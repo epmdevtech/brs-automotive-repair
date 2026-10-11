@@ -121,7 +121,7 @@ BRS/
 - **Ajuda Interativa**: `make help` (exibe todos os comandos disponíveis)
 - **Instalação de Dependências**: `make install` (`bun install`)
 - **Servidor de Desenvolvimento**: `make dev` (executa na porta 5210)
-- **Execução de Testes**: `make test` (`bun test`)
+- **Execução de Testes**: `make test` (`bun run test`, Vitest + jsdom)
 - **Verificação de Lint**: `make lint` (`bun run lint`)
 - **Formatação de Código**: `make format` (`bun run format`)
 - **Build de Produção**: `make build` (`bun run build`)
@@ -163,7 +163,7 @@ BRS/
 
 | Gate                               | Comando         | Critério de Aceitação                          |
 | ---------------------------------- | --------------- | ---------------------------------------------- |
-| **Testes de Regra de Negócio**     | `bun test`      | 100% dos testes em `src/test/` devem passar    |
+| **Testes de Regra de Negócio**     | `bun run test`  | 100% dos testes em `src/test/` devem passar    |
 | **Linters e Estilo**               | `bun run lint`  | Zero erros ESLint e formatação Prettier válida |
 | **Compilação de Tipos e Bundling** | `bun run build` | Compilação cliente e SSR Nitro sem erros       |
 
@@ -177,6 +177,7 @@ Todas as entregas obedecem ao protocolo **Universal SDD**:
 - `SPEC-002` / `TASK-002-01` / `REVIEW-002`: Infraestrutura Containerizada com Docker, Docker Compose e Automação via Makefile.
 - `SPEC-003` / `TASK-003-01` / `REVIEW-003`: Auditoria Técnica, Remoção de Artefatos de IA, Modularização em 15 Submódulos e Refinamento Editorial.
 - `SPEC-004` / `TASK-004-01` / `REVIEW-004`: Esteira de Integração Contínua (CI/CD) com GitHub Actions e Validação de Containers Docker.
+- `SPEC-005` / `TASK-005-01` / `REVIEW-005`: Refinamento de UI, Motion Design Sóbrio, Transição Cinematográfica MediaExpand e Microinterações.
 
 ---
 

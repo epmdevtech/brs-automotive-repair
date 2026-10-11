@@ -125,11 +125,13 @@ export function ContactForm({ partner }: { partner: boolean }) {
             Tipo de atendimento
           </legend>
           <div className="flex flex-wrap gap-5">
-            {[
-              ["particular", "Particular"],
-              ["seguro", "Relacionado a seguro"],
-              ["corretor", "Sou corretor de seguros"],
-            ].map(([value, label]) => (
+            {(
+              [
+                ["particular", "Particular"],
+                ["seguro", "Relacionado a seguro"],
+                ["corretor", "Sou corretor de seguros"],
+              ] as const
+            ).map(([value, label]) => (
               <label
                 key={value}
                 className="flex items-center gap-2 text-xs text-muted-foreground hover:text-foreground cursor-pointer"

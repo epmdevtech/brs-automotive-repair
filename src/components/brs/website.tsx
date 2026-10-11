@@ -7,6 +7,7 @@ import { company } from "@/lib/brs";
 export { Brand } from "./brand";
 export { Header } from "./header";
 export { Hero } from "./hero";
+export { MediaExpand } from "./media-expand";
 export { Services } from "./services";
 export { Philosophy } from "./philosophy";
 export { ProjectGallery } from "./project-gallery";
@@ -22,6 +23,7 @@ export { Footer } from "./footer";
 
 import { Header } from "./header";
 import { Hero } from "./hero";
+import { MediaExpand } from "./media-expand";
 import { Services } from "./services";
 import { Philosophy } from "./philosophy";
 import { ProjectGallery } from "./project-gallery";
@@ -33,9 +35,11 @@ import { FAQAccordion } from "./faq-accordion";
 import { Contact } from "./contact";
 import { FinalCTA } from "./final-cta";
 import { Footer } from "./footer";
+import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 
 export function Website() {
   const [partner, setPartner] = useState(false);
+  useScrollReveal();
 
   const handlePartnerContact = () => {
     setPartner(true);
@@ -57,6 +61,7 @@ export function Website() {
 
       <main id="conteudo-principal">
         <Hero />
+        <MediaExpand />
         <Services />
         <Philosophy />
         <ProjectGallery />

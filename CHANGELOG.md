@@ -27,3 +27,10 @@ O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.
 - Especificação `SPEC-003`, tarefa `TASK-003-01` e revisão `REVIEW-003`.
 - Esteira de Integração Contínua (CI/CD) com GitHub Actions (`.github/workflows/ci.yml`) validando lint, testes, build, rastreabilidade SDD e build Docker (`SPEC-004`).
 - Especificação `SPEC-004`, tarefa `TASK-004-01` e revisão `REVIEW-004`.
+- Refinamento avançado de UI e Motion Design sóbrio com tokens CSS reutilizáveis (`SPEC-005`).
+- Entrada escalonada cinematográfica do Hero com revelação tipográfica por linha no título e header integrado.
+- Transição cinematográfica `MediaExpand` entre Hero e Serviços orientada por rolagem nativa com degradação graciosa.
+- Microinteração Spotlight nos cards de serviços para mouse com foco acessível via teclado.
+- Revelação única de seções com `IntersectionObserver` e suporte completo a `prefers-reduced-motion`.
+- Suíte com 10 testes unitários e de integração de movimento (`src/test/motion.test.tsx`).
+- Especificação `SPEC-005`, tarefa `TASK-005-01` e revisão `REVIEW-005`.

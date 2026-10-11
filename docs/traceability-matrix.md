@@ -12,7 +12,8 @@ bd37746` chore(infra): adicionar Dockerfile multi-stage, docker-compose e automa
 3752cbe` refactor(brs): auditar codigo, modularizar componentes e refinar textos comerciais | [REVIEW-003-auditoria-e-refinamento-profissional-brs.md](../reviews/REVIEW-003-auditoria-e-refinamento-profissional-brs.md) (Approved) |
 | [SPEC-004](../specs/SPEC-004-esteira-ci-cd-github-actions.md) | Implemented | [TASK-004-01](../tasks/TASK-004-01-pipeline-ci-cd-github-actions.md) (Done) | `
 679c223` ci(github): configurar esteira de integracao continua com GitHub Actions | [REVIEW-004-esteira-ci-cd-github-actions.md](../reviews/REVIEW-004-esteira-ci-cd-github-actions.md) (Approved) |
+| [SPEC-005](../specs/SPEC-005-refinamento-de-motion-design-e-microinteracoes.md) | Implemented | [TASK-005-01](../tasks/TASK-005-01-motion-design-e-microinteracoes.md) (Done) | — | [REVIEW-005-motion-design-e-microinteracoes.md](../reviews/REVIEW-005-motion-design-e-microinteracoes.md) (Approved) |
 
 ## Lacunas de rastreabilidade (Traceability gaps)
 
-- Nenhuma detectada nos artefatos verificados.
+- `TASK-005-01` não possui commit com `Task-Ref: TASK-005-01`.

@@ -1,12 +1,13 @@
 import { ArrowUpRight, Check, Handshake } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { reveal } from "@/lib/motion";
 import bodywork from "@/assets/funilaria.jpg";
 
 export function PartnerSection({ onPartner }: { onPartner: () => void }) {
   return (
     <section id="corretores" className="section-space">
       <div className="page-width grid md:grid-cols-2 gap-12 md:gap-20 items-center">
-        <div className="relative overflow-hidden rounded-sm border border-border">
+        <div className="relative overflow-hidden rounded-sm border border-border" {...reveal(0)}>
           <img
             src={bodywork}
             alt="Atenção técnica na recuperação de um veículo (fotografia ilustrativa)"
@@ -23,7 +24,7 @@ export function PartnerSection({ onPartner }: { onPartner: () => void }) {
             confiável
           </span>
         </div>
-        <div>
+        <div {...reveal(1)}>
           <p className="eyebrow mb-5">Para corretores de seguros</p>
           <h2 className="section-title">
             Tranquilidade para o corretor.

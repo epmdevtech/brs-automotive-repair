@@ -33,6 +33,17 @@
   --hero-bottom: linear-gradient(0deg, var(--background), transparent);
   --font-display: "Barlow Condensed", sans-serif;
   --font-body: "Manrope", sans-serif;
+  /* Sistema de movimento: valores moderados e reutilizáveis */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-fast: 180ms;
+  --dur-base: 320ms;
+  --dur-slow: 700ms;
+  --distance: 14px;
+  --stagger: 90ms;
+  --hero-delay: 120ms;
+  --zoom: 1.035;
+  --gold-glow: oklch(0.73 0.1 82 / 0.1);
+  --gold-line: oklch(0.73 0.1 82 / 0.55);
 }
 @theme inline {
   --color-background: var(--background);
@@ -154,12 +165,14 @@
   top: 0;
   width: 100%;
   z-index: 30;
-  border-bottom: 1px solid var(--border);
-  transition: background 0.2s;
+  border-bottom: 1px solid oklch(0.98 0 0 / 0.08);
+  background: linear-gradient(180deg, oklch(0.1 0.005 260 / 0.7), transparent);
 }
 .site-header.scrolled {
   position: fixed;
   background: var(--background);
+  border-bottom-color: var(--border);
+  animation: header-in var(--dur-base) var(--ease-out) both;
 }
 .header-inner {
   height: 90px;
@@ -189,6 +202,18 @@
   height: 100%;
   object-fit: cover;
   object-position: center;
+  animation: photo-settle 1.6s var(--ease-out) both;
+}
+.hero::before {
+  /* Cortina escura que se dissolve: a foto é pintada opaca (LCP preservado) e o fade ocorre por cima. */
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: var(--background);
+  opacity: 0;
+  pointer-events: none;
+  animation: hero-curtain 0.9s var(--ease-out) both;
 }
 .hero::after {
   content: "";
@@ -199,7 +224,7 @@
 }
 .hero-content {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   padding-top: 110px;
   padding-bottom: 120px;
 }
@@ -209,6 +234,22 @@
   text-transform: uppercase;
   max-width: 620px;
   margin-top: 24px;
+}
+.hero-line {
+  /* Máscara da revelação por linha; o respiro evita cortar acentos e cedilhas. */
+  display: block;
+  overflow: hidden;
+  padding-block: 0.14em 0.06em;
+  margin-block: -0.14em -0.06em;
+}
+.hero-line-inner {
+  display: block;
+  animation: line-rise var(--dur-slow) var(--ease-out) both;
+  animation-delay: calc(var(--hero-delay) + var(--stagger) * var(--i, 0));
+}
+.hero-in {
+  animation: fade-up var(--dur-slow) var(--ease-out) both;
+  animation-delay: calc(var(--hero-delay) + var(--stagger) * var(--i, 0));
 }
 .hero-subtitle {
   font-family: var(--font-display);
@@ -265,19 +306,54 @@
   height: 20px;
 }
 .service-card {
+  position: relative;
   border: 1px solid var(--border);
   background: var(--card);
   border-radius: 3px;
   overflow: hidden;
+  transition: border-color var(--dur-base) var(--ease-out);
+}
+.service-card::before {
+  /* Spotlight: iluminação dourada suave atrás do conteúdo, posicionada por --mx/--my. */
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(
+    340px circle at var(--mx, 50%) var(--my, 30%),
+    var(--gold-glow),
+    transparent 70%
+  );
+  transition: opacity var(--dur-base) var(--ease-out);
+}
+.service-card > * {
+  position: relative;
+}
+.service-card:focus-within {
+  border-color: var(--gold-line);
+}
+.service-card:focus-within::before {
+  opacity: 1;
+}
+@media (hover: hover) and (pointer: fine) {
+  .service-card:hover {
+    border-color: var(--gold-line);
+  }
+  .service-card:hover::before {
+    opacity: 1;
+  }
 }
 .service-image {
   width: 100%;
   aspect-ratio: 1.5;
   object-fit: cover;
-  transition: transform 0.5s;
+  transition: transform 0.6s var(--ease-out);
 }
-.service-card:hover .service-image {
-  transform: scale(1.035);
+@media (hover: hover) and (pointer: fine) {
+  .service-card:hover .service-image {
+    transform: scale(var(--zoom));
+  }
 }
 .body-copy {
   font-size: 13px;
@@ -302,6 +378,12 @@
   aspect-ratio: 1.5;
   width: 100%;
   object-fit: cover;
+  transition: transform 0.6s var(--ease-out);
+}
+@media (hover: hover) and (pointer: fine) {
+  .gallery-tile:hover .gallery-image {
+    transform: scale(var(--zoom));
+  }
 }
 .process-step {
   position: relative;
@@ -371,18 +453,138 @@
 .footer-link:hover {
   color: var(--primary);
 }
-.reveal {
-  animation: reveal 0.8s ease both;
-}
-@keyframes reveal {
+/* ---------- Sistema de movimento ---------- */
+@keyframes fade-up {
   from {
     opacity: 0;
-    transform: translateY(15px);
+    transform: translateY(var(--distance));
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: none;
   }
+}
+@keyframes line-rise {
+  from {
+    transform: translateY(105%);
+  }
+  to {
+    transform: none;
+  }
+}
+@keyframes hero-curtain {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+@keyframes photo-settle {
+  from {
+    transform: scale(1.04);
+  }
+  to {
+    transform: none;
+  }
+}
+@keyframes header-in {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Expansão da mídia entre hero e serviços: --p (0 a 1) vem da rolagem nativa.
+   Sem JavaScript, --p assume 1 e a imagem aparece completa. */
+.media-expand {
+  padding-top: 72px;
+}
+.media-expand-frame {
+  --inset: calc((1 - var(--p, 1)) * var(--expand-inset, 14%));
+  position: relative;
+  margin: 0;
+  aspect-ratio: 21 / 9;
+  overflow: hidden;
+  border-radius: 3px;
+  clip-path: inset(0 var(--inset) round 3px);
+}
+.media-expand-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 38%;
+  transform: scale(calc(1 + (1 - var(--p, 1)) * 0.06));
+  will-change: transform;
+}
+.media-expand-frame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, oklch(0.1 0.005 260 / 0.88) 0%, oklch(0.1 0.005 260 / 0) 62%);
+  pointer-events: none;
+}
+.media-expand-caption {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: 1;
+  display: grid;
+  gap: 12px;
+  padding: 0 56px 40px;
+  max-width: 640px;
+  opacity: calc((var(--p, 1) - 0.6) * 2.5);
+  transform: translateY(calc((1 - var(--p, 1)) * 12px));
+}
+.media-expand-title {
+  font-family: var(--font-display);
+  font-size: 40px;
+  font-weight: 600;
+  line-height: 1.08;
+}
+.media-expand-note {
+  position: absolute;
+  right: 20px;
+  bottom: 16px;
+  z-index: 1;
+}
+
+/* Entrada de seção: uma única vez, conteúdo visível por padrão (sem JS / leitores de tela). */
+[data-reveal="hidden"] {
+  opacity: 0;
+  transform: translateY(var(--distance));
+}
+[data-reveal="shown"] {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity var(--dur-slow) var(--ease-out),
+    transform var(--dur-slow) var(--ease-out);
+  transition-delay: calc(var(--stagger) * var(--i, 0));
+}
+
+/* Seta direcional dos CTAs: deslocamento curto, apenas com hover real ou foco por teclado. */
+:is(a, button) > .lucide-arrow-up-right,
+:is(a, button) > .lucide-arrow-right {
+  transition: transform var(--dur-fast) var(--ease-out);
+}
+@media (hover: hover) and (pointer: fine) {
+  :is(a, button):hover > .lucide-arrow-up-right {
+    transform: translate(2px, -2px);
+  }
+  :is(a, button):hover > .lucide-arrow-right {
+    transform: translateX(3px);
+  }
+}
+:is(a, button):focus-visible > .lucide-arrow-up-right {
+  transform: translate(2px, -2px);
+}
+:is(a, button):focus-visible > .lucide-arrow-right {
+  transform: translateX(3px);
 }
 @media (min-width: 1600px) {
   .hero {
@@ -466,6 +668,24 @@
     left: -4px;
     top: 5px;
   }
+  .media-expand {
+    padding-top: 48px;
+  }
+  .media-expand-frame {
+    --expand-inset: 7%;
+    aspect-ratio: 4 / 3;
+  }
+  .media-expand-caption {
+    padding: 0 20px 28px;
+  }
+  .media-expand-title {
+    font-size: 28px;
+  }
+  .media-expand-note {
+    top: 12px;
+    bottom: auto;
+    right: 12px;
+  }
 }
 @media (prefers-reduced-motion: reduce) {
   html {
@@ -476,5 +696,23 @@
   *::after {
     animation: none !important;
     transition: none !important;
+  }
+  .media-expand-frame {
+    clip-path: none;
+  }
+  .media-expand-image,
+  .media-expand-caption {
+    transform: none;
+  }
+  .media-expand-caption {
+    opacity: 1;
+  }
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .service-image,
+  .gallery-image {
+    transform: none !important;
   }
 }

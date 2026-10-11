@@ -1,6 +1,7 @@
 import { ArrowUpRight, Wrench, Paintbrush, Car } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { services } from "@/lib/brs";
+import { trackPointer } from "@/lib/motion";
 import bodywork from "@/assets/funilaria.jpg";
 import painting from "@/assets/pintura.jpg";
 import dent from "@/assets/martelinho.jpg";
@@ -30,7 +31,7 @@ export function Services() {
           {services.map((service, i) => {
             const Icon = serviceIcons[i];
             return (
-              <article key={service.title} className="service-card">
+              <article key={service.title} className="service-card" onPointerMove={trackPointer}>
                 <div className="overflow-hidden relative">
                   <img
                     src={serviceImages[i]}

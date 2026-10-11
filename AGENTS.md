@@ -60,7 +60,7 @@ Quando houver conflito entre informações, obedeça a esta precedência:
 
 - **Não invente requisitos**: Limite-se estritamente ao escopo aprovado. Se houver dúvida funcional ou comercial, pergunte ao humano.
 - **Quality Gates Automáticos**:
-  - Testes: `bun test` deve passar com 100% de sucesso.
+  - Testes: `bun run test` (Vitest) deve passar com 100% de sucesso.
   - Linter: `bun run lint` (ESLint + Prettier) deve passar sem erros.
   - Compilação / Build: `bun run build` (Vite + Nitro SSR) deve passar sem falhas.
 - **Rastreabilidade Mecanizada**:

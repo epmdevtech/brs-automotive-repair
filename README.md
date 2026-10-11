@@ -98,7 +98,7 @@ O projeto possui uma esteira automatizada configurada em [`.github/workflows/ci.
 
 1. **Quality Gates & SDD**:
    - `bun run lint`: Validação estrita de ESLint e formatação Prettier.
-   - `bun test`: Execução de 100% da suíte de testes Vitest.
+   - `bun run test`: Execução de 100% da suíte de testes Vitest (jsdom).
    - `bun run build`: Compilação de produção com TanStack Start e Nitro SSR.
    - `python3 scripts/generate_traceability.py`: Verificação de lacunas na matriz de rastreabilidade.
 2. **Validação Docker**:

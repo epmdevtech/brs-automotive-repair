@@ -3,6 +3,7 @@ import { Expand, ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { services } from "@/lib/brs";
+import { reveal } from "@/lib/motion";
 import bodywork from "@/assets/funilaria.jpg";
 import painting from "@/assets/pintura.jpg";
 import dent from "@/assets/martelinho.jpg";
@@ -16,7 +17,10 @@ export function ProjectGallery() {
   return (
     <section id="trabalho" className="section-space">
       <div className="page-width">
-        <div className="flex flex-col md:flex-row gap-5 justify-between md:items-end mb-9">
+        <div
+          className="flex flex-col md:flex-row gap-5 justify-between md:items-end mb-9"
+          {...reveal(0)}
+        >
           <div>
             <p className="eyebrow mb-4">Referência de acabamento</p>
             <h2 className="section-title">
@@ -36,26 +40,27 @@ export function ProjectGallery() {
         </div>
         <div className="grid md:grid-cols-3 gap-5">
           {services.map((service, i) => (
-            <Button
-              key={service.short}
-              variant="ghost"
-              className="p-0 h-auto rounded-sm overflow-hidden relative group block text-left w-full hover:bg-transparent"
-              onClick={() => setActive(i)}
-              aria-label={`Ampliar fotografia ilustrativa de ${service.short}`}
-            >
-              <img
-                className="gallery-image"
-                src={serviceImages[i]}
-                alt={`Detalhe de ${service.short.toLowerCase()} (fotografia ilustrativa)`}
-                loading="lazy"
-                width={1200}
-                height={800}
-              />
-              <span className="absolute bottom-0 inset-x-0 bg-background/85 backdrop-blur-sm p-4 flex justify-between items-center text-xs border-t border-border/50">
-                <span className="font-medium text-foreground">{service.short}</span>
-                <Expand size={15} className="text-primary" aria-hidden="true" />
-              </span>
-            </Button>
+            <div key={service.short} {...reveal(i + 1)}>
+              <Button
+                variant="ghost"
+                className="gallery-tile p-0 h-auto rounded-sm overflow-hidden relative group block text-left w-full hover:bg-transparent"
+                onClick={() => setActive(i)}
+                aria-label={`Ampliar fotografia ilustrativa de ${service.short}`}
+              >
+                <img
+                  className="gallery-image"
+                  src={serviceImages[i]}
+                  alt={`Detalhe de ${service.short.toLowerCase()} (fotografia ilustrativa)`}
+                  loading="lazy"
+                  width={1200}
+                  height={800}
+                />
+                <span className="absolute bottom-0 inset-x-0 bg-background/85 backdrop-blur-sm p-4 flex justify-between items-center text-xs border-t border-border/50">
+                  <span className="font-medium text-foreground">{service.short}</span>
+                  <Expand size={15} className="text-primary" aria-hidden="true" />
+                </span>
+              </Button>
+            </div>
           ))}
         </div>
       </div>

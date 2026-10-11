@@ -50,7 +50,7 @@ lint: ## Executa o linter ESLint
 	$(PKG_MANAGER) run lint
 
 test: ## Executa os testes automatizados com Vitest
-	$(PKG_MANAGER) test
+	$(PKG_MANAGER) run test
 
 test-watch: ## Executa os testes em modo contínuo (watch)
 	$(PKG_MANAGER) run test:watch
