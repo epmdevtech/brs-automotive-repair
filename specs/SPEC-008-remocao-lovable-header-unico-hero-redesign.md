@@ -20,6 +20,7 @@
 ## Problema e resultado
 
 O projeto apresenta dois problemas arquiteturais e visuais críticos:
+
 1. **Header/Navbar Duplicado e Sobreposto**: A barra de navegação está sendo renderizada duplamente no topo da página (pelo componente `Header` global e pelo `motion.header` interno do `AnimatedHero`), causando colisão de z-index, duplicidade de logos e layout quebrado.
 2. **Resíduos de Template/Plataforma (Lovable)**: Permanecem no repositório a dependência `@lovable.dev/vite-tanstack-config`, scripts de telemetria/reporte de erro e comentários legados que devem ser completamente removidos em favor de uma configuração limpa e nativa de Vite e TanStack Start.
 3. **Refinamento do Hero**: A seção Hero necessita de um alinhamento estético de alto padrão dark automotivo, com badge superior elegante, tipografia H1 de alto contraste com destaque âmbar da marca, CTAs táteis com variantes primária e outline limpa, overlay de gradiente otimizado para legibilidade WCAG AA+ e rodapé sutil da viewport.

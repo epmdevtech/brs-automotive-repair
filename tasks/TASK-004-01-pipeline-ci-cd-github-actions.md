@@ -2,14 +2,14 @@
 
 ## Metadados
 
-| Campo        | Valor                                                            |
-| ------------ | ---------------------------------------------------------------- |
-| ID           | TASK-004-01                                                      |
-| Status       | Done                                                             |
-| Responsável  | Engenharia DevOps EPMDEVTECH                                     |
-| SPEC         | SPEC-004                                                         |
-| Critérios    | AC-004-01, AC-004-02, AC-004-03, AC-004-04, AC-004-05             |
-| Dependências | SPEC-004                                                         |
+| Campo        | Valor                                                 |
+| ------------ | ----------------------------------------------------- |
+| ID           | TASK-004-01                                           |
+| Status       | Done                                                  |
+| Responsável  | Engenharia DevOps EPMDEVTECH                          |
+| SPEC         | SPEC-004                                              |
+| Critérios    | AC-004-01, AC-004-02, AC-004-03, AC-004-04, AC-004-05 |
+| Dependências | SPEC-004                                              |
 
 ---
 
@@ -39,13 +39,13 @@ Implementar a esteira de integração contínua (CI) através do GitHub Actions 
 
 ## Validação
 
-| Critério/risco | Teste, comando ou revisão               | Evidência esperada                                |
-| -------------- | --------------------------------------- | ------------------------------------------------- |
-| AC-004-01      | Validação de sintaxe YAML               | YAML bem formatado sem erros de parse             |
-| AC-004-02      | Inspeção dos gatilhos `on:`             | Branches `main` e `develop` monitoradas           |
-| AC-004-03      | Validação dos passos de quality gates   | Comandos idênticos aos padronizados no Makefile   |
-| AC-004-04      | Validação do job Docker                 | Build Docker executável no runner Ubuntu          |
-| AC-004-05      | `make check` local                      | 100% dos gates aprovados localmente               |
+| Critério/risco | Teste, comando ou revisão             | Evidência esperada                              |
+| -------------- | ------------------------------------- | ----------------------------------------------- |
+| AC-004-01      | Validação de sintaxe YAML             | YAML bem formatado sem erros de parse           |
+| AC-004-02      | Inspeção dos gatilhos `on:`           | Branches `main` e `develop` monitoradas         |
+| AC-004-03      | Validação dos passos de quality gates | Comandos idênticos aos padronizados no Makefile |
+| AC-004-04      | Validação do job Docker               | Build Docker executável no runner Ubuntu        |
+| AC-004-05      | `make check` local                    | 100% dos gates aprovados localmente             |
 
 ---
 

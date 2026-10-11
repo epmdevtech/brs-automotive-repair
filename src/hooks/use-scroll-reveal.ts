@@ -15,7 +15,7 @@ export function useScrollReveal(selector = "[data-reveal]") {
 
     const viewportHeight = window.innerHeight;
     const pending = Array.from(document.querySelectorAll<HTMLElement>(selector)).filter(
-      (element) => element.getBoundingClientRect().top > viewportHeight * 0.92,
+      (element) => element.getBoundingClientRect().top > viewportHeight * 0.9,
     );
 
     pending.forEach((element) => element.setAttribute("data-reveal", "hidden"));
@@ -28,7 +28,7 @@ export function useScrollReveal(selector = "[data-reveal]") {
           observer.unobserve(entry.target);
         });
       },
-      { rootMargin: "0px 0px -8% 0px", threshold: 0.08 },
+      { rootMargin: "0px 0px -10% 0px", threshold: 0.12 },
     );
 
     pending.forEach((element) => observer.observe(element));

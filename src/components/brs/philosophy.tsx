@@ -1,3 +1,5 @@
+import { reveal } from "@/lib/motion";
+
 export function Philosophy() {
   const pillars = [
     [
@@ -17,7 +19,7 @@ export function Philosophy() {
   return (
     <section className="section-space border-y border-border bg-secondary/40">
       <div className="page-width grid md:grid-cols-2 gap-12 md:gap-24">
-        <div>
+        <div {...reveal(0)}>
           <p className="eyebrow mb-5">Padrão de execução</p>
           <h2 className="section-title">
             Critério técnico e
@@ -33,7 +35,7 @@ export function Philosophy() {
             Princípios que norteiam cada veículo atendido na oficina.
           </p>
         </div>
-        <div>
+        <div {...reveal(1)}>
           {pillars.map(([title, description], i) => (
             <div className="pillar" key={title}>
               <span className="pillar-number">0{i + 1}</span>

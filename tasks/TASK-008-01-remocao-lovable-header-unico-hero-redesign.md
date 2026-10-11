@@ -2,14 +2,14 @@
 
 ## Metadados
 
-| Campo        | Valor                                                                          |
-| ------------ | ------------------------------------------------------------------------------ |
-| ID           | TASK-008-01                                                                    |
-| Status       | Done                                                                           |
-| Responsável  | Engenharia Front-end EPMDEVTECH                                                |
-| SPEC         | SPEC-008                                                                       |
-| Critérios    | AC-008-01, AC-008-02, AC-008-03, AC-008-04, AC-008-05                          |
-| Dependências | SPEC-008                                                                       |
+| Campo        | Valor                                                 |
+| ------------ | ----------------------------------------------------- |
+| ID           | TASK-008-01                                           |
+| Status       | Done                                                  |
+| Responsável  | Engenharia Front-end EPMDEVTECH                       |
+| SPEC         | SPEC-008                                              |
+| Critérios    | AC-008-01, AC-008-02, AC-008-03, AC-008-04, AC-008-05 |
+| Dependências | SPEC-008                                              |
 
 ---
 
@@ -39,13 +39,13 @@ Remover completamente todas as dependências e resquícios do Lovable, reescreve
 
 ## Validação
 
-| Critério/risco | Teste, comando ou revisão      | Evidência esperada                                        |
-| -------------- | ------------------------------ | --------------------------------------------------------- |
-| AC-008-01      | Varredura global de arquivos   | Zero ocorrências de `@lovable.dev` ou scripts de tagging  |
-| AC-008-02      | `bun run build`                | Build cliente e SSR Nitro funcionando com Vite nativo     |
-| AC-008-03      | Inspeção de DOM / Testes       | Apenas 1 `<header>` no documento, sem duplicações         |
-| AC-008-04      | Inspeção de Hero / Testes      | Badge âmbar, H1 com forte contraste e CTAs funcionais     |
-| AC-008-05      | `make check`                   | Vitest, ESLint, Build e Rastreabilidade 100% aprovados     |
+| Critério/risco | Teste, comando ou revisão    | Evidência esperada                                       |
+| -------------- | ---------------------------- | -------------------------------------------------------- |
+| AC-008-01      | Varredura global de arquivos | Zero ocorrências de `@lovable.dev` ou scripts de tagging |
+| AC-008-02      | `bun run build`              | Build cliente e SSR Nitro funcionando com Vite nativo    |
+| AC-008-03      | Inspeção de DOM / Testes     | Apenas 1 `<header>` no documento, sem duplicações        |
+| AC-008-04      | Inspeção de Hero / Testes    | Badge âmbar, H1 com forte contraste e CTAs funcionais    |
+| AC-008-05      | `make check`                 | Vitest, ESLint, Build e Rastreabilidade 100% aprovados   |
 
 ---
 

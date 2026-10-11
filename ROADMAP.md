@@ -31,6 +31,7 @@ Planejamento de evolução da presença digital da BRS Reparações Automotivas 
 - [x] Galeria interativa Antes/Depois com `BeforeAfterSlider`, Lightbox Dialog em alta definição e serviços com `CardSpotlight` (`SPEC-007`).
 - [x] Expurgar dependências e resíduos Lovable, unificar Header em container fixed único e redesenhar Hero com UX/UI premium (`SPEC-008`).
 - [x] Refinamento exclusivo do sistema tipográfico com Sora (500/600) e Manrope (400/500/600), tokens fluidos `clamp()` e regras de estabilidade visual (`SPEC-009`).
+- [x] Auditoria e implementação de Scroll Reveal Premium com tokens calibrados (16px, 520ms, ease suave), execução estritamente única e suporte total a acessibilidade (`SPEC-010`).
 
 ---
 

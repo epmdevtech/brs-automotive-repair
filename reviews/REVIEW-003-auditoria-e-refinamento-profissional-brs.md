@@ -2,14 +2,14 @@
 
 ## Metadados
 
-| Campo        | Valor                                                  |
-| ------------ | ------------------------------------------------------ |
-| ID           | REVIEW-003                                             |
-| SPEC/TASK    | SPEC-003 / TASK-003-01                                 |
-| Status       | Approved                                               |
-| Build/commit | Auditoria, modularização e refinamento editorial       |
-| Revisor      | Engenharia, QA e Design EPMDEVTECH                     |
-| Data         | 2026-10-11                                             |
+| Campo        | Valor                                            |
+| ------------ | ------------------------------------------------ |
+| ID           | REVIEW-003                                       |
+| SPEC/TASK    | SPEC-003 / TASK-003-01                           |
+| Status       | Approved                                         |
+| Build/commit | Auditoria, modularização e refinamento editorial |
+| Revisor      | Engenharia, QA e Design EPMDEVTECH               |
+| Data         | 2026-10-11                                       |
 
 ---
 
@@ -33,12 +33,12 @@
 
 ## Achados (Findings)
 
-| ID      | Severidade | Local                           | Evidência e impacto                                                                                                         | Correção realizada / Status                                                         | Status |
-| ------- | ---------- | ------------------------------- | --------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ------ |
-| FIND-01 | Alta       | `src/components/brs/website.tsx`| Monólito de quase 1000 linhas violava princípio de responsabilidade única.                                                  | Decomposto em 15 submódulos coesos em `src/components/brs/`, mantendo compatibilidade.| Closed |
-| FIND-02 | Média      | `src/lib/error-page.ts`         | Telas de fallback continham tema claro genérico em inglês e menções automáticas.                                            | Localizado para `pt-BR`, paleta automotiva escura e sem marcas de gerador.          | Closed |
-| FIND-03 | Média      | `src/routes/index.tsx`          | Ausência de tags `og:image` e `og:locale` para compartilhamento rico.                                                       | Inseridas tags canônicas de Open Graph e Twitter Cards apontando para o hero BRS.    | Closed |
-| FIND-04 | Baixa      | Cópias comerciais               | Uso de travessões longos "—" e clichês de IA ("Mais do que reparar...").                                                   | Revisão editorial com tom técnico e direto da oficina em Toledo-PR.                 | Closed |
+| ID      | Severidade | Local                            | Evidência e impacto                                                              | Correção realizada / Status                                                            | Status |
+| ------- | ---------- | -------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | ------ |
+| FIND-01 | Alta       | `src/components/brs/website.tsx` | Monólito de quase 1000 linhas violava princípio de responsabilidade única.       | Decomposto em 15 submódulos coesos em `src/components/brs/`, mantendo compatibilidade. | Closed |
+| FIND-02 | Média      | `src/lib/error-page.ts`          | Telas de fallback continham tema claro genérico em inglês e menções automáticas. | Localizado para `pt-BR`, paleta automotiva escura e sem marcas de gerador.             | Closed |
+| FIND-03 | Média      | `src/routes/index.tsx`           | Ausência de tags `og:image` e `og:locale` para compartilhamento rico.            | Inseridas tags canônicas de Open Graph e Twitter Cards apontando para o hero BRS.      | Closed |
+| FIND-04 | Baixa      | Cópias comerciais                | Uso de travessões longos "—" e clichês de IA ("Mais do que reparar...").         | Revisão editorial com tom técnico e direto da oficina em Toledo-PR.                    | Closed |
 
 ---
 

@@ -2,14 +2,14 @@
 
 ## Metadados
 
-| Campo        | Valor                                                                          |
-| ------------ | ------------------------------------------------------------------------------ |
-| ID           | REVIEW-005                                                                     |
-| SPEC/TASK    | SPEC-005 / TASK-005-01                                                         |
-| Status       | Approved                                                                       |
-| Build/commit | Refinamento avançado de UI, motion design sóbrio e microinterações             |
-| Revisor      | Engenharia de Software, Design e QA EPMDEVTECH                                 |
-| Data         | 2026-10-11                                                                     |
+| Campo        | Valor                                                              |
+| ------------ | ------------------------------------------------------------------ |
+| ID           | REVIEW-005                                                         |
+| SPEC/TASK    | SPEC-005 / TASK-005-01                                             |
+| Status       | Approved                                                           |
+| Build/commit | Refinamento avançado de UI, motion design sóbrio e microinterações |
+| Revisor      | Engenharia de Software, Design e QA EPMDEVTECH                     |
+| Data         | 2026-10-11                                                         |
 
 ---
 
@@ -38,11 +38,11 @@
 
 ## Achados (Findings)
 
-| ID      | Severidade | Local                           | Evidência e impacto                                                                                                         | Correção realizada / Status                                                         | Status |
-| ------- | ---------- | ------------------------------- | --------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ------ |
-| FIND-01 | Média      | Dependências de animação        | Referências externas (21st.dev) usavam `framer-motion`/`motion`. Incluir bibliotecas pesadas aumentaria o bundle desnecessariamente. | Implementado com CSS moderno puro, tokens e hooks nativos sem adicionar dependências. | Closed |
-| FIND-02 | Alta       | Acessibilidade e desempenho     | Animações contínuas ou scroll hijacking prejudicam usabilidade em dispositivos móveis e usuários sensíveis a movimento.     | Adicionado `prefers-reduced-motion: reduce`, economia de dados e rolagem nativa.      | Closed |
-| FIND-03 | Baixa      | Tipagem estrita de tuplas       | Desestruturação em `contact-form.tsx` inferia tipo indefinido com `noUncheckedIndexedAccess`.                               | Tipado com `as const` para garantia de integridade em tempo de compilação.          | Closed |
+| ID      | Severidade | Local                       | Evidência e impacto                                                                                                                  | Correção realizada / Status                                                           | Status |
+| ------- | ---------- | --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------- | ------ |
+| FIND-01 | Média      | Dependências de animação    | Referências externas (21st.dev) usavam `framer-motion`/`motion`. Incluir bibliotecas pesadas aumentaria o bundle desnecessariamente. | Implementado com CSS moderno puro, tokens e hooks nativos sem adicionar dependências. | Closed |
+| FIND-02 | Alta       | Acessibilidade e desempenho | Animações contínuas ou scroll hijacking prejudicam usabilidade em dispositivos móveis e usuários sensíveis a movimento.              | Adicionado `prefers-reduced-motion: reduce`, economia de dados e rolagem nativa.      | Closed |
+| FIND-03 | Baixa      | Tipagem estrita de tuplas   | Desestruturação em `contact-form.tsx` inferia tipo indefinido com `noUncheckedIndexedAccess`.                                        | Tipado com `as const` para garantia de integridade em tempo de compilação.            | Closed |
 
 ---
 

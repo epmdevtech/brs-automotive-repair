@@ -2,14 +2,14 @@
 
 ## Metadados
 
-| Campo        | Valor                                                            |
-| ------------ | ---------------------------------------------------------------- |
-| ID           | TASK-006-01                                                      |
-| Status       | Done                                                             |
-| Responsável  | Engenharia Front-end EPMDEVTECH                                  |
-| SPEC         | SPEC-006                                                         |
-| Critérios    | AC-006-01, AC-006-02, AC-006-03, AC-006-04                       |
-| Dependências | SPEC-006                                                         |
+| Campo        | Valor                                      |
+| ------------ | ------------------------------------------ |
+| ID           | TASK-006-01                                |
+| Status       | Done                                       |
+| Responsável  | Engenharia Front-end EPMDEVTECH            |
+| SPEC         | SPEC-006                                   |
+| Critérios    | AC-006-01, AC-006-02, AC-006-03, AC-006-04 |
+| Dependências | SPEC-006                                   |
 
 ---
 
@@ -36,12 +36,12 @@ Implementar e integrar o componente `AnimatedHero` da biblioteca 21st.dev com `f
 
 ## Validação
 
-| Critério/risco | Teste, comando ou revisão     | Evidência esperada                                  |
-| -------------- | ----------------------------- | --------------------------------------------------- |
-| AC-006-01      | Inspeção de `animated-hero`   | Variantes `framer-motion` implementadas sem erros   |
-| AC-006-02      | Inspeção de `hero.tsx`        | Dados e estilo glass integrados à identidade visual |
-| AC-006-03      | Validação de CTAs             | Links e scroll para `#contato` e `#servicos` ativos |
-| AC-006-04      | `make check`                  | Lint, Vitest, Build Nitro e Matriz 100% aprovados   |
+| Critério/risco | Teste, comando ou revisão   | Evidência esperada                                  |
+| -------------- | --------------------------- | --------------------------------------------------- |
+| AC-006-01      | Inspeção de `animated-hero` | Variantes `framer-motion` implementadas sem erros   |
+| AC-006-02      | Inspeção de `hero.tsx`      | Dados e estilo glass integrados à identidade visual |
+| AC-006-03      | Validação de CTAs           | Links e scroll para `#contato` e `#servicos` ativos |
+| AC-006-04      | `make check`                | Lint, Vitest, Build Nitro e Matriz 100% aprovados   |
 
 ---
 

@@ -2,24 +2,25 @@
 
 ## Metadados
 
-| Campo                               | Valor                                                          |
-| ----------------------------------- | -------------------------------------------------------------- |
-| ID                                  | SPEC-007                                                       |
-| Status                              | Implemented                                                    |
-| Responsável                         | Engenharia Front-end EPMDEVTECH                                |
-| Revisores                           | Produto / Design / Engenharia / QA EPMDEVTECH                  |
-| Criado                              | 2026-10-11                                                     |
-| Atualizado                          | 2026-10-11                                                     |
-| Lançamento alvo                     | `0.1.0`                                                        |
+| Campo                               | Valor                                                           |
+| ----------------------------------- | --------------------------------------------------------------- |
+| ID                                  | SPEC-007                                                        |
+| Status                              | Implemented                                                     |
+| Responsável                         | Engenharia Front-end EPMDEVTECH                                 |
+| Revisores                           | Produto / Design / Engenharia / QA EPMDEVTECH                   |
+| Criado                              | 2026-10-11                                                      |
+| Atualizado                          | 2026-10-11                                                      |
+| Lançamento alvo                     | `0.1.0`                                                         |
 | Briefing de UX relacionado          | Galeria Antes/Depois + Lightbox & CardSpotlight Aceternity/21st |
-| Especificação de design relacionada | Dark Automotive Premium Design System                          |
-| ADRs relacionadas                   | N/A                                                            |
+| Especificação de design relacionada | Dark Automotive Premium Design System                           |
+| ADRs relacionadas                   | N/A                                                             |
 
 ---
 
 ## Problema e resultado
 
 A apresentação da excelência técnica da BRS Reparações Automotivas (Toledo/PR) exige demonstração tangível de recuperação de veículos:
+
 1. **Galeria de Projetos**: Os proprietários de veículos e corretores de seguros precisam avaliar a precisão da funilaria, da pintura em estufa e do martelinho de ouro. Um slider interativo de Antes e Depois com suporte a ampliação em Lightbox permite inspecionar cada detalhe em alta definição.
 2. **Seção de Serviços**: O catálogo de especialidades deve transmitir precisão e tecnologia avançada através de microinterações discretas e o efeito de iluminação dinâmica focal (`CardSpotlight`), onde o cursor do usuário ilumina sutilmente a chapa grafite dos cards.
 

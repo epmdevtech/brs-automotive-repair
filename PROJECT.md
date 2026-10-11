@@ -183,6 +183,7 @@ Todas as entregas obedecem ao protocolo **Universal SDD**:
 - `SPEC-007` / `TASK-007-01` / `REVIEW-007`: Galeria Interativa com Slider Antes/Depois e Lightbox Modal (@radix-ui/react-dialog) e Seção de Serviços com Efeito CardSpotlight.
 - `SPEC-008` / `TASK-008-01` / `REVIEW-008`: Expurgar Vínculos Lovable, Configuração Nativa Vite, Unificação de Header Único e Redesign da Seção Hero.
 - `SPEC-009` / `TASK-009-01` / `REVIEW-009`: Refinamento do Sistema Tipográfico com Sora e Manrope, Tokens Fluidos clamp() e Regras de Estabilidade Visual.
+- `SPEC-010` / `TASK-010-01` / `REVIEW-010`: Auditoria e Implementação de Scroll Reveal Premium com Tokens Calibrados, Disparo Único via IntersectionObserver e Suporte a Acessibilidade.
 
 ---
 

@@ -2,20 +2,21 @@
 
 ## Metadados
 
-| Campo         | Valor                                                         |
-| ------------- | ------------------------------------------------------------- |
-| ID            | REVIEW-008                                                    |
-| SPEC          | SPEC-008                                                      |
-| TASK          | TASK-008-01                                                   |
-| Status        | Approved                                                      |
-| Revisor       | Antigravity AI (Pair Programming) / EPMDEVTECH                |
-| Data          | 2026-10-11                                                    |
+| Campo   | Valor                                          |
+| ------- | ---------------------------------------------- |
+| ID      | REVIEW-008                                     |
+| SPEC    | SPEC-008                                       |
+| TASK    | TASK-008-01                                    |
+| Status  | Approved                                       |
+| Revisor | Antigravity AI (Pair Programming) / EPMDEVTECH |
+| Data    | 2026-10-11                                     |
 
 ---
 
 ## 1. Resumo da Mudança
 
 Atendimento integral às correções de arquitetura, limpeza de plataforma e alinhamento visual premium automotivo:
+
 1. **Expurgo Completo do Lovable**:
    - Pacote `@lovable.dev/vite-tanstack-config` desinstalado de `package.json` e `bun.lock`.
    - `vite.config.ts` reescrito do zero com configuração nativa limpa do TanStack Start e Vite (`@tanstack/react-start/plugin/vite`, `nitro/vite`, `@vitejs/plugin-react`, `@tailwindcss/vite`, `vite-tsconfig-paths`).
@@ -35,13 +36,13 @@ Atendimento integral às correções de arquitetura, limpeza de plataforma e ali
 
 ## 2. Verificação de Critérios de Aceitação
 
-| Critério    | Descrição                                                             | Status   | Evidência                                                                            |
-| ----------- | --------------------------------------------------------------------- | -------- | ------------------------------------------------------------------------------------ |
-| AC-008-01   | Expurgo total de `@lovable.dev` no código, build e documentação       | Aprovado | Zero ocorrências encontradas no grep global; dependência removida do lockfile        |
-| AC-008-02   | `vite.config.ts` com configuração nativa do TanStack Start e Nitro    | Aprovado | Build cliente e SSR Nitro executando perfeitamente e mais rápidos                    |
-| AC-008-03   | Navbar única no documento com container fixed z-50 e backdrop blur    | Aprovado | Validado via `src/test/header.test.tsx` (header único testado via jsdom/Vitest)      |
-| AC-008-04   | Hero refinado com badge âmbar, H1 contrastante e CTAs táteis          | Aprovado | Componentes `hero.tsx` e `animated-hero.tsx` atualizados e validados com testes unit |
-| AC-008-05   | Quality gates 100% aprovados (`make check`)                           | Aprovado | 31 testes Vitest, 0 erros ESLint, build Nitro SSR concluído com sucesso              |
+| Critério  | Descrição                                                          | Status   | Evidência                                                                            |
+| --------- | ------------------------------------------------------------------ | -------- | ------------------------------------------------------------------------------------ |
+| AC-008-01 | Expurgo total de `@lovable.dev` no código, build e documentação    | Aprovado | Zero ocorrências encontradas no grep global; dependência removida do lockfile        |
+| AC-008-02 | `vite.config.ts` com configuração nativa do TanStack Start e Nitro | Aprovado | Build cliente e SSR Nitro executando perfeitamente e mais rápidos                    |
+| AC-008-03 | Navbar única no documento com container fixed z-50 e backdrop blur | Aprovado | Validado via `src/test/header.test.tsx` (header único testado via jsdom/Vitest)      |
+| AC-008-04 | Hero refinado com badge âmbar, H1 contrastante e CTAs táteis       | Aprovado | Componentes `hero.tsx` e `animated-hero.tsx` atualizados e validados com testes unit |
+| AC-008-05 | Quality gates 100% aprovados (`make check`)                        | Aprovado | 31 testes Vitest, 0 erros ESLint, build Nitro SSR concluído com sucesso              |
 
 ---
 

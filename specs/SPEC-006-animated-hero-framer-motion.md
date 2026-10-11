@@ -2,18 +2,18 @@
 
 ## Metadados
 
-| Campo                               | Valor                                         |
-| ----------------------------------- | --------------------------------------------- |
-| ID                                  | SPEC-006                                      |
-| Status                              | Implemented                                   |
-| Responsável                         | Engenharia Front-end EPMDEVTECH               |
-| Revisores                           | Produto / Design / Engenharia / QA EPMDEVTECH |
-| Criado                              | 2026-10-11                                    |
-| Atualizado                          | 2026-10-11                                    |
-| Lançamento alvo                     | `0.1.0`                                       |
+| Campo                               | Valor                                          |
+| ----------------------------------- | ---------------------------------------------- |
+| ID                                  | SPEC-006                                       |
+| Status                              | Implemented                                    |
+| Responsável                         | Engenharia Front-end EPMDEVTECH                |
+| Revisores                           | Produto / Design / Engenharia / QA EPMDEVTECH  |
+| Criado                              | 2026-10-11                                     |
+| Atualizado                          | 2026-10-11                                     |
+| Lançamento alvo                     | `0.1.0`                                        |
 | Briefing de UX relacionado          | Integração de componente 21st.dev AnimatedHero |
-| Especificação de design relacionada | Dark Automotive Premium Design System         |
-| ADRs relacionadas                   | N/A                                           |
+| Especificação de design relacionada | Dark Automotive Premium Design System          |
+| ADRs relacionadas                   | N/A                                            |
 
 ---
 

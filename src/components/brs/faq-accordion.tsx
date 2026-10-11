@@ -4,6 +4,7 @@ import {
   AccordionTrigger,
   AccordionContent,
 } from "@/components/ui/accordion";
+import { reveal } from "@/lib/motion";
 
 export function FAQAccordion() {
   const questions = [
@@ -40,7 +41,7 @@ export function FAQAccordion() {
   return (
     <section className="section-space border-y border-border bg-secondary/40">
       <div className="page-width grid md:grid-cols-[.8fr_1.2fr] gap-10 md:gap-20">
-        <div>
+        <div {...reveal(0)}>
           <p className="eyebrow mb-5">Dúvidas frequentes</p>
           <h2 className="section-title">
             Informação clara e direta.
@@ -52,18 +53,20 @@ export function FAQAccordion() {
             aqui, converse diretamente com nossa equipe.
           </p>
         </div>
-        <Accordion type="single" collapsible className="w-full">
-          {questions.map(([question, answer], i) => (
-            <AccordionItem value={`faq-${i}`} key={question} className="border-border">
-              <AccordionTrigger className="py-5 text-sm font-medium text-left gap-4 hover:no-underline hover:text-primary transition-colors">
-                {question}
-              </AccordionTrigger>
-              <AccordionContent className="body-copy text-xs pr-6 pb-5 leading-relaxed text-pretty">
-                {answer}
-              </AccordionContent>
-            </AccordionItem>
-          ))}
-        </Accordion>
+        <div {...reveal(1)}>
+          <Accordion type="single" collapsible className="w-full">
+            {questions.map(([question, answer], i) => (
+              <AccordionItem value={`faq-${i}`} key={question} className="border-border">
+                <AccordionTrigger className="py-5 text-sm font-medium text-left gap-4 hover:no-underline hover:text-primary transition-colors">
+                  {question}
+                </AccordionTrigger>
+                <AccordionContent className="body-copy text-xs pr-6 pb-5 leading-relaxed text-pretty">
+                  {answer}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </div>
       </div>
     </section>
   );

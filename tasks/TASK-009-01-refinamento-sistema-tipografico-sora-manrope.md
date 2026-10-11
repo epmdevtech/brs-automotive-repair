@@ -2,14 +2,14 @@
 
 ## Metadados
 
-| Campo        | Valor                                                                          |
-| ------------ | ------------------------------------------------------------------------------ |
-| ID           | TASK-009-01                                                                    |
-| Status       | Done                                                                           |
-| Responsável  | Engenharia Front-end EPMDEVTECH                                                |
-| SPEC         | SPEC-009                                                                       |
-| Critérios    | AC-009-01, AC-009-02, AC-009-03, AC-009-04, AC-009-05, AC-009-06               |
-| Dependências | SPEC-009                                                                       |
+| Campo        | Valor                                                            |
+| ------------ | ---------------------------------------------------------------- |
+| ID           | TASK-009-01                                                      |
+| Status       | Done                                                             |
+| Responsável  | Engenharia Front-end EPMDEVTECH                                  |
+| SPEC         | SPEC-009                                                         |
+| Critérios    | AC-009-01, AC-009-02, AC-009-03, AC-009-04, AC-009-05, AC-009-06 |
+| Dependências | SPEC-009                                                         |
 
 ---
 
@@ -38,14 +38,14 @@ Refinar exclusivamente o sistema tipográfico da landing page da BRS Reparaçõe
 
 ## Validação
 
-| Critério/risco | Teste, comando ou revisão      | Evidência esperada                                                   |
-| -------------- | ------------------------------ | -------------------------------------------------------------------- |
-| AC-009-01      | Inspeção de `src/routes/__root.tsx` | Link aponta para Sora e Manrope com pesos otimizados                 |
-| AC-009-02      | Inspeção de `src/styles.css`   | `--font-display: "Sora"` e `--font-body: "Manrope"` configurados      |
-| AC-009-03      | Inspeção visual & CSS          | Títulos fluidos com `clamp()`, `text-wrap: balance` e line-heights     |
-| AC-009-04      | Inspeção visual & CSS          | Textos corridos com Manrope 400/500, line-height 1.6+ e `pretty`     |
-| AC-009-05      | Inspeção de componentes        | Cards de serviços e galeria sem caixa alta agressiva e sem bold 800  |
-| AC-009-06      | `make check`                   | Vitest, ESLint, TypeScript e Build 100% aprovados                    |
+| Critério/risco | Teste, comando ou revisão           | Evidência esperada                                                  |
+| -------------- | ----------------------------------- | ------------------------------------------------------------------- |
+| AC-009-01      | Inspeção de `src/routes/__root.tsx` | Link aponta para Sora e Manrope com pesos otimizados                |
+| AC-009-02      | Inspeção de `src/styles.css`        | `--font-display: "Sora"` e `--font-body: "Manrope"` configurados    |
+| AC-009-03      | Inspeção visual & CSS               | Títulos fluidos com `clamp()`, `text-wrap: balance` e line-heights  |
+| AC-009-04      | Inspeção visual & CSS               | Textos corridos com Manrope 400/500, line-height 1.6+ e `pretty`    |
+| AC-009-05      | Inspeção de componentes             | Cards de serviços e galeria sem caixa alta agressiva e sem bold 800 |
+| AC-009-06      | `make check`                        | Vitest, ESLint, TypeScript e Build 100% aprovados                   |
 
 ---
 

@@ -28,10 +28,10 @@
 
 ## Achados (Findings)
 
-| ID      | Severidade | Local                       | Evidência e impacto                                                                                 | Correção requerida / Ação                                                                 | Status |
-| ------- | ---------- | --------------------------- | --------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ------ |
-| FIND-01 | Média      | `.github/workflows/ci.yml`  | Scripts de rastreabilidade necessitam de todo o histórico git (`fetch-depth: 0`) para ler commits. | Configurado explicitamente `actions/checkout@v4` com `fetch-depth: 0`.                   | Closed |
-| FIND-02 | Info       | `.github/workflows/ci.yml`  | Concorrência de builds concorrentes na mesma branch pode desperdiçar minutos de runner.            | Adicionado bloco `concurrency` com `cancel-in-progress: true` para otimizar os recursos.  | Closed |
+| ID      | Severidade | Local                      | Evidência e impacto                                                                                | Correção requerida / Ação                                                                | Status |
+| ------- | ---------- | -------------------------- | -------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ------ |
+| FIND-01 | Média      | `.github/workflows/ci.yml` | Scripts de rastreabilidade necessitam de todo o histórico git (`fetch-depth: 0`) para ler commits. | Configurado explicitamente `actions/checkout@v4` com `fetch-depth: 0`.                   | Closed |
+| FIND-02 | Info       | `.github/workflows/ci.yml` | Concorrência de builds concorrentes na mesma branch pode desperdiçar minutos de runner.            | Adicionado bloco `concurrency` com `cancel-in-progress: true` para otimizar os recursos. | Closed |
 
 ---
 

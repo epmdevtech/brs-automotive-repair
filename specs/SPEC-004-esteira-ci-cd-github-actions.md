@@ -2,18 +2,18 @@
 
 ## Metadados
 
-| Campo                               | Valor                                     |
-| ----------------------------------- | ----------------------------------------- |
-| ID                                  | SPEC-004                                  |
-| Status                              | Implemented                               |
-| Responsável                         | Engenharia DevOps EPMDEVTECH              |
-| Revisores                           | Engenharia / QA EPMDEVTECH                |
-| Criado                              | 2026-10-11                                |
-| Atualizado                          | 2026-10-11                                |
-| Lançamento alvo                     | `0.1.0`                                   |
-| Briefing de UX relacionado          | N/A (DevOps e Automação CI/CD)            |
-| Especificação de design relacionada | N/A                                       |
-| ADRs relacionadas                   | N/A                                       |
+| Campo                               | Valor                          |
+| ----------------------------------- | ------------------------------ |
+| ID                                  | SPEC-004                       |
+| Status                              | Implemented                    |
+| Responsável                         | Engenharia DevOps EPMDEVTECH   |
+| Revisores                           | Engenharia / QA EPMDEVTECH     |
+| Criado                              | 2026-10-11                     |
+| Atualizado                          | 2026-10-11                     |
+| Lançamento alvo                     | `0.1.0`                        |
+| Briefing de UX relacionado          | N/A (DevOps e Automação CI/CD) |
+| Especificação de design relacionada | N/A                            |
+| ADRs relacionadas                   | N/A                            |
 
 ---
 

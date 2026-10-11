@@ -22,8 +22,9 @@ d408519` docs(traceability): atualizar matriz de rastreabilidade para SPEC-007<b
 fc69cee` feat(gallery-services): implementar slider antes/depois, lightbox e card spotlight | [REVIEW-007-galeria-interativa-e-card-spotlight.md](../reviews/REVIEW-007-galeria-interativa-e-card-spotlight.md) (Approved) |
 | [SPEC-008](../specs/SPEC-008-remocao-lovable-header-unico-hero-redesign.md) | Implemented | [TASK-008-01](../tasks/TASK-008-01-remocao-lovable-header-unico-hero-redesign.md) (Done) | `
 f496606` feat(hero-cleanup): expurgar vínculos com Lovable, unificar header e redesenhar hero | [REVIEW-008-remocao-lovable-header-unico-hero-redesign.md](../reviews/REVIEW-008-remocao-lovable-header-unico-hero-redesign.md) (Approved) |
-| [SPEC-009](../specs/SPEC-009-refinamento-sistema-tipografico-sora-manrope.md) | Implemented | [TASK-009-01](../tasks/TASK-009-01-refinamento-sistema-tipografico-sora-manrope.md) (Done) | `b63d44cb` feat(typography): refinar sistema tipográfico com Sora e Manrope | [REVIEW-009-refinamento-sistema-tipografico-sora-manrope.md](../reviews/REVIEW-009-refinamento-sistema-tipografico-sora-manrope.md) (Approved) |
+| [SPEC-009](../specs/SPEC-009-refinamento-sistema-tipografico-sora-manrope.md) | Implemented | [TASK-009-01](../tasks/TASK-009-01-refinamento-sistema-tipografico-sora-manrope.md) (Done) | `849ec293` feat(typography): refinar sistema tipográfico com Sora e Manrope | [REVIEW-009-refinamento-sistema-tipografico-sora-manrope.md](../reviews/REVIEW-009-refinamento-sistema-tipografico-sora-manrope.md) (Approved) |
+| [SPEC-010](../specs/SPEC-010-scroll-reveal-premium.md) | Implemented | [TASK-010-01](../tasks/TASK-010-01-scroll-reveal-premium.md) (Done) | — | [REVIEW-010-scroll-reveal-premium.md](../reviews/REVIEW-010-scroll-reveal-premium.md) (Approved) |
 
 ## Lacunas de rastreabilidade (Traceability gaps)
 
-- Nenhuma detectada nos artefatos verificados.
+- `TASK-010-01` não possui commit com `Task-Ref: TASK-010-01`.

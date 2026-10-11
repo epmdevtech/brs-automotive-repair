@@ -2,14 +2,14 @@
 
 ## Metadados
 
-| Campo        | Valor                                                                          |
-| ------------ | ------------------------------------------------------------------------------ |
-| ID           | TASK-007-01                                                                    |
-| Status       | Done                                                                           |
-| Responsável  | Engenharia Front-end EPMDEVTECH                                                |
-| SPEC         | SPEC-007                                                                       |
-| Critérios    | AC-007-01, AC-007-02, AC-007-03, AC-007-04, AC-007-05                          |
-| Dependências | SPEC-007                                                                       |
+| Campo        | Valor                                                 |
+| ------------ | ----------------------------------------------------- |
+| ID           | TASK-007-01                                           |
+| Status       | Done                                                  |
+| Responsável  | Engenharia Front-end EPMDEVTECH                       |
+| SPEC         | SPEC-007                                              |
+| Critérios    | AC-007-01, AC-007-02, AC-007-03, AC-007-04, AC-007-05 |
+| Dependências | SPEC-007                                              |
 
 ---
 
@@ -39,13 +39,13 @@ Desenvolver e integrar o componente interativo `BeforeAfterSlider` com modal Lig
 
 ## Validação
 
-| Critério/risco | Teste, comando ou revisão      | Evidência esperada                                        |
-| -------------- | ------------------------------ | --------------------------------------------------------- |
-| AC-007-01      | Testes de `before-after-slider`| Suporte a arrasto, posições e badges testados no Vitest    |
-| AC-007-02      | Teste do Lightbox Dialog       | Abertura e fechamento de modal com slider funcional       |
-| AC-007-03      | Testes de `card-spotlight`     | Movimentação do ponteiro e fallback de SSR sem erros      |
-| AC-007-04      | Inspeção de `services.tsx`     | Microinterações visuais de hover, foco e clique tátil     |
-| AC-007-05      | `make check`                   | Vitest, ESLint, Build Nitro e Matriz 100% aprovados       |
+| Critério/risco | Teste, comando ou revisão       | Evidência esperada                                      |
+| -------------- | ------------------------------- | ------------------------------------------------------- |
+| AC-007-01      | Testes de `before-after-slider` | Suporte a arrasto, posições e badges testados no Vitest |
+| AC-007-02      | Teste do Lightbox Dialog        | Abertura e fechamento de modal com slider funcional     |
+| AC-007-03      | Testes de `card-spotlight`      | Movimentação do ponteiro e fallback de SSR sem erros    |
+| AC-007-04      | Inspeção de `services.tsx`      | Microinterações visuais de hover, foco e clique tátil   |
+| AC-007-05      | `make check`                    | Vitest, ESLint, Build Nitro e Matriz 100% aprovados     |
 
 ---
 

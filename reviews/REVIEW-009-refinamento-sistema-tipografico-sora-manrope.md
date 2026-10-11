@@ -2,23 +2,24 @@
 
 ## Metadados
 
-| Campo         | Valor                                                         |
-| ------------- | ------------------------------------------------------------- |
-| ID            | REVIEW-009                                                    |
-| SPEC          | SPEC-009                                                      |
-| TASK          | TASK-009-01                                                   |
-| Status        | Approved                                                      |
-| Revisor       | Antigravity AI (Pair Programming) / EPMDEVTECH                |
-| Data          | 2026-10-11                                                    |
+| Campo   | Valor                                          |
+| ------- | ---------------------------------------------- |
+| ID      | REVIEW-009                                     |
+| SPEC    | SPEC-009                                       |
+| TASK    | TASK-009-01                                    |
+| Status  | Approved                                       |
+| Revisor | Antigravity AI (Pair Programming) / EPMDEVTECH |
+| Data    | 2026-10-11                                     |
 
 ---
 
 ## 1. Resumo da Mudança
 
 Atendimento estrito à direção tipográfica definida para a BRS Reparações Automotivas, elevando o posicionamento para um padrão técnico, sofisticado e confiável (estética de engenharia de precisão automotiva):
+
 1. **Google Fonts Otimizado**:
    - Atualizado o cabeçalho em `src/routes/__root.tsx` para carregar exclusivamente as famílias canônicas **Sora** (pesos 500, 600, 700) e **Manrope** (pesos 400, 500, 600) com `display=swap` e `preconnect`.
-   - Eliminadas referências legadas à fonte condensada *Barlow Condensed*.
+   - Eliminadas referências legadas à fonte condensada _Barlow Condensed_.
 2. **Tokens Tipográficos Centralizados em `src/styles.css`**:
    - `--font-display`: `"Sora", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif`.
    - `--font-body`: `"Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif`.
@@ -39,14 +40,14 @@ Atendimento estrito à direção tipográfica definida para a BRS Reparações A
 
 ## 2. Verificação de Critérios de Aceitação
 
-| Critério    | Descrição                                                                      | Status   | Evidência                                                                             |
-| ----------- | ------------------------------------------------------------------------------ | -------- | ------------------------------------------------------------------------------------- |
-| AC-009-01   | Carregamento de Sora (500/600/700) e Manrope (400/500/600) com `display=swap` | Aprovado | Validado via `src/test/typography.test.tsx` e inspeção do Head                        |
-| AC-009-02   | Variáveis CSS `--font-display` e `--font-body` centralizadas em styles.css    | Aprovado | Tokens definidos em `:root` e `@theme inline` com fallbacks seguros                   |
-| AC-009-03   | Escala de títulos fluida com `clamp()` e `text-wrap: balance`                  | Aprovado | Definido em styles.css e testado via Vitest                                           |
-| AC-009-04   | Textos corridos com Manrope 400/500, line-height 1.6+ e `text-wrap: pretty`    | Aprovado | Aplicado em body-copy e parágrafos de componentes                                     |
-| AC-009-05   | Eliminação de caixa alta agressiva e bold 800 em títulos de serviços e galeria | Aprovado | Títulos renderizados em Sora 600 com legibilidade editorial superior                  |
-| AC-009-06   | Quality gates 100% aprovados (`make check`)                                    | Aprovado | 37 testes Vitest aprovados, 0 erros ESLint, build SSR Nitro compilado com 100% sucesso |
+| Critério  | Descrição                                                                      | Status   | Evidência                                                                              |
+| --------- | ------------------------------------------------------------------------------ | -------- | -------------------------------------------------------------------------------------- |
+| AC-009-01 | Carregamento de Sora (500/600/700) e Manrope (400/500/600) com `display=swap`  | Aprovado | Validado via `src/test/typography.test.tsx` e inspeção do Head                         |
+| AC-009-02 | Variáveis CSS `--font-display` e `--font-body` centralizadas em styles.css     | Aprovado | Tokens definidos em `:root` e `@theme inline` com fallbacks seguros                    |
+| AC-009-03 | Escala de títulos fluida com `clamp()` e `text-wrap: balance`                  | Aprovado | Definido em styles.css e testado via Vitest                                            |
+| AC-009-04 | Textos corridos com Manrope 400/500, line-height 1.6+ e `text-wrap: pretty`    | Aprovado | Aplicado em body-copy e parágrafos de componentes                                      |
+| AC-009-05 | Eliminação de caixa alta agressiva e bold 800 em títulos de serviços e galeria | Aprovado | Títulos renderizados em Sora 600 com legibilidade editorial superior                   |
+| AC-009-06 | Quality gates 100% aprovados (`make check`)                                    | Aprovado | 37 testes Vitest aprovados, 0 erros ESLint, build SSR Nitro compilado com 100% sucesso |
 
 ---
 

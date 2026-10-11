@@ -1,5 +1,6 @@
 import { ArrowUpRight, Phone, Instagram, MapPin } from "lucide-react";
 import { company } from "@/lib/brs";
+import { reveal } from "@/lib/motion";
 import { ContactForm } from "./contact-form";
 
 const external = { target: "_blank", rel: "noopener noreferrer" };
@@ -8,7 +9,7 @@ export function Contact({ partner }: { partner: boolean }) {
   return (
     <section id="contato" className="section-space">
       <div className="page-width grid md:grid-cols-2 gap-12 md:gap-24">
-        <div>
+        <div {...reveal(0)}>
           <p className="eyebrow mb-5">Atendimento</p>
           <h2 className="section-title">
             O primeiro passo é um
@@ -58,7 +59,7 @@ export function Contact({ partner }: { partner: boolean }) {
             <MapPin size={14} className="text-primary" aria-hidden="true" /> Toledo, Paraná
           </p>
         </div>
-        <div>
+        <div {...reveal(1)}>
           <ContactForm partner={partner} />
         </div>
       </div>

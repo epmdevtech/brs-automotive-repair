@@ -2,26 +2,27 @@
 
 ## Metadados
 
-| Campo                               | Valor                                                         |
-| ----------------------------------- | ------------------------------------------------------------- |
-| ID                                  | SPEC-009                                                      |
-| Status                              | Implemented                                                   |
-| Responsável                         | Engenharia Front-end EPMDEVTECH                               |
-| Revisores                           | Produto / Design / Engenharia / QA EPMDEVTECH                 |
-| Criado                              | 2026-10-11                                                    |
-| Atualizado                          | 2026-10-11                                                    |
-| Lançamento alvo                     | `0.1.0`                                                       |
-| Briefing de UX relacionado          | Refinamento Tipográfico Premium Editorial Dark Automotivo     |
-| Especificação de design relacionada | Swiss/German Technical Automotive Typography Guidelines       |
-| ADRs relacionadas                   | N/A                                                           |
+| Campo                               | Valor                                                     |
+| ----------------------------------- | --------------------------------------------------------- |
+| ID                                  | SPEC-009                                                  |
+| Status                              | Implemented                                               |
+| Responsável                         | Engenharia Front-end EPMDEVTECH                           |
+| Revisores                           | Produto / Design / Engenharia / QA EPMDEVTECH             |
+| Criado                              | 2026-10-11                                                |
+| Atualizado                          | 2026-10-11                                                |
+| Lançamento alvo                     | `0.1.0`                                                   |
+| Briefing de UX relacionado          | Refinamento Tipográfico Premium Editorial Dark Automotivo |
+| Especificação de design relacionada | Swiss/German Technical Automotive Typography Guidelines   |
+| ADRs relacionadas                   | N/A                                                       |
 
 ---
 
 ## Problema e resultado
 
-A landing page da BRS Reparações Automotivas utilizava a fonte condensada *Barlow Condensed* herdada do template inicial para títulos, com tamanhos estáticos rígidos, estilos em caixa alta excessiva (`uppercase`), pesos ultra-pesados (`font-extrabold` / 800) e alturas de linha comprimidas que passavam uma impressão visual genérica ou excessivamente agressiva.
+A landing page da BRS Reparações Automotivas utilizava a fonte condensada _Barlow Condensed_ herdada do template inicial para títulos, com tamanhos estáticos rígidos, estilos em caixa alta excessiva (`uppercase`), pesos ultra-pesados (`font-extrabold` / 800) e alturas de linha comprimidas que passavam uma impressão visual genérica ou excessivamente agressiva.
 
 Para transmitir um posicionamento técnico, sofisticado, de alta precisão e extrema confiança automotiva, a direção de design definiu uma nova combinação tipográfica canônica:
+
 - **Títulos e Headings (H1, H2, H3, H4, Display)**: Família **Sora**, utilizando predominantemente pesos médios e semi-bold (500 e 600), com geometria limpa, proporções abertas e acabamento editorial.
 - **Corpo de texto, Navegação, Botões, Formulários e Microdados**: Família **Manrope**, utilizando pesos regular, medium e semibold (400, 500 e 600), com excelente legibilidade e ritmo de leitura fluida.
 

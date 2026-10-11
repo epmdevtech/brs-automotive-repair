@@ -57,4 +57,9 @@ O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.
 - Refinamento visual de títulos, cartões de serviços, galeria, navegação e botões, eliminando estilos em caixa alta artificial agressiva e negrito 800 em favor de uma estética de engenharia automotiva técnica e precisa.
 - Nova suíte de testes unitários [`src/test/typography.test.tsx`](src/test/typography.test.tsx) validando 6 requisitos do sistema tipográfico.
 - Especificação `SPEC-009`, tarefa `TASK-009-01` e revisão `REVIEW-009`.
-
+- Auditoria e implementação de Scroll Reveal Premium com tokens calibrados em `src/styles.css` (`--distance: 16px`, `--dur-reveal: 520ms`, `--stagger: 80ms`, `--ease-out: cubic-bezier(0.16, 1, 0.3, 1)`) (`SPEC-010`).
+- Calibração do hook `useScrollReveal` com disparo aos 12% da viewport (`threshold: 0.12`, `rootMargin: "0px 0px -10% 0px"`) e execução estritamente única via `observer.unobserve()`.
+- Integração de scroll reveal ordenado nas seções `Philosophy`, `Pickup`, `FAQAccordion` e `Contact`, mantendo Hero isolado sob Framer Motion sem duplicidades.
+- Suporte a `prefers-reduced-motion: reduce` e fallback com conteúdo 100% visível no DOM caso JavaScript ou IntersectionObserver não estejam disponíveis.
+- Nova suíte de testes unitários [`src/test/scroll-reveal.test.tsx`](src/test/scroll-reveal.test.tsx) com 11 testes cobrindo critérios de aceitação, unobserve e tokens de CSS.
+- Especificação `SPEC-010`, tarefa `TASK-010-01` e revisão `REVIEW-010`.
