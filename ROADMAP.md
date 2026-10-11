@@ -25,6 +25,7 @@ Planejamento de evolução da presença digital da BRS Reparações Automotivas 
 - [x] Configuração da porta local `5210` e proxy `http://brs.localhost` no Caddyfile.
 - [x] Infraestrutura containerizada Docker multi-stage e automação via Makefile (`SPEC-002`).
 - [x] Auditoria técnica, modularização de componentes e refinamento editorial profissional (`SPEC-003`).
+- [x] Esteira de CI/CD automatizada com GitHub Actions para quality gates e validação Docker (`SPEC-004`).
 
 ---
 

@@ -25,3 +25,5 @@ O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.
 - Enriquecimento dos metadados de compartilhamento social com Open Graph `og:image` e Twitter Cards.
 - Revisão editorial completa em língua portuguesa brasileira eliminando vícios e travessões longos.
 - Especificação `SPEC-003`, tarefa `TASK-003-01` e revisão `REVIEW-003`.
+- Esteira de Integração Contínua (CI/CD) com GitHub Actions (`.github/workflows/ci.yml`) validando lint, testes, build, rastreabilidade SDD e build Docker (`SPEC-004`).
+- Especificação `SPEC-004`, tarefa `TASK-004-01` e revisão `REVIEW-004`.

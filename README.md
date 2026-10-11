@@ -92,6 +92,20 @@ Acesse em seu navegador:
 
 ---
 
+## Integração Contínua (CI/CD no GitHub Actions)
+
+O projeto possui uma esteira automatizada configurada em [`.github/workflows/ci.yml`](.github/workflows/ci.yml) acionada em todo `push` ou `pull_request` nas branches `main` e `develop`:
+
+1. **Quality Gates & SDD**:
+   - `bun run lint`: Validação estrita de ESLint e formatação Prettier.
+   - `bun test`: Execução de 100% da suíte de testes Vitest.
+   - `bun run build`: Compilação de produção com TanStack Start e Nitro SSR.
+   - `python3 scripts/generate_traceability.py`: Verificação de lacunas na matriz de rastreabilidade.
+2. **Validação Docker**:
+   - Compilação isolada da imagem multi-estágio (`Dockerfile`) via Docker Buildx.
+
+---
+
 ## Princípios do Framework
 
 1. A **SPEC aprovada** define o comportamento desejado da mudança.

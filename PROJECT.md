@@ -66,6 +66,8 @@
 
 ```text
 BRS/
+├── .github/
+│   └── workflows/      # Esteiras de CI/CD (GitHub Actions: ci.yml)
 ├── agents/             # Definição e contratos dos agentes IA (Universal SDD)
 ├── workflows/          # Workflows canônicos (feature, verification)
 ├── standards/          # Padrões normativos (UX, acessibilidade, testes, segurança, etc.)
@@ -174,6 +176,7 @@ Todas as entregas obedecem ao protocolo **Universal SDD**:
 - `SPEC-001` / `TASK-001-01` / `REVIEW-001`: Estrutura da Landing Page Institucional BRS, Design Tokens e Fluxo Honesto de Contato.
 - `SPEC-002` / `TASK-002-01` / `REVIEW-002`: Infraestrutura Containerizada com Docker, Docker Compose e Automação via Makefile.
 - `SPEC-003` / `TASK-003-01` / `REVIEW-003`: Auditoria Técnica, Remoção de Artefatos de IA, Modularização em 15 Submódulos e Refinamento Editorial.
+- `SPEC-004` / `TASK-004-01` / `REVIEW-004`: Esteira de Integração Contínua (CI/CD) com GitHub Actions e Validação de Containers Docker.
 
 ---
 
