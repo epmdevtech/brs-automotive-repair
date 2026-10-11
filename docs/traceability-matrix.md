@@ -14,8 +14,8 @@ bd37746` chore(infra): adicionar Dockerfile multi-stage, docker-compose e automa
 679c223` ci(github): configurar esteira de integracao continua com GitHub Actions | [REVIEW-004-esteira-ci-cd-github-actions.md](../reviews/REVIEW-004-esteira-ci-cd-github-actions.md) (Approved) |
 | [SPEC-005](../specs/SPEC-005-refinamento-de-motion-design-e-microinteracoes.md) | Implemented | [TASK-005-01](../tasks/TASK-005-01-motion-design-e-microinteracoes.md) (Done) | `
 7579b8b` feat(ui): implementar motion design sobrio, transicao cinematografica e microinteracoes | [REVIEW-005-motion-design-e-microinteracoes.md](../reviews/REVIEW-005-motion-design-e-microinteracoes.md) (Approved) |
-| [SPEC-006](../specs/SPEC-006-animated-hero-framer-motion.md) | Implemented | [TASK-006-01](../tasks/TASK-006-01-animated-hero-framer-motion.md) (Done) | — | [REVIEW-006-animated-hero-framer-motion.md](../reviews/REVIEW-006-animated-hero-framer-motion.md) (Approved) |
+| [SPEC-006](../specs/SPEC-006-animated-hero-framer-motion.md) | Implemented | [TASK-006-01](../tasks/TASK-006-01-animated-hero-framer-motion.md) (Done) | `b0368a2d` feat(hero): integrar AnimatedHero com Framer Motion e estilo glass automotivo | [REVIEW-006-animated-hero-framer-motion.md](../reviews/REVIEW-006-animated-hero-framer-motion.md) (Approved) |
 
 ## Lacunas de rastreabilidade (Traceability gaps)
 
-- `TASK-006-01` não possui commit com `Task-Ref: TASK-006-01`.
+- Nenhuma detectada nos artefatos verificados.
