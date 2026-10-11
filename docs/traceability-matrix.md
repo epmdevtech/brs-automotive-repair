@@ -17,7 +17,10 @@ bd37746` chore(infra): adicionar Dockerfile multi-stage, docker-compose e automa
 | [SPEC-006](../specs/SPEC-006-animated-hero-framer-motion.md) | Implemented | [TASK-006-01](../tasks/TASK-006-01-animated-hero-framer-motion.md) (Done) | `
 344a9be` docs(traceability): atualizar matriz de rastreabilidade para SPEC-006<br>`
 b0368a2` feat(hero): integrar AnimatedHero com Framer Motion e estilo glass automotivo | [REVIEW-006-animated-hero-framer-motion.md](../reviews/REVIEW-006-animated-hero-framer-motion.md) (Approved) |
-| [SPEC-007](../specs/SPEC-007-galeria-interativa-e-card-spotlight.md) | Implemented | [TASK-007-01](../tasks/TASK-007-01-galeria-interativa-e-card-spotlight.md) (Done) | `fc69cee0` feat(gallery-services): implementar slider antes/depois, lightbox e card spotlight | [REVIEW-007-galeria-interativa-e-card-spotlight.md](../reviews/REVIEW-007-galeria-interativa-e-card-spotlight.md) (Approved) |
+| [SPEC-007](../specs/SPEC-007-galeria-interativa-e-card-spotlight.md) | Implemented | [TASK-007-01](../tasks/TASK-007-01-galeria-interativa-e-card-spotlight.md) (Done) | `
+d408519` docs(traceability): atualizar matriz de rastreabilidade para SPEC-007<br>`
+fc69cee` feat(gallery-services): implementar slider antes/depois, lightbox e card spotlight | [REVIEW-007-galeria-interativa-e-card-spotlight.md](../reviews/REVIEW-007-galeria-interativa-e-card-spotlight.md) (Approved) |
+| [SPEC-008](../specs/SPEC-008-remocao-lovable-header-unico-hero-redesign.md) | Implemented | [TASK-008-01](../tasks/TASK-008-01-remocao-lovable-header-unico-hero-redesign.md) (Done) | `e7bfb1e9` feat(hero-cleanup): expurgar vínculos com Lovable, unificar header e redesenhar hero | [REVIEW-008-remocao-lovable-header-unico-hero-redesign.md](../reviews/REVIEW-008-remocao-lovable-header-unico-hero-redesign.md) (Approved) |
 
 ## Lacunas de rastreabilidade (Traceability gaps)
 

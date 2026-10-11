@@ -16,12 +16,6 @@ type TelemetryEvents = {
 declare global {
   interface Window {
     __telemetryEvents?: TelemetryEvents;
-    __lovableEvents?: TelemetryEvents;
-    __lovableReportRuntimeError?: (payload: {
-      message: string;
-      stack?: string;
-      filename?: string;
-    }) => void;
   }
 }
 
@@ -48,7 +42,7 @@ function describeThrown(error: unknown): string {
 export function reportAppError(error: unknown, context: Record<string, unknown> = {}) {
   if (typeof window === "undefined") return;
 
-  const telemetry = window.__telemetryEvents ?? window.__lovableEvents;
+  const telemetry = window.__telemetryEvents;
   telemetry?.captureException?.(
     error,
     {
@@ -63,13 +57,7 @@ export function reportAppError(error: unknown, context: Record<string, unknown> 
     },
   );
 
-  const stack = error instanceof Error ? error.stack : undefined;
-  window.__lovableReportRuntimeError?.({
-    message: describeThrown(error),
-    ...(stack !== undefined && { stack }),
-    filename: window.location.pathname,
-  });
+  if (process.env.NODE_ENV === "development") {
+    console.error("[BRS Error Reporter]:", describeThrown(error), context);
+  }
 }
-
-// Alias de retrocompatibilidade
-export const reportLovableError = reportAppError;

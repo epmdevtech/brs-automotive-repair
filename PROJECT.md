@@ -99,7 +99,7 @@ BRS/
 ├── docker-compose.yml  # Orquestração do container de desenvolvimento
 ├── .dockerignore       # Exclusão de artefatos e node_modules
 ├── Makefile            # Automação de comandos e Quality Gates
-├── AGENTS.md           # Protocolo unificado de pessoas e agentes IA (Lovable + Universal SDD)
+├── AGENTS.md           # Protocolo unificado de engenharia e agentes IA (Universal SDD)
 ├── PROJECT.md          # Estado canônico atual do projeto (este documento)
 ├── README.md           # Visão geral, instruções de inicialização e documentação
 ├── ROADMAP.md          # Roadmap canônico e pré-requisitos para publicação
@@ -181,6 +181,7 @@ Todas as entregas obedecem ao protocolo **Universal SDD**:
 - `SPEC-005` / `TASK-005-01` / `REVIEW-005`: Refinamento de UI, Motion Design Sóbrio, Transição Cinematográfica MediaExpand e Microinterações.
 - `SPEC-006` / `TASK-006-01` / `REVIEW-006`: Seção Hero Animada com Framer Motion (21st.dev AnimatedHero), botões em Glassmorphism e variantes de entrada.
 - `SPEC-007` / `TASK-007-01` / `REVIEW-007`: Galeria Interativa com Slider Antes/Depois e Lightbox Modal (@radix-ui/react-dialog) e Seção de Serviços com Efeito CardSpotlight.
+- `SPEC-008` / `TASK-008-01` / `REVIEW-008`: Expurgar Vínculos Lovable, Configuração Nativa Vite, Unificação de Header Único e Redesign da Seção Hero.
 
 ---
 

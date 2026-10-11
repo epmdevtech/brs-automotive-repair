@@ -2,14 +2,9 @@ import { render, screen, fireEvent } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 import { AnimatedHero } from "@/components/brs/animated-hero";
 
-describe("AnimatedHero component (21st.dev)", () => {
+describe("AnimatedHero component", () => {
   const dummyProps = {
     backgroundImageUrl: "/test-bg.jpg",
-    logo: <span data-testid="test-logo">BRS Logo</span>,
-    navLinks: [
-      { label: "Início", href: "#inicio" },
-      { label: "Serviços", href: "#servicos" },
-    ],
     title: "BRS Reparações Automotivas",
     description: "Recuperação estética e estrutural de alta precisão em Toledo.",
     ctaButton: {
@@ -24,18 +19,17 @@ describe("AnimatedHero component (21st.dev)", () => {
     },
   };
 
-  it("renders the animated hero structure and navLinks correctly", () => {
+  it("renders the hero headline, description and viewport footer", () => {
     render(<AnimatedHero {...dummyProps} />);
 
-    expect(screen.getByTestId("test-logo")).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: "Início" })).toHaveAttribute("href", "#inicio");
-    expect(screen.getByRole("link", { name: "Serviços" })).toHaveAttribute("href", "#servicos");
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(
       "BRS Reparações Automotivas",
     );
     expect(
       screen.getByText("Recuperação estética e estrutural de alta precisão em Toledo."),
     ).toBeInTheDocument();
+    expect(screen.getByText("Toledo, Paraná")).toBeInTheDocument();
+    expect(screen.getByText("Fotografia ilustrativa")).toBeInTheDocument();
   });
 
   it("triggers ctaButton onClick and preserves anchor href destinations", () => {

@@ -1,17 +1,6 @@
-import {
-  ArrowUpRight,
-  ArrowDown,
-  MapPin,
-  ShieldCheck,
-  Wrench,
-  Handshake,
-  Truck,
-} from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { navigation } from "@/lib/brs";
+import { ArrowDown, MapPin, ShieldCheck, Wrench, Handshake, Truck } from "lucide-react";
 import hero from "@/assets/brs-hero.jpg";
 import { AnimatedHero } from "./animated-hero";
-import { Brand } from "./brand";
 
 export function Hero() {
   const handleScrollTo = (id: string) => {
@@ -29,35 +18,26 @@ export function Hero() {
       <AnimatedHero
         id="inicio"
         backgroundImageUrl={hero}
-        logo={<Brand />}
-        navLinks={navigation.map(([label, href]) => ({ label, href }))}
-        topRightAction={
-          <Button
-            variant="automotive"
-            asChild
-            className="hidden sm:inline-flex h-10 text-[11px] px-5"
-          >
-            <a href="#contato" onClick={() => handleScrollTo("contato")}>
-              Solicitar avaliação <ArrowUpRight className="ml-1" size={14} aria-hidden="true" />
-            </a>
-          </Button>
+        eyebrow={
+          <div className="inline-flex items-center gap-2 rounded-full border border-amber-500/30 bg-amber-500/10 px-3.5 py-1 backdrop-blur-xs">
+            <span className="size-1.5 rounded-full bg-amber-400 animate-pulse" />
+            <span className="text-xs font-medium uppercase tracking-widest text-amber-400/90">
+              Precisão no reparo • Cuidado no atendimento
+            </span>
+          </div>
         }
-        eyebrow={<p className="eyebrow">Precisão no reparo · Cuidado no atendimento</p>}
         title={
           <>
-            BRS Reparações <span className="text-primary">Automotivas.</span>
+            <span className="text-white font-extrabold">BRS Reparações</span>{" "}
+            <span className="text-amber-500 font-extrabold">Automotivas.</span>
           </>
         }
         description={
-          <div className="space-y-3">
-            <p className="text-base md:text-lg font-medium text-foreground">
-              Seu veículo com recuperação estética e estrutural de fábrica.
-            </p>
-            <p className="text-sm md:text-base text-muted-foreground leading-relaxed">
-              Funilaria automotiva, pintura em estufa e martelinho de ouro em Toledo, Paraná.
-              Atenção aos detalhes, diagnóstico honesto e acabamento técnico de alto padrão.
-            </p>
-          </div>
+          <p>
+            Funilaria automotiva, pintura em estufa e martelinho de ouro em Toledo, Paraná. Atenção
+            aos detalhes, diagnóstico honesto e acabamento técnico com recuperação de padrão de
+            fábrica.
+          </p>
         }
         ctaButton={{
           text: "Solicitar avaliação",
@@ -70,19 +50,19 @@ export function Hero() {
           onClick: () => handleScrollTo("servicos"),
         }}
         bottomContent={
-          <div className="page-width flex items-center justify-between text-xs text-muted-foreground pt-4 border-t border-white/10">
-            <span className="flex items-center gap-1.5 font-medium">
-              <MapPin size={13} className="text-primary" aria-hidden="true" /> Toledo, Paraná
+          <div className="page-width flex items-center justify-between text-xs text-neutral-400 pt-3 border-t border-white/10">
+            <span className="flex items-center gap-2 font-medium">
+              <MapPin size={14} className="text-amber-500" aria-hidden="true" /> Toledo, Paraná
             </span>
             <a
               href="#servicos"
               onClick={() => handleScrollTo("servicos")}
               aria-label="Rolar para a seção de serviços"
-              className="hidden sm:flex items-center gap-2 text-[10px] uppercase tracking-[2px] hover:text-foreground transition-colors"
+              className="hidden sm:flex items-center gap-2 text-[10px] uppercase tracking-[2px] text-neutral-300 hover:text-white transition-colors font-medium"
             >
               Conheça a BRS <ArrowDown size={14} aria-hidden="true" />
             </a>
-            <span className="image-note">Fotografia ilustrativa</span>
+            <span className="image-note text-[11px] text-neutral-400">Fotografia ilustrativa</span>
           </div>
         }
       />

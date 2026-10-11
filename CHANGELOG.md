@@ -45,3 +45,9 @@ O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.
 - Microinterações refinadas nos cards de serviços: elevação de ícones, iluminação de bordas e feedback tátil em botões (`active:scale-[0.98]`).
 - 3 novas suítes de testes unitários (`src/test/before-after-slider.test.tsx`, `src/test/card-spotlight.test.tsx`, `src/test/project-gallery.test.tsx`).
 - Especificação `SPEC-007`, tarefa `TASK-007-01` e revisão `REVIEW-007`.
+- Expurgo total de resíduos e dependências da plataforma Lovable (`@lovable.dev/vite-tanstack-config`, `bunfig.toml`, `error-reporting.ts`, `AGENTS.md`) (`SPEC-008`).
+- Migração para configuração limpa e nativa em `vite.config.ts` com plugins oficiais do TanStack Start e Nitro.
+- Unificação do Header: eliminação da duplicidade de navbars, centralização de um único container fixed z-50 com backdrop blur e menu mobile responsivo.
+- Redesign premium da seção Hero: badge âmbar elegante com pulso suave, tipografia H1 em alto contraste, gradientes eficientes WCAG AA+ e rodapé sutil da viewport.
+- Nova suíte de testes unitários [`src/test/header.test.tsx`](src/test/header.test.tsx) validando a existência de exatamente um banner/header na página.
+- Especificação `SPEC-008`, tarefa `TASK-008-01` e revisão `REVIEW-008`.

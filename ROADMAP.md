@@ -29,6 +29,7 @@ Planejamento de evolução da presença digital da BRS Reparações Automotivas 
 - [x] Refinamento de UI, Motion Design e Microinterações com referências do 21st.dev adaptadas à BRS (`SPEC-005`).
 - [x] Seção Hero animada com biblioteca `framer-motion` v14 e componente `AnimatedHero` inspirado no 21st.dev (`SPEC-006`).
 - [x] Galeria interativa Antes/Depois com `BeforeAfterSlider`, Lightbox Dialog em alta definição e serviços com `CardSpotlight` (`SPEC-007`).
+- [x] Expurgar dependências e resíduos Lovable, unificar Header em container fixed único e redesenhar Hero com UX/UI premium (`SPEC-008`).
 
 ---
 

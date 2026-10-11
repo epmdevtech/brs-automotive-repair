@@ -1,16 +1,3 @@
-<!-- LOVABLE:BEGIN -->
-
-> [!IMPORTANT]
-> This project is connected to [Lovable](https://lovable.dev). Avoid rewriting
-> published git history — force pushing, or rebasing/amending/squashing commits
-> that are already pushed — as it rewrites history on Lovable's side and the
-> user will likely lose their project history.
->
-> Commits you push to the connected branch sync back to Lovable and show up in
-> the editor, so keep the branch in a working state.
-
-<!-- LOVABLE:END -->
-
 # AGENTS.md — Protocolo para Agentes de IA e Engenharia (Universal SDD)
 
 Este repositório adota o **Universal SDD (Spec-Driven Development)** integrado aos padrões da EPMDEVTECH. Qualquer agente autônomo, assistente de IA (Antigravity, Claude, ChatGPT, Gemini, Copilot, Cursor, Windsurf) ou desenvolvedor humano deve cumprir os protocolos e restrições descritos neste documento.

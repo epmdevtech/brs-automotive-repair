@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { ArrowUpRight, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { navigation } from "@/lib/brs";
+import { cn } from "@/lib/utils";
 import { Brand } from "./brand";
 
 export function Header() {
@@ -9,19 +10,28 @@ export function Header() {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 80);
+    const handleScroll = () => setScrolled(window.scrollY > 40);
     handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
-    <header className={`site-header ${scrolled ? "scrolled" : ""}`}>
-      <div className="page-width header-inner">
+    <header
+      className={cn(
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-300 backdrop-blur-md border-b",
+        scrolled ? "bg-black/90 border-white/10 shadow-xl py-3" : "bg-black/40 border-white/5 py-4",
+      )}
+    >
+      <div className="page-width flex items-center justify-between">
         <Brand />
-        <nav aria-label="Navegação principal" className="hidden lg:flex items-center gap-6">
+        <nav aria-label="Navegação principal" className="hidden lg:flex items-center gap-8">
           {navigation.map(([label, href]) => (
-            <a className="nav-link" key={href} href={href}>
+            <a
+              className="text-xs uppercase tracking-wider text-neutral-300 hover:text-white transition-colors font-medium"
+              key={href}
+              href={href}
+            >
               {label}
             </a>
           ))}
@@ -30,7 +40,7 @@ export function Header() {
           <Button
             variant="automotive"
             asChild
-            className="hidden sm:inline-flex h-10 text-[11px] px-5"
+            className="hidden sm:inline-flex h-9 text-xs px-5 font-bold uppercase tracking-wider bg-amber-500 text-black hover:bg-amber-400 active:scale-[0.98] transition-all shadow-md shadow-amber-500/10"
           >
             <a href="#contato">
               Solicitar avaliação <ArrowUpRight className="ml-1" size={14} aria-hidden="true" />
@@ -39,7 +49,7 @@ export function Header() {
           <Button
             variant="ghost"
             size="icon"
-            className="lg:hidden"
+            className="lg:hidden text-white hover:bg-white/10"
             onClick={() => setOpen(!open)}
             aria-label={open ? "Fechar menu de navegação" : "Abrir menu de navegação"}
             aria-expanded={open}
@@ -53,14 +63,23 @@ export function Header() {
         <nav
           id="mobile-nav"
           aria-label="Navegação móvel"
-          className="bg-background border-t border-border px-6 py-5 grid gap-5 lg:hidden"
+          className="bg-black/95 backdrop-blur-lg border-t border-white/10 px-6 py-5 grid gap-5 lg:hidden animate-in fade-in slide-in-from-top-2"
         >
           {navigation.map(([label, href]) => (
-            <a key={href} href={href} onClick={() => setOpen(false)} className="text-sm">
+            <a
+              key={href}
+              href={href}
+              onClick={() => setOpen(false)}
+              className="text-sm font-medium text-neutral-200 hover:text-amber-400 uppercase tracking-wider"
+            >
               {label}
             </a>
           ))}
-          <Button variant="automotive" asChild>
+          <Button
+            variant="automotive"
+            asChild
+            className="bg-amber-500 text-black font-bold uppercase tracking-wider hover:bg-amber-400"
+          >
             <a href="#contato" onClick={() => setOpen(false)}>
               Solicitar avaliação <ArrowUpRight className="ml-1" size={14} aria-hidden="true" />
             </a>

@@ -1,9 +1,8 @@
 import * as React from "react";
-import { motion } from "framer-motion";
-import { cn } from "@/lib/utils";
+import { motion, useReducedMotion } from "framer-motion";
+import { ArrowDown, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
-
-import { useReducedMotion } from "framer-motion";
+import { cn } from "@/lib/utils";
 
 export interface NavLink {
   label: string;
@@ -19,11 +18,11 @@ export interface HeroAction {
 export interface AnimatedHeroProps {
   id?: string;
   backgroundImageUrl: string;
-  logo: React.ReactNode;
-  navLinks: NavLink[];
+  logo?: React.ReactNode;
+  navLinks?: NavLink[];
   topRightAction?: React.ReactNode;
   eyebrow?: React.ReactNode;
-  title: React.ReactNode;
+  title?: React.ReactNode;
   description: React.ReactNode;
   ctaButton: HeroAction;
   secondaryCta?: HeroAction;
@@ -31,14 +30,14 @@ export interface AnimatedHeroProps {
   className?: string;
 }
 
-// Animation variants
+// Variantes de transição do Framer Motion
 const getContainerVariants = (reduced: boolean) => ({
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: reduced ? 0 : 0.15,
-      delayChildren: reduced ? 0 : 0.2,
+      staggerChildren: reduced ? 0 : 0.12,
+      delayChildren: reduced ? 0 : 0.15,
     },
   },
 });
@@ -56,11 +55,8 @@ const getItemVariants = (reduced: boolean) => ({
 });
 
 export const AnimatedHero = ({
-  id,
+  id = "inicio",
   backgroundImageUrl,
-  logo,
-  navLinks,
-  topRightAction,
   eyebrow,
   title,
   description,
@@ -73,76 +69,71 @@ export const AnimatedHero = ({
   const containerVariants = getContainerVariants(shouldReduceMotion);
   const itemVariants = getItemVariants(shouldReduceMotion);
 
-  // Estilo de botão glass reutilizável com acabamento automotivo premium
-  const glassButtonClassName =
-    "bg-white/10 backdrop-blur-md border border-white/20 text-foreground hover:bg-white/20 hover:border-primary/60 transition-colors font-medium";
-
   return (
     <section
       id={id}
       className={cn(
-        "relative flex min-h-[760px] md:min-h-screen w-full flex-col items-center justify-center overflow-hidden bg-background text-foreground",
+        "relative flex min-h-screen w-full flex-col justify-center overflow-hidden bg-background text-foreground pt-28 pb-24",
         className,
       )}
     >
+      {/* Background com fotografia e overlay de alto contraste para conformidade WCAG AA+ */}
       <div
-        className="absolute inset-0 z-0 bg-cover bg-center"
+        className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: `url(${backgroundImageUrl})` }}
       >
-        <div className="absolute inset-0 bg-black/65 backdrop-contrast-105" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/80 to-black/45" />
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-black/60" />
       </div>
 
-      <motion.header
-        initial={{ y: shouldReduceMotion ? 0 : -100, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: shouldReduceMotion ? 0.01 : 0.8, ease: "easeOut" }}
-        className="absolute top-0 z-20 flex h-24 w-full items-center justify-between px-6 md:px-12 border-b border-white/10 bg-linear-to-b from-black/70 to-transparent"
-      >
-        <div className="flex items-center gap-2">{logo}</div>
-        <nav aria-label="Navegação do Hero" className="hidden lg:flex items-center gap-6">
-          {navLinks.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              className="text-xs uppercase tracking-wider text-muted-foreground transition-colors hover:text-foreground"
-            >
-              {link.label}
-            </a>
-          ))}
-        </nav>
-        <div className="flex items-center gap-3">{topRightAction}</div>
-      </motion.header>
-
+      {/* Conteúdo principal animado do Hero */}
       <motion.div
         variants={containerVariants}
         initial="hidden"
         animate="visible"
-        className="relative z-10 flex flex-col items-start justify-center text-left px-6 md:px-12 max-w-5xl w-full pt-28 pb-16"
+        className="page-width relative z-10 flex flex-col items-start justify-center text-left py-8"
       >
-        {eyebrow && (
-          <motion.div variants={itemVariants} className="mb-2">
-            {eyebrow}
-          </motion.div>
-        )}
+        {/* Overline / Badge Superior */}
+        <motion.div variants={itemVariants} className="mb-4">
+          {eyebrow || (
+            <div className="inline-flex items-center gap-2 rounded-full border border-amber-500/30 bg-amber-500/10 px-3.5 py-1 backdrop-blur-xs">
+              <span className="size-1.5 rounded-full bg-amber-400 animate-pulse" />
+              <span className="text-xs font-medium uppercase tracking-widest text-amber-400/90">
+                Precisão no reparo • Cuidado no atendimento
+              </span>
+            </div>
+          )}
+        </motion.div>
+
+        {/* Título Principal (H1) com forte contraste */}
         <motion.h1
           variants={itemVariants}
-          className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl md:text-6xl lg:text-7xl font-display uppercase leading-[0.98]"
+          className="text-4xl font-extrabold tracking-tight sm:text-6xl md:text-7xl lg:text-8xl font-display uppercase leading-[0.96] max-w-4xl"
         >
-          {title}
+          {title || (
+            <>
+              <span className="text-white font-extrabold">BRS Reparações</span>{" "}
+              <span className="text-amber-500 font-extrabold">Automotivas.</span>
+            </>
+          )}
         </motion.h1>
+
+        {/* Subtítulo Confortável e Nítido */}
         <motion.div
           variants={itemVariants}
-          className="mt-6 max-w-2xl text-sm md:text-base leading-relaxed text-muted-foreground"
+          className="mt-6 max-w-2xl text-base sm:text-lg leading-relaxed text-neutral-300"
         >
           {description}
         </motion.div>
+
+        {/* Chamadas para Ação (CTAs) */}
         <motion.div variants={itemVariants} className="mt-8 flex flex-wrap items-center gap-4">
+          {/* Botão Primário */}
           {ctaButton.href ? (
             <Button
               asChild
               size="lg"
-              variant="automotive"
-              className="h-12 px-7 text-xs font-semibold shadow-lg shadow-primary/20"
+              className="h-12 px-7 text-xs font-bold uppercase tracking-wider rounded-sm bg-amber-500 text-black hover:bg-amber-400 active:scale-[0.98] transition-all shadow-lg shadow-amber-500/20 cursor-pointer"
             >
               <a href={ctaButton.href} onClick={ctaButton.onClick}>
                 {ctaButton.text}
@@ -152,16 +143,20 @@ export const AnimatedHero = ({
             <Button
               onClick={ctaButton.onClick}
               size="lg"
-              variant="automotive"
-              className="h-12 px-7 text-xs font-semibold shadow-lg shadow-primary/20"
+              className="h-12 px-7 text-xs font-bold uppercase tracking-wider rounded-sm bg-amber-500 text-black hover:bg-amber-400 active:scale-[0.98] transition-all shadow-lg shadow-amber-500/20 cursor-pointer"
             >
               {ctaButton.text}
             </Button>
           )}
 
+          {/* Botão Secundário */}
           {secondaryCta &&
             (secondaryCta.href ? (
-              <Button asChild size="lg" className={cn("h-12 px-7 text-xs", glassButtonClassName)}>
+              <Button
+                asChild
+                size="lg"
+                className="h-12 px-7 text-xs font-medium uppercase tracking-wider rounded-sm border border-neutral-700 bg-neutral-900/70 hover:bg-neutral-800 text-neutral-200 active:scale-[0.98] transition-all backdrop-blur-xs cursor-pointer"
+              >
                 <a href={secondaryCta.href} onClick={secondaryCta.onClick}>
                   {secondaryCta.text}
                 </a>
@@ -170,7 +165,7 @@ export const AnimatedHero = ({
               <Button
                 onClick={secondaryCta.onClick}
                 size="lg"
-                className={cn("h-12 px-7 text-xs", glassButtonClassName)}
+                className="h-12 px-7 text-xs font-medium uppercase tracking-wider rounded-sm border border-neutral-700 bg-neutral-900/70 hover:bg-neutral-800 text-neutral-200 active:scale-[0.98] transition-all backdrop-blur-xs cursor-pointer"
               >
                 {secondaryCta.text}
               </Button>
@@ -178,9 +173,24 @@ export const AnimatedHero = ({
         </motion.div>
       </motion.div>
 
-      {bottomContent && (
-        <div className="relative z-10 w-full px-6 md:px-12 pb-6 mt-auto">{bottomContent}</div>
-      )}
+      {/* Rodapé do Hero / Microdados e Navegação de Scroll */}
+      <div className="absolute bottom-6 left-0 right-0 z-10">
+        {bottomContent || (
+          <div className="page-width flex items-center justify-between text-xs text-neutral-400 pt-3 border-t border-white/10">
+            <span className="flex items-center gap-2 font-medium">
+              <MapPin size={14} className="text-amber-500" aria-hidden="true" /> Toledo, Paraná
+            </span>
+            <a
+              href="#servicos"
+              aria-label="Rolar para a seção de serviços"
+              className="hidden sm:flex items-center gap-2 text-[10px] uppercase tracking-[2px] text-neutral-300 hover:text-white transition-colors font-medium"
+            >
+              Conheça a BRS <ArrowDown size={14} aria-hidden="true" />
+            </a>
+            <span className="image-note text-[11px] text-neutral-400">Fotografia ilustrativa</span>
+          </div>
+        )}
+      </div>
     </section>
   );
 };
