@@ -26,8 +26,8 @@
 ## Monitoramento e sucesso
 
 | Sinal | Baseline/target | Janela | Responsável | Ação em desvio |
-|---|---|---|---|---|
-| | | | | |
+| ----- | --------------- | ------ | ----------- | -------------- |
+|       |                 |        |             |                |
 
 ## Rollback e recuperação
 

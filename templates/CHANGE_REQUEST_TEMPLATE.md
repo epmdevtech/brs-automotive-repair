@@ -2,13 +2,13 @@
 
 ## Metadados
 
-| Campo | Valor |
-|---|---|
-| Status | Draft (Rascunho) / Awaiting approval (Aguardando aprovação) / Approved (Aprovado) / Rejected (Rejeitado) / Superseded (Substituído) |
-| SPEC Base | SPEC-NNN |
-| Reportado por | |
-| Reportado em | YYYY-MM-DD |
-| Refs: | Base SPEC: SPEC-NNN; TASKs relacionadas: TASK-NNN-XX ou N/A; ADRs relacionadas: ADR-NNN ou N/A |
+| Campo         | Valor                                                                                                                               |
+| ------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| Status        | Draft (Rascunho) / Awaiting approval (Aguardando aprovação) / Approved (Aprovado) / Rejected (Rejeitado) / Superseded (Substituído) |
+| SPEC Base     | SPEC-NNN                                                                                                                            |
+| Reportado por |                                                                                                                                     |
+| Reportado em  | YYYY-MM-DD                                                                                                                          |
+| Refs:         | Base SPEC: SPEC-NNN; TASKs relacionadas: TASK-NNN-XX ou N/A; ADRs relacionadas: ADR-NNN ou N/A                                      |
 
 ## Descoberta e impacto
 
@@ -61,9 +61,9 @@ Preencha esta seção quando o comportamento observável ou os critérios de ace
 
 ## Decisão
 
-| Papel | Nome | Decisão | Data | Notas |
-|---|---|---|---|---|
-| Autoridade humana | | Aprovado / Rejeitado | | |
+| Papel             | Nome | Decisão              | Data | Notas |
+| ----------------- | ---- | -------------------- | ---- | ----- |
+| Autoridade humana |      | Aprovado / Rejeitado |      |       |
 
 ## Acompanhamento (Follow-up)
 

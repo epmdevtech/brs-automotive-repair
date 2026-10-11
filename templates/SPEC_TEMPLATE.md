@@ -2,16 +2,16 @@
 
 ## Metadados
 
-| Campo | Valor |
-|---|---|
-| ID | SPEC-NNN |
-| Status | Draft (Rascunho) / In review (Em revisão) / Approved (Aprovado) / Implemented (Implementado) / Superseded (Substituído) |
-| Responsável | |
-| Revisores | Produto / Design / Engenharia / QA / Segurança |
-| Criado | YYYY-MM-DD |
-| Atualizado | YYYY-MM-DD |
-| Liberação Alvo | |
-| Refs: | Discovery (Descoberta): <caminho ou N/A — motivo>; Design: <caminho ou N/A — motivo>; ADRs: <ADR-NNN ou N/A — motivo> |
+| Campo          | Valor                                                                                                                   |
+| -------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| ID             | SPEC-NNN                                                                                                                |
+| Status         | Draft (Rascunho) / In review (Em revisão) / Approved (Aprovado) / Implemented (Implementado) / Superseded (Substituído) |
+| Responsável    |                                                                                                                         |
+| Revisores      | Produto / Design / Engenharia / QA / Segurança                                                                          |
+| Criado         | YYYY-MM-DD                                                                                                              |
+| Atualizado     | YYYY-MM-DD                                                                                                              |
+| Liberação Alvo |                                                                                                                         |
+| Refs:          | Discovery (Descoberta): <caminho ou N/A — motivo>; Design: <caminho ou N/A — motivo>; ADRs: <ADR-NNN ou N/A — motivo>   |
 
 ## Problema e resultado
 
@@ -70,20 +70,20 @@ Resuma componentes afetados, APIs, schemas, migrações, feature flags, dependê
 ## Riscos e dependências
 
 | Risco ou dependência | Impacto | Probabilidade | Mitigação | Responsável |
-|---|---|---|---|---|
-| | | | | |
+| -------------------- | ------- | ------------- | --------- | ----------- |
+|                      |         |               |           |             |
 
 ## Questões abertas
 
 | Questão | Responsável | Data limite | Resolução |
-|---|---|---|---|
-| | | | |
+| ------- | ----------- | ----------- | --------- |
+|         |             |             |           |
 
 ## Aprovação
 
-| Papel | Nome | Decisão | Data | Notas |
-|---|---|---|---|---|
-| Produto | | Approved / Rejected | | |
-| Design | | Approved / Rejected / N/A | | |
-| Engenharia | | Approved / Rejected | | |
-| QA | | Ready / Not ready | | |
+| Papel      | Nome | Decisão                   | Data | Notas |
+| ---------- | ---- | ------------------------- | ---- | ----- |
+| Produto    |      | Approved / Rejected       |      |       |
+| Design     |      | Approved / Rejected / N/A |      |       |
+| Engenharia |      | Approved / Rejected       |      |       |
+| QA         |      | Ready / Not ready         |      |       |

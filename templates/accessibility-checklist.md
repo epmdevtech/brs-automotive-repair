@@ -2,15 +2,15 @@
 
 ## Metadados e linha de base
 
-| Campo | Valor |
-|---|---|
-| ID | A11Y-000 |
-| Padrão/versão/nível adotado | |
-| Build/commit | |
-| Revisor | |
-| Ambiente | |
-| Navegadores/dispositivos | |
-| Tecnologias assistivas/versões | |
+| Campo                          | Valor    |
+| ------------------------------ | -------- |
+| ID                             | A11Y-000 |
+| Padrão/versão/nível adotado    |          |
+| Build/commit                   |          |
+| Revisor                        |          |
+| Ambiente                       |          |
+| Navegadores/dispositivos       |          |
+| Tecnologias assistivas/versões |          |
 
 Para cada verificação registre Pass (Aprovado), Fail (Reprovado), N/A com motivo, ou Not tested (Não testado).
 
@@ -59,20 +59,20 @@ Para cada verificação registre Pass (Aprovado), Fail (Reprovado), N/A com moti
 ## Varredura automatizada (Automated scan)
 
 | Ferramenta/versão | Escopo | Resultado | Relatório | Falsos positivos revisados por |
-|---|---|---|---|---|
-| | | | | |
+| ----------------- | ------ | --------- | --------- | ------------------------------ |
+|                   |        |           |           |                                |
 
 ## Verificações de tecnologia assistiva na jornada crítica
 
 | Jornada | AT/entrada | Resultado esperado | Resultado atual | Evidência/defeito |
-|---|---|---|---|---|
-| | | | | |
+| ------- | ---------- | ------------------ | --------------- | ----------------- |
+|         |            |                    |                 |                   |
 
 ## Descobertas e decisão (Findings and decision)
 
-| ID | Requisito | Impacto no usuário | Severidade | Evidência | Responsável/status |
-|---|---|---|---|---|---|
-| | | | | | |
+| ID  | Requisito | Impacto no usuário | Severidade | Evidência | Responsável/status |
+| --- | --------- | ------------------ | ---------- | --------- | ------------------ |
+|     |           |                    |            |           |                    |
 
 Decisão: Approved (Aprovado) / Approved with authorized exception (Aprovado com exceção autorizada) / Rejected (Rejeitado)
 

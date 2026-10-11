@@ -11,6 +11,7 @@
 O site da **BRS Reparações Automotivas** foi desenvolvido para apresentar a oficina mecânica e de funilaria/pintura situada em Toledo, Paraná. Com uma identidade visual premium inspirada na precisão automotiva, a plataforma atende tanto proprietários de veículos particulares quanto corretores de seguros.
 
 ### Destaques da Solução
+
 - **Transparência e Honestidade Comercial**: Nenhum canal não confirmado é prometido. O formulário de contato prepara uma mensagem completa para envio direto pelo canal oficial validado (Instagram `@brsreparacoes`).
 - **Mídia Ilustrativa Clara**: Todas as fotos genéricas de serviços são declaradas como ilustrativas até a coleta e autorização das fotos reais da oficina.
 - **Acessibilidade Completa**: Interface desenvolvida com primitivas Radix UI e suporte pleno a navegação por teclado (WCAG 2.1 AA).
@@ -22,39 +23,42 @@ O site da **BRS Reparações Automotivas** foi desenvolvido para apresentar a of
 
 A governança do projeto é estruturada de forma modular para garantir rastreabilidade completa entre requisitos, tarefas e código.
 
-| Documento | Objetivo |
-|-----------|----------|
-| [`PROJECT.md`](PROJECT.md) | Estado canônico atual do projeto, stack, portas e regras |
-| [`AGENTS.md`](AGENTS.md) | Protocolo unificado para pessoas e agentes de IA |
-| [`UNIVERSAL_SDD_FRAMEWORK.md`](UNIVERSAL_SDD_FRAMEWORK.md) | Definição normativa do núcleo do framework |
-| [`ROADMAP.md`](ROADMAP.md) | Planejamento, status e pré-requisitos para publicação |
-| [`CHANGELOG.md`](CHANGELOG.md) | Histórico de versões e mudanças implementadas |
-| [`docs/getting-started.md`](docs/getting-started.md) | Guia de primeiros passos no framework |
-| [`docs/architecture.md`](docs/architecture.md) | Arquitetura técnica e documental |
-| [`docs/traceability-matrix.md`](docs/traceability-matrix.md) | Matriz de rastreabilidade entre SPECs, Tasks e Commits |
-| [`standards/ux-ui.md`](standards/ux-ui.md) | Padrões de interface e critérios de UX/UI |
-| [`standards/accessibility.md`](standards/accessibility.md) | Requisitos e validação de acessibilidade |
-| [`standards/testing.md`](standards/testing.md) | Estratégia de testes automatizados e evidências |
-| [`standards/quality-gates.md`](standards/quality-gates.md) | Critérios de entrada, saída e release |
-| [`specs/`](specs/) | Especificações técnicas aprovadas (`SPEC-001`) |
-| [`tasks/`](tasks/) | Tarefas rastreadas derivadas de especificações (`TASK-001-01`) |
-| [`reviews/`](reviews/) | Registros formais de aprovação e evidências (`REVIEW-001`) |
-| [`knowledge/`](knowledge/) | Base de conhecimento modular do negócio e arquitetura |
+| Documento                                                    | Objetivo                                                       |
+| ------------------------------------------------------------ | -------------------------------------------------------------- |
+| [`PROJECT.md`](PROJECT.md)                                   | Estado canônico atual do projeto, stack, portas e regras       |
+| [`AGENTS.md`](AGENTS.md)                                     | Protocolo unificado para pessoas e agentes de IA               |
+| [`UNIVERSAL_SDD_FRAMEWORK.md`](UNIVERSAL_SDD_FRAMEWORK.md)   | Definição normativa do núcleo do framework                     |
+| [`ROADMAP.md`](ROADMAP.md)                                   | Planejamento, status e pré-requisitos para publicação          |
+| [`CHANGELOG.md`](CHANGELOG.md)                               | Histórico de versões e mudanças implementadas                  |
+| [`docs/getting-started.md`](docs/getting-started.md)         | Guia de primeiros passos no framework                          |
+| [`docs/architecture.md`](docs/architecture.md)               | Arquitetura técnica e documental                               |
+| [`docs/traceability-matrix.md`](docs/traceability-matrix.md) | Matriz de rastreabilidade entre SPECs, Tasks e Commits         |
+| [`standards/ux-ui.md`](standards/ux-ui.md)                   | Padrões de interface e critérios de UX/UI                      |
+| [`standards/accessibility.md`](standards/accessibility.md)   | Requisitos e validação de acessibilidade                       |
+| [`standards/testing.md`](standards/testing.md)               | Estratégia de testes automatizados e evidências                |
+| [`standards/quality-gates.md`](standards/quality-gates.md)   | Critérios de entrada, saída e release                          |
+| [`specs/`](specs/)                                           | Especificações técnicas aprovadas (`SPEC-001`)                 |
+| [`tasks/`](tasks/)                                           | Tarefas rastreadas derivadas de especificações (`TASK-001-01`) |
+| [`reviews/`](reviews/)                                       | Registros formais de aprovação e evidências (`REVIEW-001`)     |
+| [`knowledge/`](knowledge/)                                   | Base de conhecimento modular do negócio e arquitetura          |
 
 ---
 
 ## Primeiros Passos e Desenvolvimento Local
 
 ### Pré-requisitos
+
 - [Node.js](https://nodejs.org/) (v20+) ou [Bun](https://bun.sh/) (v1.2+)
 
 ### Instalação
+
 ```bash
 bun install
 # ou: npm install
 ```
 
 ### Automação via Makefile
+
 O projeto conta com comandos unificados via `Makefile`:
 
 ```bash
@@ -70,6 +74,7 @@ make check              # Executa todos os Quality Gates locais e matriz SDD
 ```
 
 ### Containerização (Docker & Docker Compose)
+
 A aplicação está totalmente containerizada com imagem multi-estágio baseada em `oven/bun:1-slim`:
 
 ```bash
@@ -81,6 +86,7 @@ make docker-logs        # Exibe os logs em tempo real
 ```
 
 Acesse em seu navegador:
+
 - **Acesso direto**: `http://localhost:5210`
 - **Via Caddy (Reverse Proxy)**: `http://brs.localhost`
 

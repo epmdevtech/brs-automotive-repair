@@ -2,13 +2,13 @@
 
 ## Metadados
 
-| Campo | Valor |
-|---|---|
-| ID | FLOW-000 |
-| Relacionado ao Briefing de UX | |
-| Relacionado à SPEC | |
-| Responsável | |
-| Status | Draft (Rascunho) / Approved (Aprovado) / Superseded (Substituído) |
+| Campo                         | Valor                                                             |
+| ----------------------------- | ----------------------------------------------------------------- |
+| ID                            | FLOW-000                                                          |
+| Relacionado ao Briefing de UX |                                                                   |
+| Relacionado à SPEC            |                                                                   |
+| Responsável                   |                                                                   |
+| Status                        | Draft (Rascunho) / Approved (Aprovado) / Superseded (Substituído) |
 
 ## Objetivo e atores
 
@@ -28,14 +28,14 @@
 ## Fluxo principal
 
 | Passo | Ação do ator | Resposta do sistema | Estado da interface | Dado ou evento | Critério de aceitação |
-|---|---|---|---|---|---|
-| 1 | | | | | AC-000 |
+| ----- | ------------ | ------------------- | ------------------- | -------------- | --------------------- |
+| 1     |              |                     |                     |                | AC-000                |
 
 ## Fluxos alternativos e de recuperação
 
-| ID | Gatilho | Passos | Recuperação ou saída esperada | Critério |
-|---|---|---|---|---|
-| ALT-01 | | | | |
+| ID     | Gatilho | Passos | Recuperação ou saída esperada | Critério |
+| ------ | ------- | ------ | ----------------------------- | -------- |
+| ALT-01 |         |        |                               |          |
 
 Inclua erros de validação, negação de permissão, dados vazios, timeouts (tempo limite excedido), comportamento offline, falha parcial, cancelamento, repetição, desfazer (undo) e expiração de sessão quando aplicável.
 
@@ -46,13 +46,13 @@ Adicione ou anexe um diagrama versionado. Todo nó deve ser descrito pelas tabel
 ## Questões abertas e riscos
 
 | Item | Responsável | Resolução ou mitigação |
-|---|---|---|
-| | | |
+| ---- | ----------- | ---------------------- |
+|      |             |                        |
 
 ## Aprovação
 
-| Papel | Nome | Decisão | Data |
-|---|---|---|---|
-| Produto | | | |
-| Design | | | |
-| Engenharia | | | |
+| Papel      | Nome | Decisão | Data |
+| ---------- | ---- | ------- | ---- |
+| Produto    |      |         |      |
+| Design     |      |         |      |
+| Engenharia |      |         |      |

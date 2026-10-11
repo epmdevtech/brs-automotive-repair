@@ -7,6 +7,7 @@ O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.
 ## [0.1.0] - 2026-10-11
 
 ### Adicionado
+
 - Adoção completa do framework **Universal SDD** com governança de agentes, tarefas e especificações.
 - Landing page institucional completa da **BRS Reparações Automotivas** (`src/components/brs/website.tsx`).
 - Configuração centralizada e fonte única de verdade em `src/lib/brs.ts`.
@@ -19,3 +20,8 @@ O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.
 - Infraestrutura containerizada com `Dockerfile` multi-stage (`oven/bun:1-slim`) e `docker-compose.yml` na porta estrita `5210` (`SPEC-002`).
 - Automação via `Makefile` com comandos de ciclo de vida (`help`, `install`, `dev`, `build`, `test`, `lint`, `format`, `check`, `up`, `down`, `docker-dev`, `docker-build`, `docker-logs`).
 - Especificação `SPEC-002`, tarefa `TASK-002-01` e revisão `REVIEW-002`.
+- Auditoria técnica profunda e modularização do monólito `website.tsx` em 15 submódulos de apresentação (`SPEC-003`).
+- Refatoração do reporte de erros para módulo agnóstico `src/lib/error-reporting.ts` e localização das telas de erro (`src/lib/error-page.ts`, `src/routes/__root.tsx`) com tema automotivo escuro.
+- Enriquecimento dos metadados de compartilhamento social com Open Graph `og:image` e Twitter Cards.
+- Revisão editorial completa em língua portuguesa brasileira eliminando vícios e travessões longos.
+- Especificação `SPEC-003`, tarefa `TASK-003-01` e revisão `REVIEW-003`.

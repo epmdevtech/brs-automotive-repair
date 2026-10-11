@@ -2,13 +2,13 @@
 
 ## Metadados
 
-| Campo | Valor |
-|---|---|
-| Responsável | |
-| Estado | Discovery / Ativo / Manutenção / Arquivado |
-| Versão ou release | |
-| Última revisão | YYYY-MM-DD |
-| Revisores | |
+| Campo             | Valor                                      |
+| ----------------- | ------------------------------------------ |
+| Responsável       |                                            |
+| Estado            | Discovery / Ativo / Manutenção / Arquivado |
+| Versão ou release |                                            |
+| Última revisão    | YYYY-MM-DD                                 |
+| Revisores         |                                            |
 
 ## Visão geral e domínio
 
@@ -27,14 +27,14 @@
 ## Stack e dependências
 
 | Tecnologia/dependência | Versão | Finalidade | Fonte canônica |
-|---|---|---|---|
-| | | | |
+| ---------------------- | ------ | ---------- | -------------- |
+|                        |        |            |                |
 
 ## Estrutura do repositório
 
 | Caminho | Responsabilidade |
-|---|---|
-| | |
+| ------- | ---------------- |
+|         |                  |
 
 ## Runtime e configuração
 
@@ -88,11 +88,11 @@
 ## Limitações e riscos conhecidos
 
 | Item | Impacto | Mitigação | Responsável |
-|---|---|---|---|
-| | | | |
+| ---- | ------- | --------- | ----------- |
+|      |         |           |             |
 
 ## Tecnologias e abordagens intencionalmente não usadas
 
 | Item | Motivo | Reavaliar quando |
-|---|---|---|
-| | | |
+| ---- | ------ | ---------------- |
+|      |        |                  |

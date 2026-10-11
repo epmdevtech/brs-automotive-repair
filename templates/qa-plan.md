@@ -2,14 +2,14 @@
 
 ## Metadados
 
-| Campo | Valor |
-|---|---|
-| ID | QA-000 |
-| Status | Draft (Rascunho) / Approved (Aprovado) / Executing (Executando) / Complete (Concluído) |
-| Responsável (QA owner) | |
-| Build/commit | |
-| SPEC/design relacionado | |
-| Janela de teste (Test window) | |
+| Campo                         | Valor                                                                                  |
+| ----------------------------- | -------------------------------------------------------------------------------------- |
+| ID                            | QA-000                                                                                 |
+| Status                        | Draft (Rascunho) / Approved (Aprovado) / Executing (Executando) / Complete (Concluído) |
+| Responsável (QA owner)        |                                                                                        |
+| Build/commit                  |                                                                                        |
+| SPEC/design relacionado       |                                                                                        |
+| Janela de teste (Test window) |                                                                                        |
 
 ## Escopo e objetivo de qualidade
 
@@ -23,32 +23,32 @@
 
 ## Avaliação de risco
 
-| ID | Risco | Impacto no usuário/sistema | Probabilidade | Resposta de teste | Responsável |
-|---|---|---|---|---|---|
-| R-001 | | | | | |
+| ID    | Risco | Impacto no usuário/sistema | Probabilidade | Resposta de teste | Responsável |
+| ----- | ----- | -------------------------- | ------------- | ----------------- | ----------- |
+| R-001 |       |                            |               |                   |             |
 
 ## Abordagem de teste
 
-| Área de teste | Nível/tipo | Automatizado/manual | Ambiente | Responsável | Evidência requerida |
-|---|---|---|---|---|---|
-| Funcional | | | | | |
-| Integração/contrato | | | | | |
-| E2E (Ponta a ponta) | | | | | |
-| Exploratório/usabilidade | | | | | |
-| Aceitação de usuário/negócio (UAT) | | | | | |
-| Visual | | | | | |
-| Acessibilidade | | | | | |
-| Segurança/privacidade | | | | | |
-| Desempenho/confiabilidade | | | | | |
-| Compatibilidade/localização | | | | | |
+| Área de teste                      | Nível/tipo | Automatizado/manual | Ambiente | Responsável | Evidência requerida |
+| ---------------------------------- | ---------- | ------------------- | -------- | ----------- | ------------------- |
+| Funcional                          |            |                     |          |             |                     |
+| Integração/contrato                |            |                     |          |             |                     |
+| E2E (Ponta a ponta)                |            |                     |          |             |                     |
+| Exploratório/usabilidade           |            |                     |          |             |                     |
+| Aceitação de usuário/negócio (UAT) |            |                     |          |             |                     |
+| Visual                             |            |                     |          |             |                     |
+| Acessibilidade                     |            |                     |          |             |                     |
+| Segurança/privacidade              |            |                     |          |             |                     |
+| Desempenho/confiabilidade          |            |                     |          |             |                     |
+| Compatibilidade/localização        |            |                     |          |             |                     |
 
 Marque as áreas não aplicáveis com um motivo.
 
 ## Rastreabilidade dos critérios de aceitação
 
 | Critério | Risco | ID/caminho do teste automatizado | Caso de teste manual | Evidência/resultado | Defeito/exceção |
-|---|---|---|---|---|---|
-| AC-001 | | | | Pendente | |
+| -------- | ----- | -------------------------------- | -------------------- | ------------------- | --------------- |
+| AC-001   |       |                                  |                      | Pendente            |                 |
 
 Nenhum critério pode permanecer sem evidência ou sem um motivo aprovado de não aplicável.
 
@@ -65,8 +65,8 @@ Nenhum critério pode permanecer sem evidência ou sem um motivo aprovado de nã
 ## Matriz de compatibilidade
 
 | Plataforma/navegador/dispositivo | Versão | Área de visualização (Viewport)/entrada | Prioridade | Resultado/evidência |
-|---|---|---|---|---|
-| | | | | Pendente |
+| -------------------------------- | ------ | --------------------------------------- | ---------- | ------------------- |
+|                                  |        |                                         |            | Pendente            |
 
 ## Critérios de entrada (Entry criteria)
 
@@ -87,15 +87,15 @@ Nenhum critério pode permanecer sem evidência ou sem um motivo aprovado de nã
 
 ## Defeitos e riscos residuais
 
-| ID | Severidade | Resumo | Status | Responsável | Disposição para lançamento |
-|---|---|---|---|---|---|
-| | | | | | |
+| ID  | Severidade | Resumo | Status | Responsável | Disposição para lançamento |
+| --- | ---------- | ------ | ------ | ----------- | -------------------------- |
+|     |            |        |        |             |                            |
 
 ## Exceções de portão (Gate exceptions)
 
 | Portão/verificação | Motivo e impacto | Mitigação/monitoramento | Responsável | Validade (Expiry) | Aprovador |
-|---|---|---|---|---|---|
-| | | | | | |
+| ------------------ | ---------------- | ----------------------- | ----------- | ----------------- | --------- |
+|                    |                  |                         |             |                   |           |
 
 ## Resumo do teste e recomendação
 

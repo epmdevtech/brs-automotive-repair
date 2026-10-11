@@ -2,14 +2,14 @@
 
 ## Metadados
 
-| Campo | Valor |
-|---|---|
-| ID | TASK-001-01 |
-| Status | Done |
-| Responsável | Engenharia EPMDEVTECH |
-| SPEC | SPEC-001 |
-| Critérios | AC-001-01, AC-001-02, AC-001-03, AC-001-04, AC-001-05, AC-001-06, AC-001-07 |
-| Dependências | N/A |
+| Campo        | Valor                                                                       |
+| ------------ | --------------------------------------------------------------------------- |
+| ID           | TASK-001-01                                                                 |
+| Status       | Done                                                                        |
+| Responsável  | Engenharia EPMDEVTECH                                                       |
+| SPEC         | SPEC-001                                                                    |
+| Critérios    | AC-001-01, AC-001-02, AC-001-03, AC-001-04, AC-001-05, AC-001-06, AC-001-07 |
+| Dependências | N/A                                                                         |
 
 ---
 
@@ -22,6 +22,7 @@ Implementar a landing page institucional completa da BRS Reparações Automotiva
 ## Escopo
 
 ### Incluído
+
 - Componente `Website` e subcomponentes em `src/components/brs/website.tsx`.
 - Centralização de regras e validações em `src/lib/brs.ts`.
 - Rotas TanStack Start em `src/routes/` (`__root.tsx`, `index.tsx`).
@@ -30,18 +31,19 @@ Implementar a landing page institucional completa da BRS Reparações Automotiva
 - Configuração estrita de porta local `5210` e proxy `http://brs.localhost`.
 
 ### Não incluído
+
 - Backend próprio ou integração com WhatsApp não homologado.
 
 ---
 
 ## Validação
 
-| Critério/risco | Teste, comando ou revisão | Evidência esperada |
-|---|---|---|
-| AC-001-01 a AC-001-05 | `bun test` | 7 testes passando com 100% de sucesso |
-| Padronização de código | `bun run lint` | 0 erros ESLint e formatação Prettier |
-| Compilação e Bundling | `bun run build` | Build Nitro SSR e assets estáticos concluídos |
-| Alocação de Porta | `vite.config.ts` | Porta estrita 5210 |
+| Critério/risco         | Teste, comando ou revisão | Evidência esperada                            |
+| ---------------------- | ------------------------- | --------------------------------------------- |
+| AC-001-01 a AC-001-05  | `bun test`                | 7 testes passando com 100% de sucesso         |
+| Padronização de código | `bun run lint`            | 0 erros ESLint e formatação Prettier          |
+| Compilação e Bundling  | `bun run build`           | Build Nitro SSR e assets estáticos concluídos |
+| Alocação de Porta      | `vite.config.ts`          | Porta estrita 5210                            |
 
 ---
 

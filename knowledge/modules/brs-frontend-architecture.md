@@ -1,6 +1,7 @@
 # Módulo de Conhecimento: Arquitetura Frontend BRS
 
 ## Metadados
+
 - **Módulo**: `knowledge/modules/brs-frontend-architecture.md`
 - **Domínio**: Arquitetura Web & Frontend
 - **Responsável**: Engenharia EPMDEVTECH
@@ -10,6 +11,7 @@
 ---
 
 ## 1. Stack e Framework
+
 - **Fullstack Framework**: TanStack Start `1.168+` (Vite 8 + Nitro SSR preset `cloudflare-module`).
 - **Linguagem**: TypeScript 5.8+ em modo estrito (`strict: true`).
 - **UI & Reatividade**: React 19.2+ com `@tanstack/react-query` e `@tanstack/react-router`.
@@ -21,6 +23,7 @@
 ---
 
 ## 2. Padrões de Roteamento e Estrutura de Página
+
 - A navegação principal é uma landing page de página única ancorada (`src/routes/index.tsx` renderizando `Website` de `src/components/brs/website.tsx`).
 - Âncoras suportadas:
   - `#inicio` (Hero)
@@ -34,7 +37,9 @@
 ---
 
 ## 3. Design Tokens e Cores Automotivas
+
 Configurados em `src/styles.css`:
+
 - `--background`: `oklch(0.14 0.005 260)` (Slate grafite escuro)
 - `--card`: `oklch(0.2 0.008 260)`
 - `--primary`: `oklch(0.73 0.1 82)` (Âmbar metálico aquecido)
@@ -45,6 +50,7 @@ Configurados em `src/styles.css`:
 ---
 
 ## 4. Portas e Proxy Local
+
 - Porta local do Vite: `5210` configurada estritamente (`server: { port: 5210, strictPort: true }` em `vite.config.ts`).
 - Script de inicialização: `"dev": "vite dev --port 5210"`.
 - Proxy Caddyfile: `http://brs.localhost` roteado para `localhost:5210`.

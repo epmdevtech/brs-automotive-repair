@@ -2,18 +2,18 @@
 
 ## Metadados
 
-| Campo | Valor |
-|---|---|
-| ID | SPEC-001 |
-| Status | Implemented |
-| Responsável | Engenharia EPMDEVTECH |
-| Revisores | Produto / Design / Engenharia / QA |
-| Criado | 2026-10-11 |
-| Atualizado | 2026-10-11 |
-| Lançamento alvo | `0.1.0` |
-| Briefing de UX relacionado | Conforme diretrizes da marca BRS |
+| Campo                               | Valor                                                                     |
+| ----------------------------------- | ------------------------------------------------------------------------- |
+| ID                                  | SPEC-001                                                                  |
+| Status                              | Implemented                                                               |
+| Responsável                         | Engenharia EPMDEVTECH                                                     |
+| Revisores                           | Produto / Design / Engenharia / QA                                        |
+| Criado                              | 2026-10-11                                                                |
+| Atualizado                          | 2026-10-11                                                                |
+| Lançamento alvo                     | `0.1.0`                                                                   |
+| Briefing de UX relacionado          | Conforme diretrizes da marca BRS                                          |
 | Especificação de design relacionada | Design System Dark Automotive (Barlow Condensed / Manrope / Amber Accent) |
-| ADRs relacionadas | N/A |
+| ADRs relacionadas                   | N/A                                                                       |
 
 ---
 
@@ -26,6 +26,7 @@ A **BRS Reparações Automotivas** necessitava de uma presença web moderna, con
 ## Escopo
 
 ### No escopo (In scope)
+
 - Landing page institucional de página única ancorada (`#inicio`, `#servicos`, `#trabalho`, `#corretores`, `#sobre`, `#contato`).
 - Header fixo com detecção de scroll, navegação responsiva e menu móvel.
 - Catálogo dos 3 serviços confirmados com cards e ícones temáticos.
@@ -37,6 +38,7 @@ A **BRS Reparações Automotivas** necessitava de uma presença web moderna, con
 - Configuração estrita de rede local na porta `5210` e proxy `http://brs.localhost` no Caddyfile.
 
 ### Fora do escopo (Out of scope)
+
 - Backend próprio ou persistência de banco de dados no estágio atual.
 - Disparo de WhatsApp antes da confirmação formal do número pelo proprietário.
 - Uso de fotos ilustrativas como evidência de trabalhos reais ou instalações físicas.

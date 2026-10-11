@@ -2,13 +2,13 @@
 
 ## Metadados
 
-| Campo | Valor |
-|---|---|
-| Domínio | Identidade do produto e restrições operacionais |
-| Responsável | Documentação |
-| Revisado em | 2026-09-15 |
-| Aplicabilidade | Qualquer adoção do Universal SDD ou mudança do framework |
-| Fonte da verdade | Índice de contexto do `PROJECT.md` |
+| Campo            | Valor                                                    |
+| ---------------- | -------------------------------------------------------- |
+| Domínio          | Identidade do produto e restrições operacionais          |
+| Responsável      | Documentação                                             |
+| Revisado em      | 2026-09-15                                               |
+| Aplicabilidade   | Qualquer adoção do Universal SDD ou mudança do framework |
+| Fonte da verdade | Índice de contexto do `PROJECT.md`                       |
 
 ## Identidade e usuários
 

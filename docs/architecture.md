@@ -5,16 +5,16 @@ linguagem, fornecedor de IA ou ferramenta de gestão.
 
 ## Camadas
 
-| Camada | Local | Responsabilidade |
-|---|---|---|
-| Estado | `PROJECT.md` | Descrever o projeto como ele existe agora |
-| Entrada | `AGENTS.md` e arquivos por IA | Orientar o início seguro de cada sessão |
-| Governança | `docs/` e `standards/` | Definir regras, qualidade e tomada de decisão |
-| Execução | `workflows/` e `agents/` | Definir sequência, responsáveis e limites |
-| Contexto | `knowledge/` e `adr/` | Preservar conhecimento e decisões duráveis |
-| Mudança | `specs/` e `tasks/` | Autorizar comportamento e decompor execução |
-| Evidência | `reviews/` e testes | Demonstrar conformidade e decidir release |
-| Reuso | `templates/` e `profiles/` | Padronizar artefatos e adaptar tecnologias |
+| Camada     | Local                         | Responsabilidade                              |
+| ---------- | ----------------------------- | --------------------------------------------- |
+| Estado     | `PROJECT.md`                  | Descrever o projeto como ele existe agora     |
+| Entrada    | `AGENTS.md` e arquivos por IA | Orientar o início seguro de cada sessão       |
+| Governança | `docs/` e `standards/`        | Definir regras, qualidade e tomada de decisão |
+| Execução   | `workflows/` e `agents/`      | Definir sequência, responsáveis e limites     |
+| Contexto   | `knowledge/` e `adr/`         | Preservar conhecimento e decisões duráveis    |
+| Mudança    | `specs/` e `tasks/`           | Autorizar comportamento e decompor execução   |
+| Evidência  | `reviews/` e testes           | Demonstrar conformidade e decidir release     |
+| Reuso      | `templates/` e `profiles/`    | Padronizar artefatos e adaptar tecnologias    |
 
 ## Relação entre fontes
 

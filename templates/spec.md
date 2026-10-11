@@ -2,18 +2,18 @@
 
 ## Metadados
 
-| Campo | Valor |
-|---|---|
-| ID | SPEC-000 |
-| Status | Draft (Rascunho) / In review (Em revisão) / Approved (Aprovado) / Implemented (Implementado) / Superseded (Substituído) |
-| Responsável | |
-| Revisores | Produto / Design / Engenharia / QA / Segurança |
-| Criado | YYYY-MM-DD |
-| Atualizado | YYYY-MM-DD |
-| Lançamento alvo | |
-| Briefing de UX relacionado | |
-| Especificação de design relacionada | |
-| ADRs relacionadas | |
+| Campo                               | Valor                                                                                                                   |
+| ----------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| ID                                  | SPEC-000                                                                                                                |
+| Status                              | Draft (Rascunho) / In review (Em revisão) / Approved (Aprovado) / Implemented (Implementado) / Superseded (Substituído) |
+| Responsável                         |                                                                                                                         |
+| Revisores                           | Produto / Design / Engenharia / QA / Segurança                                                                          |
+| Criado                              | YYYY-MM-DD                                                                                                              |
+| Atualizado                          | YYYY-MM-DD                                                                                                              |
+| Lançamento alvo                     |                                                                                                                         |
+| Briefing de UX relacionado          |                                                                                                                         |
+| Especificação de design relacionada |                                                                                                                         |
+| ADRs relacionadas                   |                                                                                                                         |
 
 ## Problema e resultado
 
@@ -109,20 +109,20 @@ Resuma a arquitetura, componentes afetados, APIs, esquemas (schemas), migraçõe
 ## Riscos e dependências
 
 | Risco ou dependência | Impacto | Probabilidade | Mitigação | Responsável |
-|---|---|---|---|---|
-| | | | | |
+| -------------------- | ------- | ------------- | --------- | ----------- |
+|                      |         |               |           |             |
 
 ## Questões abertas
 
 | Questão | Responsável | Data limite | Resolução |
-|---|---|---|---|
-| | | | |
+| ------- | ----------- | ----------- | --------- |
+|         |             |             |           |
 
 ## Aprovação
 
-| Papel | Nome | Decisão | Data | Notas |
-|---|---|---|---|---|
-| Produto | | Approved / Rejected | | |
-| Design | | Approved / N/A | | |
-| Engenharia | | Approved / Rejected | | |
-| QA | | Ready / Not ready | | |
+| Papel      | Nome | Decisão             | Data | Notas |
+| ---------- | ---- | ------------------- | ---- | ----- |
+| Produto    |      | Approved / Rejected |      |       |
+| Design     |      | Approved / N/A      |      |       |
+| Engenharia |      | Approved / Rejected |      |       |
+| QA         |      | Ready / Not ready   |      |       |

@@ -2,13 +2,13 @@
 
 ## Metadados
 
-| Campo | Valor |
-|---|---|
-| Status | Proposed / Accepted / Rejected / Superseded / Deprecated |
-| Data | YYYY-MM-DD |
-| Responsáveis | |
-| SPEC relacionada | |
-| Substitui/substituída por | |
+| Campo                     | Valor                                                    |
+| ------------------------- | -------------------------------------------------------- |
+| Status                    | Proposed / Accepted / Rejected / Superseded / Deprecated |
+| Data                      | YYYY-MM-DD                                               |
+| Responsáveis              |                                                          |
+| SPEC relacionada          |                                                          |
+| Substitui/substituída por |                                                          |
 
 ## Contexto
 

@@ -2,16 +2,16 @@
 
 ## Metadados
 
-| Campo | Valor |
-|---|---|
-| ID | QA-EVIDENCE-NNN |
-| Status | In progress (Em progresso) / Complete (Concluído) |
-| SPEC | SPEC-NNN |
-| TAREFA (TASK) | TASK-NNN-XX |
-| Responsável (QA Owner) | |
-| Data de Execução | YYYY-MM-DD |
-| Build / Commit | |
-| Ambiente | |
+| Campo                  | Valor                                             |
+| ---------------------- | ------------------------------------------------- |
+| ID                     | QA-EVIDENCE-NNN                                   |
+| Status                 | In progress (Em progresso) / Complete (Concluído) |
+| SPEC                   | SPEC-NNN                                          |
+| TAREFA (TASK)          | TASK-NNN-XX                                       |
+| Responsável (QA Owner) |                                                   |
+| Data de Execução       | YYYY-MM-DD                                        |
+| Build / Commit         |                                                   |
+| Ambiente               |                                                   |
 
 ## Configuração do ambiente
 
@@ -66,20 +66,20 @@ exception_ref: N/A # N/A ou referência de exceção aprovada
 ## Resumo e descobertas (Summary and findings)
 
 | Total de critérios | Passed (Aprovados) | Failed (Falhos) | Exceção |
-|---|---|---|---|
-| | | | |
+| ------------------ | ------------------ | --------------- | ------- |
+|                    |                    |                 |         |
 
 ### Defeitos e regressões
 
 | ID do Defeito | Severidade | Critério | Resumo | Status |
-|---|---|---|---|---|
-| | | | | |
+| ------------- | ---------- | -------- | ------ | ------ |
+|               |            |          |        |        |
 
 ### Riscos residuais e exceções
 
 | ID da Exceção | Critério | Motivo | Aprovado por | Expirado em (Expiry) |
-|---|---|---|---|---|
-| | | | | |
+| ------------- | -------- | ------ | ------------ | -------------------- |
+|               |          |        |              |                      |
 
 ## Recomendação
 

@@ -18,8 +18,8 @@
 ## Procedimento
 
 | Etapa | Ação/comando aprovado | Resultado esperado | Responsável | Evidência |
-|---|---|---|---|---|
-| 1 | | | | |
+| ----- | --------------------- | ------------------ | ----------- | --------- |
+| 1     |                       |                    |             |           |
 
 ## Verificação
 
@@ -31,8 +31,8 @@
 ## Rollback
 
 | Gatilho | Ação | Verificação | Impacto em dados |
-|---|---|---|---|
-| | | | |
+| ------- | ---- | ----------- | ---------------- |
+|         |      |             |                  |
 
 ## Resultado
 

@@ -2,16 +2,16 @@
 
 ## Metadados
 
-| Campo | Valor |
-|---|---|
-| ID | BUG-000 |
-| Status | New (Novo) / Confirmed (Confirmado) / In progress (Em progresso) / Ready to verify (Pronto para verificar) / Closed (Fechado) / Reopened (Reaberto) |
-| Severidade | S1 / S2 / S3 / S4 |
-| Prioridade | P0 / P1 / P2 / P3 |
-| Relatado por | |
-| Responsável | |
-| Detectado em | Build/commit/release |
-| SPEC/critério/teste relacionado | |
+| Campo                           | Valor                                                                                                                                               |
+| ------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ID                              | BUG-000                                                                                                                                             |
+| Status                          | New (Novo) / Confirmed (Confirmado) / In progress (Em progresso) / Ready to verify (Pronto para verificar) / Closed (Fechado) / Reopened (Reaberto) |
+| Severidade                      | S1 / S2 / S3 / S4                                                                                                                                   |
+| Prioridade                      | P0 / P1 / P2 / P3                                                                                                                                   |
+| Relatado por                    |                                                                                                                                                     |
+| Responsável                     |                                                                                                                                                     |
+| Detectado em                    | Build/commit/release                                                                                                                                |
+| SPEC/critério/teste relacionado |                                                                                                                                                     |
 
 ## Resumo e impacto
 

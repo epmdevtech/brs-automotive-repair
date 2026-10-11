@@ -2,12 +2,12 @@
 
 ## Metadados
 
-| Campo | Valor |
-|---|---|
-| Domínio | Entrega, qualidade, segurança e operações |
-| Responsável | Documentação |
-| Revisado | 2026-09-15 |
-| Aplicabilidade | UX, QA, lançamento e planejamento operacional |
+| Campo            | Valor                                                   |
+| ---------------- | ------------------------------------------------------- |
+| Domínio          | Entrega, qualidade, segurança e operações               |
+| Responsável      | Documentação                                            |
+| Revisado         | 2026-09-15                                              |
+| Aplicabilidade   | UX, QA, lançamento e planejamento operacional           |
 | Fonte da verdade | Índice de contexto do `PROJECT.md` e padrões vinculados |
 
 ## Experiência e acessibilidade

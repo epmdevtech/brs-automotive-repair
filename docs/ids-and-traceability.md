@@ -7,12 +7,12 @@ Ela complementa, em vez de substituir, a aprovação humana e as evidências de 
 
 ## Identificadores estáveis
 
-| Artefato | Formato | Exemplo | Regra de alocação |
-|---|---|---|---|
-| Especificação (SPEC) | `SPEC-NNN` | `SPEC-042` | Use a próxima sequência de três dígitos não utilizada em `specs/`. |
-| Emenda/Alteração de SPEC | `SPEC-NNN-vN` | `SPEC-042-v2` | Mantenha o identificador base e incremente o `N` apenas para uma alteração de SPEC aprovada. |
-| Tarefa (TASK) | `TASK-NNN-XX` | `TASK-042-01` | Reutilize o número base de três dígitos da SPEC; incremente a sequência da tarefa de dois dígitos. |
-| Decisão de arquitetura (ADR) | `ADR-NNN` | `ADR-017` | Use a próxima sequência de três dígitos não utilizada em `adr/`. |
+| Artefato                     | Formato       | Exemplo       | Regra de alocação                                                                                  |
+| ---------------------------- | ------------- | ------------- | -------------------------------------------------------------------------------------------------- |
+| Especificação (SPEC)         | `SPEC-NNN`    | `SPEC-042`    | Use a próxima sequência de três dígitos não utilizada em `specs/`.                                 |
+| Emenda/Alteração de SPEC     | `SPEC-NNN-vN` | `SPEC-042-v2` | Mantenha o identificador base e incremente o `N` apenas para uma alteração de SPEC aprovada.       |
+| Tarefa (TASK)                | `TASK-NNN-XX` | `TASK-042-01` | Reutilize o número base de três dígitos da SPEC; incremente a sequência da tarefa de dois dígitos. |
+| Decisão de arquitetura (ADR) | `ADR-NNN`     | `ADR-017`     | Use a próxima sequência de três dígitos não utilizada em `adr/`.                                   |
 
 Identificadores são imutáveis depois que um artefato é compartilhado para revisão. Não reutilize um identificador de um artefato substituído, rejeitado ou excluído. Uma alteração de SPEC faz referência a seu predecessor e é um artefato de aprovação separado; suas tarefas usam o identificador da SPEC alterada em seus campos `Refs:`.
 
@@ -28,11 +28,11 @@ Um esclarecimento simples (lightweight clarification) não cria uma versão da S
 
 Novos artefatos usam os templates em letras maiúsculas em `templates/`. Os templates legados em minúsculas permanecem disponíveis para adoção compatível.
 
-| Artefato | Conteúdo obrigatório de `Refs:` |
-|---|---|
-| SPEC | Referências de descoberta, de design e de ADRs aplicáveis; registre `N/A — <motivo>` quando uma atividade anterior (upstream) não se aplicar. |
-| TASK | O identificador exato da SPEC aprovada, IDs de critérios de aceitação aplicáveis e ADRs aplicáveis. |
-| Artefato de QA ou revisão | Os identificadores de SPEC e TASK que ele verifica, usando as linhas `Spec-Ref:` e `Task-Ref:` quando não existe tabela de metadados. |
+| Artefato                  | Conteúdo obrigatório de `Refs:`                                                                                                               |
+| ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| SPEC                      | Referências de descoberta, de design e de ADRs aplicáveis; registre `N/A — <motivo>` quando uma atividade anterior (upstream) não se aplicar. |
+| TASK                      | O identificador exato da SPEC aprovada, IDs de critérios de aceitação aplicáveis e ADRs aplicáveis.                                           |
+| Artefato de QA ou revisão | Os identificadores de SPEC e TASK que ele verifica, usando as linhas `Spec-Ref:` e `Task-Ref:` quando não existe tabela de metadados.         |
 
 As referências devem ser explícitas. Uma referência ausente, malformada ou não solucionável é uma lacuna (gap) de rastreabilidade a ser registrada e resolvida; nem uma pessoa nem um script pode inferir o link pretendido a partir de textos em prosa ou nomes de arquivos correspondentes.
 

@@ -2,14 +2,14 @@
 
 ## Metadados
 
-| Campo | Valor |
-|---|---|
-| ID | KB-000 |
-| Status | Draft / Validated / Superseded |
-| Responsável | |
-| Criado/revisado | YYYY-MM-DD |
-| Aplicabilidade | |
-| Fontes | |
+| Campo           | Valor                          |
+| --------------- | ------------------------------ |
+| ID              | KB-000                         |
+| Status          | Draft / Validated / Superseded |
+| Responsável     |                                |
+| Criado/revisado | YYYY-MM-DD                     |
+| Aplicabilidade  |                                |
+| Fontes          |                                |
 
 ## Contexto
 

@@ -2,12 +2,12 @@
 
 ## Metadados
 
-| Campo | Valor |
-|---|---|
-| Status | Draft / In review / Accepted / Rejected / Superseded |
-| Autor | |
-| Revisores | |
-| Criado/atualizado | YYYY-MM-DD |
+| Campo             | Valor                                                |
+| ----------------- | ---------------------------------------------------- |
+| Status            | Draft / In review / Accepted / Rejected / Superseded |
+| Autor             |                                                      |
+| Revisores         |                                                      |
+| Criado/atualizado | YYYY-MM-DD                                           |
 
 ## Problema e objetivo
 
@@ -18,8 +18,8 @@
 ## Alternativas consideradas
 
 | Alternativa | Benefícios | Custos/riscos | Motivo da decisão |
-|---|---|---|---|
-| | | | |
+| ----------- | ---------- | ------------- | ----------------- |
+|             |            |               |                   |
 
 ## Impacto
 
@@ -35,5 +35,5 @@
 ## Decisão
 
 | Pessoa/papel | Decisão | Data | Notas |
-|---|---|---|---|
-| | | | |
+| ------------ | ------- | ---- | ----- |
+|              |         |      |       |

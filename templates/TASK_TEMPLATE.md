@@ -2,13 +2,13 @@
 
 ## Metadados
 
-| Campo | Valor |
-|---|---|
-| ID | TASK-NNN-XX |
-| Status | Planned (Planejado) / Ready (Pronto) / In progress (Em progresso) / In review (Em revisão) / Done (Concluído) / Blocked (Bloqueado) |
-| Responsável | |
-| Refs: | SPEC: SPEC-NNN; Critérios de aceitação: AC-001; ADRs: ADR-NNN ou N/A — motivo |
-| Dependências | |
+| Campo        | Valor                                                                                                                               |
+| ------------ | ----------------------------------------------------------------------------------------------------------------------------------- |
+| ID           | TASK-NNN-XX                                                                                                                         |
+| Status       | Planned (Planejado) / Ready (Pronto) / In progress (Em progresso) / In review (Em revisão) / Done (Concluído) / Blocked (Bloqueado) |
+| Responsável  |                                                                                                                                     |
+| Refs:        | SPEC: SPEC-NNN; Critérios de aceitação: AC-001; ADRs: ADR-NNN ou N/A — motivo                                                       |
+| Dependências |                                                                                                                                     |
 
 ## Objetivo
 
@@ -38,8 +38,8 @@ Descreva o incremento verificável produzido por esta tarefa.
 ## Validação
 
 | Critério/risco | Teste, comando, ou revisão | Evidência esperada |
-|---|---|---|
-| | | |
+| -------------- | -------------------------- | ------------------ |
+|                |                            |                    |
 
 ## Condição de conclusão
 

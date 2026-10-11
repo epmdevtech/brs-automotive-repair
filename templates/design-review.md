@@ -2,21 +2,21 @@
 
 ## Metadados
 
-| Campo | Valor |
-|---|---|
-| ID | DR-000 |
-| Build/commit | |
-| Ambiente | |
-| Revisão de design aprovada | |
-| Revisão do design system | |
-| Revisor | |
-| Data | |
+| Campo                      | Valor  |
+| -------------------------- | ------ |
+| ID                         | DR-000 |
+| Build/commit               |        |
+| Ambiente                   |        |
+| Revisão de design aprovada |        |
+| Revisão do design system   |        |
+| Revisor                    |        |
+| Data                       |        |
 
 ## Matriz de revisão
 
 | Superfície/estado | Viewport/dispositivo/entrada | Referência de design | Evidência | Resultado | Achado (Finding) |
-|---|---|---|---|---|---|
-| | | | | Pass/Fail | |
+| ----------------- | ---------------------------- | -------------------- | --------- | --------- | ---------------- |
+|                   |                              |                      |           | Pass/Fail |                  |
 
 ## Verificações (Checks)
 
@@ -31,9 +31,9 @@
 
 ## Descobertas (Findings)
 
-| ID | Diferença | Esperado | Atual (Real) | Impacto no usuário/severidade | Evidência | Responsável/status |
-|---|---|---|---|---|---|---|
-| DRF-01 | | | | | | |
+| ID     | Diferença | Esperado | Atual (Real) | Impacto no usuário/severidade | Evidência | Responsável/status |
+| ------ | --------- | -------- | ------------ | ----------------------------- | --------- | ------------------ |
+| DRF-01 |           |          |              |                               |           |                    |
 
 ## Decisão
 

@@ -18,14 +18,14 @@ podem compor esse estado sem substituir regras normativas.
 
 ## O que pertence a outro lugar
 
-| Informação | Local correto |
-|---|---|
+| Informação                        | Local correto                                             |
+| --------------------------------- | --------------------------------------------------------- |
 | Índice do estado atual do projeto | `PROJECT.md` e módulos vinculados em `knowledge/INDEX.md` |
-| Requisito de uma mudança | `specs/` |
-| Decisão arquitetural | `adr/` |
-| Trabalho executável | `tasks/` |
-| Regra obrigatória | `standards/` |
-| Resultado de validação | `reviews/` ou evidência de teste |
+| Requisito de uma mudança          | `specs/`                                                  |
+| Decisão arquitetural              | `adr/`                                                    |
+| Trabalho executável               | `tasks/`                                                  |
+| Regra obrigatória                 | `standards/`                                              |
+| Resultado de validação            | `reviews/` ou evidência de teste                          |
 
 ## Qualidade de uma entrada
 

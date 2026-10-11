@@ -2,14 +2,14 @@
 
 ## Metadados
 
-| Campo | Valor |
-|---|---|
-| ID | TASK-000 |
-| Status | Planned / Ready / In progress / In review / Done / Blocked |
-| Responsável | |
-| SPEC | SPEC-000 |
-| Critérios | AC-000 |
-| Dependências | |
+| Campo        | Valor                                                      |
+| ------------ | ---------------------------------------------------------- |
+| ID           | TASK-000                                                   |
+| Status       | Planned / Ready / In progress / In review / Done / Blocked |
+| Responsável  |                                                            |
+| SPEC         | SPEC-000                                                   |
+| Critérios    | AC-000                                                     |
+| Dependências |                                                            |
 
 ## Objetivo
 
@@ -39,8 +39,8 @@ Descreva o incremento verificável produzido por esta tarefa.
 ## Validação
 
 | Critério/risco | Teste, comando ou revisão | Evidência esperada |
-|---|---|---|
-| | | |
+| -------------- | ------------------------- | ------------------ |
+|                |                           |                    |
 
 ## Condição de conclusão
 

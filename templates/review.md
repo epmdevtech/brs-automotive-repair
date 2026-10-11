@@ -2,13 +2,13 @@
 
 ## Metadados
 
-| Campo | Valor |
-|---|---|
-| ID | REVIEW-000 |
-| SPEC/TASK | |
-| Build/commit | |
-| Revisor | |
-| Data | YYYY-MM-DD |
+| Campo        | Valor      |
+| ------------ | ---------- |
+| ID           | REVIEW-000 |
+| SPEC/TASK    |            |
+| Build/commit |            |
+| Revisor      |            |
+| Data         | YYYY-MM-DD |
 
 ## Escopo revisado
 
@@ -19,9 +19,9 @@
 
 ## Achados (Findings)
 
-| ID | Severidade | Local | Evidência e impacto | Correção requerida | Status |
-|---|---|---|---|---|---|
-| REV-01 | | | | | Open (Aberto) |
+| ID     | Severidade | Local | Evidência e impacto | Correção requerida | Status        |
+| ------ | ---------- | ----- | ------------------- | ------------------ | ------------- |
+| REV-01 |            |       |                     |                    | Open (Aberto) |
 
 ## Verificações
 

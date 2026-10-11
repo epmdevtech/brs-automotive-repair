@@ -15,15 +15,15 @@ etapa pode ser marcada como não aplicável apenas com justificativa registrada.
 
 ## Estados de uma mudança
 
-| Estado | Condição de entrada | Próxima decisão |
-|---|---|---|
-| Descoberta | problema identificado | prosseguir, pesquisar ou encerrar |
-| Especificação | contexto suficiente | aprovar, revisar ou rejeitar |
-| Pronta | SPEC aprovada e TASKs rastreáveis | implementar |
-| Em implementação | tarefa atribuída | validar ou devolver à SPEC |
-| Em validação | escopo implementado | aprovar, corrigir ou bloquear |
-| Pronta para release | gates aplicáveis aprovados | liberar ou adiar |
-| Concluída | entrega e documentação alinhadas | monitorar e aprender |
+| Estado              | Condição de entrada               | Próxima decisão                   |
+| ------------------- | --------------------------------- | --------------------------------- |
+| Descoberta          | problema identificado             | prosseguir, pesquisar ou encerrar |
+| Especificação       | contexto suficiente               | aprovar, revisar ou rejeitar      |
+| Pronta              | SPEC aprovada e TASKs rastreáveis | implementar                       |
+| Em implementação    | tarefa atribuída                  | validar ou devolver à SPEC        |
+| Em validação        | escopo implementado               | aprovar, corrigir ou bloquear     |
+| Pronta para release | gates aplicáveis aprovados        | liberar ou adiar                  |
+| Concluída           | entrega e documentação alinhadas  | monitorar e aprender              |
 
 ## Retornos obrigatórios
 

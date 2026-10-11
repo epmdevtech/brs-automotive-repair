@@ -2,13 +2,13 @@
 
 ## Metadados
 
-| Campo | Valor |
-|---|---|
-| ID | UT-000 |
-| Responsável | |
-| Data/janela | |
-| Briefing de UX/design/SPEC relacionado | |
-| Status | Planned (Planejado) / Running (Em execução) / Complete (Concluído) |
+| Campo                                  | Valor                                                              |
+| -------------------------------------- | ------------------------------------------------------------------ |
+| ID                                     | UT-000                                                             |
+| Responsável                            |                                                                    |
+| Data/janela                            |                                                                    |
+| Briefing de UX/design/SPEC relacionado |                                                                    |
+| Status                                 | Planned (Planejado) / Running (Em execução) / Complete (Concluído) |
 
 ## Questões de pesquisa e decisões
 
@@ -25,16 +25,16 @@ O que deve ser aprendido, e que decisão de produto ou design cada descoberta (f
 ## Participantes
 
 | Grupo alvo (Target group) | Critérios de inclusão | Critérios de exclusão | Contagem planejada | Contagem recrutada |
-|---|---|---|---|---|
-| | | | | |
+| ------------------------- | --------------------- | --------------------- | ------------------ | ------------------ |
+|                           |                       |                       |                    |                    |
 
 Não reivindique representatividade além da amostra real.
 
 ## Cenários e tarefas
 
-| ID | Cenário/tarefa | Estado inicial | Sucesso | Falha/abandono | Medida |
-|---|---|---|---|---|---|
-| T-01 | | | | | |
+| ID   | Cenário/tarefa | Estado inicial | Sucesso | Falha/abandono | Medida |
+| ---- | -------------- | -------------- | ------- | -------------- | ------ |
+| T-01 |                |                |         |                |        |
 
 Evite instruções indutivas (leading instructions) que revelem a interação pretendida.
 
@@ -53,9 +53,9 @@ Inclua introdução, consentimento, prompts neutros (neutral prompts), perguntas
 
 ## Descobertas (Findings)
 
-| ID | Observação/evidência | Participantes afetados | Severidade | Decisão/recomendação | Responsável |
-|---|---|---|---|---|---|
-| F-01 | | | | | |
+| ID   | Observação/evidência | Participantes afetados | Severidade | Decisão/recomendação | Responsável |
+| ---- | -------------------- | ---------------------- | ---------- | -------------------- | ----------- |
+| F-01 |                      |                        |            |                      |             |
 
 Registre as observações separadamente da interpretação.
 
@@ -69,8 +69,8 @@ Registre as observações separadamente da interpretação.
 
 ## Aprovação
 
-| Papel | Nome | Decisão | Data |
-|---|---|---|---|
-| Pesquisa de UX | | | |
-| Design | | | |
-| Produto | | | |
+| Papel          | Nome | Decisão | Data |
+| -------------- | ---- | ------- | ---- |
+| Pesquisa de UX |      |         |      |
+| Design         |      |         |      |
+| Produto        |      |         |      |

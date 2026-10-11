@@ -2,14 +2,14 @@
 
 ## Metadados
 
-| Campo | Valor |
-|---|---|
-| ID | REVIEW-002 |
-| SPEC/TASK | SPEC-002 / TASK-002-01 |
-| Status | Approved |
+| Campo        | Valor                            |
+| ------------ | -------------------------------- |
+| ID           | REVIEW-002                       |
+| SPEC/TASK    | SPEC-002 / TASK-002-01           |
+| Status       | Approved                         |
 | Build/commit | Infraestrutura Docker e Makefile |
-| Revisor | Engenharia & QA EPMDEVTECH |
-| Data | 2026-10-11 |
+| Revisor      | Engenharia & QA EPMDEVTECH       |
+| Data         | 2026-10-11                       |
 
 ---
 
@@ -24,10 +24,10 @@
 
 ## Achados (Findings)
 
-| ID | Severidade | Local | Evidência e impacto | Correção requerida | Status |
-|---|---|---|---|---|---|
-| FIND-01 | Info | `docker-compose.yml` | Healthcheck com `bun -e fetch` | Validado e compatível com imagem `oven/bun:1-slim` | Closed |
-| FIND-02 | Info | `Makefile` | Atalhos `up` e `down` | Permite ergonomia rápida para o desenvolvedor | Closed |
+| ID      | Severidade | Local                | Evidência e impacto            | Correção requerida                                 | Status |
+| ------- | ---------- | -------------------- | ------------------------------ | -------------------------------------------------- | ------ |
+| FIND-01 | Info       | `docker-compose.yml` | Healthcheck com `bun -e fetch` | Validado e compatível com imagem `oven/bun:1-slim` | Closed |
+| FIND-02 | Info       | `Makefile`           | Atalhos `up` e `down`          | Permite ergonomia rápida para o desenvolvedor      | Closed |
 
 ---
 

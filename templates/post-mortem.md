@@ -14,8 +14,8 @@ Descreva impacto em usuários, dados, segurança, operação e negócio com evid
 ## Linha do tempo
 
 | Horário | Evento/observação | Ação/decisão | Fonte |
-|---|---|---|---|
-| | | | |
+| ------- | ----------------- | ------------ | ----- |
+|         |                   |              |       |
 
 ## Detecção e resposta
 
@@ -32,9 +32,9 @@ Separe causa confirmada de hipótese.
 
 ## Ações
 
-| ID | Ação | Tipo | Responsável | Prazo | Evidência de conclusão |
-|---|---|---|---|---|---|
-| PM-01 | | Prevent / Detect / Mitigate | | | |
+| ID    | Ação | Tipo                        | Responsável | Prazo | Evidência de conclusão |
+| ----- | ---- | --------------------------- | ----------- | ----- | ---------------------- |
+| PM-01 |      | Prevent / Detect / Mitigate |             |       |                        |
 
 ## Aprendizados e acompanhamento
 
