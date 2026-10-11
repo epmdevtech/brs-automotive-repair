@@ -28,14 +28,14 @@ Planejamento de evolução da presença digital da BRS Reparações Automotivas 
 - [x] Esteira de CI/CD automatizada com GitHub Actions para quality gates e validação Docker (`SPEC-004`).
 - [x] Refinamento de UI, Motion Design e Microinterações com referências do 21st.dev adaptadas à BRS (`SPEC-005`).
 - [x] Seção Hero animada com biblioteca `framer-motion` v14 e componente `AnimatedHero` inspirado no 21st.dev (`SPEC-006`).
+- [x] Galeria interativa Antes/Depois com `BeforeAfterSlider`, Lightbox Dialog em alta definição e serviços com `CardSpotlight` (`SPEC-007`).
 
 ---
 
 ### Fase 2: Pré-requisitos para Publicação Definitiva (Em Andamento 🟡)
 
 - [ ] **Identidade Visual e Logo Real**: Substituir o logotipo tipográfico provisório pelo logo original fornecido pelo proprietário da BRS.
-- [ ] **Acervo Fotográfico Real**: Substituir as imagens ilustrativas atuais (`brs-hero.jpg`, `funilaria.jpg`, etc.) por fotografias autorizadas das instalações da oficina e equipe em Toledo-PR.
-- [ ] **Comparativo Antes/Depois**: Implementar componente visual de slider/comparativo somente quando fotos reais autorizadas de reparos concluídos estiverem disponíveis.
+- [ ] **Acervo Fotográfico Real**: Substituir as imagens ilustrativas atuais (`brs-hero.jpg`, `funilaria.jpg`, etc.) por fotografias autorizadas das instalações da oficina e equipe em Toledo-PR (populando os sliders com pares de fotos reais de clientes atendidos).
 - [ ] **Canal WhatsApp Oficial**: Validar e confirmar número oficial de WhatsApp com o proprietário antes de habilitar integração direta na página.
 - [ ] **Aprovação Formal de Conteúdo**: Validação do posicionamento e textos pelo proprietário da oficina.
 - [ ] **SEO e Sitemap Final**: Geração de sitemap XML e envio aos motores de busca após deploy em domínio público oficial.

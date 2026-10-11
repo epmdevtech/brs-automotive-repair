@@ -180,6 +180,7 @@ Todas as entregas obedecem ao protocolo **Universal SDD**:
 - `SPEC-004` / `TASK-004-01` / `REVIEW-004`: Esteira de Integração Contínua (CI/CD) com GitHub Actions e Validação de Containers Docker.
 - `SPEC-005` / `TASK-005-01` / `REVIEW-005`: Refinamento de UI, Motion Design Sóbrio, Transição Cinematográfica MediaExpand e Microinterações.
 - `SPEC-006` / `TASK-006-01` / `REVIEW-006`: Seção Hero Animada com Framer Motion (21st.dev AnimatedHero), botões em Glassmorphism e variantes de entrada.
+- `SPEC-007` / `TASK-007-01` / `REVIEW-007`: Galeria Interativa com Slider Antes/Depois e Lightbox Modal (@radix-ui/react-dialog) e Seção de Serviços com Efeito CardSpotlight.
 
 ---
 

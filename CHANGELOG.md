@@ -39,3 +39,9 @@ O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.
 - Suporte a `prefers-reduced-motion` no Hero via hook nativo `useReducedMotion()`.
 - Testes unitários dedicados em `src/test/animated-hero.test.tsx` com cobertura de links, botões e ações de clique.
 - Especificação `SPEC-006`, tarefa `TASK-006-01` e revisão `REVIEW-006`.
+- Galeria interativa Antes/Depois com componente `BeforeAfterSlider` (`src/components/brs/before-after-slider.tsx`) com interação por mouse drag, touch swipe, controle via teclado (slider ARIA), handle com `ChevronsLeftRight` e mascaramento performático com `clip-path` CSS (`SPEC-007`).
+- Modal Lightbox em alta definição integrado com `@radix-ui/react-dialog` em `src/components/brs/project-gallery.tsx` com navegação entre casos e detalhes técnicos.
+- Efeito `CardSpotlight` dinâmico (`src/components/brs/card-spotlight.tsx`) com gradiente radial e máscara de matriz de micro-pontos metálicos guiados pelo cursor via `framer-motion`.
+- Microinterações refinadas nos cards de serviços: elevação de ícones, iluminação de bordas e feedback tátil em botões (`active:scale-[0.98]`).
+- 3 novas suítes de testes unitários (`src/test/before-after-slider.test.tsx`, `src/test/card-spotlight.test.tsx`, `src/test/project-gallery.test.tsx`).
+- Especificação `SPEC-007`, tarefa `TASK-007-01` e revisão `REVIEW-007`.
