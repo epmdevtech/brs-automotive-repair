@@ -16,7 +16,7 @@ export function Footer() {
           </p>
         </div>
         <div>
-          <h3 className="font-sans text-xs font-semibold uppercase tracking-wider text-foreground mb-4">
+          <h3 className="font-display text-xs font-semibold uppercase tracking-wider text-foreground mb-4">
             Navegação
           </h3>
           <div className="grid gap-2.5">
@@ -28,7 +28,7 @@ export function Footer() {
           </div>
         </div>
         <div>
-          <h3 className="font-sans text-xs font-semibold uppercase tracking-wider text-foreground mb-4">
+          <h3 className="font-display text-xs font-semibold uppercase tracking-wider text-foreground mb-4">
             Especialidades
           </h3>
           <div className="grid gap-2.5">
@@ -43,7 +43,7 @@ export function Footer() {
           </div>
         </div>
         <div>
-          <h3 className="font-sans text-xs font-semibold uppercase tracking-wider text-foreground mb-4">
+          <h3 className="font-display text-xs font-semibold uppercase tracking-wider text-foreground mb-4">
             Contatos
           </h3>
           <div className="grid gap-2.5 text-xs text-muted-foreground">

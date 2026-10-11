@@ -28,8 +28,8 @@ export function Hero() {
         }
         title={
           <>
-            <span className="text-white font-extrabold">BRS Reparações</span>{" "}
-            <span className="text-amber-500 font-extrabold">Automotivas.</span>
+            <span className="text-white font-semibold">BRS Reparações</span>{" "}
+            <span className="text-amber-500 font-semibold">Automotivas.</span>
           </>
         }
         description={

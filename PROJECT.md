@@ -151,7 +151,7 @@ BRS/
 - **Identidade Visual**: Paleta escura industrial automotiva:
   - Fundo: Slate grafite profundo (`oklch(0.14 0.005 260)`)
   - Acento Primário: Âmbar metálico aquecido (`oklch(0.73 0.1 82)`)
-  - Tipografia: Display em **Barlow Condensed** (cabeçalhos e chamadas fortes) e corpo em **Manrope** (leitura técnica e confortável).
+  - Tipografia: Display e Títulos em **Sora** (pesos 500 e 600, proporções técnicas e acabamento editorial de alta precisão) e corpo/controles em **Manrope** (pesos 400, 500 e 600, leitura técnica e confortável).
 - **Acessibilidade**:
   - Conformidade com critérios WCAG 2.1 nível AA.
   - Navegação completa por teclado com anéis de foco visíveis (`outline: 2px solid var(--primary)`).
@@ -182,6 +182,7 @@ Todas as entregas obedecem ao protocolo **Universal SDD**:
 - `SPEC-006` / `TASK-006-01` / `REVIEW-006`: Seção Hero Animada com Framer Motion (21st.dev AnimatedHero), botões em Glassmorphism e variantes de entrada.
 - `SPEC-007` / `TASK-007-01` / `REVIEW-007`: Galeria Interativa com Slider Antes/Depois e Lightbox Modal (@radix-ui/react-dialog) e Seção de Serviços com Efeito CardSpotlight.
 - `SPEC-008` / `TASK-008-01` / `REVIEW-008`: Expurgar Vínculos Lovable, Configuração Nativa Vite, Unificação de Header Único e Redesign da Seção Hero.
+- `SPEC-009` / `TASK-009-01` / `REVIEW-009`: Refinamento do Sistema Tipográfico com Sora e Manrope, Tokens Fluidos clamp() e Regras de Estabilidade Visual.
 
 ---
 

@@ -26,7 +26,7 @@ export function About() {
             seguros estruturando atendimentos para seus segurados, estamos à disposição para uma
             conversa profissional.
           </p>
-          <Button variant="editorial" asChild className="mt-5 text-xs">
+          <Button variant="editorial" asChild className="mt-5 text-xs font-semibold">
             <a href={company.instagram} {...external}>
               Acompanhar a BRS no Instagram{" "}
               <ArrowUpRight className="ml-1" size={13} aria-hidden="true" />
@@ -34,10 +34,10 @@ export function About() {
           </Button>
         </div>
         <div className="border-l border-primary pl-8 md:pl-12 py-6" {...reveal(1)}>
-          <p className="font-display text-[80px] italic font-bold leading-none tracking-tight">
+          <p className="font-display text-6xl sm:text-7xl lg:text-8xl font-semibold leading-none tracking-tight">
             BRS<span className="text-primary">.</span>
           </p>
-          <p className="text-[11px] mt-4 text-muted-foreground uppercase tracking-[2px]">
+          <p className="text-[11px] mt-4 text-muted-foreground uppercase tracking-[2px] font-medium">
             Reparações automotivas
           </p>
           <div className="mt-9 grid gap-4">

@@ -35,8 +35,10 @@ export function ProcessTimeline() {
           {steps.map(([title, copy], i) => (
             <div key={title} className="process-step" {...reveal(i + 1)}>
               <span className="text-primary text-xs font-semibold tracking-wider">0{i + 1}</span>
-              <h3 className="text-2xl mt-3 mb-3">{title}</h3>
-              <p className="body-copy text-xs">{copy}</p>
+              <h3 className="text-xl md:text-2xl font-semibold font-display tracking-tight text-foreground mt-3 mb-3 text-balance">
+                {title}
+              </h3>
+              <p className="body-copy text-xs text-pretty">{copy}</p>
             </div>
           ))}
         </div>

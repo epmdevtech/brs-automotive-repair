@@ -27,9 +27,9 @@ export function renderErrorPage(): string {
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
       }
       .brand {
+        font-family: 'Sora', 'Manrope', system-ui, -apple-system, sans-serif;
         font-size: 2rem;
-        font-weight: 800;
-        font-style: italic;
+        font-weight: 600;
         letter-spacing: -0.5px;
         margin-bottom: 1.5rem;
       }
@@ -37,6 +37,7 @@ export function renderErrorPage(): string {
         color: #d89f41;
       }
       h1 {
+        font-family: 'Sora', 'Manrope', system-ui, -apple-system, sans-serif;
         font-size: 1.25rem;
         margin: 0 0 0.75rem;
         font-weight: 600;

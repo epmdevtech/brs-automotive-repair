@@ -10,10 +10,10 @@ export function Pickup() {
           <Truck size={36} strokeWidth={1.3} className="text-primary shrink-0" aria-hidden="true" />
           <div>
             <p className="eyebrow mb-2">Comodidade</p>
-            <h2 className="text-[28px] leading-tight font-display">
+            <h2 className="text-xl sm:text-2xl font-semibold font-display tracking-tight text-foreground text-balance">
               Serviço de leva e traz para seu veículo.
             </h2>
-            <p className="body-copy text-xs mt-1.5">
+            <p className="body-copy text-xs mt-1.5 text-pretty">
               Consulte a disponibilidade de busca e entrega para a sua região em Toledo e arredores.
             </p>
           </div>

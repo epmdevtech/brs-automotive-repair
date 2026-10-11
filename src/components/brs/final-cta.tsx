@@ -27,12 +27,12 @@ export function FinalCTA() {
           Converse com a equipe da BRS para tirar dúvidas e agendar sua avaliação em Toledo.
         </p>
         <div className="flex flex-wrap gap-3 justify-center mt-7">
-          <Button variant="automotive" asChild className="h-12 px-6 text-xs">
+          <Button variant="automotive" asChild className="h-12 px-6 text-xs font-semibold">
             <a href="#contato">
               Solicitar avaliação <ArrowUpRight className="ml-1" size={14} aria-hidden="true" />
             </a>
           </Button>
-          <Button variant="automotiveOutline" asChild className="h-12 px-6 text-xs">
+          <Button variant="automotiveOutline" asChild className="h-12 px-6 text-xs font-medium">
             <a href={company.instagram} {...external}>
               <Instagram className="mr-1" size={14} aria-hidden="true" /> Conhecer o Instagram
             </a>

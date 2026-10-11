@@ -176,7 +176,7 @@ export function ContactForm({ partner }: { partner: boolean }) {
           enviar com um clique diretamente pelo Instagram oficial da BRS.
         </p>
 
-        <Button type="submit" variant="automotive" className="h-12 text-xs">
+        <Button type="submit" variant="automotive" className="h-12 text-xs font-semibold">
           Preparar mensagem <ArrowUpRight className="ml-1" size={14} aria-hidden="true" />
         </Button>
       </form>
@@ -188,8 +188,10 @@ export function ContactForm({ partner }: { partner: boolean }) {
         }}
       >
         <DialogContent className="w-[calc(100%-32px)] max-h-[90vh] overflow-y-auto bg-card border-border p-6">
-          <DialogTitle className="text-lg font-display">Mensagem pronta para envio</DialogTitle>
-          <DialogDescription className="text-xs text-muted-foreground">
+          <DialogTitle className="text-lg md:text-xl font-semibold font-display tracking-tight text-foreground">
+            Mensagem pronta para envio
+          </DialogTitle>
+          <DialogDescription className="text-xs text-muted-foreground mt-0.5 text-pretty">
             Copie o texto estruturado abaixo e envie em uma conversa no Instagram oficial da BRS.
             Nenhuma informação foi enviada ainda.
           </DialogDescription>
@@ -200,7 +202,11 @@ export function ContactForm({ partner }: { partner: boolean }) {
             className="field-input min-h-44 text-xs font-mono my-2"
           />
           <div className="flex flex-col sm:flex-row gap-3 pt-2">
-            <Button variant="automotiveOutline" onClick={copy} className="flex-1 gap-2">
+            <Button
+              variant="automotiveOutline"
+              onClick={copy}
+              className="flex-1 gap-2 text-xs font-medium"
+            >
               {copied ? (
                 <Check size={16} aria-hidden="true" />
               ) : (
@@ -208,7 +214,7 @@ export function ContactForm({ partner }: { partner: boolean }) {
               )}
               {copied ? "Mensagem copiada" : "Copiar mensagem"}
             </Button>
-            <Button variant="automotive" asChild className="flex-1 gap-2">
+            <Button variant="automotive" asChild className="flex-1 gap-2 text-xs font-semibold">
               <a href={company.instagram} {...external}>
                 <Instagram size={16} aria-hidden="true" /> Abrir Instagram
               </a>

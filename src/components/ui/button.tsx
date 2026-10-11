@@ -13,7 +13,7 @@ const buttonVariants = cva(
         automotive:
           "rounded-sm bg-primary text-primary-foreground hover:bg-primary/90 active:scale-[0.98] font-semibold",
         automotiveOutline:
-          "rounded-sm border border-border bg-transparent text-foreground hover:border-primary/60 hover:bg-secondary active:scale-[0.98]",
+          "rounded-sm border border-border bg-transparent text-foreground hover:border-primary/60 hover:bg-secondary active:scale-[0.98] font-medium",
         editorial: "rounded-none p-0 text-foreground hover:text-primary underline-offset-4",
         destructive: "bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90",
         outline:

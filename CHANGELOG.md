@@ -51,3 +51,10 @@ O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.
 - Redesign premium da seção Hero: badge âmbar elegante com pulso suave, tipografia H1 em alto contraste, gradientes eficientes WCAG AA+ e rodapé sutil da viewport.
 - Nova suíte de testes unitários [`src/test/header.test.tsx`](src/test/header.test.tsx) validando a existência de exatamente um banner/header na página.
 - Especificação `SPEC-008`, tarefa `TASK-008-01` e revisão `REVIEW-008`.
+- Refinamento do sistema tipográfico da landing page com as famílias **Sora** e **Manrope** (`SPEC-009`).
+- Otimização do Google Fonts em `src/routes/__root.tsx` carregando exclusivamente Sora (pesos 500, 600, 700) e Manrope (pesos 400, 500, 600) com `display=swap` e `preconnect`.
+- Centralização de tokens tipográficos fluidos com `clamp()`, unitless line-heights, pesos canônicos e normalização com `font-size-adjust: from-font`, `text-wrap: balance` e `text-wrap: pretty` em `src/styles.css`.
+- Refinamento visual de títulos, cartões de serviços, galeria, navegação e botões, eliminando estilos em caixa alta artificial agressiva e negrito 800 em favor de uma estética de engenharia automotiva técnica e precisa.
+- Nova suíte de testes unitários [`src/test/typography.test.tsx`](src/test/typography.test.tsx) validando 6 requisitos do sistema tipográfico.
+- Especificação `SPEC-009`, tarefa `TASK-009-01` e revisão `REVIEW-009`.
+

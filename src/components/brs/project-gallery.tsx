@@ -161,10 +161,10 @@ export function ProjectGallery() {
                     <span>{item.category}</span>
                     <span className="text-muted-foreground">{item.number} / CASO</span>
                   </div>
-                  <h3 className="text-xl font-bold font-display uppercase tracking-tight text-foreground mb-2">
+                  <h3 className="text-lg md:text-xl font-semibold font-display tracking-tight text-foreground mb-2 text-balance">
                     {item.title}
                   </h3>
-                  <p className="text-xs text-muted-foreground leading-relaxed line-clamp-3">
+                  <p className="text-xs text-muted-foreground leading-relaxed line-clamp-3 text-pretty">
                     {item.description}
                   </p>
                 </div>
@@ -202,10 +202,10 @@ export function ProjectGallery() {
                   <span className="text-[10px] font-semibold text-primary uppercase tracking-wider">
                     {currentCase.category} · Caso {currentCase.number} de 03
                   </span>
-                  <DialogTitle className="text-2xl md:text-3xl font-display uppercase tracking-tight mt-1 text-foreground">
+                  <DialogTitle className="text-xl md:text-2xl font-semibold font-display tracking-tight mt-1 text-foreground text-balance">
                     {currentCase.title}
                   </DialogTitle>
-                  <DialogDescription className="text-xs text-muted-foreground mt-0.5">
+                  <DialogDescription className="text-xs text-muted-foreground mt-0.5 text-pretty">
                     {currentCase.subtitle}
                   </DialogDescription>
                 </div>

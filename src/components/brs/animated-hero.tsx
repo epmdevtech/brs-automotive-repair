@@ -108,12 +108,12 @@ export const AnimatedHero = ({
         {/* Título Principal (H1) com forte contraste */}
         <motion.h1
           variants={itemVariants}
-          className="text-4xl font-extrabold tracking-tight sm:text-6xl md:text-7xl lg:text-8xl font-display uppercase leading-[0.96] max-w-4xl"
+          className="text-4xl font-semibold tracking-tight sm:text-5xl md:text-6xl lg:text-[4.25rem] font-display leading-[1.12] max-w-4xl text-balance"
         >
           {title || (
             <>
-              <span className="text-white font-extrabold">BRS Reparações</span>{" "}
-              <span className="text-amber-500 font-extrabold">Automotivas.</span>
+              <span className="text-white font-semibold">BRS Reparações</span>{" "}
+              <span className="text-amber-500 font-semibold">Automotivas.</span>
             </>
           )}
         </motion.h1>
@@ -121,7 +121,7 @@ export const AnimatedHero = ({
         {/* Subtítulo Confortável e Nítido */}
         <motion.div
           variants={itemVariants}
-          className="mt-6 max-w-2xl text-base sm:text-lg leading-relaxed text-neutral-300"
+          className="mt-6 max-w-2xl text-base sm:text-lg leading-relaxed text-neutral-300 text-pretty"
         >
           {description}
         </motion.div>
@@ -133,7 +133,7 @@ export const AnimatedHero = ({
             <Button
               asChild
               size="lg"
-              className="h-12 px-7 text-xs font-bold uppercase tracking-wider rounded-sm bg-amber-500 text-black hover:bg-amber-400 active:scale-[0.98] transition-all shadow-lg shadow-amber-500/20 cursor-pointer"
+              className="h-12 px-7 text-xs font-semibold tracking-wide rounded-sm bg-amber-500 text-black hover:bg-amber-400 active:scale-[0.98] transition-all shadow-lg shadow-amber-500/20 cursor-pointer"
             >
               <a href={ctaButton.href} onClick={ctaButton.onClick}>
                 {ctaButton.text}
@@ -143,7 +143,7 @@ export const AnimatedHero = ({
             <Button
               onClick={ctaButton.onClick}
               size="lg"
-              className="h-12 px-7 text-xs font-bold uppercase tracking-wider rounded-sm bg-amber-500 text-black hover:bg-amber-400 active:scale-[0.98] transition-all shadow-lg shadow-amber-500/20 cursor-pointer"
+              className="h-12 px-7 text-xs font-semibold tracking-wide rounded-sm bg-amber-500 text-black hover:bg-amber-400 active:scale-[0.98] transition-all shadow-lg shadow-amber-500/20 cursor-pointer"
             >
               {ctaButton.text}
             </Button>
@@ -155,7 +155,7 @@ export const AnimatedHero = ({
               <Button
                 asChild
                 size="lg"
-                className="h-12 px-7 text-xs font-medium uppercase tracking-wider rounded-sm border border-neutral-700 bg-neutral-900/70 hover:bg-neutral-800 text-neutral-200 active:scale-[0.98] transition-all backdrop-blur-xs cursor-pointer"
+                className="h-12 px-7 text-xs font-medium tracking-wide rounded-sm border border-neutral-700 bg-neutral-900/70 hover:bg-neutral-800 text-neutral-200 active:scale-[0.98] transition-all backdrop-blur-xs cursor-pointer"
               >
                 <a href={secondaryCta.href} onClick={secondaryCta.onClick}>
                   {secondaryCta.text}
@@ -165,7 +165,7 @@ export const AnimatedHero = ({
               <Button
                 onClick={secondaryCta.onClick}
                 size="lg"
-                className="h-12 px-7 text-xs font-medium uppercase tracking-wider rounded-sm border border-neutral-700 bg-neutral-900/70 hover:bg-neutral-800 text-neutral-200 active:scale-[0.98] transition-all backdrop-blur-xs cursor-pointer"
+                className="h-12 px-7 text-xs font-medium tracking-wide rounded-sm border border-neutral-700 bg-neutral-900/70 hover:bg-neutral-800 text-neutral-200 active:scale-[0.98] transition-all backdrop-blur-xs cursor-pointer"
               >
                 {secondaryCta.text}
               </Button>

@@ -28,7 +28,7 @@ export function Header() {
         <nav aria-label="Navegação principal" className="hidden lg:flex items-center gap-8">
           {navigation.map(([label, href]) => (
             <a
-              className="text-xs uppercase tracking-wider text-neutral-300 hover:text-white transition-colors font-medium"
+              className="text-[13px] text-neutral-300 hover:text-white transition-colors font-medium"
               key={href}
               href={href}
             >
@@ -40,7 +40,7 @@ export function Header() {
           <Button
             variant="automotive"
             asChild
-            className="hidden sm:inline-flex h-9 text-xs px-5 font-bold uppercase tracking-wider bg-amber-500 text-black hover:bg-amber-400 active:scale-[0.98] transition-all shadow-md shadow-amber-500/10"
+            className="hidden sm:inline-flex h-9 text-xs px-5 font-semibold tracking-wide bg-amber-500 text-black hover:bg-amber-400 active:scale-[0.98] transition-all shadow-md shadow-amber-500/10"
           >
             <a href="#contato">
               Solicitar avaliação <ArrowUpRight className="ml-1" size={14} aria-hidden="true" />
@@ -70,7 +70,7 @@ export function Header() {
               key={href}
               href={href}
               onClick={() => setOpen(false)}
-              className="text-sm font-medium text-neutral-200 hover:text-amber-400 uppercase tracking-wider"
+              className="text-sm font-medium text-neutral-200 hover:text-amber-400 transition-colors"
             >
               {label}
             </a>
@@ -78,7 +78,7 @@ export function Header() {
           <Button
             variant="automotive"
             asChild
-            className="bg-amber-500 text-black font-bold uppercase tracking-wider hover:bg-amber-400"
+            className="bg-amber-500 text-black font-semibold text-xs tracking-wide hover:bg-amber-400"
           >
             <a href="#contato" onClick={() => setOpen(false)}>
               Solicitar avaliação <ArrowUpRight className="ml-1" size={14} aria-hidden="true" />

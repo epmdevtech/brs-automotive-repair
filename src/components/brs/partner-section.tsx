@@ -31,7 +31,7 @@ export function PartnerSection({ onPartner }: { onPartner: () => void }) {
             <br />
             <span className="text-primary">Cuidado rigoroso com o segurado.</span>
           </h2>
-          <p className="body-copy mt-5">
+          <p className="body-copy mt-5 text-pretty">
             Indicar uma oficina envolve diretamente a reputação do corretor e a experiência do
             segurado durante o sinistro. A BRS valoriza parcerias sérias, com comunicação
             transparente e compromisso com o prazo acordado.
@@ -42,13 +42,20 @@ export function PartnerSection({ onPartner }: { onPartner: () => void }) {
               "Atenção prioritária à qualidade percebida pelo segurado",
               "Relacionamento profissional e responsável de longo prazo",
             ].map((item) => (
-              <li key={item} className="text-xs flex gap-3 items-center">
+              <li
+                key={item}
+                className="text-xs sm:text-[13px] flex gap-3 items-center text-foreground/90"
+              >
                 <Check className="text-primary shrink-0" size={15} aria-hidden="true" />
                 <span>{item}</span>
               </li>
             ))}
           </ul>
-          <Button variant="automotive" className="h-12 px-6 text-xs" onClick={onPartner}>
+          <Button
+            variant="automotive"
+            className="h-12 px-6 text-xs font-semibold"
+            onClick={onPartner}
+          >
             Conversar sobre parceria <ArrowUpRight className="ml-1" size={14} aria-hidden="true" />
           </Button>
         </div>

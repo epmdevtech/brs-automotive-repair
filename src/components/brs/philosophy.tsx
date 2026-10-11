@@ -38,8 +38,10 @@ export function Philosophy() {
             <div className="pillar" key={title}>
               <span className="pillar-number">0{i + 1}</span>
               <div>
-                <h3 className="text-2xl mb-2">{title}</h3>
-                <p className="body-copy text-xs">{description}</p>
+                <h3 className="text-xl md:text-2xl font-semibold font-display tracking-tight text-foreground mb-2 text-balance">
+                  {title}
+                </h3>
+                <p className="body-copy text-xs text-pretty">{description}</p>
               </div>
             </div>
           ))}
