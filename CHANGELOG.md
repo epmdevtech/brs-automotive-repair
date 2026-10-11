@@ -34,3 +34,8 @@ O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.
 - Revelação única de seções com `IntersectionObserver` e suporte completo a `prefers-reduced-motion`.
 - Suíte com 10 testes unitários e de integração de movimento (`src/test/motion.test.tsx`).
 - Especificação `SPEC-005`, tarefa `TASK-005-01` e revisão `REVIEW-005`.
+- Seção Hero animada com biblioteca `framer-motion` v14 e componentes inspirados em 21st.dev (`SPEC-006`).
+- Componente modular `src/components/brs/animated-hero.tsx` com variantes de stagger (`containerVariants`, `itemVariants`), header animado vindo do topo e botões de estilo glass translúcido com `backdrop-blur-md`.
+- Suporte a `prefers-reduced-motion` no Hero via hook nativo `useReducedMotion()`.
+- Testes unitários dedicados em `src/test/animated-hero.test.tsx` com cobertura de links, botões e ações de clique.
+- Especificação `SPEC-006`, tarefa `TASK-006-01` e revisão `REVIEW-006`.

@@ -27,6 +27,7 @@ Planejamento de evolução da presença digital da BRS Reparações Automotivas 
 - [x] Auditoria técnica, modularização de componentes e refinamento editorial profissional (`SPEC-003`).
 - [x] Esteira de CI/CD automatizada com GitHub Actions para quality gates e validação Docker (`SPEC-004`).
 - [x] Refinamento de UI, Motion Design e Microinterações com referências do 21st.dev adaptadas à BRS (`SPEC-005`).
+- [x] Seção Hero animada com biblioteca `framer-motion` v14 e componente `AnimatedHero` inspirado no 21st.dev (`SPEC-006`).
 
 ---
 
