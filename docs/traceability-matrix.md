@@ -8,8 +8,8 @@ Gerado por `scripts/generate_traceability.py`. Não edite manualmente; execute n
 eafb5fc` feat(site): implementar landing page institucional e governanca Universal SDD | [REVIEW-001-institutional-landing-page.md](../reviews/REVIEW-001-institutional-landing-page.md) (Approved with remarks) |
 | [SPEC-002](../specs/SPEC-002-infraestrutura-docker-e-makefile.md) | Implemented | [TASK-002-01](../tasks/TASK-002-01-docker-e-makefile.md) (Done) | `
 bd37746` chore(infra): adicionar Dockerfile multi-stage, docker-compose e automacao Makefile | [REVIEW-002-infraestrutura-docker-e-makefile.md](../reviews/REVIEW-002-infraestrutura-docker-e-makefile.md) (Approved) |
-| [SPEC-003](../specs/SPEC-003-auditoria-e-refinamento-profissional-brs.md) | Implemented | [TASK-003-01](../tasks/TASK-003-01-auditoria-e-refinamento-profissional-brs.md) (Done) | — | [REVIEW-003-auditoria-e-refinamento-profissional-brs.md](../reviews/REVIEW-003-auditoria-e-refinamento-profissional-brs.md) (Approved) |
+| [SPEC-003](../specs/SPEC-003-auditoria-e-refinamento-profissional-brs.md) | Implemented | [TASK-003-01](../tasks/TASK-003-01-auditoria-e-refinamento-profissional-brs.md) (Done) | `3752cbe0` refactor(brs): auditar codigo, modularizar componentes e refinar textos comerciais | [REVIEW-003-auditoria-e-refinamento-profissional-brs.md](../reviews/REVIEW-003-auditoria-e-refinamento-profissional-brs.md) (Approved) |
 
 ## Lacunas de rastreabilidade (Traceability gaps)
 
-- `TASK-003-01` não possui commit com `Task-Ref: TASK-003-01`.
+- Nenhuma detectada nos artefatos verificados.
