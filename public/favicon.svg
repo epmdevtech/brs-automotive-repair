@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#181c24"/>
+      <stop offset="50%" stop-color="#0f1218"/>
+      <stop offset="100%" stop-color="#090a0d"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fbbf24"/>
+      <stop offset="60%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#b45309"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Fundo Grafite Automotivo com cantos arredondados -->
+  <rect x="14" y="14" width="484" height="484" rx="112" fill="url(#bg)" stroke="url(#gold)" stroke-width="14"/>
+
+  <!-- Friso superior automotivo discreto -->
+  <line x1="128" y1="102" x2="384" y2="102" stroke="url(#gold)" stroke-width="4" stroke-opacity="0.4" stroke-linecap="round"/>
+
+  <!-- Monograma BRS -->
+  <g font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-weight="900" font-size="184" letter-spacing="-3">
+    <text x="256" y="320" text-anchor="middle">
+      <tspan fill="#FFFFFF">BR</tspan><tspan fill="url(#gold)">S</tspan>
+    </text>
+  </g>
+
+  <!-- Friso divisor âmbar dourado -->
+  <line x1="118" y1="360" x2="394" y2="360" stroke="url(#gold)" stroke-width="8" stroke-linecap="round"/>
+
+  <!-- Subtítulo técnico REPARAÇÕES -->
+  <text x="256" y="414" text-anchor="middle" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-weight="700" font-size="33" letter-spacing="10" fill="#9CA3AF">REPARAÇÕES</text>
+</svg>

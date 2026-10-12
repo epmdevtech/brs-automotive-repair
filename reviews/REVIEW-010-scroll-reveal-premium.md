@@ -42,14 +42,14 @@ Conclusão rigorosa da auditoria técnica e implementação de Scroll Reveal Pre
 
 ## 2. Verificação de Critérios de Aceitação
 
-| Critério  | Descrição                                                                               | Status   | Evidência                                                                             |
-| --------- | --------------------------------------------------------------------------------------- | -------- | ------------------------------------------------------------------------------------- |
-| AC-010-01 | Revelação coordenada com deslocamento de ~16px e duração de ~520ms nas seções mapeadas  | Aprovado | Tokens definidos em `src/styles.css` e validados via suíte de testes                  |
-| AC-010-02 | Preservação do Hero via Framer Motion sem aplicação redundante de scroll reveal         | Aprovado | Hero não possui `[data-reveal]`; validado em `src/test/scroll-reveal.test.tsx`        |
-| AC-010-03 | Execução única por elemento via `unobserve` imediato no IntersectionObserver            | Aprovado | Verificado em `src/hooks/use-scroll-reveal.ts` e simulado com sucesso em testes       |
-| AC-010-04 | Conteúdo 100% visível por padrão caso JS/Observer não estejam ativos                    | Aprovado | Nenhum elemento nasce com `hidden` no SSR; testado no mount inicial do Website        |
-| AC-010-05 | Suporte a `prefers-reduced-motion: reduce` desativando animações e exibindo conteúdo    | Aprovado | Verificado via media query CSS e no hook com `shouldSimplifyMotion()`                 |
-| AC-010-06 | Quality gates 100% aprovados (`make check`)                                             | Aprovado | 48 testes Vitest aprovados, 0 erros ESLint, build SSR Nitro compilado com 100% êxito |
+| Critério  | Descrição                                                                              | Status   | Evidência                                                                            |
+| --------- | -------------------------------------------------------------------------------------- | -------- | ------------------------------------------------------------------------------------ |
+| AC-010-01 | Revelação coordenada com deslocamento de ~16px e duração de ~520ms nas seções mapeadas | Aprovado | Tokens definidos em `src/styles.css` e validados via suíte de testes                 |
+| AC-010-02 | Preservação do Hero via Framer Motion sem aplicação redundante de scroll reveal        | Aprovado | Hero não possui `[data-reveal]`; validado em `src/test/scroll-reveal.test.tsx`       |
+| AC-010-03 | Execução única por elemento via `unobserve` imediato no IntersectionObserver           | Aprovado | Verificado em `src/hooks/use-scroll-reveal.ts` e simulado com sucesso em testes      |
+| AC-010-04 | Conteúdo 100% visível por padrão caso JS/Observer não estejam ativos                   | Aprovado | Nenhum elemento nasce com `hidden` no SSR; testado no mount inicial do Website       |
+| AC-010-05 | Suporte a `prefers-reduced-motion: reduce` desativando animações e exibindo conteúdo   | Aprovado | Verificado via media query CSS e no hook com `shouldSimplifyMotion()`                |
+| AC-010-06 | Quality gates 100% aprovados (`make check`)                                            | Aprovado | 48 testes Vitest aprovados, 0 erros ESLint, build SSR Nitro compilado com 100% êxito |
 
 ---
 

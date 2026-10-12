@@ -63,3 +63,7 @@ O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.
 - Suporte a `prefers-reduced-motion: reduce` e fallback com conteúdo 100% visível no DOM caso JavaScript ou IntersectionObserver não estejam disponíveis.
 - Nova suíte de testes unitários [`src/test/scroll-reveal.test.tsx`](src/test/scroll-reveal.test.tsx) com 11 testes cobrindo critérios de aceitação, unobserve e tokens de CSS.
 - Especificação `SPEC-010`, tarefa `TASK-010-01` e revisão `REVIEW-010`.
+- Expurgo definitivo do favicon residual da Lovable e implementação do pacote oficial de favicons e ícones da BRS Reparações Automotivas (`public/favicon.svg`, `public/favicon.ico`, `public/apple-touch-icon.png`, `public/favicon-96x96.png`, `public/web-app-manifest-192x192.png`, `public/web-app-manifest-512x512.png` e `public/site.webmanifest`) (`SPEC-011`).
+- Atualização das tags de cabeçalho no RootRoute (`src/routes/__root.tsx`) com links canônicos de favicons e meta tag `theme-color`.
+- Nova suíte de testes unitários [`src/test/favicon.test.tsx`](src/test/favicon.test.tsx) validando integridade de assets e metadados.
+- Especificação `SPEC-011`, tarefa `TASK-011-01` e revisão `REVIEW-011`.

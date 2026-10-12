@@ -32,6 +32,7 @@ Planejamento de evolução da presença digital da BRS Reparações Automotivas 
 - [x] Expurgar dependências e resíduos Lovable, unificar Header em container fixed único e redesenhar Hero com UX/UI premium (`SPEC-008`).
 - [x] Refinamento exclusivo do sistema tipográfico com Sora (500/600) e Manrope (400/500/600), tokens fluidos `clamp()` e regras de estabilidade visual (`SPEC-009`).
 - [x] Auditoria e implementação de Scroll Reveal Premium com tokens calibrados (16px, 520ms, ease suave), execução estritamente única e suporte total a acessibilidade (`SPEC-010`).
+- [x] Substituição do favicon residual Lovable pelo pacote oficial de favicons e ícones BRS Reparações Automotivas (`SPEC-011`).
 
 ---
 
