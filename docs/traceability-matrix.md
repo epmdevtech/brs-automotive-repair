@@ -34,9 +34,10 @@ a66ffff` feat(hero-colors): padronizar cores de tipografia e botoes da secao Her
 27cef24` feat(footer): implementar Footer Premium Minimal inspirado no 21st.dev | [REVIEW-013-footer-premium-minimal.md](../reviews/REVIEW-013-footer-premium-minimal.md) (Approved) |
 | [SPEC-014](../specs/SPEC-014-multipagina-seo-tecnico-llm.md) | Approved | [TASK-014-01](../tasks/TASK-014-01-multipagina-seo-tecnico-llm.md) (Done) | `
 9c3b351` feat(routing,seo): refatora para multipagina, seo tecnico e otimizacao llm | [REVIEW-014-multipagina-seo-tecnico-llm.md](../reviews/REVIEW-014-multipagina-seo-tecnico-llm.md) (Approved) |
-| [SPEC-015](../specs/SPEC-015-motion-design-scroll-reveal.md) | Approved | [TASK-015-01](../tasks/TASK-015-01-motion-design-scroll-reveal.md) (Done) | `ca59b7a8` feat(motion): implementa sistema unificado de motion design e scroll reveal premium | [REVIEW-015-motion-design-scroll-reveal.md](../reviews/REVIEW-015-motion-design-scroll-reveal.md) (Approved ✅) |
-| [SPEC-016](../specs/SPEC-016-refinamento-premium-navbar.md) | Approved | [TASK-016-01](../tasks/TASK-016-01-refinamento-premium-navbar.md) (Done) | — | [REVIEW-016-refinamento-premium-navbar.md](../reviews/REVIEW-016-refinamento-premium-navbar.md) (Approved ✅) |
+| [SPEC-015](../specs/SPEC-015-motion-design-scroll-reveal.md) | Approved | [TASK-015-01](../tasks/TASK-015-01-motion-design-scroll-reveal.md) (Done) | `
+ca59b7a` feat(motion): implementa sistema unificado de motion design e scroll reveal premium | [REVIEW-015-motion-design-scroll-reveal.md](../reviews/REVIEW-015-motion-design-scroll-reveal.md) (Approved ✅) |
+| [SPEC-016](../specs/SPEC-016-refinamento-premium-navbar.md) | Approved | [TASK-016-01](../tasks/TASK-016-01-refinamento-premium-navbar.md) (Done) | `25f56605` feat(header): refinar navbar para capsula flutuante e glassmorphism escuro | [REVIEW-016-refinamento-premium-navbar.md](../reviews/REVIEW-016-refinamento-premium-navbar.md) (Approved ✅) |
 
 ## Lacunas de rastreabilidade (Traceability gaps)
 
-- `TASK-016-01` não possui commit com `Task-Ref: TASK-016-01`.
+- Nenhuma detectada nos artefatos verificados.
