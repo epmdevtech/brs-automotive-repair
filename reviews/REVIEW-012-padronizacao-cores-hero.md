@@ -35,13 +35,13 @@ Atendimento rigoroso ao alinhamento cromático da seção Hero com a paleta e os
 
 ## 2. Verificação de Critérios de Aceitação
 
-| Critério  | Descrição                                                                         | Status   | Evidência                                                                             |
-| --------- | --------------------------------------------------------------------------------- | -------- | ------------------------------------------------------------------------------------- |
-| AC-012-01 | `"Automotivas."` no H1 utiliza `text-primary`, correspondendo aos títulos do site | Aprovado | Validado em `hero.tsx`, `animated-hero.tsx` e `hero-colors.test.tsx`                  |
-| AC-012-02 | Badge overline utiliza `text-primary`, `border-primary/20`, `bg-primary/10`       | Aprovado | Validado em `hero-colors.test.tsx` e inspeção visual                                  |
-| AC-012-03 | Descrição da Hero utiliza `text-neutral-400`                                      | Aprovado | Aplicado no parágrafo e testado                                                       |
-| AC-012-04 | Botão primário da Hero e CTA do Header idênticos em `bg-primary` e hover          | Aprovado | Classes idênticas validadas no teste comparativo                                      |
-| AC-012-05 | Botão secundário possui borda `neutral-800`, fundo `neutral-900/60` e hover claro | Aprovado | Estilo dark refinado aplicado e validado                                              |
+| Critério  | Descrição                                                                         | Status   | Evidência                                                                            |
+| --------- | --------------------------------------------------------------------------------- | -------- | ------------------------------------------------------------------------------------ |
+| AC-012-01 | `"Automotivas."` no H1 utiliza `text-primary`, correspondendo aos títulos do site | Aprovado | Validado em `hero.tsx`, `animated-hero.tsx` e `hero-colors.test.tsx`                 |
+| AC-012-02 | Badge overline utiliza `text-primary`, `border-primary/20`, `bg-primary/10`       | Aprovado | Validado em `hero-colors.test.tsx` e inspeção visual                                 |
+| AC-012-03 | Descrição da Hero utiliza `text-neutral-400`                                      | Aprovado | Aplicado no parágrafo e testado                                                      |
+| AC-012-04 | Botão primário da Hero e CTA do Header idênticos em `bg-primary` e hover          | Aprovado | Classes idênticas validadas no teste comparativo                                     |
+| AC-012-05 | Botão secundário possui borda `neutral-800`, fundo `neutral-900/60` e hover claro | Aprovado | Estilo dark refinado aplicado e validado                                             |
 | AC-012-06 | Quality gates 100% aprovados (`make check`)                                       | Aprovado | 57 testes Vitest aprovados, 0 erros ESLint, build SSR Nitro compilado com 100% êxito |
 
 ---

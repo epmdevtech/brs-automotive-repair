@@ -70,3 +70,8 @@ O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.
 - Padronização cromática rigorosa da seção Hero: destaque do H1 (`text-primary`), badge overline (`border-primary/20 bg-primary/10 text-primary`), descrição (`text-neutral-400`), botão primário (`bg-primary text-primary-foreground hover:bg-primary/90`) sincronizado com a Navbar, e botão secundário com estética dark refinada (`SPEC-012`).
 - Nova suíte de testes unitários [`src/test/hero-colors.test.tsx`](src/test/hero-colors.test.tsx) validando as 5 frentes cromáticas da Hero.
 - Especificação `SPEC-012`, tarefa `TASK-012-01` e revisão `REVIEW-012`.
+- Implementação do rodapé definitivo `MinimalFooter` (`src/components/ui/minimal-footer.tsx`) inspirado no 21st.dev e adaptado à identidade BRS, com layout responsivo de 4 colunas em desktop e empilhado no mobile (`SPEC-013`).
+- Refatoração de `src/components/brs/footer.tsx` assegurando unicidade arquitetural de exatamente um elemento `footer` no DOM.
+- Validação e restrição a canais de contato reais (Instagram oficial `@brsreparacoes` e telefone fixo `(45) 2035-9440`), âncoras válidas existentes, ano de copyright dinâmico e aviso de conformidade de imagem ilustrativa.
+- Nova suíte de testes unitários [`src/test/minimal-footer.test.tsx`](src/test/minimal-footer.test.tsx) validando os 6 critérios de aceitação.
+- Especificação `SPEC-013`, tarefa `TASK-013-01` e revisão `REVIEW-013`.
