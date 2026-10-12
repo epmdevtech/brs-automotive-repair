@@ -28,8 +28,8 @@ f496606` feat(hero-cleanup): expurgar vínculos com Lovable, unificar header e r
 f4bbb59` feat(motion): auditoria e implementacao de scroll reveal premium (SPEC-010) | [REVIEW-010-scroll-reveal-premium.md](../reviews/REVIEW-010-scroll-reveal-premium.md) (Approved) |
 | [SPEC-011](../specs/SPEC-011-substituicao-favicon-icone-brs.md) | Implemented | [TASK-011-01](../tasks/TASK-011-01-substituicao-favicon-icone-brs.md) (Done) | `
 2276fab` feat(branding): substituir favicon Lovable por pacote oficial BRS Reparações Automotivas (SPEC-011) | [REVIEW-011-substituicao-favicon-icone-brs.md](../reviews/REVIEW-011-substituicao-favicon-icone-brs.md) (Approved) |
-| [SPEC-012](../specs/SPEC-012-padronizacao-cores-hero.md) | Implemented | [TASK-012-01](../tasks/TASK-012-01-padronizacao-cores-hero.md) (Done) | — | [REVIEW-012-padronizacao-cores-hero.md](../reviews/REVIEW-012-padronizacao-cores-hero.md) (Approved) |
+| [SPEC-012](../specs/SPEC-012-padronizacao-cores-hero.md) | Implemented | [TASK-012-01](../tasks/TASK-012-01-padronizacao-cores-hero.md) (Done) | `a66ffff0` feat(hero-colors): padronizar cores de tipografia e botoes da secao Hero (SPEC-012) | [REVIEW-012-padronizacao-cores-hero.md](../reviews/REVIEW-012-padronizacao-cores-hero.md) (Approved) |
 
 ## Lacunas de rastreabilidade (Traceability gaps)
 
-- `TASK-012-01` não possui commit com `Task-Ref: TASK-012-01`.
+- Nenhuma detectada nos artefatos verificados.
