@@ -19,9 +19,9 @@ export function Hero() {
         id="inicio"
         backgroundImageUrl={hero}
         eyebrow={
-          <div className="inline-flex items-center gap-2 rounded-full border border-amber-500/30 bg-amber-500/10 px-3.5 py-1 backdrop-blur-xs">
-            <span className="size-1.5 rounded-full bg-amber-400 animate-pulse" />
-            <span className="text-xs font-medium uppercase tracking-widest text-amber-400/90">
+          <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-3.5 py-1 backdrop-blur-xs">
+            <span className="size-1.5 rounded-full bg-primary animate-pulse" />
+            <span className="text-xs font-medium uppercase tracking-widest text-primary">
               Precisão no reparo • Cuidado no atendimento
             </span>
           </div>
@@ -29,11 +29,11 @@ export function Hero() {
         title={
           <>
             <span className="text-white font-semibold">BRS Reparações</span>{" "}
-            <span className="text-amber-500 font-semibold">Automotivas.</span>
+            <span className="text-primary font-semibold">Automotivas.</span>
           </>
         }
         description={
-          <p>
+          <p className="text-neutral-400">
             Funilaria automotiva, pintura em estufa e martelinho de ouro em Toledo, Paraná. Atenção
             aos detalhes, diagnóstico honesto e acabamento técnico com recuperação de padrão de
             fábrica.
@@ -52,7 +52,7 @@ export function Hero() {
         bottomContent={
           <div className="page-width flex items-center justify-between text-xs text-neutral-400 pt-3 border-t border-white/10">
             <span className="flex items-center gap-2 font-medium">
-              <MapPin size={14} className="text-amber-500" aria-hidden="true" /> Toledo, Paraná
+              <MapPin size={14} className="text-primary" aria-hidden="true" /> Toledo, Paraná
             </span>
             <a
               href="#servicos"

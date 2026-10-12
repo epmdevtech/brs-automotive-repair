@@ -40,7 +40,7 @@ export function Header() {
           <Button
             variant="automotive"
             asChild
-            className="hidden sm:inline-flex h-9 text-xs px-5 font-semibold tracking-wide bg-amber-500 text-black hover:bg-amber-400 active:scale-[0.98] transition-all shadow-md shadow-amber-500/10"
+            className="hidden sm:inline-flex h-9 text-xs px-5 font-semibold tracking-wide bg-primary text-primary-foreground hover:bg-primary/90 active:scale-[0.98] transition-all shadow-md shadow-primary/10"
           >
             <a href="#contato">
               Solicitar avaliação <ArrowUpRight className="ml-1" size={14} aria-hidden="true" />
@@ -70,7 +70,7 @@ export function Header() {
               key={href}
               href={href}
               onClick={() => setOpen(false)}
-              className="text-sm font-medium text-neutral-200 hover:text-amber-400 transition-colors"
+              className="text-sm font-medium text-neutral-200 hover:text-primary transition-colors"
             >
               {label}
             </a>
@@ -78,7 +78,7 @@ export function Header() {
           <Button
             variant="automotive"
             asChild
-            className="bg-amber-500 text-black font-semibold text-xs tracking-wide hover:bg-amber-400"
+            className="bg-primary text-primary-foreground font-semibold text-xs tracking-wide hover:bg-primary/90"
           >
             <a href="#contato" onClick={() => setOpen(false)}>
               Solicitar avaliação <ArrowUpRight className="ml-1" size={14} aria-hidden="true" />

@@ -96,9 +96,9 @@ export const AnimatedHero = ({
         {/* Overline / Badge Superior */}
         <motion.div variants={itemVariants} className="mb-4">
           {eyebrow || (
-            <div className="inline-flex items-center gap-2 rounded-full border border-amber-500/30 bg-amber-500/10 px-3.5 py-1 backdrop-blur-xs">
-              <span className="size-1.5 rounded-full bg-amber-400 animate-pulse" />
-              <span className="text-xs font-medium uppercase tracking-widest text-amber-400/90">
+            <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-3.5 py-1 backdrop-blur-xs">
+              <span className="size-1.5 rounded-full bg-primary animate-pulse" />
+              <span className="text-xs font-medium uppercase tracking-widest text-primary">
                 Precisão no reparo • Cuidado no atendimento
               </span>
             </div>
@@ -113,7 +113,7 @@ export const AnimatedHero = ({
           {title || (
             <>
               <span className="text-white font-semibold">BRS Reparações</span>{" "}
-              <span className="text-amber-500 font-semibold">Automotivas.</span>
+              <span className="text-primary font-semibold">Automotivas.</span>
             </>
           )}
         </motion.h1>
@@ -121,7 +121,7 @@ export const AnimatedHero = ({
         {/* Subtítulo Confortável e Nítido */}
         <motion.div
           variants={itemVariants}
-          className="mt-6 max-w-2xl text-base sm:text-lg leading-relaxed text-neutral-300 text-pretty"
+          className="mt-6 max-w-2xl text-base sm:text-lg leading-relaxed text-neutral-400 text-pretty"
         >
           {description}
         </motion.div>
@@ -131,9 +131,10 @@ export const AnimatedHero = ({
           {/* Botão Primário */}
           {ctaButton.href ? (
             <Button
+              variant="automotive"
               asChild
               size="lg"
-              className="h-12 px-7 text-xs font-semibold tracking-wide rounded-sm bg-amber-500 text-black hover:bg-amber-400 active:scale-[0.98] transition-all shadow-lg shadow-amber-500/20 cursor-pointer"
+              className="h-12 px-7 text-xs font-semibold tracking-wide rounded-sm bg-primary text-primary-foreground hover:bg-primary/90 active:scale-[0.98] transition-all shadow-lg shadow-primary/10 cursor-pointer"
             >
               <a href={ctaButton.href} onClick={ctaButton.onClick}>
                 {ctaButton.text}
@@ -141,9 +142,10 @@ export const AnimatedHero = ({
             </Button>
           ) : (
             <Button
+              variant="automotive"
               onClick={ctaButton.onClick}
               size="lg"
-              className="h-12 px-7 text-xs font-semibold tracking-wide rounded-sm bg-amber-500 text-black hover:bg-amber-400 active:scale-[0.98] transition-all shadow-lg shadow-amber-500/20 cursor-pointer"
+              className="h-12 px-7 text-xs font-semibold tracking-wide rounded-sm bg-primary text-primary-foreground hover:bg-primary/90 active:scale-[0.98] transition-all shadow-lg shadow-primary/10 cursor-pointer"
             >
               {ctaButton.text}
             </Button>
@@ -155,7 +157,7 @@ export const AnimatedHero = ({
               <Button
                 asChild
                 size="lg"
-                className="h-12 px-7 text-xs font-medium tracking-wide rounded-sm border border-neutral-700 bg-neutral-900/70 hover:bg-neutral-800 text-neutral-200 active:scale-[0.98] transition-all backdrop-blur-xs cursor-pointer"
+                className="h-12 px-7 text-xs font-medium tracking-wide rounded-sm border border-neutral-800 bg-neutral-900/60 hover:bg-neutral-800 hover:text-white text-neutral-300 active:scale-[0.98] transition-all backdrop-blur-xs cursor-pointer"
               >
                 <a href={secondaryCta.href} onClick={secondaryCta.onClick}>
                   {secondaryCta.text}
@@ -165,7 +167,7 @@ export const AnimatedHero = ({
               <Button
                 onClick={secondaryCta.onClick}
                 size="lg"
-                className="h-12 px-7 text-xs font-medium tracking-wide rounded-sm border border-neutral-700 bg-neutral-900/70 hover:bg-neutral-800 text-neutral-200 active:scale-[0.98] transition-all backdrop-blur-xs cursor-pointer"
+                className="h-12 px-7 text-xs font-medium tracking-wide rounded-sm border border-neutral-800 bg-neutral-900/60 hover:bg-neutral-800 hover:text-white text-neutral-300 active:scale-[0.98] transition-all backdrop-blur-xs cursor-pointer"
               >
                 {secondaryCta.text}
               </Button>
@@ -178,7 +180,7 @@ export const AnimatedHero = ({
         {bottomContent || (
           <div className="page-width flex items-center justify-between text-xs text-neutral-400 pt-3 border-t border-white/10">
             <span className="flex items-center gap-2 font-medium">
-              <MapPin size={14} className="text-amber-500" aria-hidden="true" /> Toledo, Paraná
+              <MapPin size={14} className="text-primary" aria-hidden="true" /> Toledo, Paraná
             </span>
             <a
               href="#servicos"

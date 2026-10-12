@@ -185,6 +185,7 @@ Todas as entregas obedecem ao protocolo **Universal SDD**:
 - `SPEC-009` / `TASK-009-01` / `REVIEW-009`: Refinamento do Sistema Tipográfico com Sora e Manrope, Tokens Fluidos clamp() e Regras de Estabilidade Visual.
 - `SPEC-010` / `TASK-010-01` / `REVIEW-010`: Auditoria e Implementação de Scroll Reveal Premium com Tokens Calibrados, Disparo Único via IntersectionObserver e Suporte a Acessibilidade.
 - `SPEC-011` / `TASK-011-01` / `REVIEW-011`: Substituição do Favicon Lovable pelo Pacote Oficial de Favicons e Ícones da BRS Reparações Automotivas.
+- `SPEC-012` / `TASK-012-01` / `REVIEW-012`: Padronização Rigorosa das Cores de Tipografia e Botões da Seção Hero Alinhadas aos Tokens do Projeto.
 
 ---
 

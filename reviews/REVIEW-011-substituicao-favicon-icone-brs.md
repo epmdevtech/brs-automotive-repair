@@ -35,13 +35,13 @@ Conclusão rigorosa da substituição do favicon legado da plataforma Lovable pe
 
 ## 2. Verificação de Critérios de Aceitação
 
-| Critério  | Descrição                                                                            | Status   | Evidência                                                                             |
-| --------- | ------------------------------------------------------------------------------------ | -------- | ------------------------------------------------------------------------------------- |
-| AC-011-01 | Remoção total do favicon da Lovable com coração colorido                             | Aprovado | Arquivo Lovable de 20KB substituído pelo pacote BRS oficial                           |
+| Critério  | Descrição                                                                            | Status   | Evidência                                                                            |
+| --------- | ------------------------------------------------------------------------------------ | -------- | ------------------------------------------------------------------------------------ |
+| AC-011-01 | Remoção total do favicon da Lovable com coração colorido                             | Aprovado | Arquivo Lovable de 20KB substituído pelo pacote BRS oficial                          |
 | AC-011-02 | Novo `favicon.svg` vetorial representando a identidade da BRS                        | Aprovado | Fundo grafite, borda âmbar e monograma BRS em alto contraste                         |
-| AC-011-03 | `favicon.ico` multiresolução (16x16, 32x32, 48x48) perfeitamente legível na aba      | Aprovado | Gerado com Pillow e supersampling; validado visualmente e via testes                  |
-| AC-011-04 | Disponibilização de `apple-touch-icon.png`, `favicon-96x96.png` e `site.webmanifest` | Aprovado | Arquivos presentes no diretório `public/`                                             |
-| AC-011-05 | Metadados do RootRoute em `src/routes/__root.tsx` declarando todos os ícones da BRS  | Aprovado | Links declarados no Head e validados em `src/test/favicon.test.tsx`                   |
+| AC-011-03 | `favicon.ico` multiresolução (16x16, 32x32, 48x48) perfeitamente legível na aba      | Aprovado | Gerado com Pillow e supersampling; validado visualmente e via testes                 |
+| AC-011-04 | Disponibilização de `apple-touch-icon.png`, `favicon-96x96.png` e `site.webmanifest` | Aprovado | Arquivos presentes no diretório `public/`                                            |
+| AC-011-05 | Metadados do RootRoute em `src/routes/__root.tsx` declarando todos os ícones da BRS  | Aprovado | Links declarados no Head e validados em `src/test/favicon.test.tsx`                  |
 | AC-011-06 | Quality gates 100% aprovados (`make check`)                                          | Aprovado | 52 testes Vitest aprovados, 0 erros ESLint, build SSR Nitro compilado com 100% êxito |
 
 ---

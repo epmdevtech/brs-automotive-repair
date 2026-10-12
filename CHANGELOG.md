@@ -67,3 +67,6 @@ O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.
 - Atualização das tags de cabeçalho no RootRoute (`src/routes/__root.tsx`) com links canônicos de favicons e meta tag `theme-color`.
 - Nova suíte de testes unitários [`src/test/favicon.test.tsx`](src/test/favicon.test.tsx) validando integridade de assets e metadados.
 - Especificação `SPEC-011`, tarefa `TASK-011-01` e revisão `REVIEW-011`.
+- Padronização cromática rigorosa da seção Hero: destaque do H1 (`text-primary`), badge overline (`border-primary/20 bg-primary/10 text-primary`), descrição (`text-neutral-400`), botão primário (`bg-primary text-primary-foreground hover:bg-primary/90`) sincronizado com a Navbar, e botão secundário com estética dark refinada (`SPEC-012`).
+- Nova suíte de testes unitários [`src/test/hero-colors.test.tsx`](src/test/hero-colors.test.tsx) validando as 5 frentes cromáticas da Hero.
+- Especificação `SPEC-012`, tarefa `TASK-012-01` e revisão `REVIEW-012`.

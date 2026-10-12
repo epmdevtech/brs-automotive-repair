@@ -33,6 +33,7 @@ Planejamento de evolução da presença digital da BRS Reparações Automotivas 
 - [x] Refinamento exclusivo do sistema tipográfico com Sora (500/600) e Manrope (400/500/600), tokens fluidos `clamp()` e regras de estabilidade visual (`SPEC-009`).
 - [x] Auditoria e implementação de Scroll Reveal Premium com tokens calibrados (16px, 520ms, ease suave), execução estritamente única e suporte total a acessibilidade (`SPEC-010`).
 - [x] Substituição do favicon residual Lovable pelo pacote oficial de favicons e ícones BRS Reparações Automotivas (`SPEC-011`).
+- [x] Padronização das cores da seção Hero (H1, badge overline, descrição, botão primário e botão secundário) alinhadas 100% aos tokens do site (`SPEC-012`).
 
 ---
 
