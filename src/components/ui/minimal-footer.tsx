@@ -3,6 +3,7 @@ import { ArrowUpRight, Instagram, MapPin, Phone } from "lucide-react";
 import { company, navigation, services } from "@/lib/brs";
 import { Brand } from "@/components/brs/brand";
 import { Button } from "@/components/ui/button";
+import { Reveal } from "@/components/brs/reveal";
 import { cn } from "@/lib/utils";
 
 const external = { target: "_blank", rel: "noopener noreferrer" };
@@ -21,7 +22,7 @@ export function MinimalFooter({ className }: MinimalFooterProps) {
         className,
       )}
     >
-      <div className="page-width py-14 lg:py-16">
+      <Reveal yOffset={12} className="page-width py-14 lg:py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-12">
           {/* Coluna 1: Marca & Posicionamento Institucional */}
           <div className="lg:col-span-5 flex flex-col items-start">
@@ -123,7 +124,7 @@ export function MinimalFooter({ className }: MinimalFooterProps) {
             </div>
           </div>
         </div>
-      </div>
+      </Reveal>
 
       {/* Faixa inferior: Copyright, Privacidade & Transparência Editorial */}
       <div className="border-t border-border/60 bg-secondary/20">

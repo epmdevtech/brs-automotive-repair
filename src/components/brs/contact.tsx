@@ -1,6 +1,6 @@
 import { ArrowUpRight, Phone, Instagram, MapPin } from "lucide-react";
 import { company } from "@/lib/brs";
-import { reveal } from "@/lib/motion";
+import { Reveal } from "./reveal";
 import { ContactForm } from "./contact-form";
 
 const external = { target: "_blank", rel: "noopener noreferrer" };
@@ -9,7 +9,7 @@ export function Contact({ partner }: { partner: boolean }) {
   return (
     <section id="contato" className="section-space">
       <div className="page-width grid md:grid-cols-2 gap-12 md:gap-24">
-        <div {...reveal(0)}>
+        <Reveal staggerIndex={0}>
           <p className="eyebrow mb-5">Atendimento</p>
           <h2 className="section-title">
             O primeiro passo é um
@@ -58,8 +58,9 @@ export function Contact({ partner }: { partner: boolean }) {
           <p className="text-[11px] text-muted-foreground mt-8 flex gap-2 items-center">
             <MapPin size={14} className="text-primary" aria-hidden="true" /> Toledo, Paraná
           </p>
-        </div>
-        <div {...reveal(1)}>
+        </Reveal>
+        <div data-reveal="" style={{ "--i": 1 } as React.CSSProperties}>
+          {/* Sem animação de scroll no formulário: renderização direta e estável sem distrações */}
           <ContactForm partner={partner} />
         </div>
       </div>

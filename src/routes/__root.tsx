@@ -10,6 +10,7 @@ import {
 } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
 import { Phone } from "lucide-react";
+import { MotionConfig } from "framer-motion";
 
 import appCss from "../styles.css?url";
 import { reportAppError } from "../lib/error-reporting";
@@ -145,31 +146,33 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <a
-        href="#conteudo-principal"
-        className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 bg-primary text-primary-foreground p-3 font-medium text-xs rounded-sm"
-      >
-        Pular para o conteúdo principal
-      </a>
-
-      <Header />
-
-      <main id="conteudo-principal">
-        <Outlet />
-      </main>
-
-      <Footer />
-
-      <Button
-        variant="automotive"
-        size="icon"
-        asChild
-        className="fixed bottom-5 right-5 z-20 size-12 rounded-full shadow-xl md:hidden"
-      >
-        <a href={company.phoneHref} aria-label="Ligar para a central de atendimento da BRS">
-          <Phone size={20} aria-hidden="true" />
+      <MotionConfig reducedMotion="user">
+        <a
+          href="#conteudo-principal"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 bg-primary text-primary-foreground p-3 font-medium text-xs rounded-sm"
+        >
+          Pular para o conteúdo principal
         </a>
-      </Button>
+
+        <Header />
+
+        <main id="conteudo-principal">
+          <Outlet />
+        </main>
+
+        <Footer />
+
+        <Button
+          variant="automotive"
+          size="icon"
+          asChild
+          className="fixed bottom-5 right-5 z-20 size-12 rounded-full shadow-xl md:hidden"
+        >
+          <a href={company.phoneHref} aria-label="Ligar para a central de atendimento da BRS">
+            <Phone size={20} aria-hidden="true" />
+          </a>
+        </Button>
+      </MotionConfig>
     </QueryClientProvider>
   );
 }

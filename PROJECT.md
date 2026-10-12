@@ -188,6 +188,7 @@ Todas as entregas obedecem ao protocolo **Universal SDD**:
 - `SPEC-012` / `TASK-012-01` / `REVIEW-012`: Padronização Rigorosa das Cores de Tipografia e Botões da Seção Hero Alinhadas aos Tokens do Projeto.
 - `SPEC-013` / `TASK-013-01` / `REVIEW-013`: Implementação de Footer Premium Minimal Inspirado no 21st.dev com Identidade BRS, Canais Reais e Acessibilidade.
 - `SPEC-014` / `TASK-014-01` / `REVIEW-014`: Refatoração Multipágina em TanStack Start, SEO Técnico Canônico e Otimização para LLMs com llms.txt.
+- `SPEC-015` / `TASK-015-01` / `REVIEW-015`: Sistema Unificado de Motion Design e Scroll Reveal Premium com Tokens Normativos e Primitivos de Animação.
 
 ---
 

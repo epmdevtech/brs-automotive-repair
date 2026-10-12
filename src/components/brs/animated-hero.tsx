@@ -30,26 +30,28 @@ export interface AnimatedHeroProps {
   className?: string;
 }
 
-// Variantes de transição do Framer Motion
+import { MOTION_TOKENS } from "@/lib/motion-system";
+
+// Variantes de transição normativas do Framer Motion (SPEC-015)
 const getContainerVariants = (reduced: boolean) => ({
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: reduced ? 0 : 0.12,
-      delayChildren: reduced ? 0 : 0.15,
+      staggerChildren: reduced ? 0 : MOTION_TOKENS.stagger,
+      delayChildren: reduced ? 0 : 0.04,
     },
   },
 });
 
 const getItemVariants = (reduced: boolean) => ({
-  hidden: { y: reduced ? 0 : 20, opacity: 0 },
+  hidden: { y: reduced ? 0 : 16, opacity: 0 },
   visible: {
     y: 0,
     opacity: 1,
     transition: {
-      duration: reduced ? 0.01 : 0.6,
-      ease: "easeOut",
+      duration: reduced ? 0.01 : MOTION_TOKENS.duration.base,
+      ease: MOTION_TOKENS.ease,
     },
   },
 });
@@ -78,13 +80,19 @@ export const AnimatedHero = ({
       )}
     >
       {/* Background com fotografia e overlay de alto contraste para conformidade WCAG AA+ */}
-      <div
-        className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat"
+      <motion.div
+        className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat will-change-transform"
         style={{ backgroundImage: `url(${backgroundImageUrl})` }}
+        initial={shouldReduceMotion ? { scale: 1 } : { scale: 1.05 }}
+        animate={{ scale: 1 }}
+        transition={{
+          duration: shouldReduceMotion ? 0.01 : MOTION_TOKENS.duration.slow,
+          ease: MOTION_TOKENS.ease,
+        }}
       >
         <div className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/80 to-black/45" />
         <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-black/60" />
-      </div>
+      </motion.div>
 
       {/* Conteúdo principal animado do Hero */}
       <motion.div

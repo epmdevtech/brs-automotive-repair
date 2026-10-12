@@ -1,7 +1,7 @@
 import { ArrowUpRight, Instagram } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { company } from "@/lib/brs";
-import { reveal } from "@/lib/motion";
+import { Reveal } from "./reveal";
 import hero from "@/assets/brs-hero.jpg";
 
 const external = { target: "_blank", rel: "noopener noreferrer" };
@@ -16,7 +16,7 @@ export function FinalCTA() {
         width={1920}
         height={1088}
       />
-      <div className="page-width relative z-10 text-center" {...reveal(0)}>
+      <Reveal className="page-width relative z-10 text-center">
         <p className="eyebrow justify-center mb-5">Seu veículo · Nosso compromisso</p>
         <h2 className="section-title">
           Vamos definir a melhor
@@ -38,7 +38,7 @@ export function FinalCTA() {
             </a>
           </Button>
         </div>
-      </div>
+      </Reveal>
     </section>
   );
 }

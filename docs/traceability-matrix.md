@@ -32,7 +32,9 @@ f4bbb59` feat(motion): auditoria e implementacao de scroll reveal premium (SPEC-
 a66ffff` feat(hero-colors): padronizar cores de tipografia e botoes da secao Hero (SPEC-012) | [REVIEW-012-padronizacao-cores-hero.md](../reviews/REVIEW-012-padronizacao-cores-hero.md) (Approved) |
 | [SPEC-013](../specs/SPEC-013-footer-premium-minimal.md) | Implemented | [TASK-013-01](../tasks/TASK-013-01-footer-premium-minimal.md) (Done) | `
 27cef24` feat(footer): implementar Footer Premium Minimal inspirado no 21st.dev | [REVIEW-013-footer-premium-minimal.md](../reviews/REVIEW-013-footer-premium-minimal.md) (Approved) |
-| [SPEC-014](../specs/SPEC-014-multipagina-seo-tecnico-llm.md) | Approved | [TASK-014-01](../tasks/TASK-014-01-multipagina-seo-tecnico-llm.md) (Done) | `5430db64` feat(routing,seo): refatora para multipagina, seo tecnico e otimizacao llm | [REVIEW-014-multipagina-seo-tecnico-llm.md](../reviews/REVIEW-014-multipagina-seo-tecnico-llm.md) (Approved) |
+| [SPEC-014](../specs/SPEC-014-multipagina-seo-tecnico-llm.md) | Approved | [TASK-014-01](../tasks/TASK-014-01-multipagina-seo-tecnico-llm.md) (Done) | `
+9c3b351` feat(routing,seo): refatora para multipagina, seo tecnico e otimizacao llm | [REVIEW-014-multipagina-seo-tecnico-llm.md](../reviews/REVIEW-014-multipagina-seo-tecnico-llm.md) (Approved) |
+| [SPEC-015](../specs/SPEC-015-motion-design-scroll-reveal.md) | Approved | [TASK-015-01](../tasks/TASK-015-01-motion-design-scroll-reveal.md) (Done) | `0b095ebf` feat(motion): implementa sistema unificado de motion design e scroll reveal premium | [REVIEW-015-motion-design-scroll-reveal.md](../reviews/REVIEW-015-motion-design-scroll-reveal.md) (Approved ✅) |
 
 ## Lacunas de rastreabilidade (Traceability gaps)
 

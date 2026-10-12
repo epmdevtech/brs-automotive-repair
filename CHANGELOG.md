@@ -80,3 +80,12 @@ O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.
 - Criação dos arquivos canônicos `public/sitemap.xml`, `public/robots.txt` e `public/llms.txt` otimizados para motores de busca e agentes LLM com avisos de conformidade fotográfica.
 - Suíte completa de testes unitários e de integração [`src/test/multipage-seo-llm.test.tsx`](src/test/multipage-seo-llm.test.tsx).
 - Especificação `SPEC-014`, tarefa `TASK-014-01` e revisão `REVIEW-014`.
+- Sistema unificado de motion design e scroll reveal premium com tokens normativos (`src/lib/motion-system.ts`), componentes primitivos `<Reveal>` e `<ImageReveal>` e orquestração sóbria e técnica seção por seção (`SPEC-015`).
+- Animação do Hero no mount (sem esperar scroll), zoom-out sutil da imagem de fundo (1.05 → 1.00) e escalonamento de entrada nítido sem impacto no LCP.
+- Transição da Navbar no scroll com compressão de altura, backdrop-blur-md translúcido e borda refinada.
+- Galeria de Projetos com convite interativo de 10% no divisor ao entrar na viewport e touch-pan-y no `BeforeAfterSlider` para navegação touch vertical desimpedida.
+- Linha de progresso vertical nas etapas de atendimento (`ProcessTimeline`) vinculada ao scroll via `transform: scaleY` com ativação luminosa dos marcadores.
+- Efeito parallax sutil na imagem de corretores restrito a desktop (`lg:` / `min-width: 1024px`) e desativado em telas menores.
+- Suporte global a acessibilidade com `<MotionConfig reducedMotion="user">` no layout raiz e degradação suave sem layout shift.
+- Nova suíte de testes unitários [`src/test/motion-system.test.tsx`](src/test/motion-system.test.tsx) validando os 10 critérios de aceitação.
+- Especificação `SPEC-015`, tarefa `TASK-015-01` e revisão `REVIEW-015`.

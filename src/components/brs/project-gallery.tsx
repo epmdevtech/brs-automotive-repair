@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Expand, ChevronLeft, ChevronRight, CheckCircle2, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTitle, DialogDescription } from "@/components/ui/dialog";
-import { reveal } from "@/lib/motion";
+import { Reveal } from "./reveal";
 import { BeforeAfterSlider } from "./before-after-slider";
 import bodywork from "@/assets/funilaria.jpg";
 import painting from "@/assets/pintura.jpg";
@@ -101,10 +101,7 @@ export function ProjectGallery() {
   return (
     <section id="trabalho" className="section-space">
       <div className="page-width">
-        <div
-          className="flex flex-col md:flex-row gap-5 justify-between md:items-end mb-10"
-          {...reveal(0)}
-        >
+        <Reveal className="flex flex-col md:flex-row gap-5 justify-between md:items-end mb-10">
           <div>
             <p className="eyebrow mb-4">Galeria Antes & Depois</p>
             <h2 className="section-title">
@@ -122,15 +119,16 @@ export function ProjectGallery() {
               Demonstração técnica de reparo (acervo de fotos reais em preparação).
             </p>
           </div>
-        </div>
+        </Reveal>
 
         {/* Grid de 3 Cards Interativos */}
         <div className="grid md:grid-cols-3 gap-6">
           {galleryCases.map((item, i) => (
-            <article
+            <Reveal
               key={item.id}
+              as="article"
+              staggerIndex={i}
               className="group rounded-sm border border-border/80 bg-card overflow-hidden flex flex-col transition-all duration-300 hover:border-primary/50 shadow-md"
-              {...reveal(i + 1)}
             >
               {/* Slider Antes/Depois Integrado no Card */}
               <div className="relative">
@@ -182,7 +180,7 @@ export function ProjectGallery() {
                   </Button>
                 </div>
               </div>
-            </article>
+            </Reveal>
           ))}
         </div>
       </div>

@@ -19,8 +19,10 @@ export function Header() {
   return (
     <header
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-300 backdrop-blur-md border-b",
-        scrolled ? "bg-black/90 border-white/10 shadow-xl py-3" : "bg-black/40 border-white/5 py-4",
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] backdrop-blur-md border-b",
+        scrolled
+          ? "bg-black/90 border-white/10 shadow-xl py-2.5 sm:py-3"
+          : "bg-black/40 border-white/5 py-4",
       )}
     >
       <div className="page-width flex items-center justify-between">

@@ -36,6 +36,7 @@ Planejamento de evolução da presença digital da BRS Reparações Automotivas 
 - [x] Padronização das cores da seção Hero (H1, badge overline, descrição, botão primário e botão secundário) alinhadas 100% aos tokens do site (`SPEC-012`).
 - [x] Implementação de Footer Premium Minimal inspirado na referência 21st.dev com identidade BRS, canais reais e acessibilidade (`SPEC-013`).
 - [x] Refatoração multipágina com 10 rotas reais em TanStack Start, SEO técnico completo (JSON-LD Schema.org, sitemap.xml, robots.txt) e otimização para LLMs com llms.txt (`SPEC-014`).
+- [x] Sistema unificado de motion design e scroll reveal premium com tokens centrais, primitivos `<Reveal>` e `<ImageReveal>`, linha de progresso com scroll nas etapas e acessibilidade total (`SPEC-015`).
 
 ---
 

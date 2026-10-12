@@ -1,7 +1,7 @@
 import { ArrowUpRight, Phone, MapPin, Instagram } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { company } from "@/lib/brs";
-import { reveal } from "@/lib/motion";
+import { Reveal } from "./reveal";
 
 const external = { target: "_blank", rel: "noopener noreferrer" };
 
@@ -9,7 +9,7 @@ export function About() {
   return (
     <section id="sobre" className="section-space">
       <div className="page-width grid md:grid-cols-[1.1fr_1fr] gap-12 md:gap-24 items-center">
-        <div {...reveal(0)}>
+        <Reveal>
           <p className="eyebrow mb-5">BRS · Toledo / PR</p>
           <h2 className="section-title">
             Oficina técnica especializada.
@@ -38,8 +38,8 @@ export function About() {
               </a>
             </Button>
           </div>
-        </div>
-        <div className="border-l border-primary pl-8 md:pl-12 py-6" {...reveal(1)}>
+        </Reveal>
+        <Reveal delay={0.12} className="border-l border-primary pl-8 md:pl-12 py-6">
           <p className="font-display text-6xl sm:text-7xl lg:text-8xl font-semibold leading-none tracking-tight">
             BRS<span className="text-primary">.</span>
           </p>
@@ -67,7 +67,7 @@ export function About() {
               @brsreparacoes
             </a>
           </div>
-        </div>
+        </Reveal>
       </div>
     </section>
   );

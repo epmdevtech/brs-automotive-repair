@@ -54,15 +54,15 @@ Transformação completa da presença digital da **BRS Reparações Automotivas*
 
 ## 2. Verificação de Critérios de Aceitação
 
-| Critério  | Descrição                                                                               | Status   | Evidência                                                                             |
-| --------- | --------------------------------------------------------------------------------------- | -------- | ------------------------------------------------------------------------------------- |
-| AC-014-01 | As 10 rotas públicas e a 404 resolvem e carregam sem erros no TanStack Router          | Aprovado | Testado em `src/test/multipage-seo-llm.test.tsx` e build Vite/SSR                    |
-| AC-014-02 | Exatamente um Header e um Footer por rota, navegação para URLs reais sem links `href="#"`| Aprovado | Validado em `__root.tsx`, `header.test.tsx`, `minimal-footer.test.tsx`                 |
-| AC-014-03 | Metadados exclusivos (title, description, canonical, OG, Twitter) por rota               | Aprovado | Validado via `buildRouteHead` em `src/lib/seo.ts` e testes unitários                  |
-| AC-014-04 | `sitemap.xml` e `robots.txt` públicos, válidos e sincronizados                          | Aprovado | Validados em `src/test/multipage-seo-llm.test.tsx`                                    |
-| AC-014-05 | Schemas JSON-LD contextuais baseados exclusivamente em fatos comprovados                | Aprovado | Schemas validados sem inclusão de avaliações fictícias ou endereço não confirmado    |
-| AC-014-06 | `llms.txt` público em Markdown UTF-8 com sumário factual e índice de URLs                | Aprovado | Validado em `public/llms.txt` e `src/test/multipage-seo-llm.test.tsx`                 |
-| AC-014-07 | Quality gates 100% aprovados (`make check`)                                             | Aprovado | 81 testes Vitest aprovados, 0 erros ESLint, build SSR Nitro compilado com 100% êxito |
+| Critério  | Descrição                                                                                 | Status   | Evidência                                                                            |
+| --------- | ----------------------------------------------------------------------------------------- | -------- | ------------------------------------------------------------------------------------ |
+| AC-014-01 | As 10 rotas públicas e a 404 resolvem e carregam sem erros no TanStack Router             | Aprovado | Testado em `src/test/multipage-seo-llm.test.tsx` e build Vite/SSR                    |
+| AC-014-02 | Exatamente um Header e um Footer por rota, navegação para URLs reais sem links `href="#"` | Aprovado | Validado em `__root.tsx`, `header.test.tsx`, `minimal-footer.test.tsx`               |
+| AC-014-03 | Metadados exclusivos (title, description, canonical, OG, Twitter) por rota                | Aprovado | Validado via `buildRouteHead` em `src/lib/seo.ts` e testes unitários                 |
+| AC-014-04 | `sitemap.xml` e `robots.txt` públicos, válidos e sincronizados                            | Aprovado | Validados em `src/test/multipage-seo-llm.test.tsx`                                   |
+| AC-014-05 | Schemas JSON-LD contextuais baseados exclusivamente em fatos comprovados                  | Aprovado | Schemas validados sem inclusão de avaliações fictícias ou endereço não confirmado    |
+| AC-014-06 | `llms.txt` público em Markdown UTF-8 com sumário factual e índice de URLs                 | Aprovado | Validado em `public/llms.txt` e `src/test/multipage-seo-llm.test.tsx`                |
+| AC-014-07 | Quality gates 100% aprovados (`make check`)                                               | Aprovado | 81 testes Vitest aprovados, 0 erros ESLint, build SSR Nitro compilado com 100% êxito |
 
 ---
 

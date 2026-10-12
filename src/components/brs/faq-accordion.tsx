@@ -4,7 +4,7 @@ import {
   AccordionTrigger,
   AccordionContent,
 } from "@/components/ui/accordion";
-import { reveal } from "@/lib/motion";
+import { Reveal } from "./reveal";
 
 export function FAQAccordion() {
   const questions = [
@@ -41,7 +41,7 @@ export function FAQAccordion() {
   return (
     <section className="section-space border-y border-border bg-secondary/40">
       <div className="page-width grid md:grid-cols-[.8fr_1.2fr] gap-10 md:gap-20">
-        <div {...reveal(0)}>
+        <Reveal staggerIndex={0}>
           <p className="eyebrow mb-5">Dúvidas frequentes</p>
           <h2 className="section-title">
             Informação clara e direta.
@@ -52,8 +52,8 @@ export function FAQAccordion() {
             Cada veículo apresenta particularidades técnicas. Caso sua dúvida não esteja respondida
             aqui, converse diretamente com nossa equipe.
           </p>
-        </div>
-        <div {...reveal(1)}>
+        </Reveal>
+        <Reveal staggerIndex={1} delay={0.1}>
           <Accordion type="single" collapsible className="w-full">
             {questions.map(([question, answer], i) => (
               <AccordionItem value={`faq-${i}`} key={question} className="border-border">
@@ -66,7 +66,7 @@ export function FAQAccordion() {
               </AccordionItem>
             ))}
           </Accordion>
-        </div>
+        </Reveal>
       </div>
     </section>
   );

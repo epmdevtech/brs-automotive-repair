@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useReducedMotion } from "framer-motion";
 import { ChevronsLeftRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -36,6 +37,76 @@ export function BeforeAfterSlider({
   const [position, setPosition] = React.useState(Math.max(0, Math.min(100, initialPosition)));
   const [isDragging, setIsDragging] = React.useState(false);
   const containerRef = React.useRef<HTMLDivElement>(null);
+  const shouldReduceMotion = useReducedMotion() ?? false;
+  const hasInteractedRef = React.useRef(false);
+  const teaserAnimationRef = React.useRef<number | null>(null);
+
+  const cancelTeaser = React.useCallback(() => {
+    hasInteractedRef.current = true;
+    if (teaserAnimationRef.current !== null) {
+      cancelAnimationFrame(teaserAnimationRef.current);
+      teaserAnimationRef.current = null;
+    }
+  }, []);
+
+  // Convite de interação ao entrar na viewport pela primeira vez (~10% e volta)
+  React.useEffect(() => {
+    if (shouldReduceMotion || typeof IntersectionObserver === "undefined") return;
+    const element = containerRef.current;
+    if (!element) return;
+
+    let hasTriggered = false;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0];
+        if (entry?.isIntersecting && !hasTriggered && !hasInteractedRef.current) {
+          hasTriggered = true;
+          observer.disconnect();
+
+          const startPos = position;
+          const targetPos = Math.min(100, startPos + 10);
+          const startTime = performance.now();
+          const forwardDuration = 350;
+          const returnDuration = 400;
+          const totalDuration = forwardDuration + returnDuration;
+
+          const animateTeaser = (currentTime: number) => {
+            if (hasInteractedRef.current) return;
+
+            const elapsed = currentTime - startTime;
+            if (elapsed < forwardDuration) {
+              const progress = elapsed / forwardDuration;
+              const easeProgress = 1 - Math.pow(1 - progress, 2);
+              const current = startPos + (targetPos - startPos) * easeProgress;
+              setPosition(Math.round(current * 10) / 10);
+              teaserAnimationRef.current = requestAnimationFrame(animateTeaser);
+            } else if (elapsed < totalDuration) {
+              const progress = (elapsed - forwardDuration) / returnDuration;
+              const easeProgress = Math.pow(progress, 2);
+              const current = targetPos - (targetPos - startPos) * easeProgress;
+              setPosition(Math.round(current * 10) / 10);
+              teaserAnimationRef.current = requestAnimationFrame(animateTeaser);
+            } else {
+              setPosition(startPos);
+              teaserAnimationRef.current = null;
+            }
+          };
+
+          teaserAnimationRef.current = requestAnimationFrame(animateTeaser);
+        }
+      },
+      { threshold: 0.3 },
+    );
+
+    observer.observe(element);
+    return () => {
+      observer.disconnect();
+      if (teaserAnimationRef.current !== null) {
+        cancelAnimationFrame(teaserAnimationRef.current);
+      }
+    };
+  }, [shouldReduceMotion, position]);
 
   const updatePosition = React.useCallback(
     (clientX: number) => {
@@ -51,8 +122,13 @@ export function BeforeAfterSlider({
   );
 
   const handlePointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
+    cancelTeaser();
     setIsDragging(true);
-    e.currentTarget.setPointerCapture(e.pointerId);
+    try {
+      e.currentTarget.setPointerCapture(e.pointerId);
+    } catch {
+      // Ignora erro se pointer já foi capturado
+    }
     updatePosition(e.clientX);
   };
 
@@ -73,6 +149,7 @@ export function BeforeAfterSlider({
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    cancelTeaser();
     let next = position;
     if (e.key === "ArrowLeft" || e.key === "ArrowDown") {
       next = Math.max(0, position - 5);
@@ -101,7 +178,7 @@ export function BeforeAfterSlider({
     <div
       ref={containerRef}
       className={cn(
-        "relative select-none overflow-hidden rounded-sm bg-card border border-border/80 cursor-ew-resize touch-none group",
+        "relative select-none overflow-hidden rounded-sm bg-card border border-border/80 cursor-ew-resize touch-pan-y group",
         aspectRatioClassName,
         className,
       )}

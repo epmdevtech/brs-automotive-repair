@@ -1,7 +1,8 @@
 import { ArrowUpRight, Wrench, Paintbrush, Car } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { services } from "@/lib/brs";
-import { reveal } from "@/lib/motion";
+import { Reveal } from "./reveal";
+import { ImageReveal } from "./image-reveal";
 import { CardSpotlight } from "./card-spotlight";
 import bodywork from "@/assets/funilaria.jpg";
 import painting from "@/assets/pintura.jpg";
@@ -14,10 +15,7 @@ export function Services() {
   return (
     <section id="servicos" className="section-space">
       <div className="page-width">
-        <div
-          className="flex flex-col md:flex-row justify-between md:items-end gap-6 mb-12"
-          {...reveal(0)}
-        >
+        <Reveal className="flex flex-col md:flex-row justify-between md:items-end gap-6 mb-12">
           <div>
             <p className="eyebrow mb-4">Especialidades</p>
             <h2 className="section-title">
@@ -30,16 +28,16 @@ export function Services() {
             Soluções técnicas adequadas para diferentes níveis de avaria. Diagnóstico criterioso
             para cada caso com tecnologia automotiva de ponta.
           </p>
-        </div>
+        </Reveal>
 
         <div className="grid md:grid-cols-3 gap-6">
           {services.map((service, i) => {
             const Icon = serviceIcons[i];
             return (
-              <div key={service.title} {...reveal(i + 1)}>
+              <Reveal key={service.title} staggerIndex={i} className="h-full">
                 <CardSpotlight className="flex flex-col h-full bg-card/95 group shadow-lg">
-                  {/* Imagem do Serviço com Zoom Sutil */}
-                  <div className="overflow-hidden relative aspect-16/10">
+                  {/* Imagem do Serviço com Mask Reveal de baixo para cima */}
+                  <ImageReveal delay={0.1 + i * 0.08} className="relative aspect-16/10">
                     <img
                       src={serviceImages[i]}
                       alt={`${service.title} (fotografia ilustrativa da atividade)`}
@@ -52,15 +50,17 @@ export function Services() {
                     <span className="absolute bottom-3 right-3 text-[8px] uppercase tracking-wider px-2 py-1 bg-background/85 text-muted-foreground border border-border/50 backdrop-blur-xs rounded-xs">
                       Fotografia ilustrativa
                     </span>
-                  </div>
+                  </ImageReveal>
 
                   {/* Conteúdo com Microinterações */}
                   <div className="p-6 flex flex-col flex-1 justify-between">
                     <div>
                       <div className="flex justify-between items-center mb-5">
-                        <span className="text-[10px] font-semibold text-primary tracking-widest uppercase">
-                          0{i + 1} / ESPECIALIDADE
-                        </span>
+                        <Reveal delay={0.05} yOffset={8}>
+                          <span className="text-[10px] font-semibold text-primary tracking-widest uppercase">
+                            0{i + 1} / ESPECIALIDADE
+                          </span>
+                        </Reveal>
                         {Icon && (
                           <div
                             className="size-9 rounded-sm bg-background/90 border border-border/70 flex items-center justify-center text-primary transition-all duration-300 group-hover:-translate-y-1 group-hover:border-primary/60 group-hover:bg-primary/10 shadow-xs"
@@ -100,7 +100,7 @@ export function Services() {
                     </div>
                   </div>
                 </CardSpotlight>
-              </div>
+              </Reveal>
             );
           })}
         </div>

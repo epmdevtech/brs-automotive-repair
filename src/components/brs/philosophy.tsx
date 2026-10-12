@@ -1,4 +1,5 @@
-import { reveal } from "@/lib/motion";
+import * as React from "react";
+import { Reveal } from "./reveal";
 
 export function Philosophy() {
   const pillars = [
@@ -19,7 +20,7 @@ export function Philosophy() {
   return (
     <section className="section-space border-y border-border bg-secondary/40">
       <div className="page-width grid md:grid-cols-2 gap-12 md:gap-24">
-        <div {...reveal(0)}>
+        <Reveal staggerIndex={0}>
           <p className="eyebrow mb-5">Padrão de execução</p>
           <h2 className="section-title">
             Critério técnico e
@@ -34,18 +35,20 @@ export function Philosophy() {
           <p className="text-[10px] text-muted-foreground mt-5">
             Princípios que norteiam cada veículo atendido na oficina.
           </p>
-        </div>
-        <div {...reveal(1)}>
+        </Reveal>
+        <div data-reveal="" style={{ "--i": 1 } as React.CSSProperties} className="space-y-6">
           {pillars.map(([title, description], i) => (
-            <div className="pillar" key={title}>
-              <span className="pillar-number">0{i + 1}</span>
+            <Reveal key={title} staggerIndex={i} className="pillar">
+              <Reveal delay={0.04} yOffset={10}>
+                <span className="pillar-number">0{i + 1}</span>
+              </Reveal>
               <div>
                 <h3 className="text-xl md:text-2xl font-semibold font-display tracking-tight text-foreground mb-2 text-balance">
                   {title}
                 </h3>
                 <p className="body-copy text-xs text-pretty">{description}</p>
               </div>
-            </div>
+            </Reveal>
           ))}
         </div>
       </div>
