@@ -26,12 +26,18 @@ export function About() {
             seguros estruturando atendimentos para seus segurados, estamos à disposição para uma
             conversa profissional.
           </p>
-          <Button variant="editorial" asChild className="mt-5 text-xs font-semibold">
-            <a href={company.instagram} {...external}>
-              Acompanhar a BRS no Instagram{" "}
-              <ArrowUpRight className="ml-1" size={13} aria-hidden="true" />
-            </a>
-          </Button>
+          <div className="flex flex-wrap gap-3 mt-5">
+            <Button variant="automotive" asChild className="text-xs font-semibold">
+              <a href="/sobre">
+                Conhecer a BRS <ArrowUpRight className="ml-1" size={13} aria-hidden="true" />
+              </a>
+            </Button>
+            <Button variant="editorial" asChild className="text-xs font-semibold">
+              <a href={company.instagram} {...external}>
+                Instagram oficial <ArrowUpRight className="ml-1" size={13} aria-hidden="true" />
+              </a>
+            </Button>
+          </div>
         </div>
         <div className="border-l border-primary pl-8 md:pl-12 py-6" {...reveal(1)}>
           <p className="font-display text-6xl sm:text-7xl lg:text-8xl font-semibold leading-none tracking-tight">

@@ -1,6 +1,6 @@
 export function Brand() {
   return (
-    <a href="#inicio" aria-label="BRS Reparações Automotivas: início" className="brand">
+    <a href="/" aria-label="BRS Reparações Automotivas: início" className="brand">
       <strong>
         BRS<span className="sr-only"> Reparações Automotivas</span>
       </strong>

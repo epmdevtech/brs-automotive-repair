@@ -75,3 +75,8 @@ O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.
 - Validação e restrição a canais de contato reais (Instagram oficial `@brsreparacoes` e telefone fixo `(45) 2035-9440`), âncoras válidas existentes, ano de copyright dinâmico e aviso de conformidade de imagem ilustrativa.
 - Nova suíte de testes unitários [`src/test/minimal-footer.test.tsx`](src/test/minimal-footer.test.tsx) validando os 6 critérios de aceitação.
 - Especificação `SPEC-013`, tarefa `TASK-013-01` e revisão `REVIEW-013`.
+- Refatoração da arquitetura para site multipágina com 10 rotas reais em TanStack Start (`/`, `/servicos/`, `/servicos/funilaria`, `/servicos/pintura-automotiva`, `/servicos/martelinho-de-ouro`, `/trabalhos`, `/para-corretores`, `/sobre`, `/contato`, `/privacidade` e `/404`) preservando layout único e navegação suave no root (`SPEC-014`).
+- Módulo centralizador de SEO técnico e Schema.org JSON-LD (`src/lib/seo.ts`) com esquemas canônicos estruturados (`AutoBodyShop`, `Service`, `BreadcrumbList`, `WebPage`).
+- Criação dos arquivos canônicos `public/sitemap.xml`, `public/robots.txt` e `public/llms.txt` otimizados para motores de busca e agentes LLM com avisos de conformidade fotográfica.
+- Suíte completa de testes unitários e de integração [`src/test/multipage-seo-llm.test.tsx`](src/test/multipage-seo-llm.test.tsx).
+- Especificação `SPEC-014`, tarefa `TASK-014-01` e revisão `REVIEW-014`.

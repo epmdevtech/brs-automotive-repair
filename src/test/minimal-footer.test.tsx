@@ -20,7 +20,7 @@ describe("SPEC-013 — MinimalFooter Premium BRS", () => {
     expect(screen.getByText(/Toledo, Paraná/i)).toBeInTheDocument();
   });
 
-  it("renderiza todos os links de navegação com âncoras reais da página", () => {
+  it("renderiza todos os links de navegação com as rotas canônicas da página", () => {
     render(<MinimalFooter />);
     const nav = screen.getByRole("navigation", { name: "Navegação do rodapé" });
     expect(nav).toBeInTheDocument();
@@ -28,12 +28,12 @@ describe("SPEC-013 — MinimalFooter Premium BRS", () => {
     const links = nav.querySelectorAll("a");
     const hrefs = Array.from(links).map((l) => l.getAttribute("href"));
 
-    expect(hrefs).toContain("#inicio");
-    expect(hrefs).toContain("#servicos");
-    expect(hrefs).toContain("#trabalho");
-    expect(hrefs).toContain("#corretores");
-    expect(hrefs).toContain("#sobre");
-    expect(hrefs).toContain("#contato");
+    expect(hrefs).toContain("/");
+    expect(hrefs).toContain("/servicos");
+    expect(hrefs).toContain("/trabalhos");
+    expect(hrefs).toContain("/para-corretores");
+    expect(hrefs).toContain("/sobre");
+    expect(hrefs).toContain("/contato");
   });
 
   it("disponibiliza links oficiais confirmados de telefone e Instagram, sem redes sociais falsas", () => {

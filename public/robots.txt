@@ -1,14 +1,31 @@
+# Robots.txt — BRS Reparações Automotivas
+# Rastreamento público permitido para indexação web e busca por IA
+
 User-agent: Googlebot
 Allow: /
 
 User-agent: Bingbot
 Allow: /
 
+# Rastreamento para mecanismos de busca por IA
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+# Compartilhamento e pré-visualização social
 User-agent: Twitterbot
 Allow: /
 
 User-agent: facebookexternalhit
 Allow: /
 
+# Padrão para todos os demais agentes
 User-agent: *
 Allow: /
+
+Sitemap: http://brs.localhost/sitemap.xml

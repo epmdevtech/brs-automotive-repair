@@ -41,13 +41,21 @@ export function Hero() {
         }
         ctaButton={{
           text: "Solicitar avaliação",
-          href: "#contato",
-          onClick: () => handleScrollTo("contato"),
+          href: "/contato",
+          onClick: () => {
+            if (window.location.pathname === "/") {
+              handleScrollTo("contato");
+            }
+          },
         }}
         secondaryCta={{
           text: "Conhecer os serviços",
-          href: "#servicos",
-          onClick: () => handleScrollTo("servicos"),
+          href: "/servicos",
+          onClick: () => {
+            if (window.location.pathname === "/") {
+              handleScrollTo("servicos");
+            }
+          },
         }}
         bottomContent={
           <div className="page-width flex items-center justify-between text-xs text-neutral-400 pt-3 border-t border-white/10">
@@ -55,9 +63,8 @@ export function Hero() {
               <MapPin size={14} className="text-primary" aria-hidden="true" /> Toledo, Paraná
             </span>
             <a
-              href="#servicos"
-              onClick={() => handleScrollTo("servicos")}
-              aria-label="Rolar para a seção de serviços"
+              href="/servicos"
+              aria-label="Conhecer a página de serviços da BRS"
               className="hidden sm:flex items-center gap-2 text-[10px] uppercase tracking-[2px] text-neutral-300 hover:text-white transition-colors font-medium"
             >
               Conheça a BRS <ArrowDown size={14} aria-hidden="true" />

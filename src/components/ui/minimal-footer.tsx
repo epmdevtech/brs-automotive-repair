@@ -64,7 +64,7 @@ export function MinimalFooter({ className }: MinimalFooterProps) {
               {services.map((service) => (
                 <li key={service.title}>
                   <a
-                    href="#servicos"
+                    href={service.path}
                     className="hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary rounded-xs"
                   >
                     {service.short}
@@ -73,7 +73,7 @@ export function MinimalFooter({ className }: MinimalFooterProps) {
               ))}
               <li>
                 <a
-                  href="#sobre"
+                  href="/sobre"
                   className="hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary rounded-xs"
                 >
                   Serviço Leva e Traz
@@ -114,7 +114,7 @@ export function MinimalFooter({ className }: MinimalFooterProps) {
                   asChild
                   className="w-full sm:w-auto h-9 text-xs px-4 font-semibold tracking-wide bg-primary text-primary-foreground hover:bg-primary/90 active:scale-[0.98] transition-all"
                 >
-                  <a href="#contato">
+                  <a href="/contato">
                     Solicitar avaliação{" "}
                     <ArrowUpRight className="ml-1 size-3.5" aria-hidden="true" />
                   </a>
@@ -125,10 +125,18 @@ export function MinimalFooter({ className }: MinimalFooterProps) {
         </div>
       </div>
 
-      {/* Faixa inferior: Copyright & Transparência Editorial */}
+      {/* Faixa inferior: Copyright, Privacidade & Transparência Editorial */}
       <div className="border-t border-border/60 bg-secondary/20">
         <div className="page-width py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-[10px] text-muted-foreground leading-relaxed">
-          <span>© {currentYear} BRS Reparações Automotivas. Todos os direitos reservados.</span>
+          <div className="flex flex-wrap items-center gap-4">
+            <span>© {currentYear} BRS Reparações Automotivas. Todos os direitos reservados.</span>
+            <a
+              href="/privacidade"
+              className="hover:text-primary transition-colors underline-offset-4 hover:underline"
+            >
+              Privacidade
+            </a>
+          </div>
           <span className="text-neutral-500">
             Demonstração institucional oficial · Fotografias ilustrativas temporárias.
           </span>

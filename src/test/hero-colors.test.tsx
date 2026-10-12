@@ -50,8 +50,8 @@ describe("SPEC-012 — Padronização de Cores da Seção Hero e Sincronia com N
     const { container: headerContainer } = render(<Header />);
 
     // Filtra especificamente os botões de ação 'Solicitar avaliação'
-    const heroCta = heroContainer.querySelector("a[href='#contato']");
-    const headerCta = headerContainer.querySelector("a.bg-primary[href='#contato']");
+    const heroCta = heroContainer.querySelector("a[href='/contato']");
+    const headerCta = headerContainer.querySelector("a.bg-primary[href='/contato']");
 
     expect(heroCta).not.toBeNull();
     expect(headerCta).not.toBeNull();
@@ -68,7 +68,7 @@ describe("SPEC-012 — Padronização de Cores da Seção Hero e Sincronia com N
 
   it("renderiza o botão secundário da Hero com o padrão dark do site", () => {
     const { container } = render(<Hero />);
-    const secondaryBtn = container.querySelector("a[href='#servicos']");
+    const secondaryBtn = container.querySelector("a[href='/servicos']");
 
     expect(secondaryBtn).not.toBeNull();
     expect(secondaryBtn?.className).toContain("border-neutral-800");

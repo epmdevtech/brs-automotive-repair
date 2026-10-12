@@ -37,21 +37,44 @@ import { FinalCTA } from "./final-cta";
 import { Footer } from "./footer";
 import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 
-export function Website() {
+export function HomePageContent() {
   const [partner, setPartner] = useState(false);
   useScrollReveal();
 
   const handlePartnerContact = () => {
     setPartner(true);
     document.getElementById("contato")?.scrollIntoView({
-      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+      behavior:
+        typeof window !== "undefined" &&
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches
+          ? "auto"
+          : "smooth",
     });
   };
 
   return (
     <>
+      <Hero />
+      <MediaExpand />
+      <Services />
+      <Philosophy />
+      <ProjectGallery />
+      <ProcessTimeline />
+      <PartnerSection onPartner={handlePartnerContact} />
+      <Pickup />
+      <About />
+      <FAQAccordion />
+      <Contact partner={partner} />
+      <FinalCTA />
+    </>
+  );
+}
+
+export function Website() {
+  return (
+    <>
       <a
-        href="#servicos"
+        href="#conteudo-principal"
         className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 bg-primary text-primary-foreground p-3 font-medium text-xs rounded-sm"
       >
         Pular para o conteúdo principal
@@ -60,18 +83,7 @@ export function Website() {
       <Header />
 
       <main id="conteudo-principal">
-        <Hero />
-        <MediaExpand />
-        <Services />
-        <Philosophy />
-        <ProjectGallery />
-        <ProcessTimeline />
-        <PartnerSection onPartner={handlePartnerContact} />
-        <Pickup />
-        <About />
-        <FAQAccordion />
-        <Contact partner={partner} />
-        <FinalCTA />
+        <HomePageContent />
       </main>
 
       <Footer />

@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { reveal } from "@/lib/motion";
 import bodywork from "@/assets/funilaria.jpg";
 
-export function PartnerSection({ onPartner }: { onPartner: () => void }) {
+export function PartnerSection({ onPartner }: { onPartner?: () => void }) {
   return (
     <section id="corretores" className="section-space">
       <div className="page-width grid md:grid-cols-2 gap-12 md:gap-20 items-center">
@@ -51,13 +51,23 @@ export function PartnerSection({ onPartner }: { onPartner: () => void }) {
               </li>
             ))}
           </ul>
-          <Button
-            variant="automotive"
-            className="h-12 px-6 text-xs font-semibold"
-            onClick={onPartner}
-          >
-            Conversar sobre parceria <ArrowUpRight className="ml-1" size={14} aria-hidden="true" />
-          </Button>
+          <div className="flex flex-wrap gap-3.5">
+            <Button variant="automotive" asChild className="h-11 px-5 text-xs font-semibold">
+              <a href="/para-corretores">
+                Conhecer atendimento para corretores{" "}
+                <ArrowUpRight className="ml-1" size={14} aria-hidden="true" />
+              </a>
+            </Button>
+            {onPartner && (
+              <Button
+                variant="automotiveOutline"
+                className="h-11 px-5 text-xs font-semibold"
+                onClick={onPartner}
+              >
+                Iniciar contato direto
+              </Button>
+            )}
+          </div>
         </div>
       </div>
     </section>

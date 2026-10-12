@@ -42,7 +42,7 @@ export function Header() {
             asChild
             className="hidden sm:inline-flex h-9 text-xs px-5 font-semibold tracking-wide bg-primary text-primary-foreground hover:bg-primary/90 active:scale-[0.98] transition-all shadow-md shadow-primary/10"
           >
-            <a href="#contato">
+            <a href="/contato">
               Solicitar avaliação <ArrowUpRight className="ml-1" size={14} aria-hidden="true" />
             </a>
           </Button>
@@ -80,7 +80,7 @@ export function Header() {
             asChild
             className="bg-primary text-primary-foreground font-semibold text-xs tracking-wide hover:bg-primary/90"
           >
-            <a href="#contato" onClick={() => setOpen(false)}>
+            <a href="/contato" onClick={() => setOpen(false)}>
               Solicitar avaliação <ArrowUpRight className="ml-1" size={14} aria-hidden="true" />
             </a>
           </Button>

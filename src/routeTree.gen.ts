@@ -10,33 +10,169 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as R404RouteImport } from './routes/404'
+import { Route as ContatoRouteImport } from './routes/contato'
+import { Route as ParaCorretoresRouteImport } from './routes/para-corretores'
+import { Route as PrivacidadeRouteImport } from './routes/privacidade'
+import { Route as SobreRouteImport } from './routes/sobre'
+import { Route as TrabalhosRouteImport } from './routes/trabalhos'
+import { Route as ServicosIndexRouteImport } from './routes/servicos/index'
+import { Route as ServicosFunilariaRouteImport } from './routes/servicos/funilaria'
+import { Route as ServicosMartelinhoDeOuroRouteImport } from './routes/servicos/martelinho-de-ouro'
+import { Route as ServicosPinturaAutomotivaRouteImport } from './routes/servicos/pintura-automotiva'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const R404Route = R404RouteImport.update({
+  id: '/404',
+  path: '/404',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContatoRoute = ContatoRouteImport.update({
+  id: '/contato',
+  path: '/contato',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ParaCorretoresRoute = ParaCorretoresRouteImport.update({
+  id: '/para-corretores',
+  path: '/para-corretores',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacidadeRoute = PrivacidadeRouteImport.update({
+  id: '/privacidade',
+  path: '/privacidade',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SobreRoute = SobreRouteImport.update({
+  id: '/sobre',
+  path: '/sobre',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TrabalhosRoute = TrabalhosRouteImport.update({
+  id: '/trabalhos',
+  path: '/trabalhos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicosIndexRoute = ServicosIndexRouteImport.update({
+  id: '/servicos/',
+  path: '/servicos/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicosFunilariaRoute = ServicosFunilariaRouteImport.update({
+  id: '/servicos/funilaria',
+  path: '/servicos/funilaria',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicosMartelinhoDeOuroRoute =
+  ServicosMartelinhoDeOuroRouteImport.update({
+    id: '/servicos/martelinho-de-ouro',
+    path: '/servicos/martelinho-de-ouro',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ServicosPinturaAutomotivaRoute =
+  ServicosPinturaAutomotivaRouteImport.update({
+    id: '/servicos/pintura-automotiva',
+    path: '/servicos/pintura-automotiva',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/404': typeof R404Route
+  '/contato': typeof ContatoRoute
+  '/para-corretores': typeof ParaCorretoresRoute
+  '/privacidade': typeof PrivacidadeRoute
+  '/sobre': typeof SobreRoute
+  '/trabalhos': typeof TrabalhosRoute
+  '/servicos/funilaria': typeof ServicosFunilariaRoute
+  '/servicos/martelinho-de-ouro': typeof ServicosMartelinhoDeOuroRoute
+  '/servicos/pintura-automotiva': typeof ServicosPinturaAutomotivaRoute
+  '/servicos/': typeof ServicosIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/404': typeof R404Route
+  '/contato': typeof ContatoRoute
+  '/para-corretores': typeof ParaCorretoresRoute
+  '/privacidade': typeof PrivacidadeRoute
+  '/sobre': typeof SobreRoute
+  '/trabalhos': typeof TrabalhosRoute
+  '/servicos/funilaria': typeof ServicosFunilariaRoute
+  '/servicos/martelinho-de-ouro': typeof ServicosMartelinhoDeOuroRoute
+  '/servicos/pintura-automotiva': typeof ServicosPinturaAutomotivaRoute
+  '/servicos': typeof ServicosIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/404': typeof R404Route
+  '/contato': typeof ContatoRoute
+  '/para-corretores': typeof ParaCorretoresRoute
+  '/privacidade': typeof PrivacidadeRoute
+  '/sobre': typeof SobreRoute
+  '/trabalhos': typeof TrabalhosRoute
+  '/servicos/funilaria': typeof ServicosFunilariaRoute
+  '/servicos/martelinho-de-ouro': typeof ServicosMartelinhoDeOuroRoute
+  '/servicos/pintura-automotiva': typeof ServicosPinturaAutomotivaRoute
+  '/servicos/': typeof ServicosIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/404'
+    | '/contato'
+    | '/para-corretores'
+    | '/privacidade'
+    | '/sobre'
+    | '/trabalhos'
+    | '/servicos/funilaria'
+    | '/servicos/martelinho-de-ouro'
+    | '/servicos/pintura-automotiva'
+    | '/servicos/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/404'
+    | '/contato'
+    | '/para-corretores'
+    | '/privacidade'
+    | '/sobre'
+    | '/trabalhos'
+    | '/servicos/funilaria'
+    | '/servicos/martelinho-de-ouro'
+    | '/servicos/pintura-automotiva'
+    | '/servicos'
+  id:
+    | '__root__'
+    | '/'
+    | '/404'
+    | '/contato'
+    | '/para-corretores'
+    | '/privacidade'
+    | '/sobre'
+    | '/trabalhos'
+    | '/servicos/funilaria'
+    | '/servicos/martelinho-de-ouro'
+    | '/servicos/pintura-automotiva'
+    | '/servicos/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  R404Route: typeof R404Route
+  ContatoRoute: typeof ContatoRoute
+  ParaCorretoresRoute: typeof ParaCorretoresRoute
+  PrivacidadeRoute: typeof PrivacidadeRoute
+  SobreRoute: typeof SobreRoute
+  TrabalhosRoute: typeof TrabalhosRoute
+  ServicosFunilariaRoute: typeof ServicosFunilariaRoute
+  ServicosMartelinhoDeOuroRoute: typeof ServicosMartelinhoDeOuroRoute
+  ServicosPinturaAutomotivaRoute: typeof ServicosPinturaAutomotivaRoute
+  ServicosIndexRoute: typeof ServicosIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +184,91 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/404': {
+      id: '/404'
+      path: '/404'
+      fullPath: '/404'
+      preLoaderRoute: typeof R404RouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contato': {
+      id: '/contato'
+      path: '/contato'
+      fullPath: '/contato'
+      preLoaderRoute: typeof ContatoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/para-corretores': {
+      id: '/para-corretores'
+      path: '/para-corretores'
+      fullPath: '/para-corretores'
+      preLoaderRoute: typeof ParaCorretoresRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacidade': {
+      id: '/privacidade'
+      path: '/privacidade'
+      fullPath: '/privacidade'
+      preLoaderRoute: typeof PrivacidadeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sobre': {
+      id: '/sobre'
+      path: '/sobre'
+      fullPath: '/sobre'
+      preLoaderRoute: typeof SobreRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/trabalhos': {
+      id: '/trabalhos'
+      path: '/trabalhos'
+      fullPath: '/trabalhos'
+      preLoaderRoute: typeof TrabalhosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/servicos/': {
+      id: '/servicos/'
+      path: '/servicos'
+      fullPath: '/servicos/'
+      preLoaderRoute: typeof ServicosIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/servicos/funilaria': {
+      id: '/servicos/funilaria'
+      path: '/servicos/funilaria'
+      fullPath: '/servicos/funilaria'
+      preLoaderRoute: typeof ServicosFunilariaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/servicos/martelinho-de-ouro': {
+      id: '/servicos/martelinho-de-ouro'
+      path: '/servicos/martelinho-de-ouro'
+      fullPath: '/servicos/martelinho-de-ouro'
+      preLoaderRoute: typeof ServicosMartelinhoDeOuroRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/servicos/pintura-automotiva': {
+      id: '/servicos/pintura-automotiva'
+      path: '/servicos/pintura-automotiva'
+      fullPath: '/servicos/pintura-automotiva'
+      preLoaderRoute: typeof ServicosPinturaAutomotivaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  R404Route: R404Route,
+  ContatoRoute: ContatoRoute,
+  ParaCorretoresRoute: ParaCorretoresRoute,
+  PrivacidadeRoute: PrivacidadeRoute,
+  SobreRoute: SobreRoute,
+  TrabalhosRoute: TrabalhosRoute,
+  ServicosFunilariaRoute: ServicosFunilariaRoute,
+  ServicosMartelinhoDeOuroRoute: ServicosMartelinhoDeOuroRoute,
+  ServicosPinturaAutomotivaRoute: ServicosPinturaAutomotivaRoute,
+  ServicosIndexRoute: ServicosIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

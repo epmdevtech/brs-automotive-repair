@@ -71,8 +71,10 @@ export function Services() {
                         )}
                       </div>
 
-                      <h3 className="text-xl md:text-2xl font-semibold font-display tracking-tight text-foreground mb-3 transition-colors duration-200 group-hover:text-primary leading-snug text-balance">
-                        {service.title}
+                      <h3 className="text-xl md:text-2xl font-semibold font-display tracking-tight text-foreground mb-3 leading-snug text-balance">
+                        <a href={service.path} className="hover:text-primary transition-colors">
+                          {service.title}
+                        </a>
                       </h3>
                       <p className="text-xs text-muted-foreground leading-relaxed min-h-[70px] text-pretty">
                         {service.description}
@@ -86,7 +88,7 @@ export function Services() {
                         asChild
                         className="text-xs h-10 w-full justify-between font-semibold active:scale-[0.98] transition-all duration-200 hover:border-primary/60 hover:bg-primary/15 group-hover:border-primary/40 focus-visible:ring-2 focus-visible:ring-primary shadow-xs"
                       >
-                        <a href="#contato">
+                        <a href="/contato">
                           Solicitar avaliação{" "}
                           <ArrowUpRight
                             size={14}

@@ -84,11 +84,11 @@ describe("Website motion layer", () => {
 
     const evaluation = screen.getAllByRole("link", { name: /Solicitar avaliação/ });
     expect(evaluation.length).toBeGreaterThan(1);
-    evaluation.forEach((link) => expect(link).toHaveAttribute("href", "#contato"));
+    evaluation.forEach((link) => expect(link).toHaveAttribute("href", "/contato"));
 
     expect(screen.getByRole("link", { name: /Conhecer os serviços/ })).toHaveAttribute(
       "href",
-      "#servicos",
+      "/servicos",
     );
   });
 

@@ -187,6 +187,7 @@ Todas as entregas obedecem ao protocolo **Universal SDD**:
 - `SPEC-011` / `TASK-011-01` / `REVIEW-011`: Substituição do Favicon Lovable pelo Pacote Oficial de Favicons e Ícones da BRS Reparações Automotivas.
 - `SPEC-012` / `TASK-012-01` / `REVIEW-012`: Padronização Rigorosa das Cores de Tipografia e Botões da Seção Hero Alinhadas aos Tokens do Projeto.
 - `SPEC-013` / `TASK-013-01` / `REVIEW-013`: Implementação de Footer Premium Minimal Inspirado no 21st.dev com Identidade BRS, Canais Reais e Acessibilidade.
+- `SPEC-014` / `TASK-014-01` / `REVIEW-014`: Refatoração Multipágina em TanStack Start, SEO Técnico Canônico e Otimização para LLMs com llms.txt.
 
 ---
 

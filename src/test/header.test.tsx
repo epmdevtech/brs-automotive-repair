@@ -9,8 +9,8 @@ describe("Header component and single navbar layout", () => {
 
     expect(screen.getByRole("banner")).toBeInTheDocument();
     expect(screen.getByText("BRS")).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: "Início" })).toHaveAttribute("href", "#inicio");
-    expect(screen.getByRole("link", { name: "Serviços" })).toHaveAttribute("href", "#servicos");
+    expect(screen.getByRole("link", { name: "Início" })).toHaveAttribute("href", "/");
+    expect(screen.getByRole("link", { name: "Serviços" })).toHaveAttribute("href", "/servicos");
   });
 
   it("toggles the responsive mobile navigation on hamburger click", () => {

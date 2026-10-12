@@ -28,7 +28,7 @@ export function FinalCTA() {
         </p>
         <div className="flex flex-wrap gap-3 justify-center mt-7">
           <Button variant="automotive" asChild className="h-12 px-6 text-xs font-semibold">
-            <a href="#contato">
+            <a href="/contato">
               Solicitar avaliação <ArrowUpRight className="ml-1" size={14} aria-hidden="true" />
             </a>
           </Button>
