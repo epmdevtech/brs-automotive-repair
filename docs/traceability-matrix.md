@@ -26,8 +26,8 @@ f496606` feat(hero-cleanup): expurgar vínculos com Lovable, unificar header e r
 849ec29` feat(typography): refinar sistema tipográfico com Sora e Manrope | [REVIEW-009-refinamento-sistema-tipografico-sora-manrope.md](../reviews/REVIEW-009-refinamento-sistema-tipografico-sora-manrope.md) (Approved) |
 | [SPEC-010](../specs/SPEC-010-scroll-reveal-premium.md) | Implemented | [TASK-010-01](../tasks/TASK-010-01-scroll-reveal-premium.md) (Done) | `
 f4bbb59` feat(motion): auditoria e implementacao de scroll reveal premium (SPEC-010) | [REVIEW-010-scroll-reveal-premium.md](../reviews/REVIEW-010-scroll-reveal-premium.md) (Approved) |
-| [SPEC-011](../specs/SPEC-011-substituicao-favicon-icone-brs.md) | Implemented | [TASK-011-01](../tasks/TASK-011-01-substituicao-favicon-icone-brs.md) (Done) | — | [REVIEW-011-substituicao-favicon-icone-brs.md](../reviews/REVIEW-011-substituicao-favicon-icone-brs.md) (Approved) |
+| [SPEC-011](../specs/SPEC-011-substituicao-favicon-icone-brs.md) | Implemented | [TASK-011-01](../tasks/TASK-011-01-substituicao-favicon-icone-brs.md) (Done) | `2276fabc` feat(branding): substituir favicon Lovable por pacote oficial BRS Reparações Automotivas (SPEC-011) | [REVIEW-011-substituicao-favicon-icone-brs.md](../reviews/REVIEW-011-substituicao-favicon-icone-brs.md) (Approved) |
 
 ## Lacunas de rastreabilidade (Traceability gaps)
 
-- `TASK-011-01` não possui commit com `Task-Ref: TASK-011-01`.
+- Nenhuma detectada nos artefatos verificados.
