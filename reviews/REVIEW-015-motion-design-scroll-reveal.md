@@ -2,14 +2,14 @@
 
 ## Metadados
 
-| Campo           | Valor                                                                                                    |
-| --------------- | -------------------------------------------------------------------------------------------------------- |
-| ID              | REVIEW-015                                                                                               |
-| SPEC            | SPEC-015                                                                                                 |
-| Tarefa          | TASK-015-01                                                                                              |
-| Data da Revisão | 2026-10-11                                                                                               |
-| Revisor         | Engenharia Frontend EPMDEVTECH & Antigravity AI                                                          |
-| Status          | Approved ✅                                                                                              |
+| Campo           | Valor                                           |
+| --------------- | ----------------------------------------------- |
+| ID              | REVIEW-015                                      |
+| SPEC            | SPEC-015                                        |
+| Tarefa          | TASK-015-01                                     |
+| Data da Revisão | 2026-10-11                                      |
+| Revisor         | Engenharia Frontend EPMDEVTECH & Antigravity AI |
+| Status          | Approved ✅                                     |
 
 ---
 

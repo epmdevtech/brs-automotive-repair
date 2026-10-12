@@ -89,3 +89,10 @@ O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.
 - Suporte global a acessibilidade com `<MotionConfig reducedMotion="user">` no layout raiz e degradação suave sem layout shift.
 - Nova suíte de testes unitários [`src/test/motion-system.test.tsx`](src/test/motion-system.test.tsx) validando os 10 critérios de aceitação.
 - Especificação `SPEC-015`, tarefa `TASK-015-01` e revisão `REVIEW-015`.
+- Refinamento visual da Navbar (`Header` em `src/components/brs/header.tsx`) para formato de cápsula flutuante centralizada (`max-w-6xl`, `rounded-full`, espaçamento superior `top-3 sm:top-5`) com vidro escuro translúcido (`bg-neutral-950/75`, `backdrop-blur-md`, `border border-white/10`, `shadow-2xl shadow-black/40`) (`SPEC-016`).
+- Transição suave na rolagem da página para dimensões compactas (`py-2 px-5 sm:px-6`) e maior opacidade (`bg-neutral-950/90`).
+- Refinamento do botão de ação principal (CTA "Solicitar avaliação") com cantos `rounded-full`, brilho sutil dourado no hover (`hover:shadow-[0_0_18px_rgba(212,175,55,0.22)]`) e foco acessível por teclado.
+- Painel mobile redesenhado em estilo flutuante escuro (`rounded-2xl`, `bg-neutral-950/95`, `backdrop-blur-lg`, `border-white/10 mt-2`).
+- Atualização e expansão da suíte de testes unitários [`src/test/header.test.tsx`](src/test/header.test.tsx) cobrindo classes de cápsula flutuante, botão CTA e unicidade do header.
+- Especificação `SPEC-016`, tarefa `TASK-016-01` e revisão `REVIEW-016`.
+
