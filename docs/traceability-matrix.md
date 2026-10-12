@@ -30,8 +30,8 @@ f4bbb59` feat(motion): auditoria e implementacao de scroll reveal premium (SPEC-
 2276fab` feat(branding): substituir favicon Lovable por pacote oficial BRS Reparações Automotivas (SPEC-011) | [REVIEW-011-substituicao-favicon-icone-brs.md](../reviews/REVIEW-011-substituicao-favicon-icone-brs.md) (Approved) |
 | [SPEC-012](../specs/SPEC-012-padronizacao-cores-hero.md) | Implemented | [TASK-012-01](../tasks/TASK-012-01-padronizacao-cores-hero.md) (Done) | `
 a66ffff` feat(hero-colors): padronizar cores de tipografia e botoes da secao Hero (SPEC-012) | [REVIEW-012-padronizacao-cores-hero.md](../reviews/REVIEW-012-padronizacao-cores-hero.md) (Approved) |
-| [SPEC-013](../specs/SPEC-013-footer-premium-minimal.md) | Implemented | [TASK-013-01](../tasks/TASK-013-01-footer-premium-minimal.md) (Done) | — | [REVIEW-013-footer-premium-minimal.md](../reviews/REVIEW-013-footer-premium-minimal.md) (Approved) |
+| [SPEC-013](../specs/SPEC-013-footer-premium-minimal.md) | Implemented | [TASK-013-01](../tasks/TASK-013-01-footer-premium-minimal.md) (Done) | `27cef24d` feat(footer): implementar Footer Premium Minimal inspirado no 21st.dev | [REVIEW-013-footer-premium-minimal.md](../reviews/REVIEW-013-footer-premium-minimal.md) (Approved) |
 
 ## Lacunas de rastreabilidade (Traceability gaps)
 
-- `TASK-013-01` não possui commit com `Task-Ref: TASK-013-01`.
+- Nenhuma detectada nos artefatos verificados.
