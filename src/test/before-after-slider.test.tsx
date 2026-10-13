@@ -51,20 +51,40 @@ describe("BeforeAfterSlider component", () => {
     fireEvent.keyDown(slider, { key: "End" });
     expect(slider).toHaveAttribute("aria-valuenow", "100");
     expect(onPositionChange).toHaveBeenCalledWith(100);
+
+    // PageDown diminui em 10 (100 -> 90)
+    fireEvent.keyDown(slider, { key: "PageDown" });
+    expect(slider).toHaveAttribute("aria-valuenow", "90");
+    expect(onPositionChange).toHaveBeenCalledWith(90);
+
+    // PageUp aumenta em 10 (90 -> 100)
+    fireEvent.keyDown(slider, { key: "PageUp" });
+    expect(slider).toHaveAttribute("aria-valuenow", "100");
+    expect(onPositionChange).toHaveBeenCalledWith(100);
   });
 
-  it("renders custom labels and handles clamping", () => {
+  it("renders custom labels, hint text and handles clamping", () => {
     render(
       <BeforeAfterSlider
         {...defaultProps}
         beforeLabel="Avaria"
         afterLabel="Restauração"
         initialPosition={150} // Deve ser clampado para 100
+        hint="Arraste para inspecionar"
       />,
     );
 
     expect(screen.getByText("Avaria")).toBeInTheDocument();
     expect(screen.getByText("Restauração")).toBeInTheDocument();
+    expect(screen.getByText("Arraste para inspecionar")).toBeInTheDocument();
     expect(screen.getByRole("slider")).toHaveAttribute("aria-valuenow", "100");
+  });
+
+  it("supports priority property configuring eager image loading", () => {
+    render(<BeforeAfterSlider {...defaultProps} priority />);
+
+    const afterImg = screen.getByAltText("Estado recuperado da lataria");
+    expect(afterImg).toHaveAttribute("loading", "eager");
+    expect(afterImg).toHaveAttribute("fetchpriority", "high");
   });
 });

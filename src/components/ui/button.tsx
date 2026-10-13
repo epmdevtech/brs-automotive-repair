@@ -5,28 +5,29 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium cursor-pointer transition-[color,background-color,border-color,transform,opacity] duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background pointer-coarse:min-h-11 disabled:pointer-events-none disabled:opacity-50 disabled:cursor-not-allowed aria-busy:cursor-progress aria-busy:opacity-70 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+  "btn disabled:pointer-events-none disabled:opacity-50 disabled:cursor-not-allowed aria-busy:cursor-progress aria-busy:opacity-70 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground shadow hover:bg-primary/90",
-        automotive:
-          "rounded-sm bg-primary text-primary-foreground hover:bg-primary/90 active:scale-[0.98] font-semibold",
-        automotiveOutline:
-          "rounded-sm border border-border bg-transparent text-foreground hover:border-primary/60 hover:bg-secondary active:scale-[0.98] font-medium",
-        editorial: "rounded-none p-0 text-foreground hover:text-primary underline-offset-4",
+        default: "btn--primary",
+        primary: "btn--primary",
+        secondary: "btn--secondary",
+        link: "btn--link",
+        tertiary: "btn--link",
+        compact: "btn--primary btn--sm",
+        automotive: "btn--primary",
+        automotiveOutline: "btn--secondary",
+        editorial: "btn--link",
         destructive: "bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90",
-        outline:
-          "border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground",
-        secondary: "bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80",
-        ghost: "hover:bg-accent hover:text-accent-foreground",
-        link: "text-primary underline-offset-4 hover:underline",
+        outline: "btn--secondary",
+        ghost: "bg-transparent text-foreground hover:bg-white/10 hover:text-white",
       },
       size: {
-        default: "h-9 px-4 py-2",
-        sm: "h-8 rounded-md px-3 text-xs",
-        lg: "h-10 rounded-md px-8",
-        icon: "h-9 w-9 pointer-coarse:min-w-11",
+        default: "",
+        sm: "btn--sm",
+        lg: "h-11 px-6",
+        xl: "h-12 px-7 text-xs",
+        icon: "size-11 min-w-11 p-0",
       },
     },
     defaultVariants: {
