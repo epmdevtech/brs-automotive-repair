@@ -1,9 +1,8 @@
 import * as React from "react";
+import { Link } from "@tanstack/react-router";
 import { ArrowUpRight, Instagram, MapPin, Phone } from "lucide-react";
 import { company, navigation, services } from "@/lib/brs";
 import { Brand } from "@/components/brs/brand";
-import { Button } from "@/components/ui/button";
-import { Reveal } from "@/components/brs/reveal";
 import { cn } from "@/lib/utils";
 
 const external = { target: "_blank", rel: "noopener noreferrer" };
@@ -22,7 +21,7 @@ export function MinimalFooter({ className }: MinimalFooterProps) {
         className,
       )}
     >
-      <Reveal yOffset={12} className="page-width py-14 lg:py-16">
+      <div className="page-width py-14 lg:py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-12">
           {/* Coluna 1: Marca & Posicionamento Institucional */}
           <div className="lg:col-span-5 flex flex-col items-start">
@@ -45,12 +44,12 @@ export function MinimalFooter({ className }: MinimalFooterProps) {
             <ul className="space-y-2.5 text-xs text-neutral-400">
               {navigation.map(([label, href]) => (
                 <li key={href}>
-                  <a
-                    href={href}
+                  <Link
+                    to={href}
                     className="hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary rounded-xs"
                   >
                     {label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -64,21 +63,21 @@ export function MinimalFooter({ className }: MinimalFooterProps) {
             <ul className="space-y-2.5 text-xs text-neutral-400">
               {services.map((service) => (
                 <li key={service.title}>
-                  <a
-                    href={service.path}
+                  <Link
+                    to={service.path}
                     className="hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary rounded-xs"
                   >
                     {service.short}
-                  </a>
+                  </Link>
                 </li>
               ))}
               <li>
-                <a
-                  href="/sobre"
+                <Link
+                  to="/servicos"
                   className="hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary rounded-xs"
                 >
                   Serviço Leva e Traz
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -108,35 +107,25 @@ export function MinimalFooter({ className }: MinimalFooterProps) {
                 <span>@brsreparacoes</span>
                 <ArrowUpRight size={12} className="text-neutral-500" aria-hidden="true" />
               </a>
-
-              <div className="pt-2">
-                <Button
-                  variant="automotive"
-                  asChild
-                  className="w-full sm:w-auto h-9 text-xs px-4 font-semibold tracking-wide bg-primary text-primary-foreground hover:bg-primary/90 active:scale-[0.98] transition-all"
-                >
-                  <a href="/contato">
-                    Solicitar avaliação{" "}
-                    <ArrowUpRight className="ml-1 size-3.5" aria-hidden="true" />
-                  </a>
-                </Button>
-              </div>
             </div>
           </div>
         </div>
-      </Reveal>
+      </div>
 
-      {/* Faixa inferior: Copyright, Privacidade & Transparência Editorial */}
+      {/* Faixa inferior: Copyright, Razão Social, CNPJ, Privacidade & Transparência Editorial */}
       <div className="border-t border-border/60 bg-secondary/20">
-        <div className="page-width py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-[10px] text-muted-foreground leading-relaxed">
-          <div className="flex flex-wrap items-center gap-4">
+        <div className="page-width py-5 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-3 text-[10px] text-muted-foreground leading-relaxed">
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
             <span>© {currentYear} BRS Reparações Automotivas. Todos os direitos reservados.</span>
-            <a
-              href="/privacidade"
+            <span className="text-neutral-500 font-mono text-[9px]">
+              {company.legalName} · CNPJ: {company.cnpj}
+            </span>
+            <Link
+              to="/privacidade"
               className="hover:text-primary transition-colors underline-offset-4 hover:underline"
             >
               Privacidade
-            </a>
+            </Link>
           </div>
           <span className="text-neutral-500">
             Demonstração institucional oficial · Fotografias ilustrativas temporárias.

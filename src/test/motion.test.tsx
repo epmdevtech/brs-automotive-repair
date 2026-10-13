@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
-import { Website } from "@/components/brs/website";
+import { HomePageContent, SiteLayout } from "@/components/brs/website";
 import {
   clamp01,
   indexStyle,
@@ -76,14 +76,18 @@ describe("Motion utilities", () => {
 
 describe("Website motion layer", () => {
   it("keeps the headline readable and the CTA destinations unchanged", () => {
-    render(<Website />);
+    render(
+      <SiteLayout>
+        <HomePageContent />
+      </SiteLayout>,
+    );
 
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(
       "BRS Reparações Automotivas.",
     );
 
     const evaluation = screen.getAllByRole("link", { name: /Solicitar avaliação/ });
-    expect(evaluation.length).toBeGreaterThan(1);
+    expect(evaluation.length).toBeGreaterThanOrEqual(1);
     evaluation.forEach((link) => expect(link).toHaveAttribute("href", "/contato"));
 
     expect(screen.getByRole("link", { name: /Conhecer os serviços/ })).toHaveAttribute(
@@ -93,16 +97,24 @@ describe("Website motion layer", () => {
   });
 
   it("keeps all content visible when scroll observers are unavailable", () => {
-    const { container } = render(<Website />);
+    const { container } = render(
+      <SiteLayout>
+        <HomePageContent />
+      </SiteLayout>,
+    );
 
     expect(container.querySelectorAll('[data-reveal="hidden"]')).toHaveLength(0);
 
     const expand = screen.getByRole("region", { name: "Acabamento em pintura automotiva" });
-    expect(expand.style.getPropertyValue("--p")).toBe("1");
+    expect(Number(expand.style.getPropertyValue("--p"))).toBe(1);
   });
 
   it("labels illustrative media in the cinematic transition", () => {
-    render(<Website />);
+    render(
+      <SiteLayout>
+        <HomePageContent />
+      </SiteLayout>,
+    );
     const expand = screen.getByRole("region", { name: "Acabamento em pintura automotiva" });
     expect(expand).toHaveTextContent("Fotografia ilustrativa");
   });

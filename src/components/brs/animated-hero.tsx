@@ -1,7 +1,9 @@
 import * as React from "react";
+import { Link } from "@tanstack/react-router";
 import { motion, useReducedMotion } from "framer-motion";
-import { ArrowDown, MapPin } from "lucide-react";
+import { ArrowDown, ArrowUpRight, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { MagneticButton } from "@/components/ui/magnetic-button";
 import { cn } from "@/lib/utils";
 
 export interface NavLink {
@@ -24,13 +26,38 @@ export interface AnimatedHeroProps {
   eyebrow?: React.ReactNode;
   title?: React.ReactNode;
   description: React.ReactNode;
-  ctaButton: HeroAction;
+  ctaButton?: HeroAction;
   secondaryCta?: HeroAction;
   bottomContent?: React.ReactNode;
   className?: string;
 }
 
 import { MOTION_TOKENS } from "@/lib/motion-system";
+
+/**
+ * Rotas internas usam navegação client-side; âncoras (#) e URLs externas seguem como `<a>`.
+ * Repassa as props injetadas por `Button asChild` (className, ref, handlers) ao elemento final.
+ */
+function HeroLink({
+  action,
+  children,
+  ...props
+}: { action: HeroAction; children: React.ReactNode } & React.ComponentPropsWithRef<"a">) {
+  const { href, onClick } = action;
+  if (href?.startsWith("/")) {
+    // O destino vem de props genéricas; o roteador valida a rota em tempo de execução.
+    return (
+      <Link {...props} to={href as "/"} onClick={onClick}>
+        {children}
+      </Link>
+    );
+  }
+  return (
+    <a {...props} href={href} onClick={onClick}>
+      {children}
+    </a>
+  );
+}
 
 // Variantes de transição normativas do Framer Motion (SPEC-015)
 const getContainerVariants = (reduced: boolean) => ({
@@ -101,17 +128,12 @@ export const AnimatedHero = ({
         animate="visible"
         className="page-width relative z-10 flex flex-col items-start justify-center text-left py-8"
       >
-        {/* Overline / Badge Superior */}
-        <motion.div variants={itemVariants} className="mb-4">
-          {eyebrow || (
-            <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-3.5 py-1 backdrop-blur-xs">
-              <span className="size-1.5 rounded-full bg-primary animate-pulse" />
-              <span className="text-xs font-medium uppercase tracking-widest text-primary">
-                Precisão no reparo • Cuidado no atendimento
-              </span>
-            </div>
-          )}
-        </motion.div>
+        {/* Overline / Badge Superior (apenas quando explicitamente fornecido) */}
+        {eyebrow && (
+          <motion.div variants={itemVariants} className="mb-4">
+            {eyebrow}
+          </motion.div>
+        )}
 
         {/* Título Principal (H1) com forte contraste */}
         <motion.h1
@@ -135,52 +157,47 @@ export const AnimatedHero = ({
         </motion.div>
 
         {/* Chamadas para Ação (CTAs) */}
-        <motion.div variants={itemVariants} className="mt-8 flex flex-wrap items-center gap-4">
-          {/* Botão Primário */}
-          {ctaButton.href ? (
-            <Button
-              variant="automotive"
-              asChild
-              size="lg"
-              className="h-12 px-7 text-xs font-semibold tracking-wide rounded-sm bg-primary text-primary-foreground hover:bg-primary/90 active:scale-[0.98] transition-all shadow-lg shadow-primary/10 cursor-pointer"
-            >
-              <a href={ctaButton.href} onClick={ctaButton.onClick}>
-                {ctaButton.text}
-              </a>
-            </Button>
-          ) : (
-            <Button
-              variant="automotive"
-              onClick={ctaButton.onClick}
-              size="lg"
-              className="h-12 px-7 text-xs font-semibold tracking-wide rounded-sm bg-primary text-primary-foreground hover:bg-primary/90 active:scale-[0.98] transition-all shadow-lg shadow-primary/10 cursor-pointer"
-            >
-              {ctaButton.text}
-            </Button>
-          )}
+        {(ctaButton || secondaryCta) && (
+          <motion.div
+            variants={itemVariants}
+            className="mt-8 flex flex-wrap items-center gap-4 hero-cta-group"
+          >
+            {/* Botão Primário (se fornecido) */}
+            {ctaButton && (
+              <MagneticButton>
+                {ctaButton.href ? (
+                  <Button variant="primary" asChild className="cursor-pointer">
+                    <HeroLink action={ctaButton}>
+                      {ctaButton.text}{" "}
+                      <ArrowUpRight className="ml-1.5" size={16} aria-hidden="true" />
+                    </HeroLink>
+                  </Button>
+                ) : (
+                  <Button variant="primary" onClick={ctaButton.onClick} className="cursor-pointer">
+                    {ctaButton.text}{" "}
+                    <ArrowUpRight className="ml-1.5" size={16} aria-hidden="true" />
+                  </Button>
+                )}
+              </MagneticButton>
+            )}
 
-          {/* Botão Secundário */}
-          {secondaryCta &&
-            (secondaryCta.href ? (
-              <Button
-                asChild
-                size="lg"
-                className="h-12 px-7 text-xs font-medium tracking-wide rounded-sm border border-neutral-800 bg-neutral-900/60 hover:bg-neutral-800 hover:text-white text-neutral-300 active:scale-[0.98] transition-all backdrop-blur-xs cursor-pointer"
-              >
-                <a href={secondaryCta.href} onClick={secondaryCta.onClick}>
+            {/* Botão Secundário */}
+            {secondaryCta &&
+              (secondaryCta.href ? (
+                <Button variant="secondary" asChild className="cursor-pointer">
+                  <HeroLink action={secondaryCta}>{secondaryCta.text}</HeroLink>
+                </Button>
+              ) : (
+                <Button
+                  variant="secondary"
+                  onClick={secondaryCta.onClick}
+                  className="cursor-pointer"
+                >
                   {secondaryCta.text}
-                </a>
-              </Button>
-            ) : (
-              <Button
-                onClick={secondaryCta.onClick}
-                size="lg"
-                className="h-12 px-7 text-xs font-medium tracking-wide rounded-sm border border-neutral-800 bg-neutral-900/60 hover:bg-neutral-800 hover:text-white text-neutral-300 active:scale-[0.98] transition-all backdrop-blur-xs cursor-pointer"
-              >
-                {secondaryCta.text}
-              </Button>
-            ))}
-        </motion.div>
+                </Button>
+              ))}
+          </motion.div>
+        )}
       </motion.div>
 
       {/* Rodapé do Hero / Microdados e Navegação de Scroll */}

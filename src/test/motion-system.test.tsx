@@ -5,7 +5,7 @@ import { Reveal } from "@/components/brs/reveal";
 import { ImageReveal } from "@/components/brs/image-reveal";
 import { BeforeAfterSlider } from "@/components/brs/before-after-slider";
 import { ProcessTimeline } from "@/components/brs/process-timeline";
-import { PartnerSection } from "@/components/brs/partner-section";
+import { HomePathways } from "@/components/brs/home-pathways";
 import { Hero } from "@/components/brs/hero";
 
 describe("Sistema Unificado de Motion Design (SPEC-015)", () => {
@@ -140,16 +140,13 @@ describe("Sistema Unificado de Motion Design (SPEC-015)", () => {
     });
   });
 
-  describe("AC-015-08: Seção de parceiros com texto em stagger e imagem", () => {
-    it("renderiza a seção para corretores com imagem ilustrativa", () => {
-      render(<PartnerSection />);
+  describe("AC-015-08: Resumo de páginas com cartões em stagger", () => {
+    it("renderiza os três cartões de encaminhamento com revelação escalonada", () => {
+      const { container } = render(<HomePathways />);
 
       expect(screen.getByText("Para corretores de seguros")).toBeInTheDocument();
-      expect(
-        screen.getByAltText(
-          "Atenção técnica na recuperação de um veículo (fotografia ilustrativa)",
-        ),
-      ).toBeInTheDocument();
+      const reveals = container.querySelectorAll<HTMLElement>("[data-reveal]");
+      expect(reveals.length).toBeGreaterThanOrEqual(4);
     });
   });
 
@@ -159,7 +156,8 @@ describe("Sistema Unificado de Motion Design (SPEC-015)", () => {
 
       expect(screen.getByText("BRS Reparações")).toBeInTheDocument();
       expect(screen.getByText("Automotivas.")).toBeInTheDocument();
-      expect(screen.getAllByRole("link", { name: /solicitar avaliação/i })[0]).toBeInTheDocument();
+      expect(screen.getByRole("link", { name: /conhecer os serviços/i })).toBeInTheDocument();
+      expect(screen.queryByRole("link", { name: /solicitar avaliação/i })).toBeNull();
     });
   });
 });

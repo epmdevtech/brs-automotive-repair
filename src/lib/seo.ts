@@ -7,6 +7,7 @@ export interface RouteSeoOptions {
   image?: string;
   type?: "website" | "article";
   jsonLd?: Record<string, unknown> | Array<Record<string, unknown>>;
+  noindex?: boolean;
 }
 
 export function buildRouteHead({
@@ -16,6 +17,7 @@ export function buildRouteHead({
   image = "/assets/brs-hero.jpg",
   type = "website",
   jsonLd,
+  noindex = false,
 }: RouteSeoOptions) {
   const url = canonicalUrl(path);
   const imageUrl = image.startsWith("http") ? image : canonicalUrl(image);
@@ -28,22 +30,28 @@ export function buildRouteHead({
     });
   }
 
+  const meta: Array<Record<string, string>> = [
+    { title },
+    { name: "description", content: description },
+    { property: "og:title", content: title },
+    { property: "og:description", content: description },
+    { property: "og:type", content: type },
+    { property: "og:url", content: url },
+    { property: "og:image", content: imageUrl },
+    { property: "og:locale", content: "pt_BR" },
+    { property: "og:site_name", content: company.name },
+    { name: "twitter:card", content: "summary_large_image" },
+    { name: "twitter:title", content: title },
+    { name: "twitter:description", content: description },
+    { name: "twitter:image", content: imageUrl },
+  ];
+
+  if (noindex) {
+    meta.push({ name: "robots", content: "noindex, nofollow" });
+  }
+
   return {
-    meta: [
-      { title },
-      { name: "description", content: description },
-      { property: "og:title", content: title },
-      { property: "og:description", content: description },
-      { property: "og:type", content: type },
-      { property: "og:url", content: url },
-      { property: "og:image", content: imageUrl },
-      { property: "og:locale", content: "pt_BR" },
-      { property: "og:site_name", content: company.name },
-      { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: title },
-      { name: "twitter:description", content: description },
-      { name: "twitter:image", content: imageUrl },
-    ],
+    meta,
     links: [{ rel: "canonical", href: url }],
     scripts,
   };
@@ -54,6 +62,15 @@ export function buildAutoBodyShopSchema() {
     "@context": "https://schema.org",
     "@type": "AutoBodyShop",
     name: company.name,
+    legalName: company.legalName,
+    alternateName: [company.tradeName, company.name],
+    taxID: company.cnpjRaw,
+    foundingDate: company.foundedDate,
+    founder: {
+      "@type": "Person",
+      name: company.founder.name,
+      jobTitle: company.founder.role,
+    },
     url: canonicalUrl("/"),
     telephone: "+55 45 2035-9440",
     sameAs: [company.instagram],
@@ -101,6 +118,36 @@ export function buildAutoBodyShopSchema() {
               "Desamassamento artesanal PDR sem repintura, preservando 100% da tinta original e o valor de revenda.",
           },
         },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "Espelhamento de pintura automotiva",
+            url: canonicalUrl("/servicos#espelhamento"),
+            description:
+              "Polimento técnico em múltiplos estágios para nivelamento do verniz e remoção de micro-riscos e hologramas.",
+          },
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "Vitrificação cerâmica de pintura",
+            url: canonicalUrl("/servicos#vitrificacao"),
+            description:
+              "Aplicação de revestimento cerâmico de alta densidade com barreira hidrofóbica e proteção UV duradoura.",
+          },
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "Polimento de para-brisa",
+            url: canonicalUrl("/servicos#polimento-de-parabrisa"),
+            description:
+              "Tratamento óptico em óxido de cério para remoção de marcas de palheta e recuperação da transparência cristalina.",
+          },
+        },
       ],
     },
   };
@@ -137,6 +184,7 @@ export function buildServiceSchema({
     provider: {
       "@type": "AutoBodyShop",
       name: company.name,
+      legalName: company.legalName,
       url: canonicalUrl("/"),
       telephone: "+55 45 2035-9440",
       sameAs: [company.instagram],

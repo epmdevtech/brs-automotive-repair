@@ -2,22 +2,22 @@
 
 ## Metadados
 
-| Campo                   | Valor                                           |
-| ----------------------- | ----------------------------------------------- |
-| Nome do Projeto         | BRS Reparações Automotivas (`brs`)              |
-| Organização             | EPMDEVTECH Clientes                             |
-| Responsável             | Engenharia & Produto EPMDEVTECH                 |
-| Estado                  | Ativo / Landing Page Institucional Implementada |
-| Versão ou release       | `0.1.0` (Universal SDD Compliant)               |
-| Última revisão          | 2026-10-11                                      |
-| Framework de Governança | Universal SDD (Spec-Driven Development)         |
-| Revisores               | Equipe Técnica EPMDEVTECH                       |
+| Campo                   | Valor                                                           |
+| ----------------------- | --------------------------------------------------------------- |
+| Nome do Projeto         | BRS Reparações Automotivas (`brs`)                              |
+| Organização             | EPMDEVTECH Clientes                                             |
+| Responsável             | Engenharia & Produto EPMDEVTECH                                 |
+| Estado                  | Ativo / Website Institucional Multipágina Estruturado com Rotas |
+| Versão ou release       | `0.2.0` (Universal SDD Compliant)                               |
+| Última revisão          | 2026-10-13                                                      |
+| Framework de Governança | Universal SDD (Spec-Driven Development)                         |
+| Revisores               | Equipe Técnica EPMDEVTECH                                       |
 
 ---
 
 ## 1. Visão Geral e Domínio
 
-- **Problema e resultado principal**: Prover uma presença digital institucional de alta credibilidade para a **BRS Reparações Automotivas**, localizada em Toledo-PR. O site apresenta com clareza os serviços especializados (Funilaria, Pintura e Martelinho de Ouro), atende demandas tanto de proprietários particulares quanto de corretores de seguros, e oferece um fluxo honesto de contato sem falsas alegações ou dependências desnecessárias.
+- **Problema e resultado principal**: Prover uma presença digital institucional de alta credibilidade para a **BRS Reparações Automotivas**, localizada em Toledo-PR. O projeto é um website institucional multipágina completo com rotas dedicadas para cada especialidade (Funilaria, Pintura em Estufa e Martelinho de Ouro), galeria de trabalhos concluídos com comparador Antes/Depois, área exclusiva para corretores de seguros, apresentação institucional da oficina e canal de contato e avaliação técnica.
 - **Usuários e partes interessadas**:
   - _Clientes Particulares (Proprietários de Veículos)_: Buscam restauração estética, recuperação de colisões ou martelinho de ouro sem danificar a pintura original, com agilidade e clareza no contato.
   - _Corretores de Seguros e Parceiros_: Buscam oficina de confiança em Toledo-PR com padrão de acabamento para encaminhamento de sinistros e atendimento a segurados.
@@ -36,8 +36,18 @@
 
 - **Estilo e componentes**:
   - Aplicação moderna em **TanStack Start** com renderização híbrida SSR / Nitro e tipagem ponta a ponta com TypeScript.
-  - Landing page institucional de página única (`src/routes/index.tsx`) com navegação por âncoras suaves:
-    `#inicio` → `#servicos` → `#trabalho` → `#corretores` → `#sobre` → `#contato`.
+  - **Website Multipágina com Rotas Especializadas** gerenciadas pelo `@tanstack/react-router`:
+    - `/`: Página Inicial orientada à conversão e encaminhamento para as rotas especializadas;
+    - `/servicos`: Catálogo geral e visão integrada de especialidades;
+    - `/servicos/funilaria`: Rota dedicada da especialidade de Funilaria;
+    - `/servicos/pintura-automotiva`: Rota dedicada da especialidade de Pintura em Estufa;
+    - `/servicos/martelinho-de-ouro`: Rota dedicada da especialidade de Martelinho de Ouro;
+    - `/trabalhos`: Portfólio completo de projetos e comparador interativo Antes/Depois;
+    - `/para-corretores`: Rota voltada para corretores de seguros e parcerias de sinistro;
+    - `/sobre`: Rota institucional sobre a história, valores e estrutura física da BRS;
+    - `/contato`: Rota dedicada de triagem de contato e avaliação técnica;
+    - `/privacidade`: Políticas de privacidade e conformidade de dados;
+    - `/proposta/$slug`: Rota de proposta comercial personalizada confidencial (`noindex, nofollow`).
   - Configuração canônica de dados da empresa centralizada em [`src/lib/brs.ts`](src/lib/brs.ts), compartilhada diretamente entre componentes visuais e suites de teste.
   - Componentes de interface baseados nas primitivas acessíveis do **Radix UI** estilizados via Tailwind CSS v4.
   - Roteamento com `@tanstack/react-router` e cache reativo com `@tanstack/react-query`.
@@ -190,6 +200,22 @@ Todas as entregas obedecem ao protocolo **Universal SDD**:
 - `SPEC-014` / `TASK-014-01` / `REVIEW-014`: Refatoração Multipágina em TanStack Start, SEO Técnico Canônico e Otimização para LLMs com llms.txt.
 - `SPEC-015` / `TASK-015-01` / `REVIEW-015`: Sistema Unificado de Motion Design e Scroll Reveal Premium com Tokens Normativos e Primitivos de Animação.
 - `SPEC-016` / `TASK-016-01` / `REVIEW-016`: Refinamento Premium da Navbar com Cápsula Flutuante Centralizada, Glassmorphism Escuro e Botão Dourado com Cantos Arredondados.
+- `SPEC-017` / `TASK-017-01` / `REVIEW-017`: Consolidação da Arquitetura SPA + Multi-Route, Home Resumida e Orientada à Conversão, Navegação Client-Side e Layout Unificado.
+- `SPEC-018` / `TASK-018-01` / `REVIEW-018`: Motion Design de Luxo com Framer Motion (ScrollReveal & ImageReveal), Deslocamento Contido, Curva Suave [0.21, 0.47, 0.32, 0.98] e Zoom Reverso.
+- `SPEC-019` / `TASK-019-01` / `REVIEW-019`: Automação Docker DevOps com Hot Reload Instantâneo, Execução em Segundo Plano (-d), Mitigação de Conflito de Porta 5210 e Resolução Nativa tsconfigPaths.
+- `SPEC-020` / `TASK-020-01` / `REVIEW-020`: Sistema Global de Motion Design Premium para Todas as Rotas com Tokens Centralizados, PageTransition, ScrollReveal, ImageReveal e Acessibilidade Estrita.
+- `SPEC-021` / `TASK-021-01` / `REVIEW-021`: Sistema Premium de CTAs, Conversão e Microinterações com Geometria Chanfrada Automotiva (btn-bevel-4), Hierarquia Comercial em 3 Níveis e Máquina de Estados no Formulário.
+- `SPEC-022` / `TASK-022-01` / `REVIEW-022`: Padronização Global de Botões, Elementos de Forma (Dois Raios Normativos 4px e 12px, Zero Clip-Path) e Limpeza de Redundâncias no Hero (Remoção de CTA Duplicado e Selo Genérico).
+- `SPEC-023` / `TASK-023-01` / `REVIEW-023`: Arquitetura Editorial Anti-Card Slop, matrizes com bordas compartilhadas e eliminação de caixas flutuantes repetitivas.
+- `SPEC-024` / `TASK-024-01` / `REVIEW-024`: Correção do Menu Desktop, Remoção do CTA Flutuante Redundante e Adição de Botão Voltar ao Topo Acessível.
+- `SPEC-025` / `TASK-025-01` / `REVIEW-025`: Comparador Interativo Antes/Depois na Home e na Galeria de Trabalhos com Controle Deslizante Acessível.
+- `SPEC-026` / `TASK-026-01` / `REVIEW-026`: Pares de Imagens Genuinamente Distintos para o Antes e Depois das 3 Especialidades e Diversificação Fotográfica no Acervo Público.
+- `SPEC-027` / `TASK-027-01` / `REVIEW-027`: Rota de Proposta Comercial Personalizada (`/proposta/$slug` e `/proposta`), Arquitetura de 10 Seções de Alta Conversão, Validação Comercial de Completude e Transição Honesta para Briefing.
+- `SPEC-027` / `TASK-027-02` / `REVIEW-027-02`: Correção de Hidratação SSR e Visibilidade da Proposta Comercial, eliminação de wrappers bloqueantes de animação e restauração de 100% da visualização no navegador real.
+- `SPEC-028` / `TASK-028-01` / `REVIEW-028`: Proposta Comercial Modular EPM DevTech para BRS Reparações Automotivas (`/proposta/brs-reparacoes`), Portfólio de 6 Módulos Especializados com Escopos e Exclusões, Matriz Comparativa Responsiva, 5 Pacotes Sugeridos em 1 Clique, Segregação de Custos de Terceiros e Infraestrutura, Fluxo Visual em 9 Etapas e Simulador Dinâmico de Orçamento.
+- `SPEC-029` / `TASK-029-01` / `REVIEW-029`: Refatoração Canônica: Website Multipágina com Arquitetura de Rotas Dedicadas (TanStack Router), eliminação de vestígios conceituais de landing page em `AGENTS.md`, `PROJECT.md`, proposta comercial (`src/lib/proposta.ts`) e suítes de teste.
+- `SPEC-030` / `TASK-030-01` / `REVIEW-030`: Implementação da Linha de Estética Automotiva & Proteção de Superfícies (Espelhamento de Pintura, Vitrificação Cerâmica e Polimento Técnico de Para-brisa) com preservação dos 3 pilares estruturais canônicos de reparação.
+- `SPEC-031` / `TASK-031-01` / `REVIEW-031`: Integração de Dados Cadastrais Oficiais (Razão Social: `Brs Comercio de Pecas Automotivas LTDA`, CNPJ: `53.877.400/0001-46`, Fundação: `09/02/2024`) e Histórico de Experiência Prática do Fundador Bruno no Segmento Automotivo.
 
 ---
 

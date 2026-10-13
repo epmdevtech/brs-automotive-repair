@@ -1,4 +1,4 @@
-import painting from "@/assets/pintura.jpg";
+import painting from "@/assets/pintura-depois.jpg";
 import { useScrollProgress } from "@/hooks/use-scroll-progress";
 
 /**
@@ -15,7 +15,7 @@ export function MediaExpand() {
         <figure className="media-expand-frame">
           <img
             src={painting}
-            alt="Profissional aplicando pintura na lateral de um veículo em cabine de pintura (fotografia ilustrativa)"
+            alt="Veículo com verniz espelhado de alto sólidos sob iluminação técnica de estufa (fotografia ilustrativa)"
             width={1200}
             height={800}
             loading="lazy"

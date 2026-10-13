@@ -4,6 +4,29 @@ Todas as alterações notáveis neste projeto serão documentadas neste arquivo.
 
 O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e este projeto adere ao [Universal SDD](UNIVERSAL_SDD_FRAMEWORK.md).
 
+## [0.3.0] - 2026-10-13
+
+### Adicionado
+
+- **Linha de Estética Automotiva & Proteção de Superfícies** (`SPEC-030` / `TASK-030-01` / `REVIEW-030`):
+  - Inclusão dos novos serviços captados para a BRS: Espelhamento de Pintura automotiva (`espelhamento`), Vitrificação Cerâmica (`vitrificacao`) e Polimento Técnico de Para-brisa (`polimento-de-parabrisa`).
+  - Preservação estrita dos 3 pilares estruturais canônicos de reparação (Funilaria, Pintura, Martelinho) em `services` com rotas especializadas próprias.
+  - Criação da coleção `aestheticServices` e unificada `allOfferedServices` em `src/lib/brs.ts`.
+  - Seção editorial na rota `/servicos` com benefícios, processos e limitações honestas de cada serviço estético.
+  - Bloco complementar de estética e proteção na Home (`src/components/brs/services.tsx`) sob a matriz de especialidades.
+  - Dropdown com agrupamento visual (`<optgroup>`) no formulário de contato (`src/components/brs/contact-form.tsx`).
+  - Enriquecimento de SEO e catálogo de ofertas no Schema.org `AutoBodyShop`.
+- **Dados Cadastrais Oficiais e Histórico do Fundador Bruno** (`SPEC-031` / `TASK-031-01` / `REVIEW-031`):
+  - Razão Social: `Brs Comercio de Pecas Automotivas LTDA`
+  - Nome Fantasia: `Brs Comercio de Pecas Automotivas`
+  - CNPJ: `53.877.400/0001-46` (sem pontuação: `53877400000146`)
+  - Data de Fundação Oficial: `09/02/2024`
+  - Fundador: **Bruno** (liderança técnica e anos de prática consolidada no segmento automotivo regional).
+  - Exibição legal e fiscal no rodapé (`src/components/ui/minimal-footer.tsx`).
+  - Bloco de liderança, trajetória técnica e painel de dados cadastrais na rota institucional `/sobre`.
+  - Identificação precisa da controladora legal na Política de Privacidade (`/privacidade`) sob conformidade com a LGPD.
+  - Schemas estruturados de SEO (`src/lib/seo.ts`) com `legalName`, `alternateName`, `taxID`, `foundingDate` e `founder`.
+
 ## [0.1.0] - 2026-10-11
 
 ### Adicionado
@@ -95,4 +118,111 @@ O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.
 - Painel mobile redesenhado em estilo flutuante escuro (`rounded-2xl`, `bg-neutral-950/95`, `backdrop-blur-lg`, `border-white/10 mt-2`).
 - Atualização e expansão da suíte de testes unitários [`src/test/header.test.tsx`](src/test/header.test.tsx) cobrindo classes de cápsula flutuante, botão CTA e unicidade do header.
 - Especificação `SPEC-016`, tarefa `TASK-016-01` e revisão `REVIEW-016`.
-
+- Auditoria UX/UI e consolidação da arquitetura SPA + Multi-Route da BRS: eliminação da duplicação editorial entre a homepage e rotas específicas (`SPEC-017`).
+- Homepage (`/`) reestruturada em narrativa enxuta orientada à conversão: Hero, faixa de confiança, transição MediaExpand, especialidades resumidas, diferenciais, processo, cartões de encaminhamento `HomePathways` e CTA final.
+- Centralização de seções específicas em suas rotas exclusivas: `ProjectGallery` em `/trabalhos`, parceria com corretores em `/para-corretores`, institucional em `/sobre`, e atendimento, formulário seguro e `FAQAccordion` em `/contato`.
+- Migração completa de links internos de navegação para `<Link>` do TanStack Router, permitindo transições client-side sem recargas de página.
+- Refinamento da barra de navegação flutuante com indicador de página ativa (`aria-current="page"`) e remoção da redundância entre link "Contato" e CTA dourado.
+- Criação dos componentes modulares `SiteLayout` (shell unificado da aplicação), `ServicePageLayout` (estrutura padronizada para páginas de serviço com links contextuais cruzados) e `ContactCTA` (chamada para ação consistente).
+- Nova suíte de testes de consolidação de arquitetura [`src/test/architecture-consolidation.test.tsx`](src/test/architecture-consolidation.test.tsx) validando os critérios da SPEC-017.
+- Especificação `SPEC-017`, tarefa `TASK-017-01` e revisão `REVIEW-017`.
+- Implementação de Motion Design de Luxo com Framer Motion (`framer-motion` v14) para estúdio boutique/premium automotivo (`SPEC-018`).
+- Criação dos componentes base de animação reutilizáveis com tipagem estrita TypeScript:
+  - `ScrollReveal` (`src/components/ui/scroll-reveal.tsx`): suporte às direções `up`, `down`, `left`, `right`, `none`, deslocamento sutil de 24px (15px-30px), curva bezier suave `[0.21, 0.47, 0.32, 0.98]`, execução única com `viewport={{ once: true, margin: "-60px" }}` e fallback resiliente para SSR e `prefers-reduced-motion`.
+  - `ImageReveal` (`src/components/ui/image-reveal.tsx`): container `overflow-hidden` com efeito cinematográfico de zoom reverso (`scale: 1.12 -> 1.00`) e fade-in suave para fotos veiculares.
+- Refatoração completa das rotas e componentes estruturais com efeitos em cascata (`delay={index * 0.12}`) e sem overflow horizontal mobile:
+  - `src/routes/servicos/index.tsx`
+  - `src/components/brs/service-page-layout.tsx` (`/servicos/funilaria`, `/servicos/pintura-automotiva`, `/servicos/martelinho-de-ouro`)
+  - `src/routes/trabalhos.tsx`
+  - `src/routes/para-corretores.tsx`
+  - `src/routes/sobre.tsx`
+  - `src/routes/contato.tsx`
+  - `src/components/brs/home-pathways.tsx`
+  - `src/components/brs/contact-cta.tsx`
+- Criação de nova suíte de testes unitários [`src/test/scroll-reveal-luxury.test.tsx`](src/test/scroll-reveal-luxury.test.tsx) validando 5 critérios de motion de luxo e acessibilidade.
+- Especificação `SPEC-018`, tarefa `TASK-018-01` e revisão `REVIEW-018`.
+- Automação DevOps em Docker com Hot Reload instantâneo e execução em segundo plano (`SPEC-019`).
+- Configuração do Vite (`vite.config.ts`) com `host: "0.0.0.0"`, `server.watch.usePolling` e intervalo de 100ms via variáveis de ambiente, além de migração para a resolução nativa de caminhos `resolve: { tsconfigPaths: true }`.
+- Atualização do `Dockerfile` (estágio `dev`) e `docker-compose.yml` com sincronização automática de dependências no boot e volume nomeado `brs_node_modules`.
+- Reformulação do `Makefile` com alvos `up` / `docker-up` em modo detached (`-d`), liberação automática do terminal, comando `make free-port` para resolver colisões de processos órfãos na porta 5210, proteção contra conflitos em `make dev` e alvo de inspeção `make status`.
+- Especificação `SPEC-019`, tarefa `TASK-019-01` e revisão `REVIEW-019`.
+- Sistema Global de Motion Design Premium para Todas as Rotas com tokens centralizados, transições de rotas e acessibilidade estrita (`SPEC-020`).
+- Centralização dos motion tokens, tempos e curvas em `src/lib/motion-tokens.ts` com curva bezier de luxo `[0.21, 0.47, 0.32, 0.98]`, durações sem lentidão e construtores funcionais de variantes.
+- Aprimoramento de `ScrollReveal` e `ImageReveal` com suporte a polimorfismo (`as`), direções, margem de viewport negativa (`-60px`), disparo único e zoom reverso de catálogo (`scale: 1.08 -> 1.00`).
+- Criação de `PageTransition` integrado no `SiteLayout` para transições sutis entre páginas de 200ms sem remontagem de Header e Rodapé.
+- Aplicação e auditoria em 100% dos componentes e rotas (Homepage, Filosofia, Processo, Galeria, FAQ, Contato, CTA, rotas de serviços, institucional, privacidade e 404).
+- Respeito irrestrito a `prefers-reduced-motion` e resiliência em ambiente SSR do TanStack Start e Nitro.
+- Nova suíte de testes automatizados com Vitest [`src/test/global-motion-system.test.tsx`](src/test/global-motion-system.test.tsx) com 12 testes aprovados.
+- Especificação `SPEC-020`, tarefa `TASK-020-01` e revisão `REVIEW-020`.
+- Sistema Premium de CTAs, Conversão e Microinterações para a BRS Reparações Automotivas (`SPEC-021`).
+- Design System de botões enriquecido em `src/styles.css` e `src/components/ui/button.tsx` com geometria chanfrada automotiva nos 4 cantos (`btn-bevel-4` e `btn-bevel-4-sm`) e sombras extrudadas técnicas (`shadow-bevel-gold`, `shadow-bevel-dark`).
+- Implementação de novas variantes semânticas: `primary`, `secondary`, `tertiary` e `compact`, preservando total compatibilidade com variantes legadas.
+- Microinteração magnética fluida e contida (`src/components/ui/magnetic-button.tsx`) com atração elástica de 5px exclusiva para desktop (`hover: hover` e `pointer: fine`) e desativação sob `prefers-reduced-motion` e touch.
+- Padronização rigorosa da hierarquia de CTAs em 3 níveis em todas as rotas (Header, Hero, Services, ServicePageLayout, ContactCTA, Trabalhos, Para Corretores, Sobre, 404 e MinimalFooter), eliminando termos vagos ("Saiba mais", "Ver detalhes").
+- Refatoração do formulário de contato (`src/components/brs/contact-form.tsx`) com máquina de estados explícita (`idle`, `submitting`, `success`, `error`), bloqueio contra cliques múltiplos e diálogo modal com mensagem estruturada para o canal confirmado no Instagram `@brsreparacoes`.
+- Instalação e integração do Playwright com suíte ponta a ponta (`e2e/cta-conversion.spec.ts`) validando geometria, navegação por teclado (Tab) e fluxo completo do formulário.
+- Nova suíte de testes unitários Vitest [`src/test/cta-conversion-system.test.tsx`](src/test/cta-conversion-system.test.tsx) cobrindo variantes chanfradas, microinteração e estados de formulário.
+- Padronização Global de Botões, Elementos de Forma (Dois Raios Normativos 4px e 12px, Zero Clip-Path) e Limpeza de Redundâncias no Hero (`SPEC-022`).
+- Consolidação de Fonte Única de Verdade de Design Tokens em `src/styles.css`: `--radius-sm: 4px;` (botões e inputs), `--radius-lg: 12px;` (cápsula flutuante, cards, painéis e imagens), `--btn-h: 44px;`, `--btn-h-sm: 34px;`, `--gold: #C8A96A;`, `--gold-hover: #D8BC82;`, `--on-gold: #16130B;`, `--line-light: rgb(255 255 255 / .28);`, `--ease: 200ms ease;`.
+- Eliminação definitiva de recortes por `clip-path` em botões e interfaces (extinção de `.btn-bevel-4`, `.btn-bevel-4-sm`, `.shadow-bevel-gold`, `.shadow-bevel-dark`).
+- Criação da classe canônica de botão `.btn` com variantes `.btn--primary` (com seta ↗ 16px à direita), `.btn--secondary` (sem ícone, fundo escuro e borda translúcida com hover dourado), `.btn--link` (texto dourado com seta → animada) e `.btn--sm` (34px, exclusivo do menu flutuante), integrada ao componente `Button` em `src/components/ui/button.tsx`.
+- Limpeza radical da seção Hero (`src/components/brs/hero.tsx` e `src/components/brs/animated-hero.tsx`): remoção do CTA primário duplicado "Solicitar avaliação" (mantendo exclusivamente o botão secundário "Conhecer os serviços" com 44px alinhado à esquerda) e expurgo integral do selo/tag genérico de IA _"PRECISÃO NO REPARO • CUIDADO NO ATENDIMENTO"_.
+- Atualização do menu flutuante em `src/components/brs/header.tsx`: transição da cápsula de `rounded-full` para `border-radius: var(--radius-lg)` (12px), com CTA primário compacto `.btn--sm` mantido visível no cabeçalho em visualização móvel sem depender de abrir o hambúrguer.
+- Padronização de campos de formulário (`.field-input`): altura mínima de 44px, raio de 4px, borda `var(--line-light)` e anel de foco acessível com outline dourado (`outline: 2px solid var(--gold); outline-offset: 2px;`).
+- Padronização de todos os cards (`CardSpotlight`, `ProjectGallery`, comparativos de serviços, depoimentos, princípios e caixas de aviso) para `border-radius: var(--radius-lg)` (12px).
+- Atualização e aprovação de 100% dos testes unitários Vitest (132/132 testes) e testes E2E Playwright (19/19 testes).
+- Especificação `SPEC-022`, tarefa `TASK-022-01` e revisão `REVIEW-022`.
+- Refatoração Editorial de UI & Eliminação de Card Slop (Anti-Card Slop & Premium Automotive Design) (`SPEC-023`).
+- Eliminação de padrões genéricos de card slop (grades monótonas de 3 a 4 caixas, sombras pesadas, ícones encapsulados em quadradinhos e badges sobrepostos a fotografias) em todo o portal da BRS.
+- Introdução de arquitetura editorial de UI: matrizes contínuas com bordas compartilhadas (`border-y`, `divide-x`, `divide-y`), linhas expansivas de 12 colunas para serviços com fotografias integradas e hierarquia tipográfica forte.
+- Refatoração de componentes estruturais: `Services`, `HomePathways`, `ProjectGallery`, `ServicePageLayout`, `Contact`, além das páginas `/servicos/index.tsx`, `/para-corretores.tsx` e `/sobre.tsx`.
+- Preservação estrita das regras de negócio e dados canônicos em `src/lib/brs.ts`, estabilidade dos contratos de botões `.btn` e garantia de 100% de sucesso em testes Vitest (132 testes) e Playwright (19 testes).
+- Especificação `SPEC-023`, tarefa `TASK-023-01` e revisão `REVIEW-023`.
+- Correção do Menu Hamburguer no Desktop, Remoção do Ícone Flutuante de Telefone e Adição do Botão Voltar ao Topo (`SPEC-024`).
+- Diagnóstico da causa raiz e correção definitiva da exibição indevida do menu hambúrguer no desktop ($\ge 1024\text{px}$), eliminando a colisão de cascata CSS entre a regra não-camada `.btn` (`display: inline-flex`) e o utilitário `lg:hidden` (`display: none`).
+- Remoção completa do botão de telefone flutuante no canto inferior direito de `src/components/brs/site-layout.tsx`, eliminando ruído visual e confusão comercial no rodapé.
+- Criação e integração global do componente acessível `BackToTop` (`src/components/ui/back-to-top.tsx`) com detecção de rolagem (>400px), transição suave de opacidade e translação, rolagem suave respeitando `prefers-reduced-motion`, touch target normativo de 44px e raio de 4px.
+- Novas suítes de testes unitários Vitest (`src/test/back-to-top.test.tsx` e atualização de `src/test/header.test.tsx`) com 135/135 testes aprovados e testes ponta a ponta Playwright (`e2e/header-nav-and-back-to-top.spec.ts`).
+- Especificação `SPEC-024`, tarefa `TASK-024-01` e revisão `REVIEW-024`.
+- Comparador Antes e Depois: Home, Galeria e Componente Reutilizável (`SPEC-025`).
+- Aprimoramento do componente reutilizável `BeforeAfterSlider` (`src/components/brs/before-after-slider.tsx`) com navegação estendida por teclado (`PageUp`/`PageDown` em saltos de 10%), affordance visual discreta de arraste com fade suave durante interação (`hint`), semântica ARIA de slider, anel de foco acessível e suporte a carregamento prioritário de imagem (`priority`).
+- Criação e montagem da seção editorial `HomeBeforeAfter` (`src/components/brs/home-before-after.tsx`) na página inicial (`src/components/brs/website.tsx`) posicionada imediatamente após o Hero, com composição assimétrica de 12 colunas no desktop (7 colunas para o comparador e 5 colunas para narrativa e CTAs).
+- Integração de conversão fluida com CTA direcionando para a rota canônica da galeria (`/trabalhos`) e garantia de conformidade fotográfica transparente da BRS.
+- Reutilização consistente do componente na galeria de trabalhos (`ProjectGallery` e modal Lightbox em alta definição).
+- Novas suítes de testes unitários Vitest (`src/test/home-before-after.test.tsx` e ampliação de `src/test/before-after-slider.test.tsx`) com 140/140 testes aprovados e testes ponta a ponta Playwright (`e2e/before-after-showcase.spec.ts`).
+- Especificação `SPEC-025`, tarefa `TASK-025-01` e revisão `REVIEW-025`.
+- Imagens Distintas para Comparadores Antes/Depois e Eliminação de Repetição Visual no Acervo Público (`SPEC-026`).
+- Aquisição e organização de 10 fotografias fotorrealistas de alta definição (1376x768, 16:9) em `src/assets/`, substituindo a repetição contínua das mesmas 3 imagens pelo site.
+- Criação de 3 pares genuinamente distintos para o Antes e Depois das especialidades: Funilaria de Precisão (`funilaria-antes.jpg` e `funilaria-depois.jpg`), Pintura em Estufa (`pintura-antes.jpg` e `pintura-depois.jpg`) e Martelinho de Ouro (`martelinho-antes.jpg` e `martelinho-depois.jpg`).
+- Expurgo definitivo de classes e filtros CSS artificiais (`filter contrast-125`, `filter blur`, etc.) que simulavam avarias sobre a mesma foto base.
+- Implementação de fotografia contextual dedicada para serviços e áreas especializadas: `funilaria-servico.jpg` (`/servicos/funilaria`), `pintura-servico.jpg` (`/servicos/pintura-automotiva`), `martelinho-servico.jpg` (`/servicos/martelinho-de-ouro`), `corretores-vistoria.jpg` (`/para-corretores`), `MediaExpand` e `FinalCTA`.
+- Atualização e expansão de suítes de testes: Vitest (`src/test/distinct-images-acervo.test.tsx`, 144 testes 100% aprovados) e Playwright E2E (`e2e/distinct-images.spec.ts`, 28 testes 100% aprovados).
+- Especificação `SPEC-026`, tarefa `TASK-026-01` e revisão `REVIEW-026`.
+- Rota de Proposta Comercial Personalizada (`/proposta/$slug` e `/proposta`), Arquitetura de 10 Seções de Alta Conversão, Validação Comercial de Completude e Transição Honesta para Briefing (`SPEC-027`).
+- Criação do módulo canônico de domínio `src/lib/proposta.ts` com tipagem rigorosa de `CommercialProposal`, validador comercial `validateProposalCompleteness()` (bloqueia placeholders, pendências de valores e termos inadequados de outros segmentos), formatador monetário `formatCurrencyBRL()` e dados da proposta piloto `brs-digital-presence`.
+- Arquitetura de apresentação dividida em 10 submódulos temáticos (`src/components/brs/proposal/`): Identificação & Autoria discreta EPM DevTech (`ProposalHero`), Sub-navegação rápida de âncoras adesiva (`ProposalNav`), Diagnóstico & Metas (`ProposalOpportunity`), Solução Proposta (`ProposalSolution`), Escopo discriminado em duas colunas Incluído vs. Não Incluído (`ProposalScope`), Investimento inequívoco com explicitação sobre ausência de mensalidade surpresa (`ProposalInvestmentSection`), Condições Comerciais e Pagamento (`ProposalConditions`), Etapas de Desenvolvimento e Cronograma (`ProposalTimeline`), Papéis & Responsabilidades mútuas (`ProposalResponsibilities`), FAQ em acordeão acessível Radix UI (`ProposalFaq`), e Aceite Comercial com modal acessível para início do briefing (`ProposalAcceptance`).
+- Criação das rotas TanStack Router `src/routes/proposta/$slug.tsx` (exibição direta individualizada por slug) e `src/routes/proposta/index.tsx` (consulta segura por referência com bloqueio de enumeração pública), mais estado contextual 404 (`ProposalNotFound`).
+- Proteção de privacidade e SEO: inserção de tag `<meta name="robots" content="noindex, nofollow" />` nas rotas de proposta comercial e omissão deliberada do `sitemap.xml` e da navbar pública.
+- Fluxo honesto de manifestação de interesse: o CTA abre diálogo explicativo de alinhamento com a EPM DevTech para agendamento de briefing, permitindo envio para WhatsApp comercial ou cópia do texto sem falsa simulação de contrato jurídico ou cobrança automática.
+- 100% de aprovação nos Quality Gates: 24 arquivos de teste e 166 testes Vitest aprovados (`src/test/proposta.test.ts` e `src/test/proposta-route.test.tsx`), zero erros no ESLint e compilação SSR Nitro concluída com sucesso.
+- Especificação `SPEC-027`, tarefa `TASK-027-01` e revisão `REVIEW-027`.
+- Correção de Hidratação SSR e Visibilidade da Proposta Comercial (`TASK-027-02`).
+- Diagnóstico e correção do aviso `client:525 A tree hydrated but some attributes of the server rendered HTML didn't match the client properties`: remoção de wrappers bloqueantes de animação `<ScrollReveal>` de todos os 10 componentes da proposta comercial (`ProposalHero`, `ProposalOpportunity`, `ProposalSolution`, `ProposalScope`, `ProposalInvestmentSection`, `ProposalConditions`, `ProposalTimeline`, `ProposalResponsibilities`, `ProposalFaq`, `ProposalAcceptance`), restabelecendo renderização e visibilidade imediata de todo o documento comercial sem dependência de JavaScript de scroll e eliminando qualquer risco de tela em branco no navegador.
+- Criação e aprovação da tarefa `TASK-027-02` e revisão `REVIEW-027-02`, com evidência visual fullPage em `e2e-screenshots/proposal-view.png` e 100% de aprovação no Playwright Chromium.
+- Proposta Comercial Modular EPM DevTech para BRS Reparações Automotivas (`SPEC-028`).
+- Criação e disponibilização da rota comercial `/proposta/brs-reparacoes`, apresentando um portfólio de 6 soluções digitais de software sob medida para o setor automotivo: EPM Web (R$ 2.490), EPM Booking Auto (R$ 3.990), EPM CRM Auto (R$ 4.990), EPM Oficina (R$ 7.490), EPM Connect (A partir de R$ 1.990) e EPM Insights (R$ 2.490).
+- Cada solução do catálogo especifica objetivo de negócio, escopo-base incluído, exclusões fora do escopo, dependências técnicas e nota sobre custos de operação.
+- Implementação de Matriz Comparativa de Soluções com visualização completa em tabela para desktop/tablet e cartões otimizados para telas de celular.
+- Estruturação de 5 Alternativas de Combinações Sugeridas com seleção em 1 clique que atualiza instantaneamente o simulador de orçamento: Presença Digital (R$ 2.490), Captação e Agendamento (R$ 6.480), Gestão Comercial (R$ 7.480), Operação Digital em destaque (R$ 18.960) e Ecossistema Expandido (A partir de R$ 23.440).
+- Transparência de infraestrutura e custos recorrentes segregados: Registro de Domínio oficial no Registro.br, Hospedagem Cloud/CDN, Armazenamento de fotos de OS, Provedor homologado WhatsApp API e Suporte sob demanda sem lock-in ou mensalidade mandatória.
+- Ciclo de execução do projeto em 9 etapas visuais numeradas, destacando a manifestação de interesse como próximo passo da direção da BRS.
+- Simulador dinâmico de orçamento em tempo real com modal Radix Dialog acessível contendo prévia da mensagem gerada para cópia e envio direto via WhatsApp ou E-mail.
+- Atualização do portal `/proposta` com atalho proeminente para a proposta modular da BRS e preservação da proposta clássica de presença digital.
+- Garantia de 100% de conformidade com os Quality Gates: 173 testes unitários no Vitest aprovados com 100% de sucesso, 0 erros no ESLint, Prettier formatado, compilação de produção Vite + Nitro SSR sem falhas e 3 testes E2E Playwright aprovados com screenshots capturados em desktop e mobile.
+- Especificação `SPEC-028`, tarefa `TASK-028-01` e revisão `REVIEW-028`.
+- Refatoração Canônica: Website Multipágina com Arquitetura de Rotas Dedicadas (`SPEC-029`).
+- Expurgo definitivo de termos legados de "landing page" ou "página única ancorada" de todo o repositório, alinhando a governança, as regras de IA e a documentação comercial à realidade arquitetural do projeto.
+- Atualização do protocolo canônico em `AGENTS.md` e metadados de arquitetura em `PROJECT.md`, consolidando o projeto como um Website Multipágina em TanStack Router e TanStack Start, com rotas independentes e profundas (`/`, `/servicos`, `/servicos/funilaria`, `/servicos/pintura-automotiva`, `/servicos/martelinho-de-ouro`, `/trabalhos`, `/para-corretores`, `/sobre`, `/contato`, `/privacidade`, `/proposta/$slug`).
+- Refatoração do módulo EPM Web e do catálogo comercial em `src/lib/proposta.ts`, explicitando a entrega das 10 rotas especializadas com indexação SEO individual por URL e navegação client-side ultrarrápida.
+- Atualização e aprovação com 100% de sucesso de todas as suítes de teste unitários Vitest (173/173 testes), linter ESLint (0 erros) e testes E2E Playwright (3/3 testes).
+- Especificação `SPEC-029`, tarefa `TASK-029-01` e revisão `REVIEW-029`.

@@ -22,17 +22,10 @@ describe("SPEC-012 — Padronização de Cores da Seção Hero e Sincronia com N
     expect(h1?.innerHTML).not.toContain("text-amber-500");
   });
 
-  it("renderiza o badge overline com tokens de primary e sem tons alaranjados residuais", () => {
-    const { container } = render(<Hero />);
-    const badgeText = screen.getByText("Precisão no reparo • Cuidado no atendimento");
-    expect(badgeText).toBeInTheDocument();
-    expect(badgeText.className).toContain("text-primary");
-
-    const badgeContainer = badgeText.closest("div");
-    expect(badgeContainer).not.toBeNull();
-    expect(badgeContainer?.className).toContain("border-primary/20");
-    expect(badgeContainer?.className).toContain("bg-primary/10");
-    expect(badgeContainer?.className).not.toContain("amber");
+  it("assegura que o selo genérico de IA foi completamente eliminado do Hero (SPEC-022)", () => {
+    render(<Hero />);
+    const badgeText = screen.queryByText(/Precisão no reparo • Cuidado no atendimento/i);
+    expect(badgeText).toBeNull();
   });
 
   it("renderiza o texto descritivo com a classe de parágrafo text-neutral-400", () => {
@@ -45,36 +38,27 @@ describe("SPEC-012 — Padronização de Cores da Seção Hero e Sincronia com N
     expect(desc?.className).toContain("text-neutral-400");
   });
 
-  it("garante correspondência exata de classes entre o botão primário da Hero e o CTA da Navbar", () => {
+  it("garante que o Hero não duplica o CTA do Header e o Header mantém o CTA primário (SPEC-022)", () => {
     const { container: heroContainer } = render(<Hero />);
     const { container: headerContainer } = render(<Header />);
 
-    // Filtra especificamente os botões de ação 'Solicitar avaliação'
-    const heroCta = heroContainer.querySelector("a[href='/contato']");
-    const headerCta = headerContainer.querySelector("a.bg-primary[href='/contato']");
+    // Hero não possui o botão duplicado 'Solicitar avaliação'
+    const heroPrimaryCta = heroContainer.querySelector("a[href='/contato']");
+    expect(heroPrimaryCta).toBeNull();
 
-    expect(heroCta).not.toBeNull();
+    // Header possui o CTA primário com a classe canônica .btn--primary e sem chanfro
+    const headerCta = headerContainer.querySelector("a[href='/contato']");
     expect(headerCta).not.toBeNull();
-
-    // Ambos os botões compartilham os tokens primários
-    expect(heroCta?.className).toContain("bg-primary");
-    expect(heroCta?.className).toContain("text-primary-foreground");
-    expect(heroCta?.className).toContain("hover:bg-primary/90");
-
-    expect(headerCta?.className).toContain("bg-primary");
-    expect(headerCta?.className).toContain("text-primary-foreground");
-    expect(headerCta?.className).toContain("hover:bg-primary/90");
+    expect(headerCta?.className).toContain("btn--primary");
+    expect(headerCta?.className).not.toContain("btn-bevel-4");
   });
 
-  it("renderiza o botão secundário da Hero com o padrão dark do site", () => {
+  it("renderiza o botão secundário exclusivo da Hero com o padrão normativo .btn--secondary", () => {
     const { container } = render(<Hero />);
     const secondaryBtn = container.querySelector("a[href='/servicos']");
 
     expect(secondaryBtn).not.toBeNull();
-    expect(secondaryBtn?.className).toContain("border-neutral-800");
-    expect(secondaryBtn?.className).toContain("bg-neutral-900/60");
-    expect(secondaryBtn?.className).toContain("text-neutral-300");
-    expect(secondaryBtn?.className).toContain("hover:bg-neutral-800");
-    expect(secondaryBtn?.className).toContain("hover:text-white");
+    expect(secondaryBtn?.className).toContain("btn--secondary");
+    expect(secondaryBtn?.className).not.toContain("btn-bevel-4");
   });
 });

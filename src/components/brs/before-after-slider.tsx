@@ -17,6 +17,12 @@ export interface BeforeAfterSliderProps {
   afterImageClassName?: string;
   onPositionChange?: (position: number) => void;
   showLabels?: boolean;
+  priority?: boolean;
+  hint?: string;
+  title?: string;
+  description?: string;
+  category?: string;
+  linkUrl?: string;
 }
 
 export function BeforeAfterSlider({
@@ -33,6 +39,8 @@ export function BeforeAfterSlider({
   afterImageClassName,
   onPositionChange,
   showLabels = true,
+  priority = false,
+  hint = "Arraste para comparar",
 }: BeforeAfterSliderProps) {
   const [position, setPosition] = React.useState(Math.max(0, Math.min(100, initialPosition)));
   const [isDragging, setIsDragging] = React.useState(false);
@@ -157,6 +165,12 @@ export function BeforeAfterSlider({
     } else if (e.key === "ArrowRight" || e.key === "ArrowUp") {
       next = Math.min(100, position + 5);
       e.preventDefault();
+    } else if (e.key === "PageDown") {
+      next = Math.max(0, position - 10);
+      e.preventDefault();
+    } else if (e.key === "PageUp") {
+      next = Math.min(100, position + 10);
+      e.preventDefault();
     } else if (e.key === "Home") {
       next = 0;
       e.preventDefault();
@@ -179,6 +193,7 @@ export function BeforeAfterSlider({
       ref={containerRef}
       className={cn(
         "relative select-none overflow-hidden rounded-sm bg-card border border-border/80 cursor-ew-resize touch-pan-y group",
+        "focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2",
         aspectRatioClassName,
         className,
       )}
@@ -202,7 +217,9 @@ export function BeforeAfterSlider({
           "absolute inset-0 h-full w-full object-cover pointer-events-none",
           afterImageClassName,
         )}
-        loading="lazy"
+        loading={priority ? "eager" : "lazy"}
+        fetchPriority={priority ? "high" : "auto"}
+        decoding={priority ? "sync" : "async"}
         draggable={false}
       />
 
@@ -220,10 +237,27 @@ export function BeforeAfterSlider({
             "absolute inset-0 h-full w-full object-cover pointer-events-none",
             beforeImageClassName,
           )}
-          loading="lazy"
+          loading={priority ? "eager" : "lazy"}
+          fetchPriority={priority ? "high" : "auto"}
+          decoding={priority ? "sync" : "async"}
           draggable={false}
         />
       </div>
+
+      {/* Dica visual discreta de affordance */}
+      {hint && (
+        <div
+          className={cn(
+            "absolute bottom-2.5 left-1/2 -translate-x-1/2 z-10 pointer-events-none",
+            "px-2.5 py-0.5 rounded-xs bg-neutral-950/80 backdrop-blur-xs border border-white/10",
+            "text-[9px] font-medium tracking-wide text-neutral-300 uppercase",
+            "transition-opacity duration-300",
+            isDragging ? "opacity-0" : "opacity-90",
+          )}
+        >
+          {hint}
+        </div>
+      )}
 
       {/* Badges indicativos com fade suave */}
       {showLabels && (
@@ -250,7 +284,7 @@ export function BeforeAfterSlider({
       >
         <div
           className={cn(
-            "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-8 rounded-full bg-background/95 border border-primary/70 text-primary shadow-xl shadow-black/80 flex items-center justify-center transition-transform duration-150",
+            "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-8 rounded-sm bg-background/95 border border-primary/70 text-primary shadow-xl shadow-black/80 flex items-center justify-center transition-transform duration-150",
             isDragging ? "scale-110 border-primary shadow-primary/20" : "group-hover:scale-105",
           )}
           aria-hidden="true"

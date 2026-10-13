@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Reveal } from "./reveal";
+import { ScrollReveal } from "@/components/ui/scroll-reveal";
 
 export function Philosophy() {
   const pillars = [
@@ -20,7 +20,12 @@ export function Philosophy() {
   return (
     <section className="section-space border-y border-border bg-secondary/40">
       <div className="page-width grid md:grid-cols-2 gap-12 md:gap-24">
-        <Reveal staggerIndex={0}>
+        <ScrollReveal
+          data-reveal=""
+          style={{ "--i": 0 } as React.CSSProperties}
+          direction="up"
+          delay={0.05}
+        >
           <p className="eyebrow mb-5">Padrão de execução</p>
           <h2 className="section-title">
             Critério técnico e
@@ -35,20 +40,21 @@ export function Philosophy() {
           <p className="text-[10px] text-muted-foreground mt-5">
             Princípios que norteiam cada veículo atendido na oficina.
           </p>
-        </Reveal>
+        </ScrollReveal>
+
         <div data-reveal="" style={{ "--i": 1 } as React.CSSProperties} className="space-y-6">
           {pillars.map(([title, description], i) => (
-            <Reveal key={title} staggerIndex={i} className="pillar">
-              <Reveal delay={0.04} yOffset={10}>
+            <ScrollReveal key={title} direction="up" delay={0.1 + i * 0.12} className="pillar">
+              <div className="flex items-center justify-center">
                 <span className="pillar-number">0{i + 1}</span>
-              </Reveal>
+              </div>
               <div>
                 <h3 className="text-xl md:text-2xl font-semibold font-display tracking-tight text-foreground mb-2 text-balance">
                   {title}
                 </h3>
                 <p className="body-copy text-xs text-pretty">{description}</p>
               </div>
-            </Reveal>
+            </ScrollReveal>
           ))}
         </div>
       </div>

@@ -3,11 +3,11 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 import fs from "node:fs";
 import path from "node:path";
 
-import { Website } from "@/components/brs/website";
+import { HomePageContent, SiteLayout } from "@/components/brs/website";
 import { FAQAccordion } from "@/components/brs/faq-accordion";
 import { Contact } from "@/components/brs/contact";
 import { Philosophy } from "@/components/brs/philosophy";
-import { Pickup } from "@/components/brs/pickup";
+import { HomePathways } from "@/components/brs/home-pathways";
 import { Hero } from "@/components/brs/hero";
 import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 
@@ -42,10 +42,10 @@ describe("SPEC-010 — Scroll Reveal Premium", () => {
       expect(reveals[1].style.getPropertyValue("--i")).toBe("1");
     });
 
-    it("renders Pickup section with data-reveal on main container", () => {
-      const { container } = render(<Pickup />);
+    it("renders HomePathways section with data-reveal on header and cards", () => {
+      const { container } = render(<HomePathways />);
       const reveals = container.querySelectorAll<HTMLElement>("[data-reveal]");
-      expect(reveals.length).toBeGreaterThanOrEqual(1);
+      expect(reveals.length).toBeGreaterThanOrEqual(2);
       expect(reveals[0].style.getPropertyValue("--i")).toBe("0");
     });
 
@@ -61,7 +61,11 @@ describe("SPEC-010 — Scroll Reveal Premium", () => {
 
   describe("Progressive Enhancement & Motion Safety", () => {
     it("keeps all elements visible without data-reveal='hidden' during initial SSR/mount", () => {
-      const { container } = render(<Website />);
+      const { container } = render(
+        <SiteLayout>
+          <HomePageContent />
+        </SiteLayout>,
+      );
       // Em ambientes sem observer simulando scroll inicial, nada deve estar escondido com 'hidden'
       const hiddenElements = container.querySelectorAll('[data-reveal="hidden"]');
       expect(hiddenElements.length).toBe(0);
@@ -125,7 +129,11 @@ describe("SPEC-010 — Scroll Reveal Premium", () => {
         dispatchEvent: vi.fn(),
       }));
 
-      const { container } = render(<Website />);
+      const { container } = render(
+        <SiteLayout>
+          <HomePageContent />
+        </SiteLayout>,
+      );
       const hiddenElements = container.querySelectorAll('[data-reveal="hidden"]');
       expect(hiddenElements.length).toBe(0);
     });

@@ -8,8 +8,11 @@ import { shouldSimplifyMotion } from "@/lib/motion";
  * - sem JavaScript (ou com movimento simplificado) o conteúdo permanece visível;
  * - elementos já visíveis na carga inicial não são escondidos (sem flash);
  * - apenas elementos abaixo da dobra recebem o estado inicial oculto.
+ *
+ * `routeKey` (ex.: o pathname atual) reexecuta a varredura quando a rota muda, de modo que o
+ * layout compartilhado inicialize um único observer por página.
  */
-export function useScrollReveal(selector = "[data-reveal]") {
+export function useScrollReveal(selector = "[data-reveal]", routeKey?: string) {
   useEffect(() => {
     if (shouldSimplifyMotion() || typeof IntersectionObserver === "undefined") return;
 
@@ -37,5 +40,5 @@ export function useScrollReveal(selector = "[data-reveal]") {
       observer.disconnect();
       pending.forEach((element) => element.setAttribute("data-reveal", "shown"));
     };
-  }, [selector]);
+  }, [selector, routeKey]);
 }

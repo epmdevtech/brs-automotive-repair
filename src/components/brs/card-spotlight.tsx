@@ -58,7 +58,7 @@ export function CardSpotlight({
   return (
     <div
       className={cn(
-        "group/spotlight relative overflow-hidden rounded-sm bg-card border border-border/80 transition-colors duration-300 hover:border-primary/50",
+        "group/spotlight relative overflow-hidden rounded-xl bg-card border border-border/80 transition-colors duration-300 hover:border-primary/50",
         className,
       )}
       onPointerMove={handlePointerMove}

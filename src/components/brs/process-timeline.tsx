@@ -1,6 +1,6 @@
 import * as React from "react";
 import { motion, useScroll, useTransform, useReducedMotion, type MotionValue } from "framer-motion";
-import { Reveal } from "./reveal";
+import { ScrollReveal } from "@/components/ui/scroll-reveal";
 
 function TimelineStep({
   title,
@@ -49,7 +49,7 @@ function TimelineStep({
     >
       {/* Marcador luminoso no eixo da linha */}
       <div
-        className={`absolute left-0 top-3 size-7 sm:size-8 -translate-x-1/2 rounded-full border flex items-center justify-center transition-all duration-300 ${
+        className={`absolute left-0 top-3 size-7 sm:size-8 -translate-x-1/2 rounded-sm border flex items-center justify-center transition-all duration-300 ${
           active
             ? "border-primary bg-primary/20 text-primary shadow-[0_0_12px_rgba(218,165,32,0.35)]"
             : "border-border/80 bg-card text-muted-foreground"
@@ -102,16 +102,16 @@ export function ProcessTimeline() {
   ];
 
   return (
-    <section className="section-space bg-secondary/50 border-y border-border">
+    <section id="processo" className="section-space bg-secondary/50 border-y border-border">
       <div className="page-width">
-        <Reveal className="mb-12">
+        <ScrollReveal direction="up" delay={0.05} className="mb-12">
           <p className="eyebrow mb-4">Etapas do atendimento</p>
           <h2 className="section-title">
             Fluxo estruturado e
             <br />
             <span className="text-muted-foreground">decisão com total segurança.</span>
           </h2>
-        </Reveal>
+        </ScrollReveal>
 
         <div ref={containerRef} className="relative my-8">
           {/* Linha guia estática de fundo */}

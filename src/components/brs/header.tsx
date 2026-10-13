@@ -1,13 +1,21 @@
 import { useEffect, useState } from "react";
+import { Link, useRouterState } from "@tanstack/react-router";
 import { ArrowUpRight, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { navigation } from "@/lib/brs";
+import { MagneticButton } from "@/components/ui/magnetic-button";
+import { primaryNavigation } from "@/lib/brs";
 import { cn } from "@/lib/utils";
 import { Brand } from "./brand";
+
+/** Início só é ativo na raiz; as demais seções também são ativas nas subrotas (ex.: /servicos/funilaria). */
+function isActivePath(pathname: string, href: string) {
+  return href === "/" ? pathname === "/" : pathname === href || pathname.startsWith(`${href}/`);
+}
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const pathname = useRouterState({ select: (state) => state.location.pathname });
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 40);
@@ -21,11 +29,12 @@ export function Header() {
       {/* Cápsula flutuante centralizada */}
       <div
         className={cn(
-          "pointer-events-auto mx-auto max-w-6xl transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] rounded-full border shadow-2xl backdrop-blur-md flex items-center justify-between",
+          "pointer-events-auto mx-auto max-w-6xl transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] rounded-xl border shadow-2xl backdrop-blur-md flex items-center justify-between",
           scrolled
-            ? "bg-neutral-950/90 border-white/15 py-2 px-5 sm:px-6 shadow-black/60"
-            : "bg-neutral-950/75 border-white/10 py-2.5 sm:py-3 px-5 sm:px-8 shadow-black/40",
+            ? "bg-neutral-950/90 border-white/15 py-2 px-4 sm:px-6 shadow-black/60"
+            : "bg-neutral-950/75 border-white/10 py-2.5 sm:py-3 px-4 sm:px-8 shadow-black/40",
         )}
+        style={{ borderRadius: "var(--radius-lg)" }}
       >
         <Brand />
 
@@ -34,40 +43,46 @@ export function Header() {
           aria-label="Navegação principal"
           className="hidden lg:flex items-center gap-7 xl:gap-8"
         >
-          {navigation.map(([label, href]) => (
-            <a
-              className="text-[13px] text-neutral-300 hover:text-white transition-colors font-medium tracking-wide"
-              key={href}
-              href={href}
-            >
-              {label}
-            </a>
-          ))}
+          {primaryNavigation.map(([label, href]) => {
+            const active = isActivePath(pathname, href);
+            return (
+              <Link
+                key={href}
+                to={href}
+                aria-current={active ? "page" : undefined}
+                className={cn(
+                  "text-[13px] transition-colors font-medium tracking-wide border-b border-transparent pb-0.5",
+                  active ? "text-white border-primary/70" : "text-neutral-300 hover:text-white",
+                )}
+              >
+                {label}
+              </Link>
+            );
+          })}
         </nav>
 
-        {/* Ações da direita: Botão CTA dourado refinado e alternador móvel */}
-        <div className="flex gap-3 items-center">
-          <Button
-            variant="automotive"
-            asChild
-            className="hidden sm:inline-flex h-9 text-xs px-5 rounded-full font-semibold tracking-wide bg-primary text-primary-foreground hover:bg-primary/90 hover:shadow-[0_0_18px_rgba(212,175,55,0.22)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-950 active:scale-[0.98] transition-all duration-300 shadow-md shadow-primary/10"
-          >
-            <a href="/contato">
-              Solicitar avaliação <ArrowUpRight className="ml-1" size={14} aria-hidden="true" />
-            </a>
-          </Button>
+        {/* Ações da direita: Botão CTA dourado normativo (.btn--sm) e alternador móvel */}
+        <div className="flex gap-2 sm:gap-3 items-center">
+          <MagneticButton className="inline-flex">
+            <Button variant="primary" size="sm" asChild className="text-[11px]">
+              <Link to="/contato">
+                <span className="hidden xs:inline">Solicitar avaliação</span>
+                <span className="xs:hidden">Avaliação</span>
+                <ArrowUpRight className="ml-1" size={14} aria-hidden="true" />
+              </Link>
+            </Button>
+          </MagneticButton>
 
-          <Button
-            variant="ghost"
-            size="icon"
-            className="lg:hidden text-white hover:bg-white/10 rounded-full size-9"
+          <button
+            type="button"
+            className="lg:hidden inline-flex items-center justify-center text-white hover:bg-white/10 rounded-sm size-9 transition-colors focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2 cursor-pointer border-0 bg-transparent p-0"
             onClick={() => setOpen(!open)}
             aria-label={open ? "Fechar menu de navegação" : "Abrir menu de navegação"}
             aria-expanded={open}
             aria-controls="mobile-nav"
           >
             {open ? <X aria-hidden="true" size={18} /> : <Menu aria-hidden="true" size={18} />}
-          </Button>
+          </button>
         </div>
       </div>
 
@@ -76,26 +91,34 @@ export function Header() {
         <nav
           id="mobile-nav"
           aria-label="Navegação móvel"
-          className="pointer-events-auto mx-auto max-w-6xl mt-2 rounded-2xl bg-neutral-950/95 backdrop-blur-lg border border-white/10 px-6 py-5 grid gap-4 lg:hidden animate-in fade-in slide-in-from-top-2 shadow-2xl shadow-black/70"
+          className="pointer-events-auto mx-auto max-w-6xl mt-2 rounded-xl bg-neutral-950/95 backdrop-blur-lg border border-white/10 px-6 py-5 grid gap-4 lg:hidden animate-in fade-in slide-in-from-top-2 shadow-2xl shadow-black/70"
+          style={{ borderRadius: "var(--radius-lg)" }}
         >
-          {navigation.map(([label, href]) => (
-            <a
-              key={href}
-              href={href}
-              onClick={() => setOpen(false)}
-              className="text-sm font-medium text-neutral-200 hover:text-primary transition-colors py-1"
-            >
-              {label}
-            </a>
-          ))}
+          {primaryNavigation.map(([label, href]) => {
+            const active = isActivePath(pathname, href);
+            return (
+              <Link
+                key={href}
+                to={href}
+                onClick={() => setOpen(false)}
+                aria-current={active ? "page" : undefined}
+                className={cn(
+                  "text-sm font-medium transition-colors py-1",
+                  active ? "text-primary" : "text-neutral-200 hover:text-primary",
+                )}
+              >
+                {label}
+              </Link>
+            );
+          })}
           <Button
-            variant="automotive"
+            variant="primary"
             asChild
-            className="bg-primary text-primary-foreground font-semibold text-xs tracking-wide rounded-full hover:bg-primary/90 hover:shadow-[0_0_18px_rgba(212,175,55,0.22)] mt-2"
+            className="w-full text-xs font-semibold tracking-wider uppercase mt-2 h-11"
           >
-            <a href="/contato" onClick={() => setOpen(false)}>
+            <Link to="/contato" onClick={() => setOpen(false)}>
               Solicitar avaliação <ArrowUpRight className="ml-1" size={14} aria-hidden="true" />
-            </a>
+            </Link>
           </Button>
         </nav>
       )}

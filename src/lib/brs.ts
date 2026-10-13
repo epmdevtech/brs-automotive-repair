@@ -1,5 +1,17 @@
 export const company = {
   name: "BRS Reparações Automotivas",
+  legalName: "Brs Comercio de Pecas Automotivas LTDA",
+  tradeName: "Brs Comercio de Pecas Automotivas",
+  cnpj: "53.877.400/0001-46",
+  cnpjRaw: "53877400000146",
+  foundedDate: "2024-02-09",
+  foundedFormatted: "09/02/2024",
+  founder: {
+    name: "Bruno",
+    role: "Fundador e Especialista Técnico",
+    experienceYearsText: "Anos de experiência consolidada no segmento automotivo",
+    bio: "À frente da BRS, Bruno reúne anos de vivência e dedicação prática ao setor automotivo — unindo conhecimento aprofundado em funilaria, pintura e fornecimento de peças com uma conduta pautada em diagnóstico honesto e respeito rigoroso ao padrão de fábrica de cada veículo.",
+  },
   phone: "(45) 2035-9440",
   phoneHref: "tel:+554520359440",
   instagram: "https://www.instagram.com/brsreparacoes/",
@@ -23,9 +35,18 @@ export const navigation = [
   ["Contato", "/contato"],
 ] as const;
 
+/**
+ * Itens da navbar. "Contato" não aparece aqui porque o CTA "Solicitar avaliação" já
+ * leva a `/contato`; o rodapé continua usando a lista completa em `navigation`.
+ */
+export const primaryNavigation = navigation.filter(([, href]) => href !== "/contato");
+
+export type ServicePath =
+  "/servicos/funilaria" | "/servicos/pintura-automotiva" | "/servicos/martelinho-de-ouro";
+
 export interface ServiceDetail {
   slug: string;
-  path: string;
+  path: ServicePath;
   title: string;
   short: string;
   description: string;
@@ -140,6 +161,95 @@ export const services: ServiceDetail[] = [
       },
     ],
   },
+];
+
+export interface AestheticServiceDetail {
+  slug: string;
+  title: string;
+  short: string;
+  tagline: string;
+  description: string;
+  applications: string[];
+  limitations: string[];
+  benefits: string[];
+}
+
+export const aestheticServices: AestheticServiceDetail[] = [
+  {
+    slug: "espelhamento",
+    title: "Espelhamento de pintura automotiva",
+    short: "Espelhamento",
+    tagline: "Nivelamento do verniz e eliminação de micro-riscos",
+    description:
+      "Polimento técnico em etapas de corte, refino e lustro para nivelar a camada superficial do verniz. Remove marcas de lavagem (swirls), teias de aranha e oxidações superficiais, restaurando a nitidez ótica e o reflexo espelhado da pintura.",
+    applications: [
+      "Veículos com verniz opaco ou com micro-riscos circulares de lavagens inadequadas",
+      "Pinturas sem brilho ou com oxidação superficial decorrente de exposição solar",
+      "Preparação automotiva antes de eventos, revenda ou aplicação de proteção cerâmica",
+      "Restauração do brilho profundo em cores escuras ou sólidas que evidenciam imperfeições",
+    ],
+    limitations: [
+      "Não recupera riscos profundos que ultrapassaram o verniz e atingiram a tinta base ou a chapa",
+      "Exige espessura mínima de verniz saudável para suportar o processo de polimento",
+    ],
+    benefits: [
+      "Eliminação de até 90% dos micro-riscos e hologramas superficiais",
+      "Reflexo nítido de espelho e toque aveludado na carroceria",
+      "Acabamento com ceras e selantes técnicos de alta ancoragem",
+    ],
+  },
+  {
+    slug: "vitrificacao",
+    title: "Vitrificação cerâmica de pintura",
+    short: "Vitrificação",
+    tagline: "Proteção nanotecnológica duradoura contra intempéries",
+    description:
+      "Aplicação de revestimento cerâmico (coating de sílica / SiO2) que se ancora molecularmente aos microporos do verniz. Forma um escudo vítreo de alta dureza resistente a raios ultravioleta, seiva de árvores, fezes de pássaros e agentes químicos.",
+    applications: [
+      "Veículos zero quilômetro para blindar e conservar a pintura original desde o início",
+      "Veículos recém-polidos ou repintados para prolongar o brilho e facilitar a lavagem",
+      "Proteção preventiva para veículos que ficam expostos a sol, chuva e contaminantes industriais",
+      "Proprietários que exigem repelência hidrofóbica e máxima facilidade de manutenção",
+    ],
+    limitations: [
+      "Exige polimento técnico e descontaminação prévia obrigatória antes da aplicação do vitrificador",
+      "Demanda tempo de cura inicial (mínimo de 24 a 48 horas) antes do contato com chuva ou lavagem",
+      "Não protege contra impactos de pedriscos em rodovias ou danos mecânicos severos",
+    ],
+    benefits: [
+      "Durabilidade e proteção contínua de até 1 a 3 anos sob manutenção adequada",
+      "Alta repelência hidrofóbica: a água e a sujeira deslizam sem aderir",
+      "Filtro UV potente que retarda o desbotamento precoce do verniz",
+    ],
+  },
+  {
+    slug: "polimento-de-parabrisa",
+    title: "Polimento técnico de para-brisa",
+    short: "Polimento de para-brisa",
+    tagline: "Restauração da clareza óptica e remoção de marcas de palheta",
+    description:
+      "Processo especializado de polimento em vidro automotivo utilizando discos especiais e óxido de cério. Remove riscos finos causados por palhetas desgastadas, manchas de chuva ácida (marcas d'água minerais) e contaminações aderidas ao vidro.",
+    applications: [
+      "Para-brisas com marcas curvas causadas por palhetas ressecadas ou areia",
+      "Manchas persistentes de chuva ácida (calcificação) que não saem em lavagens comuns",
+      "Refração e ofuscamento incômodo à noite sob a luz de faróis contrários",
+      "Vidros laterais ou traseiros com marcas minerais e perda de nitidez",
+    ],
+    limitations: [
+      "Inaplicável em trincas, lascas (olhos de boi) ou fissuras estruturais (que exigem reparo de trinca ou troca)",
+      "Riscos que agarram na unha com profundidade excessiva podem gerar distorção óptica se polidos em excesso",
+    ],
+    benefits: [
+      "Visibilidade e segurança noturna e sob chuva restabelecidas",
+      "Economia significativa evitando a substituição desnecessária do para-brisa original",
+      "Eliminação do efeito de ofuscamento contra os faróis de outros veículos",
+    ],
+  },
+];
+
+export const allOfferedServices = [
+  ...services.map((s) => s.short),
+  ...aestheticServices.map((s) => s.short),
 ];
 
 export type ContactValues = {

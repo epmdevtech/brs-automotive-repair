@@ -1,8 +1,9 @@
+import { Link } from "@tanstack/react-router";
 import { ChevronRight, Home } from "lucide-react";
 
 export interface BreadcrumbItem {
   name: string;
-  path?: string;
+  path?: "/servicos" | "/trabalhos" | "/para-corretores" | "/sobre" | "/contato";
 }
 
 export interface BreadcrumbsProps {
@@ -18,13 +19,13 @@ export function Breadcrumbs({ items, className = "" }: BreadcrumbsProps) {
     >
       <ol className="flex flex-wrap items-center gap-1.5 sm:gap-2">
         <li className="flex items-center gap-1.5">
-          <a
-            href="/"
+          <Link
+            to="/"
             className="flex items-center gap-1 hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary rounded-xs"
           >
             <Home size={13} className="text-primary" aria-hidden="true" />
             <span>Início</span>
-          </a>
+          </Link>
         </li>
         {items.map((item, index) => {
           const isLast = index === items.length - 1;
@@ -39,12 +40,12 @@ export function Breadcrumbs({ items, className = "" }: BreadcrumbsProps) {
                   {item.name}
                 </span>
               ) : (
-                <a
-                  href={item.path}
+                <Link
+                  to={item.path}
                   className="hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary rounded-xs"
                 >
                   {item.name}
-                </a>
+                </Link>
               )}
             </li>
           );

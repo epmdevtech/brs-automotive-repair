@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 
 import { MinimalFooter } from "@/components/ui/minimal-footer";
-import { Website } from "@/components/brs/website";
+import { HomePageContent, SiteLayout } from "@/components/brs/website";
 import { company } from "@/lib/brs";
 
 describe("SPEC-013 — MinimalFooter Premium BRS", () => {
@@ -74,10 +74,16 @@ describe("SPEC-013 — MinimalFooter Premium BRS", () => {
         /Demonstração institucional oficial · Fotografias ilustrativas temporárias/i,
       ),
     ).toBeInTheDocument();
+    expect(screen.getByText(new RegExp(company.legalName, "i"))).toBeInTheDocument();
+    expect(screen.getByText(new RegExp(company.cnpj, "i"))).toBeInTheDocument();
   });
 
   it("garante que exatamente UM footer é renderizado no layout completo do Website", () => {
-    const { container } = render(<Website />);
+    const { container } = render(
+      <SiteLayout>
+        <HomePageContent />
+      </SiteLayout>,
+    );
     const footers = container.querySelectorAll("footer");
     expect(footers.length).toBe(1);
   });
