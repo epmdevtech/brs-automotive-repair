@@ -9,15 +9,19 @@ services:
       - "${APP_PORT:-5210}:5210"
     volumes:
       - .:/app
-      - /app/node_modules
+      - brs_node_modules:/app/node_modules
       - /app/.output
+      - /app/.nitro
     environment:
       - NODE_ENV=development
       - PORT=5210
       - HOST=0.0.0.0
       - CHOKIDAR_USEPOLLING=true
       - VITE_USE_POLLING=true
+      - WATCHPACK_POLLING=true
+      - CHOKIDAR_INTERVAL=100
       - APP_PORT=${APP_PORT:-5210}
+    init: true
     restart: unless-stopped
     healthcheck:
       test:
@@ -29,3 +33,6 @@ services:
       timeout: 5s
       retries: 3
       start_period: 10s
+
+volumes:
+  brs_node_modules:

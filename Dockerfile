@@ -21,13 +21,16 @@ ENV PORT=5210
 ENV HOST=0.0.0.0
 ENV CHOKIDAR_USEPOLLING=true
 ENV VITE_USE_POLLING=true
+ENV WATCHPACK_POLLING=true
+ENV CHOKIDAR_INTERVAL=100
 
-COPY --from=deps /app/node_modules ./node_modules
 COPY package.json bun.lock* ./
+RUN bun install
 
 EXPOSE 5210
 
-CMD ["bun", "run", "dev", "--host", "0.0.0.0", "--port", "5210"]
+# Garante sincronização imediata de dependências ao montar volumes e sobe Vite com HMR
+CMD ["sh", "-c", "bun install && bun run dev --host 0.0.0.0 --port 5210"]
 
 # ==========================================
 # Estágio 3: Compilação de Produção
