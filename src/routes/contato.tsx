@@ -1,13 +1,15 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { company } from "@/lib/brs";
 import { buildRouteHead, buildBreadcrumbSchema } from "@/lib/seo";
 import { Breadcrumbs } from "@/components/brs/breadcrumbs";
 import { Contact } from "@/components/brs/contact";
+import { FAQAccordion } from "@/components/brs/faq-accordion";
+import { ScrollReveal } from "@/components/ui/scroll-reveal";
 
 export const Route = createFileRoute("/contato")({
-  validateSearch: (search: Record<string, unknown>) => ({
-    audience: typeof search.audience === "string" ? search.audience : undefined,
-  }),
+  validateSearch: (search: Record<string, unknown>): { audience?: string } => {
+    const audience = search["audience"];
+    return typeof audience === "string" ? { audience } : {};
+  },
   component: ContatoPage,
   head: () =>
     buildRouteHead({
@@ -38,9 +40,12 @@ function ContatoPage() {
   return (
     <div className="pt-28 pb-20">
       <section className="page-width mb-6">
-        <Breadcrumbs items={[{ name: "Contato e Avaliação" }]} className="mb-4" />
+        <ScrollReveal direction="up" delay={0.05}>
+          <Breadcrumbs items={[{ name: "Contato e Avaliação" }]} className="mb-4" />
+        </ScrollReveal>
       </section>
-      <Contact partner={isPartner} />
+      <Contact partner={isPartner} headingAs="h1" />
+      <FAQAccordion />
     </div>
   );
 }

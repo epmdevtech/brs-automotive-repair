@@ -4,15 +4,28 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --radius: 0.3rem;
+  /* Design Tokens Normativos — Fonte Única de Verdade (SPEC-022) */
+  --radius-sm: 4px; /* botões e inputs */
+  --radius-lg: 12px; /* menu flutuante, cards, imagens */
+  --btn-h: 44px;
+  --btn-h-sm: 34px;
+  --btn-px: 20px;
+  --btn-px-sm: 14px;
+  --gold: #c8a96a;
+  --gold-hover: #d8bc82;
+  --on-gold: #16130b;
+  --line-light: rgb(255 255 255 / 0.28);
+  --ease: 200ms ease;
+
+  --radius: var(--radius-sm);
   --background: oklch(0.14 0.005 260);
   --foreground: oklch(0.98 0 0);
   --card: oklch(0.2 0.008 260);
   --card-foreground: var(--foreground);
   --popover: var(--card);
   --popover-foreground: var(--foreground);
-  --primary: oklch(0.73 0.1 82);
-  --primary-foreground: oklch(0.15 0.005 260);
+  --primary: var(--gold);
+  --primary-foreground: var(--on-gold);
   --secondary: oklch(0.21 0.008 260);
   --secondary-foreground: var(--foreground);
   --muted: var(--secondary);
@@ -23,7 +36,7 @@
   --destructive-foreground: var(--foreground);
   --border: oklch(0.98 0 0 / 0.14);
   --input: var(--border);
-  --ring: var(--primary);
+  --ring: var(--gold);
   --hero-shade: linear-gradient(
     90deg,
     oklch(0.1 0.005 260 / 0.92) 0%,
@@ -70,14 +83,15 @@
   --stagger: 80ms;
   --hero-delay: 120ms;
   --zoom: 1.035;
-  --gold-glow: oklch(0.73 0.1 82 / 0.1);
-  --gold-line: oklch(0.73 0.1 82 / 0.55);
+  --gold-glow: rgb(200 169 106 / 0.1);
+  --gold-line: rgb(200 169 106 / 0.55);
 }
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
+  --color-gold: var(--gold);
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
   --color-card: var(--card);
@@ -95,9 +109,12 @@
   --color-destructive-foreground: var(--destructive-foreground);
   --font-sans: var(--font-body);
   --font-display: var(--font-display);
-  --radius-sm: 2px;
-  --radius-md: 4px;
-  --radius-lg: 6px;
+  --radius-xs: var(--radius-sm);
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-sm);
+  --radius-lg: var(--radius-lg);
+  --radius-xl: var(--radius-lg);
+  --radius-2xl: var(--radius-lg);
 }
 @layer base {
   * {
@@ -365,7 +382,7 @@
   position: relative;
   border: 1px solid var(--border);
   background: var(--card);
-  border-radius: 3px;
+  border-radius: var(--radius-lg);
   overflow: hidden;
   transition: border-color var(--dur-base) var(--ease-out);
 }
@@ -470,18 +487,28 @@
 .field-input {
   width: 100%;
   background: var(--background);
-  border: 1px solid var(--input);
-  border-radius: 3px;
+  border: 1px solid var(--line-light);
+  border-radius: var(--radius-sm);
   color: var(--foreground);
-  min-height: 46px;
-  padding: 12px;
+  min-height: 44px;
+  height: 44px;
+  padding: 10px 14px;
   font-family: var(--font-body);
   font-size: 13px;
   line-height: 1.5;
+  transition:
+    border-color var(--ease),
+    outline var(--ease);
 }
-.field-input:focus {
-  outline: 1px solid var(--primary);
-  border-color: var(--primary);
+textarea.field-input {
+  height: auto;
+  min-height: 110px;
+}
+.field-input:focus,
+.field-input:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+  border-color: var(--gold);
 }
 .field-input::placeholder {
   color: var(--muted-foreground);
@@ -572,8 +599,8 @@
   margin: 0;
   aspect-ratio: 21 / 9;
   overflow: hidden;
-  border-radius: 3px;
-  clip-path: inset(0 var(--inset) round 3px);
+  border-radius: var(--radius-lg);
+  clip-path: inset(0 var(--inset) round var(--radius-lg));
 }
 .media-expand-image {
   width: 100%;
@@ -645,12 +672,133 @@
     transform: translateX(3px);
   }
 }
-:is(a, button):focus-visible > .lucide-arrow-up-right {
-  transform: translate(2px, -2px);
-}
 :is(a, button):focus-visible > .lucide-arrow-right {
   transform: translateX(3px);
 }
+
+/* ---------- Componente Canônico de Botão (SPEC-022) ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: var(--btn-h);
+  min-height: var(--btn-h);
+  padding: 0 var(--btn-px);
+  border-radius: var(--radius-sm);
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition:
+    background-color var(--ease),
+    border-color var(--ease),
+    color var(--ease),
+    transform var(--ease);
+}
+
+.btn.hidden {
+  display: none;
+}
+
+@media (width >= 48rem) {
+  .btn.md\:hidden {
+    display: none;
+  }
+}
+
+@media (width >= 64rem) {
+  .btn.lg\:hidden {
+    display: none;
+  }
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.btn:disabled,
+.btn[aria-disabled="true"],
+.btn[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Variante Primária */
+.btn--primary {
+  background: var(--gold);
+  color: var(--on-gold);
+  border-color: var(--gold);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .btn--primary:hover {
+    background: var(--gold-hover);
+    border-color: var(--gold-hover);
+    color: var(--on-gold);
+  }
+}
+
+/* Variante Secundária */
+.btn--secondary {
+  background: #18181a;
+  color: #ffffff;
+  border-color: var(--line-light);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .btn--secondary:hover {
+    border-color: var(--gold);
+    background: rgb(200 169 106 / 0.1);
+    color: #ffffff;
+  }
+}
+
+/* Variante Link */
+.btn--link {
+  background: transparent;
+  color: var(--gold);
+  border-color: transparent;
+  padding: 0;
+  height: auto;
+  min-height: auto;
+  border-radius: 0;
+}
+
+.btn--link > svg,
+.btn--link > .lucide-arrow-right {
+  transition: transform var(--ease);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .btn--link:hover {
+    color: var(--gold-hover);
+  }
+  .btn--link:hover > svg,
+  .btn--link:hover > .lucide-arrow-right {
+    transform: translateX(4px);
+  }
+}
+
+/* Tamanho Compacto Exclusivo do Menu Flutuante */
+.btn--sm {
+  height: var(--btn-h-sm);
+  min-height: var(--btn-h-sm);
+  padding: 0 var(--btn-px-sm);
+  font-size: 11px;
+}
+
 @media (min-width: 1600px) {
   .hero {
     min-height: 820px;
@@ -729,6 +877,16 @@
     top: 12px;
     bottom: auto;
     right: 12px;
+  }
+  .hero-cta-group {
+    width: 100%;
+  }
+  .hero-cta-group .btn,
+  .hero-cta-group button,
+  .hero-cta-group a {
+    width: 100%;
+    min-height: 48px;
+    height: 48px;
   }
 }
 @media (prefers-reduced-motion: reduce) {

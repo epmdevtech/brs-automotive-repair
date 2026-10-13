@@ -1,21 +1,30 @@
-import { ArrowUpRight, Wrench, Paintbrush, Car } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { services } from "@/lib/brs";
-import { Reveal } from "./reveal";
-import { ImageReveal } from "./image-reveal";
-import { CardSpotlight } from "./card-spotlight";
-import bodywork from "@/assets/funilaria.jpg";
-import painting from "@/assets/pintura.jpg";
-import dent from "@/assets/martelinho.jpg";
+import { Link } from "@tanstack/react-router";
+import { ArrowUpRight, Sparkles, ShieldCheck, Eye } from "lucide-react";
+import { services, aestheticServices } from "@/lib/brs";
+import { ScrollReveal } from "@/components/ui/scroll-reveal";
+import { ImageReveal } from "@/components/ui/image-reveal";
+import funilariaServico from "@/assets/funilaria-servico.jpg";
+import pinturaServico from "@/assets/pintura-servico.jpg";
+import martelinhoServico from "@/assets/martelinho-servico.jpg";
 
-const serviceImages = [bodywork, painting, dent];
-const serviceIcons = [Wrench, Paintbrush, Car];
+const serviceImages = [funilariaServico, pinturaServico, martelinhoServico];
 
+const aestheticIcons = [Sparkles, ShieldCheck, Eye];
+
+/**
+ * Seção de Especialidades — Arquitetura Editorial Premium (SPEC-023 & SPEC-030)
+ * Matriz aberta contínua com divisores estruturais, tipografia expressiva e
+ * apresentação clara dos serviços de reparação e estética automotiva.
+ */
 export function Services() {
   return (
     <section id="servicos" className="section-space">
       <div className="page-width">
-        <Reveal className="flex flex-col md:flex-row justify-between md:items-end gap-6 mb-12">
+        <ScrollReveal
+          direction="up"
+          delay={0.05}
+          className="flex flex-col md:flex-row justify-between md:items-end gap-6 mb-12"
+        >
           <div>
             <p className="eyebrow mb-4">Especialidades</p>
             <h2 className="section-title">
@@ -28,81 +37,145 @@ export function Services() {
             Soluções técnicas adequadas para diferentes níveis de avaria. Diagnóstico criterioso
             para cada caso com tecnologia automotiva de ponta.
           </p>
-        </Reveal>
+        </ScrollReveal>
 
-        <div className="grid md:grid-cols-3 gap-6">
-          {services.map((service, i) => {
-            const Icon = serviceIcons[i];
-            return (
-              <Reveal key={service.title} staggerIndex={i} className="h-full">
-                <CardSpotlight className="flex flex-col h-full bg-card/95 group shadow-lg">
-                  {/* Imagem do Serviço com Mask Reveal de baixo para cima */}
-                  <ImageReveal delay={0.1 + i * 0.08} className="relative aspect-16/10">
-                    <img
-                      src={serviceImages[i]}
-                      alt={`${service.title} (fotografia ilustrativa da atividade)`}
-                      width={1200}
-                      height={800}
-                      loading="lazy"
-                      className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-linear-to-t from-card/80 to-transparent pointer-events-none" />
-                    <span className="absolute bottom-3 right-3 text-[8px] uppercase tracking-wider px-2 py-1 bg-background/85 text-muted-foreground border border-border/50 backdrop-blur-xs rounded-xs">
-                      Fotografia ilustrativa
-                    </span>
-                  </ImageReveal>
+        {/* Matriz Editorial com Bordas Compartilhadas (Anti-Card Slop) */}
+        <div className="border-y border-border/80 grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-border/80">
+          {services.map((service, i) => (
+            <ScrollReveal
+              key={service.title}
+              as="article"
+              direction="up"
+              delay={0.1 + i * 0.12}
+              className="flex flex-col justify-between py-8 md:py-10 md:px-8 first:md:pl-0 last:md:pr-0 group"
+            >
+              <div>
+                {/* Fotografia Automotiva com Enquadramento Editorial */}
+                <ImageReveal
+                  delay={0.1 + i * 0.08}
+                  className="relative aspect-16/10 mb-6 overflow-hidden"
+                >
+                  <img
+                    src={serviceImages[i]}
+                    alt={`${service.title} (fotografia ilustrativa da atividade)`}
+                    width={1200}
+                    height={800}
+                    loading="lazy"
+                    className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                  />
+                  <span className="absolute bottom-3 right-3 text-[8px] uppercase tracking-wider px-2 py-1 bg-background/85 text-muted-foreground border border-border/50 backdrop-blur-xs rounded-xs pointer-events-none">
+                    Fotografia ilustrativa
+                  </span>
+                </ImageReveal>
 
-                  {/* Conteúdo com Microinterações */}
-                  <div className="p-6 flex flex-col flex-1 justify-between">
-                    <div>
-                      <div className="flex justify-between items-center mb-5">
-                        <Reveal delay={0.05} yOffset={8}>
-                          <span className="text-[10px] font-semibold text-primary tracking-widest uppercase">
-                            0{i + 1} / ESPECIALIDADE
-                          </span>
-                        </Reveal>
-                        {Icon && (
-                          <div
-                            className="size-9 rounded-sm bg-background/90 border border-border/70 flex items-center justify-center text-primary transition-all duration-300 group-hover:-translate-y-1 group-hover:border-primary/60 group-hover:bg-primary/10 shadow-xs"
-                            aria-hidden="true"
-                          >
-                            <Icon size={18} strokeWidth={1.8} />
-                          </div>
-                        )}
-                      </div>
+                {/* Identificador & Tipografia */}
+                <span className="font-mono text-[11px] font-semibold text-primary tracking-wider uppercase block mb-3">
+                  0{i + 1} / ESPECIALIDADE
+                </span>
 
-                      <h3 className="text-xl md:text-2xl font-semibold font-display tracking-tight text-foreground mb-3 leading-snug text-balance">
-                        <a href={service.path} className="hover:text-primary transition-colors">
-                          {service.title}
-                        </a>
-                      </h3>
-                      <p className="text-xs text-muted-foreground leading-relaxed min-h-[70px] text-pretty">
-                        {service.description}
-                      </p>
+                <h3 className="text-xl md:text-2xl font-semibold font-display tracking-tight text-foreground mb-3 leading-snug text-balance">
+                  <Link to={service.path} className="hover:text-primary transition-colors">
+                    {service.title}
+                  </Link>
+                </h3>
+
+                <p className="text-xs text-muted-foreground leading-relaxed text-pretty">
+                  {service.description}
+                </p>
+              </div>
+
+              {/* Link de Navegação Contextual sem Botões Pesados Repetitivos */}
+              <div className="pt-6 mt-6 border-t border-border/40">
+                <Link
+                  to={service.path}
+                  className="group/link inline-flex items-center gap-1.5 text-xs font-semibold text-primary hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary rounded-xs py-0.5"
+                >
+                  <span>
+                    {i === 0
+                      ? "Conhecer funilaria"
+                      : i === 1
+                        ? "Conhecer a pintura"
+                        : "Entender o martelinho"}
+                  </span>
+                  <ArrowUpRight
+                    size={14}
+                    className="transition-transform duration-200 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5"
+                    aria-hidden="true"
+                  />
+                </Link>
+              </div>
+            </ScrollReveal>
+          ))}
+        </div>
+
+        {/* Linha de Estética Automotiva & Proteção (SPEC-030) */}
+        <div className="mt-16 pt-12 border-t border-border/80">
+          <ScrollReveal
+            direction="up"
+            delay={0.08}
+            className="flex flex-col md:flex-row justify-between md:items-end gap-6 mb-10"
+          >
+            <div>
+              <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-xs bg-primary/10 border border-primary/20 text-primary text-xs font-mono uppercase tracking-wider mb-3">
+                <Sparkles size={13} aria-hidden="true" />
+                <span>Estética & Proteção de Superfícies</span>
+              </div>
+              <h3 className="text-2xl md:text-3xl font-display font-semibold tracking-tight text-foreground">
+                Acabamento refinado e proteção duradoura.
+              </h3>
+            </div>
+            <Link
+              to="/servicos"
+              hash="estetica-automotiva"
+              className="group/all inline-flex items-center gap-1.5 text-xs font-mono font-medium text-primary hover:text-foreground transition-colors"
+            >
+              <span>Ver todas as especificações e limitações</span>
+              <ArrowUpRight
+                size={14}
+                className="transition-transform duration-200 group-hover/all:translate-x-0.5 group-hover/all:-translate-y-0.5"
+                aria-hidden="true"
+              />
+            </Link>
+          </ScrollReveal>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {aestheticServices.map((aesthetic, idx) => {
+              const Icon = aestheticIcons[idx];
+              return (
+                <ScrollReveal
+                  key={aesthetic.slug}
+                  direction="up"
+                  delay={0.12 + idx * 0.1}
+                  className="p-6 rounded-sm border border-border/70 bg-card/40 flex flex-col justify-between hover:border-primary/40 transition-colors"
+                >
+                  <div>
+                    <div className="w-9 h-9 rounded-xs bg-primary/10 border border-primary/20 flex items-center justify-center text-primary mb-4">
+                      <Icon size={18} aria-hidden="true" />
                     </div>
-
-                    {/* Botão de Ação com Feedback Tátil */}
-                    <div className="pt-5 mt-5 border-t border-border/50">
-                      <Button
-                        variant="automotiveOutline"
-                        asChild
-                        className="text-xs h-10 w-full justify-between font-semibold active:scale-[0.98] transition-all duration-200 hover:border-primary/60 hover:bg-primary/15 group-hover:border-primary/40 focus-visible:ring-2 focus-visible:ring-primary shadow-xs"
-                      >
-                        <a href="/contato">
-                          Solicitar avaliação{" "}
-                          <ArrowUpRight
-                            size={14}
-                            className="ml-1 text-primary transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                            aria-hidden="true"
-                          />
-                        </a>
-                      </Button>
-                    </div>
+                    <h4 className="text-base font-semibold font-display text-foreground mb-1.5">
+                      {aesthetic.title}
+                    </h4>
+                    <p className="text-xs text-primary font-mono mb-3">{aesthetic.tagline}</p>
+                    <p className="text-xs text-muted-foreground leading-relaxed">
+                      {aesthetic.description}
+                    </p>
                   </div>
-                </CardSpotlight>
-              </Reveal>
-            );
-          })}
+                  <div className="pt-4 mt-6 border-t border-border/40 flex items-center justify-between">
+                    <span className="text-[11px] font-mono text-muted-foreground">
+                      {aesthetic.benefits[0]}
+                    </span>
+                    <Link
+                      to="/contato"
+                      className="text-xs font-medium text-primary hover:text-foreground transition-colors inline-flex items-center gap-1"
+                    >
+                      <span>Avaliar</span>
+                      <ArrowUpRight size={13} aria-hidden="true" />
+                    </Link>
+                  </div>
+                </ScrollReveal>
+              );
+            })}
+          </div>
         </div>
       </div>
     </section>

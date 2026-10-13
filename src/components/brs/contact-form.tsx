@@ -1,8 +1,17 @@
 import { useState, useEffect, type FormEvent } from "react";
-import { ArrowUpRight, Check, Copy, Instagram } from "lucide-react";
+import { ArrowUpRight, Check, Copy, Instagram, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTitle, DialogDescription } from "@/components/ui/dialog";
-import { company, services, validateContact, contactMessage, type ContactValues } from "@/lib/brs";
+import {
+  company,
+  services,
+  aestheticServices,
+  validateContact,
+  contactMessage,
+  type ContactValues,
+} from "@/lib/brs";
+
+type FormStatus = "idle" | "submitting" | "success" | "error";
 
 const initialValues: ContactValues = {
   name: "",
@@ -18,6 +27,7 @@ const external = { target: "_blank", rel: "noopener noreferrer" };
 export function ContactForm({ partner }: { partner: boolean }) {
   const [values, setValues] = useState<ContactValues>(initialValues);
   const [errors, setErrors] = useState<Partial<Record<keyof ContactValues, string>>>({});
+  const [status, setStatus] = useState<FormStatus>("idle");
   const [message, setMessage] = useState("");
   const [copied, setCopied] = useState(false);
   const [copyError, setCopyError] = useState(false);
@@ -26,17 +36,34 @@ export function ContactForm({ partner }: { partner: boolean }) {
     if (partner) setValues((v) => ({ ...v, audience: "corretor" }));
   }, [partner]);
 
-  const update = (field: keyof ContactValues, value: string) =>
+  const update = (field: keyof ContactValues, value: string) => {
     setValues((v) => ({ ...v, [field]: value }));
+    if (status === "error" && errors[field]) {
+      setErrors((prev) => {
+        const next = { ...prev };
+        delete next[field];
+        return next;
+      });
+    }
+  };
 
   const submit = (event: FormEvent) => {
     event.preventDefault();
     const validation = validateContact(values);
     setErrors(validation);
-    if (Object.keys(validation).length) return;
+    if (Object.keys(validation).length) {
+      setStatus("error");
+      return;
+    }
+    setStatus("submitting");
     setCopied(false);
     setCopyError(false);
-    setMessage(contactMessage(values));
+
+    // Feedback visual palpável com transição suave
+    setTimeout(() => {
+      setMessage(contactMessage(values));
+      setStatus("success");
+    }, 350);
   };
 
   async function copy() {
@@ -111,11 +138,20 @@ export function ContactForm({ partner }: { partner: boolean }) {
               onChange={(e) => update("service", e.target.value)}
             >
               <option value="">Preciso de orientação técnica</option>
-              {services.map((s) => (
-                <option key={s.short} value={s.short}>
-                  {s.short}
-                </option>
-              ))}
+              <optgroup label="Reparações Automotivas">
+                {services.map((s) => (
+                  <option key={s.short} value={s.short}>
+                    {s.short}
+                  </option>
+                ))}
+              </optgroup>
+              <optgroup label="Estética & Proteção">
+                {aestheticServices.map((s) => (
+                  <option key={s.short} value={s.short}>
+                    {s.short}
+                  </option>
+                ))}
+              </optgroup>
             </select>
           </label>
         </div>
@@ -176,15 +212,38 @@ export function ContactForm({ partner }: { partner: boolean }) {
           enviar com um clique diretamente pelo Instagram oficial da BRS.
         </p>
 
-        <Button type="submit" variant="automotive" className="h-12 text-xs font-semibold">
-          Preparar mensagem <ArrowUpRight className="ml-1" size={14} aria-hidden="true" />
+        <Button
+          type="submit"
+          variant="primary"
+          disabled={status === "submitting"}
+          className="h-12 text-xs font-semibold"
+          aria-live="polite"
+        >
+          {status === "submitting" ? (
+            <>
+              <Loader2 className="mr-2 size-4 animate-spin" aria-hidden="true" />
+              Gerando mensagem...
+            </>
+          ) : status === "success" ? (
+            <>
+              <Check className="mr-2 size-4" aria-hidden="true" />
+              Mensagem pronta!
+            </>
+          ) : (
+            <>
+              Preparar mensagem <ArrowUpRight className="ml-1" size={14} aria-hidden="true" />
+            </>
+          )}
         </Button>
       </form>
 
       <Dialog
         open={Boolean(message)}
         onOpenChange={(open) => {
-          if (!open) setMessage("");
+          if (!open) {
+            setMessage("");
+            setStatus("idle");
+          }
         }}
       >
         <DialogContent className="w-[calc(100%-32px)] max-h-[90vh] overflow-y-auto bg-card border-border p-6">
@@ -202,11 +261,7 @@ export function ContactForm({ partner }: { partner: boolean }) {
             className="field-input min-h-44 text-xs font-mono my-2"
           />
           <div className="flex flex-col sm:flex-row gap-3 pt-2">
-            <Button
-              variant="automotiveOutline"
-              onClick={copy}
-              className="flex-1 gap-2 text-xs font-medium"
-            >
+            <Button variant="secondary" onClick={copy} className="flex-1 gap-2 text-xs font-medium">
               {copied ? (
                 <Check size={16} aria-hidden="true" />
               ) : (
@@ -214,7 +269,7 @@ export function ContactForm({ partner }: { partner: boolean }) {
               )}
               {copied ? "Mensagem copiada" : "Copiar mensagem"}
             </Button>
-            <Button variant="automotive" asChild className="flex-1 gap-2 text-xs font-semibold">
+            <Button variant="primary" asChild className="flex-1 gap-2 text-xs font-semibold">
               <a href={company.instagram} {...external}>
                 <Instagram size={16} aria-hidden="true" /> Abrir Instagram
               </a>

@@ -9,14 +9,11 @@ import {
   type ErrorComponentProps,
 } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
-import { Phone } from "lucide-react";
 import { MotionConfig } from "framer-motion";
 
 import appCss from "../styles.css?url";
 import { reportAppError } from "../lib/error-reporting";
-import { company } from "../lib/brs";
-import { Header } from "../components/brs/header";
-import { Footer } from "../components/brs/footer";
+import { SiteLayout } from "../components/brs/site-layout";
 import { Button } from "../components/ui/button";
 
 function NotFoundComponent() {
@@ -31,24 +28,15 @@ function NotFoundComponent() {
           para navegar pelo conteúdo oficial da BRS.
         </p>
         <div className="mt-6 flex flex-wrap justify-center gap-3">
-          <Link
-            to="/"
-            className="inline-flex items-center justify-center rounded-sm bg-primary px-5 py-2.5 text-xs font-semibold tracking-wide text-primary-foreground transition-colors hover:bg-primary/90"
-          >
-            Página inicial
-          </Link>
-          <Link
-            to="/servicos"
-            className="inline-flex items-center justify-center rounded-sm border border-neutral-800 bg-neutral-900/60 px-5 py-2.5 text-xs font-semibold tracking-wide text-neutral-300 transition-colors hover:bg-neutral-800 hover:text-white"
-          >
-            Nossos serviços
-          </Link>
-          <Link
-            to="/contato"
-            className="inline-flex items-center justify-center rounded-sm border border-neutral-800 bg-neutral-900/60 px-5 py-2.5 text-xs font-semibold tracking-wide text-neutral-300 transition-colors hover:bg-neutral-800 hover:text-white"
-          >
-            Fale conosco
-          </Link>
+          <Button variant="primary" asChild>
+            <Link to="/">Página inicial</Link>
+          </Button>
+          <Button variant="secondary" asChild>
+            <Link to="/servicos">Nossos serviços</Link>
+          </Button>
+          <Button variant="secondary" asChild>
+            <Link to="/contato">Fale conosco</Link>
+          </Button>
         </div>
       </div>
     </div>
@@ -73,21 +61,18 @@ function ErrorComponent({ error, reset }: ErrorComponentProps) {
           inicial.
         </p>
         <div className="mt-6 flex flex-wrap justify-center gap-3">
-          <button
+          <Button
+            variant="primary"
             onClick={() => {
               router.invalidate();
               reset();
             }}
-            className="inline-flex items-center justify-center rounded-sm bg-primary px-5 py-2.5 text-xs font-semibold tracking-wide text-primary-foreground transition-colors hover:bg-primary/90"
           >
             Tentar novamente
-          </button>
-          <Link
-            to="/"
-            className="inline-flex items-center justify-center rounded-sm border border-input bg-background px-5 py-2.5 text-xs font-semibold tracking-wide text-foreground transition-colors hover:bg-accent"
-          >
-            Página inicial
-          </Link>
+          </Button>
+          <Button variant="secondary" asChild>
+            <Link to="/">Página inicial</Link>
+          </Button>
         </div>
       </div>
     </div>
@@ -147,31 +132,9 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       <MotionConfig reducedMotion="user">
-        <a
-          href="#conteudo-principal"
-          className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 bg-primary text-primary-foreground p-3 font-medium text-xs rounded-sm"
-        >
-          Pular para o conteúdo principal
-        </a>
-
-        <Header />
-
-        <main id="conteudo-principal">
+        <SiteLayout>
           <Outlet />
-        </main>
-
-        <Footer />
-
-        <Button
-          variant="automotive"
-          size="icon"
-          asChild
-          className="fixed bottom-5 right-5 z-20 size-12 rounded-full shadow-xl md:hidden"
-        >
-          <a href={company.phoneHref} aria-label="Ligar para a central de atendimento da BRS">
-            <Phone size={20} aria-hidden="true" />
-          </a>
-        </Button>
+        </SiteLayout>
       </MotionConfig>
     </QueryClientProvider>
   );

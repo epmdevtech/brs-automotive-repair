@@ -1,7 +1,6 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
-import tsconfigPaths from "vite-tsconfig-paths";
 import { tanstackStart } from "@tanstack/react-start/plugin/vite";
 import { nitro } from "nitro/vite";
 
@@ -9,8 +8,18 @@ export default defineConfig(({ command }) => ({
   server: {
     port: 5210,
     strictPort: true,
+    host: "0.0.0.0",
+    watch: {
+      usePolling:
+        process.env.VITE_USE_POLLING === "true" || process.env.CHOKIDAR_USEPOLLING === "true",
+      interval: 100,
+    },
+    hmr: {
+      clientPort: 5210,
+    },
   },
   resolve: {
+    tsconfigPaths: true,
     alias: {
       "@": "/src",
     },
@@ -24,7 +33,6 @@ export default defineConfig(({ command }) => ({
     ],
   },
   plugins: [
-    tsconfigPaths({ projects: ["./tsconfig.json"] }),
     tailwindcss(),
     tanstackStart({
       server: { entry: "server" },

@@ -16,6 +16,8 @@ import { Route as ParaCorretoresRouteImport } from './routes/para-corretores'
 import { Route as PrivacidadeRouteImport } from './routes/privacidade'
 import { Route as SobreRouteImport } from './routes/sobre'
 import { Route as TrabalhosRouteImport } from './routes/trabalhos'
+import { Route as PropostaIndexRouteImport } from './routes/proposta/index'
+import { Route as PropostaSlugRouteImport } from './routes/proposta/$slug'
 import { Route as ServicosIndexRouteImport } from './routes/servicos/index'
 import { Route as ServicosFunilariaRouteImport } from './routes/servicos/funilaria'
 import { Route as ServicosMartelinhoDeOuroRouteImport } from './routes/servicos/martelinho-de-ouro'
@@ -56,6 +58,16 @@ const TrabalhosRoute = TrabalhosRouteImport.update({
   path: '/trabalhos',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PropostaIndexRoute = PropostaIndexRouteImport.update({
+  id: '/proposta/',
+  path: '/proposta/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PropostaSlugRoute = PropostaSlugRouteImport.update({
+  id: '/proposta/$slug',
+  path: '/proposta/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ServicosIndexRoute = ServicosIndexRouteImport.update({
   id: '/servicos/',
   path: '/servicos/',
@@ -87,9 +99,11 @@ export interface FileRoutesByFullPath {
   '/privacidade': typeof PrivacidadeRoute
   '/sobre': typeof SobreRoute
   '/trabalhos': typeof TrabalhosRoute
+  '/proposta/$slug': typeof PropostaSlugRoute
   '/servicos/funilaria': typeof ServicosFunilariaRoute
   '/servicos/martelinho-de-ouro': typeof ServicosMartelinhoDeOuroRoute
   '/servicos/pintura-automotiva': typeof ServicosPinturaAutomotivaRoute
+  '/proposta/': typeof PropostaIndexRoute
   '/servicos/': typeof ServicosIndexRoute
 }
 export interface FileRoutesByTo {
@@ -100,9 +114,11 @@ export interface FileRoutesByTo {
   '/privacidade': typeof PrivacidadeRoute
   '/sobre': typeof SobreRoute
   '/trabalhos': typeof TrabalhosRoute
+  '/proposta/$slug': typeof PropostaSlugRoute
   '/servicos/funilaria': typeof ServicosFunilariaRoute
   '/servicos/martelinho-de-ouro': typeof ServicosMartelinhoDeOuroRoute
   '/servicos/pintura-automotiva': typeof ServicosPinturaAutomotivaRoute
+  '/proposta': typeof PropostaIndexRoute
   '/servicos': typeof ServicosIndexRoute
 }
 export interface FileRoutesById {
@@ -114,9 +130,11 @@ export interface FileRoutesById {
   '/privacidade': typeof PrivacidadeRoute
   '/sobre': typeof SobreRoute
   '/trabalhos': typeof TrabalhosRoute
+  '/proposta/$slug': typeof PropostaSlugRoute
   '/servicos/funilaria': typeof ServicosFunilariaRoute
   '/servicos/martelinho-de-ouro': typeof ServicosMartelinhoDeOuroRoute
   '/servicos/pintura-automotiva': typeof ServicosPinturaAutomotivaRoute
+  '/proposta/': typeof PropostaIndexRoute
   '/servicos/': typeof ServicosIndexRoute
 }
 export interface FileRouteTypes {
@@ -129,9 +147,11 @@ export interface FileRouteTypes {
     | '/privacidade'
     | '/sobre'
     | '/trabalhos'
+    | '/proposta/$slug'
     | '/servicos/funilaria'
     | '/servicos/martelinho-de-ouro'
     | '/servicos/pintura-automotiva'
+    | '/proposta/'
     | '/servicos/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -142,9 +162,11 @@ export interface FileRouteTypes {
     | '/privacidade'
     | '/sobre'
     | '/trabalhos'
+    | '/proposta/$slug'
     | '/servicos/funilaria'
     | '/servicos/martelinho-de-ouro'
     | '/servicos/pintura-automotiva'
+    | '/proposta'
     | '/servicos'
   id:
     | '__root__'
@@ -155,9 +177,11 @@ export interface FileRouteTypes {
     | '/privacidade'
     | '/sobre'
     | '/trabalhos'
+    | '/proposta/$slug'
     | '/servicos/funilaria'
     | '/servicos/martelinho-de-ouro'
     | '/servicos/pintura-automotiva'
+    | '/proposta/'
     | '/servicos/'
   fileRoutesById: FileRoutesById
 }
@@ -169,9 +193,11 @@ export interface RootRouteChildren {
   PrivacidadeRoute: typeof PrivacidadeRoute
   SobreRoute: typeof SobreRoute
   TrabalhosRoute: typeof TrabalhosRoute
+  PropostaSlugRoute: typeof PropostaSlugRoute
   ServicosFunilariaRoute: typeof ServicosFunilariaRoute
   ServicosMartelinhoDeOuroRoute: typeof ServicosMartelinhoDeOuroRoute
   ServicosPinturaAutomotivaRoute: typeof ServicosPinturaAutomotivaRoute
+  PropostaIndexRoute: typeof PropostaIndexRoute
   ServicosIndexRoute: typeof ServicosIndexRoute
 }
 
@@ -226,6 +252,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TrabalhosRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/proposta/': {
+      id: '/proposta/'
+      path: '/proposta'
+      fullPath: '/proposta/'
+      preLoaderRoute: typeof PropostaIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/proposta/$slug': {
+      id: '/proposta/$slug'
+      path: '/proposta/$slug'
+      fullPath: '/proposta/$slug'
+      preLoaderRoute: typeof PropostaSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/servicos/': {
       id: '/servicos/'
       path: '/servicos'
@@ -265,9 +305,11 @@ const rootRouteChildren: RootRouteChildren = {
   PrivacidadeRoute: PrivacidadeRoute,
   SobreRoute: SobreRoute,
   TrabalhosRoute: TrabalhosRoute,
+  PropostaSlugRoute: PropostaSlugRoute,
   ServicosFunilariaRoute: ServicosFunilariaRoute,
   ServicosMartelinhoDeOuroRoute: ServicosMartelinhoDeOuroRoute,
   ServicosPinturaAutomotivaRoute: ServicosPinturaAutomotivaRoute,
+  PropostaIndexRoute: PropostaIndexRoute,
   ServicosIndexRoute: ServicosIndexRoute,
 }
 export const routeTree = rootRouteImport
