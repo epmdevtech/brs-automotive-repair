@@ -5,21 +5,21 @@ import { NumericCounter } from "@/components/ui/numeric-counter";
 export function Philosophy() {
   const pillars = [
     [
-      "Atenção rigorosa aos detalhes",
-      "Alinhamento milimétrico de painéis, preparação minuciosa e controle de aplicação do verniz.",
+      "Reparação e pintura técnica de precisão",
+      "Alinhamento milimétrico de painéis, preparação minuciosa e controle de aplicação do verniz em estufa de pressão positiva.",
     ],
     [
-      "Comunicação clara e transparente",
-      "Orientações objetivas para que você compreenda o diagnóstico e as etapas de cada reparo.",
+      "Diagnóstico honesto e transparente",
+      "Orientações objetivas e laudo claro para que você compreenda a real extensão da avaria, sem procedimentos desnecessários.",
     ],
     [
-      "Compromisso com o proprietário",
-      "Tratamento responsável com quem confia seu veículo e com corretores que recomendam a BRS.",
+      "Serviço de leva e traz em Toledo-PR",
+      "Comodidade na retirada e entrega do veículo com atendimento ágil e responsável para você e seu corretor parceiro.",
     ],
   ];
 
   return (
-    <section className="section-space border-y border-border bg-secondary/40">
+    <section className="pt-16 pb-8 border-t border-border bg-secondary/20">
       <div className="page-width grid md:grid-cols-2 gap-12 md:gap-24">
         <ScrollReveal
           data-reveal=""
@@ -29,9 +29,8 @@ export function Philosophy() {
         >
           <p className="eyebrow mb-5">Padrão de execução</p>
           <h2 className="section-title">
-            Critério técnico e
-            <br />
-            <span className="text-primary">cuidado em cada etapa.</span>
+            Critério técnico e <br />
+            cuidado em cada etapa.
           </h2>
           <p className="body-copy mt-6 max-w-[440px]">
             Um reparo automotivo duradouro exige técnica apurada, ferramentas adequadas e

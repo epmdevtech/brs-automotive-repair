@@ -40,11 +40,7 @@ function SobrePage() {
         codeIndex="INS.04 // INSTITUCIONAL"
         eyebrow="Oficina Técnica Especializada"
         breadcrumbs={[{ name: "A BRS" }]}
-        title={
-          <>
-            Oficina Técnica Especializada em <span className="text-primary">Toledo, Paraná.</span>
-          </>
-        }
+        title="Oficina Técnica Especializada em Toledo, Paraná."
         description={
           <>
             A <strong className="text-white">BRS Reparações Automotivas</strong> nasceu para atender
@@ -94,13 +90,9 @@ function SobrePage() {
         ]}
         asideContent={
           <div className="relative rounded-2xl border border-white/10 bg-gradient-to-b from-white/[0.04] to-transparent p-6 sm:p-8 backdrop-blur-sm">
-            <div className="flex items-center justify-between border-b border-white/10 pb-4 mb-6">
+            <div className="border-b border-white/10 pb-4 mb-6">
               <span className="font-mono text-[11px] uppercase tracking-[2px] text-primary font-semibold">
-                BRS.HQ // TOLEDO-PR
-              </span>
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2.5 py-0.5 font-mono text-[10px] text-emerald-400">
-                <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                OFICINA ATIVA
+                Oficina em Toledo, Paraná
               </span>
             </div>
             <p className="font-display text-5xl sm:text-6xl font-semibold tracking-tight text-white mb-2">

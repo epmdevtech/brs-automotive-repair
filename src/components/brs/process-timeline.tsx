@@ -107,10 +107,10 @@ export function ProcessTimeline() {
   ];
 
   return (
-    <section id="processo" className="section-space bg-secondary/50 border-y border-border">
+    <section id="processo" className="pt-4 pb-16 bg-secondary/20 border-b border-border">
       <div className="page-width">
-        <ScrollReveal direction="up" delay={0.05} className="mb-12">
-          <p className="eyebrow mb-4">Etapas do atendimento</p>
+        <ScrollReveal direction="up" delay={0.05} className="mb-10">
+          <p className="eyebrow mb-3">Etapas do atendimento</p>
           <h2 className="section-title">
             Fluxo estruturado e
             <br />

@@ -221,6 +221,14 @@ Todas as entregas obedecem ao protocolo **Universal SDD**:
 - `SPEC-034` / `TASK-034-01` / `REVIEW-034`: Redesign Awwwards Standard dos Heroes em Todas as Rotas com Tipografia, Paleta de Cores, Lenis e Coreografia GSAP.
 - `SPEC-035` / `TASK-035-01` / `REVIEW-035`: Criação do DESIGN.md, Reformulação da Escala Tipográfica Fluida e Ritmo de Layout (Anti-AI Genericness).
 - `SPEC-036` / `TASK-036-01` / `REVIEW-036`: Integração do Motion Engine (Lenis + GSAP ScrollTrigger), Componentes Interativos (Before/After Slider, NumericCounter, ParallaxImage, microinterações refinadas) e Transições Suaves de Página.
+- `SPEC-037` / `TASK-037-01` / `REVIEW-037`: Refinamento UX/UI, Consolidação Visual, Despoluição Editorial e Otimização da Hierarquia e Conversão da Home Page.
+- `SPEC-038` / `TASK-038-01` / `REVIEW-038`: Remoção de Artefatos Genéricos de IA (OFICINA ATIVA, Badges LED Pulsantes e Botões All-Caps), restaurando sobriedade editorial e elegância institucional.
+- `SPEC-039` / `TASK-039-01` / `REVIEW-039`: Refinamento da Hero Section e Transição Direta para Especialidades, remoção da barra de micro-benefícios (trust-strip), botão secundário com smooth scroll para #especialidades e incorporação orgânica dos diferenciais.
+- `SPEC-040` / `TASK-040-01` / `REVIEW-040`: Padronização Tipográfica dos Rótulos de Seção (Eyebrows), remoção de pseudo-elementos decorativos (.eyebrow::before) e eliminação de travessões pré-fixados.
+- `SPEC-041` / `TASK-041-01` / `REVIEW-041`: Remoção do CTA de Avaliação da Hero Section e Foco na Descoberta de Serviços, eliminando duplicidade com Header e destacando Ver Especialidades com ArrowDown e tap target mínimo de 44px.
+- `SPEC-042` / `TASK-042-01` / `REVIEW-042`: Refinamento Visual da Hero/Intro de Serviços (/servicos), remoção dos 3 mini-cards compactos de resumo, CTA único de exploração (Ver Trabalhos Concluídos com tap target de 44px), id lista-servicos com respiro py-16 lg:py-20 e limpeza de código.
+- `SPEC-043` / `TASK-043-01` / `REVIEW-043`: Refatoração Global de UX/UI: Despoluição de CTAs em Serviços (/servicos), Foco em Casos em Trabalhos (/trabalhos) e Atualização Editorial B2B em Para Corretores (/para-corretores).
+- `SPEC-044` / `TASK-044-01` / `REVIEW-044`: Padronização da Hierarquia Tipográfica e Títulos Monocromáticos: eliminação de frases bicolores de IA em h1/h2, unificação em branco puro e preservação da cor primária/dourada para CTAs e eyebrows.
 
 ---
 

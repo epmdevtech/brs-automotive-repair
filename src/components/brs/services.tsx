@@ -18,7 +18,12 @@ const aestheticIcons = [Sparkles, ShieldCheck, Eye];
  */
 export function Services() {
   return (
-    <section id="servicos" className="section-space">
+    <section id="servicos" className="section-space py-16 md:py-24 relative">
+      <div
+        id="especialidades"
+        className="scroll-mt-24 absolute -top-12 left-0"
+        aria-hidden="true"
+      />
       <div className="page-width">
         <ScrollReveal
           direction="up"
@@ -67,11 +72,6 @@ export function Services() {
                   </ParallaxImage>
                 </div>
 
-                {/* Identificador & Tipografia */}
-                <span className="font-mono text-[11px] font-semibold text-primary tracking-wider uppercase block mb-3">
-                  0{i + 1} / ESPECIALIDADE
-                </span>
-
                 <h3 className="text-xl md:text-2xl font-semibold font-display tracking-tight text-foreground mb-3 leading-snug text-balance">
                   <Link
                     to={service.path}
@@ -110,20 +110,17 @@ export function Services() {
           ))}
         </div>
 
-        {/* Linha de Estética Automotiva & Proteção (SPEC-030) */}
-        <div className="mt-16 pt-12 border-t border-border/80">
+        {/* Linha de Estética Automotiva & Proteção — Apresentação Editorial Compacta (SPEC-030, SPEC-037) */}
+        <div className="mt-14 pt-10 border-t border-border/80">
           <ScrollReveal
             direction="up"
             delay={0.08}
-            className="flex flex-col md:flex-row justify-between md:items-end gap-6 mb-10"
+            className="flex flex-col md:flex-row justify-between md:items-end gap-4 mb-8"
           >
             <div>
-              <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-xs bg-primary/10 border border-primary/20 text-primary text-xs font-mono uppercase tracking-wider mb-3">
-                <Sparkles size={13} aria-hidden="true" />
-                <span>Estética & Proteção de Superfícies</span>
-              </div>
-              <h3 className="text-2xl md:text-3xl font-display font-semibold tracking-tight text-foreground">
-                Acabamento refinado e proteção duradoura.
+              <p className="eyebrow mb-2">Estética & Proteção</p>
+              <h3 className="text-xl md:text-2xl font-display font-semibold tracking-tight text-foreground">
+                Acabamento refinado e conservação de superfícies.
               </h3>
             </div>
             <Link
@@ -131,7 +128,7 @@ export function Services() {
               hash="estetica-automotiva"
               className="group/all inline-flex items-center gap-1.5 text-xs font-mono font-medium text-primary hover:text-foreground transition-colors"
             >
-              <span>Ver todas as especificações e limitações</span>
+              <span>Ver especificações e limitações</span>
               <ArrowUpRight
                 size={14}
                 className="transition-transform duration-200 group-hover/all:translate-x-0.5 group-hover/all:-translate-y-0.5"
@@ -140,39 +137,37 @@ export function Services() {
             </Link>
           </ScrollReveal>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {/* Lista Editorial Compacta com divisores sutis */}
+          <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-border/60 border-y border-border/60">
             {aestheticServices.map((aesthetic, idx) => {
               const Icon = aestheticIcons[idx];
               return (
                 <ScrollReveal
                   key={aesthetic.slug}
                   direction="up"
-                  delay={0.12 + idx * 0.1}
-                  className="p-6 rounded-sm border border-border/70 bg-card/40 flex flex-col justify-between hover:border-primary/50 hover:bg-card/70 hover:shadow-[0_4px_24px_rgba(200,169,106,0.06)] transition-all duration-300 group/card"
+                  delay={0.1 + idx * 0.08}
+                  className="py-6 md:py-8 md:px-6 first:md:pl-0 last:md:pr-0 flex flex-col justify-between group transition-colors duration-300 hover:bg-white/[0.015]"
                 >
                   <div>
-                    <div className="w-9 h-9 rounded-xs bg-primary/10 border border-primary/20 flex items-center justify-center text-primary mb-4 group-hover/card:scale-105 group-hover/card:border-primary/50 transition-all duration-300">
-                      <Icon size={18} aria-hidden="true" />
+                    <div className="flex items-center gap-2.5 text-primary mb-2.5">
+                      <Icon size={16} aria-hidden="true" className="shrink-0" />
+                      <h4 className="text-sm font-semibold font-display text-foreground group-hover:text-primary transition-colors">
+                        {aesthetic.title}
+                      </h4>
                     </div>
-                    <h4 className="text-base font-semibold font-display text-foreground mb-1.5 group-hover/card:text-white transition-colors">
-                      {aesthetic.title}
-                    </h4>
-                    <p className="text-xs text-primary font-mono mb-3">{aesthetic.tagline}</p>
                     <p className="text-xs text-muted-foreground leading-relaxed">
                       {aesthetic.description}
                     </p>
                   </div>
-                  <div className="pt-4 mt-6 border-t border-border/40 flex items-center justify-between">
-                    <span className="text-[11px] font-mono text-muted-foreground">
-                      {aesthetic.benefits[0]}
-                    </span>
+                  <div className="pt-4 mt-4 flex items-center justify-between text-[11px] font-mono text-muted-foreground">
+                    <span className="text-primary/90">{aesthetic.benefits[0]}</span>
                     <Link
                       to="/contato"
-                      className="text-xs font-medium text-primary hover:text-foreground transition-colors inline-flex items-center gap-1 group/btn"
+                      className="text-primary hover:text-foreground transition-colors inline-flex items-center gap-1 group/btn font-medium"
                     >
                       <span>Avaliar</span>
                       <ArrowUpRight
-                        size={13}
+                        size={12}
                         className="transition-transform duration-200 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5"
                         aria-hidden="true"
                       />

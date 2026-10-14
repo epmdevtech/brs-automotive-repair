@@ -36,7 +36,7 @@ const pathways = [
  */
 export function HomePathways() {
   return (
-    <section className="section-space border-y border-border bg-secondary/40">
+    <section className="section-space bg-background border-b border-border">
       <div className="page-width">
         <ScrollReveal
           data-reveal=""

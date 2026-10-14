@@ -36,11 +36,7 @@ function PrivacidadePage() {
         breadcrumbs={[{ name: "Política de Privacidade" }]}
         codeIndex="LEG.07 // LGPD & PRIVACIDADE"
         eyebrow="Privacidade e Proteção de Dados"
-        title={
-          <>
-            Transparência e Respeito à <span className="text-primary">sua Privacidade.</span>
-          </>
-        }
+        title="Transparência e Respeito à sua Privacidade."
         description={
           <p className="text-neutral-300 text-sm sm:text-base leading-relaxed">
             A <strong className="text-white">{company.legalName}</strong> (nome fantasia{" "}

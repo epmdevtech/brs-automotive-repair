@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { MagneticButton } from "@/components/ui/magnetic-button";
 import { cn } from "@/lib/utils";
 import { MOTION_TOKENS } from "@/lib/motion-system";
+import { useSmoothScroll } from "@/hooks/use-smooth-scroll";
 import { SignatureCanvas } from "./signature-canvas";
 
 export interface NavLink {
@@ -46,6 +47,8 @@ function HeroLink({
   ...props
 }: { action: HeroAction; children: React.ReactNode } & React.ComponentPropsWithRef<"a">) {
   const { href, onClick } = action;
+  const { scrollTo } = useSmoothScroll();
+
   if (href?.startsWith("/")) {
     // O destino vem de props genéricas; o roteador valida a rota em tempo de execução.
     return (
@@ -54,8 +57,20 @@ function HeroLink({
       </Link>
     );
   }
+
+  const handleAnchorClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (onClick) onClick();
+    if (href?.startsWith("#")) {
+      e.preventDefault();
+      scrollTo(href);
+      if (typeof window !== "undefined") {
+        window.history.pushState(null, "", href);
+      }
+    }
+  };
+
   return (
-    <a {...props} href={href} onClick={onClick}>
+    <a {...props} href={href} onClick={handleAnchorClick}>
       {children}
     </a>
   );
@@ -183,14 +198,6 @@ export const AnimatedHero = ({
         className="pointer-events-none absolute top-1/3 left-1/3 -translate-x-1/2 -translate-y-1/2 size-[650px] rounded-full bg-primary/8 blur-[140px] will-change-transform"
       />
 
-      {/* Marcas de precisão técnica nas bordas (estilo Awwwards SOTD) */}
-      <div className="absolute top-24 left-8 text-white/15 font-mono text-[10px] select-none hidden lg:block tracking-widest">
-        + BRS.24 // REF:TLD-PR
-      </div>
-      <div className="absolute top-24 right-8 text-white/15 font-mono text-[10px] select-none hidden lg:block tracking-widest">
-        COORD: 24°43'S 53°44'W
-      </div>
-
       {/* Conteúdo principal animado do Hero */}
       <motion.div
         ref={contentRef}
@@ -209,14 +216,9 @@ export const AnimatedHero = ({
         {/* Título Principal (H1) com forte contraste */}
         <motion.h1
           variants={itemVariants}
-          className="text-4xl font-semibold tracking-tight sm:text-5xl md:text-6xl lg:text-[4.25rem] font-display leading-[1.12] max-w-4xl text-balance"
+          className="text-4xl font-semibold tracking-tight sm:text-5xl md:text-6xl lg:text-[4.25rem] font-display leading-[1.12] max-w-4xl text-balance text-white"
         >
-          {title || (
-            <>
-              <span className="text-white font-semibold">BRS Reparações</span>{" "}
-              <span className="text-primary font-semibold">Automotivas.</span>
-            </>
-          )}
+          {title || "BRS Reparações Automotivas."}
         </motion.h1>
 
         {/* Subtítulo Confortável e Nítido */}
@@ -231,20 +233,27 @@ export const AnimatedHero = ({
         {(ctaButton || secondaryCta) && (
           <motion.div
             variants={itemVariants}
-            className="mt-8 flex flex-wrap items-center gap-4 hero-cta-group"
+            className={cn(
+              "mt-8 flex flex-wrap items-center hero-cta-group",
+              ctaButton && secondaryCta && "gap-4",
+            )}
           >
             {/* Botão Primário (se fornecido) */}
             {ctaButton && (
               <MagneticButton>
                 {ctaButton.href ? (
-                  <Button variant="primary" asChild className="cursor-pointer">
+                  <Button variant="primary" asChild className="cursor-pointer min-h-[44px]">
                     <HeroLink action={ctaButton}>
                       {ctaButton.text}{" "}
                       <ArrowUpRight className="ml-1.5" size={16} aria-hidden="true" />
                     </HeroLink>
                   </Button>
                 ) : (
-                  <Button variant="primary" onClick={ctaButton.onClick} className="cursor-pointer">
+                  <Button
+                    variant="primary"
+                    onClick={ctaButton.onClick}
+                    className="cursor-pointer min-h-[44px]"
+                  >
                     {ctaButton.text}{" "}
                     <ArrowUpRight className="ml-1.5" size={16} aria-hidden="true" />
                   </Button>
@@ -252,19 +261,35 @@ export const AnimatedHero = ({
               </MagneticButton>
             )}
 
-            {/* Botão Secundário */}
+            {/* Botão Secundário / Descoberta de Serviços */}
             {secondaryCta &&
               (secondaryCta.href ? (
-                <Button variant="secondary" asChild className="cursor-pointer">
-                  <HeroLink action={secondaryCta}>{secondaryCta.text}</HeroLink>
+                <Button
+                  variant="secondary"
+                  asChild
+                  className="cursor-pointer min-h-[44px] px-6 text-xs group"
+                >
+                  <HeroLink action={secondaryCta}>
+                    {secondaryCta.text}{" "}
+                    <ArrowDown
+                      size={14}
+                      className="ml-2 transition-transform duration-300 group-hover:translate-y-1 text-primary"
+                      aria-hidden="true"
+                    />
+                  </HeroLink>
                 </Button>
               ) : (
                 <Button
                   variant="secondary"
                   onClick={secondaryCta.onClick}
-                  className="cursor-pointer"
+                  className="cursor-pointer min-h-[44px] px-6 text-xs group"
                 >
-                  {secondaryCta.text}
+                  {secondaryCta.text}{" "}
+                  <ArrowDown
+                    size={14}
+                    className="ml-2 transition-transform duration-300 group-hover:translate-y-1 text-primary"
+                    aria-hidden="true"
+                  />
                 </Button>
               ))}
           </motion.div>

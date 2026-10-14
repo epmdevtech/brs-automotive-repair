@@ -49,19 +49,9 @@ function ContatoPage() {
             : "Atendimento Técnico e Avaliação"
         }
         title={
-          isPartner ? (
-            <>
-              Canal Direto para Corretores.
-              <br />
-              <span className="text-primary">Agilidade e Respaldo Técnico.</span>
-            </>
-          ) : (
-            <>
-              O primeiro passo é um
-              <br />
-              <span className="text-primary">diagnóstico transparente.</span>
-            </>
-          )
+          isPartner
+            ? "Canal Direto para Corretores. Agilidade e Respaldo Técnico."
+            : "O primeiro passo é um diagnóstico transparente."
         }
         description={
           <p className="text-neutral-300 text-sm sm:text-base leading-relaxed">

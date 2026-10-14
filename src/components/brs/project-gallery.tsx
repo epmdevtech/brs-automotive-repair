@@ -93,7 +93,7 @@ const galleryCases: GalleryCase[] = [
   },
 ];
 
-export function ProjectGallery() {
+export function ProjectGallery({ className }: { className?: string } = {}) {
   const [activeModalIndex, setActiveModalIndex] = useState<number | null>(null);
   const currentCase = activeModalIndex === null ? null : galleryCases[activeModalIndex];
 
@@ -108,7 +108,7 @@ export function ProjectGallery() {
   };
 
   return (
-    <section id="trabalho" className="section-space">
+    <section id="trabalho" className={`section-space ${className || ""}`}>
       <div className="page-width">
         <ScrollReveal
           direction="up"

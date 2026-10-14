@@ -33,10 +33,7 @@ export function MediaExpand() {
             className="media-expand-image"
           />
           <figcaption className="media-expand-caption">
-            <span className="eyebrow flex items-center gap-2">
-              <span className="size-1.5 rounded-full bg-primary" aria-hidden="true" />
-              Pintura automotiva // Estufa de Pressão Positiva
-            </span>
+            <span className="eyebrow">Pintura automotiva // Estufa de Pressão Positiva</span>
             <span className="media-expand-title">Acabamento uniforme, do preparo ao verniz.</span>
           </figcaption>
           <span className="media-expand-note image-note">Fotografia ilustrativa</span>
