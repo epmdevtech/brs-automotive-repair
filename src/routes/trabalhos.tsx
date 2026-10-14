@@ -1,10 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Info } from "lucide-react";
+import { Info, Sparkles, CheckCircle2, ShieldCheck, ArrowUpRight } from "lucide-react";
 import { buildRouteHead, buildBreadcrumbSchema } from "@/lib/seo";
-import { Breadcrumbs } from "@/components/brs/breadcrumbs";
+import { PageHero } from "@/components/brs/page-hero";
 import { ProjectGallery } from "@/components/brs/project-gallery";
 import { ContactCTA } from "@/components/brs/contact-cta";
-import { ScrollReveal } from "@/components/ui/scroll-reveal";
 
 export const Route = createFileRoute("/trabalhos")({
   component: TrabalhosPage,
@@ -33,57 +32,72 @@ export const Route = createFileRoute("/trabalhos")({
 function TrabalhosPage() {
   return (
     <div className="pt-28 pb-20">
-      <section className="page-width mb-8">
-        <ScrollReveal direction="up" delay={0.05}>
-          <Breadcrumbs items={[{ name: "Trabalhos" }]} className="mb-6" />
-        </ScrollReveal>
-
-        <div className="max-w-3xl">
-          <ScrollReveal direction="up" delay={0.1}>
-            <p className="eyebrow mb-3">Galeria Técnica Interativa</p>
-          </ScrollReveal>
-
-          <ScrollReveal direction="up" delay={0.2}>
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-semibold font-display tracking-tight text-white mb-6 leading-tight">
-              Casos de Reparação e Acabamento.
-            </h1>
-          </ScrollReveal>
-
-          <ScrollReveal direction="up" delay={0.3}>
-            <p className="text-neutral-300 text-sm sm:text-base leading-relaxed mb-6">
-              Explore abaixo a comparação interativa de procedimentos. Arraste o divisor central ou
-              utilize as teclas direcionais do teclado para alternar entre as fases de avaliação e o
-              resultado final obtido.
-            </p>
-          </ScrollReveal>
-
-          {/* Aviso Explícito de Conformidade Fotográfica */}
-          <ScrollReveal direction="up" delay={0.38}>
-            <div className="p-4 rounded-xl border border-primary/20 bg-primary/5 flex items-start gap-3 text-xs text-neutral-300">
-              <Info size={18} className="text-primary shrink-0 mt-0.5" aria-hidden="true" />
-              <div>
-                <span className="font-semibold text-white block mb-0.5">
-                  Transparência Fotográfica
-                </span>
-                <span>
-                  O acervo fotográfico real da BRS está em fase de documentação com autorização de
-                  clientes em Toledo-PR. As imagens apresentadas nesta galeria são ilustrativas
-                  temporárias demonstrativas da precisão e dos métodos empregados pela oficina.
-                </span>
-              </div>
+      {/* Hero Section Padrão Awwwards Site of the Day (SPEC-034) */}
+      <PageHero
+        breadcrumbs={[{ name: "Trabalhos" }]}
+        codeIndex="GAL.03 // PORTFÓLIO"
+        eyebrow="Galeria Técnica Interativa"
+        title="Casos de Reparação e Acabamento."
+        description={
+          <p className="text-neutral-300 text-sm sm:text-base leading-relaxed mb-2">
+            Explore abaixo a comparação interativa de procedimentos. Arraste o divisor central ou
+            utilize as teclas direcionais do teclado para alternar entre as fases de avaliação e o
+            resultado final obtido.
+          </p>
+        }
+        telemetryBadges={[
+          {
+            icon: Sparkles,
+            label: "Comparador Interativo",
+            detail: "Deslizamento contínuo e inspeção de gaps",
+          },
+          {
+            icon: CheckCircle2,
+            label: "Precisão Milimétrica",
+            detail: "Padrão de fábrica sem enxertos pesados",
+          },
+          {
+            icon: ShieldCheck,
+            label: "Toledo, Paraná",
+            detail: "Documentação técnica dos procedimentos",
+          },
+        ]}
+        actions={[
+          {
+            label: "Solicitar avaliação técnica",
+            to: "/contato",
+            variant: "primary",
+            icon: ArrowUpRight,
+          },
+        ]}
+        footerContent={
+          <div className="p-4 rounded-sm border border-primary/20 bg-primary/5 flex items-start gap-3 text-xs text-neutral-300">
+            <Info size={18} className="text-primary shrink-0 mt-0.5" aria-hidden="true" />
+            <div>
+              <span className="font-semibold text-white block mb-0.5">
+                Transparência Fotográfica
+              </span>
+              <span>
+                O acervo fotográfico real da BRS está em fase de documentação com autorização de
+                clientes em Toledo-PR. As imagens apresentadas nesta galeria são ilustrativas
+                temporárias demonstrativas da precisão e dos métodos empregados pela oficina.
+              </span>
             </div>
-          </ScrollReveal>
-        </div>
-      </section>
+          </div>
+        }
+      />
 
-      {/* Galeria com Sliders e Lightbox */}
+      {/* Galeria com Filtros Interativos e Slider Antes/Depois */}
       <ProjectGallery />
 
-      <ContactCTA
-        title="Deseja uma análise técnica para o seu veículo?"
-        description="Envie imagens ou venha nos visitar para receber uma previsão clara sobre prazo e procedimentos cabíveis."
-        label="Solicitar avaliação do seu carro"
-      />
+      {/* CTA de Fechamento */}
+      <div className="mt-16">
+        <ContactCTA
+          title="Precisa de uma avaliação para o seu veículo?"
+          description="Envie as fotos da avaria e receba uma orientação técnica preliminar sobre o melhor método de reparação para o seu caso."
+          label="Solicitar avaliação técnica"
+        />
+      </div>
     </div>
   );
 }

@@ -1,6 +1,7 @@
 import * as React from "react";
 import { motion, useScroll, useTransform, useReducedMotion, type MotionValue } from "framer-motion";
 import { ScrollReveal } from "@/components/ui/scroll-reveal";
+import { NumericCounter } from "@/components/ui/numeric-counter";
 
 function TimelineStep({
   title,
@@ -47,7 +48,7 @@ function TimelineStep({
         willChange: "opacity",
       }}
     >
-      {/* Marcador luminoso no eixo da linha */}
+      {/* Marcador luminoso no eixo da linha com contador animado */}
       <div
         className={`absolute left-0 top-3 size-7 sm:size-8 -translate-x-1/2 rounded-sm border flex items-center justify-center transition-all duration-300 ${
           active
@@ -55,7 +56,11 @@ function TimelineStep({
             : "border-border/80 bg-card text-muted-foreground"
         }`}
       >
-        <span className="text-[11px] font-semibold font-mono">0{index + 1}</span>
+        <NumericCounter
+          target={index + 1}
+          padZero
+          className="text-[11px] font-semibold font-mono"
+        />
       </div>
 
       <div className="grid md:grid-cols-[1.2fr_2fr] gap-2 md:gap-8 items-baseline">

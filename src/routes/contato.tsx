@@ -1,9 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { ArrowUpRight, Clock, Instagram, MapPin, Phone } from "lucide-react";
+import { company } from "@/lib/brs";
 import { buildRouteHead, buildBreadcrumbSchema } from "@/lib/seo";
-import { Breadcrumbs } from "@/components/brs/breadcrumbs";
+import { PageHero } from "@/components/brs/page-hero";
 import { Contact } from "@/components/brs/contact";
 import { FAQAccordion } from "@/components/brs/faq-accordion";
-import { ScrollReveal } from "@/components/ui/scroll-reveal";
 
 export const Route = createFileRoute("/contato")({
   validateSearch: (search: Record<string, unknown>): { audience?: string } => {
@@ -39,12 +40,74 @@ function ContatoPage() {
 
   return (
     <div className="pt-28 pb-20">
-      <section className="page-width mb-6">
-        <ScrollReveal direction="up" delay={0.05}>
-          <Breadcrumbs items={[{ name: "Contato e Avaliação" }]} className="mb-4" />
-        </ScrollReveal>
-      </section>
-      <Contact partner={isPartner} headingAs="h1" />
+      <PageHero
+        breadcrumbs={[{ name: "Contato e Avaliação" }]}
+        codeIndex={isPartner ? "PAR.06 // ATENDIMENTO CORRETORES" : "CON.06 // CONTATO & AVALIAÇÃO"}
+        eyebrow={
+          isPartner
+            ? "Canal Exclusivo para Corretores e Seguradoras"
+            : "Atendimento Técnico e Avaliação"
+        }
+        title={
+          isPartner ? (
+            <>
+              Canal Direto para Corretores.
+              <br />
+              <span className="text-primary">Agilidade e Respaldo Técnico.</span>
+            </>
+          ) : (
+            <>
+              O primeiro passo é um
+              <br />
+              <span className="text-primary">diagnóstico transparente.</span>
+            </>
+          )
+        }
+        description={
+          <p className="text-neutral-300 text-sm sm:text-base leading-relaxed">
+            {isPartner
+              ? "Atendimento prioritário para corretores de seguros em Toledo e região. Comunicação técnica clara para liberação de sinistros, vistorias complementares e acompanhamento de etapas."
+              : "Conte à equipe da BRS o que ocorreu com seu veículo e solicite orientações técnicas sobre o método ideal de recuperação estética ou estrutural."}
+          </p>
+        }
+        telemetryBadges={[
+          {
+            icon: Phone,
+            label: "Central Direta",
+            detail: company.phone,
+          },
+          {
+            icon: Instagram,
+            label: "Instagram Oficial",
+            detail: "@brsreparacoes",
+          },
+          {
+            icon: MapPin,
+            label: "Toledo — PR",
+            detail: "Atendimento & Leva e Traz",
+          },
+          {
+            icon: Clock,
+            label: "Tempo de Resposta",
+            detail: "Diagnóstico ágil e fundamentado",
+          },
+        ]}
+        actions={[
+          {
+            label: "Ir para o formulário de avaliação",
+            href: "#contato",
+            variant: "primary",
+            icon: ArrowUpRight,
+          },
+          {
+            label: company.phone,
+            href: company.phoneHref,
+            variant: "secondary",
+            icon: Phone,
+          },
+        ]}
+      />
+      <Contact partner={isPartner} headingAs="h2" />
       <FAQAccordion />
     </div>
   );

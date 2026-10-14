@@ -3,6 +3,30 @@
 @import "tw-animate-css";
 @custom-variant dark (&:is(.dark *));
 
+/* Lenis Smooth Scroll Core Styles (SPEC-032) */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis:not(.lenis-autoToggle).lenis-stopped {
+  overflow: clip;
+}
+.lenis [data-lenis-prevent],
+.lenis [data-lenis-prevent-wheel],
+.lenis [data-lenis-prevent-touch],
+.lenis [data-lenis-prevent-vertical],
+.lenis [data-lenis-prevent-horizontal] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+.lenis.lenis-autoToggle {
+  transition-property: overflow;
+  transition-duration: 1ms;
+  transition-behavior: allow-discrete;
+}
+
 :root {
   /* Design Tokens Normativos — Fonte Única de Verdade (SPEC-022) */
   --radius-sm: 4px; /* botões e inputs */
@@ -49,14 +73,30 @@
   --font-display: "Sora", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-body: "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 
-  /* Escala Tipográfica Fluida (clamp) */
-  --text-hero: clamp(2.5rem, 1.8rem + 3.2vw, 4.25rem); /* 40px - 68px */
-  --text-hero-sub: clamp(1.125rem, 1rem + 0.6vw, 1.375rem); /* 18px - 22px */
-  --text-section: clamp(1.875rem, 1.4rem + 1.8vw, 2.75rem); /* 30px - 44px */
-  --text-h3: clamp(1.125rem, 1.05rem + 0.4vw, 1.375rem); /* 18px - 22px */
-  --text-body: clamp(0.875rem, 0.84rem + 0.15vw, 0.9375rem); /* 14px - 15px */
-  --text-caption: 0.8125rem; /* 13px */
-  --text-micro: 0.6875rem; /* 11px */
+  /* Escala Tipográfica Fluida Awwwards Standard (SPEC-035) */
+  --t-mega: clamp(3.5rem, 1.5rem + 8vw, 7.5rem); /* Display monumental, H1 de entrada */
+  --t-xl: clamp(2.25rem, 1.25rem + 3.8vw, 4.5rem); /* Títulos de páginas e chamadas hero */
+  --t-l: clamp(1.75rem, 1.15rem + 1.8vw, 2.75rem); /* Títulos de seções principais */
+  --t-m: clamp(1.25rem, 1.05rem + 0.6vw, 1.625rem); /* Subtítulos e títulos de cartões */
+  --t-body: clamp(0.9375rem, 0.9rem + 0.15vw, 1.0625rem); /* Corpo de leitura (15px - 17px) */
+  --t-s: 0.875rem; /* Texto de apoio e botões secundários (14px) */
+  --t-xs: 0.75rem; /* Legendas, badges e metadados (12px) */
+  --t-micro: 0.6875rem; /* Telemetria técnica, chips e coordenadas (11px) */
+
+  /* Mapeamento e Tokens Canônicos de Escala Fluida */
+  --text-hero: clamp(2.25rem, 1.25rem + 3.8vw, 4.5rem);
+  --text-hero-sub: clamp(1.125rem, 1rem + 0.6vw, 1.375rem);
+  --text-section: clamp(1.75rem, 1.15rem + 1.8vw, 2.75rem);
+  --text-h3: clamp(1.125rem, 1.05rem + 0.4vw, 1.375rem);
+  --text-body: clamp(0.9375rem, 0.9rem + 0.15vw, 1.0625rem);
+  --text-caption: 0.8125rem;
+
+  /* Spacing Moods — Ritmo de Layout Awwwards (SPEC-035) */
+  --space-tight: clamp(2rem, 1.5rem + 1.5vw, 3.5rem); /* Subseções, filtros, grupos de telemetria */
+  --space-normal: clamp(4rem, 2.5rem + 3vw, 6.5rem); /* Ritmo padrão entre seções de conteúdo */
+  --space-airy: clamp(6.5rem, 4rem + 5vw, 10rem); /* Transições temáticas e grandes respiros */
+  --space-viewport: min(100svh, 860px); /* Heroes e palcos cinemáticos de tela cheia */
+  --gutter: clamp(1rem, 0.5rem + 2vw, 2.5rem); /* Gutter fluido do grid de 12 colunas */
 
   /* Pesos Canônicos */
   --weight-regular: 400;
@@ -171,12 +211,94 @@
     font-family: var(--font-body);
   }
 }
+
+/* Classes Awwwards Site of the Day (SPEC-032) */
+.glass-panel-luxury {
+  background: rgba(13, 15, 19, 0.72);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-panel-gold {
+  background: rgba(18, 20, 26, 0.75);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(212, 175, 55, 0.22);
+}
+
+@keyframes ledPulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.7);
+  }
+  50% {
+    opacity: 0.85;
+    transform: scale(1.08);
+    box-shadow: 0 0 0 6px rgba(212, 175, 55, 0);
+  }
+}
+
+.led-status-pulse {
+  animation: ledPulse 2.4s infinite cubic-bezier(0.4, 0, 0.6, 1);
+}
+
+.telemetry-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: var(--font-body);
+  font-size: 0.6875rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 0.35rem 0.75rem;
+  border-radius: var(--radius-sm);
+  backdrop-filter: blur(10px);
+}
+
 .page-width {
   width: min(1200px, calc(100% - 96px));
   margin-inline: auto;
 }
 .section-space {
-  padding-block: 104px;
+  padding-block: var(--space-normal);
+}
+.space-tight {
+  margin-block: var(--space-tight);
+}
+.space-normal {
+  margin-block: var(--space-normal);
+}
+.space-airy {
+  margin-block: var(--space-airy);
+}
+.padding-tight {
+  padding-block: var(--space-tight);
+}
+.padding-normal {
+  padding-block: var(--space-normal);
+}
+.padding-airy {
+  padding-block: var(--space-airy);
+}
+
+/* Utilitários Anti-AI Genericness (SPEC-035) */
+.hairline-border {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+.tech-card {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: var(--radius-sm);
+  transition: border-color var(--dur-fast) var(--ease-out);
+}
+.tech-card:hover {
+  border-color: rgba(200, 169, 106, 0.35);
 }
 .eyebrow {
   display: flex;
@@ -699,6 +821,7 @@ textarea.field-input {
     background-color var(--ease),
     border-color var(--ease),
     color var(--ease),
+    box-shadow var(--ease),
     transform var(--ease);
 }
 
@@ -747,6 +870,7 @@ textarea.field-input {
     background: var(--gold-hover);
     border-color: var(--gold-hover);
     color: var(--on-gold);
+    box-shadow: 0 0 20px rgb(200 169 106 / 0.22);
   }
 }
 
@@ -762,6 +886,7 @@ textarea.field-input {
     border-color: var(--gold);
     background: rgb(200 169 106 / 0.1);
     color: #ffffff;
+    box-shadow: 0 0 16px rgb(200 169 106 / 0.12);
   }
 }
 

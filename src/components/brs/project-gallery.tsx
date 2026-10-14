@@ -11,6 +11,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { ScrollReveal } from "@/components/ui/scroll-reveal";
+import { NumericCounter } from "@/components/ui/numeric-counter";
 import { BeforeAfterSlider } from "./before-after-slider";
 import funilariaAntes from "@/assets/funilaria-antes.jpg";
 import funilariaDepois from "@/assets/funilaria-depois.jpg";
@@ -169,7 +170,9 @@ export function ProjectGallery() {
                 {/* Informações Técnicas e Tipografia */}
                 <div className="flex items-center justify-between text-[10px] font-semibold text-primary tracking-wider uppercase mb-2">
                   <span>{item.category}</span>
-                  <span className="font-mono text-muted-foreground">{item.number} / CASO</span>
+                  <span className="font-mono text-muted-foreground">
+                    <NumericCounter target={parseInt(item.number, 10)} padZero /> / CASO
+                  </span>
                 </div>
                 <h3 className="text-lg md:text-xl font-semibold font-display tracking-tight text-foreground mb-2 text-balance">
                   {item.title}

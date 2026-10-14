@@ -1,12 +1,11 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { ArrowUpRight, FileText, Handshake, Phone, ShieldCheck, Clock } from "lucide-react";
 import { company } from "@/lib/brs";
 import { buildRouteHead, buildBreadcrumbSchema } from "@/lib/seo";
-import { Breadcrumbs } from "@/components/brs/breadcrumbs";
-import { Button } from "@/components/ui/button";
+import { PageHero } from "@/components/brs/page-hero";
 import { ContactCTA } from "@/components/brs/contact-cta";
 import { ScrollReveal } from "@/components/ui/scroll-reveal";
-import { ImageReveal } from "@/components/ui/image-reveal";
+import { NumericCounter } from "@/components/ui/numeric-counter";
 import corretoresVistoria from "@/assets/corretores-vistoria.jpg";
 
 export const Route = createFileRoute("/para-corretores")({
@@ -37,72 +36,78 @@ export const Route = createFileRoute("/para-corretores")({
 function ParaCorretoresPage() {
   return (
     <div className="pt-28 pb-20">
-      <section className="page-width mb-12">
-        <ScrollReveal direction="up" delay={0.05}>
-          <Breadcrumbs items={[{ name: "Para corretores" }]} className="mb-6" />
-        </ScrollReveal>
-
-        <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-          <div className="lg:col-span-7">
-            <ScrollReveal direction="up" delay={0.1}>
-              <p className="eyebrow mb-3">Parceria Profissional</p>
-            </ScrollReveal>
-
-            <ScrollReveal direction="up" delay={0.2}>
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-semibold font-display tracking-tight text-white mb-6 leading-tight">
-                Tranquilidade para o Corretor.
-                <br />
-                <span className="text-primary">Cuidado Rigoroso com o Segurado.</span>
-              </h1>
-            </ScrollReveal>
-
-            <ScrollReveal direction="up" delay={0.3}>
-              <p className="text-neutral-300 text-sm sm:text-base leading-relaxed mb-6">
-                A indicação de uma oficina em momento de sinistro coloca em jogo a reputação que o
-                corretor construiu com seu cliente. Na BRS Reparações Automotivas, tratamos o
-                segurado com total transparência, cumprimento estrito de prazos e atualização
-                contínua do andamento dos reparos.
-              </p>
-            </ScrollReveal>
-
-            <ScrollReveal direction="up" delay={0.38}>
-              <div className="flex flex-wrap gap-4 pt-2">
-                <Button variant="primary" asChild className="h-11 px-6 text-xs font-semibold">
-                  <Link to="/contato" search={{ audience: "corretor" }}>
-                    Iniciar conversa sobre parceria{" "}
-                    <ArrowUpRight className="ml-1" size={14} aria-hidden="true" />
-                  </Link>
-                </Button>
-                <Button variant="secondary" asChild className="h-11 px-6 text-xs font-medium">
-                  <a href={company.phoneHref}>
-                    <Phone size={14} className="mr-2 text-primary" aria-hidden="true" />
-                    {company.phone}
-                  </a>
-                </Button>
-              </div>
-            </ScrollReveal>
+      <PageHero
+        breadcrumbs={[{ name: "Para corretores" }]}
+        codeIndex="PAR.05 // SINISTROS & CORRETORES"
+        eyebrow="Parceria Profissional B2B"
+        title={
+          <>
+            Tranquilidade para o Corretor.
+            <br />
+            <span className="text-primary">Cuidado Rigoroso com o Segurado.</span>
+          </>
+        }
+        description={
+          <p className="text-neutral-300 text-sm sm:text-base leading-relaxed">
+            A indicação de uma oficina em momento de sinistro coloca em jogo a reputação que o
+            corretor construiu com seu cliente. Na BRS Reparações Automotivas, tratamos o segurado
+            com total transparência, cumprimento estrito de prazos e atualização contínua do
+            andamento dos reparos.
+          </p>
+        }
+        telemetryBadges={[
+          {
+            icon: ShieldCheck,
+            label: "Livre Escolha de Oficina",
+            detail: "Garantida em qualquer apólice por lei",
+          },
+          {
+            icon: FileText,
+            label: "Vistorias & Laudos Rápidos",
+            detail: "Comunicação técnica sem ruídos",
+          },
+          {
+            icon: Handshake,
+            label: "Canal Direto para Corretores",
+            detail: "Prioridade no atendimento ao segurado",
+          },
+          {
+            icon: Clock,
+            label: "Previsibilidade de Entrega",
+            detail: "Cronograma realista e cumprido",
+          },
+        ]}
+        actions={[
+          {
+            label: "Iniciar conversa sobre parceria",
+            to: "/contato",
+            search: { audience: "corretor" },
+            variant: "primary",
+            icon: ArrowUpRight,
+          },
+          {
+            label: company.phone,
+            href: company.phoneHref,
+            variant: "secondary",
+            icon: Phone,
+          },
+        ]}
+        asideContent={
+          <div className="relative rounded-2xl border border-white/10 overflow-hidden bg-card/40 aspect-4/3">
+            <img
+              src={corretoresVistoria}
+              alt="Vistoria técnica e atendimento a segurados em oficina (fotografia ilustrativa)"
+              width={1200}
+              height={800}
+              className="w-full h-full object-cover"
+              loading="lazy"
+            />
+            <span className="absolute bottom-3 right-3 text-[9px] uppercase tracking-wider px-2 py-1 bg-background/85 text-muted-foreground border border-border/50 backdrop-blur-xs rounded-xs pointer-events-none">
+              Fotografia ilustrativa
+            </span>
           </div>
-
-          <div className="lg:col-span-5 relative">
-            <ImageReveal
-              delay={0.15}
-              className="rounded-xl border border-border aspect-4/3 relative overflow-hidden"
-            >
-              <img
-                src={corretoresVistoria}
-                alt="Vistoria técnica e atendimento a segurados em oficina (fotografia ilustrativa)"
-                width={1200}
-                height={800}
-                className="w-full h-full object-cover"
-                loading="lazy"
-              />
-              <span className="absolute bottom-3 right-3 text-[9px] uppercase tracking-wider px-2 py-1 bg-background/85 text-muted-foreground border border-border/50 backdrop-blur-xs rounded-xs pointer-events-none">
-                Fotografia ilustrativa
-              </span>
-            </ImageReveal>
-          </div>
-        </div>
-      </section>
+        }
+      />
 
       {/* Pilares da Parceria — Matriz Editorial com Bordas Compartilhadas */}
       <section className="page-width mt-16 pt-12 border-t border-border">
@@ -121,7 +126,7 @@ function ParaCorretoresPage() {
           >
             <div>
               <span className="font-mono text-[11px] font-semibold text-primary uppercase tracking-wider block mb-3">
-                01 / TRANSPARÊNCIA
+                <NumericCounter target={1} padZero /> / TRANSPARÊNCIA
               </span>
               <h3 className="text-base sm:text-lg font-semibold font-display text-white mb-2">
                 Comunicação e Prazos
@@ -140,7 +145,7 @@ function ParaCorretoresPage() {
           >
             <div>
               <span className="font-mono text-[11px] font-semibold text-primary uppercase tracking-wider block mb-3">
-                02 / DOCUMENTAÇÃO
+                <NumericCounter target={2} padZero /> / DOCUMENTAÇÃO
               </span>
               <h3 className="text-base sm:text-lg font-semibold font-display text-white mb-2">
                 Orçamentos e Laudos
@@ -159,7 +164,7 @@ function ParaCorretoresPage() {
           >
             <div>
               <span className="font-mono text-[11px] font-semibold text-primary uppercase tracking-wider block mb-3">
-                03 / DIREITO LEGAL
+                <NumericCounter target={3} padZero /> / DIREITO LEGAL
               </span>
               <h3 className="text-base sm:text-lg font-semibold font-display text-white mb-2">
                 Livre Escolha de Oficina

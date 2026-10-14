@@ -1,11 +1,11 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { ArrowUpRight, MapPin, Phone, Instagram, ShieldCheck, Truck, Wrench } from "lucide-react";
 import { company } from "@/lib/brs";
 import { buildRouteHead, buildBreadcrumbSchema } from "@/lib/seo";
-import { Breadcrumbs } from "@/components/brs/breadcrumbs";
-import { Button } from "@/components/ui/button";
+import { PageHero } from "@/components/brs/page-hero";
 import { ContactCTA } from "@/components/brs/contact-cta";
 import { ScrollReveal } from "@/components/ui/scroll-reveal";
+import { NumericCounter } from "@/components/ui/numeric-counter";
 
 const external = { target: "_blank", rel: "noopener noreferrer" };
 
@@ -36,65 +36,80 @@ export const Route = createFileRoute("/sobre")({
 function SobrePage() {
   return (
     <div className="pt-28 pb-20">
-      <section className="page-width mb-12">
-        <ScrollReveal direction="up" delay={0.05}>
-          <Breadcrumbs items={[{ name: "A BRS" }]} className="mb-6" />
-        </ScrollReveal>
-
-        <div className="grid lg:grid-cols-12 gap-8 lg:gap-16 items-center">
-          <div className="lg:col-span-7">
-            <ScrollReveal direction="up" delay={0.1}>
-              <p className="eyebrow mb-3">Institucional</p>
-            </ScrollReveal>
-
-            <ScrollReveal direction="up" delay={0.2}>
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-semibold font-display tracking-tight text-white mb-6 leading-tight">
-                Oficina Técnica Especializada em Toledo, Paraná.
-              </h1>
-            </ScrollReveal>
-
-            <ScrollReveal direction="up" delay={0.3}>
-              <p className="text-neutral-300 text-sm sm:text-base leading-relaxed mb-4">
-                A <strong className="text-white">BRS Reparações Automotivas</strong> nasceu para
-                atender motoristas e corretores de seguros que buscam um nível superior de
-                acabamento, respeito aos prazos e honestidade no diagnóstico da avaria veicular.
-              </p>
-              <p className="text-neutral-300 text-sm sm:text-base leading-relaxed mb-6">
-                Nosso trabalho não envolve soluções improvisadas ou excesso de massa plástica. Toda
-                intervenção visa devolver à carroceria as folgas, vincos e a integridade de pintura
-                concebidos pela montadora.
-              </p>
-            </ScrollReveal>
-
-            <ScrollReveal direction="up" delay={0.38}>
-              <div className="flex flex-wrap gap-4 pt-2">
-                <Button variant="primary" asChild className="h-11 px-6 text-xs font-semibold">
-                  <Link to="/contato">
-                    FALAR COM A BRS <ArrowUpRight className="ml-1" size={14} aria-hidden="true" />
-                  </Link>
-                </Button>
-                <Button variant="secondary" asChild className="h-11 px-6 text-xs font-medium">
-                  <a href={company.instagram} {...external}>
-                    <Instagram size={14} className="mr-2 text-primary" aria-hidden="true" />
-                    Instagram @brsreparacoes
-                  </a>
-                </Button>
-              </div>
-            </ScrollReveal>
-          </div>
-
-          <ScrollReveal
-            direction="up"
-            delay={0.2}
-            className="lg:col-span-5 border-l border-primary/60 pl-8 sm:pl-12 py-6"
-          >
-            <p className="font-display text-6xl sm:text-7xl lg:text-8xl font-semibold leading-none tracking-tight text-white">
+      <PageHero
+        codeIndex="INS.04 // INSTITUCIONAL"
+        eyebrow="Oficina Técnica Especializada"
+        breadcrumbs={[{ name: "A BRS" }]}
+        title={
+          <>
+            Oficina Técnica Especializada em <span className="text-primary">Toledo, Paraná.</span>
+          </>
+        }
+        description={
+          <>
+            A <strong className="text-white">BRS Reparações Automotivas</strong> nasceu para atender
+            motoristas e corretores de seguros que buscam um nível superior de acabamento, respeito
+            aos prazos e honestidade no diagnóstico da avaria veicular, sem soluções improvisadas.
+            Toda intervenção visa devolver à carroceria as folgas, vincos e a integridade de pintura
+            concebidos pela montadora.
+          </>
+        }
+        telemetryBadges={[
+          {
+            label: "Toledo — PR",
+            detail: "Atendimento regional",
+            icon: MapPin,
+          },
+          {
+            label: "3 Frentes Técnicas",
+            detail: "Funilaria · Pintura · Martelinho",
+            icon: Wrench,
+          },
+          {
+            label: "Leva & Traz",
+            detail: "Sob consulta urbana",
+            icon: Truck,
+          },
+          {
+            label: "Padrão de Fábrica",
+            detail: "Vincos e folgas originais",
+            icon: ShieldCheck,
+          },
+        ]}
+        actions={[
+          {
+            label: "FALAR COM A BRS",
+            to: "/contato",
+            variant: "primary",
+            icon: ArrowUpRight,
+          },
+          {
+            label: "Instagram @brsreparacoes",
+            href: company.instagram,
+            variant: "secondary",
+            target: "_blank",
+            rel: "noopener noreferrer",
+            icon: Instagram,
+          },
+        ]}
+        asideContent={
+          <div className="relative rounded-2xl border border-white/10 bg-gradient-to-b from-white/[0.04] to-transparent p-6 sm:p-8 backdrop-blur-sm">
+            <div className="flex items-center justify-between border-b border-white/10 pb-4 mb-6">
+              <span className="font-mono text-[11px] uppercase tracking-[2px] text-primary font-semibold">
+                BRS.HQ // TOLEDO-PR
+              </span>
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2.5 py-0.5 font-mono text-[10px] text-emerald-400">
+                <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                OFICINA ATIVA
+              </span>
+            </div>
+            <p className="font-display text-5xl sm:text-6xl font-semibold tracking-tight text-white mb-2">
               BRS<span className="text-primary">.</span>
             </p>
-            <p className="text-xs mt-3 text-muted-foreground uppercase tracking-[2px] font-semibold font-mono">
+            <p className="font-mono text-xs uppercase tracking-[2px] text-muted-foreground mb-6">
               Reparações automotivas
             </p>
-            <div className="mt-8 space-y-4 text-xs sm:text-sm text-neutral-300">
+            <div className="space-y-4 border-t border-white/10 pt-5 text-xs text-neutral-300">
               <div className="flex items-center gap-3">
                 <MapPin size={16} className="text-primary shrink-0" aria-hidden="true" />
                 <span>Toledo, Paraná — Brasil</span>
@@ -110,9 +125,9 @@ function SobrePage() {
                 <span>Serviço Leva e Traz sob consulta urbana</span>
               </div>
             </div>
-          </ScrollReveal>
-        </div>
-      </section>
+          </div>
+        }
+      />
 
       {/* Nossos Princípios — Matriz Editorial com Bordas Compartilhadas */}
       <section className="page-width mt-16 pt-12 border-t border-border">
@@ -131,7 +146,7 @@ function SobrePage() {
           >
             <div>
               <span className="font-mono text-[11px] font-semibold text-primary uppercase tracking-wider block mb-3">
-                01 / ÉTICA PROFISSIONAL
+                <NumericCounter target={1} padZero /> / ÉTICA PROFISSIONAL
               </span>
               <h3 className="text-base sm:text-lg font-semibold font-display text-white mb-2">
                 Diagnóstico Honesto
@@ -150,7 +165,7 @@ function SobrePage() {
           >
             <div>
               <span className="font-mono text-[11px] font-semibold text-primary uppercase tracking-wider block mb-3">
-                02 / PADRÃO ORIGINAL
+                <NumericCounter target={2} padZero /> / PADRÃO ORIGINAL
               </span>
               <h3 className="text-base sm:text-lg font-semibold font-display text-white mb-2">
                 Precisão de Ajuste
@@ -169,7 +184,7 @@ function SobrePage() {
           >
             <div>
               <span className="font-mono text-[11px] font-semibold text-primary uppercase tracking-wider block mb-3">
-                03 / ATENDIMENTO
+                <NumericCounter target={3} padZero /> / ATENDIMENTO
               </span>
               <h3 className="text-base sm:text-lg font-semibold font-display text-white mb-2">
                 Respeito à Rotina
