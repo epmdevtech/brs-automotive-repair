@@ -1,5 +1,14 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowUpRight, Check, Truck, Sparkles, ShieldCheck, Eye, CheckCircle2 } from "lucide-react";
+import {
+  ArrowUpRight,
+  ArrowDown,
+  Check,
+  Truck,
+  Sparkles,
+  ShieldCheck,
+  Eye,
+  CheckCircle2,
+} from "lucide-react";
 import { services, aestheticServices } from "@/lib/brs";
 import { buildRouteHead, buildBreadcrumbSchema } from "@/lib/seo";
 import { Breadcrumbs } from "@/components/brs/breadcrumbs";
@@ -7,6 +16,7 @@ import { PageHero } from "@/components/brs/page-hero";
 import { Button } from "@/components/ui/button";
 import { ScrollReveal } from "@/components/ui/scroll-reveal";
 import { ImageReveal } from "@/components/ui/image-reveal";
+import { useSmoothScroll } from "@/hooks/use-smooth-scroll";
 import funilariaServico from "@/assets/funilaria-servico.jpg";
 import pinturaServico from "@/assets/pintura-servico.jpg";
 import martelinhoServico from "@/assets/martelinho-servico.jpg";
@@ -15,6 +25,12 @@ const serviceImages: Record<string, string> = {
   funilaria: funilariaServico,
   "pintura-automotiva": pinturaServico,
   "martelinho-de-ouro": martelinhoServico,
+};
+
+const serviceAnchorIds: Record<string, string> = {
+  funilaria: "funilaria-estrutural",
+  "pintura-automotiva": "pintura-estufa",
+  "martelinho-de-ouro": "martelinho-pdr",
 };
 
 export const Route = createFileRoute("/servicos/")({
@@ -45,6 +61,16 @@ export const Route = createFileRoute("/servicos/")({
 });
 
 function ServicesPage() {
+  const { scrollTo } = useSmoothScroll();
+
+  const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, target: string) => {
+    e.preventDefault();
+    scrollTo(target);
+    if (typeof window !== "undefined") {
+      window.history.pushState(null, "", target);
+    }
+  };
+
   return (
     <div className="pt-28 pb-20">
       {/* Banner / Header da Página (SPEC-034 Awwwards Standard) */}
@@ -83,14 +109,16 @@ function ServicesPage() {
         {services.map((service, index) => {
           const image = serviceImages[service.slug] || funilariaServico;
           const isReverse = index % 2 === 1;
+          const sectionId = serviceAnchorIds[service.slug] || service.slug;
 
           return (
             <ScrollReveal
               key={service.slug}
               as="article"
+              id={sectionId}
               direction="up"
               delay={index * 0.12}
-              className={`grid md:grid-cols-12 gap-8 lg:gap-16 items-center py-12 lg:py-16 first:pt-0 border-b border-border/70 last:border-b-0 ${
+              className={`grid md:grid-cols-12 gap-8 lg:gap-16 items-center py-12 lg:py-16 first:pt-0 border-b border-border/70 last:border-b-0 scroll-mt-28 ${
                 isReverse ? "md:grid-flow-dense" : ""
               }`}
             >
@@ -150,20 +178,19 @@ function ServicesPage() {
                   </div>
                 </div>
 
-                <div className="flex flex-wrap items-center gap-3 pt-6 border-t border-border/60">
-                  <Button variant="secondary" asChild className="h-10 px-5 text-xs font-semibold">
-                    <Link to={service.path}>
-                      {service.slug === "funilaria"
-                        ? "Conhecer Funilaria"
-                        : service.slug === "pintura-automotiva"
-                          ? "Conhecer a Pintura"
-                          : "Entender o Martelinho"}
-                      <ArrowUpRight className="ml-1" size={14} aria-hidden="true" />
-                    </Link>
-                  </Button>
-                  <Button variant="primary" asChild className="h-10 px-5 text-xs font-semibold">
-                    <Link to="/contato">Solicitar avaliação</Link>
-                  </Button>
+                <div className="pt-6 border-t border-border/60">
+                  <Link
+                    to="/trabalhos"
+                    search={{ filtro: service.slug }}
+                    className="inline-flex items-center gap-2 text-xs font-semibold tracking-wider uppercase text-primary hover:text-white transition-colors group cursor-pointer"
+                  >
+                    <span>Ver casos deste serviço no portfólio</span>
+                    <ArrowUpRight
+                      size={14}
+                      className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                      aria-hidden="true"
+                    />
+                  </Link>
                 </div>
               </div>
             </ScrollReveal>
@@ -203,12 +230,14 @@ function ServicesPage() {
               </p>
             </div>
             <div className="pt-4 mt-4 border-t border-border/40">
-              <Link
-                to="/servicos/martelinho-de-ouro"
-                className="text-xs font-semibold text-primary hover:text-white inline-flex items-center gap-1 transition-colors"
+              <a
+                href="#martelinho-pdr"
+                onClick={(e) => handleSmoothScroll(e, "#martelinho-pdr")}
+                className="text-xs font-semibold text-primary hover:text-white inline-flex items-center gap-1.5 transition-colors cursor-pointer"
               >
-                Entender método PDR <ArrowUpRight size={13} aria-hidden="true" />
-              </Link>
+                <span>Ver método Martelinho PDR</span>
+                <ArrowDown size={13} aria-hidden="true" />
+              </a>
             </div>
           </ScrollReveal>
 
@@ -230,12 +259,14 @@ function ServicesPage() {
               </p>
             </div>
             <div className="pt-4 mt-4 border-t border-border/40">
-              <Link
-                to="/servicos/funilaria"
-                className="text-xs font-semibold text-primary hover:text-white inline-flex items-center gap-1 transition-colors"
+              <a
+                href="#funilaria-estrutural"
+                onClick={(e) => handleSmoothScroll(e, "#funilaria-estrutural")}
+                className="text-xs font-semibold text-primary hover:text-white inline-flex items-center gap-1.5 transition-colors cursor-pointer"
               >
-                Ver processo de funilaria <ArrowUpRight size={13} aria-hidden="true" />
-              </Link>
+                <span>Ver processo de Funilaria</span>
+                <ArrowDown size={13} aria-hidden="true" />
+              </a>
             </div>
           </ScrollReveal>
 
@@ -257,12 +288,14 @@ function ServicesPage() {
               </p>
             </div>
             <div className="pt-4 mt-4 border-t border-border/40">
-              <Link
-                to="/servicos/pintura-automotiva"
-                className="text-xs font-semibold text-primary hover:text-white inline-flex items-center gap-1 transition-colors"
+              <a
+                href="#pintura-estufa"
+                onClick={(e) => handleSmoothScroll(e, "#pintura-estufa")}
+                className="text-xs font-semibold text-primary hover:text-white inline-flex items-center gap-1.5 transition-colors cursor-pointer"
               >
-                Ver pintura em estufa <ArrowUpRight size={13} aria-hidden="true" />
-              </Link>
+                <span>Ver Pintura em Estufa</span>
+                <ArrowDown size={13} aria-hidden="true" />
+              </a>
             </div>
           </ScrollReveal>
         </div>
@@ -342,7 +375,7 @@ function ServicesPage() {
                       </ul>
                     </div>
 
-                    <div className="mb-6 pt-4 border-t border-white/10">
+                    <div className="pt-4 border-t border-white/10">
                       <h4 className="text-[11px] font-mono uppercase tracking-wider text-neutral-400 mb-2.5">
                         Limitações e Critérios:
                       </h4>
@@ -358,43 +391,51 @@ function ServicesPage() {
                       </ul>
                     </div>
                   </div>
-
-                  <div className="pt-4 border-t border-white/10 mt-auto">
-                    <Button variant="secondary" asChild size="sm" className="w-full text-xs">
-                      <Link to="/contato">
-                        <span>Avaliar {aes.short}</span>
-                        <ArrowUpRight className="ml-1.5 size-3.5" aria-hidden="true" />
-                      </Link>
-                    </Button>
-                  </div>
                 </ScrollReveal>
               );
             })}
           </div>
         </section>
 
-        {/* Bloco Editorial de Leva e Traz & Aviso */}
+        {/* Banner Final de Conversão com Leva e Traz (Único Ponto Focal da Rota) */}
         <ScrollReveal
           direction="up"
-          delay={0.18}
+          delay={0.15}
           id="leva-e-traz"
-          className="mt-16 py-8 border-y border-border/80 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6"
+          className="mt-20 rounded-2xl border border-primary/20 bg-gradient-to-b from-primary/[0.07] via-background to-background p-8 sm:p-12 relative overflow-hidden"
         >
-          <div className="flex items-start gap-4">
-            <Truck size={22} className="text-primary shrink-0 mt-1" aria-hidden="true" />
-            <div>
-              <h3 className="text-base font-semibold font-display text-white">
-                Serviço de Leva e Traz em Toledo
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute -right-20 -bottom-20 size-72 rounded-full bg-primary/10 blur-3xl -z-10"
+          />
+
+          <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
+            <div className="max-w-2xl">
+              <div className="flex items-center gap-2 text-xs font-mono tracking-widest uppercase text-primary mb-3">
+                <Truck size={16} className="text-primary shrink-0" aria-hidden="true" />
+                <span>Comodidade Urbana em Toledo-PR</span>
+              </div>
+              <h3 className="text-2xl sm:text-3xl font-semibold font-display tracking-tight text-white mb-3">
+                Diagnóstico técnico preciso com comodidade de Leva e Traz em Toledo-PR
               </h3>
-              <p className="text-xs text-neutral-400 mt-1 max-w-xl">
-                Para sua maior comodidade, consultamos disponibilidade de busca e entrega do veículo
-                no perímetro urbano de Toledo-PR.
+              <p className="text-xs sm:text-sm text-neutral-300 leading-relaxed">
+                Envie as fotos da avaria pelo canal oficial ou agende a retirada do veículo no seu
+                endereço. Realizamos triagem técnica honesta indicando apenas a intervenção
+                necessária.
               </p>
             </div>
+
+            <Button
+              variant="primary"
+              asChild
+              className="h-12 min-h-[44px] px-8 text-xs font-semibold shrink-0 cursor-pointer shadow-lg shadow-primary/15"
+            >
+              <Link to="/contato">
+                <span>Solicitar Avaliação Técnica via WhatsApp</span>
+                <ArrowUpRight className="ml-2 size-4" aria-hidden="true" />
+              </Link>
+            </Button>
           </div>
-          <Button variant="primary" asChild className="h-10 px-5 text-xs font-semibold shrink-0">
-            <Link to="/contato">Solicitar avaliação</Link>
-          </Button>
         </ScrollReveal>
       </section>
     </div>

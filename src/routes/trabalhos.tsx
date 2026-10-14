@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Info, Sparkles, CheckCircle2, ShieldCheck, ArrowUpRight } from "lucide-react";
+import { Info } from "lucide-react";
 import { buildRouteHead, buildBreadcrumbSchema } from "@/lib/seo";
 import { PageHero } from "@/components/brs/page-hero";
 import { ProjectGallery } from "@/components/brs/project-gallery";
@@ -32,63 +32,34 @@ export const Route = createFileRoute("/trabalhos")({
 function TrabalhosPage() {
   return (
     <div className="pt-28 pb-20">
-      {/* Hero Section Padrão Awwwards Site of the Day (SPEC-034) */}
+      {/* Hero Section Padrão Awwwards Site of the Day (SPEC-034 / SPEC-043) */}
       <PageHero
         breadcrumbs={[{ name: "Trabalhos" }]}
         codeIndex="GAL.03 // PORTFÓLIO"
-        eyebrow="Galeria Técnica Interativa"
+        eyebrow="PORTFÓLIO & COMPROVAÇÃO TÉCNICA"
         title="Casos de Reparação e Acabamento."
         description={
-          <p className="text-neutral-300 text-sm sm:text-base leading-relaxed mb-2">
-            Explore abaixo a comparação interativa de procedimentos. Arraste o divisor central ou
-            utilize as teclas direcionais do teclado para alternar entre as fases de avaliação e o
-            resultado final obtido.
+          <p className="text-neutral-300 text-sm sm:text-base leading-relaxed">
+            Veja na prática a recuperação de vincos, alinhamento milimétrico de peças e fidelidade
+            de cor em veículos atendidos pela BRS. Compare o estado de entrada com o padrão final
+            entregue de fábrica.
           </p>
         }
-        telemetryBadges={[
-          {
-            icon: Sparkles,
-            label: "Comparador Interativo",
-            detail: "Deslizamento contínuo e inspeção de gaps",
-          },
-          {
-            icon: CheckCircle2,
-            label: "Precisão Milimétrica",
-            detail: "Padrão de fábrica sem enxertos pesados",
-          },
-          {
-            icon: ShieldCheck,
-            label: "Toledo, Paraná",
-            detail: "Documentação técnica dos procedimentos",
-          },
-        ]}
-        actions={[
-          {
-            label: "Solicitar avaliação técnica",
-            to: "/contato",
-            variant: "primary",
-            icon: ArrowUpRight,
-          },
-        ]}
         footerContent={
-          <div className="p-4 rounded-sm border border-primary/20 bg-primary/5 flex items-start gap-3 text-xs text-neutral-300">
-            <Info size={18} className="text-primary shrink-0 mt-0.5" aria-hidden="true" />
-            <div>
-              <span className="font-semibold text-white block mb-0.5">
-                Transparência Fotográfica
-              </span>
-              <span>
-                O acervo fotográfico real da BRS está em fase de documentação com autorização de
-                clientes em Toledo-PR. As imagens apresentadas nesta galeria são ilustrativas
-                temporárias demonstrativas da precisão e dos métodos empregados pela oficina.
-              </span>
-            </div>
+          <div className="py-2.5 px-3.5 rounded-sm border border-primary/20 bg-primary/5 flex items-center gap-2.5 text-[11px] text-neutral-300">
+            <Info size={14} className="text-primary shrink-0" aria-hidden="true" />
+            <p>
+              <span className="font-semibold text-white">Transparência Fotográfica: </span>
+              Acervo fotográfico real em fase de documentação em Toledo-PR. Imagens ilustrativas
+              demonstrativas de método e tolerâncias de fábrica.
+            </p>
           </div>
         }
+        className="mb-0 border-b-0 pb-6 sm:pb-8"
       />
 
-      {/* Galeria com Filtros Interativos e Slider Antes/Depois */}
-      <ProjectGallery />
+      {/* Galeria com Filtros Interativos e Slider Antes/Depois com Respiro Otimizado */}
+      <ProjectGallery className="pt-6 sm:pt-8" />
 
       {/* CTA de Fechamento */}
       <div className="mt-16">

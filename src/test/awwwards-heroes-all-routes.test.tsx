@@ -112,7 +112,10 @@ describe("SPEC-034 / TASK-034-01 — Awwwards Heroes Across All Routes", () => {
         { file: "src/components/brs/service-page-layout.tsx", code: "ESP.0" },
         { file: "src/routes/trabalhos.tsx", code: "GAL.03 // PORTFÓLIO" },
         { file: "src/routes/sobre.tsx", code: "INS.04 // INSTITUCIONAL" },
-        { file: "src/routes/para-corretores.tsx", code: "PAR.05 // SINISTROS" },
+        {
+          file: "src/routes/para-corretores.tsx",
+          code: "PAR.05 // RELACIONAMENTO TÉCNICO & SINISTROS",
+        },
         { file: "src/routes/contato.tsx", code: "CON.06" },
         { file: "src/routes/privacidade.tsx", code: "LEG.07 // LGPD" },
       ];
