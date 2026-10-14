@@ -40,7 +40,7 @@ function ParaCorretoresPage() {
         breadcrumbs={[{ name: "Para corretores" }]}
         codeIndex="PAR.05 // RELACIONAMENTO TÉCNICO & SINISTROS"
         eyebrow="TOLEDO — PARANÁ | ATENDIMENTO PROFISSIONAL B2B"
-        title="Parceria técnica. Transparência operacional. Confiança em cada reparação."
+        title="Tranquilidade para o Corretor. Cuidado Rigoroso com o Segurado."
         description={
           <div className="space-y-3 text-neutral-300 text-sm sm:text-base leading-relaxed">
             <p>

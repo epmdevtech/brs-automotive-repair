@@ -216,14 +216,9 @@ export const AnimatedHero = ({
         {/* Título Principal (H1) com forte contraste */}
         <motion.h1
           variants={itemVariants}
-          className="text-4xl font-semibold tracking-tight sm:text-5xl md:text-6xl lg:text-[4.25rem] font-display leading-[1.12] max-w-4xl text-balance"
+          className="text-4xl font-semibold tracking-tight sm:text-5xl md:text-6xl lg:text-[4.25rem] font-display leading-[1.12] max-w-4xl text-balance text-white"
         >
-          {title || (
-            <>
-              <span className="text-white font-semibold">BRS Reparações</span>{" "}
-              <span className="text-primary font-semibold">Automotivas.</span>
-            </>
-          )}
+          {title || "BRS Reparações Automotivas."}
         </motion.h1>
 
         {/* Subtítulo Confortável e Nítido */}

@@ -40,11 +40,7 @@ function SobrePage() {
         codeIndex="INS.04 // INSTITUCIONAL"
         eyebrow="Oficina Técnica Especializada"
         breadcrumbs={[{ name: "A BRS" }]}
-        title={
-          <>
-            Oficina Técnica Especializada em <span className="text-primary">Toledo, Paraná.</span>
-          </>
-        }
+        title="Oficina Técnica Especializada em Toledo, Paraná."
         description={
           <>
             A <strong className="text-white">BRS Reparações Automotivas</strong> nasceu para atender

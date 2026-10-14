@@ -5,20 +5,15 @@ import { Hero } from "@/components/brs/hero";
 import { Header } from "@/components/brs/header";
 
 describe("SPEC-012 — Padronização de Cores da Seção Hero e Sincronia com Navbar", () => {
-  it("renderiza o H1 com 'BRS Reparações' em text-white e 'Automotivas.' em text-primary", () => {
+  it("renderiza o H1 de forma monocromática em branco sem text-primary ou text-amber-500 (SPEC-044)", () => {
     const { container } = render(<Hero />);
     const h1 = container.querySelector("h1");
     expect(h1).not.toBeNull();
+    expect(h1?.textContent).toContain("BRS Reparações Automotivas.");
 
-    const whiteSpan = h1?.querySelector(".text-white");
-    expect(whiteSpan).not.toBeNull();
-    expect(whiteSpan?.textContent).toContain("BRS Reparações");
-
-    const primarySpan = h1?.querySelector(".text-primary");
-    expect(primarySpan).not.toBeNull();
-    expect(primarySpan?.textContent).toContain("Automotivas.");
-
-    // Garante que não restou o tom alaranjado saturado text-amber-500 no H1
+    // O H1 deve conter a classe de texto em branco e não conter text-primary nem text-amber-500
+    expect(h1?.className).toContain("text-white");
+    expect(h1?.querySelector(".text-primary")).toBeNull();
     expect(h1?.innerHTML).not.toContain("text-amber-500");
   });
 

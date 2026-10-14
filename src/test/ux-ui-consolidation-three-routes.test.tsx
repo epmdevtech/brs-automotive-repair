@@ -147,7 +147,7 @@ describe("SPEC-043: Refatoração Global de UX/UI (/servicos, /trabalhos e /para
       expect(hero?.textContent).toContain("PAR.05 // RELACIONAMENTO TÉCNICO & SINISTROS");
       expect(hero?.textContent).toContain("TOLEDO — PARANÁ | ATENDIMENTO PROFISSIONAL B2B");
       expect(hero?.textContent).toContain(
-        "Parceria técnica. Transparência operacional. Confiança em cada reparação.",
+        "Tranquilidade para o Corretor. Cuidado Rigoroso com o Segurado.",
       );
       expect(hero?.textContent).toContain("Conversar com a equipe técnica");
     });

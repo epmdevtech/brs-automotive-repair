@@ -29,9 +29,8 @@ export function Philosophy() {
         >
           <p className="eyebrow mb-5">Padrão de execução</p>
           <h2 className="section-title">
-            Critério técnico e
-            <br />
-            <span className="text-primary">cuidado em cada etapa.</span>
+            Critério técnico e <br />
+            cuidado em cada etapa.
           </h2>
           <p className="body-copy mt-6 max-w-[440px]">
             Um reparo automotivo duradouro exige técnica apurada, ferramentas adequadas e

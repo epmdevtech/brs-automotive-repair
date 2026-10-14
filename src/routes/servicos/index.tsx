@@ -78,13 +78,7 @@ function ServicesPage() {
         breadcrumbs={[{ name: "Serviços" }]}
         codeIndex="CAT.02 // SERVIÇOS"
         eyebrow="Especialidades Técnicas da Oficina"
-        title={
-          <>
-            Recuperação técnica de precisão.
-            <br />
-            <span className="text-primary">Preservação do padrão de fábrica.</span>
-          </>
-        }
+        title="Recuperação técnica de precisão. Preservação do padrão de fábrica."
         description={
           <p className="text-neutral-300 text-sm sm:text-base leading-relaxed">
             A BRS Reparações Automotivas concentra sua atuação em três frentes complementares de

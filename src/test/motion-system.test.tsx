@@ -154,8 +154,9 @@ describe("Sistema Unificado de Motion Design (SPEC-015)", () => {
     it("renderiza o Hero acima da dobra imediatamente", () => {
       render(<Hero />);
 
-      expect(screen.getByText("BRS Reparações")).toBeInTheDocument();
-      expect(screen.getByText("Automotivas.")).toBeInTheDocument();
+      expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(
+        "BRS Reparações Automotivas.",
+      );
       expect(
         screen.getByRole("link", { name: /ver especialidades|conhecer os serviços/i }),
       ).toBeInTheDocument();
