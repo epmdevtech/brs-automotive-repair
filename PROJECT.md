@@ -218,6 +218,8 @@ Todas as entregas obedecem ao protocolo **Universal SDD**:
 - `SPEC-031` / `TASK-031-01` / `REVIEW-031`: Integração de Dados Cadastrais Oficiais (Razão Social: `Brs Comercio de Pecas Automotivas LTDA`, CNPJ: `53.877.400/0001-46`, Fundação: `09/02/2024`) e Histórico de Experiência Prática do Fundador Bruno no Segmento Automotivo.
 - `SPEC-032` / `TASK-032-01` / `REVIEW-032`: Redesign Awwwards Site of the Day da Home Landing Page (Hero e Showcase), Paleta de Cores de Luxo Automotivo, Tipografia Editorial de Alta Precisão, Lenis Smooth Scroll e Coreografia de Movimento GSAP.
 - `SPEC-033` / `TASK-033-01` / `REVIEW-033`: Experiência Signature Interativa WebGL/Canvas de Partículas & Laser e Transições de Página Cinemáticas sem Quebra de Estado da UI.
+- `SPEC-034` / `TASK-034-01` / `REVIEW-034`: Redesign Awwwards Standard dos Heroes em Todas as Rotas com Tipografia, Paleta de Cores, Lenis e Coreografia GSAP.
+- `SPEC-035` / `TASK-035-01` / `REVIEW-035`: Criação do DESIGN.md, Reformulação da Escala Tipográfica Fluida e Ritmo de Layout (Anti-AI Genericness).
 
 ---
 

@@ -2,13 +2,13 @@
 
 ## 1. Metadados
 
-| Campo        | Valor                                                                  |
-| ------------ | ---------------------------------------------------------------------- |
-| SPEC         | [`SPEC-034`](../specs/SPEC-034-awwwards-heroes-across-all-routes.md)   |
-| TASK         | [`TASK-034-01`](../tasks/TASK-034-01-awwwards-heroes-across-all-routes.md) |
-| Data         | 2026-10-14                                                             |
-| Status       | Aprovado (100% Quality Gates Cumpridos)                               |
-| Revisor      | Quality Gate Lead & Awwwards Design Auditor                            |
+| Campo   | Valor                                                                      |
+| ------- | -------------------------------------------------------------------------- |
+| SPEC    | [`SPEC-034`](../specs/SPEC-034-awwwards-heroes-across-all-routes.md)       |
+| TASK    | [`TASK-034-01`](../tasks/TASK-034-01-awwwards-heroes-across-all-routes.md) |
+| Data    | 2026-10-14                                                                 |
+| Status  | Aprovado (100% Quality Gates Cumpridos)                                    |
+| Revisor | Quality Gate Lead & Awwwards Design Auditor                                |
 
 ---
 
