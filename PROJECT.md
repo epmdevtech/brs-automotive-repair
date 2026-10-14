@@ -217,6 +217,7 @@ Todas as entregas obedecem ao protocolo **Universal SDD**:
 - `SPEC-030` / `TASK-030-01` / `REVIEW-030`: Implementação da Linha de Estética Automotiva & Proteção de Superfícies (Espelhamento de Pintura, Vitrificação Cerâmica e Polimento Técnico de Para-brisa) com preservação dos 3 pilares estruturais canônicos de reparação.
 - `SPEC-031` / `TASK-031-01` / `REVIEW-031`: Integração de Dados Cadastrais Oficiais (Razão Social: `Brs Comercio de Pecas Automotivas LTDA`, CNPJ: `53.877.400/0001-46`, Fundação: `09/02/2024`) e Histórico de Experiência Prática do Fundador Bruno no Segmento Automotivo.
 - `SPEC-032` / `TASK-032-01` / `REVIEW-032`: Redesign Awwwards Site of the Day da Home Landing Page (Hero e Showcase), Paleta de Cores de Luxo Automotivo, Tipografia Editorial de Alta Precisão, Lenis Smooth Scroll e Coreografia de Movimento GSAP.
+- `SPEC-033` / `TASK-033-01` / `REVIEW-033`: Experiência Signature Interativa WebGL/Canvas de Partículas & Laser e Transições de Página Cinemáticas sem Quebra de Estado da UI.
 
 ---
 

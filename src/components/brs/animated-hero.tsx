@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { MagneticButton } from "@/components/ui/magnetic-button";
 import { cn } from "@/lib/utils";
 import { MOTION_TOKENS } from "@/lib/motion-system";
+import { SignatureCanvas } from "./signature-canvas";
 
 export interface NavLink {
   label: string;
@@ -171,6 +172,9 @@ export const AnimatedHero = ({
         <div className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/80 to-black/45" />
         <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-black/60" />
       </motion.div>
+
+      {/* Experiência Signature Interativa WebGL/Canvas de Partículas e Laser (SPEC-033) */}
+      <SignatureCanvas />
 
       {/* Halo de luz ambiente dourada interativo via GSAP */}
       <div

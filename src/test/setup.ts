@@ -60,6 +60,24 @@ Object.defineProperty(global, "ResizeObserver", {
   value: MockResizeObserver,
 });
 
+if (typeof HTMLCanvasElement !== "undefined") {
+  HTMLCanvasElement.prototype.getContext = vi.fn(
+    () =>
+      ({
+        clearRect: vi.fn(),
+        beginPath: vi.fn(),
+        arc: vi.fn(),
+        fill: vi.fn(),
+        stroke: vi.fn(),
+        moveTo: vi.fn(),
+        lineTo: vi.fn(),
+        scale: vi.fn(),
+        save: vi.fn(),
+        restore: vi.fn(),
+      }) as unknown as RenderingContext,
+  ) as unknown as typeof HTMLCanvasElement.prototype.getContext;
+}
+
 // Os testes renderizam componentes isolados, sem RouterProvider. O `Link` e o `useRouterState`
 // reais exigem um roteador montado; aqui são substituídos por equivalentes mínimos, mantendo
 // intactos `createRouter`, `rootRouteId` etc. para os testes de roteamento reais.

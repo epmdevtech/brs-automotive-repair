@@ -2,15 +2,15 @@
 
 ## Metadados
 
-| Campo        | Valor                                                                                                      |
-| ------------ | ---------------------------------------------------------------------------------------------------------- |
-| ID           | `TASK-032-01`                                                                                              |
-| SPEC         | [`SPEC-032`](../specs/SPEC-032-awwwards-redesign-hero-showcase-lenis-gsap.md)                              |
-| Título       | Implementação do Redesign Awwwards da Home, Smooth Scroll com Lenis e Coreografia GSAP                     |
-| Data Criação | 2026-10-14                                                                                                 |
-| Status       | Completed (Concluída)                                                                                      |
-| Responsável  | Lead Creative Technologist & Motion Architect                                                              |
-| Branch/Alvo  | `main`                                                                                                     |
+| Campo        | Valor                                                                                  |
+| ------------ | -------------------------------------------------------------------------------------- |
+| ID           | `TASK-032-01`                                                                          |
+| SPEC         | [`SPEC-032`](../specs/SPEC-032-awwwards-redesign-hero-showcase-lenis-gsap.md)          |
+| Título       | Implementação do Redesign Awwwards da Home, Smooth Scroll com Lenis e Coreografia GSAP |
+| Data Criação | 2026-10-14                                                                             |
+| Status       | Completed (Concluída)                                                                  |
+| Responsável  | Lead Creative Technologist & Motion Architect                                          |
+| Branch/Alvo  | `main`                                                                                 |
 
 ---
 

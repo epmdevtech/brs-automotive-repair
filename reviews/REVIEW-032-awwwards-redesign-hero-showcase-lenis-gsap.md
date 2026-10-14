@@ -2,14 +2,14 @@
 
 ## Metadados
 
-| Campo          | Valor                                                                                                         |
-| -------------- | ------------------------------------------------------------------------------------------------------------- |
-| ID             | `REVIEW-032`                                                                                                  |
-| SPEC Relacionada| [`SPEC-032`](../specs/SPEC-032-awwwards-redesign-hero-showcase-lenis-gsap.md)                                 |
-| TASK Relacionada| [`TASK-032-01`](../tasks/TASK-032-01-awwwards-redesign-hero-showcase-lenis-gsap.md)                          |
-| Data Revisão   | 2026-10-14                                                                                                    |
-| Status         | Approved (Aprovado)                                                                                           |
-| Revisor        | Lead Creative Technologist & QA Architect                                                                     |
+| Campo            | Valor                                                                               |
+| ---------------- | ----------------------------------------------------------------------------------- |
+| ID               | `REVIEW-032`                                                                        |
+| SPEC Relacionada | [`SPEC-032`](../specs/SPEC-032-awwwards-redesign-hero-showcase-lenis-gsap.md)       |
+| TASK Relacionada | [`TASK-032-01`](../tasks/TASK-032-01-awwwards-redesign-hero-showcase-lenis-gsap.md) |
+| Data Revisão     | 2026-10-14                                                                          |
+| Status           | Approved (Aprovado)                                                                 |
+| Revisor          | Lead Creative Technologist & QA Architect                                           |
 
 ---
 
@@ -21,14 +21,14 @@ A implementação do redesign da Home da BRS Reparações Automotivas elevou o p
 
 ## 2. Verificação dos Critérios de Aceite da SPEC-032
 
-| Critério | Descrição | Status | Evidência |
-| -------- | --------- | ------ | --------- |
-| **AC-032-01** | Smooth Scroll com Lenis & Sincronização GSAP | Aprovado | `SmoothScrollProvider` e `useSmoothScroll` sincronizam RAF com `ScrollTrigger.update`, com fallback de redução de movimento. |
-| **AC-032-02** | Paleta de Cores & Tokens de Luxo Automotivo | Aprovado | Variáveis `--gold-metallic`, `--obsidian`, classes `.glass-panel-luxury`, `.led-status-pulse` adicionadas em `src/styles.css`. |
-| **AC-032-03** | Hero Section Awwwards Standard | Aprovado | Badge com LED pulsante de Toledo-PR, 3 pilares de telemetria automotiva, micro-parallax GSAP `quickTo`, H1 canônico preservado. |
-| **AC-032-04** | Showcase Section Antes/Depois & Telemetria | Aprovado | Tags de estudo de caso com tolerância `< 1.0mm`, moldura de precisão e entrada escalonada com GSAP ScrollTrigger. |
-| **AC-032-05** | MediaExpand Cinematográfico | Aprovado | Transição suave de expansão inercial, halo luminoso e legenda técnica de estufa de pintura. |
-| **AC-032-06** | Testes e Quality Gates | Aprovado | 25 suítes de teste (180 testes) 100% aprovados, 0 erros de linting e build de produção bem-sucedido. |
+| Critério      | Descrição                                    | Status   | Evidência                                                                                                                       |
+| ------------- | -------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| **AC-032-01** | Smooth Scroll com Lenis & Sincronização GSAP | Aprovado | `SmoothScrollProvider` e `useSmoothScroll` sincronizam RAF com `ScrollTrigger.update`, com fallback de redução de movimento.    |
+| **AC-032-02** | Paleta de Cores & Tokens de Luxo Automotivo  | Aprovado | Variáveis `--gold-metallic`, `--obsidian`, classes `.glass-panel-luxury`, `.led-status-pulse` adicionadas em `src/styles.css`.  |
+| **AC-032-03** | Hero Section Awwwards Standard               | Aprovado | Badge com LED pulsante de Toledo-PR, 3 pilares de telemetria automotiva, micro-parallax GSAP `quickTo`, H1 canônico preservado. |
+| **AC-032-04** | Showcase Section Antes/Depois & Telemetria   | Aprovado | Tags de estudo de caso com tolerância `< 1.0mm`, moldura de precisão e entrada escalonada com GSAP ScrollTrigger.               |
+| **AC-032-05** | MediaExpand Cinematográfico                  | Aprovado | Transição suave de expansão inercial, halo luminoso e legenda técnica de estufa de pintura.                                     |
+| **AC-032-06** | Testes e Quality Gates                       | Aprovado | 25 suítes de teste (180 testes) 100% aprovados, 0 erros de linting e build de produção bem-sucedido.                            |
 
 ---
 
