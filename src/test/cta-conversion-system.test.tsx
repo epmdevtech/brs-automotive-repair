@@ -7,8 +7,8 @@ import { ContactForm } from "@/components/brs/contact-form";
 describe("SPEC-021 — Sistema Premium de CTAs, Conversão e Microinterações", () => {
   describe("1. Componente Canônico de Botão e Eliminação de Bevel (SPEC-022)", () => {
     it("renderiza botão primário com classe canônica btn--primary sem chanfro", () => {
-      render(<Button variant="primary">SOLICITAR AVALIAÇÃO</Button>);
-      const btn = screen.getByRole("button", { name: "SOLICITAR AVALIAÇÃO" });
+      render(<Button variant="primary">Solicitar avaliação</Button>);
+      const btn = screen.getByRole("button", { name: "Solicitar avaliação" });
 
       expect(btn).toHaveClass("btn");
       expect(btn).toHaveClass("btn--primary");
@@ -16,8 +16,8 @@ describe("SPEC-021 — Sistema Premium de CTAs, Conversão e Microinterações",
     });
 
     it("renderiza botão secundário com classe canônica btn--secondary sem chanfro", () => {
-      render(<Button variant="secondary">CONHECER FUNILARIA</Button>);
-      const btn = screen.getByRole("button", { name: "CONHECER FUNILARIA" });
+      render(<Button variant="secondary">Conhecer funilaria</Button>);
+      const btn = screen.getByRole("button", { name: "Conhecer funilaria" });
 
       expect(btn).toHaveClass("btn");
       expect(btn).toHaveClass("btn--secondary");

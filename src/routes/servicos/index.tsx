@@ -432,7 +432,7 @@ function ServicesPage() {
             </div>
           </div>
           <Button variant="primary" asChild className="h-10 px-5 text-xs font-semibold shrink-0">
-            <Link to="/contato">SOLICITAR AVALIAÇÃO</Link>
+            <Link to="/contato">Solicitar avaliação</Link>
           </Button>
         </ScrollReveal>
       </section>

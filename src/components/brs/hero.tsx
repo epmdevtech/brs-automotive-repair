@@ -9,12 +9,9 @@ export function Hero() {
         id="inicio"
         backgroundImageUrl={hero}
         eyebrow={
-          <div className="inline-flex items-center gap-2.5 px-3 py-1 rounded-sm border border-white/10 bg-black/45 backdrop-blur-md">
-            <span className="size-2 rounded-full bg-primary led-status-pulse" aria-hidden="true" />
-            <span className="text-[11px] font-mono tracking-[0.16em] uppercase text-neutral-300 font-medium">
-              Oficina Técnica Especializada • Toledo, PR
-            </span>
-          </div>
+          <span className="eyebrow tracking-widest text-primary font-medium block">
+            Oficina Técnica Especializada • Toledo, PR
+          </span>
         }
         title={
           <>
