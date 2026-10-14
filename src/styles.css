@@ -111,7 +111,7 @@ html.lenis body {
   --tracking-tight: -0.02em;
   --tracking-normal: 0;
   --tracking-wide: 0.04em;
-  --tracking-eyebrow: 0.12em;
+  --tracking-eyebrow: 0.2em;
 
   /* Sistema de movimento: valores moderados e reutilizáveis (SPEC-010) */
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
@@ -303,21 +303,13 @@ html.lenis body {
 .eyebrow {
   display: flex;
   align-items: center;
-  gap: 10px;
   color: var(--primary);
   text-transform: uppercase;
   font-family: var(--font-body);
-  font-size: var(--text-micro);
+  font-size: 0.75rem;
   font-weight: var(--weight-semibold);
   line-height: 1.5;
   letter-spacing: var(--tracking-eyebrow);
-}
-.eyebrow::before {
-  content: "";
-  width: 20px;
-  height: 1px;
-  background: var(--primary);
-  flex-shrink: 0;
 }
 .section-title {
   font-family: var(--font-display);
