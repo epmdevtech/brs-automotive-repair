@@ -1,11 +1,22 @@
 import type { ComponentType } from "react";
 import { Link } from "@tanstack/react-router";
-import { ArrowUpRight, Check, Phone, ShieldAlert } from "lucide-react";
+import {
+  ArrowUpRight,
+  Check,
+  Phone,
+  ShieldAlert,
+  Wrench,
+  Paintbrush,
+  Car,
+  Sparkles,
+  Eye,
+  ShieldCheck,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ScrollReveal } from "@/components/ui/scroll-reveal";
 import { ImageReveal } from "@/components/ui/image-reveal";
 import { company, services, type ServiceDetail } from "@/lib/brs";
-import { Breadcrumbs } from "./breadcrumbs";
+import { PageHero, type TelemetryBadge } from "./page-hero";
 import { ContactCTA } from "./contact-cta";
 
 export interface ServicePageContent {
@@ -29,8 +40,8 @@ export interface ServicePageContent {
 }
 
 /**
- * Estrutura comum das páginas de serviço com refinamento de motion design boutique.
- * Combina ScrollReveal com deslocamento suave e ImageReveal com zoom reverso cinematográfico.
+ * Estrutura comum das páginas de serviço com refinamento de motion design Awwwards (SPEC-034).
+ * Combina PageHero com telemetria contextual, ImageReveal com zoom reverso cinematográfico e navegação client-side.
  */
 export function ServicePageLayout({
   service,
@@ -52,55 +63,85 @@ export function ServicePageLayout({
 }: ServicePageContent) {
   const otherServices = services.filter((item) => item.slug !== service.slug);
 
+  // Telemetria técnica específica por especialidade
+  const serviceBadges: TelemetryBadge[] =
+    service.slug === "funilaria"
+      ? [
+          { icon: Wrench, label: "Gaps Milimétricos", detail: "< 1.0mm padrão de fábrica" },
+          { icon: ShieldAlert, label: "Mesa de Tração", detail: "Alinhamento estrutural laser" },
+          { icon: ShieldCheck, label: "Sem Enxerto", detail: "Geometria original restaurada" },
+        ]
+      : service.slug === "pintura-automotiva"
+        ? [
+            {
+              icon: Paintbrush,
+              label: "Pressão Positiva",
+              detail: "Estufa com filtragem absoluta",
+            },
+            {
+              icon: Sparkles,
+              label: "Colorimetria Digital",
+              detail: "Leitura espectrofotométrica",
+            },
+            {
+              icon: ShieldCheck,
+              label: "Verniz Alto Sólidos",
+              detail: "Proteção UV e acabamento espelhado",
+            },
+          ]
+        : [
+            { icon: Car, label: "Pintura Original", detail: "Sem repintura nem perda de valor" },
+            { icon: Eye, label: "Reflexo Óptico", detail: "Leitura de sombras com luminária LED" },
+            {
+              icon: ShieldCheck,
+              label: "Sem Massa Plástica",
+              detail: "Procedimento cirúrgico não invasivo",
+            },
+          ];
+
+  const codeIndex =
+    service.slug === "funilaria"
+      ? "ESP.01 // FUNILARIA"
+      : service.slug === "pintura-automotiva"
+        ? "ESP.02 // PINTURA"
+        : "ESP.03 // MARTELINHO";
+
   return (
     <div className="pt-28 pb-20">
-      <section className="page-width mb-12">
-        <Breadcrumbs
-          items={[{ name: "Serviços", path: "/servicos" }, { name: service.title }]}
-          className="mb-6"
-        />
-
-        <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-          <div className="lg:col-span-7">
-            <ScrollReveal direction="up" delay={0.05}>
-              <p className="eyebrow mb-3">{eyebrow}</p>
-            </ScrollReveal>
-
-            <ScrollReveal direction="up" delay={0.15}>
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-semibold font-display tracking-tight text-white mb-6 leading-tight">
-                {title}
-              </h1>
-            </ScrollReveal>
-
-            <ScrollReveal direction="up" delay={0.25}>
-              <p className="text-neutral-300 text-sm sm:text-base leading-relaxed mb-6">{intro}</p>
-            </ScrollReveal>
-
-            <ScrollReveal direction="up" delay={0.35}>
-              <div className="flex flex-wrap gap-4 pt-2">
-                <Button variant="primary" asChild className="h-11 px-6 text-xs font-semibold">
-                  <Link to="/contato">
-                    {heroCtaLabel} <ArrowUpRight className="ml-1" size={14} aria-hidden="true" />
-                  </Link>
-                </Button>
-                <Button variant="secondary" asChild className="h-11 px-6 text-xs font-medium">
-                  <a href={company.phoneHref}>
-                    <Phone size={14} className="mr-2 text-primary" aria-hidden="true" />
-                    Ligar {company.phone}
-                  </a>
-                </Button>
-              </div>
-            </ScrollReveal>
-          </div>
-
-          <div className="lg:col-span-5">
-            <ImageReveal className="relative rounded-xl border border-border aspect-4/3 shadow-2xl">
+      {/* Hero Section Padrão Awwwards Site of the Day */}
+      <PageHero
+        breadcrumbs={[{ name: "Serviços", path: "/servicos" }, { name: service.title }]}
+        codeIndex={codeIndex}
+        eyebrow={eyebrow}
+        title={title}
+        description={intro}
+        telemetryBadges={serviceBadges}
+        actions={[
+          {
+            label: heroCtaLabel,
+            to: "/contato",
+            variant: "primary",
+            icon: ArrowUpRight,
+          },
+          {
+            label: `Ligar ${company.phone}`,
+            href: company.phoneHref,
+            variant: "secondary",
+            icon: Phone,
+          },
+        ]}
+        asideContent={
+          <div className="relative rounded-sm overflow-hidden border border-white/15 shadow-2xl shadow-black/80 hover:border-primary/40 transition-colors duration-500 group">
+            <div className="absolute top-2 left-2 z-20 text-white/30 font-mono text-[9px] pointer-events-none">
+              + SPEC.VIEW // {service.slug.toUpperCase()}
+            </div>
+            <ImageReveal className="relative aspect-4/3 overflow-hidden">
               <img
                 src={image}
                 alt={imageAlt}
                 width={1200}
                 height={800}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-700"
                 loading="lazy"
               />
               <span className="absolute bottom-3 right-3 text-[9px] uppercase tracking-wider px-2 py-1 bg-background/85 text-muted-foreground border border-border/50 backdrop-blur-xs rounded-xs">
@@ -108,13 +149,13 @@ export function ServicePageLayout({
               </span>
             </ImageReveal>
           </div>
-        </div>
-      </section>
+        }
+      />
 
-      {/* Aplicações e limitações — Estrutura Editorial em Duas Colunas com Hairline */}
+      {/* Aplicações e Limitações — Matriz Editorial com Bordas Compartilhadas */}
       <section className="page-width mt-16 pt-12 border-t border-border">
-        <div className="grid md:grid-cols-2 gap-10 lg:gap-16 divide-y md:divide-y-0 md:divide-x divide-border/80">
-          <ScrollReveal direction="up" delay={0.1} className="h-full md:pr-10 lg:pr-12">
+        <div className="border-y border-border/80 grid md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-border/80">
+          <ScrollReveal direction="up" delay={0.1} className="py-8 md:py-10 md:pr-10 lg:pr-12">
             <div>
               <div className="flex items-center gap-3 mb-6">
                 <ApplicationsIcon size={18} className="text-primary shrink-0" aria-hidden="true" />
@@ -125,7 +166,7 @@ export function ServicePageLayout({
               <ul className="space-y-4 text-xs sm:text-sm text-neutral-300">
                 {service.applications.map((app) => (
                   <li key={app} className="flex items-start gap-3">
-                    <Check size={15} className="text-primary shrink-0 mt-0.5" aria-hidden="true" />
+                    <span className="size-1.5 rounded-full bg-primary shrink-0 mt-2" />
                     <span className="leading-relaxed">{app}</span>
                   </li>
                 ))}
@@ -136,7 +177,7 @@ export function ServicePageLayout({
           <ScrollReveal
             direction="up"
             delay={0.22}
-            className="h-full pt-10 md:pt-0 md:pl-10 lg:pl-12"
+            className="h-full pt-10 md:pt-0 md:pl-10 lg:pl-12 py-8 md:py-10"
           >
             <div>
               <div className="flex items-center gap-3 mb-6">
@@ -223,6 +264,7 @@ export function ServicePageLayout({
         </ul>
       </nav>
 
+      {/* CTA de Fechamento */}
       <ContactCTA title={ctaTitle} description={ctaText} label={ctaLabel} className="mt-20" />
     </div>
   );

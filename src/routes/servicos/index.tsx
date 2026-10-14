@@ -14,6 +14,7 @@ import {
 import { services, aestheticServices } from "@/lib/brs";
 import { buildRouteHead, buildBreadcrumbSchema } from "@/lib/seo";
 import { Breadcrumbs } from "@/components/brs/breadcrumbs";
+import { PageHero } from "@/components/brs/page-hero";
 import { Button } from "@/components/ui/button";
 import { ScrollReveal } from "@/components/ui/scroll-reveal";
 import { ImageReveal } from "@/components/ui/image-reveal";
@@ -63,34 +64,57 @@ export const Route = createFileRoute("/servicos/")({
 function ServicesPage() {
   return (
     <div className="pt-28 pb-20">
-      {/* Banner / Header da Página */}
-      <section className="page-width mb-12">
-        <ScrollReveal direction="up" delay={0.05}>
-          <Breadcrumbs items={[{ name: "Serviços" }]} className="mb-6" />
-        </ScrollReveal>
-
-        <div className="max-w-3xl">
-          <ScrollReveal direction="up" delay={0.1}>
-            <p className="eyebrow mb-3">Especialidades Técnicas</p>
-          </ScrollReveal>
-
-          <ScrollReveal direction="up" delay={0.2}>
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-semibold font-display tracking-tight text-white mb-6 leading-tight">
-              Recuperação técnica de precisão.
-              <br />
-              <span className="text-primary">Preservação do padrão de fábrica.</span>
-            </h1>
-          </ScrollReveal>
-
-          <ScrollReveal direction="up" delay={0.3}>
-            <p className="text-neutral-300 text-sm sm:text-base leading-relaxed">
-              A BRS Reparações Automotivas concentra sua atuação em três frentes complementares de
-              reparação veicular em Toledo, Paraná. Cada serviço é conduzido mediante diagnóstico
-              individualizado da deformação metálica e da integridade da camada de verniz.
-            </p>
-          </ScrollReveal>
-        </div>
-      </section>
+      {/* Banner / Header da Página (SPEC-034 Awwwards Standard) */}
+      <PageHero
+        breadcrumbs={[{ name: "Serviços" }]}
+        codeIndex="CAT.02 // SERVIÇOS"
+        eyebrow="Especialidades Técnicas da Oficina"
+        title={
+          <>
+            Recuperação técnica de precisão.
+            <br />
+            <span className="text-primary">Preservação do padrão de fábrica.</span>
+          </>
+        }
+        description={
+          <p className="text-neutral-300 text-sm sm:text-base leading-relaxed">
+            A BRS Reparações Automotivas concentra sua atuação em três frentes complementares de
+            reparação veicular em Toledo, Paraná. Cada serviço é conduzido mediante diagnóstico
+            individualizado da deformação metálica e da integridade da camada de verniz.
+          </p>
+        }
+        telemetryBadges={[
+          {
+            icon: Wrench,
+            label: "Funilaria Estrutural",
+            detail: "Mesa de tração e gaps de fábrica",
+          },
+          {
+            icon: Paintbrush,
+            label: "Pintura em Estufa",
+            detail: "Pressão positiva e colorimetria digital",
+          },
+          {
+            icon: Car,
+            label: "Martelinho de Ouro",
+            detail: "Desamassamento com verniz original",
+          },
+        ]}
+        actions={[
+          {
+            label: "Solicitar avaliação técnica",
+            to: "/contato",
+            variant: "primary",
+            icon: ArrowUpRight,
+          },
+          {
+            label: "Ver trabalhos concluídos",
+            to: "/trabalhos",
+            variant: "secondary",
+            icon: ArrowUpRight,
+          },
+        ]}
+      />
 
       {/* Grid Detalhado dos 3 Serviços */}
       {/* Faixas Editoriais dos 3 Serviços com Linhas Amplas */}

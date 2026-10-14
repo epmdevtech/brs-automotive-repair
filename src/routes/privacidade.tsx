@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { ShieldCheck, Lock, EyeOff, FileText } from "lucide-react";
 import { company } from "@/lib/brs";
 import { buildRouteHead, buildBreadcrumbSchema } from "@/lib/seo";
-import { Breadcrumbs } from "@/components/brs/breadcrumbs";
+import { PageHero } from "@/components/brs/page-hero";
 import { ScrollReveal } from "@/components/ui/scroll-reveal";
 
 export const Route = createFileRoute("/privacidade")({
@@ -32,35 +32,49 @@ export const Route = createFileRoute("/privacidade")({
 function PrivacidadePage() {
   return (
     <div className="pt-28 pb-20">
-      <section className="page-width mb-12">
-        <ScrollReveal direction="up" delay={0.05}>
-          <Breadcrumbs items={[{ name: "Política de Privacidade" }]} className="mb-6" />
-        </ScrollReveal>
-
-        <div className="max-w-3xl">
-          <ScrollReveal direction="up" delay={0.1}>
-            <p className="eyebrow mb-3">Privacidade e Proteção de Dados</p>
-          </ScrollReveal>
-
-          <ScrollReveal direction="up" delay={0.2}>
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-semibold font-display tracking-tight text-white mb-6 leading-tight">
-              Transparência e Respeito à sua Privacidade.
-            </h1>
-          </ScrollReveal>
-
-          <ScrollReveal direction="up" delay={0.3}>
-            <p className="text-neutral-300 text-sm sm:text-base leading-relaxed mb-6">
-              A <strong className="text-white">{company.legalName}</strong> (nome fantasia{" "}
-              <em>{company.tradeName}</em>, operando sob a marca comercial{" "}
-              <strong className="text-white">{company.name}</strong>, inscrita no CNPJ sob o nº{" "}
-              <span className="font-mono text-primary">{company.cnpj}</span>), sediada em Toledo,
-              Paraná, preza pela transparência e pela proteção da privacidade dos seus visitantes e
-              clientes, em total consonância com a Lei Geral de Proteção de Dados (LGPD — Lei
-              Federal nº 13.709/2018).
-            </p>
-          </ScrollReveal>
-        </div>
-      </section>
+      <PageHero
+        breadcrumbs={[{ name: "Política de Privacidade" }]}
+        codeIndex="LEG.07 // LGPD & PRIVACIDADE"
+        eyebrow="Privacidade e Proteção de Dados"
+        title={
+          <>
+            Transparência e Respeito à <span className="text-primary">sua Privacidade.</span>
+          </>
+        }
+        description={
+          <p className="text-neutral-300 text-sm sm:text-base leading-relaxed">
+            A <strong className="text-white">{company.legalName}</strong> (nome fantasia{" "}
+            <em>{company.tradeName}</em>, operando sob a marca comercial{" "}
+            <strong className="text-white">{company.name}</strong>, inscrita no CNPJ sob o nº{" "}
+            <span className="font-mono text-primary">{company.cnpj}</span>), sediada em Toledo,
+            Paraná, preza pela transparência e pela proteção da privacidade dos seus visitantes e
+            clientes, em total consonância com a Lei Geral de Proteção de Dados (LGPD — Lei Federal
+            nº 13.709/2018).
+          </p>
+        }
+        telemetryBadges={[
+          {
+            icon: ShieldCheck,
+            label: "Marco Legal",
+            detail: "LGPD (Lei Federal 13.709/2018)",
+          },
+          {
+            icon: EyeOff,
+            label: "Zero Cookies Invasivos",
+            detail: "Sem pixel publicitário ou rastreamento",
+          },
+          {
+            icon: Lock,
+            label: "Processamento Local",
+            detail: "Dados retidos apenas na sua sessão",
+          },
+          {
+            icon: FileText,
+            label: `CNPJ ${company.cnpj}`,
+            detail: company.city,
+          },
+        ]}
+      />
 
       <section className="page-width">
         <div className="grid md:grid-cols-2 gap-8 lg:gap-10 max-w-4xl">

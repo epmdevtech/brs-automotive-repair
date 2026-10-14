@@ -2,15 +2,15 @@
 
 ## Metadados
 
-| Campo        | Valor                                                                                                      |
-| ------------ | ---------------------------------------------------------------------------------------------------------- |
-| ID           | `TASK-033-01`                                                                                              |
-| SPEC         | [`SPEC-033`](../specs/SPEC-033-signature-webgl-canvas-and-refined-page-transitions.md)                      |
-| Título       | Implementação da Experiência Signature Canvas/WebGL e Transições de Página Refinadas                       |
-| Data Criação | 2026-10-14                                                                                                 |
-| Status       | Completed (Concluída)                                                                                      |
-| Responsável  | Lead Creative Technologist & WebGL / Motion Architect                                                      |
-| Branch/Alvo  | `feature/awwwards-redesign`                                                                                |
+| Campo        | Valor                                                                                  |
+| ------------ | -------------------------------------------------------------------------------------- |
+| ID           | `TASK-033-01`                                                                          |
+| SPEC         | [`SPEC-033`](../specs/SPEC-033-signature-webgl-canvas-and-refined-page-transitions.md) |
+| Título       | Implementação da Experiência Signature Canvas/WebGL e Transições de Página Refinadas   |
+| Data Criação | 2026-10-14                                                                             |
+| Status       | Completed (Concluída)                                                                  |
+| Responsável  | Lead Creative Technologist & WebGL / Motion Architect                                  |
+| Branch/Alvo  | `feature/awwwards-redesign`                                                            |
 
 ---
 
