@@ -19,7 +19,7 @@ export function Philosophy() {
   ];
 
   return (
-    <section className="section-space border-y border-border bg-secondary/40">
+    <section className="pt-16 pb-8 border-t border-border bg-secondary/20">
       <div className="page-width grid md:grid-cols-2 gap-12 md:gap-24">
         <ScrollReveal
           data-reveal=""

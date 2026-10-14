@@ -40,7 +40,8 @@ Gerado por `scripts/generate_traceability.py`. Não edite manualmente; execute n
 | [SPEC-034](../specs/SPEC-034-awwwards-heroes-across-all-routes.md) | Approved (Aprovada) | [TASK-034-01](../tasks/TASK-034-01-awwwards-heroes-across-all-routes.md) (Completed (Concluído)) | `4b891bd2` feat(awwwards): redesign hero sections across all routes and pages | [REVIEW-034-awwwards-heroes-across-all-routes.md](../reviews/REVIEW-034-awwwards-heroes-across-all-routes.md) (Aprovado (100% Quality Gates Cumpridos)) |
 | [SPEC-035](../specs/SPEC-035-awwwards-design-system-typography-layout.md) | Approved (Aprovada) | [TASK-035-01](../tasks/TASK-035-01-awwwards-design-system-typography-layout.md) (Completed (Concluído)) | `f96811e8` feat(awwwards): create DESIGN.md, overhaul typography scale and layout rhythm | [REVIEW-035-awwwards-design-system-typography-layout.md](../reviews/REVIEW-035-awwwards-design-system-typography-layout.md) (Aprovado (100% dos Quality Gates Cumpridos)) |
 | [SPEC-036](../specs/SPEC-036-awwwards-motion-engine-transitions.md) | Approved (Aprovada) | [TASK-036-01](../tasks/TASK-036-01-awwwards-motion-engine-transitions.md) (Completed) | `39ba24cf` feat(awwwards): integrate Lenis motion engine, GSAP ScrollTrigger, parallax, counters, and refined transitions | [REVIEW-036-awwwards-motion-engine-transitions.md](../reviews/REVIEW-036-awwwards-motion-engine-transitions.md) (Aprovado (100% dos Quality Gates Cumpridos)) |
+| [SPEC-037](../specs/SPEC-037-ux-ui-refinement-consolidation.md) | Approved (Aprovada) | [TASK-037-01](../tasks/TASK-037-01-ux-ui-refinement-consolidation.md) (Completed) | — | [REVIEW-037-ux-ui-refinement-consolidation.md](../reviews/REVIEW-037-ux-ui-refinement-consolidation.md) (Aprovado (100% dos Quality Gates Cumpridos)) |
 
 ## Lacunas de rastreabilidade (Traceability gaps)
 
-- Nenhuma detectada nos artefatos verificados.
+- `TASK-037-01` não possui commit com `Task-Ref: TASK-037-01`.

@@ -25,7 +25,8 @@ export function FinalCTA() {
           solução técnica para o seu veículo?
         </h2>
         <p className="body-copy mt-5">
-          Converse com a equipe da BRS para tirar dúvidas e agendar sua avaliação em Toledo.
+          Converse com a equipe técnica da BRS em Toledo-PR para tirar dúvidas e agendar sua
+          avaliação sem compromisso.
         </p>
         <div className="flex flex-wrap gap-3 justify-center mt-7">
           <Button variant="primary" asChild className="h-12 px-7 text-xs font-semibold">

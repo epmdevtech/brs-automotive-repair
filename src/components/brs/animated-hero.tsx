@@ -183,14 +183,6 @@ export const AnimatedHero = ({
         className="pointer-events-none absolute top-1/3 left-1/3 -translate-x-1/2 -translate-y-1/2 size-[650px] rounded-full bg-primary/8 blur-[140px] will-change-transform"
       />
 
-      {/* Marcas de precisão técnica nas bordas (estilo Awwwards SOTD) */}
-      <div className="absolute top-24 left-8 text-white/15 font-mono text-[10px] select-none hidden lg:block tracking-widest">
-        + BRS.24 // REF:TLD-PR
-      </div>
-      <div className="absolute top-24 right-8 text-white/15 font-mono text-[10px] select-none hidden lg:block tracking-widest">
-        COORD: 24°43'S 53°44'W
-      </div>
-
       {/* Conteúdo principal animado do Hero */}
       <motion.div
         ref={contentRef}

@@ -81,14 +81,6 @@ export function HomeBeforeAfter() {
             </div>
 
             <div className="relative rounded-sm overflow-hidden border border-white/15 hover:border-primary/40 shadow-2xl shadow-black/90 transition-colors duration-500 group">
-              {/* Marcas técnicas de alinhamento óptico nos cantos */}
-              <div className="absolute top-2 left-2 z-30 text-white/30 font-mono text-[9px] pointer-events-none">
-                + ALIGN.X
-              </div>
-              <div className="absolute top-2 right-2 z-30 text-white/30 font-mono text-[9px] pointer-events-none">
-                + ALIGN.Y
-              </div>
-
               <BeforeAfterSlider
                 beforeImage={funilariaAntes}
                 afterImage={funilariaDepois}
@@ -153,17 +145,13 @@ export function HomeBeforeAfter() {
                 </div>
               </div>
 
-              {/* CTA para a galeria canônica /trabalhos */}
-              <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
+              {/* CTA direto para a galeria canônica /trabalhos */}
+              <div className="pt-2">
                 <Button variant="primary" asChild className="h-11 px-6">
                   <Link to="/trabalhos">
                     Ver galeria completa
                     <ArrowUpRight className="ml-1" size={16} aria-hidden="true" />
                   </Link>
-                </Button>
-
-                <Button variant="secondary" asChild className="h-11 px-5">
-                  <Link to="/contato">Solicitar avaliação</Link>
                 </Button>
               </div>
 

@@ -221,6 +221,7 @@ Todas as entregas obedecem ao protocolo **Universal SDD**:
 - `SPEC-034` / `TASK-034-01` / `REVIEW-034`: Redesign Awwwards Standard dos Heroes em Todas as Rotas com Tipografia, Paleta de Cores, Lenis e Coreografia GSAP.
 - `SPEC-035` / `TASK-035-01` / `REVIEW-035`: Criação do DESIGN.md, Reformulação da Escala Tipográfica Fluida e Ritmo de Layout (Anti-AI Genericness).
 - `SPEC-036` / `TASK-036-01` / `REVIEW-036`: Integração do Motion Engine (Lenis + GSAP ScrollTrigger), Componentes Interativos (Before/After Slider, NumericCounter, ParallaxImage, microinterações refinadas) e Transições Suaves de Página.
+- `SPEC-037` / `TASK-037-01` / `REVIEW-037`: Refinamento UX/UI, Consolidação Visual, Despoluição Editorial e Otimização da Hierarquia e Conversão da Home Page.
 
 ---
 

@@ -29,10 +29,15 @@ export function Hero() {
             fábrica.
           </p>
         }
+        ctaButton={{
+          text: "Solicitar avaliação",
+          href: "/contato",
+        }}
         secondaryCta={{
           text: "Conhecer os serviços",
           href: "/servicos",
         }}
+        showTelemetryMetrics={false}
         bottomContent={
           <div className="page-width flex items-center justify-between text-xs text-neutral-400 pt-3 border-t border-white/10">
             <span className="flex items-center gap-2 font-medium">
@@ -56,14 +61,13 @@ export function Hero() {
       />
 
       <div className="trust-strip">
-        <div className="page-width grid grid-cols-2 md:grid-cols-4 gap-y-5">
+        <div className="page-width grid grid-cols-1 sm:grid-cols-3 gap-y-4 sm:gap-x-8">
           {[
-            [ShieldCheck, "Cuidado em cada detalhe"],
-            [Wrench, "Reparação especializada"],
-            [Handshake, "Atendimento direto e transparente"],
-            [Truck, "Serviço de leva e traz em Toledo"],
+            [Wrench, "Reparação e pintura técnica de precisão"],
+            [Handshake, "Diagnóstico honesto e transparente"],
+            [Truck, "Serviço de leva e traz em Toledo-PR"],
           ].map(([Icon, text], i) => {
-            const ItemIcon = Icon as typeof ShieldCheck;
+            const ItemIcon = Icon as typeof Wrench;
             return (
               <div className="trust-item" key={i}>
                 <ItemIcon strokeWidth={1.5} size={18} aria-hidden="true" />

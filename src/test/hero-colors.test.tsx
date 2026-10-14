@@ -38,13 +38,14 @@ describe("SPEC-012 — Padronização de Cores da Seção Hero e Sincronia com N
     expect(desc?.className).toContain("text-neutral-400");
   });
 
-  it("garante que o Hero não duplica o CTA do Header e o Header mantém o CTA primário (SPEC-022)", () => {
+  it("garante que o Hero possui CTA primário de avaliação e o Header mantém o CTA canônico (SPEC-037)", () => {
     const { container: heroContainer } = render(<Hero />);
     const { container: headerContainer } = render(<Header />);
 
-    // Hero não possui o botão duplicado 'Solicitar avaliação'
+    // Hero possui o botão primário 'Solicitar avaliação' (SPEC-037)
     const heroPrimaryCta = heroContainer.querySelector("a[href='/contato']");
-    expect(heroPrimaryCta).toBeNull();
+    expect(heroPrimaryCta).not.toBeNull();
+    expect(heroPrimaryCta?.textContent).toContain("Solicitar avaliação");
 
     // Header possui o CTA primário com a classe canônica .btn--primary e sem chanfro
     const headerCta = headerContainer.querySelector("a[href='/contato']");
