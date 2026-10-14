@@ -1,32 +1,94 @@
+import { useRef, useEffect } from "react";
 import { Link } from "@tanstack/react-router";
-import { ArrowUpRight, ShieldCheck, Sparkles } from "lucide-react";
+import { ArrowUpRight, ShieldCheck, Sparkles, CheckCircle2, SlidersHorizontal } from "lucide-react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Button } from "@/components/ui/button";
-import { ScrollReveal } from "@/components/ui/scroll-reveal";
 import { BeforeAfterSlider } from "./before-after-slider";
+import { isReducedMotionPreferred } from "@/lib/motion-system";
 import funilariaAntes from "@/assets/funilaria-antes.jpg";
 import funilariaDepois from "@/assets/funilaria-depois.jpg";
 
 /**
- * Seção de Demonstração Interativa Antes e Depois na Página Inicial (SPEC-025, SPEC-026).
- * Composição editorial assimétrica de 12 colunas no desktop, destacando a
- * precisão técnica do alinhamento e conduzindo o usuário à galeria completa (/trabalhos).
+ * Seção de Demonstração Interativa Antes e Depois na Página Inicial (SPEC-025, SPEC-026, SPEC-032).
+ * Padrão Awwwards Site of the Day: Composição editorial técnica de 12 colunas,
+ * telemetria de tolerâncias milimétricas, moldura automotiva chanfrada e coreografia GSAP ScrollTrigger.
  */
 export function HomeBeforeAfter() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const visualColRef = useRef<HTMLDivElement>(null);
+  const textColRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (typeof window === "undefined" || isReducedMotionPreferred()) return;
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 78%",
+          toggleActions: "play none none none",
+        },
+      });
+
+      tl.from(visualColRef.current, {
+        opacity: 0,
+        y: 32,
+        scale: 0.98,
+        duration: 0.85,
+        ease: "power3.out",
+      }).from(
+        textColRef.current,
+        {
+          opacity: 0,
+          y: 28,
+          duration: 0.75,
+          ease: "power3.out",
+        },
+        "-=0.55",
+      );
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
     <section
+      ref={sectionRef}
       id="demonstracao"
       aria-label="Demonstração interativa de reparação antes e depois"
-      className="py-16 sm:py-20 border-y border-white/10 bg-neutral-950/60 relative overflow-hidden"
+      className="py-16 sm:py-24 border-y border-white/10 bg-neutral-950/80 relative overflow-hidden"
     >
-      <div className="page-width">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 xl:gap-12 items-center">
+      {/* Halo de luz ambiente especular automotiva */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -top-40 left-1/4 size-[550px] rounded-full bg-primary/6 blur-[130px]"
+      />
+
+      <div className="page-width relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 xl:gap-14 items-center">
           {/* Coluna Visual: Comparador Interativo de Imagens (7 colunas no desktop) */}
-          <ScrollReveal
-            direction="up"
-            delay={0.08}
-            className="lg:col-span-7 flex flex-col justify-center"
-          >
-            <div className="relative rounded-sm overflow-hidden border border-white/15 shadow-2xl shadow-black/80">
+          <div ref={visualColRef} className="lg:col-span-7 flex flex-col justify-center">
+            {/* Tag técnica de indexação estilo Awwwards */}
+            <div className="flex items-center justify-between text-[11px] font-mono tracking-widest uppercase text-neutral-400 mb-2 px-1">
+              <span className="flex items-center gap-1.5 text-primary font-medium">
+                <SlidersHorizontal size={12} aria-hidden="true" />
+                ESTUDO DE CASO // PRECISÃO 01
+              </span>
+              <span className="text-white/40">TOLERÂNCIA &lt; 1.0MM</span>
+            </div>
+
+            <div className="relative rounded-sm overflow-hidden border border-white/15 hover:border-primary/40 shadow-2xl shadow-black/90 transition-colors duration-500 group">
+              {/* Marcas técnicas de alinhamento óptico nos cantos */}
+              <div className="absolute top-2 left-2 z-30 text-white/30 font-mono text-[9px] pointer-events-none">
+                + ALIGN.X
+              </div>
+              <div className="absolute top-2 right-2 z-30 text-white/30 font-mono text-[9px] pointer-events-none">
+                + ALIGN.Y
+              </div>
+
               <BeforeAfterSlider
                 beforeImage={funilariaAntes}
                 afterImage={funilariaDepois}
@@ -47,14 +109,10 @@ export function HomeBeforeAfter() {
               </span>
               <span className="image-note">Demonstração técnica</span>
             </div>
-          </ScrollReveal>
+          </div>
 
-          {/* Coluna Narrativa Editorial e Conversão (5 colunas no desktop) */}
-          <ScrollReveal
-            direction="up"
-            delay={0.16}
-            className="lg:col-span-5 flex flex-col justify-center"
-          >
+          {/* Coluna Narrativa Editorial e Telemetria (5 colunas no desktop) */}
+          <div ref={textColRef} className="lg:col-span-5 flex flex-col justify-center">
             <div className="space-y-4">
               <p className="eyebrow">Demonstração Técnica Antes & Depois</p>
 
@@ -68,17 +126,31 @@ export function HomeBeforeAfter() {
                 geometria original da chapa, evitando enxertos pesados de massa plástica.
               </p>
 
-              {/* Destaque do caso apresentado */}
-              <div className="pt-2 pb-1 border-y border-white/10 my-4">
-                <p className="text-xs uppercase tracking-wider text-primary font-semibold mb-1">
-                  Caso em exibição
-                </p>
-                <p className="text-sm font-medium text-white">
-                  Funilaria de Precisão & Alinhamento Estrutural
-                </p>
-                <p className="text-xs text-neutral-400 mt-0.5">
-                  Painel lateral restaurado respeitando gaps de portas e para-lamas.
-                </p>
+              {/* Destaque do caso apresentado com HUD técnico de telemetria */}
+              <div className="pt-3 pb-3 border-y border-white/10 my-4 space-y-2.5">
+                <div>
+                  <p className="text-xs uppercase tracking-wider text-primary font-semibold mb-1">
+                    Caso em exibição
+                  </p>
+                  <p className="text-sm font-medium text-white">
+                    Funilaria de Precisão & Alinhamento Estrutural
+                  </p>
+                  <p className="text-xs text-neutral-400 mt-0.5">
+                    Painel lateral restaurado respeitando gaps de portas e para-lamas.
+                  </p>
+                </div>
+
+                {/* Especificações técnicas de oficina (Padrão Awwwards) */}
+                <div className="grid grid-cols-2 gap-2 pt-2 border-t border-white/5 text-[11px]">
+                  <div className="flex items-center gap-1.5 text-neutral-300">
+                    <CheckCircle2 size={12} className="text-primary shrink-0" aria-hidden="true" />
+                    <span>Gaps &lt; 1mm conformes</span>
+                  </div>
+                  <div className="flex items-center gap-1.5 text-neutral-300">
+                    <CheckCircle2 size={12} className="text-primary shrink-0" aria-hidden="true" />
+                    <span>Repuxo a frio milimétrico</span>
+                  </div>
+                </div>
               </div>
 
               {/* CTA para a galeria canônica /trabalhos */}
@@ -108,7 +180,7 @@ export function HomeBeforeAfter() {
                 </span>
               </p>
             </div>
-          </ScrollReveal>
+          </div>
         </div>
       </div>
     </section>

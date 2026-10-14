@@ -8,6 +8,14 @@ export function Hero() {
       <AnimatedHero
         id="inicio"
         backgroundImageUrl={hero}
+        eyebrow={
+          <div className="inline-flex items-center gap-2.5 px-3 py-1 rounded-sm border border-white/10 bg-black/45 backdrop-blur-md">
+            <span className="size-2 rounded-full bg-primary led-status-pulse" aria-hidden="true" />
+            <span className="text-[11px] font-mono tracking-[0.16em] uppercase text-neutral-300 font-medium">
+              Oficina Técnica Especializada • Toledo, PR
+            </span>
+          </div>
+        }
         title={
           <>
             <span className="text-white font-semibold">BRS Reparações</span>{" "}
@@ -33,9 +41,14 @@ export function Hero() {
             <a
               href="#servicos"
               aria-label="Rolar para a seção de serviços"
-              className="hidden sm:flex items-center gap-2 text-[10px] uppercase tracking-[2px] text-neutral-300 hover:text-white transition-colors font-medium"
+              className="hidden sm:flex items-center gap-2 text-[10px] uppercase tracking-[2px] text-neutral-300 hover:text-white transition-colors font-medium group"
             >
-              Ver especialidades <ArrowDown size={14} aria-hidden="true" />
+              Ver especialidades{" "}
+              <ArrowDown
+                size={14}
+                aria-hidden="true"
+                className="group-hover:translate-y-0.5 transition-transform"
+              />
             </a>
             <span className="image-note text-[11px] text-neutral-400">Fotografia ilustrativa</span>
           </div>
