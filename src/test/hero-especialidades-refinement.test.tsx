@@ -26,11 +26,8 @@ describe("SPEC-039 — Refinamento da Hero Section e Transição Direta para Esp
       </SmoothScrollProvider>,
     );
 
-    // CTA Primário de conversão dominante
-    const primaryCta = screen.getByRole("link", { name: /solicitar avaliação/i });
-    expect(primaryCta).toBeInTheDocument();
-    expect(primaryCta).toHaveAttribute("href", "/contato");
-    expect(primaryCta.className).toContain("btn--primary");
+    // Hero não duplica o CTA de avaliação (foco exclusivo na descoberta de serviços)
+    expect(screen.queryByRole("link", { name: /solicitar avaliação/i })).toBeNull();
 
     // Botão Secundário 'Ver especialidades' com peso outline/ghost (.btn--secondary)
     const secondaryCta = screen.getByRole("link", { name: /ver especialidades/i });

@@ -24,10 +24,6 @@ export function Hero() {
           fábrica.
         </p>
       }
-      ctaButton={{
-        text: "Solicitar avaliação",
-        href: "/contato",
-      }}
       secondaryCta={{
         text: "Ver especialidades",
         href: "#especialidades",

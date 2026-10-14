@@ -238,20 +238,27 @@ export const AnimatedHero = ({
         {(ctaButton || secondaryCta) && (
           <motion.div
             variants={itemVariants}
-            className="mt-8 flex flex-wrap items-center gap-4 hero-cta-group"
+            className={cn(
+              "mt-8 flex flex-wrap items-center hero-cta-group",
+              ctaButton && secondaryCta && "gap-4",
+            )}
           >
             {/* Botão Primário (se fornecido) */}
             {ctaButton && (
               <MagneticButton>
                 {ctaButton.href ? (
-                  <Button variant="primary" asChild className="cursor-pointer">
+                  <Button variant="primary" asChild className="cursor-pointer min-h-[44px]">
                     <HeroLink action={ctaButton}>
                       {ctaButton.text}{" "}
                       <ArrowUpRight className="ml-1.5" size={16} aria-hidden="true" />
                     </HeroLink>
                   </Button>
                 ) : (
-                  <Button variant="primary" onClick={ctaButton.onClick} className="cursor-pointer">
+                  <Button
+                    variant="primary"
+                    onClick={ctaButton.onClick}
+                    className="cursor-pointer min-h-[44px]"
+                  >
                     {ctaButton.text}{" "}
                     <ArrowUpRight className="ml-1.5" size={16} aria-hidden="true" />
                   </Button>
@@ -259,19 +266,35 @@ export const AnimatedHero = ({
               </MagneticButton>
             )}
 
-            {/* Botão Secundário */}
+            {/* Botão Secundário / Descoberta de Serviços */}
             {secondaryCta &&
               (secondaryCta.href ? (
-                <Button variant="secondary" asChild className="cursor-pointer">
-                  <HeroLink action={secondaryCta}>{secondaryCta.text}</HeroLink>
+                <Button
+                  variant="secondary"
+                  asChild
+                  className="cursor-pointer min-h-[44px] px-6 text-xs group"
+                >
+                  <HeroLink action={secondaryCta}>
+                    {secondaryCta.text}{" "}
+                    <ArrowDown
+                      size={14}
+                      className="ml-2 transition-transform duration-300 group-hover:translate-y-1 text-primary"
+                      aria-hidden="true"
+                    />
+                  </HeroLink>
                 </Button>
               ) : (
                 <Button
                   variant="secondary"
                   onClick={secondaryCta.onClick}
-                  className="cursor-pointer"
+                  className="cursor-pointer min-h-[44px] px-6 text-xs group"
                 >
-                  {secondaryCta.text}
+                  {secondaryCta.text}{" "}
+                  <ArrowDown
+                    size={14}
+                    className="ml-2 transition-transform duration-300 group-hover:translate-y-1 text-primary"
+                    aria-hidden="true"
+                  />
                 </Button>
               ))}
           </motion.div>

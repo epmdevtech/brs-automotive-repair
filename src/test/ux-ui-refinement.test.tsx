@@ -13,12 +13,10 @@ describe("SPEC-037 — Refinamento UX/UI, Consolidação Visual e Otimização d
   it("AC-037-01: Hero possui CTA primário para avaliação, CTA secundário e sem marcas HUD artificiais", () => {
     const { container } = render(<Hero />);
 
-    // CTA Primário para contato
-    const primaryCta = screen.getByRole("link", { name: /solicitar avaliação/i });
-    expect(primaryCta).toBeInTheDocument();
-    expect(primaryCta).toHaveAttribute("href", "/contato");
+    // Ausência de CTA duplicado para /contato na Hero (SPEC-041)
+    expect(screen.queryByRole("link", { name: /solicitar avaliação/i })).toBeNull();
 
-    // CTA Secundário para especialidades
+    // CTA Focal único para descoberta de especialidades
     const secondaryCta = screen.getByRole("link", { name: /ver especialidades/i });
     expect(secondaryCta).toBeInTheDocument();
     expect(secondaryCta).toHaveAttribute("href", "#especialidades");

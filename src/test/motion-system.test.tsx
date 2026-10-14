@@ -159,7 +159,7 @@ describe("Sistema Unificado de Motion Design (SPEC-015)", () => {
       expect(
         screen.getByRole("link", { name: /ver especialidades|conhecer os serviços/i }),
       ).toBeInTheDocument();
-      expect(screen.getByRole("link", { name: /solicitar avaliação/i })).toBeInTheDocument();
+      expect(screen.queryByRole("link", { name: /solicitar avaliação/i })).toBeNull();
     });
   });
 });
