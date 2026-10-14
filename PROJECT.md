@@ -220,6 +220,7 @@ Todas as entregas obedecem ao protocolo **Universal SDD**:
 - `SPEC-033` / `TASK-033-01` / `REVIEW-033`: Experiência Signature Interativa WebGL/Canvas de Partículas & Laser e Transições de Página Cinemáticas sem Quebra de Estado da UI.
 - `SPEC-034` / `TASK-034-01` / `REVIEW-034`: Redesign Awwwards Standard dos Heroes em Todas as Rotas com Tipografia, Paleta de Cores, Lenis e Coreografia GSAP.
 - `SPEC-035` / `TASK-035-01` / `REVIEW-035`: Criação do DESIGN.md, Reformulação da Escala Tipográfica Fluida e Ritmo de Layout (Anti-AI Genericness).
+- `SPEC-036` / `TASK-036-01` / `REVIEW-036`: Integração do Motion Engine (Lenis + GSAP ScrollTrigger), Componentes Interativos (Before/After Slider, NumericCounter, ParallaxImage, microinterações refinadas) e Transições Suaves de Página.
 
 ---
 

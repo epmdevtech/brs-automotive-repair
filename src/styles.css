@@ -821,6 +821,7 @@ textarea.field-input {
     background-color var(--ease),
     border-color var(--ease),
     color var(--ease),
+    box-shadow var(--ease),
     transform var(--ease);
 }
 
@@ -869,6 +870,7 @@ textarea.field-input {
     background: var(--gold-hover);
     border-color: var(--gold-hover);
     color: var(--on-gold);
+    box-shadow: 0 0 20px rgb(200 169 106 / 0.22);
   }
 }
 
@@ -884,6 +886,7 @@ textarea.field-input {
     border-color: var(--gold);
     background: rgb(200 169 106 / 0.1);
     color: #ffffff;
+    box-shadow: 0 0 16px rgb(200 169 106 / 0.12);
   }
 }
 

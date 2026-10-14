@@ -66,13 +66,20 @@ export function SmoothScrollProvider({ children }: { children: ReactNode }) {
     };
   }, []);
 
-  // Reseta a rolagem imediatamente para o topo em transições de página
+  // Reseta a rolagem imediatamente para o topo em transições de página e recalcula gatilhos GSAP
   useEffect(() => {
     if (lenisRef.current) {
       lenisRef.current.scrollTo(0, { immediate: true });
     } else if (typeof window !== "undefined") {
       window.scrollTo(0, 0);
     }
+
+    // Recalcula posições do ScrollTrigger na nova rota após renderização do DOM
+    const timer = setTimeout(() => {
+      ScrollTrigger.refresh();
+    }, 120);
+
+    return () => clearTimeout(timer);
   }, [pathname]);
 
   const scrollTo: SmoothScrollContextValue["scrollTo"] = (target, options) => {

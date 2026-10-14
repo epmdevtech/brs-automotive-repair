@@ -5,6 +5,7 @@ import { buildRouteHead, buildBreadcrumbSchema } from "@/lib/seo";
 import { PageHero } from "@/components/brs/page-hero";
 import { ContactCTA } from "@/components/brs/contact-cta";
 import { ScrollReveal } from "@/components/ui/scroll-reveal";
+import { NumericCounter } from "@/components/ui/numeric-counter";
 
 const external = { target: "_blank", rel: "noopener noreferrer" };
 
@@ -145,7 +146,7 @@ function SobrePage() {
           >
             <div>
               <span className="font-mono text-[11px] font-semibold text-primary uppercase tracking-wider block mb-3">
-                01 / ÉTICA PROFISSIONAL
+                <NumericCounter target={1} padZero /> / ÉTICA PROFISSIONAL
               </span>
               <h3 className="text-base sm:text-lg font-semibold font-display text-white mb-2">
                 Diagnóstico Honesto
@@ -164,7 +165,7 @@ function SobrePage() {
           >
             <div>
               <span className="font-mono text-[11px] font-semibold text-primary uppercase tracking-wider block mb-3">
-                02 / PADRÃO ORIGINAL
+                <NumericCounter target={2} padZero /> / PADRÃO ORIGINAL
               </span>
               <h3 className="text-base sm:text-lg font-semibold font-display text-white mb-2">
                 Precisão de Ajuste
@@ -183,7 +184,7 @@ function SobrePage() {
           >
             <div>
               <span className="font-mono text-[11px] font-semibold text-primary uppercase tracking-wider block mb-3">
-                03 / ATENDIMENTO
+                <NumericCounter target={3} padZero /> / ATENDIMENTO
               </span>
               <h3 className="text-base sm:text-lg font-semibold font-display text-white mb-2">
                 Respeito à Rotina

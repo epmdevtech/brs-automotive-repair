@@ -2,13 +2,13 @@
 
 ## 1. Metadados
 
-| Campo        | Valor                                                                          |
-| ------------ | ------------------------------------------------------------------------------ |
-| SPEC         | [`SPEC-035`](../specs/SPEC-035-awwwards-design-system-typography-layout.md)   |
-| TASK         | [`TASK-035-01`](../tasks/TASK-035-01-awwwards-design-system-typography-layout.md) |
-| Data         | 2026-10-14                                                                     |
-| Status       | Aprovado (100% dos Quality Gates Cumpridos)                                   |
-| Revisor      | Quality Gate Lead & Awwwards Design Auditor                                    |
+| Campo   | Valor                                                                             |
+| ------- | --------------------------------------------------------------------------------- |
+| SPEC    | [`SPEC-035`](../specs/SPEC-035-awwwards-design-system-typography-layout.md)       |
+| TASK    | [`TASK-035-01`](../tasks/TASK-035-01-awwwards-design-system-typography-layout.md) |
+| Data    | 2026-10-14                                                                        |
+| Status  | Aprovado (100% dos Quality Gates Cumpridos)                                       |
+| Revisor | Quality Gate Lead & Awwwards Design Auditor                                       |
 
 ---
 
