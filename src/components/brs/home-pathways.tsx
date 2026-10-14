@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowUpRight } from "lucide-react";
 import { ScrollReveal } from "@/components/ui/scroll-reveal";
+import { NumericCounter } from "@/components/ui/numeric-counter";
 
 const pathways = [
   {
@@ -30,8 +31,8 @@ const pathways = [
 ] as const;
 
 /**
- * Resumo editorial das páginas institucionais (SPEC-023).
- * Estrutura de matriz contínua com hairlines compartilhados, eliminando caixas de cards genéricas.
+ * Resumo editorial das páginas institucionais (SPEC-023, SPEC-036).
+ * Estrutura de matriz contínua com hairlines compartilhados e microinterações táteis.
  */
 export function HomePathways() {
   return (
@@ -57,16 +58,16 @@ export function HomePathways() {
               direction="up"
               delay={i * 0.12}
               as="article"
-              className="flex h-full flex-col justify-between py-8 md:py-10 md:px-8 first:md:pl-0 last:md:pr-0"
+              className="flex h-full flex-col justify-between py-8 md:py-10 md:px-8 first:md:pl-0 last:md:pr-0 group transition-colors duration-500 hover:bg-white/[0.015]"
             >
               <div>
                 <div className="flex items-center justify-between mb-4">
                   <span className="eyebrow">{item.eyebrow}</span>
                   <span className="font-mono text-[11px] font-semibold text-primary">
-                    {item.number}
+                    <NumericCounter target={parseInt(item.number, 10)} padZero />
                   </span>
                 </div>
-                <h3 className="text-xl md:text-2xl font-semibold font-display tracking-tight text-foreground mb-3 text-balance">
+                <h3 className="text-xl md:text-2xl font-semibold font-display tracking-tight text-foreground mb-3 text-balance group-hover:text-primary transition-colors">
                   {item.title}
                 </h3>
                 <p className="text-xs text-muted-foreground leading-relaxed text-pretty">
@@ -77,12 +78,12 @@ export function HomePathways() {
               <div className="pt-6 mt-6 border-t border-border/40">
                 <Link
                   to={item.to}
-                  className="group inline-flex items-center gap-1.5 text-xs font-semibold text-primary hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary rounded-xs py-0.5"
+                  className="group/link inline-flex items-center gap-1.5 text-xs font-semibold text-primary hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary rounded-xs py-0.5"
                 >
                   <span>{item.label}</span>
                   <ArrowUpRight
                     size={14}
-                    className="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                    className="transition-transform duration-200 group-hover/link:translate-x-1 group-hover/link:-translate-y-1 text-primary"
                     aria-hidden="true"
                   />
                 </Link>

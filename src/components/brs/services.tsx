@@ -2,7 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { ArrowUpRight, Sparkles, ShieldCheck, Eye } from "lucide-react";
 import { services, aestheticServices } from "@/lib/brs";
 import { ScrollReveal } from "@/components/ui/scroll-reveal";
-import { ImageReveal } from "@/components/ui/image-reveal";
+import { ParallaxImage } from "@/components/ui/parallax-image";
 import funilariaServico from "@/assets/funilaria-servico.jpg";
 import pinturaServico from "@/assets/pintura-servico.jpg";
 import martelinhoServico from "@/assets/martelinho-servico.jpg";
@@ -12,9 +12,9 @@ const serviceImages = [funilariaServico, pinturaServico, martelinhoServico];
 const aestheticIcons = [Sparkles, ShieldCheck, Eye];
 
 /**
- * Seção de Especialidades — Arquitetura Editorial Premium (SPEC-023 & SPEC-030)
- * Matriz aberta contínua com divisores estruturais, tipografia expressiva e
- * apresentação clara dos serviços de reparação e estética automotiva.
+ * Seção de Especialidades — Arquitetura Editorial Premium (SPEC-023, SPEC-030, SPEC-036)
+ * Matriz aberta contínua com divisores estruturais, tipografia expressiva,
+ * parallax fotográfico sutil e microinterações de alta precisão.
  */
 export function Services() {
   return (
@@ -47,26 +47,25 @@ export function Services() {
               as="article"
               direction="up"
               delay={0.1 + i * 0.12}
-              className="flex flex-col justify-between py-8 md:py-10 md:px-8 first:md:pl-0 last:md:pr-0 group"
+              className="flex flex-col justify-between py-8 md:py-10 md:px-8 first:md:pl-0 last:md:pr-0 group transition-colors duration-500 hover:bg-white/[0.015]"
             >
               <div>
-                {/* Fotografia Automotiva com Enquadramento Editorial */}
-                <ImageReveal
-                  delay={0.1 + i * 0.08}
-                  className="relative aspect-16/10 mb-6 overflow-hidden"
-                >
-                  <img
+                {/* Fotografia Automotiva com Parallax Sutil e Enquadramento Editorial */}
+                <div className="relative aspect-16/10 mb-6 overflow-hidden rounded-xs border border-white/10 group-hover:border-primary/40 transition-colors duration-500">
+                  <ParallaxImage
                     src={serviceImages[i]}
                     alt={`${service.title} (fotografia ilustrativa da atividade)`}
                     width={1200}
                     height={800}
-                    loading="lazy"
-                    className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                  />
-                  <span className="absolute bottom-3 right-3 text-[8px] uppercase tracking-wider px-2 py-1 bg-background/85 text-muted-foreground border border-border/50 backdrop-blur-xs rounded-xs pointer-events-none">
-                    Fotografia ilustrativa
-                  </span>
-                </ImageReveal>
+                    speed={6}
+                    aspectRatioClassName="aspect-16/10"
+                    imageClassName="transition-transform duration-700 ease-out group-hover:scale-105"
+                  >
+                    <span className="absolute bottom-3 right-3 text-[8px] uppercase tracking-wider px-2 py-1 bg-background/85 text-muted-foreground border border-border/50 backdrop-blur-xs rounded-xs pointer-events-none z-10">
+                      Fotografia ilustrativa
+                    </span>
+                  </ParallaxImage>
+                </div>
 
                 {/* Identificador & Tipografia */}
                 <span className="font-mono text-[11px] font-semibold text-primary tracking-wider uppercase block mb-3">
@@ -74,7 +73,10 @@ export function Services() {
                 </span>
 
                 <h3 className="text-xl md:text-2xl font-semibold font-display tracking-tight text-foreground mb-3 leading-snug text-balance">
-                  <Link to={service.path} className="hover:text-primary transition-colors">
+                  <Link
+                    to={service.path}
+                    className="hover:text-primary transition-colors focus-visible:outline-none focus-visible:underline"
+                  >
                     {service.title}
                   </Link>
                 </h3>
@@ -84,7 +86,7 @@ export function Services() {
                 </p>
               </div>
 
-              {/* Link de Navegação Contextual sem Botões Pesados Repetitivos */}
+              {/* Link de Navegação Contextual com Microinteração Refinada */}
               <div className="pt-6 mt-6 border-t border-border/40">
                 <Link
                   to={service.path}
@@ -99,7 +101,7 @@ export function Services() {
                   </span>
                   <ArrowUpRight
                     size={14}
-                    className="transition-transform duration-200 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5"
+                    className="transition-transform duration-200 group-hover/link:translate-x-1 group-hover/link:-translate-y-1 text-primary"
                     aria-hidden="true"
                   />
                 </Link>
@@ -146,13 +148,13 @@ export function Services() {
                   key={aesthetic.slug}
                   direction="up"
                   delay={0.12 + idx * 0.1}
-                  className="p-6 rounded-sm border border-border/70 bg-card/40 flex flex-col justify-between hover:border-primary/40 transition-colors"
+                  className="p-6 rounded-sm border border-border/70 bg-card/40 flex flex-col justify-between hover:border-primary/50 hover:bg-card/70 hover:shadow-[0_4px_24px_rgba(200,169,106,0.06)] transition-all duration-300 group/card"
                 >
                   <div>
-                    <div className="w-9 h-9 rounded-xs bg-primary/10 border border-primary/20 flex items-center justify-center text-primary mb-4">
+                    <div className="w-9 h-9 rounded-xs bg-primary/10 border border-primary/20 flex items-center justify-center text-primary mb-4 group-hover/card:scale-105 group-hover/card:border-primary/50 transition-all duration-300">
                       <Icon size={18} aria-hidden="true" />
                     </div>
-                    <h4 className="text-base font-semibold font-display text-foreground mb-1.5">
+                    <h4 className="text-base font-semibold font-display text-foreground mb-1.5 group-hover/card:text-white transition-colors">
                       {aesthetic.title}
                     </h4>
                     <p className="text-xs text-primary font-mono mb-3">{aesthetic.tagline}</p>
@@ -166,10 +168,14 @@ export function Services() {
                     </span>
                     <Link
                       to="/contato"
-                      className="text-xs font-medium text-primary hover:text-foreground transition-colors inline-flex items-center gap-1"
+                      className="text-xs font-medium text-primary hover:text-foreground transition-colors inline-flex items-center gap-1 group/btn"
                     >
                       <span>Avaliar</span>
-                      <ArrowUpRight size={13} aria-hidden="true" />
+                      <ArrowUpRight
+                        size={13}
+                        className="transition-transform duration-200 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5"
+                        aria-hidden="true"
+                      />
                     </Link>
                   </div>
                 </ScrollReveal>

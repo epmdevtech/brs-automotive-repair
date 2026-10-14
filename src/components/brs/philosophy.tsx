@@ -1,5 +1,6 @@
 import * as React from "react";
 import { ScrollReveal } from "@/components/ui/scroll-reveal";
+import { NumericCounter } from "@/components/ui/numeric-counter";
 
 export function Philosophy() {
   const pillars = [
@@ -46,7 +47,9 @@ export function Philosophy() {
           {pillars.map(([title, description], i) => (
             <ScrollReveal key={title} direction="up" delay={0.1 + i * 0.12} className="pillar">
               <div className="flex items-center justify-center">
-                <span className="pillar-number">0{i + 1}</span>
+                <span className="pillar-number font-mono">
+                  <NumericCounter target={i + 1} padZero />
+                </span>
               </div>
               <div>
                 <h3 className="text-xl md:text-2xl font-semibold font-display tracking-tight text-foreground mb-2 text-balance">

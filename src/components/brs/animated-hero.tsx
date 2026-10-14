@@ -1,10 +1,13 @@
 import * as React from "react";
 import { Link } from "@tanstack/react-router";
 import { motion, useReducedMotion } from "framer-motion";
-import { ArrowDown, ArrowUpRight, MapPin } from "lucide-react";
+import { ArrowDown, ArrowUpRight, MapPin, Sparkles, Wrench, ShieldCheck } from "lucide-react";
+import { gsap } from "gsap";
 import { Button } from "@/components/ui/button";
 import { MagneticButton } from "@/components/ui/magnetic-button";
 import { cn } from "@/lib/utils";
+import { MOTION_TOKENS } from "@/lib/motion-system";
+import { SignatureCanvas } from "./signature-canvas";
 
 export interface NavLink {
   label: string;
@@ -30,9 +33,8 @@ export interface AnimatedHeroProps {
   secondaryCta?: HeroAction;
   bottomContent?: React.ReactNode;
   className?: string;
+  showTelemetryMetrics?: boolean;
 }
-
-import { MOTION_TOKENS } from "@/lib/motion-system";
 
 /**
  * Rotas internas usam navegação client-side; âncoras (#) e URLs externas seguem como `<a>`.
@@ -59,7 +61,7 @@ function HeroLink({
   );
 }
 
-// Variantes de transição normativas do Framer Motion (SPEC-015)
+// Variantes de transição normativas do Framer Motion (SPEC-015, SPEC-032)
 const getContainerVariants = (reduced: boolean) => ({
   hidden: { opacity: 0 },
   visible: {
@@ -93,20 +95,70 @@ export const AnimatedHero = ({
   secondaryCta,
   bottomContent,
   className,
+  showTelemetryMetrics = true,
 }: AnimatedHeroProps) => {
   const shouldReduceMotion = useReducedMotion() ?? false;
   const containerVariants = getContainerVariants(shouldReduceMotion);
   const itemVariants = getItemVariants(shouldReduceMotion);
 
+  const heroRef = React.useRef<HTMLElement>(null);
+  const contentRef = React.useRef<HTMLDivElement>(null);
+  const glowRef = React.useRef<HTMLDivElement>(null);
+
+  // Micro-parallax responsivo com GSAP quickTo para 60/120fps sem re-render (SPEC-032)
+  React.useEffect(() => {
+    if (typeof window === "undefined" || shouldReduceMotion) return;
+    const heroEl = heroRef.current;
+    if (!heroEl) return;
+
+    if (!window.matchMedia("(pointer: fine)").matches) return;
+
+    let setContentX: (val: number) => void;
+    let setContentY: (val: number) => void;
+    let setGlowX: (val: number) => void;
+    let setGlowY: (val: number) => void;
+
+    try {
+      setContentX = gsap.quickTo(contentRef.current, "x", { duration: 0.8, ease: "power3.out" });
+      setContentY = gsap.quickTo(contentRef.current, "y", { duration: 0.8, ease: "power3.out" });
+      if (glowRef.current) {
+        setGlowX = gsap.quickTo(glowRef.current, "x", { duration: 0.6, ease: "power2.out" });
+        setGlowY = gsap.quickTo(glowRef.current, "y", { duration: 0.6, ease: "power2.out" });
+      }
+    } catch {
+      return;
+    }
+
+    const handleMouseMove = (e: MouseEvent) => {
+      const rect = heroEl.getBoundingClientRect();
+      const relX = e.clientX - rect.left - rect.width / 2;
+      const relY = e.clientY - rect.top - rect.height / 2;
+
+      setContentX(relX * 0.012);
+      setContentY(relY * 0.012);
+
+      if (glowRef.current && setGlowX && setGlowY) {
+        setGlowX(relX * 0.25);
+        setGlowY(relY * 0.25);
+      }
+    };
+
+    heroEl.addEventListener("mousemove", handleMouseMove, { passive: true });
+    return () => {
+      heroEl.removeEventListener("mousemove", handleMouseMove);
+    };
+  }, [shouldReduceMotion]);
+
   return (
     <section
+      ref={heroRef}
       id={id}
       className={cn(
         "relative flex min-h-screen w-full flex-col justify-center overflow-hidden bg-background text-foreground pt-28 pb-24",
         className,
       )}
     >
-      {/* Background com fotografia e overlay de alto contraste para conformidade WCAG AA+ */}
+      {/* Background com fotografia e overlay cinemático de alto contraste */}
       <motion.div
         className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat will-change-transform"
         style={{ backgroundImage: `url(${backgroundImageUrl})` }}
@@ -121,14 +173,33 @@ export const AnimatedHero = ({
         <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-black/60" />
       </motion.div>
 
+      {/* Experiência Signature Interativa WebGL/Canvas de Partículas e Laser (SPEC-033) */}
+      <SignatureCanvas />
+
+      {/* Halo de luz ambiente dourada interativo via GSAP */}
+      <div
+        ref={glowRef}
+        aria-hidden="true"
+        className="pointer-events-none absolute top-1/3 left-1/3 -translate-x-1/2 -translate-y-1/2 size-[650px] rounded-full bg-primary/8 blur-[140px] will-change-transform"
+      />
+
+      {/* Marcas de precisão técnica nas bordas (estilo Awwwards SOTD) */}
+      <div className="absolute top-24 left-8 text-white/15 font-mono text-[10px] select-none hidden lg:block tracking-widest">
+        + BRS.24 // REF:TLD-PR
+      </div>
+      <div className="absolute top-24 right-8 text-white/15 font-mono text-[10px] select-none hidden lg:block tracking-widest">
+        COORD: 24°43'S 53°44'W
+      </div>
+
       {/* Conteúdo principal animado do Hero */}
       <motion.div
+        ref={contentRef}
         variants={containerVariants}
         initial="hidden"
         animate="visible"
-        className="page-width relative z-10 flex flex-col items-start justify-center text-left py-8"
+        className="page-width relative z-10 flex flex-col items-start justify-center text-left py-8 will-change-transform"
       >
-        {/* Overline / Badge Superior (apenas quando explicitamente fornecido) */}
+        {/* Overline / Badge Superior */}
         {eyebrow && (
           <motion.div variants={itemVariants} className="mb-4">
             {eyebrow}
@@ -198,6 +269,45 @@ export const AnimatedHero = ({
               ))}
           </motion.div>
         )}
+
+        {/* Indicadores de Telemetria e Precisão Técnica da Oficina (SPEC-032) */}
+        {showTelemetryMetrics && (
+          <motion.div
+            variants={itemVariants}
+            className="mt-10 pt-6 border-t border-white/10 grid grid-cols-1 sm:grid-cols-3 gap-3.5 w-full max-w-3xl"
+          >
+            {[
+              {
+                icon: Sparkles,
+                label: "Colorimetria Espectrofotométrica",
+                detail: "Ajuste digital e verniz de alto sólidos",
+              },
+              {
+                icon: Wrench,
+                label: "Alinhamento Estrutural",
+                detail: "Gaps milimétricos com padrão de fábrica",
+              },
+              {
+                icon: ShieldCheck,
+                label: "Diagnóstico Transparente",
+                detail: "Reparo técnico preservando a geometria original",
+              },
+            ].map((metric, i) => (
+              <div
+                key={i}
+                className="flex flex-col p-3 rounded-sm bg-white/[0.02] border border-white/10 backdrop-blur-sm transition-all duration-300 hover:border-primary/40 hover:bg-white/[0.04]"
+              >
+                <div className="flex items-center gap-2 text-primary text-xs font-semibold">
+                  <metric.icon size={14} aria-hidden="true" />
+                  <span className="font-display tracking-tight text-[12px]">{metric.label}</span>
+                </div>
+                <span className="text-[11px] text-neutral-400 mt-1 leading-snug font-body">
+                  {metric.detail}
+                </span>
+              </div>
+            ))}
+          </motion.div>
+        )}
       </motion.div>
 
       {/* Rodapé do Hero / Microdados e Navegação de Scroll */}
@@ -210,9 +320,14 @@ export const AnimatedHero = ({
             <a
               href="#servicos"
               aria-label="Rolar para a seção de serviços"
-              className="hidden sm:flex items-center gap-2 text-[10px] uppercase tracking-[2px] text-neutral-300 hover:text-white transition-colors font-medium"
+              className="hidden sm:flex items-center gap-2 text-[10px] uppercase tracking-[2px] text-neutral-300 hover:text-white transition-colors font-medium group"
             >
-              Conheça a BRS <ArrowDown size={14} aria-hidden="true" />
+              Conheça a BRS{" "}
+              <ArrowDown
+                size={14}
+                aria-hidden="true"
+                className="group-hover:translate-y-0.5 transition-transform"
+              />
             </a>
             <span className="image-note text-[11px] text-neutral-400">Fotografia ilustrativa</span>
           </div>

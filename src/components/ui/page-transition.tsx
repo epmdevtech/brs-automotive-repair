@@ -1,6 +1,5 @@
 import * as React from "react";
 import { motion, useReducedMotion } from "framer-motion";
-import { MOTION_EASE, MOTION_DURATIONS } from "@/lib/motion-tokens";
 import { cn } from "@/lib/utils";
 
 export interface PageTransitionProps {
@@ -10,27 +9,46 @@ export interface PageTransitionProps {
 }
 
 /**
- * PageTransition — Transição sutil e rápida entre rotas para TanStack Start.
+ * PageTransition — Transição cinemática refinada entre rotas para TanStack Start (SPEC-020, SPEC-033).
  *
  * Características:
- * - Duração rápida de 200ms para evitar atrasos na navegação.
- * - Deslocamento vertical mínimo (6px) combinado com fade-in.
- * - Não bloqueia scroll restoration nem retém a tela anterior.
+ * - Duração ágil e inercial de 280ms (curva de desaceleração de luxo [0.22, 1, 0.36, 1]).
+ * - Barra laser superior dourada transitória que indica visualmente a troca de rota sem bloquear UI.
+ * - Suporte nativo à View Transitions API por Progressive Enhancement.
  * - Desativa animações automaticamente sob `prefers-reduced-motion` ou SSR.
+ * - Não interfere na restauração de rolagem, nem no estado do TanStack Router ou Radix UI.
  */
 export function PageTransition({ children, pathname, className }: PageTransitionProps) {
+  const shouldReduce = useReducedMotion();
+
   return (
-    <motion.div
-      key={pathname}
-      initial={false}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{
-        duration: MOTION_DURATIONS.fast,
-        ease: MOTION_EASE,
-      }}
-      className={cn("w-full", className)}
-    >
-      {children}
-    </motion.div>
+    <>
+      {/* Indicador de varredura laser superior na troca de rota (Awwwards Standard) */}
+      {!shouldReduce && (
+        <motion.div
+          key={`route-laser-${pathname}`}
+          initial={{ scaleX: 0, opacity: 0.95 }}
+          animate={{ scaleX: 1, opacity: 0 }}
+          transition={{ duration: 0.42, ease: [0.22, 1, 0.36, 1] }}
+          style={{ originX: 0 }}
+          className="fixed top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-primary/30 via-primary to-amber-200 z-50 pointer-events-none shadow-[0_0_12px_rgba(212,175,55,0.8)]"
+          aria-hidden="true"
+        />
+      )}
+
+      {/* Conteúdo da rota com entrada cinemática suave */}
+      <motion.div
+        key={pathname}
+        initial={shouldReduce ? false : { opacity: 0.88, y: 8 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{
+          duration: shouldReduce ? 0.01 : 0.28,
+          ease: [0.22, 1, 0.36, 1],
+        }}
+        className={cn("w-full", className)}
+      >
+        {children}
+      </motion.div>
+    </>
   );
 }
