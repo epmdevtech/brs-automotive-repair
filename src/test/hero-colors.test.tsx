@@ -56,7 +56,7 @@ describe("SPEC-012 — Padronização de Cores da Seção Hero e Sincronia com N
 
   it("renderiza o botão secundário exclusivo da Hero com o padrão normativo .btn--secondary", () => {
     const { container } = render(<Hero />);
-    const secondaryBtn = container.querySelector("a[href='/servicos']");
+    const secondaryBtn = container.querySelector("a[href='#especialidades']");
 
     expect(secondaryBtn).not.toBeNull();
     expect(secondaryBtn?.className).toContain("btn--secondary");

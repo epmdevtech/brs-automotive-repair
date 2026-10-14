@@ -18,7 +18,12 @@ const aestheticIcons = [Sparkles, ShieldCheck, Eye];
  */
 export function Services() {
   return (
-    <section id="servicos" className="section-space">
+    <section id="servicos" className="section-space py-16 md:py-24 relative">
+      <div
+        id="especialidades"
+        className="scroll-mt-24 absolute -top-12 left-0"
+        aria-hidden="true"
+      />
       <div className="page-width">
         <ScrollReveal
           direction="up"

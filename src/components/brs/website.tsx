@@ -35,9 +35,9 @@ export function HomePageContent() {
   return (
     <>
       <Hero />
+      <Services />
       <HomeBeforeAfter />
       <MediaExpand />
-      <Services />
       <Philosophy />
       <ProcessTimeline />
       <HomePathways />

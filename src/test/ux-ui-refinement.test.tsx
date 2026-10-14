@@ -18,21 +18,23 @@ describe("SPEC-037 — Refinamento UX/UI, Consolidação Visual e Otimização d
     expect(primaryCta).toBeInTheDocument();
     expect(primaryCta).toHaveAttribute("href", "/contato");
 
-    // CTA Secundário para serviços
-    const secondaryCta = screen.getByRole("link", { name: /conhecer os serviços/i });
+    // CTA Secundário para especialidades
+    const secondaryCta = screen.getByRole("link", { name: /ver especialidades/i });
     expect(secondaryCta).toBeInTheDocument();
-    expect(secondaryCta).toHaveAttribute("href", "/servicos");
+    expect(secondaryCta).toHaveAttribute("href", "#especialidades");
 
     // Eliminação de marcas HUD artificiais
     expect(screen.queryByText(/\+ BRS\.24/i)).toBeNull();
     expect(screen.queryByText(/COORD: 24°43'S/i)).toBeNull();
 
-    // Faixa consolidada com 3 diferenciais autênticos
-    const trustItems = container.querySelectorAll(".trust-item");
-    expect(trustItems.length).toBe(3);
-    expect(screen.getByText("Reparação e pintura técnica de precisão")).toBeInTheDocument();
-    expect(screen.getByText("Diagnóstico honesto e transparente")).toBeInTheDocument();
-    expect(screen.getByText("Serviço de leva e traz em Toledo-PR")).toBeInTheDocument();
+    // Faixa trust-strip removida do Hero (SPEC-039)
+    expect(container.querySelector(".trust-strip")).toBeNull();
+
+    // 3 Diferenciais técnicos incorporados com sucesso em Philosophy
+    const { container: philContainer } = render(<Philosophy />);
+    expect(philContainer.textContent).toContain("Reparação e pintura técnica de precisão");
+    expect(philContainer.textContent).toContain("Diagnóstico honesto e transparente");
+    expect(philContainer.textContent).toContain("Serviço de leva e traz em Toledo-PR");
   });
 
   it("AC-037-02: HomeBeforeAfter prioriza o slider e remove sobreposições HUD no frame", () => {

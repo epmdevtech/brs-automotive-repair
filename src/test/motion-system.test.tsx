@@ -156,7 +156,9 @@ describe("Sistema Unificado de Motion Design (SPEC-015)", () => {
 
       expect(screen.getByText("BRS Reparações")).toBeInTheDocument();
       expect(screen.getByText("Automotivas.")).toBeInTheDocument();
-      expect(screen.getByRole("link", { name: /conhecer os serviços/i })).toBeInTheDocument();
+      expect(
+        screen.getByRole("link", { name: /ver especialidades|conhecer os serviços/i }),
+      ).toBeInTheDocument();
       expect(screen.getByRole("link", { name: /solicitar avaliação/i })).toBeInTheDocument();
     });
   });

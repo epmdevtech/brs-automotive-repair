@@ -480,26 +480,6 @@ html.lenis body {
   align-items: center;
   color: var(--muted-foreground);
 }
-.trust-strip {
-  padding-block: 26px;
-  border-block: 1px solid var(--border);
-}
-.trust-item {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  justify-content: center;
-  border-right: 1px solid var(--border);
-  font-size: 12px;
-}
-.trust-item:last-child {
-  border: 0;
-}
-.trust-item svg {
-  color: var(--primary);
-  width: 20px;
-  height: 20px;
-}
 .service-card {
   position: relative;
   border: 1px solid var(--border);
@@ -966,18 +946,6 @@ textarea.field-input {
   .hero-bottom {
     bottom: 22px;
     gap: 20px;
-  }
-  .trust-strip {
-    padding-block: 23px;
-  }
-  .trust-item {
-    font-size: 11px;
-    justify-content: flex-start;
-    gap: 10px;
-    border: 0;
-  }
-  .trust-item svg {
-    width: 17px;
   }
   .process-step {
     border-top: 0;

@@ -90,10 +90,9 @@ describe("Website motion layer", () => {
     expect(evaluation.length).toBeGreaterThanOrEqual(1);
     evaluation.forEach((link) => expect(link).toHaveAttribute("href", "/contato"));
 
-    expect(screen.getByRole("link", { name: /Conhecer os serviços/ })).toHaveAttribute(
-      "href",
-      "/servicos",
-    );
+    expect(
+      screen.getByRole("link", { name: /ver especialidades|conhecer os serviços/i }),
+    ).toHaveAttribute("href", "#especialidades");
   });
 
   it("keeps all content visible when scroll observers are unavailable", () => {

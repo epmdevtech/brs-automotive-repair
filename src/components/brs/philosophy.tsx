@@ -5,16 +5,16 @@ import { NumericCounter } from "@/components/ui/numeric-counter";
 export function Philosophy() {
   const pillars = [
     [
-      "Atenção rigorosa aos detalhes",
-      "Alinhamento milimétrico de painéis, preparação minuciosa e controle de aplicação do verniz.",
+      "Reparação e pintura técnica de precisão",
+      "Alinhamento milimétrico de painéis, preparação minuciosa e controle de aplicação do verniz em estufa de pressão positiva.",
     ],
     [
-      "Comunicação clara e transparente",
-      "Orientações objetivas para que você compreenda o diagnóstico e as etapas de cada reparo.",
+      "Diagnóstico honesto e transparente",
+      "Orientações objetivas e laudo claro para que você compreenda a real extensão da avaria, sem procedimentos desnecessários.",
     ],
     [
-      "Compromisso com o proprietário",
-      "Tratamento responsável com quem confia seu veículo e com corretores que recomendam a BRS.",
+      "Serviço de leva e traz em Toledo-PR",
+      "Comodidade na retirada e entrega do veículo com atendimento ágil e responsável para você e seu corretor parceiro.",
     ],
   ];
 

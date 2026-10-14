@@ -223,6 +223,7 @@ Todas as entregas obedecem ao protocolo **Universal SDD**:
 - `SPEC-036` / `TASK-036-01` / `REVIEW-036`: Integração do Motion Engine (Lenis + GSAP ScrollTrigger), Componentes Interativos (Before/After Slider, NumericCounter, ParallaxImage, microinterações refinadas) e Transições Suaves de Página.
 - `SPEC-037` / `TASK-037-01` / `REVIEW-037`: Refinamento UX/UI, Consolidação Visual, Despoluição Editorial e Otimização da Hierarquia e Conversão da Home Page.
 - `SPEC-038` / `TASK-038-01` / `REVIEW-038`: Remoção de Artefatos Genéricos de IA (OFICINA ATIVA, Badges LED Pulsantes e Botões All-Caps), restaurando sobriedade editorial e elegância institucional.
+- `SPEC-039` / `TASK-039-01` / `REVIEW-039`: Refinamento da Hero Section e Transição Direta para Especialidades, remoção da barra de micro-benefícios (trust-strip), botão secundário com smooth scroll para #especialidades e incorporação orgânica dos diferenciais.
 
 ---
 

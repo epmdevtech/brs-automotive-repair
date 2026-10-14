@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { MagneticButton } from "@/components/ui/magnetic-button";
 import { cn } from "@/lib/utils";
 import { MOTION_TOKENS } from "@/lib/motion-system";
+import { useSmoothScroll } from "@/hooks/use-smooth-scroll";
 import { SignatureCanvas } from "./signature-canvas";
 
 export interface NavLink {
@@ -46,6 +47,8 @@ function HeroLink({
   ...props
 }: { action: HeroAction; children: React.ReactNode } & React.ComponentPropsWithRef<"a">) {
   const { href, onClick } = action;
+  const { scrollTo } = useSmoothScroll();
+
   if (href?.startsWith("/")) {
     // O destino vem de props genéricas; o roteador valida a rota em tempo de execução.
     return (
@@ -54,8 +57,20 @@ function HeroLink({
       </Link>
     );
   }
+
+  const handleAnchorClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (onClick) onClick();
+    if (href?.startsWith("#")) {
+      e.preventDefault();
+      scrollTo(href);
+      if (typeof window !== "undefined") {
+        window.history.pushState(null, "", href);
+      }
+    }
+  };
+
   return (
-    <a {...props} href={href} onClick={onClick}>
+    <a {...props} href={href} onClick={handleAnchorClick}>
       {children}
     </a>
   );
