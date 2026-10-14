@@ -226,6 +226,7 @@ Todas as entregas obedecem ao protocolo **Universal SDD**:
 - `SPEC-039` / `TASK-039-01` / `REVIEW-039`: Refinamento da Hero Section e Transição Direta para Especialidades, remoção da barra de micro-benefícios (trust-strip), botão secundário com smooth scroll para #especialidades e incorporação orgânica dos diferenciais.
 - `SPEC-040` / `TASK-040-01` / `REVIEW-040`: Padronização Tipográfica dos Rótulos de Seção (Eyebrows), remoção de pseudo-elementos decorativos (.eyebrow::before) e eliminação de travessões pré-fixados.
 - `SPEC-041` / `TASK-041-01` / `REVIEW-041`: Remoção do CTA de Avaliação da Hero Section e Foco na Descoberta de Serviços, eliminando duplicidade com Header e destacando Ver Especialidades com ArrowDown e tap target mínimo de 44px.
+- `SPEC-042` / `TASK-042-01` / `REVIEW-042`: Refinamento Visual da Hero/Intro de Serviços (/servicos), remoção dos 3 mini-cards compactos de resumo, CTA único de exploração (Ver Trabalhos Concluídos com tap target de 44px), id lista-servicos com respiro py-16 lg:py-20 e limpeza de código.
 
 ---
 

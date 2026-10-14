@@ -1,16 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import {
-  ArrowUpRight,
-  Check,
-  Wrench,
-  Paintbrush,
-  Car,
-  Truck,
-  Sparkles,
-  ShieldCheck,
-  Eye,
-  CheckCircle2,
-} from "lucide-react";
+import { ArrowUpRight, Check, Truck, Sparkles, ShieldCheck, Eye, CheckCircle2 } from "lucide-react";
 import { services, aestheticServices } from "@/lib/brs";
 import { buildRouteHead, buildBreadcrumbSchema } from "@/lib/seo";
 import { Breadcrumbs } from "@/components/brs/breadcrumbs";
@@ -26,12 +15,6 @@ const serviceImages: Record<string, string> = {
   funilaria: funilariaServico,
   "pintura-automotiva": pinturaServico,
   "martelinho-de-ouro": martelinhoServico,
-};
-
-const serviceIcons: Record<string, typeof Wrench> = {
-  funilaria: Wrench,
-  "pintura-automotiva": Paintbrush,
-  "martelinho-de-ouro": Car,
 };
 
 export const Route = createFileRoute("/servicos/")({
@@ -83,30 +66,7 @@ function ServicesPage() {
             individualizado da deformação metálica e da integridade da camada de verniz.
           </p>
         }
-        telemetryBadges={[
-          {
-            icon: Wrench,
-            label: "Funilaria Estrutural",
-            detail: "Mesa de tração e gaps de fábrica",
-          },
-          {
-            icon: Paintbrush,
-            label: "Pintura em Estufa",
-            detail: "Pressão positiva e colorimetria digital",
-          },
-          {
-            icon: Car,
-            label: "Martelinho de Ouro",
-            detail: "Desamassamento com verniz original",
-          },
-        ]}
         actions={[
-          {
-            label: "Solicitar avaliação técnica",
-            to: "/contato",
-            variant: "primary",
-            icon: ArrowUpRight,
-          },
           {
             label: "Ver trabalhos concluídos",
             to: "/trabalhos",
@@ -114,13 +74,14 @@ function ServicesPage() {
             icon: ArrowUpRight,
           },
         ]}
+        className="mb-0 border-b-0 pb-8 sm:pb-12"
       />
 
       {/* Grid Detalhado dos 3 Serviços */}
       {/* Faixas Editoriais dos 3 Serviços com Linhas Amplas */}
-      <section className="page-width border-t border-border/70">
+      <section id="lista-servicos" className="page-width border-t border-border/70 py-16 lg:py-20">
         {services.map((service, index) => {
-          const image = serviceImages[service.slug] || bodywork;
+          const image = serviceImages[service.slug] || funilariaServico;
           const isReverse = index % 2 === 1;
 
           return (
@@ -129,7 +90,7 @@ function ServicesPage() {
               as="article"
               direction="up"
               delay={index * 0.12}
-              className={`grid md:grid-cols-12 gap-8 lg:gap-16 items-center py-12 lg:py-16 border-b border-border/70 last:border-b-0 ${
+              className={`grid md:grid-cols-12 gap-8 lg:gap-16 items-center py-12 lg:py-16 first:pt-0 border-b border-border/70 last:border-b-0 ${
                 isReverse ? "md:grid-flow-dense" : ""
               }`}
             >

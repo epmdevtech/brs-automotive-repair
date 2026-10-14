@@ -5,6 +5,7 @@ import { gsap } from "gsap";
 import { Button } from "@/components/ui/button";
 import { Breadcrumbs } from "./breadcrumbs";
 import { isReducedMotionPreferred } from "@/lib/motion-system";
+import { useSmoothScroll } from "@/hooks/use-smooth-scroll";
 import { cn } from "@/lib/utils";
 
 export interface TelemetryBadge {
@@ -30,6 +31,7 @@ export interface PageHeroAction {
   }>;
   target?: string;
   rel?: string;
+  onClick?: () => void;
 }
 
 export interface PageHeroProps {
@@ -68,6 +70,19 @@ export function PageHero({
   const badgesRef = React.useRef<HTMLDivElement>(null);
   const actionsRef = React.useRef<HTMLDivElement>(null);
   const asideRef = React.useRef<HTMLDivElement>(null);
+
+  const { scrollTo } = useSmoothScroll();
+
+  const handleAnchorClick = (e: React.MouseEvent<HTMLAnchorElement>, action: PageHeroAction) => {
+    if (action.onClick) action.onClick();
+    if (action.href?.startsWith("#")) {
+      e.preventDefault();
+      scrollTo(action.href);
+      if (typeof window !== "undefined") {
+        window.history.pushState(null, "", action.href);
+      }
+    }
+  };
 
   React.useEffect(() => {
     if (typeof window === "undefined" || isReducedMotionPreferred()) return;
@@ -189,7 +204,10 @@ export function PageHero({
 
             <div
               ref={descRef}
-              className="text-neutral-300 text-sm sm:text-base leading-relaxed mb-6 font-body text-pretty"
+              className={cn(
+                "text-neutral-300 text-sm sm:text-base leading-relaxed font-body text-pretty",
+                telemetryBadges && telemetryBadges.length > 0 ? "mb-6" : "mb-0",
+              )}
             >
               {description}
             </div>
@@ -224,9 +242,17 @@ export function PageHero({
               </div>
             )}
 
-            {/* Ações (CTAs com suporte estrito a Link para rotas internas) */}
+            {/* Ações (CTAs com suporte estrito a Link para rotas internas e âncoras locais) */}
             {actions && actions.length > 0 && (
-              <div ref={actionsRef} className="flex flex-wrap items-center gap-4 pt-2">
+              <div
+                ref={actionsRef}
+                data-page-hero-actions=""
+                className={cn(
+                  "flex flex-wrap items-center",
+                  actions.length > 1 ? "gap-4" : "gap-0",
+                  telemetryBadges && telemetryBadges.length > 0 ? "pt-2" : "mt-6 sm:mt-8",
+                )}
+              >
                 {actions.map((action, idx) => {
                   const Icon = action.icon || ArrowUpRight;
                   if (action.to) {
@@ -235,10 +261,10 @@ export function PageHero({
                         key={idx}
                         variant={action.variant || "primary"}
                         asChild
-                        className="h-11 px-6 text-xs font-semibold cursor-pointer"
+                        className="h-11 min-h-[44px] px-6 text-xs font-semibold cursor-pointer"
                       >
                         {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-                        <Link to={action.to} search={action.search as any}>
+                        <Link to={action.to} search={action.search as any} onClick={action.onClick}>
                           {action.label}
                           <Icon className="ml-1.5 shrink-0" size={14} aria-hidden="true" />
                         </Link>
@@ -250,9 +276,14 @@ export function PageHero({
                       key={idx}
                       variant={action.variant || "secondary"}
                       asChild
-                      className="h-11 px-6 text-xs font-medium cursor-pointer"
+                      className="h-11 min-h-[44px] px-6 text-xs font-medium cursor-pointer"
                     >
-                      <a href={action.href} target={action.target} rel={action.rel}>
+                      <a
+                        href={action.href}
+                        target={action.target}
+                        rel={action.rel}
+                        onClick={(e) => handleAnchorClick(e, action)}
+                      >
                         {action.label}
                         <Icon className="ml-1.5 shrink-0" size={14} aria-hidden="true" />
                       </a>
