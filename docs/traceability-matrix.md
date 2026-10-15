@@ -60,6 +60,7 @@ Gerado por `scripts/generate_traceability.py`. Não edite manualmente; execute n
 | [SPEC-054](../specs/SPEC-054-admin-erp-light-mode-agendamentos.md) | Aprovado | [TASK-054-01](../tasks/TASK-054-01-admin-erp-light-mode-agendamentos.md) (Concluído) | `713e3945` feat(booking): redesenho administrativo erp light mode da rota agendamentos | — |
 | [SPEC-055](../specs/SPEC-055-auth-split-login-e-agenda-operacional.md) | Aprovado | [TASK-055-01](../tasks/TASK-055-01-auth-split-login-e-agenda-operacional.md) (Concluído) | `111b5163` feat(booking): autenticacao split-screen login e agenda operacional despoluida | — |
 | [SPEC-056](../specs/SPEC-056-auth-login-refinement-ux-a11y.md) | Aprovado | [TASK-056-01](../tasks/TASK-056-01-auth-login-refinement-ux-a11y.md) (Concluído) | `f9f8f9d7` docs: sincronizar matriz de rastreabilidade com TASK-056-01<br>`cdde3607` feat(auth): refinar layout split-screen, isolamento e acessibilidade wcag da rota /login | — |
+| [SPEC-057](../specs/SPEC-057-linha-do-tempo-operacional-rbac-auditoria.md) | Aprovado | [TASK-057-01](../tasks/TASK-057-01-linha-do-tempo-operacional-rbac-auditoria.md) (Concluído) | `8416d9fa` feat(booking): implementar linha do tempo operacional com RBAC e auditoria (SPEC-057) | — |
 
 ## Lacunas de rastreabilidade (Traceability gaps)
 
