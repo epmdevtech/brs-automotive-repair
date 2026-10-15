@@ -242,6 +242,7 @@ Todas as entregas obedecem ao protocolo **Universal SDD**:
 - `SPEC-055` / `TASK-055-01`: Arquitetura UX/UI de Autenticação Split-Screen (/login) e Agenda Operacional Despoluída (/agendamentos) com StatusTabs unificadas, Mini-stepper de reparo e Visão Kanban.
 - `SPEC-056` / `TASK-056-01`: Refinamento de UX/UI, Isolamento de Layout e Acessibilidade Estrita (WCAG 2.2 AA) na Autenticação (/login) e Painel Administrativo BRS.
 - `SPEC-057` / `TASK-057-01`: Linha do Tempo Operacional com RBAC, Trilha de Auditoria Append-Only e Acessibilidade Estrita na Oficina BRS.
+- `SPEC-058` / `TASK-058-01`: Página Pública de Acompanhamento do Reparo Mobile-First (Hero Acima da Dobra, Header Isolado no Fluxo, WCAG 2.2 AA e Projeção Segura de Eventos).
 
 ---
 
