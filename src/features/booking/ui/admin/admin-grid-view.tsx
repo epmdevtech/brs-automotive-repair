@@ -12,34 +12,21 @@ import {
   Eye,
   Filter,
   LogOut,
-  MapPin,
   MessageCircle,
-  Phone,
   PlayCircle,
   Plus,
-  RefreshCw,
-  Search,
-  Shield,
   Slash,
   Sparkles,
   Truck,
-  User,
-  Wrench,
   XCircle,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { company } from "@/lib/brs";
-import type { Appointment, AppointmentStatus, Professional } from "../../domain/types";
+import type { Appointment, AppointmentStatus } from "../../domain/types";
 import { localBookingRepository } from "../../data/local/local-repository";
 import { formatDate, formatTime, isSameCivilDay, parseTimeOnDate } from "../../domain/time";
 import { formatPhoneBR } from "../../domain/phone";
-import { getStatusBorderClass, getStatusLabel } from "../../domain/status";
-import {
-  DAMAGE_AREAS_LIST,
-  DAMAGE_TYPES_LIST,
-  buildCustomerWhatsAppLink,
-  formatPreOsSummary,
-} from "../../domain/intake";
+import { getStatusBorderClass } from "../../domain/status";
+import { buildCustomerWhatsAppLink, formatPreOsSummary } from "../../domain/intake";
 import { getBlockedPeriods, isPeriodBlocked, type BlockedPeriod } from "../../domain/blocks";
 import { BRS_BOOKING_CONFIG } from "../../config/booking.config";
 import { logoutAdmin } from "../../domain/auth";
@@ -224,38 +211,38 @@ export function AdminGridView({ onLogout }: AdminGridViewProps) {
   };
 
   return (
-    <div className="min-h-screen bg-[#0B0B0C] text-[#EDEDED] flex flex-col font-sans selection:bg-[#FF5A00]/30 selection:text-white">
-      {/* 1. BARRA DE STATUS MULTI-ABAS (TELEMETRIA INDUSTRIAL) */}
-      <div className="w-full px-6 py-2 bg-[#0E0E10] border-b border-[#1F1F23] text-[11px] text-zinc-400 flex items-center justify-between font-mono">
+    <div className="min-h-screen bg-[#F8F9FA] text-slate-900 flex flex-col font-sans selection:bg-slate-900 selection:text-white">
+      {/* 1. BARRA SUPERIOR DE TELEMETRIA OPERACIONAL */}
+      <div className="w-full px-6 py-2 bg-white border-b border-slate-200 text-xs text-slate-500 flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <span className="size-2 rounded-full bg-emerald-400 shadow-[0_0_8px_#00E599] animate-pulse" />
-          <span className="text-zinc-300">
-            Ambiente Demonstrativo: sincronização multi-abas ativa via Web Locks & BroadcastChannel
+          <span className="size-2 rounded-full bg-emerald-500 animate-pulse" />
+          <span className="text-slate-600 font-medium">
+            Ambiente Demonstrativo: Sincronização multi-abas ativa via Web Locks & BroadcastChannel
           </span>
         </div>
 
-        <div className="flex flex-wrap items-center gap-4 text-[11px]">
+        <div className="flex flex-wrap items-center gap-4 text-xs">
           <button
             type="button"
             onClick={handleResetDemoData}
-            className="text-zinc-400 hover:text-[#FF5A00] font-medium flex items-center gap-1.5 transition-colors cursor-pointer"
+            className="text-slate-600 hover:text-slate-900 font-medium flex items-center gap-1.5 transition-colors cursor-pointer"
             title="Recarrega a agenda com agendamentos fictícios de demonstração"
           >
-            <Sparkles size={12} className="text-[#FF5A00]" />
+            <Sparkles size={12} className="text-amber-600" />
             <span>Restaurar Dados Fictícios</span>
           </button>
           <a
             href="/"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-zinc-400 hover:text-white flex items-center gap-1 transition-colors"
+            className="text-slate-600 hover:text-slate-900 flex items-center gap-1 transition-colors"
           >
             Ver site da oficina <ExternalLink size={11} />
           </a>
           <button
             type="button"
             onClick={handleLogout}
-            className="text-zinc-400 hover:text-red-400 font-medium flex items-center gap-1 transition-colors cursor-pointer"
+            className="text-slate-600 hover:text-rose-600 font-medium flex items-center gap-1 transition-colors cursor-pointer"
           >
             <LogOut size={12} /> Sair
           </button>
@@ -264,38 +251,38 @@ export function AdminGridView({ onLogout }: AdminGridViewProps) {
 
       {/* BANNER DE NOTIFICAÇÃO DO SEED */}
       {seedNotice && (
-        <div className="w-full px-6 py-2.5 bg-emerald-950/40 border-b border-emerald-800 text-xs text-emerald-300 flex items-center justify-between font-mono animate-fadeIn">
+        <div className="w-full px-6 py-2.5 bg-emerald-50 border-b border-emerald-200 text-xs text-emerald-800 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <CheckCircle size={14} className="text-emerald-400" />
+            <CheckCircle size={14} className="text-emerald-600" />
             <span className="font-medium">{seedNotice}</span>
           </div>
           <button
             type="button"
             onClick={() => setSeedNotice(null)}
-            className="text-emerald-300 hover:text-white text-xs font-bold px-2 py-0.5 rounded cursor-pointer"
+            className="text-emerald-800 hover:text-emerald-950 text-xs font-semibold px-2 py-0.5 rounded cursor-pointer"
           >
             Fechar
           </button>
         </div>
       )}
 
-      {/* 2. CABEÇALHO DA PLATAFORMA (CHASSIS WORKSHOP HEADER) */}
-      <header className="px-6 py-5 bg-[#121214] border-b border-[#1F1F23] flex flex-col md:flex-row md:items-center justify-between gap-4">
+      {/* 2. CABEÇALHO DO ERP ADMINISTRATIVO */}
+      <header className="px-6 py-4 bg-white border-b border-slate-200 flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div className="flex items-center gap-3">
-          <div className="size-10 rounded-lg bg-[#18181B] text-white flex items-center justify-center font-display font-bold text-base border border-[#27272A] shadow-inner">
+          <div className="size-9 rounded-lg bg-slate-900 text-white flex items-center justify-center font-bold text-sm shadow-xs">
             B
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <h1 className="text-xl font-display font-bold text-white tracking-tight">
+              <h1 className="text-lg font-bold text-slate-900 tracking-tight">
                 Agenda dos Técnicos
               </h1>
-              <span className="text-[10px] uppercase font-mono px-2 py-0.5 rounded bg-white/5 text-zinc-400 font-semibold border border-white/10">
+              <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-slate-100 text-slate-600 font-medium border border-slate-200">
                 EPM BOOKING
               </span>
             </div>
-            <p className="text-xs text-zinc-400">
-              BRS Reparações Automotivas • Gestão Integrada de Atendimentos
+            <p className="text-xs text-slate-500">
+              {company.name} • Gestão Integrada de Atendimentos
             </p>
           </div>
         </div>
@@ -304,16 +291,16 @@ export function AdminGridView({ onLogout }: AdminGridViewProps) {
           <button
             type="button"
             onClick={() => setBlockDialogOpen(true)}
-            className="px-3.5 py-2 rounded-lg border border-[#27272A] bg-[#18181B] hover:bg-[#27272A] text-xs font-semibold text-zinc-300 hover:text-white flex items-center gap-1.5 transition-colors cursor-pointer"
+            className="px-3.5 py-2 rounded-lg border border-slate-200 bg-white hover:bg-slate-50 text-xs font-medium text-slate-700 hover:text-slate-900 flex items-center gap-1.5 transition-colors cursor-pointer shadow-2xs"
           >
-            <Slash size={13} className="text-zinc-500" />
+            <Slash size={13} className="text-slate-400" />
             Bloquear Período
           </button>
 
           <button
             type="button"
             onClick={() => openSlotBooking("09:00", BRS_BOOKING_CONFIG.professionals[0].id)}
-            className="px-4 py-2 rounded-lg bg-[#FF5A00] hover:bg-[#E04F00] active:scale-[0.99] text-white text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 transition-all cursor-pointer shadow-lg shadow-[#FF5A00]/20"
+            className="px-3.5 py-2 rounded-lg bg-slate-900 hover:bg-black active:scale-[0.99] text-white text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer shadow-sm"
           >
             <Plus size={14} />
             Novo Agendamento
@@ -322,16 +309,16 @@ export function AdminGridView({ onLogout }: AdminGridViewProps) {
       </header>
 
       {/* 3. BARRA DE NAVEGAÇÃO & CONTROLES */}
-      <div className="px-6 py-3.5 bg-[#121214] border-b border-[#1F1F23] flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div className="px-6 py-3 bg-white border-b border-slate-200 flex flex-col md:flex-row md:items-center justify-between gap-4">
         {/* ABAS: DIA, LISTA, LEVA E TRAZ */}
-        <div className="flex items-center gap-1 bg-[#18181B] p-1 rounded-lg border border-[#27272A]">
+        <div className="flex items-center gap-1 bg-slate-100 p-1 rounded-lg border border-slate-200">
           <button
             type="button"
             onClick={() => setViewMode("dia")}
-            className={`px-3 py-1.5 rounded text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer ${
+            className={`px-3 py-1.5 rounded-md text-xs font-medium flex items-center gap-1.5 transition-colors cursor-pointer ${
               viewMode === "dia"
-                ? "bg-[#27272A] text-white shadow-xs font-semibold"
-                : "text-zinc-400 hover:text-white"
+                ? "bg-white text-slate-900 shadow-xs font-semibold"
+                : "text-slate-600 hover:text-slate-900"
             }`}
           >
             <Calendar size={13} /> Dia
@@ -340,10 +327,10 @@ export function AdminGridView({ onLogout }: AdminGridViewProps) {
           <button
             type="button"
             onClick={() => setViewMode("lista")}
-            className={`px-3 py-1.5 rounded text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer ${
+            className={`px-3 py-1.5 rounded-md text-xs font-medium flex items-center gap-1.5 transition-colors cursor-pointer ${
               viewMode === "lista"
-                ? "bg-[#27272A] text-white shadow-xs font-semibold"
-                : "text-zinc-400 hover:text-white"
+                ? "bg-white text-slate-900 shadow-xs font-semibold"
+                : "text-slate-600 hover:text-slate-900"
             }`}
           >
             <Filter size={13} /> Lista
@@ -352,15 +339,15 @@ export function AdminGridView({ onLogout }: AdminGridViewProps) {
           <button
             type="button"
             onClick={() => setViewMode("solicitacoes")}
-            className={`px-3 py-1.5 rounded text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer ${
+            className={`px-3 py-1.5 rounded-md text-xs font-medium flex items-center gap-1.5 transition-colors cursor-pointer ${
               viewMode === "solicitacoes"
-                ? "bg-[#27272A] text-white shadow-xs font-semibold"
-                : "text-zinc-400 hover:text-white"
+                ? "bg-white text-slate-900 shadow-xs font-semibold"
+                : "text-slate-600 hover:text-slate-900"
             }`}
           >
             <Truck size={13} /> Leva e Traz
             {stats.levaETraz > 0 && (
-              <span className="size-4 rounded-full bg-[#FF5A00] text-white text-[9px] flex items-center justify-center font-bold">
+              <span className="size-4 rounded-full bg-slate-900 text-white text-[9px] flex items-center justify-center font-bold">
                 {stats.levaETraz}
               </span>
             )}
@@ -370,17 +357,15 @@ export function AdminGridView({ onLogout }: AdminGridViewProps) {
         {/* NAVEGADOR DE PROFISSIONAL E DATA */}
         <div className="flex flex-wrap items-center gap-3">
           <div className="flex items-center gap-2 text-xs">
-            <span className="text-zinc-400 font-mono text-[11px] uppercase">Profissional:</span>
+            <span className="text-slate-500 font-medium">Profissional:</span>
             <select
               value={selectedProfessionalId}
               onChange={(e) => setSelectedProfessionalId(e.target.value)}
-              className="py-1.5 px-3 rounded-lg border border-[#27272A] bg-[#18181B] text-xs font-medium text-white focus:outline-none focus:border-[#FF5A00]"
+              className="py-1.5 px-3 rounded-lg border border-slate-200 bg-white text-xs font-medium text-slate-800 focus:outline-none focus:border-slate-900 shadow-2xs"
             >
-              <option value="ALL" className="bg-[#18181B] text-white">
-                Todos os profissionais
-              </option>
+              <option value="ALL">Todos os profissionais</option>
               {BRS_BOOKING_CONFIG.professionals.map((p) => (
-                <option key={p.id} value={p.id} className="bg-[#18181B] text-white">
+                <option key={p.id} value={p.id}>
                   {p.name}
                 </option>
               ))}
@@ -391,7 +376,7 @@ export function AdminGridView({ onLogout }: AdminGridViewProps) {
             <button
               type="button"
               onClick={() => changeDateBy(-1)}
-              className="p-1.5 rounded-lg border border-[#27272A] bg-[#18181B] hover:bg-[#27272A] text-zinc-400 hover:text-white cursor-pointer"
+              className="p-1.5 rounded-lg border border-slate-200 bg-white hover:bg-slate-50 text-slate-600 hover:text-slate-900 cursor-pointer shadow-2xs"
               title="Dia anterior"
             >
               <ChevronLeft size={14} />
@@ -399,21 +384,21 @@ export function AdminGridView({ onLogout }: AdminGridViewProps) {
             <button
               type="button"
               onClick={goToToday}
-              className="px-3 py-1.5 rounded-lg border border-[#27272A] bg-[#18181B] hover:bg-[#27272A] text-xs font-semibold text-white cursor-pointer"
+              className="px-3 py-1.5 rounded-lg border border-slate-200 bg-white hover:bg-slate-50 text-xs font-medium text-slate-800 cursor-pointer shadow-2xs"
             >
               Hoje
             </button>
             <button
               type="button"
               onClick={() => changeDateBy(1)}
-              className="p-1.5 rounded-lg border border-[#27272A] bg-[#18181B] hover:bg-[#27272A] text-zinc-400 hover:text-white cursor-pointer"
+              className="p-1.5 rounded-lg border border-slate-200 bg-white hover:bg-slate-50 text-slate-600 hover:text-slate-900 cursor-pointer shadow-2xs"
               title="Próximo dia"
             >
               <ChevronRight size={14} />
             </button>
           </div>
 
-          <div className="text-xs font-semibold text-zinc-300 font-mono uppercase tracking-wider">
+          <div className="text-xs font-medium text-slate-700 capitalize">
             {currentDate.toLocaleDateString("pt-BR", {
               weekday: "long",
               day: "2-digit",
@@ -424,71 +409,55 @@ export function AdminGridView({ onLogout }: AdminGridViewProps) {
         </div>
       </div>
 
-      {/* 4. CARDS DE KPIS / MÉTRICAS SEMÂNTICAS */}
+      {/* 4. CARDS DE KPIS / MÉTRICAS SÓBRIAS */}
       <main className="p-6 space-y-6 max-w-7xl mx-auto w-full">
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
-          <div className="p-4 rounded-xl bg-[#121214] border border-[#1F1F23] space-y-1 shadow-md">
-            <span className="text-[11px] text-zinc-400 font-mono uppercase tracking-wider">
-              Total do Dia
-            </span>
-            <div className="text-2xl lg:text-3xl font-display font-bold text-white">
-              {stats.total}
-            </div>
+          <div className="p-4 rounded-xl bg-white border border-slate-200 space-y-1 shadow-2xs">
+            <span className="text-[11px] text-slate-500 font-medium">Total do Dia</span>
+            <div className="text-2xl font-bold text-slate-900">{stats.total}</div>
           </div>
 
-          <div className="p-4 rounded-xl bg-[#121214] border border-[#1F1F23] border-l-4 border-l-amber-500 space-y-1 shadow-md">
-            <span className="text-[11px] text-amber-400 font-semibold flex items-center gap-1 font-mono uppercase tracking-wider">
-              <PlayCircle size={13} className="text-amber-500" /> Em Andamento
+          <div className="p-4 rounded-xl bg-white border border-slate-200 border-l-4 border-l-amber-500 space-y-1 shadow-2xs">
+            <span className="text-[11px] text-amber-700 font-semibold flex items-center gap-1">
+              <PlayCircle size={13} className="text-amber-600" /> Em Andamento
             </span>
-            <div className="text-2xl lg:text-3xl font-display font-bold text-[#FF7A29]">
-              {stats.inProgress}
-            </div>
+            <div className="text-2xl font-bold text-slate-900">{stats.inProgress}</div>
           </div>
 
-          <div className="p-4 rounded-xl bg-[#121214] border border-[#1F1F23] border-l-4 border-l-emerald-500 space-y-1 shadow-md">
-            <span className="text-[11px] text-emerald-400 font-semibold flex items-center gap-1 font-mono uppercase tracking-wider">
-              <CheckCircle2 size={13} className="text-emerald-400" /> Concluídos
+          <div className="p-4 rounded-xl bg-white border border-slate-200 border-l-4 border-l-emerald-500 space-y-1 shadow-2xs">
+            <span className="text-[11px] text-emerald-700 font-semibold flex items-center gap-1">
+              <CheckCircle2 size={13} className="text-emerald-600" /> Concluídos
             </span>
-            <div className="text-2xl lg:text-3xl font-display font-bold text-emerald-400">
-              {stats.completed}
-            </div>
+            <div className="text-2xl font-bold text-slate-900">{stats.completed}</div>
           </div>
 
-          <div className="p-4 rounded-xl bg-[#121214] border border-[#1F1F23] border-l-4 border-l-sky-500 space-y-1 shadow-md">
-            <span className="text-[11px] text-sky-400 font-semibold flex items-center gap-1 font-mono uppercase tracking-wider">
-              <Clock size={13} className="text-sky-400" /> Abertos
+          <div className="p-4 rounded-xl bg-white border border-slate-200 border-l-4 border-l-sky-500 space-y-1 shadow-2xs">
+            <span className="text-[11px] text-sky-700 font-semibold flex items-center gap-1">
+              <Clock size={13} className="text-sky-600" /> Abertos
             </span>
-            <div className="text-2xl lg:text-3xl font-display font-bold text-sky-400">
-              {stats.open}
-            </div>
+            <div className="text-2xl font-bold text-slate-900">{stats.open}</div>
           </div>
 
-          <div className="p-4 rounded-xl bg-[#121214] border border-[#1F1F23] border-l-4 border-l-neutral-400 space-y-1 shadow-md">
-            <span className="text-[11px] text-neutral-400 font-semibold flex items-center gap-1 font-mono uppercase tracking-wider">
-              <Slash size={13} className="text-neutral-400" /> Fechados
+          <div className="p-4 rounded-xl bg-white border border-slate-200 border-l-4 border-l-neutral-400 space-y-1 shadow-2xs">
+            <span className="text-[11px] text-neutral-600 font-semibold flex items-center gap-1">
+              <Slash size={13} className="text-neutral-500" /> Fechados
             </span>
-            <div className="text-2xl lg:text-3xl font-display font-bold text-neutral-300">
-              {stats.closed}
-            </div>
+            <div className="text-2xl font-bold text-slate-900">{stats.closed}</div>
           </div>
 
-          <div className="p-4 rounded-xl bg-[#121214] border border-[#1F1F23] border-l-4 border-l-red-400 space-y-1 shadow-md">
-            <span className="text-[11px] text-red-400 font-semibold flex items-center gap-1 font-mono uppercase tracking-wider">
-              <XCircle size={13} className="text-red-400" /> Cancelados
+          <div className="p-4 rounded-xl bg-white border border-slate-200 border-l-4 border-l-rose-400 space-y-1 shadow-2xs">
+            <span className="text-[11px] text-rose-700 font-semibold flex items-center gap-1">
+              <XCircle size={13} className="text-rose-600" /> Cancelados
             </span>
-            <div className="text-2xl lg:text-3xl font-display font-bold text-red-400">
-              {stats.cancelled}
-            </div>
+            <div className="text-2xl font-bold text-slate-900">{stats.cancelled}</div>
           </div>
         </div>
 
         {/* BARRA DE FILTRO OPERACIONAL POR STATUS */}
-        <div className="flex flex-wrap items-center justify-between gap-3 p-3 rounded-xl bg-[#121214] border border-[#1F1F23]">
+        <div className="flex flex-wrap items-center justify-between gap-3 p-3 rounded-xl bg-white border border-slate-200 shadow-2xs">
           <div className="flex items-center gap-2">
-            <Filter size={14} className="text-zinc-500" />
-            <span className="text-xs font-semibold text-zinc-300 font-mono uppercase tracking-wider text-[11px]">
-              Filtrar por Situação:
-            </span>
+            <Filter size={14} className="text-slate-400" />
+            <span className="text-xs font-medium text-slate-700">Filtrar por Situação:</span>
           </div>
 
           <div className="flex flex-wrap items-center gap-1.5 text-xs">
@@ -497,8 +466,8 @@ export function AdminGridView({ onLogout }: AdminGridViewProps) {
               onClick={() => setStatusFilter("ALL")}
               className={`px-3 py-1.5 rounded-lg font-medium transition-colors cursor-pointer ${
                 statusFilter === "ALL"
-                  ? "bg-white text-black shadow-xs font-semibold"
-                  : "bg-[#18181B] text-zinc-400 hover:text-white border border-[#27272A]"
+                  ? "bg-slate-900 text-white shadow-xs font-semibold"
+                  : "bg-slate-50 text-slate-700 hover:bg-slate-100 border border-slate-200"
               }`}
             >
               Todos ({stats.total})
@@ -508,8 +477,8 @@ export function AdminGridView({ onLogout }: AdminGridViewProps) {
               onClick={() => setStatusFilter("CONFIRMED")}
               className={`px-3 py-1.5 rounded-lg font-medium transition-colors cursor-pointer flex items-center gap-1.5 ${
                 statusFilter === "CONFIRMED"
-                  ? "bg-[#FF5A00] text-white shadow-xs font-semibold"
-                  : "bg-amber-500/10 text-[#FF7A29] border border-amber-500/30 hover:bg-amber-500/20"
+                  ? "bg-amber-600 text-white shadow-xs font-semibold"
+                  : "bg-amber-50 text-amber-700 border border-amber-200 hover:bg-amber-100"
               }`}
             >
               <span className="size-2 rounded-full bg-amber-500" />
@@ -521,10 +490,10 @@ export function AdminGridView({ onLogout }: AdminGridViewProps) {
               className={`px-3 py-1.5 rounded-lg font-medium transition-colors cursor-pointer flex items-center gap-1.5 ${
                 statusFilter === "COMPLETED"
                   ? "bg-emerald-600 text-white shadow-xs font-semibold"
-                  : "bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 hover:bg-emerald-500/20"
+                  : "bg-emerald-50 text-emerald-700 border border-emerald-200 hover:bg-emerald-100"
               }`}
             >
-              <span className="size-2 rounded-full bg-emerald-400" />
+              <span className="size-2 rounded-full bg-emerald-500" />
               Concluídos ({stats.completed})
             </button>
             <button
@@ -533,10 +502,10 @@ export function AdminGridView({ onLogout }: AdminGridViewProps) {
               className={`px-3 py-1.5 rounded-lg font-medium transition-colors cursor-pointer flex items-center gap-1.5 ${
                 statusFilter === "PENDING"
                   ? "bg-sky-600 text-white shadow-xs font-semibold"
-                  : "bg-sky-500/10 text-sky-400 border border-sky-500/30 hover:bg-sky-500/20"
+                  : "bg-sky-50 text-sky-700 border border-sky-200 hover:bg-sky-100"
               }`}
             >
-              <span className="size-2 rounded-full bg-sky-400" />
+              <span className="size-2 rounded-full bg-sky-500" />
               Abertos ({stats.open})
             </button>
             <button
@@ -545,7 +514,7 @@ export function AdminGridView({ onLogout }: AdminGridViewProps) {
               className={`px-3 py-1.5 rounded-lg font-medium transition-colors cursor-pointer flex items-center gap-1.5 ${
                 statusFilter === "NO_SHOW"
                   ? "bg-neutral-800 text-white shadow-xs font-semibold"
-                  : "bg-neutral-500/10 text-neutral-400 border border-neutral-500/30 hover:bg-neutral-500/20"
+                  : "bg-neutral-100 text-neutral-700 border border-neutral-200 hover:bg-neutral-200"
               }`}
             >
               <span className="size-2 rounded-full bg-neutral-400" />
@@ -556,34 +525,32 @@ export function AdminGridView({ onLogout }: AdminGridViewProps) {
               onClick={() => setStatusFilter("CANCELLED")}
               className={`px-3 py-1.5 rounded-lg font-medium transition-colors cursor-pointer flex items-center gap-1.5 ${
                 statusFilter === "CANCELLED"
-                  ? "bg-red-600 text-white shadow-xs font-semibold"
-                  : "bg-red-500/10 text-red-400 border border-red-500/30 hover:bg-red-500/20"
+                  ? "bg-rose-600 text-white shadow-xs font-semibold"
+                  : "bg-rose-50 text-rose-700 border border-rose-200 hover:bg-rose-100"
               }`}
             >
-              <span className="size-2 rounded-full bg-red-400" />
+              <span className="size-2 rounded-full bg-rose-500" />
               Cancelados ({stats.cancelled})
             </button>
           </div>
         </div>
 
-        {/* 5. VISÃO EM GRADE / TIMELINE DE ENGENHARIA (HORÁRIOS X PROFISSIONAIS) */}
+        {/* 5. VISÃO EM GRADE / TABELA DE AGENDAMENTOS PROFISSIONAL */}
         {viewMode === "dia" && (
-          <div className="bg-[#121214] rounded-xl border border-[#1F1F23] overflow-x-auto shadow-2xl">
+          <div className="bg-white rounded-xl border border-slate-200 overflow-x-auto shadow-2xs">
             <table className="w-full border-collapse text-xs">
               <thead>
-                <tr className="border-b border-[#1F1F23] bg-[#161619]">
-                  <th className="p-3.5 text-center font-mono font-semibold text-zinc-400 w-24 border-r border-[#1F1F23] uppercase text-[10px] tracking-wider">
+                <tr className="border-b border-slate-200 bg-[#F9FAFB]">
+                  <th className="p-3 text-center font-mono font-medium text-slate-500 w-20 border-r border-slate-200 text-xs">
                     Horário
                   </th>
                   {displayedProfessionals.map((pro) => (
                     <th
                       key={pro.id}
-                      className="p-3.5 text-center font-semibold text-white border-r border-[#1F1F23] last:border-r-0 min-w-[260px]"
+                      className="p-3 text-left font-semibold text-slate-800 border-r border-slate-200 last:border-r-0 min-w-[260px]"
                     >
-                      <div className="font-display font-bold text-xs text-white">{pro.name}</div>
-                      <div className="text-[10px] text-zinc-400 font-mono uppercase tracking-wider">
-                        {pro.role}
-                      </div>
+                      <div className="font-semibold text-xs text-slate-900">{pro.name}</div>
+                      <div className="text-[11px] text-slate-500 font-normal">{pro.role}</div>
                     </th>
                   ))}
                 </tr>
@@ -594,9 +561,9 @@ export function AdminGridView({ onLogout }: AdminGridViewProps) {
                   const slotDate = parseTimeOnDate(currentDate, hourStr);
 
                   return (
-                    <tr key={hourStr} className="border-b border-[#1F1F23] last:border-b-0">
+                    <tr key={hourStr} className="border-b border-slate-200 last:border-b-0">
                       {/* COLUNA DE HORÁRIO */}
-                      <td className="p-3 text-center font-mono font-semibold text-zinc-400 border-r border-[#1F1F23] bg-[#121214] align-middle">
+                      <td className="p-3 text-center font-mono text-slate-500 border-r border-slate-200 bg-[#F9FAFB] align-middle">
                         {hourStr}
                       </td>
 
@@ -607,9 +574,9 @@ export function AdminGridView({ onLogout }: AdminGridViewProps) {
                           return (
                             <td
                               key={pro.id}
-                              className="p-4 text-center text-zinc-600 font-mono uppercase text-[10px] tracking-wider bg-[#0E0E10] border-r border-[#1F1F23] last:border-r-0 select-none"
+                              className="p-4 text-center text-slate-400 text-xs bg-slate-50/60 border-r border-slate-200 last:border-r-0 select-none"
                             >
-                              Fora do expediente
+                              Intervalo de almoço
                             </td>
                           );
                         }
@@ -650,36 +617,40 @@ export function AdminGridView({ onLogout }: AdminGridViewProps) {
                           return (
                             <td
                               key={pro.id}
-                              className="p-2.5 border-r border-[#1F1F23] last:border-r-0 align-top"
+                              className="p-2 border-r border-slate-200 last:border-r-0 align-top bg-slate-50/30"
                             >
                               <div
                                 onClick={() => handleOpenAppointmentDetail(app)}
-                                className={`p-3 rounded-lg border border-[#27272A] border-l-4 ${getStatusBorderClass(app.status)} bg-[#18181B] hover:bg-[#1E1E22] hover:border-[#3F3F46] shadow-md space-y-2 cursor-pointer transition-all group`}
+                                className={`p-2.5 rounded-lg border border-slate-200 border-l-4 ${getStatusBorderClass(app.status)} bg-white hover:border-slate-300 shadow-2xs space-y-1.5 cursor-pointer transition-all group`}
                                 title="Clique para expandir o processo completo do cliente"
                               >
                                 <div className="flex items-center justify-between gap-1">
-                                  <span className="font-mono font-bold text-[11px] text-zinc-200 bg-white/5 border border-white/10 px-2 py-0.5 rounded tracking-wider">
+                                  <span className="font-mono font-semibold text-[11px] text-slate-900 bg-slate-100 px-1.5 py-0.5 rounded border border-slate-200">
                                     {app.protocol}
                                   </span>
-                                  <StatusBadge status={app.status} size="sm" />
+                                  <StatusBadge status={app.status} size="xs" />
                                 </div>
 
                                 <div>
-                                  <div className="font-semibold text-xs text-white group-hover:text-amber-400 transition-colors">
+                                  <div className="font-semibold text-xs text-slate-900 group-hover:text-slate-700 transition-colors truncate">
                                     {app.customer.name}
                                   </div>
-                                  <div className="text-[11px] text-zinc-400 font-mono">
-                                    {app.intake.vehicle.make} {app.intake.vehicle.model}
-                                    {app.intake.vehicle.plate
-                                      ? ` (${app.intake.vehicle.plate})`
-                                      : ""}
+                                  <div className="text-[11px] text-slate-500 flex items-center gap-1">
+                                    <span>
+                                      {app.intake.vehicle.make} {app.intake.vehicle.model}
+                                    </span>
+                                    {app.intake.vehicle.plate && (
+                                      <span className="font-mono text-[10px] text-slate-700 bg-slate-100 px-1 py-0.2 rounded">
+                                        {app.intake.vehicle.plate}
+                                      </span>
+                                    )}
                                   </div>
                                 </div>
 
-                                <div className="text-[10px] text-zinc-400 flex items-center justify-between font-mono">
-                                  <span>{svc?.short ?? app.serviceId}</span>
+                                <div className="text-[11px] text-slate-500 flex items-center justify-between">
+                                  <span className="truncate">{svc?.short ?? app.serviceId}</span>
                                   {isLeva && (
-                                    <span className="flex items-center gap-1 text-[#FF7A29] font-medium">
+                                    <span className="flex items-center gap-1 text-slate-700 font-medium text-[10px]">
                                       <Truck size={11} /> Leva e Traz
                                     </span>
                                   )}
@@ -687,24 +658,24 @@ export function AdminGridView({ onLogout }: AdminGridViewProps) {
 
                                 {/* BOTÕES DE AÇÃO NO CARD */}
                                 <div
-                                  className="flex items-center gap-1.5 pt-1.5 border-t border-[#27272A]"
+                                  className="flex items-center gap-1.5 pt-1.5 border-t border-slate-100"
                                   onClick={(e) => e.stopPropagation()}
                                 >
                                   <a
                                     href={whatsAppLink}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="flex-1 py-1.5 px-2.5 rounded-lg bg-[#25D366] hover:bg-[#20ba59] active:scale-[0.98] text-white text-[11px] font-semibold flex items-center justify-center gap-1.5 transition-all shadow-xs"
+                                    className="flex-1 py-1 px-2 rounded-md bg-[#25D366] hover:bg-[#20ba59] active:scale-[0.98] text-white text-[11px] font-medium flex items-center justify-center gap-1 transition-all shadow-2xs"
                                     title="Abrir WhatsApp com dados da Pré-OS"
                                   >
-                                    <MessageCircle size={13} className="fill-white/20" /> WhatsApp
+                                    <MessageCircle size={12} /> WhatsApp
                                   </a>
 
                                   <button
                                     type="button"
                                     onClick={() => handleCopySummary(app)}
                                     title="Copiar dados da Pré-OS"
-                                    className="p-1.5 rounded border border-[#27272A] bg-[#121214] hover:bg-[#27272A] text-zinc-300 hover:text-white cursor-pointer"
+                                    className="p-1 rounded-md border border-slate-200 bg-white hover:bg-slate-50 text-slate-600 hover:text-slate-900 cursor-pointer shadow-2xs"
                                   >
                                     <Copy size={12} />
                                   </button>
@@ -714,7 +685,7 @@ export function AdminGridView({ onLogout }: AdminGridViewProps) {
                                       type="button"
                                       onClick={() => handleStatusChange(app.id, "COMPLETED")}
                                       title="Concluir Atendimento"
-                                      className="p-1.5 rounded border border-emerald-500/40 bg-emerald-950/30 hover:bg-emerald-900/40 text-emerald-400 cursor-pointer"
+                                      className="p-1 rounded-md border border-emerald-200 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 cursor-pointer"
                                     >
                                       <Check size={12} />
                                     </button>
@@ -729,28 +700,28 @@ export function AdminGridView({ onLogout }: AdminGridViewProps) {
                           return (
                             <td
                               key={pro.id}
-                              className="p-2.5 border-r border-[#1F1F23] last:border-r-0 align-top"
+                              className="p-2 border-r border-slate-200 last:border-r-0 align-top bg-slate-50/50"
                             >
-                              <div className="p-3 rounded-lg border border-red-900/40 bg-red-950/20 text-red-400 text-xs text-center space-y-1">
-                                <Slash size={14} className="mx-auto text-red-500" />
-                                <div className="font-semibold text-[11px] font-mono uppercase tracking-wider">
-                                  Período Bloqueado
+                              <div className="p-2.5 rounded-lg border border-slate-200 bg-slate-100/70 text-slate-600 text-xs text-center space-y-1">
+                                <Slash size={13} className="mx-auto text-slate-400" />
+                                <div className="font-medium text-[11px] text-slate-600">
+                                  Bloqueado
                                 </div>
                               </div>
                             </td>
                           );
                         }
 
-                        // SLOT LIVRE: BOTÃO "+ Livre"
+                        // SLOT LIVRE DISCRETO
                         return (
                           <td
                             key={pro.id}
-                            className="p-2.5 border-r border-[#1F1F23] last:border-r-0 align-middle text-center"
+                            className="p-2 border-r border-slate-200 last:border-r-0 align-middle text-center"
                           >
                             <button
                               type="button"
                               onClick={() => openSlotBooking(hourStr, pro.id)}
-                              className="w-full py-3.5 px-4 rounded-lg border border-dashed border-zinc-800 hover:border-zinc-600 bg-transparent hover:bg-zinc-900/60 text-zinc-500 hover:text-zinc-200 text-xs font-mono transition-all cursor-pointer flex items-center justify-center gap-1 shadow-2xs"
+                              className="w-full h-full min-h-[64px] rounded-lg border border-dashed border-slate-200 hover:border-slate-300 hover:bg-slate-50/70 text-slate-400 hover:text-slate-700 text-xs transition-all cursor-pointer flex items-center justify-center font-medium"
                             >
                               <span>+ Livre</span>
                             </button>
@@ -767,12 +738,12 @@ export function AdminGridView({ onLogout }: AdminGridViewProps) {
 
         {/* 6. VISÃO EM LISTA (TABELA DETALHADA) */}
         {viewMode === "lista" && (
-          <div className="bg-[#121214] rounded-xl border border-[#1F1F23] p-4 space-y-3 shadow-2xl">
-            <h3 className="font-display font-bold text-sm text-white">
+          <div className="bg-white rounded-xl border border-slate-200 p-4 space-y-3 shadow-2xs">
+            <h3 className="font-semibold text-sm text-slate-900">
               Listagem Cronológica de Atendimentos
             </h3>
             {displayedAppointments.length === 0 ? (
-              <p className="text-xs text-zinc-400 py-8 text-center font-mono">
+              <p className="text-xs text-slate-500 py-8 text-center">
                 {statusFilter === "ALL"
                   ? "Nenhum atendimento cadastrado."
                   : "Nenhum atendimento encontrado para o filtro selecionado."}
@@ -794,23 +765,26 @@ export function AdminGridView({ onLogout }: AdminGridViewProps) {
                     <div
                       key={a.id}
                       onClick={() => handleOpenAppointmentDetail(a)}
-                      className={`p-3.5 rounded-lg border border-[#27272A] border-l-4 ${getStatusBorderClass(a.status)} bg-[#18181B] hover:border-[#3F3F46] hover:bg-[#1E1E22] flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs cursor-pointer transition-all`}
+                      className={`p-3.5 rounded-lg border border-slate-200 border-l-4 ${getStatusBorderClass(a.status)} bg-white hover:border-slate-300 hover:bg-slate-50/50 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs cursor-pointer transition-all shadow-2xs`}
                     >
                       <div className="space-y-1">
                         <div className="flex flex-wrap items-center gap-2">
-                          <span className="font-mono font-bold text-zinc-200 bg-white/5 border border-white/10 px-2 py-0.5 rounded tracking-wider">
+                          <span className="font-mono font-semibold text-slate-900 bg-slate-100 border border-slate-200 px-2 py-0.5 rounded text-[11px]">
                             {a.protocol}
                           </span>
                           <StatusBadge status={a.status} size="sm" />
-                          <span className="font-semibold text-white">{a.customer.name}</span>
-                          <span className="text-zinc-400 font-mono text-[11px]">
+                          <span className="font-semibold text-slate-900">{a.customer.name}</span>
+                          <span className="text-slate-500 text-[11px]">
                             ({formatPhoneBR(a.customer.phone)})
                           </span>
                         </div>
-                        <div className="text-[11px] text-zinc-400 font-mono">
-                          {formatDate(new Date(a.startTime))} às {formatTime(new Date(a.startTime))}{" "}
+                        <div className="text-[11px] text-slate-500">
+                          <span className="font-mono">
+                            {formatDate(new Date(a.startTime))} às{" "}
+                            {formatTime(new Date(a.startTime))}
+                          </span>{" "}
                           •{" "}
-                          <strong className="text-zinc-300">
+                          <strong className="text-slate-800">
                             {a.intake.vehicle.make} {a.intake.vehicle.model}
                           </strong>{" "}
                           • {svc?.short}
@@ -821,7 +795,7 @@ export function AdminGridView({ onLogout }: AdminGridViewProps) {
                         <button
                           type="button"
                           onClick={() => handleOpenAppointmentDetail(a)}
-                          className="py-1 px-3 rounded-lg border border-[#27272A] bg-[#121214] hover:bg-[#27272A] text-zinc-200 text-xs font-semibold flex items-center gap-1 cursor-pointer transition-colors"
+                          className="py-1 px-3 rounded-lg border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-medium flex items-center gap-1 cursor-pointer transition-colors shadow-2xs"
                         >
                           <Eye size={12} /> Ver Processo
                         </button>
@@ -830,10 +804,10 @@ export function AdminGridView({ onLogout }: AdminGridViewProps) {
                           href={whatsApp}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="py-1.5 px-3.5 rounded-lg bg-[#25D366] hover:bg-[#20ba59] active:scale-[0.98] text-white text-xs font-semibold flex items-center gap-1.5 transition-all shadow-xs"
+                          className="py-1.5 px-3.5 rounded-lg bg-[#25D366] hover:bg-[#20ba59] active:scale-[0.98] text-white text-xs font-semibold flex items-center gap-1.5 transition-all shadow-2xs"
                           title="Abrir WhatsApp com dados da Pré-OS"
                         >
-                          <MessageCircle size={13} className="fill-white/20" /> WhatsApp
+                          <MessageCircle size={13} /> WhatsApp
                         </a>
                       </div>
                     </div>
@@ -846,21 +820,21 @@ export function AdminGridView({ onLogout }: AdminGridViewProps) {
 
         {/* 7. VISÃO EXCLUSIVA LEVA E TRAZ */}
         {viewMode === "solicitacoes" && (
-          <div className="bg-[#121214] rounded-xl border border-[#1F1F23] p-5 space-y-4 shadow-2xl">
+          <div className="bg-white rounded-xl border border-slate-200 p-5 space-y-4 shadow-2xs">
             <div className="flex items-center gap-2">
-              <Truck size={18} className="text-[#FF5A00]" />
+              <Truck size={18} className="text-slate-700" />
               <div>
-                <h3 className="font-display font-bold text-sm text-white">
+                <h3 className="font-semibold text-sm text-slate-900">
                   Roteiro de Coleta e Devolução Leva e Traz (Toledo-PR)
                 </h3>
-                <p className="text-xs text-zinc-400">
+                <p className="text-xs text-slate-500">
                   Clientes que solicitaram retirada e entrega do veículo no endereço.
                 </p>
               </div>
             </div>
 
             {appointments.filter((a) => a.logistics.type === "leva-e-traz").length === 0 ? (
-              <p className="text-xs text-zinc-400 py-8 text-center font-mono">
+              <p className="text-xs text-slate-500 py-8 text-center">
                 Nenhuma solicitação de Leva e Traz ativa no momento.
               </p>
             ) : (
@@ -871,32 +845,32 @@ export function AdminGridView({ onLogout }: AdminGridViewProps) {
                     <div
                       key={a.id}
                       onClick={() => handleOpenAppointmentDetail(a)}
-                      className="p-4 rounded-lg border border-[#27272A] bg-[#18181B] hover:border-[#3F3F46] hover:bg-[#1E1E22] space-y-2 text-xs cursor-pointer transition-all"
+                      className="p-4 rounded-lg border border-slate-200 bg-white hover:border-slate-300 hover:bg-slate-50/50 space-y-2 text-xs cursor-pointer transition-all shadow-2xs"
                     >
                       <div className="flex justify-between items-center gap-2">
                         <div className="flex items-center gap-2">
-                          <span className="font-mono font-bold text-[#FF5A00] bg-[#FF5A00]/10 border border-[#FF5A00]/30 px-2 py-0.5 rounded tracking-wider">
+                          <span className="font-mono font-semibold text-slate-900 bg-slate-100 border border-slate-200 px-2 py-0.5 rounded text-[11px]">
                             {a.protocol}
                           </span>
                           <StatusBadge status={a.status} size="sm" />
                         </div>
-                        <span className="font-semibold text-zinc-300 font-mono">
+                        <span className="font-medium text-slate-700 font-mono">
                           {formatDate(new Date(a.startTime))} às {formatTime(new Date(a.startTime))}
                         </span>
                       </div>
 
-                      <div className="font-medium text-white">
+                      <div className="text-slate-800">
                         Cliente: <strong>{a.customer.name}</strong> (
                         {formatPhoneBR(a.customer.phone)})
                       </div>
-                      <div className="text-zinc-300">
+                      <div className="text-slate-600">
                         Endereço de Coleta:{" "}
-                        <strong className="text-white">
+                        <strong className="text-slate-900">
                           {a.logistics.address}, Bairro {a.logistics.neighborhood} (Toledo-PR)
                         </strong>
                       </div>
-                      <div className="flex items-center justify-between pt-1 border-t border-[#27272A]">
-                        <span className="text-[11px] text-zinc-400 font-mono">
+                      <div className="flex items-center justify-between pt-1 border-t border-slate-100">
+                        <span className="text-[11px] text-slate-500">
                           Veículo: {a.intake.vehicle.make} {a.intake.vehicle.model}
                         </span>
                         <button
@@ -905,7 +879,7 @@ export function AdminGridView({ onLogout }: AdminGridViewProps) {
                             e.stopPropagation();
                             handleOpenAppointmentDetail(a);
                           }}
-                          className="py-1 px-2.5 rounded bg-[#FF5A00] hover:bg-[#E04F00] text-white text-[11px] font-semibold flex items-center gap-1 cursor-pointer transition-colors"
+                          className="py-1 px-2.5 rounded-lg bg-slate-900 hover:bg-black text-white text-[11px] font-semibold flex items-center gap-1 cursor-pointer transition-colors shadow-2xs"
                         >
                           <Eye size={12} /> Ver Detalhes do Processo
                         </button>

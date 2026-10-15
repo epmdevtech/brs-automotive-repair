@@ -7,22 +7,14 @@ import {
   Clock,
   Copy,
   ExternalLink,
-  FileCheck,
-  FileText,
-  HelpCircle,
   Loader2,
-  MapPin,
   MessageCircle,
   Phone,
   Send,
-  Shield,
-  ShieldAlert,
   Slash,
-  Sparkles,
   Truck,
   User,
   Wrench,
-  X,
   XCircle,
   AlertCircle,
 } from "lucide-react";
@@ -48,14 +40,14 @@ import type { Appointment, AppointmentStatus } from "../../domain/types";
 import { BRS_BOOKING_CONFIG } from "../../config/booking.config";
 import { formatDate, formatTime, formatDateTime } from "../../domain/time";
 import { formatPhoneBR } from "../../domain/phone";
-import { canTransition, getStatusBadgeClass, getStatusLabel } from "../../domain/status";
+import { canTransition } from "../../domain/status";
 import {
   buildCustomerWhatsAppLink,
   formatPreOsSummary,
   DAMAGE_AREAS_LIST,
   DAMAGE_TYPES_LIST,
 } from "../../domain/intake";
-import { MILESTONE_MESSAGES, buildMilestoneWhatsAppUrl, maskPlate } from "../../domain/events";
+import { MILESTONE_MESSAGES, buildMilestoneWhatsAppUrl } from "../../domain/events";
 import { RepairTimeline } from "./repair-timeline";
 import { StatusBadge } from "../status-badge";
 
@@ -137,7 +129,7 @@ export function CustomerProcessDialog({
       setCopiedSummary(true);
       setTimeout(() => setCopiedSummary(false), 2500);
     } catch {
-      // Fallback silencioso
+      // Fallback
     }
   };
 
@@ -172,9 +164,6 @@ export function CustomerProcessDialog({
   };
 
   const handleClose = () => {
-    setActionError(null);
-    setActionSuccess(null);
-    setIsPending(false);
     onOpenChange(false);
   };
 
@@ -184,9 +173,7 @@ export function CustomerProcessDialog({
 
     if (!canTransition(appointment.status, "COMPLETED")) {
       setActionError(
-        `Transição inválida: o status atual (${getStatusLabel(
-          appointment.status,
-        )}) não pode avançar diretamente para Concluído.`,
+        `Transição inválida: Não é possível concluir a partir de "${appointment.status}".`,
       );
       return;
     }
@@ -194,13 +181,13 @@ export function CustomerProcessDialog({
     setIsPending(true);
     try {
       const result = await onStatusChange(appointment.id, "COMPLETED", {
-        actorId: appointment.professionalId,
-        actorName: professional?.name ?? "Técnico BRS",
-        note: "Atendimento concluído e conferido com checklist de qualidade.",
+        actorId: professional?.id ?? "bruno-tecnico",
+        actorName: professional?.name ?? "Bruno (Funilaria & Vistoria)",
+        note: "Atendimento concluído com sucesso e checklist técnico validado.",
       });
 
       if (result === false) {
-        setActionError("Falha na persistência da conclusão. O agendamento permanece aberto.");
+        setActionError("Não foi possível concluir o agendamento. Tente novamente.");
         setIsPending(false);
         return;
       }
@@ -213,7 +200,7 @@ export function CustomerProcessDialog({
       }, 700);
     } catch (err) {
       setActionError(
-        err instanceof Error ? err.message : "Erro inesperado ao concluir atendimento.",
+        err instanceof Error ? err.message : "Erro inesperado ao concluir agendamento.",
       );
       setIsPending(false);
     }
@@ -225,21 +212,21 @@ export function CustomerProcessDialog({
 
     setIsPending(true);
     try {
-      const reason = cancelReason.trim() || "Cancelado pelo operador no painel administrativo.";
       const result = await onStatusChange(appointment.id, "CANCELLED", {
         actorId: "admin",
         actorName: "Administrador BRS",
-        note: reason,
+        note: cancelReason.trim() ? cancelReason.trim() : "Cancelamento solicitado no painel.",
       });
 
+      setCancelDialogOpen(false);
+      setCancelReason("");
+
       if (result === false) {
-        setActionError("Falha ao registrar o cancelamento. Tente novamente.");
+        setActionError("Falha ao registrar cancelamento. Verifique e tente novamente.");
         setIsPending(false);
         return;
       }
 
-      setCancelDialogOpen(false);
-      setCancelReason("");
       setActionSuccess("Agendamento cancelado com sucesso.");
       setTimeout(() => {
         setIsPending(false);
@@ -312,94 +299,91 @@ export function CustomerProcessDialog({
   return (
     <>
       <Dialog open={open} onOpenChange={handleClose}>
-        <DialogContent className="max-w-4xl max-h-[92vh] overflow-y-auto bg-[#121214] text-[#EDEDED] border-[#1F1F23] p-0 sm:rounded-xl shadow-2xl">
-          {/* CABEÇALHO SUPERIOR (CHASSIS WORKSHOP HEADER) */}
-          <div className="p-6 bg-[#161619] border-b border-[#1F1F23] space-y-4">
+        <DialogContent className="max-w-4xl max-h-[92vh] overflow-y-auto bg-white text-slate-900 border-slate-200 p-0 sm:rounded-xl shadow-xl">
+          {/* CABEÇALHO DO DIÁLOGO */}
+          <div className="p-6 bg-[#F9FAFB] border-b border-slate-200 space-y-3">
             <div className="flex flex-wrap items-center justify-between gap-3">
               <div className="flex items-center gap-2">
-                <span className="font-mono font-bold text-sm text-[#FF5A00] bg-[#FF5A00]/10 border border-[#FF5A00]/30 px-3 py-1 rounded-md flex items-center gap-1.5 shadow-sm tracking-wider">
+                <span className="font-mono font-semibold text-xs text-slate-900 bg-white border border-slate-200 px-2.5 py-1 rounded-md flex items-center gap-1.5 shadow-2xs">
                   {appointment.protocol}
                   <button
                     type="button"
                     onClick={handleCopyProtocol}
                     title="Copiar protocolo"
-                    className="hover:text-white cursor-pointer ml-1 text-zinc-400"
+                    className="hover:text-slate-900 cursor-pointer text-slate-400 ml-1"
                   >
                     {copiedProtocol ? (
-                      <Check size={13} className="text-emerald-400" />
+                      <Check size={12} className="text-emerald-600" />
                     ) : (
-                      <Copy size={13} />
+                      <Copy size={12} />
                     )}
                   </button>
                 </span>
                 <StatusBadge status={appointment.status} size="md" />
               </div>
 
-              <div className="text-right text-xs text-zinc-400 font-mono">
-                <span className="font-medium text-white">
+              <div className="text-right text-xs text-slate-500">
+                <span className="font-medium text-slate-900 font-mono">
                   {formatDate(slotDate)} às {formatTime(slotDate)}
                 </span>
-                <div className="text-[11px] text-zinc-500">
+                <div className="text-[11px] text-slate-400">
                   Duração estimada: {service?.durationMinutes ?? 45} min
                 </div>
               </div>
             </div>
 
             <div>
-              <DialogTitle className="text-xl font-display font-bold text-white tracking-tight">
+              <DialogTitle className="text-xl font-bold text-slate-900 tracking-tight">
                 Processo Completo do Cliente • {appointment.customer.name}
               </DialogTitle>
-              <DialogDescription className="text-xs text-zinc-400 mt-1 flex flex-wrap items-center gap-2">
-                <span>{service?.title}</span>
+              <DialogDescription className="text-xs text-slate-500 mt-1 flex flex-wrap items-center gap-2">
+                <span className="font-medium text-slate-700">{service?.title}</span>
                 <span>•</span>
-                <span className="font-semibold text-zinc-300 font-mono uppercase text-[11px]">
-                  Técnico Responsável: {professional?.name ?? appointment.professionalId}
+                <span>
+                  Técnico:{" "}
+                  <strong className="text-slate-800">
+                    {professional?.name ?? appointment.professionalId}
+                  </strong>
                 </span>
               </DialogDescription>
             </div>
 
             {/* MENSAGENS INLINE DE ERRO OU SUCESSO */}
             {actionError && (
-              <div className="p-3 rounded-lg border border-red-900/50 bg-red-950/30 text-red-300 text-xs flex items-center gap-2 animate-in fade-in-50">
-                <AlertCircle size={15} className="text-red-400 shrink-0" />
+              <div className="p-3 rounded-lg border border-rose-200 bg-rose-50 text-rose-700 text-xs flex items-center gap-2">
+                <AlertCircle size={15} className="text-rose-600 shrink-0" />
                 <span>{actionError}</span>
               </div>
             )}
 
             {actionSuccess && (
-              <div className="p-3 rounded-lg border border-emerald-900/50 bg-emerald-950/30 text-emerald-300 text-xs flex items-center gap-2 animate-in fade-in-50">
-                <CheckCircle2 size={15} className="text-emerald-400 shrink-0" />
+              <div className="p-3 rounded-lg border border-emerald-200 bg-emerald-50 text-emerald-800 text-xs flex items-center gap-2">
+                <CheckCircle2 size={15} className="text-emerald-600 shrink-0" />
                 <span>{actionSuccess}</span>
               </div>
             )}
           </div>
 
           <div className="p-6 space-y-6">
-            {/* 1. DESTAQUE OBRIGATÓRIO: QUANDO O CLIENTE CADASTROU (TELEMETRIA DE ENTRADA) */}
-            <div className="p-4 rounded-xl border border-[#1F1F23] bg-[#18181B] flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs shadow-md">
+            {/* 1. TELEMETRIA DE ENTRADA DO CADASTRO */}
+            <div className="p-4 rounded-xl border border-slate-200 bg-white flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs shadow-2xs">
               <div className="flex items-start gap-3">
-                <div className="size-8 rounded-lg bg-[#FF5A00]/10 border border-[#FF5A00]/30 text-[#FF5A00] flex items-center justify-center shrink-0">
+                <div className="size-8 rounded-lg bg-slate-100 text-slate-700 flex items-center justify-center shrink-0">
                   <Clock size={16} />
                 </div>
                 <div>
-                  <div className="font-bold text-white uppercase font-mono tracking-wider text-[11px] flex items-center gap-2">
+                  <div className="font-semibold text-slate-900 text-xs flex items-center gap-2">
                     <span>Registro de Cadastro do Cliente</span>
-                    <span className="text-[9px] px-1.5 py-0.2 rounded bg-white/5 border border-white/10 text-zinc-400">
-                      TELEMETRIA
-                    </span>
                   </div>
-                  <div className="text-zinc-300 mt-0.5">
+                  <div className="text-slate-600 mt-0.5">
                     Cadastrado em{" "}
-                    <strong className="text-white font-semibold font-mono">
+                    <strong className="text-slate-900 font-mono font-medium">
                       {formatDateTime(createdDate)}
                     </strong>{" "}
                     ({getCreatedRelative()})
                   </div>
-                  <div className="text-[11px] text-zinc-400 mt-0.5">
-                    Canal de Entrada:{" "}
-                    <span className="font-medium text-zinc-200">
-                      Portal Web BRS (Auto-Confirmação pelo Cliente)
-                    </span>
+                  <div className="text-[11px] text-slate-400 mt-0.5">
+                    Canal de Entrada: Portal Web BRS (Auto-Confirmação pelo Cliente)
                   </div>
                 </div>
               </div>
@@ -408,20 +392,20 @@ export function CustomerProcessDialog({
                 <button
                   type="button"
                   onClick={handleCopyTrackingLink}
-                  className="py-1.5 px-3 rounded-md border border-[#27272A] bg-[#121214] hover:bg-[#27272A] text-[11px] font-medium text-zinc-200 hover:text-white flex items-center gap-1.5 transition-colors cursor-pointer"
+                  className="py-1.5 px-3 rounded-lg border border-slate-200 bg-white hover:bg-slate-50 text-xs font-medium text-slate-700 flex items-center gap-1.5 transition-colors cursor-pointer shadow-2xs"
                 >
                   {copiedTracking ? (
                     <>
-                      <Check size={12} className="text-emerald-400" /> Link de Acompanhamento
+                      <Check size={12} className="text-emerald-600" /> Link de Acompanhamento
                       Copiado!
                     </>
                   ) : (
                     <>
-                      <ExternalLink size={12} /> Copiar Link de Acompanhamento do Cliente
+                      <ExternalLink size={12} /> Copiar Link de Acompanhamento
                     </>
                   )}
                 </button>
-                <span className="text-[10px] text-zinc-500 font-mono">
+                <span className="text-[10px] text-slate-400 font-mono">
                   Idempotência:{" "}
                   {appointment.idempotencyKey
                     ? `${appointment.idempotencyKey.slice(0, 14)}...`
@@ -430,25 +414,20 @@ export function CustomerProcessDialog({
               </div>
             </div>
 
-            {/* 2. LINHA DO TEMPO AUTOMOTIVA DINÂMICA (ALIMENTADA POR EVENTOS REAIS) */}
+            {/* 2. LINHA DO TEMPO AUTOMOTIVA (STEPPER HORIZONTAL LIMPO) */}
             <RepairTimeline appointment={appointment} />
 
-            {/* 3. COMUNICAÇÃO DE MARCOS WHATSAPP CUSTO ZERO (DEMO) */}
-            <div className="p-4 rounded-xl border border-[#1F1F23] bg-[#161619] space-y-3 text-xs shadow-md">
+            {/* 3. COMUNICAÇÃO DE MARCOS WHATSAPP INTEGRADA */}
+            <div className="p-4 rounded-xl border border-slate-200 bg-[#F9FAFB] space-y-3 text-xs">
               <div className="flex flex-wrap items-center justify-between gap-2">
-                <span className="font-bold text-white flex items-center gap-1.5 font-display text-xs">
-                  <MessageCircle size={15} className="text-emerald-400" />
-                  Comunicação com Cliente via WhatsApp (Custo Zero • Sem APIs Pagas)
+                <span className="font-semibold text-slate-900 flex items-center gap-1.5 text-xs">
+                  <MessageCircle size={15} className="text-emerald-600" />
+                  <span>Comunicação por Etapa com o Cliente (WhatsApp)</span>
                 </span>
-                <span className="text-[10px] font-mono font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 px-2 py-0.5 rounded">
-                  1-Clique Deep Link + Área de Transferência
+                <span className="text-[11px] text-slate-500 font-medium">
+                  Modelos de mensagem contextualizados
                 </span>
               </div>
-
-              <p className="text-[11px] text-zinc-400 leading-relaxed">
-                Envie atualizações oficiais da oficina no WhatsApp do cliente com textos contextuais
-                pré-formatados para cada marco do reparo automotivo:
-              </p>
 
               {/* SELEÇÃO DO MARCO */}
               <div className="flex flex-wrap gap-1.5">
@@ -461,8 +440,8 @@ export function CustomerProcessDialog({
                       onClick={() => setSelectedMilestoneId(m.id)}
                       className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all cursor-pointer ${
                         isActive
-                          ? "bg-emerald-600 text-white shadow-xs font-semibold"
-                          : "bg-[#18181B] border border-[#27272A] text-zinc-400 hover:text-white"
+                          ? "bg-slate-900 text-white shadow-2xs font-semibold"
+                          : "bg-white border border-slate-200 text-slate-700 hover:bg-slate-50"
                       }`}
                     >
                       {m.stageName}
@@ -472,17 +451,17 @@ export function CustomerProcessDialog({
               </div>
 
               {/* PREVIEW DA MENSAGEM DO MARCO */}
-              <div className="p-3 rounded-lg bg-[#0B0B0C] border border-[#1F1F23] space-y-2">
-                <div className="flex items-center justify-between text-[11px]">
-                  <span className="font-semibold text-zinc-200">{selectedMilestone.label}</span>
-                  <span className="text-zinc-500 font-mono">
+              <div className="p-3.5 rounded-lg bg-white border border-slate-200 space-y-2.5 shadow-2xs">
+                <div className="flex items-center justify-between text-xs">
+                  <span className="font-medium text-slate-900">{selectedMilestone.label}</span>
+                  <span className="text-slate-500 font-mono text-[11px]">
                     Destino: {formatPhoneBR(appointment.customer.phone)}
                   </span>
                 </div>
 
-                <pre className="text-xs text-zinc-200 font-mono whitespace-pre-wrap bg-[#121214] p-3 rounded border border-[#27272A] max-h-36 overflow-y-auto leading-relaxed">
+                <div className="text-xs text-slate-800 whitespace-pre-wrap bg-slate-50 p-3 rounded-md border border-slate-200 max-h-32 overflow-y-auto leading-relaxed">
                   {selectedMilestoneText}
-                </pre>
+                </div>
 
                 <div className="flex flex-wrap items-center justify-end gap-2 pt-1">
                   <button
@@ -490,15 +469,15 @@ export function CustomerProcessDialog({
                     onClick={() =>
                       handleCopyMilestoneMessage(selectedMilestone.id, selectedMilestoneText)
                     }
-                    className="py-1.5 px-3 rounded-md border border-[#27272A] bg-[#18181B] hover:bg-[#27272A] text-xs font-medium text-zinc-200 flex items-center gap-1.5 transition-colors cursor-pointer"
+                    className="py-1.5 px-3 rounded-lg border border-slate-200 bg-white hover:bg-slate-50 text-xs font-medium text-slate-700 flex items-center gap-1.5 transition-colors cursor-pointer shadow-2xs"
                   >
                     {copiedMilestoneId === selectedMilestone.id ? (
                       <>
-                        <Check size={13} className="text-emerald-400" /> Copiado com sucesso!
+                        <Check size={13} className="text-emerald-600" /> Copiado!
                       </>
                     ) : (
                       <>
-                        <Copy size={13} /> Copiar Mensagem do Marco
+                        <Copy size={13} /> Copiar Mensagem
                       </>
                     )}
                   </button>
@@ -507,7 +486,7 @@ export function CustomerProcessDialog({
                     href={selectedMilestoneWaUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="py-1.5 px-3 rounded-md bg-[#25D366] hover:bg-[#20ba59] active:scale-[0.98] text-white text-xs font-semibold flex items-center gap-1.5 transition-all shadow-2xs"
+                    className="py-1.5 px-3 rounded-lg bg-[#25D366] hover:bg-[#20ba59] active:scale-[0.98] text-white text-xs font-medium flex items-center gap-1.5 transition-all shadow-2xs"
                   >
                     <Send size={13} /> Abrir no WhatsApp
                   </a>
@@ -515,51 +494,41 @@ export function CustomerProcessDialog({
               </div>
             </div>
 
-            {/* 4. DADOS DO CLIENTE & VEÍCULO */}
+            {/* 4. METADADOS ESTRUTURADOS: FICHA DO CLIENTE & VEÍCULO */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {/* FICHA DO CLIENTE */}
-              <div className="p-4 rounded-xl border border-[#1F1F23] bg-[#161619] space-y-3 text-xs">
-                <div className="font-bold text-white flex items-center justify-between">
-                  <span className="flex items-center gap-1.5 font-display text-xs">
-                    <User size={14} className="text-[#FF5A00]" />
-                    Ficha do Cliente
+              <div className="p-4 rounded-xl border border-slate-200 bg-white space-y-3 text-xs shadow-2xs">
+                <div className="font-semibold text-slate-900 flex items-center justify-between">
+                  <span className="flex items-center gap-1.5 text-xs">
+                    <User size={14} className="text-slate-500" />
+                    <span>Dados do Cliente</span>
                   </span>
-                  <span className="text-[10px] font-mono font-medium text-emerald-400 bg-emerald-500/10 border border-emerald-500/30 px-2 py-0.5 rounded">
+                  <span className="text-[10px] font-medium text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full">
                     LGPD Consentida
                   </span>
                 </div>
 
-                <div className="space-y-1.5">
-                  <div>
-                    <span className="text-[11px] text-zinc-500 uppercase font-mono">
-                      Nome Completo:
-                    </span>
-                    <div className="font-semibold text-sm text-white">
-                      {appointment.customer.name}
-                    </div>
+                <div className="space-y-2 border-t border-slate-100 pt-2">
+                  <div className="flex justify-between items-center">
+                    <span className="text-slate-500">Nome:</span>
+                    <span className="font-medium text-slate-900">{appointment.customer.name}</span>
                   </div>
 
-                  <div>
-                    <span className="text-[11px] text-zinc-500 uppercase font-mono">
-                      WhatsApp / Telefone:
-                    </span>
-                    <div className="font-mono font-medium text-zinc-300 flex items-center gap-2">
-                      <a
-                        href={`tel:${appointment.customer.phone}`}
-                        className="hover:underline flex items-center gap-1 text-white"
-                      >
-                        <Phone size={12} className="text-zinc-500" />
-                        {formatPhoneBR(appointment.customer.phone)}
-                      </a>
-                    </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-slate-500">Telefone:</span>
+                    <a
+                      href={`tel:${appointment.customer.phone}`}
+                      className="font-mono text-slate-800 hover:text-slate-900 hover:underline flex items-center gap-1"
+                    >
+                      <Phone size={11} className="text-slate-400" />
+                      {formatPhoneBR(appointment.customer.phone)}
+                    </a>
                   </div>
 
                   {appointment.customer.notes && (
-                    <div>
-                      <span className="text-[11px] text-zinc-500 uppercase font-mono">
-                        Observações do Cliente:
-                      </span>
-                      <p className="p-2.5 rounded bg-[#121214] border border-[#27272A] text-zinc-300 text-[11px] italic mt-0.5 font-sans">
+                    <div className="pt-1">
+                      <span className="text-slate-500 block mb-0.5">Observações:</span>
+                      <p className="p-2.5 rounded-lg bg-slate-50 border border-slate-200 text-slate-700 text-xs italic">
                         "{appointment.customer.notes}"
                       </p>
                     </div>
@@ -568,104 +537,86 @@ export function CustomerProcessDialog({
               </div>
 
               {/* FICHA DO VEÍCULO */}
-              <div className="p-4 rounded-xl border border-[#1F1F23] bg-[#161619] space-y-3 text-xs">
-                <div className="font-bold text-white flex items-center justify-between">
-                  <span className="flex items-center gap-1.5 font-display text-xs">
-                    <Car size={14} className="text-[#FF5A00]" />
-                    Dados do Veículo
+              <div className="p-4 rounded-xl border border-slate-200 bg-white space-y-3 text-xs shadow-2xs">
+                <div className="font-semibold text-slate-900 flex items-center justify-between">
+                  <span className="flex items-center gap-1.5 text-xs">
+                    <Car size={14} className="text-slate-500" />
+                    <span>Veículo & Placa</span>
                   </span>
 
-                  {/* PLACA MERCOSUL ESTILIZADA */}
                   {appointment.intake.vehicle.plate && (
-                    <div className="rounded border border-zinc-700 bg-white overflow-hidden text-center shadow-xs">
-                      <div className="bg-[#003399] text-white text-[7px] font-bold px-2 py-0.2 tracking-wider flex items-center justify-center gap-1">
-                        <span>BRASIL</span>
-                      </div>
-                      <div className="font-mono font-black text-xs px-2 py-0.5 text-slate-900 tracking-wider">
-                        {appointment.intake.vehicle.plate.toUpperCase()}
-                      </div>
-                    </div>
+                    <span className="font-mono font-bold text-xs px-2 py-0.5 bg-slate-100 border border-slate-300 rounded text-slate-900">
+                      {appointment.intake.vehicle.plate.toUpperCase()}
+                    </span>
                   )}
                 </div>
 
-                <div className="grid grid-cols-2 gap-2 text-xs">
-                  <div>
-                    <span className="text-[11px] text-zinc-500 uppercase font-mono">
-                      Marca / Modelo:
-                    </span>
-                    <div className="font-semibold text-white">
+                <div className="space-y-2 border-t border-slate-100 pt-2">
+                  <div className="flex justify-between items-center">
+                    <span className="text-slate-500">Modelo:</span>
+                    <span className="font-medium text-slate-900">
                       {appointment.intake.vehicle.make} {appointment.intake.vehicle.model}
-                    </div>
+                    </span>
                   </div>
 
-                  <div>
-                    <span className="text-[11px] text-zinc-500 uppercase font-mono">
-                      Ano de Fabricação:
-                    </span>
-                    <div className="font-medium text-zinc-300 font-mono">
+                  <div className="flex justify-between items-center">
+                    <span className="text-slate-500">Ano:</span>
+                    <span className="font-mono text-slate-800">
                       {appointment.intake.vehicle.year || "Não informado"}
-                    </div>
+                    </span>
                   </div>
 
-                  <div>
-                    <span className="text-[11px] text-zinc-500 uppercase font-mono">
-                      Cor Externa:
-                    </span>
-                    <div className="font-medium text-zinc-300">
+                  <div className="flex justify-between items-center">
+                    <span className="text-slate-500">Cor:</span>
+                    <span className="text-slate-800">
                       {appointment.intake.vehicle.color || "Padrão montadora"}
-                    </div>
+                    </span>
                   </div>
 
-                  <div>
-                    <span className="text-[11px] text-zinc-500 uppercase font-mono">
-                      Tipo de Acabamento:
-                    </span>
-                    <div className="font-medium text-zinc-300 capitalize">
+                  <div className="flex justify-between items-center">
+                    <span className="text-slate-500">Acabamento:</span>
+                    <span className="text-slate-800 capitalize">
                       {appointment.intake.vehicle.finishType || "Metálica"}
-                    </div>
+                    </span>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* 5. DIAGNÓSTICO DE DANOS & ANAMNESE DA PRÉ-OS */}
-            <div className="p-4 rounded-xl border border-[#1F1F23] bg-[#161619] space-y-3 text-xs">
+            {/* 5. DIAGNÓSTICO DE DANOS DA PRÉ-OS */}
+            <div className="p-4 rounded-xl border border-slate-200 bg-white space-y-3 text-xs shadow-2xs">
               <div className="flex items-center justify-between">
-                <span className="font-bold text-white flex items-center gap-1.5 font-display text-xs">
-                  <ShieldAlert size={14} className="text-[#FF5A00]" />
-                  Diagnóstico de Avarias (Anamnese Técnica de Pré-OS)
+                <span className="font-semibold text-slate-900 flex items-center gap-1.5 text-xs">
+                  <Wrench size={14} className="text-slate-500" />
+                  <span>Diagnóstico de Avarias (Anamnese Técnica)</span>
                 </span>
 
                 <span
-                  className={`text-[10px] font-mono font-semibold px-2 py-0.5 rounded border ${
+                  className={`text-[10px] font-medium px-2 py-0.5 rounded-full border ${
                     appointment.intake.isInsurance
-                      ? "bg-sky-500/10 text-sky-400 border-sky-500/30"
-                      : "bg-white/5 text-zinc-400 border-white/10"
+                      ? "bg-sky-50 text-sky-700 border-sky-200"
+                      : "bg-slate-100 text-slate-600 border-slate-200"
                   }`}
                 >
                   {appointment.intake.isInsurance ? "Seguradora / Sinistro" : "Particular"}
                 </span>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
                 <div>
-                  <span className="text-[11px] text-zinc-500 uppercase font-mono">
-                    Classificação do Dano:
-                  </span>
-                  <div className="font-semibold text-white mt-0.5">{damageTypeLabel}</div>
+                  <span className="text-slate-500 block mb-0.5">Classificação do Dano:</span>
+                  <div className="font-medium text-slate-900">{damageTypeLabel}</div>
                 </div>
 
                 <div>
-                  <span className="text-[11px] text-zinc-500 uppercase font-mono">
-                    Áreas Afetadas:
-                  </span>
-                  <div className="flex flex-wrap gap-1 mt-1">
+                  <span className="text-slate-500 block mb-0.5">Áreas Afetadas:</span>
+                  <div className="flex flex-wrap gap-1 mt-0.5">
                     {(appointment.intake.affectedAreas ?? []).map((areaId) => {
                       const label = DAMAGE_AREAS_LIST.find((a) => a.id === areaId)?.label ?? areaId;
                       return (
                         <span
                           key={areaId}
-                          className="px-2 py-0.5 rounded bg-[#18181B] border border-[#27272A] text-zinc-300 text-[10px] font-mono"
+                          className="px-2 py-0.5 rounded-md bg-slate-100 border border-slate-200 text-slate-700 text-[11px]"
                         >
                           {label}
                         </span>
@@ -676,89 +627,68 @@ export function CustomerProcessDialog({
               </div>
 
               {appointment.intake.description && (
-                <div>
-                  <span className="text-[11px] text-zinc-500 uppercase font-mono">
-                    Relato Técnico do Cliente:
-                  </span>
-                  <p className="p-2.5 rounded bg-[#121214] border border-[#27272A] text-zinc-300 text-xs leading-relaxed mt-1 font-sans">
+                <div className="pt-1">
+                  <span className="text-slate-500 block mb-0.5">Relato do Cliente:</span>
+                  <p className="p-2.5 rounded-lg bg-slate-50 border border-slate-200 text-slate-700 text-xs leading-relaxed">
                     {appointment.intake.description}
                   </p>
                 </div>
               )}
             </div>
 
-            {/* 6. LOGÍSTICA LEVA E TRAZ (SE APLICÁVEL) */}
+            {/* 6. LOGÍSTICA LEVA E TRAZ */}
             {isLeva && (
-              <div className="p-4 rounded-xl border border-[#FF5A00]/30 bg-[#FF5A00]/5 space-y-2 text-xs">
-                <div className="font-bold text-[#FF7A29] flex items-center gap-1.5 font-display text-xs">
-                  <Truck size={14} className="text-[#FF5A00]" />
-                  Roteiro de Coleta e Entrega Leva e Traz (Toledo-PR)
+              <div className="p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-2 text-xs">
+                <div className="font-semibold text-slate-900 flex items-center gap-1.5 text-xs">
+                  <Truck size={14} className="text-slate-700" />
+                  <span>Roteiro Leva e Traz (Toledo-PR)</span>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-zinc-300">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-slate-700 pt-1">
                   <div>
-                    <span className="text-[11px] text-zinc-500 uppercase font-mono">
-                      Endereço de Coleta:
+                    <span className="text-slate-500 block">Endereço de Coleta:</span>
+                    <span className="font-medium text-slate-900">
+                      {appointment.logistics.address}
                     </span>
-                    <div className="font-semibold text-white">{appointment.logistics.address}</div>
                   </div>
 
                   <div>
-                    <span className="text-[11px] text-zinc-500 uppercase font-mono">
-                      Bairro / Cidade:
-                    </span>
-                    <div>
+                    <span className="text-slate-500 block">Bairro / Cidade:</span>
+                    <span>
                       {appointment.logistics.neighborhood} —{" "}
                       {appointment.logistics.city ?? "Toledo-PR"}
-                    </div>
+                    </span>
                   </div>
-
-                  {appointment.logistics.referencePoint && (
-                    <div>
-                      <span className="text-[11px] text-zinc-500 uppercase font-mono">
-                        Ponto de Referência:
-                      </span>
-                      <div>{appointment.logistics.referencePoint}</div>
-                    </div>
-                  )}
-
-                  {appointment.logistics.contactPerson && (
-                    <div>
-                      <span className="text-[11px] text-zinc-500 uppercase font-mono">
-                        Contato no Local:
-                      </span>
-                      <div>{appointment.logistics.contactPerson}</div>
-                    </div>
-                  )}
                 </div>
               </div>
             )}
           </div>
 
           {/* RODAPÉ DE AÇÕES OPERACIONAIS */}
-          <div className="p-5 bg-[#161619] border-t border-[#1F1F23] flex flex-wrap items-center justify-between gap-3">
+          <div className="p-5 bg-[#F9FAFB] border-t border-slate-200 flex flex-wrap items-center justify-between gap-3">
             <div className="flex flex-wrap items-center gap-2">
               <a
                 href={whatsAppLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="py-2 px-3.5 rounded-lg bg-[#25D366] hover:bg-[#20ba59] active:scale-[0.98] text-white text-xs font-semibold flex items-center gap-1.5 transition-all shadow-xs"
+                className="py-2 px-3 rounded-lg border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-medium flex items-center gap-1.5 transition-colors cursor-pointer shadow-2xs"
               >
-                <MessageCircle size={14} /> Abrir WhatsApp da Pré-OS
+                <MessageCircle size={14} className="text-[#25D366]" />
+                <span>Abrir WhatsApp da Pré-OS</span>
               </a>
 
               <button
                 type="button"
                 onClick={handleCopySummary}
-                className="py-2 px-3.5 rounded-lg border border-[#27272A] bg-[#18181B] hover:bg-[#27272A] text-xs font-medium text-zinc-200 flex items-center gap-1.5 transition-colors cursor-pointer"
+                className="py-2 px-3 rounded-lg border border-slate-200 bg-white hover:bg-slate-50 text-xs font-medium text-slate-700 flex items-center gap-1.5 transition-colors cursor-pointer shadow-2xs"
               >
                 {copiedSummary ? (
                   <>
-                    <Check size={14} className="text-emerald-400" /> Copiado com sucesso!
+                    <Check size={13} className="text-emerald-600" /> Copiado!
                   </>
                 ) : (
                   <>
-                    <Copy size={14} /> Copiar Resumo para OS
+                    <Copy size={13} /> Copiar Resumo para OS
                   </>
                 )}
               </button>
@@ -774,12 +704,12 @@ export function CustomerProcessDialog({
                     type="button"
                     disabled={isPending || !canTransition(appointment.status, "COMPLETED")}
                     onClick={handleComplete}
-                    className="py-2 px-3.5 rounded-lg border border-emerald-500/40 bg-emerald-500/15 hover:bg-emerald-500/25 disabled:opacity-50 disabled:cursor-not-allowed text-emerald-300 text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 cursor-pointer transition-colors shadow-sm"
+                    className="py-2 px-3.5 rounded-lg bg-emerald-600 hover:bg-emerald-700 disabled:opacity-50 disabled:cursor-not-allowed text-white text-xs font-semibold flex items-center gap-1.5 cursor-pointer transition-colors shadow-xs"
                   >
                     {isPending ? (
                       <Loader2 size={13} className="animate-spin" />
                     ) : (
-                      <Check size={13} />
+                      <Check size={13} strokeWidth={2.5} />
                     )}
                     Concluir Atendimento
                   </button>
@@ -791,7 +721,7 @@ export function CustomerProcessDialog({
                     type="button"
                     disabled={isPending}
                     onClick={handleNoShow}
-                    className="py-2 px-2.5 rounded-lg border border-[#27272A] bg-[#18181B] hover:bg-[#27272A] disabled:opacity-50 disabled:cursor-not-allowed text-zinc-400 hover:text-white text-xs font-medium flex items-center gap-1 cursor-pointer transition-colors font-mono uppercase text-[11px]"
+                    className="py-2 px-3 rounded-lg border border-slate-200 bg-white hover:bg-slate-50 disabled:opacity-50 disabled:cursor-not-allowed text-slate-700 text-xs font-medium flex items-center gap-1.5 cursor-pointer transition-colors shadow-2xs"
                     title="Registrar ausência do cliente e fechar atendimento"
                   >
                     <Slash size={13} /> Fechar / Ausente
@@ -805,7 +735,7 @@ export function CustomerProcessDialog({
                     type="button"
                     disabled={isPending}
                     onClick={() => setCancelDialogOpen(true)}
-                    className="py-2 px-3 rounded-lg border border-red-900/50 bg-red-950/20 hover:bg-red-950/40 disabled:opacity-50 disabled:cursor-not-allowed text-red-400 text-xs font-medium flex items-center gap-1.5 cursor-pointer transition-colors font-mono uppercase text-[11px]"
+                    className="py-2 px-3 rounded-lg border border-rose-200 bg-rose-50 hover:bg-rose-100 disabled:opacity-50 disabled:cursor-not-allowed text-rose-700 text-xs font-medium flex items-center gap-1.5 cursor-pointer transition-colors"
                     title="Cancelar agendamento"
                   >
                     <XCircle size={13} /> Cancelar
@@ -817,7 +747,7 @@ export function CustomerProcessDialog({
                 variant="outline"
                 size="sm"
                 onClick={handleClose}
-                className="text-xs border-[#27272A] bg-[#18181B] text-zinc-300 hover:bg-[#27272A] hover:text-white cursor-pointer"
+                className="text-xs border-slate-300 bg-white text-slate-700 hover:bg-slate-100 hover:text-slate-900 cursor-pointer shadow-2xs"
               >
                 Fechar Janela
               </Button>
@@ -826,27 +756,24 @@ export function CustomerProcessDialog({
         </DialogContent>
       </Dialog>
 
-      {/* DIÁLOGO ACESSÍVEL DE CONFIRMAÇÃO DE CANCELAMENTO (RADIX UI ALERTDIALOG) */}
+      {/* DIÁLOGO ACESSÍVEL DE CONFIRMAÇÃO DE CANCELAMENTO */}
       <AlertDialog open={cancelDialogOpen} onOpenChange={setCancelDialogOpen}>
-        <AlertDialogContent className="bg-[#121214] text-white border-[#1F1F23] sm:rounded-xl shadow-2xl max-w-md">
+        <AlertDialogContent className="bg-white text-slate-900 border-slate-200 sm:rounded-xl shadow-xl max-w-md">
           <AlertDialogHeader>
-            <AlertDialogTitle className="text-base font-bold text-white flex items-center gap-2">
-              <XCircle size={18} className="text-red-500" />
+            <AlertDialogTitle className="text-base font-bold text-slate-900 flex items-center gap-2">
+              <XCircle size={18} className="text-rose-600" />
               Confirmar Cancelamento do Agendamento
             </AlertDialogTitle>
-            <AlertDialogDescription className="text-xs text-zinc-400 leading-relaxed">
+            <AlertDialogDescription className="text-xs text-slate-500 leading-relaxed">
               Você está cancelando o agendamento{" "}
-              <strong className="text-white font-mono">{appointment.protocol}</strong> do cliente{" "}
-              <strong>{appointment.customer.name}</strong>. Esta ação altera o status do reparo e
-              registra um evento no histórico de auditoria.
+              <strong className="text-slate-900 font-mono">{appointment.protocol}</strong> do
+              cliente <strong className="text-slate-900">{appointment.customer.name}</strong>. Esta
+              ação altera o status do reparo e registra um evento no histórico de auditoria.
             </AlertDialogDescription>
           </AlertDialogHeader>
 
           <div className="space-y-1.5 my-2">
-            <label
-              htmlFor="cancel-reason-input"
-              className="text-[11px] font-semibold text-zinc-300 uppercase font-mono"
-            >
+            <label htmlFor="cancel-reason-input" className="text-xs font-medium text-slate-700">
               Motivo do Cancelamento (opcional):
             </label>
             <textarea
@@ -855,7 +782,7 @@ export function CustomerProcessDialog({
               onChange={(e) => setCancelReason(e.target.value)}
               placeholder="Ex: Desistência do cliente, agendamento duplicado, etc."
               rows={2}
-              className="w-full text-xs p-2.5 rounded-lg border border-[#27272A] bg-[#18181B] text-white placeholder:text-zinc-500 focus:outline-none focus:ring-1 focus:ring-red-500"
+              className="w-full text-xs p-2.5 rounded-lg border border-slate-300 bg-white text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-1 focus:ring-slate-900 shadow-2xs"
             />
           </div>
 
@@ -866,14 +793,14 @@ export function CustomerProcessDialog({
                 setCancelDialogOpen(false);
                 setCancelReason("");
               }}
-              className="text-xs border-[#27272A] bg-[#18181B] text-zinc-300 hover:bg-[#27272A] hover:text-white cursor-pointer"
+              className="text-xs border-slate-300 bg-white text-slate-700 hover:bg-slate-100 hover:text-slate-900 cursor-pointer"
             >
               Voltar
             </AlertDialogCancel>
             <AlertDialogAction
               disabled={isPending}
               onClick={handleCancelConfirm}
-              className="bg-red-600 hover:bg-red-700 text-white text-xs font-semibold cursor-pointer"
+              className="bg-rose-600 hover:bg-rose-700 text-white text-xs font-semibold cursor-pointer shadow-xs"
             >
               {isPending ? (
                 <>

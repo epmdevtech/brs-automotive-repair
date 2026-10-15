@@ -1,6 +1,5 @@
 import { useState, type FormEvent } from "react";
 import { ArrowLeft, ArrowRight, Eye, EyeOff, Lock, Mail, Shield, Sparkles } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { company } from "@/lib/brs";
 import { DEMO_CREDENTIALS, loginAdmin, type AdminUser } from "../../domain/auth";
 
@@ -33,24 +32,24 @@ export function AdminLogin({ onLoginSuccess }: AdminLoginProps) {
   };
 
   return (
-    <div className="min-h-screen bg-[#0B0B0C] text-[#EDEDED] flex flex-col justify-between selection:bg-[#FF5A00]/30 selection:text-white">
+    <div className="min-h-screen bg-[#F8F9FA] text-slate-900 flex flex-col justify-between font-sans selection:bg-slate-900 selection:text-white">
       {/* BARRA SUPERIOR */}
-      <header className="w-full px-6 py-4 flex items-center justify-between border-b border-[#1F1F23] bg-[#121214]/80 backdrop-blur-md">
+      <header className="w-full px-6 py-4 flex items-center justify-between border-b border-slate-200 bg-white/90 backdrop-blur-md">
         <div className="flex items-center gap-2.5">
-          <div className="size-8 rounded bg-[#18181B] text-white flex items-center justify-center font-display font-bold text-sm border border-[#27272A] shadow-inner">
+          <div className="size-8 rounded-lg bg-slate-900 text-white flex items-center justify-center font-bold text-sm shadow-xs">
             B
           </div>
-          <span className="font-display font-semibold text-sm tracking-tight text-white">
+          <span className="font-semibold text-sm tracking-tight text-slate-900">
             {company.name}
           </span>
-          <span className="hidden sm:inline-block text-[10px] uppercase font-mono px-2 py-0.5 rounded bg-white/5 text-zinc-400 font-semibold border border-white/10">
-            CHASSIS OPS
+          <span className="hidden sm:inline-block text-[11px] font-mono px-2 py-0.5 rounded bg-slate-100 text-slate-600 font-medium border border-slate-200">
+            PAINEL OPERACIONAL
           </span>
         </div>
 
         <a
           href="/"
-          className="text-xs text-zinc-400 hover:text-white font-medium flex items-center gap-1.5 transition-colors"
+          className="text-xs text-slate-500 hover:text-slate-900 font-medium flex items-center gap-1.5 transition-colors"
         >
           <ArrowLeft size={13} />
           <span>Voltar ao site</span>
@@ -59,49 +58,45 @@ export function AdminLogin({ onLoginSuccess }: AdminLoginProps) {
 
       {/* ÁREA CENTRAL / CARD DE LOGIN */}
       <main className="flex-1 flex items-center justify-center p-4 py-12">
-        <div className="w-full max-w-[460px] bg-[#121214] rounded-xl border border-[#1F1F23] p-6 sm:p-8 shadow-2xl space-y-6 relative overflow-hidden">
-          {/* AMBIENT GLOW SUAVE */}
-          <div
-            className="absolute -top-20 left-1/2 -translate-x-1/2 w-64 h-24 bg-[#FF5A00]/10 blur-3xl pointer-events-none rounded-full"
-            aria-hidden="true"
-          />
-
-          <div className="text-center space-y-2 relative">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 text-zinc-300 text-[11px] font-semibold border border-white/10 uppercase font-mono tracking-wider">
-              <Shield size={12} className="text-[#FF5A00]" />
+        <div className="w-full max-w-[440px] bg-white rounded-xl border border-slate-200 p-6 sm:p-8 shadow-sm space-y-6">
+          <div className="text-center space-y-2">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-700 text-[11px] font-semibold border border-slate-200">
+              <Shield size={12} className="text-slate-600" />
               <span>Acesso Administrativo</span>
             </div>
 
-            <h1 className="text-2xl sm:text-3xl font-display font-bold text-white tracking-tight">
-              Painel da Oficina
-            </h1>
-            <p className="text-xs text-zinc-400">
-              Faça login para gerenciar consultas, bloqueios e equipe.
+            <h1 className="text-2xl font-bold text-slate-900 tracking-tight">Painel da Oficina</h1>
+            <p className="text-xs text-slate-500">
+              Faça login para gerenciar consultas, bloqueios e equipe técnica.
             </p>
           </div>
 
-          {/* BOX DEMONSTRATIVO INTERATIVO (TERMINAL LOOK) */}
-          <div className="p-4 rounded-lg bg-[#18181B] border border-[#27272A] space-y-3 relative">
+          {/* BOX DEMONSTRATIVO DE CREDENCIAIS */}
+          <div className="p-4 rounded-lg bg-slate-50 border border-slate-200 space-y-3">
             <div className="flex items-start gap-2 text-xs">
-              <Sparkles size={14} className="text-[#FF5A00] shrink-0 mt-0.5" />
+              <Sparkles size={14} className="text-amber-600 shrink-0 mt-0.5" />
               <div>
-                <strong className="text-zinc-200 block text-xs">
+                <strong className="text-slate-900 block text-xs font-semibold">
                   Ambiente Demonstrativo Interativo
                 </strong>
-                <span className="text-zinc-400 text-[11px]">
-                  Credenciais de teste pré-configuradas para avaliadores e equipe técnica:
+                <span className="text-slate-500 text-[11px]">
+                  Credenciais de teste pré-configuradas para avaliação operacional:
                 </span>
               </div>
             </div>
 
-            <div className="font-mono text-xs text-zinc-300 bg-[#0B0B0C] p-3 rounded border border-[#27272A] space-y-1.5">
+            <div className="font-mono text-xs text-slate-800 bg-white p-3 rounded-md border border-slate-200 space-y-1.5 shadow-2xs">
               <div className="flex justify-between items-center">
-                <span className="text-zinc-500 uppercase text-[10px] tracking-wider">E-mail:</span>
-                <span className="font-bold text-white tracking-wide">{DEMO_CREDENTIALS.email}</span>
+                <span className="text-slate-500 text-[10px] uppercase font-sans tracking-wider">
+                  E-mail:
+                </span>
+                <span className="font-medium text-slate-900">{DEMO_CREDENTIALS.email}</span>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-zinc-500 uppercase text-[10px] tracking-wider">Senha:</span>
-                <span className="font-bold text-[#FF5A00] tracking-wide">
+                <span className="text-slate-500 text-[10px] uppercase font-sans tracking-wider">
+                  Senha:
+                </span>
+                <span className="font-semibold text-slate-900 font-mono">
                   {DEMO_CREDENTIALS.password}
                 </span>
               </div>
@@ -110,15 +105,15 @@ export function AdminLogin({ onLoginSuccess }: AdminLoginProps) {
             <button
               type="button"
               onClick={fillDemoCredentials}
-              className="w-full py-2.5 px-3 rounded-lg bg-[#27272A] hover:bg-[#323238] active:scale-[0.99] text-zinc-200 hover:text-white text-xs font-semibold flex items-center justify-center gap-2 transition-all cursor-pointer border border-[#3F3F46]"
+              className="w-full py-2 px-3 rounded-lg bg-white hover:bg-slate-100 active:scale-[0.99] text-slate-700 text-xs font-medium flex items-center justify-center gap-1.5 transition-all cursor-pointer border border-slate-300 shadow-2xs"
             >
-              <Sparkles size={13} className="text-[#FF5A00]" />
+              <Sparkles size={13} className="text-amber-600" />
               <span>Preencher dados demo em 1 clique</span>
             </button>
           </div>
 
           {error && (
-            <div className="p-3 rounded-lg bg-red-950/40 border border-red-800 text-red-300 text-xs">
+            <div className="p-3 rounded-lg bg-rose-50 border border-rose-200 text-rose-700 text-xs">
               {error}
             </div>
           )}
@@ -126,13 +121,13 @@ export function AdminLogin({ onLoginSuccess }: AdminLoginProps) {
           {/* FORMULÁRIO DE LOGIN */}
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-1.5">
-              <label className="text-xs font-semibold text-zinc-300 block font-mono uppercase tracking-wider text-[11px]">
+              <label className="text-xs font-medium text-slate-700 block">
                 E-mail institucional
               </label>
               <div className="relative">
                 <Mail
                   size={14}
-                  className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-500"
+                  className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
                 />
                 <input
                   type="email"
@@ -140,22 +135,20 @@ export function AdminLogin({ onLoginSuccess }: AdminLoginProps) {
                   placeholder="admin@brsreparacoes.com.br"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full pl-9 pr-3 py-2.5 text-xs rounded-lg border border-[#27272A] bg-[#18181B] text-white placeholder:text-zinc-500 focus:outline-none focus:border-[#FF5A00] focus:ring-1 focus:ring-[#FF5A00] transition-colors"
+                  className="w-full pl-9 pr-3 py-2 text-xs rounded-lg border border-slate-300 bg-white text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900 transition-colors shadow-2xs"
                 />
               </div>
             </div>
 
             <div className="space-y-1.5">
               <div className="flex items-center justify-between text-xs">
-                <label className="font-semibold text-zinc-300 font-mono uppercase tracking-wider text-[11px]">
-                  Senha de acesso
-                </label>
-                <span className="text-[10px] text-zinc-500 font-mono">Demo: demo123</span>
+                <label className="text-xs font-medium text-slate-700">Senha de acesso</label>
+                <span className="text-[11px] text-slate-500 font-mono">Demo: demo123</span>
               </div>
               <div className="relative">
                 <Lock
                   size={14}
-                  className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-500"
+                  className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
                 />
                 <input
                   type={showPassword ? "text" : "password"}
@@ -163,12 +156,12 @@ export function AdminLogin({ onLoginSuccess }: AdminLoginProps) {
                   placeholder="••••••••"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full pl-9 pr-9 py-2.5 text-xs rounded-lg border border-[#27272A] bg-[#18181B] text-white placeholder:text-zinc-500 focus:outline-none focus:border-[#FF5A00] focus:ring-1 focus:ring-[#FF5A00] transition-colors"
+                  className="w-full pl-9 pr-9 py-2 text-xs rounded-lg border border-slate-300 bg-white text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900 transition-colors shadow-2xs"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-500 hover:text-white cursor-pointer"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700 cursor-pointer"
                 >
                   {showPassword ? <EyeOff size={14} /> : <Eye size={14} />}
                 </button>
@@ -177,14 +170,14 @@ export function AdminLogin({ onLoginSuccess }: AdminLoginProps) {
 
             <button
               type="submit"
-              className="w-full py-3 rounded-lg bg-[#FF5A00] hover:bg-[#E04F00] active:scale-[0.99] text-white text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 transition-all cursor-pointer shadow-lg shadow-[#FF5A00]/20"
+              className="w-full py-2.5 rounded-lg bg-slate-900 hover:bg-black active:scale-[0.99] text-white text-xs font-semibold flex items-center justify-center gap-1.5 transition-all cursor-pointer shadow-sm"
             >
               <span>Entrar no Painel</span>
               <ArrowRight size={14} />
             </button>
           </form>
 
-          <p className="text-[11px] text-zinc-500 text-center leading-relaxed font-mono">
+          <p className="text-[11px] text-slate-500 text-center leading-relaxed">
             Sessão temporária mantida apenas no navegador durante o teste demonstrativo. Para
             ambiente de produção, conecte seu provedor OAuth/SSO ou Supabase Auth.
           </p>
@@ -192,8 +185,8 @@ export function AdminLogin({ onLoginSuccess }: AdminLoginProps) {
       </main>
 
       {/* RODAPÉ */}
-      <footer className="w-full py-4 text-center text-[11px] text-zinc-500 border-t border-[#1F1F23] bg-[#121214]/60 font-mono">
-        © 2026 {company.name} • EPM Booking Engine
+      <footer className="w-full py-4 text-center text-[11px] text-slate-500 border-t border-slate-200 bg-white">
+        © 2026 {company.name} • Sistema Operacional BRS
       </footer>
     </div>
   );

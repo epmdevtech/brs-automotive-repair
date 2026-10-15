@@ -7,9 +7,9 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import type { Appointment, DamageType, FinishType } from "../../domain/types";
+import type { Appointment, DamageType } from "../../domain/types";
 import { BRS_BOOKING_CONFIG } from "../../config/booking.config";
-import { generateProtocol, DAMAGE_AREAS_LIST, DAMAGE_TYPES_LIST } from "../../domain/intake";
+import { generateProtocol, DAMAGE_TYPES_LIST } from "../../domain/intake";
 import { normalizePhoneE164 } from "../../domain/phone";
 import { parseTimeOnDate, formatDate } from "../../domain/time";
 import { localBookingRepository } from "../../data/local/local-repository";
@@ -129,18 +129,18 @@ export function ManualBookingDialog({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-lg bg-[#121214] text-[#EDEDED] border-[#1F1F23] p-6 rounded-xl shadow-2xl">
-        <DialogHeader className="border-b border-[#1F1F23] pb-3">
-          <DialogTitle className="text-lg font-display font-bold text-white">
+      <DialogContent className="max-w-lg bg-white text-slate-900 border-slate-200 p-6 rounded-xl shadow-xl">
+        <DialogHeader className="border-b border-slate-100 pb-3">
+          <DialogTitle className="text-lg font-bold text-slate-900">
             Novo Agendamento na Baia Técnica
           </DialogTitle>
-          <DialogDescription className="text-xs text-zinc-400">
+          <DialogDescription className="text-xs text-slate-500">
             Cadastre um atendimento presencial ou coleta Leva e Traz para {formatDate(initialDate)}.
           </DialogDescription>
         </DialogHeader>
 
         {error && (
-          <div className="p-2.5 rounded bg-red-950/40 border border-red-800 text-red-300 text-xs">
+          <div className="p-2.5 rounded-lg bg-rose-50 border border-rose-200 text-rose-700 text-xs">
             {error}
           </div>
         )}
@@ -148,13 +148,13 @@ export function ManualBookingDialog({
         <form onSubmit={handleSubmit} className="space-y-4 pt-2 text-xs">
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="font-semibold block mb-1 text-zinc-300 font-mono text-[11px] uppercase tracking-wider">
+              <label className="font-medium block mb-1 text-slate-700 text-xs">
                 Nome do Cliente *
               </label>
               <input
                 type="text"
                 required
-                className="w-full p-2.5 rounded-lg border border-[#27272A] bg-[#18181B] text-white placeholder:text-zinc-500 focus:outline-none focus:border-[#FF5A00]"
+                className="w-full p-2.5 rounded-lg border border-slate-300 bg-white text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900 shadow-2xs"
                 placeholder="Ex: João da Silva"
                 value={customerName}
                 onChange={(e) => setCustomerName(e.target.value)}
@@ -162,13 +162,13 @@ export function ManualBookingDialog({
             </div>
 
             <div>
-              <label className="font-semibold block mb-1 text-zinc-300 font-mono text-[11px] uppercase tracking-wider">
+              <label className="font-medium block mb-1 text-slate-700 text-xs">
                 Telefone (DDD + Celular) *
               </label>
               <input
                 type="tel"
                 required
-                className="w-full p-2.5 rounded-lg border border-[#27272A] bg-[#18181B] text-white placeholder:text-zinc-500 focus:outline-none focus:border-[#FF5A00]"
+                className="w-full p-2.5 rounded-lg border border-slate-300 bg-white text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900 shadow-2xs"
                 placeholder="(45) 99999-8888"
                 value={customerPhone}
                 onChange={(e) => setCustomerPhone(e.target.value)}
@@ -178,38 +178,32 @@ export function ManualBookingDialog({
 
           <div className="grid grid-cols-3 gap-3">
             <div>
-              <label className="font-semibold block mb-1 text-zinc-300 font-mono text-[11px] uppercase tracking-wider">
-                Marca *
-              </label>
+              <label className="font-medium block mb-1 text-slate-700 text-xs">Marca *</label>
               <input
                 type="text"
                 required
-                className="w-full p-2.5 rounded-lg border border-[#27272A] bg-[#18181B] text-white placeholder:text-zinc-500 focus:outline-none focus:border-[#FF5A00]"
+                className="w-full p-2.5 rounded-lg border border-slate-300 bg-white text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900 shadow-2xs"
                 placeholder="Ex: Toyota"
                 value={vehicleMake}
                 onChange={(e) => setVehicleMake(e.target.value)}
               />
             </div>
             <div>
-              <label className="font-semibold block mb-1 text-zinc-300 font-mono text-[11px] uppercase tracking-wider">
-                Modelo *
-              </label>
+              <label className="font-medium block mb-1 text-slate-700 text-xs">Modelo *</label>
               <input
                 type="text"
                 required
-                className="w-full p-2.5 rounded-lg border border-[#27272A] bg-[#18181B] text-white placeholder:text-zinc-500 focus:outline-none focus:border-[#FF5A00]"
+                className="w-full p-2.5 rounded-lg border border-slate-300 bg-white text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900 shadow-2xs"
                 placeholder="Ex: Corolla"
                 value={vehicleModel}
                 onChange={(e) => setVehicleModel(e.target.value)}
               />
             </div>
             <div>
-              <label className="font-semibold block mb-1 text-zinc-300 font-mono text-[11px] uppercase tracking-wider">
-                Placa
-              </label>
+              <label className="font-medium block mb-1 text-slate-700 text-xs">Placa</label>
               <input
                 type="text"
-                className="w-full p-2.5 rounded-lg border border-[#27272A] bg-[#18181B] text-white placeholder:text-zinc-500 focus:outline-none focus:border-[#FF5A00] uppercase font-mono"
+                className="w-full p-2.5 rounded-lg border border-slate-300 bg-white text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900 uppercase font-mono shadow-2xs"
                 placeholder="ABC1D23"
                 value={vehiclePlate}
                 onChange={(e) => setVehiclePlate(e.target.value.toUpperCase())}
@@ -219,16 +213,16 @@ export function ManualBookingDialog({
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="font-semibold block mb-1 text-zinc-300 font-mono text-[11px] uppercase tracking-wider">
+              <label className="font-medium block mb-1 text-slate-700 text-xs">
                 Especialidade / Serviço
               </label>
               <select
-                className="w-full p-2.5 rounded-lg border border-[#27272A] bg-[#18181B] text-white focus:outline-none focus:border-[#FF5A00]"
+                className="w-full p-2.5 rounded-lg border border-slate-300 bg-white text-slate-900 focus:outline-none focus:border-slate-900 shadow-2xs"
                 value={serviceId}
                 onChange={(e) => setServiceId(e.target.value)}
               >
                 {BRS_BOOKING_CONFIG.services.map((s) => (
-                  <option key={s.id} value={s.id} className="bg-[#18181B] text-white">
+                  <option key={s.id} value={s.id}>
                     {s.title}
                   </option>
                 ))}
@@ -236,16 +230,16 @@ export function ManualBookingDialog({
             </div>
 
             <div>
-              <label className="font-semibold block mb-1 text-zinc-300 font-mono text-[11px] uppercase tracking-wider">
+              <label className="font-medium block mb-1 text-slate-700 text-xs">
                 Profissional / Baia
               </label>
               <select
-                className="w-full p-2.5 rounded-lg border border-[#27272A] bg-[#18181B] text-white focus:outline-none focus:border-[#FF5A00]"
+                className="w-full p-2.5 rounded-lg border border-slate-300 bg-white text-slate-900 focus:outline-none focus:border-slate-900 shadow-2xs"
                 value={professionalId}
                 onChange={(e) => setProfessionalId(e.target.value)}
               >
                 {BRS_BOOKING_CONFIG.professionals.map((p) => (
-                  <option key={p.id} value={p.id} className="bg-[#18181B] text-white">
+                  <option key={p.id} value={p.id}>
                     {p.name}
                   </option>
                 ))}
@@ -255,28 +249,28 @@ export function ManualBookingDialog({
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="font-semibold block mb-1 text-zinc-300 font-mono text-[11px] uppercase tracking-wider">
+              <label className="font-medium block mb-1 text-slate-700 text-xs">
                 Horário de Início
               </label>
               <input
                 type="time"
-                className="w-full p-2.5 rounded-lg border border-[#27272A] bg-[#18181B] text-white font-mono focus:outline-none focus:border-[#FF5A00]"
+                className="w-full p-2.5 rounded-lg border border-slate-300 bg-white text-slate-900 font-mono focus:outline-none focus:border-slate-900 shadow-2xs"
                 value={time}
                 onChange={(e) => setTime(e.target.value)}
               />
             </div>
 
             <div>
-              <label className="font-semibold block mb-1 text-zinc-300 font-mono text-[11px] uppercase tracking-wider">
+              <label className="font-medium block mb-1 text-slate-700 text-xs">
                 Tipo de Avaria
               </label>
               <select
-                className="w-full p-2.5 rounded-lg border border-[#27272A] bg-[#18181B] text-white focus:outline-none focus:border-[#FF5A00]"
+                className="w-full p-2.5 rounded-lg border border-slate-300 bg-white text-slate-900 focus:outline-none focus:border-slate-900 shadow-2xs"
                 value={damageType}
                 onChange={(e) => setDamageType(e.target.value as DamageType)}
               >
                 {DAMAGE_TYPES_LIST.map((t) => (
-                  <option key={t.id} value={t.id} className="bg-[#18181B] text-white">
+                  <option key={t.id} value={t.id}>
                     {t.label}
                   </option>
                 ))}
@@ -289,27 +283,27 @@ export function ManualBookingDialog({
               type="checkbox"
               checked={isLevaETraz}
               onChange={(e) => setIsLevaETraz(e.target.checked)}
-              className="accent-[#FF5A00] size-4 cursor-pointer"
+              className="accent-slate-900 size-4 cursor-pointer"
             />
-            <span className="font-medium text-zinc-200">
+            <span className="font-medium text-slate-800">
               Serviço Leva e Traz (Coleta em Toledo-PR)
             </span>
           </label>
 
           {isLevaETraz && (
-            <div className="p-3 rounded-lg border border-[#27272A] bg-[#18181B] space-y-2">
+            <div className="p-3 rounded-lg border border-slate-200 bg-slate-50 space-y-2">
               <div className="grid grid-cols-2 gap-2">
                 <input
                   type="text"
                   placeholder="Rua e número"
-                  className="p-2 rounded border border-[#27272A] bg-[#121214] text-white placeholder:text-zinc-500 text-xs focus:outline-none focus:border-[#FF5A00]"
+                  className="p-2 rounded-md border border-slate-300 bg-white text-slate-900 placeholder:text-slate-400 text-xs focus:outline-none focus:border-slate-900 shadow-2xs"
                   value={address}
                   onChange={(e) => setAddress(e.target.value)}
                 />
                 <input
                   type="text"
                   placeholder="Bairro em Toledo"
-                  className="p-2 rounded border border-[#27272A] bg-[#121214] text-white placeholder:text-zinc-500 text-xs focus:outline-none focus:border-[#FF5A00]"
+                  className="p-2 rounded-md border border-slate-300 bg-white text-slate-900 placeholder:text-slate-400 text-xs focus:outline-none focus:border-slate-900 shadow-2xs"
                   value={neighborhood}
                   onChange={(e) => setNeighborhood(e.target.value)}
                 />
@@ -317,20 +311,20 @@ export function ManualBookingDialog({
             </div>
           )}
 
-          <div className="flex items-center justify-end gap-2 pt-3 border-t border-[#1F1F23]">
+          <div className="flex items-center justify-end gap-2 pt-3 border-t border-slate-100">
             <Button
               type="button"
               variant="outline"
               size="sm"
               onClick={() => onOpenChange(false)}
-              className="text-xs border-[#27272A] bg-[#18181B] text-zinc-300 hover:bg-[#27272A] hover:text-white cursor-pointer"
+              className="text-xs border-slate-300 bg-white text-slate-700 hover:bg-slate-100 hover:text-slate-900 cursor-pointer shadow-2xs"
             >
               Cancelar
             </Button>
             <button
               type="submit"
               disabled={submitting}
-              className="px-4 py-2 rounded-lg bg-[#FF5A00] hover:bg-[#E04F00] active:scale-[0.99] text-white text-xs font-bold uppercase tracking-wider cursor-pointer shadow-lg shadow-[#FF5A00]/20 disabled:opacity-50 transition-all"
+              className="px-4 py-2 rounded-lg bg-slate-900 hover:bg-black active:scale-[0.99] text-white text-xs font-semibold cursor-pointer shadow-xs disabled:opacity-50 transition-all"
             >
               {submitting ? "Gravando..." : "Confirmar Agendamento"}
             </button>
