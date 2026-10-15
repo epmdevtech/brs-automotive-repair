@@ -57,6 +57,7 @@ Gerado por `scripts/generate_traceability.py`. Não edite manualmente; execute n
 | [SPEC-051](../specs/SPEC-051-ux-ui-status-atendimentos-brs.md) | Aprovado | [TASK-051-01](../tasks/TASK-051-01-ux-ui-status-atendimentos-brs.md) (Concluído) | `33fea473` feat(booking): ux/ui de status operacionais, badges semanticos e filtros na agenda | — |
 | [SPEC-052](../specs/SPEC-052-ux-ui-whatsapp-status-fechados-painel.md) | Aprovado | [TASK-052-01](../tasks/TASK-052-01-ux-ui-whatsapp-status-fechados-painel.md) (Concluído) | `99c6fbf1` feat(booking): refatora botao whatsapp com affordance real e adiciona kpi e filtro de fechados | — |
 | [SPEC-053](../specs/SPEC-053-awwwards-dark-industrial-agendamentos.md) | Aprovado | [TASK-053-01](../tasks/TASK-053-01-awwwards-dark-industrial-agendamentos.md) (Concluído) | `357df1cd` feat(booking): redesenho visual awwwards dark industrial da rota agendamentos | — |
+| [SPEC-054](../specs/SPEC-054-admin-erp-light-mode-agendamentos.md) | Aprovado | [TASK-054-01](../tasks/TASK-054-01-admin-erp-light-mode-agendamentos.md) (Concluído) | `713e3945` feat(booking): redesenho administrativo erp light mode da rota agendamentos | — |
 
 ## Lacunas de rastreabilidade (Traceability gaps)
 
