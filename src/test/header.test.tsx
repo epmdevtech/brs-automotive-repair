@@ -57,4 +57,21 @@ describe("Header component and floating capsule navbar", () => {
     const headers = screen.getAllByRole("banner");
     expect(headers).toHaveLength(1);
   });
+
+  it("oculta CTA no mobile na barra superior e exibe rótulo conciso 'Avaliação' no menu móvel (SPEC-062)", () => {
+    const { container } = render(<Header />);
+
+    // CTA na barra superior possui hidden sm:inline-flex para não sobrecarregar o topo mobile
+    const magneticWrapper = container.querySelector(".hidden.sm\\:inline-flex");
+    expect(magneticWrapper).toBeInTheDocument();
+
+    const menuButton = screen.getByRole("button", { name: "Abrir menu de navegação" });
+    fireEvent.click(menuButton);
+
+    const mobileNav = screen.getByLabelText("Navegação móvel");
+    const mobileCta = mobileNav.querySelector("a[href='/contato']");
+    expect(mobileCta).toBeInTheDocument();
+    expect(mobileCta).toHaveTextContent("Avaliação");
+    expect(mobileCta?.textContent?.trim()).toMatch(/^Avaliação$/i);
+  });
 });

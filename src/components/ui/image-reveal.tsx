@@ -1,5 +1,5 @@
 import * as React from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { MOTION_EASE, MOTION_DURATIONS, MOTION_VIEWPORT } from "@/lib/motion-tokens";
 
@@ -21,7 +21,7 @@ export interface ImageRevealProps extends React.HTMLAttributes<HTMLDivElement> {
  * - Efeito suave de zoom reverso (padrão scale: 1.08 -> 1.00) e fade-in (opacity: 0 -> 1).
  * - Duração calibrada de 0.95s com bezier [0.21, 0.47, 0.32, 0.98].
  * - Preserva proporções de aspecto (aspect-16/10, aspect-4/3), object-fit e responsividade sem layout shift.
- * - Resiliência SSR e acessibilidade com prefers-reduced-motion.
+ * - Resiliência SSR e acessibilidade delegada ao MotionConfig global em __root.tsx.
  */
 export function ImageReveal({
   children,
@@ -34,16 +34,6 @@ export function ImageReveal({
   style,
   ...props
 }: ImageRevealProps) {
-  const shouldReduceMotion = useReducedMotion() ?? false;
-
-  if (shouldReduceMotion) {
-    return (
-      <div className={cn("overflow-hidden", className)} style={style} {...props}>
-        {children}
-      </div>
-    );
-  }
-
   return (
     <div className={cn("overflow-hidden", className)} style={style} {...props}>
       <motion.div

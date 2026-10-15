@@ -1,5 +1,5 @@
 import * as React from "react";
-import { motion, useMotionValue, useSpring, useReducedMotion } from "framer-motion";
+import { motion, useMotionValue, useSpring } from "framer-motion";
 
 export interface MagneticButtonProps {
   children: React.ReactNode;
@@ -26,17 +26,25 @@ export function MagneticButton({
   className,
 }: MagneticButtonProps) {
   const ref = React.useRef<HTMLDivElement>(null);
-  const shouldReduceMotion = useReducedMotion() ?? false;
   const [canHover, setCanHover] = React.useState(false);
 
   React.useEffect(() => {
     if (typeof window === "undefined") return;
-    const media = window.matchMedia("(hover: hover) and (pointer: fine)");
-    setCanHover(media.matches);
+    const hoverMedia = window.matchMedia("(hover: hover) and (pointer: fine)");
+    const motionMedia = window.matchMedia("(prefers-reduced-motion: reduce)");
 
-    const handler = (e: MediaQueryListEvent) => setCanHover(e.matches);
-    media.addEventListener("change", handler);
-    return () => media.removeEventListener("change", handler);
+    const updateState = () => {
+      setCanHover(hoverMedia.matches && !motionMedia.matches);
+    };
+
+    updateState();
+
+    hoverMedia.addEventListener("change", updateState);
+    motionMedia.addEventListener("change", updateState);
+    return () => {
+      hoverMedia.removeEventListener("change", updateState);
+      motionMedia.removeEventListener("change", updateState);
+    };
   }, []);
 
   const x = useMotionValue(0);
@@ -47,7 +55,7 @@ export function MagneticButton({
   const springY = useSpring(y, springConfig);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!canHover || shouldReduceMotion || !ref.current) return;
+    if (!canHover || !ref.current) return;
     const rect = ref.current.getBoundingClientRect();
     const centerX = rect.left + rect.width / 2;
     const centerY = rect.top + rect.height / 2;
@@ -67,7 +75,7 @@ export function MagneticButton({
     y.set(0);
   };
 
-  if (!canHover || shouldReduceMotion) {
+  if (!canHover) {
     return <div className={className}>{children}</div>;
   }
 

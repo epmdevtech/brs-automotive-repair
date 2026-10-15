@@ -1,5 +1,4 @@
 import * as React from "react";
-import { useReducedMotion } from "framer-motion";
 import { ChevronsLeftRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -45,7 +44,6 @@ export function BeforeAfterSlider({
   const [position, setPosition] = React.useState(Math.max(0, Math.min(100, initialPosition)));
   const [isDragging, setIsDragging] = React.useState(false);
   const containerRef = React.useRef<HTMLDivElement>(null);
-  const shouldReduceMotion = useReducedMotion() ?? false;
   const hasInteractedRef = React.useRef(false);
   const teaserAnimationRef = React.useRef<number | null>(null);
 
@@ -59,7 +57,10 @@ export function BeforeAfterSlider({
 
   // Convite de interação ao entrar na viewport pela primeira vez (~10% e volta)
   React.useEffect(() => {
-    if (shouldReduceMotion || typeof IntersectionObserver === "undefined") return;
+    const isReduced =
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (isReduced || typeof IntersectionObserver === "undefined") return;
     const element = containerRef.current;
     if (!element) return;
 
@@ -114,7 +115,7 @@ export function BeforeAfterSlider({
         cancelAnimationFrame(teaserAnimationRef.current);
       }
     };
-  }, [shouldReduceMotion, position]);
+  }, [position]);
 
   const updatePosition = React.useCallback(
     (clientX: number) => {

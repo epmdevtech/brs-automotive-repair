@@ -186,6 +186,96 @@ describe("SPEC-020 — Sistema Global de Motion Design Premium", () => {
       const routeModule = await import("@/routes/acompanhar/$token");
       expect(routeModule.Route).toBeDefined();
       expect((routeModule as Record<string, unknown>).CustomerTrackingPage).toBeUndefined();
+    }, 15000);
+  });
+
+  describe("Isomorfismo SSR e Resolução de Hidratação Motion (SPEC-061)", () => {
+    it("garante isomorfismo estrito no ScrollReveal durante SSR e hidratação com reduced-motion (AC-061-01, AC-061-02)", async () => {
+      mockReducedMotion();
+      const { renderToString } = await import("react-dom/server");
+      const { hydrateRoot } = await import("react-dom/client");
+
+      const ssrTree = (
+        <MotionConfig reducedMotion="user">
+          <ScrollReveal direction="up" distance={24} style={{ "--i": 0 } as React.CSSProperties}>
+            <span>Conteúdo Isomórfico</span>
+          </ScrollReveal>
+        </MotionConfig>
+      );
+
+      const html = renderToString(ssrTree);
+      expect(html).toContain("Conteúdo Isomórfico");
+      expect(html).toContain("opacity:0");
+      expect(html).toContain("transform:translateY(24px)");
+
+      const container = document.createElement("div");
+      container.innerHTML = html;
+      document.body.appendChild(container);
+
+      const consoleErrorSpy = vi.spyOn(console, "error").mockImplementation(() => {});
+
+      let root: ReturnType<typeof hydrateRoot> | null = null;
+      try {
+        const { act } = await import("@testing-library/react");
+        await act(async () => {
+          root = hydrateRoot(
+            container,
+            <MotionConfig reducedMotion="user">
+              <ScrollReveal
+                direction="up"
+                distance={24}
+                style={{ "--i": 0 } as React.CSSProperties}
+              >
+                <span>Conteúdo Isomórfico</span>
+              </ScrollReveal>
+            </MotionConfig>,
+          );
+        });
+
+        const hydrationErrors = consoleErrorSpy.mock.calls.filter((call) =>
+          call.some(
+            (arg) =>
+              typeof arg === "string" &&
+              (arg.includes("Hydration failed") || arg.includes("didn't match the client")),
+          ),
+        );
+        expect(hydrationErrors).toHaveLength(0);
+      } finally {
+        if (root) {
+          const { act } = await import("@testing-library/react");
+          await act(async () => {
+            root?.unmount();
+          });
+        }
+        consoleErrorSpy.mockRestore();
+        document.body.removeChild(container);
+      }
+    });
+
+    it("assegura que MagneticButton renderiza isomorficamente no SSR e suprime warnings de reduced-motion (AC-061-03)", async () => {
+      mockReducedMotion();
+      const { MagneticButton } = await import("@/components/ui/magnetic-button");
+      const { renderToString } = await import("react-dom/server");
+
+      const warnSpy = vi.spyOn(console, "warn").mockImplementation(() => {});
+
+      const html = renderToString(
+        <MagneticButton className="cta-button">
+          <span>Agendar</span>
+        </MagneticButton>,
+      );
+
+      expect(html).toContain("cta-button");
+      expect(html).toContain("Agendar");
+
+      // O aviso do Framer Motion warnOnce não deve ter sido disparado no SSR
+      const framerWarns = warnSpy.mock.calls.filter((call) =>
+        call.some(
+          (arg) => typeof arg === "string" && arg.includes("Reduced Motion enabled on your device"),
+        ),
+      );
+      expect(framerWarns).toHaveLength(0);
+      warnSpy.mockRestore();
     });
   });
 });
