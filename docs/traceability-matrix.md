@@ -61,7 +61,7 @@ Gerado por `scripts/generate_traceability.py`. Não edite manualmente; execute n
 | [SPEC-055](../specs/SPEC-055-auth-split-login-e-agenda-operacional.md) | Aprovado | [TASK-055-01](../tasks/TASK-055-01-auth-split-login-e-agenda-operacional.md) (Concluído) | `111b5163` feat(booking): autenticacao split-screen login e agenda operacional despoluida | — |
 | [SPEC-056](../specs/SPEC-056-auth-login-refinement-ux-a11y.md) | Aprovado | [TASK-056-01](../tasks/TASK-056-01-auth-login-refinement-ux-a11y.md) (Concluído) | `f9f8f9d7` docs: sincronizar matriz de rastreabilidade com TASK-056-01<br>`cdde3607` feat(auth): refinar layout split-screen, isolamento e acessibilidade wcag da rota /login | — |
 | [SPEC-057](../specs/SPEC-057-linha-do-tempo-operacional-rbac-auditoria.md) | Aprovado | [TASK-057-01](../tasks/TASK-057-01-linha-do-tempo-operacional-rbac-auditoria.md) (Concluído) | `8416d9fa` feat(booking): implementar linha do tempo operacional com RBAC e auditoria (SPEC-057) | — |
-| [SPEC-058](../specs/SPEC-058-pagina-publica-acompanhamento-mobile-first.md) | Aprovado | [TASK-058-01](../tasks/TASK-058-01-pagina-publica-acompanhamento-mobile-first.md) (Concluído) | `c3029a8e` feat(tracking): refatorar pagina publica de acompanhamento mobile-first (SPEC-058) | — |
+| [SPEC-058](../specs/SPEC-058-pagina-publica-acompanhamento-mobile-first.md) | Aprovado | [TASK-058-01](../tasks/TASK-058-01-pagina-publica-acompanhamento-mobile-first.md) (Concluído) | `28d0179f` docs(sdd): sincronizar matriz de rastreabilidade para SPEC-058<br>`c3029a8e` feat(tracking): refatorar pagina publica de acompanhamento mobile-first (SPEC-058) | — |
 
 ## Lacunas de rastreabilidade (Traceability gaps)
 
