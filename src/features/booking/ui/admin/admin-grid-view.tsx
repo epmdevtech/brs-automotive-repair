@@ -3,6 +3,7 @@ import {
   Calendar,
   Check,
   CheckCircle,
+  CheckCircle2,
   ChevronLeft,
   ChevronRight,
   Clock,
@@ -14,6 +15,7 @@ import {
   MapPin,
   MessageCircle,
   Phone,
+  PlayCircle,
   Plus,
   RefreshCw,
   Search,
@@ -31,7 +33,7 @@ import type { Appointment, AppointmentStatus, Professional } from "../../domain/
 import { localBookingRepository } from "../../data/local/local-repository";
 import { formatDate, formatTime, isSameCivilDay, parseTimeOnDate } from "../../domain/time";
 import { formatPhoneBR } from "../../domain/phone";
-import { getStatusLabel } from "../../domain/status";
+import { getStatusBorderClass, getStatusLabel } from "../../domain/status";
 import {
   DAMAGE_AREAS_LIST,
   DAMAGE_TYPES_LIST,
@@ -45,8 +47,10 @@ import { ensureSeedData } from "../../domain/seed";
 import { ManualBookingDialog } from "./manual-booking-dialog";
 import { BlockSlotDialog } from "./block-slot-dialog";
 import { CustomerProcessDialog } from "./customer-process-dialog";
+import { StatusBadge } from "../status-badge";
 
 type ViewMode = "dia" | "semana" | "lista" | "solicitacoes";
+type StatusFilter = "ALL" | AppointmentStatus;
 
 const GRID_HOURS = [
   "08:00",
@@ -69,6 +73,7 @@ export function AdminGridView({ onLogout }: AdminGridViewProps) {
   const [appointments, setAppointments] = useState<Appointment[]>([]);
   const [blockedPeriods, setBlockedPeriods] = useState<BlockedPeriod[]>([]);
   const [viewMode, setViewMode] = useState<ViewMode>("dia");
+  const [statusFilter, setStatusFilter] = useState<StatusFilter>("ALL");
   const [selectedProfessionalId, setSelectedProfessionalId] = useState<string>("ALL");
   const [currentDate, setCurrentDate] = useState<Date>(() => new Date());
 
@@ -147,21 +152,32 @@ export function AdminGridView({ onLogout }: AdminGridViewProps) {
     return BRS_BOOKING_CONFIG.professionals.filter((p) => p.id === selectedProfessionalId);
   }, [selectedProfessionalId]);
 
-  // KPIs superiores
+  // KPIs superiores semânticos
   const stats = useMemo(() => {
-    const dayAppointments = appointments.filter(
-      (a) => a.status !== "CANCELLED" && isSameCivilDay(new Date(a.startTime), currentDate),
+    const dayAppointments = appointments.filter((a) =>
+      isSameCivilDay(new Date(a.startTime), currentDate),
     );
-    const confirmedCount = dayAppointments.filter((a) => a.status === "CONFIRMED").length;
+    const inProgressCount = dayAppointments.filter((a) => a.status === "CONFIRMED").length;
+    const completedCount = dayAppointments.filter((a) => a.status === "COMPLETED").length;
+    const openCount = dayAppointments.filter((a) => a.status === "PENDING").length;
+    const cancelledCount = dayAppointments.filter((a) => a.status === "CANCELLED").length;
     const levaETrazCount = dayAppointments.filter((a) => a.logistics.type === "leva-e-traz").length;
 
     return {
       total: dayAppointments.length,
-      confirmed: confirmedCount,
+      inProgress: inProgressCount,
+      completed: completedCount,
+      open: openCount,
+      cancelled: cancelledCount,
       levaETraz: levaETrazCount,
       activePros: BRS_BOOKING_CONFIG.professionals.length,
     };
   }, [appointments, currentDate]);
+
+  const displayedAppointments = useMemo(() => {
+    if (statusFilter === "ALL") return appointments;
+    return appointments.filter((a) => a.status === statusFilter);
+  }, [appointments, statusFilter]);
 
   const handleStatusChange = async (
     id: string,
@@ -404,29 +420,120 @@ export function AdminGridView({ onLogout }: AdminGridViewProps) {
         </div>
       </div>
 
-      {/* 4. CARDS DE KPIS / MÉTRICAS (IDÊNTICOS À IMAGEM) */}
+      {/* 4. CARDS DE KPIS / MÉTRICAS SEMÂNTICAS */}
       <main className="p-6 space-y-6 max-w-7xl mx-auto w-full">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3.5">
           <div className="p-4 rounded-xl bg-[#fbf9f6] border border-[#e5dfd5] space-y-1 shadow-2xs">
-            <span className="text-[11px] text-[#716860] font-medium">Total de Atendimentos</span>
-            <div className="text-3xl font-display font-bold text-[#201d1b]">{stats.total}</div>
-          </div>
-
-          <div className="p-4 rounded-xl bg-[#fbf9f6] border border-[#e5dfd5] space-y-1 shadow-2xs">
-            <span className="text-[11px] text-emerald-700 font-semibold">Confirmados</span>
-            <div className="text-3xl font-display font-bold text-emerald-600">
-              {stats.confirmed}
+            <span className="text-[11px] text-[#716860] font-medium">Total do Dia</span>
+            <div className="text-2xl lg:text-3xl font-display font-bold text-[#201d1b]">
+              {stats.total}
             </div>
           </div>
 
-          <div className="p-4 rounded-xl bg-[#fbf9f6] border border-[#e5dfd5] space-y-1 shadow-2xs">
-            <span className="text-[11px] text-amber-700 font-semibold">Coletas Leva e Traz</span>
-            <div className="text-3xl font-display font-bold text-amber-600">{stats.levaETraz}</div>
+          <div className="p-4 rounded-xl bg-[#fbf9f6] border border-[#e5dfd5] border-l-4 border-l-amber-500 space-y-1 shadow-2xs">
+            <span className="text-[11px] text-amber-800 font-semibold flex items-center gap-1">
+              <PlayCircle size={13} className="text-amber-600" /> Em Andamento
+            </span>
+            <div className="text-2xl lg:text-3xl font-display font-bold text-amber-700">
+              {stats.inProgress}
+            </div>
           </div>
 
-          <div className="p-4 rounded-xl bg-[#fbf9f6] border border-[#e5dfd5] space-y-1 shadow-2xs">
-            <span className="text-[11px] text-[#716860] font-medium">Profissionais Ativos</span>
-            <div className="text-3xl font-display font-bold text-[#201d1b]">{stats.activePros}</div>
+          <div className="p-4 rounded-xl bg-[#fbf9f6] border border-[#e5dfd5] border-l-4 border-l-emerald-500 space-y-1 shadow-2xs">
+            <span className="text-[11px] text-emerald-800 font-semibold flex items-center gap-1">
+              <CheckCircle2 size={13} className="text-emerald-600" /> Concluídos
+            </span>
+            <div className="text-2xl lg:text-3xl font-display font-bold text-emerald-600">
+              {stats.completed}
+            </div>
+          </div>
+
+          <div className="p-4 rounded-xl bg-[#fbf9f6] border border-[#e5dfd5] border-l-4 border-l-sky-500 space-y-1 shadow-2xs">
+            <span className="text-[11px] text-sky-800 font-semibold flex items-center gap-1">
+              <Clock size={13} className="text-sky-600" /> Abertos
+            </span>
+            <div className="text-2xl lg:text-3xl font-display font-bold text-sky-700">
+              {stats.open}
+            </div>
+          </div>
+
+          <div className="p-4 rounded-xl bg-[#fbf9f6] border border-[#e5dfd5] border-l-4 border-l-red-400 space-y-1 shadow-2xs">
+            <span className="text-[11px] text-red-800 font-semibold flex items-center gap-1">
+              <XCircle size={13} className="text-red-500" /> Cancelados
+            </span>
+            <div className="text-2xl lg:text-3xl font-display font-bold text-red-600">
+              {stats.cancelled}
+            </div>
+          </div>
+        </div>
+
+        {/* BARRA DE FILTRO OPERACIONAL POR STATUS */}
+        <div className="flex flex-wrap items-center justify-between gap-3 p-3 rounded-xl bg-[#fbf9f6] border border-[#e5dfd5]">
+          <div className="flex items-center gap-2">
+            <Filter size={14} className="text-[#84776b]" />
+            <span className="text-xs font-semibold text-[#554e47]">Filtrar por Situação:</span>
+          </div>
+
+          <div className="flex flex-wrap items-center gap-1.5 text-xs">
+            <button
+              type="button"
+              onClick={() => setStatusFilter("ALL")}
+              className={`px-3 py-1.5 rounded-lg font-medium transition-colors cursor-pointer ${
+                statusFilter === "ALL"
+                  ? "bg-[#201d1b] text-white shadow-xs font-semibold"
+                  : "bg-[#eee7de] text-[#554e47] hover:bg-[#e4dcce] hover:text-[#201d1b]"
+              }`}
+            >
+              Todos ({stats.total})
+            </button>
+            <button
+              type="button"
+              onClick={() => setStatusFilter("CONFIRMED")}
+              className={`px-3 py-1.5 rounded-lg font-medium transition-colors cursor-pointer flex items-center gap-1.5 ${
+                statusFilter === "CONFIRMED"
+                  ? "bg-amber-600 text-white shadow-xs font-semibold"
+                  : "bg-amber-50 text-amber-900 border border-amber-200 hover:bg-amber-100"
+              }`}
+            >
+              <span className="size-2 rounded-full bg-amber-500" />
+              Em Andamento ({stats.inProgress})
+            </button>
+            <button
+              type="button"
+              onClick={() => setStatusFilter("COMPLETED")}
+              className={`px-3 py-1.5 rounded-lg font-medium transition-colors cursor-pointer flex items-center gap-1.5 ${
+                statusFilter === "COMPLETED"
+                  ? "bg-emerald-600 text-white shadow-xs font-semibold"
+                  : "bg-emerald-50 text-emerald-900 border border-emerald-200 hover:bg-emerald-100"
+              }`}
+            >
+              <span className="size-2 rounded-full bg-emerald-500" />
+              Concluídos ({stats.completed})
+            </button>
+            <button
+              type="button"
+              onClick={() => setStatusFilter("PENDING")}
+              className={`px-3 py-1.5 rounded-lg font-medium transition-colors cursor-pointer flex items-center gap-1.5 ${
+                statusFilter === "PENDING"
+                  ? "bg-sky-600 text-white shadow-xs font-semibold"
+                  : "bg-sky-50 text-sky-900 border border-sky-200 hover:bg-sky-100"
+              }`}
+            >
+              <span className="size-2 rounded-full bg-sky-500" />
+              Abertos ({stats.open})
+            </button>
+            <button
+              type="button"
+              onClick={() => setStatusFilter("CANCELLED")}
+              className={`px-3 py-1.5 rounded-lg font-medium transition-colors cursor-pointer flex items-center gap-1.5 ${
+                statusFilter === "CANCELLED"
+                  ? "bg-red-600 text-white shadow-xs font-semibold"
+                  : "bg-red-50 text-red-900 border border-red-200 hover:bg-red-100"
+              }`}
+            >
+              <span className="size-2 rounded-full bg-red-500" />
+              Cancelados ({stats.cancelled})
+            </button>
           </div>
         </div>
 
@@ -478,7 +585,8 @@ export function AdminGridView({ onLogout }: AdminGridViewProps) {
 
                         // Verifica se há agendamento para este profissional neste dia e horário
                         const app = appointments.find((a) => {
-                          if (a.status === "CANCELLED") return false;
+                          if (statusFilter !== "ALL" && a.status !== statusFilter) return false;
+                          if (statusFilter === "ALL" && a.status === "CANCELLED") return false;
                           if (a.professionalId !== pro.id) return false;
                           const aDate = new Date(a.startTime);
                           return (
@@ -515,20 +623,18 @@ export function AdminGridView({ onLogout }: AdminGridViewProps) {
                             >
                               <div
                                 onClick={() => handleOpenAppointmentDetail(app)}
-                                className="p-3 rounded-lg border border-emerald-500/30 bg-emerald-50/60 hover:bg-emerald-100/70 hover:border-emerald-500/70 shadow-xs space-y-2 cursor-pointer transition-all group"
+                                className={`p-3 rounded-lg border border-[#e5dfd5] border-l-4 ${getStatusBorderClass(app.status)} bg-white hover:bg-[#fbf9f6] shadow-xs space-y-2 cursor-pointer transition-all group`}
                                 title="Clique para expandir o processo completo do cliente"
                               >
                                 <div className="flex items-center justify-between gap-1">
-                                  <span className="font-mono font-bold text-[11px] text-emerald-800 bg-emerald-100/80 px-2 py-0.5 rounded">
+                                  <span className="font-mono font-bold text-[11px] text-[#3d3834] bg-[#eee7de] px-2 py-0.5 rounded">
                                     {app.protocol}
                                   </span>
-                                  <span className="text-[10px] font-semibold text-emerald-700 uppercase bg-emerald-200/50 px-1.5 py-0.5 rounded group-hover:bg-emerald-300/80 transition-colors flex items-center gap-1">
-                                    <Eye size={10} /> Processo
-                                  </span>
+                                  <StatusBadge status={app.status} size="sm" />
                                 </div>
 
                                 <div>
-                                  <div className="font-semibold text-xs text-[#201d1b] group-hover:text-emerald-950 transition-colors">
+                                  <div className="font-semibold text-xs text-[#201d1b] group-hover:text-amber-900 transition-colors">
                                     {app.customer.name}
                                   </div>
                                   <div className="text-[11px] text-[#716860]">
@@ -550,14 +656,14 @@ export function AdminGridView({ onLogout }: AdminGridViewProps) {
 
                                 {/* BOTÕES DE AÇÃO NO CARD */}
                                 <div
-                                  className="flex items-center gap-1.5 pt-1.5 border-t border-emerald-200/60"
+                                  className="flex items-center gap-1.5 pt-1.5 border-t border-[#eee7de]"
                                   onClick={(e) => e.stopPropagation()}
                                 >
                                   <a
                                     href={whatsAppLink}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="flex-1 py-1.5 px-2 rounded bg-emerald-600 hover:bg-emerald-700 text-white text-[11px] font-semibold flex items-center justify-center gap-1 transition-colors"
+                                    className="flex-1 py-1.5 px-2 rounded bg-[#201d1b] hover:bg-[#34302d] text-white text-[11px] font-semibold flex items-center justify-center gap-1 transition-colors"
                                   >
                                     <MessageCircle size={12} /> WhatsApp
                                   </a>
@@ -571,14 +677,16 @@ export function AdminGridView({ onLogout }: AdminGridViewProps) {
                                     <Copy size={12} />
                                   </button>
 
-                                  <button
-                                    type="button"
-                                    onClick={() => handleStatusChange(app.id, "COMPLETED")}
-                                    title="Concluir Atendimento"
-                                    className="p-1.5 rounded border border-emerald-300 bg-white hover:bg-emerald-100 text-emerald-700 cursor-pointer"
-                                  >
-                                    <Check size={12} />
-                                  </button>
+                                  {app.status !== "COMPLETED" && (
+                                    <button
+                                      type="button"
+                                      onClick={() => handleStatusChange(app.id, "COMPLETED")}
+                                      title="Concluir Atendimento"
+                                      className="p-1.5 rounded border border-emerald-300 bg-white hover:bg-emerald-50 text-emerald-700 cursor-pointer"
+                                    >
+                                      <Check size={12} />
+                                    </button>
+                                  )}
                                 </div>
                               </div>
                             </td>
@@ -629,13 +737,15 @@ export function AdminGridView({ onLogout }: AdminGridViewProps) {
             <h3 className="font-display font-bold text-sm text-[#201d1b]">
               Listagem Cronológica de Atendimentos
             </h3>
-            {appointments.length === 0 ? (
+            {displayedAppointments.length === 0 ? (
               <p className="text-xs text-[#716860] py-8 text-center">
-                Nenhum atendimento cadastrado.
+                {statusFilter === "ALL"
+                  ? "Nenhum atendimento cadastrado."
+                  : "Nenhum atendimento encontrado para o filtro selecionado."}
               </p>
             ) : (
               <div className="space-y-2">
-                {appointments.map((a) => {
+                {displayedAppointments.map((a) => {
                   const svc = BRS_BOOKING_CONFIG.services.find((s) => s.id === a.serviceId);
                   const whatsApp = buildCustomerWhatsAppLink({
                     protocol: a.protocol,
@@ -650,13 +760,14 @@ export function AdminGridView({ onLogout }: AdminGridViewProps) {
                     <div
                       key={a.id}
                       onClick={() => handleOpenAppointmentDetail(a)}
-                      className="p-3.5 rounded-lg border border-[#e5dfd5] bg-white hover:border-emerald-400 hover:bg-emerald-50/20 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs cursor-pointer transition-all"
+                      className={`p-3.5 rounded-lg border border-[#e5dfd5] border-l-4 ${getStatusBorderClass(a.status)} bg-white hover:border-[#cfc7bc] hover:bg-[#faf7f2] flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs cursor-pointer transition-all`}
                     >
                       <div className="space-y-1">
-                        <div className="flex items-center gap-2">
-                          <span className="font-mono font-bold text-emerald-800 bg-emerald-100 px-2 py-0.5 rounded">
+                        <div className="flex flex-wrap items-center gap-2">
+                          <span className="font-mono font-bold text-[#3d3834] bg-[#eee7de] px-2 py-0.5 rounded">
                             {a.protocol}
                           </span>
+                          <StatusBadge status={a.status} size="sm" />
                           <span className="font-semibold text-[#201d1b]">{a.customer.name}</span>
                           <span className="text-[#716860]">
                             ({formatPhoneBR(a.customer.phone)})
@@ -685,7 +796,7 @@ export function AdminGridView({ onLogout }: AdminGridViewProps) {
                           href={whatsApp}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="py-1 px-3 rounded bg-emerald-600 text-white text-xs font-semibold flex items-center gap-1 hover:bg-emerald-700 transition-colors"
+                          className="py-1 px-3 rounded bg-[#201d1b] hover:bg-[#34302d] text-white text-xs font-semibold flex items-center gap-1 transition-colors"
                         >
                           <MessageCircle size={12} /> WhatsApp
                         </a>
@@ -727,10 +838,13 @@ export function AdminGridView({ onLogout }: AdminGridViewProps) {
                       onClick={() => handleOpenAppointmentDetail(a)}
                       className="p-4 rounded-lg border border-amber-200 bg-amber-50/50 hover:bg-amber-100/50 space-y-2 text-xs cursor-pointer transition-all"
                     >
-                      <div className="flex justify-between items-center">
-                        <span className="font-mono font-bold text-amber-900 bg-amber-100 px-2 py-0.5 rounded">
-                          {a.protocol}
-                        </span>
+                      <div className="flex justify-between items-center gap-2">
+                        <div className="flex items-center gap-2">
+                          <span className="font-mono font-bold text-amber-900 bg-amber-100 px-2 py-0.5 rounded">
+                            {a.protocol}
+                          </span>
+                          <StatusBadge status={a.status} size="sm" />
+                        </div>
                         <span className="font-semibold text-foreground">
                           {formatDate(new Date(a.startTime))} às {formatTime(new Date(a.startTime))}
                         </span>

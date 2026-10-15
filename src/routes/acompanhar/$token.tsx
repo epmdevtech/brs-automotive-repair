@@ -29,7 +29,7 @@ import {
   ensureInitialEvents,
 } from "@/features/booking/domain/events";
 import type { Appointment, CustomerTrackingView } from "@/features/booking/domain/types";
-import { getStatusBadgeClass, getStatusLabel } from "@/features/booking/domain/status";
+import { StatusBadge } from "@/features/booking/ui/status-badge";
 import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/acompanhar/$token")({
@@ -172,13 +172,7 @@ function CustomerTrackingPage() {
               <span className="font-mono font-bold text-sm bg-primary/20 text-primary border border-primary/40 px-3 py-1 rounded-md">
                 {trackingData.protocol}
               </span>
-              <span
-                className={`text-xs font-semibold px-2.5 py-1 rounded-full uppercase tracking-wider ${getStatusBadgeClass(
-                  trackingData.status,
-                )}`}
-              >
-                {getStatusLabel(trackingData.status)}
-              </span>
+              <StatusBadge status={trackingData.status} size="md" />
             </div>
 
             <div className="text-right text-xs text-neutral-400">

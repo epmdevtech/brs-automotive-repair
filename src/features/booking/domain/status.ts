@@ -1,7 +1,7 @@
 import type { AppointmentStatus, Result } from "./types";
 
 const VALID_TRANSITIONS: Record<AppointmentStatus, readonly AppointmentStatus[]> = {
-  PENDING: ["CONFIRMED", "CANCELLED"],
+  PENDING: ["CONFIRMED", "CANCELLED", "NO_SHOW"],
   CONFIRMED: ["COMPLETED", "CANCELLED", "NO_SHOW"],
   COMPLETED: [],
   CANCELLED: [],
@@ -33,37 +33,79 @@ export function transitionStatus(
 }
 
 /**
- * Retorna o rótulo humanizado de cada status.
+ * Retorna o rótulo humanizado e preciso para analistas operacionais da oficina.
+ * - PENDING: "Aberto" (Aguardando triagem técnica inicial)
+ * - CONFIRMED: "Em Andamento" (Veículo em atendimento na grade)
+ * - COMPLETED: "Concluído" (Reparação finalizada com checklist)
+ * - CANCELLED: "Cancelado" (Desistência ou encerramento motivado)
+ * - NO_SHOW: "Fechado" (Encerramento administrativo por não comparecimento)
  */
 export function getStatusLabel(status: AppointmentStatus): string {
   switch (status) {
     case "PENDING":
-      return "Pendente";
+      return "Aberto";
     case "CONFIRMED":
-      return "Confirmado";
+      return "Em Andamento";
     case "COMPLETED":
       return "Concluído";
     case "CANCELLED":
       return "Cancelado";
     case "NO_SHOW":
-      return "Não Compareceu";
+      return "Fechado";
   }
 }
 
 /**
- * Retorna classes Tailwind CSS semânticas para exibição de badges de status.
+ * Retorna classes Tailwind CSS semânticas com alto contraste (WCAG AA) para badges.
+ * Reservando verde exclusivamente para Concluído.
  */
 export function getStatusBadgeClass(status: AppointmentStatus): string {
   switch (status) {
     case "PENDING":
-      return "bg-amber-100 text-amber-900 border border-amber-300";
+      return "bg-sky-50 text-sky-800 border border-sky-300";
     case "CONFIRMED":
-      return "bg-emerald-100 text-emerald-900 border border-emerald-300";
+      return "bg-amber-50 text-amber-900 border border-amber-300";
     case "COMPLETED":
-      return "bg-blue-100 text-blue-900 border border-blue-300";
+      return "bg-emerald-50 text-emerald-900 border border-emerald-300";
     case "CANCELLED":
-      return "bg-slate-100 text-slate-700 border border-slate-300";
+      return "bg-red-50 text-red-800 border border-red-200";
     case "NO_SHOW":
-      return "bg-red-100 text-red-900 border border-red-300";
+      return "bg-neutral-100 text-neutral-700 border border-neutral-300";
+  }
+}
+
+/**
+ * Retorna classe de borda lateral semântica (border-l-4) para cartões de agendamento.
+ */
+export function getStatusBorderClass(status: AppointmentStatus): string {
+  switch (status) {
+    case "PENDING":
+      return "border-l-sky-500";
+    case "CONFIRMED":
+      return "border-l-amber-500";
+    case "COMPLETED":
+      return "border-l-emerald-500";
+    case "CANCELLED":
+      return "border-l-red-400";
+    case "NO_SHOW":
+      return "border-l-neutral-400";
+  }
+}
+
+/**
+ * Retorna a classe de cor para o indicador pontual geométrico (dot) do status.
+ */
+export function getStatusDotClass(status: AppointmentStatus): string {
+  switch (status) {
+    case "PENDING":
+      return "bg-sky-500";
+    case "CONFIRMED":
+      return "bg-amber-500";
+    case "COMPLETED":
+      return "bg-emerald-500";
+    case "CANCELLED":
+      return "bg-red-500";
+    case "NO_SHOW":
+      return "bg-neutral-400";
   }
 }

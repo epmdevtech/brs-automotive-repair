@@ -17,6 +17,7 @@ import {
   Send,
   Shield,
   ShieldAlert,
+  Slash,
   Sparkles,
   Truck,
   User,
@@ -56,6 +57,7 @@ import {
 } from "../../domain/intake";
 import { MILESTONE_MESSAGES, buildMilestoneWhatsAppUrl, maskPlate } from "../../domain/events";
 import { RepairTimeline } from "./repair-timeline";
+import { StatusBadge } from "../status-badge";
 
 export interface CustomerProcessDialogProps {
   appointment: Appointment | null;
@@ -252,6 +254,36 @@ export function CustomerProcessDialog({
     }
   };
 
+  const handleNoShow = async () => {
+    if (!appointment || !onStatusChange || isPending) return;
+    setActionError(null);
+
+    setIsPending(true);
+    try {
+      const result = await onStatusChange(appointment.id, "NO_SHOW", {
+        actorId: "admin",
+        actorName: "Administrador BRS",
+        note: "Cliente não compareceu ao horário agendado. Atendimento encerrado administrativamente.",
+      });
+
+      if (result === false) {
+        setActionError("Falha ao registrar encerramento administrativo. Tente novamente.");
+        setIsPending(false);
+        return;
+      }
+
+      setActionSuccess("Atendimento encerrado por não comparecimento.");
+      setTimeout(() => {
+        setIsPending(false);
+        setActionSuccess(null);
+        handleClose();
+      }, 700);
+    } catch (err) {
+      setActionError(err instanceof Error ? err.message : "Erro inesperado ao registrar ausência.");
+      setIsPending(false);
+    }
+  };
+
   const damageTypeLabel =
     DAMAGE_TYPES_LIST.find((d) => d.id === appointment.intake.damageType)?.label ??
     appointment.intake.damageType;
@@ -285,24 +317,22 @@ export function CustomerProcessDialog({
           <div className="p-6 bg-[#f4eee6] border-b border-[#ded7cc] space-y-4">
             <div className="flex flex-wrap items-center justify-between gap-3">
               <div className="flex items-center gap-2">
-                <span className="font-mono font-bold text-sm text-emerald-900 bg-emerald-100 border border-emerald-300 px-3 py-1 rounded-md flex items-center gap-1.5 shadow-2xs">
+                <span className="font-mono font-bold text-sm text-[#201d1b] bg-[#eee7de] border border-[#d8d0c4] px-3 py-1 rounded-md flex items-center gap-1.5 shadow-2xs">
                   {appointment.protocol}
                   <button
                     type="button"
                     onClick={handleCopyProtocol}
                     title="Copiar protocolo"
-                    className="hover:text-emerald-700 cursor-pointer ml-1"
+                    className="hover:text-[#201d1b] cursor-pointer ml-1"
                   >
-                    {copiedProtocol ? <Check size={13} /> : <Copy size={13} />}
+                    {copiedProtocol ? (
+                      <Check size={13} className="text-emerald-600" />
+                    ) : (
+                      <Copy size={13} />
+                    )}
                   </button>
                 </span>
-                <span
-                  className={`text-xs font-semibold px-2.5 py-1 rounded-full uppercase tracking-wider ${getStatusBadgeClass(
-                    appointment.status,
-                  )}`}
-                >
-                  {getStatusLabel(appointment.status)}
-                </span>
+                <StatusBadge status={appointment.status} size="md" />
               </div>
 
               <div className="text-right text-xs text-[#716860]">
@@ -389,7 +419,10 @@ export function CustomerProcessDialog({
                   )}
                 </button>
                 <span className="text-[10px] text-[#716860] font-mono">
-                  Idempotência: {appointment.idempotencyKey.slice(0, 14)}...
+                  Idempotência:{" "}
+                  {appointment.idempotencyKey
+                    ? `${appointment.idempotencyKey.slice(0, 14)}...`
+                    : "local"}
                 </span>
               </div>
             </div>
@@ -606,7 +639,7 @@ export function CustomerProcessDialog({
                 <div>
                   <span className="text-[11px] text-[#716860]">Áreas Afetadas:</span>
                   <div className="flex flex-wrap gap-1 mt-1">
-                    {appointment.intake.affectedAreas.map((areaId) => {
+                    {(appointment.intake.affectedAreas ?? []).map((areaId) => {
                       const label = DAMAGE_AREAS_LIST.find((a) => a.id === areaId)?.label ?? areaId;
                       return (
                         <span
@@ -708,29 +741,51 @@ export function CustomerProcessDialog({
 
             {/* BOTÕES DE CONTROLE: CONCLUIR, CANCELAR E FECHAR */}
             <div className="flex items-center gap-2">
-              {onStatusChange && appointment.status !== "COMPLETED" && (
-                <button
-                  type="button"
-                  disabled={isPending || !canTransition(appointment.status, "COMPLETED")}
-                  onClick={handleComplete}
-                  className="py-2 px-3.5 rounded-lg border border-emerald-400 bg-emerald-100 hover:bg-emerald-200 disabled:opacity-50 disabled:cursor-not-allowed text-emerald-900 text-xs font-semibold flex items-center gap-1.5 cursor-pointer transition-colors shadow-2xs"
-                >
-                  {isPending ? <Loader2 size={13} className="animate-spin" /> : <Check size={13} />}
-                  Concluir Atendimento
-                </button>
-              )}
+              {onStatusChange &&
+                appointment.status !== "COMPLETED" &&
+                appointment.status !== "CANCELLED" &&
+                appointment.status !== "NO_SHOW" && (
+                  <button
+                    type="button"
+                    disabled={isPending || !canTransition(appointment.status, "COMPLETED")}
+                    onClick={handleComplete}
+                    className="py-2 px-3.5 rounded-lg border border-emerald-400 bg-emerald-100 hover:bg-emerald-200 disabled:opacity-50 disabled:cursor-not-allowed text-emerald-900 text-xs font-semibold flex items-center gap-1.5 cursor-pointer transition-colors shadow-2xs"
+                  >
+                    {isPending ? (
+                      <Loader2 size={13} className="animate-spin" />
+                    ) : (
+                      <Check size={13} />
+                    )}
+                    Concluir Atendimento
+                  </button>
+                )}
 
-              {onStatusChange && appointment.status !== "CANCELLED" && (
-                <button
-                  type="button"
-                  disabled={isPending}
-                  onClick={() => setCancelDialogOpen(true)}
-                  className="py-2 px-3 rounded-lg border border-red-200 bg-white hover:bg-red-50 disabled:opacity-50 disabled:cursor-not-allowed text-red-700 text-xs font-medium flex items-center gap-1.5 cursor-pointer transition-colors"
-                  title="Cancelar agendamento"
-                >
-                  <XCircle size={13} /> Cancelar
-                </button>
-              )}
+              {onStatusChange &&
+                (appointment.status === "CONFIRMED" || appointment.status === "PENDING") && (
+                  <button
+                    type="button"
+                    disabled={isPending}
+                    onClick={handleNoShow}
+                    className="py-2 px-2.5 rounded-lg border border-neutral-300 bg-white hover:bg-neutral-100 disabled:opacity-50 disabled:cursor-not-allowed text-neutral-700 text-xs font-medium flex items-center gap-1 cursor-pointer transition-colors"
+                    title="Registrar ausência do cliente e fechar atendimento"
+                  >
+                    <Slash size={13} /> Fechar / Ausente
+                  </button>
+                )}
+
+              {onStatusChange &&
+                appointment.status !== "CANCELLED" &&
+                appointment.status !== "COMPLETED" && (
+                  <button
+                    type="button"
+                    disabled={isPending}
+                    onClick={() => setCancelDialogOpen(true)}
+                    className="py-2 px-3 rounded-lg border border-red-200 bg-white hover:bg-red-50 disabled:opacity-50 disabled:cursor-not-allowed text-red-700 text-xs font-medium flex items-center gap-1.5 cursor-pointer transition-colors"
+                    title="Cancelar agendamento"
+                  >
+                    <XCircle size={13} /> Cancelar
+                  </button>
+                )}
 
               <Button
                 type="button"
@@ -739,7 +794,7 @@ export function CustomerProcessDialog({
                 onClick={handleClose}
                 className="text-xs"
               >
-                Fechar
+                Fechar Janela
               </Button>
             </div>
           </div>

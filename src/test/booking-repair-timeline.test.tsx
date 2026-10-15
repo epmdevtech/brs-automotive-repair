@@ -70,7 +70,7 @@ describe("SPEC-050: Correção dos Botões no Modal de Processo (Fechar, Conclui
       />,
     );
 
-    const closeBtn = screen.getByRole("button", { name: /^Fechar$/i });
+    const closeBtn = screen.getByRole("button", { name: /^Fechar Janela$/i });
     fireEvent.click(closeBtn);
 
     expect(handleOpenChange).toHaveBeenCalledWith(false);
