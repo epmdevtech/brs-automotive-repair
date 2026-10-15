@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as R404RouteImport } from './routes/404'
 import { Route as AgendamentosRouteImport } from './routes/agendamentos'
 import { Route as ContatoRouteImport } from './routes/contato'
+import { Route as LoginRouteImport } from './routes/login'
 import { Route as ParaCorretoresRouteImport } from './routes/para-corretores'
 import { Route as PrivacidadeRouteImport } from './routes/privacidade'
 import { Route as SobreRouteImport } from './routes/sobre'
@@ -44,6 +45,11 @@ const AgendamentosRoute = AgendamentosRouteImport.update({
 const ContatoRoute = ContatoRouteImport.update({
   id: '/contato',
   path: '/contato',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ParaCorretoresRoute = ParaCorretoresRouteImport.update({
@@ -114,6 +120,7 @@ export interface FileRoutesByFullPath {
   '/404': typeof R404Route
   '/agendamentos': typeof AgendamentosRoute
   '/contato': typeof ContatoRoute
+  '/login': typeof LoginRoute
   '/para-corretores': typeof ParaCorretoresRoute
   '/privacidade': typeof PrivacidadeRoute
   '/sobre': typeof SobreRoute
@@ -132,6 +139,7 @@ export interface FileRoutesByTo {
   '/404': typeof R404Route
   '/agendamentos': typeof AgendamentosRoute
   '/contato': typeof ContatoRoute
+  '/login': typeof LoginRoute
   '/para-corretores': typeof ParaCorretoresRoute
   '/privacidade': typeof PrivacidadeRoute
   '/sobre': typeof SobreRoute
@@ -151,6 +159,7 @@ export interface FileRoutesById {
   '/404': typeof R404Route
   '/agendamentos': typeof AgendamentosRoute
   '/contato': typeof ContatoRoute
+  '/login': typeof LoginRoute
   '/para-corretores': typeof ParaCorretoresRoute
   '/privacidade': typeof PrivacidadeRoute
   '/sobre': typeof SobreRoute
@@ -171,6 +180,7 @@ export interface FileRouteTypes {
     | '/404'
     | '/agendamentos'
     | '/contato'
+    | '/login'
     | '/para-corretores'
     | '/privacidade'
     | '/sobre'
@@ -189,6 +199,7 @@ export interface FileRouteTypes {
     | '/404'
     | '/agendamentos'
     | '/contato'
+    | '/login'
     | '/para-corretores'
     | '/privacidade'
     | '/sobre'
@@ -207,6 +218,7 @@ export interface FileRouteTypes {
     | '/404'
     | '/agendamentos'
     | '/contato'
+    | '/login'
     | '/para-corretores'
     | '/privacidade'
     | '/sobre'
@@ -226,6 +238,7 @@ export interface RootRouteChildren {
   R404Route: typeof R404Route
   AgendamentosRoute: typeof AgendamentosRoute
   ContatoRoute: typeof ContatoRoute
+  LoginRoute: typeof LoginRoute
   ParaCorretoresRoute: typeof ParaCorretoresRoute
   PrivacidadeRoute: typeof PrivacidadeRoute
   SobreRoute: typeof SobreRoute
@@ -268,6 +281,13 @@ declare module '@tanstack/react-router' {
       path: '/contato'
       fullPath: '/contato'
       preLoaderRoute: typeof ContatoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/para-corretores': {
@@ -362,6 +382,7 @@ const rootRouteChildren: RootRouteChildren = {
   R404Route: R404Route,
   AgendamentosRoute: AgendamentosRoute,
   ContatoRoute: ContatoRoute,
+  LoginRoute: LoginRoute,
   ParaCorretoresRoute: ParaCorretoresRoute,
   PrivacidadeRoute: PrivacidadeRoute,
   SobreRoute: SobreRoute,

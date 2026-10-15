@@ -239,6 +239,7 @@ Todas as entregas obedecem ao protocolo **Universal SDD**:
 - `SPEC-052` / `TASK-052-01`: Refatoração UX/UI do Botão WhatsApp com Affordance Real e Inclusão do Status "Fechados" nos KPIs e Filtros da Agenda.
 - `SPEC-053` / `TASK-053-01`: Redesenho Visual Awwwards Dark Industrial para o Painel de Agendamentos e Gestão de Reparação BRS (Aesthetic Dark Premium, tipografia técnica editorial e esteira linear de engenharia).
 - `SPEC-054` / `TASK-054-01`: Redesenho do Painel Administrativo / ERP BRS em Light Mode High-End (Linear / Vercel Dashboard / Apple Pro Apps, sobriedade operacional, Stepper horizontal limpo e metadados estruturados).
+- `SPEC-055` / `TASK-055-01`: Arquitetura UX/UI de Autenticação Split-Screen (/login) e Agenda Operacional Despoluída (/agendamentos) com StatusTabs unificadas, Mini-stepper de reparo e Visão Kanban.
 
 ---
 

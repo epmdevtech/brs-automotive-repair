@@ -19,6 +19,7 @@ import {
   Sparkles,
   Truck,
   XCircle,
+  LayoutDashboard,
 } from "lucide-react";
 import { company } from "@/lib/brs";
 import type { Appointment, AppointmentStatus } from "../../domain/types";
@@ -35,9 +36,11 @@ import { ManualBookingDialog } from "./manual-booking-dialog";
 import { BlockSlotDialog } from "./block-slot-dialog";
 import { CustomerProcessDialog } from "./customer-process-dialog";
 import { StatusBadge } from "../status-badge";
+import { StatusTabs, type StatusFilter } from "./status-tabs";
+import { ProcessStepper } from "./process-stepper";
+import { KanbanBoard } from "./kanban-board";
 
-type ViewMode = "dia" | "semana" | "lista" | "solicitacoes";
-type StatusFilter = "ALL" | AppointmentStatus;
+type ViewMode = "dia" | "semana" | "lista" | "quadro" | "solicitacoes";
 
 const GRID_HOURS = [
   "08:00",
@@ -338,6 +341,18 @@ export function AdminGridView({ onLogout }: AdminGridViewProps) {
 
           <button
             type="button"
+            onClick={() => setViewMode("quadro")}
+            className={`px-3 py-1.5 rounded-md text-xs font-medium flex items-center gap-1.5 transition-colors cursor-pointer ${
+              viewMode === "quadro"
+                ? "bg-white text-slate-900 shadow-xs font-semibold"
+                : "text-slate-600 hover:text-slate-900"
+            }`}
+          >
+            <LayoutDashboard size={13} /> Quadro
+          </button>
+
+          <button
+            type="button"
             onClick={() => setViewMode("solicitacoes")}
             className={`px-3 py-1.5 rounded-md text-xs font-medium flex items-center gap-1.5 transition-colors cursor-pointer ${
               viewMode === "solicitacoes"
@@ -409,132 +424,10 @@ export function AdminGridView({ onLogout }: AdminGridViewProps) {
         </div>
       </div>
 
-      {/* 4. CARDS DE KPIS / MÉTRICAS SÓBRIAS */}
+      {/* 4. BARRA DE ABAS UNIFICADA COM CONTADORES (StatusTabs <= 56px) */}
+      <StatusTabs currentFilter={statusFilter} onFilterChange={setStatusFilter} stats={stats} />
+
       <main className="p-6 space-y-6 max-w-7xl mx-auto w-full">
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
-          <div className="p-4 rounded-xl bg-white border border-slate-200 space-y-1 shadow-2xs">
-            <span className="text-[11px] text-slate-500 font-medium">Total do Dia</span>
-            <div className="text-2xl font-bold text-slate-900">{stats.total}</div>
-          </div>
-
-          <div className="p-4 rounded-xl bg-white border border-slate-200 border-l-4 border-l-amber-500 space-y-1 shadow-2xs">
-            <span className="text-[11px] text-amber-700 font-semibold flex items-center gap-1">
-              <PlayCircle size={13} className="text-amber-600" /> Em Andamento
-            </span>
-            <div className="text-2xl font-bold text-slate-900">{stats.inProgress}</div>
-          </div>
-
-          <div className="p-4 rounded-xl bg-white border border-slate-200 border-l-4 border-l-emerald-500 space-y-1 shadow-2xs">
-            <span className="text-[11px] text-emerald-700 font-semibold flex items-center gap-1">
-              <CheckCircle2 size={13} className="text-emerald-600" /> Concluídos
-            </span>
-            <div className="text-2xl font-bold text-slate-900">{stats.completed}</div>
-          </div>
-
-          <div className="p-4 rounded-xl bg-white border border-slate-200 border-l-4 border-l-sky-500 space-y-1 shadow-2xs">
-            <span className="text-[11px] text-sky-700 font-semibold flex items-center gap-1">
-              <Clock size={13} className="text-sky-600" /> Abertos
-            </span>
-            <div className="text-2xl font-bold text-slate-900">{stats.open}</div>
-          </div>
-
-          <div className="p-4 rounded-xl bg-white border border-slate-200 border-l-4 border-l-neutral-400 space-y-1 shadow-2xs">
-            <span className="text-[11px] text-neutral-600 font-semibold flex items-center gap-1">
-              <Slash size={13} className="text-neutral-500" /> Fechados
-            </span>
-            <div className="text-2xl font-bold text-slate-900">{stats.closed}</div>
-          </div>
-
-          <div className="p-4 rounded-xl bg-white border border-slate-200 border-l-4 border-l-rose-400 space-y-1 shadow-2xs">
-            <span className="text-[11px] text-rose-700 font-semibold flex items-center gap-1">
-              <XCircle size={13} className="text-rose-600" /> Cancelados
-            </span>
-            <div className="text-2xl font-bold text-slate-900">{stats.cancelled}</div>
-          </div>
-        </div>
-
-        {/* BARRA DE FILTRO OPERACIONAL POR STATUS */}
-        <div className="flex flex-wrap items-center justify-between gap-3 p-3 rounded-xl bg-white border border-slate-200 shadow-2xs">
-          <div className="flex items-center gap-2">
-            <Filter size={14} className="text-slate-400" />
-            <span className="text-xs font-medium text-slate-700">Filtrar por Situação:</span>
-          </div>
-
-          <div className="flex flex-wrap items-center gap-1.5 text-xs">
-            <button
-              type="button"
-              onClick={() => setStatusFilter("ALL")}
-              className={`px-3 py-1.5 rounded-lg font-medium transition-colors cursor-pointer ${
-                statusFilter === "ALL"
-                  ? "bg-slate-900 text-white shadow-xs font-semibold"
-                  : "bg-slate-50 text-slate-700 hover:bg-slate-100 border border-slate-200"
-              }`}
-            >
-              Todos ({stats.total})
-            </button>
-            <button
-              type="button"
-              onClick={() => setStatusFilter("CONFIRMED")}
-              className={`px-3 py-1.5 rounded-lg font-medium transition-colors cursor-pointer flex items-center gap-1.5 ${
-                statusFilter === "CONFIRMED"
-                  ? "bg-amber-600 text-white shadow-xs font-semibold"
-                  : "bg-amber-50 text-amber-700 border border-amber-200 hover:bg-amber-100"
-              }`}
-            >
-              <span className="size-2 rounded-full bg-amber-500" />
-              Em Andamento ({stats.inProgress})
-            </button>
-            <button
-              type="button"
-              onClick={() => setStatusFilter("COMPLETED")}
-              className={`px-3 py-1.5 rounded-lg font-medium transition-colors cursor-pointer flex items-center gap-1.5 ${
-                statusFilter === "COMPLETED"
-                  ? "bg-emerald-600 text-white shadow-xs font-semibold"
-                  : "bg-emerald-50 text-emerald-700 border border-emerald-200 hover:bg-emerald-100"
-              }`}
-            >
-              <span className="size-2 rounded-full bg-emerald-500" />
-              Concluídos ({stats.completed})
-            </button>
-            <button
-              type="button"
-              onClick={() => setStatusFilter("PENDING")}
-              className={`px-3 py-1.5 rounded-lg font-medium transition-colors cursor-pointer flex items-center gap-1.5 ${
-                statusFilter === "PENDING"
-                  ? "bg-sky-600 text-white shadow-xs font-semibold"
-                  : "bg-sky-50 text-sky-700 border border-sky-200 hover:bg-sky-100"
-              }`}
-            >
-              <span className="size-2 rounded-full bg-sky-500" />
-              Abertos ({stats.open})
-            </button>
-            <button
-              type="button"
-              onClick={() => setStatusFilter("NO_SHOW")}
-              className={`px-3 py-1.5 rounded-lg font-medium transition-colors cursor-pointer flex items-center gap-1.5 ${
-                statusFilter === "NO_SHOW"
-                  ? "bg-neutral-800 text-white shadow-xs font-semibold"
-                  : "bg-neutral-100 text-neutral-700 border border-neutral-200 hover:bg-neutral-200"
-              }`}
-            >
-              <span className="size-2 rounded-full bg-neutral-400" />
-              Fechados ({stats.closed})
-            </button>
-            <button
-              type="button"
-              onClick={() => setStatusFilter("CANCELLED")}
-              className={`px-3 py-1.5 rounded-lg font-medium transition-colors cursor-pointer flex items-center gap-1.5 ${
-                statusFilter === "CANCELLED"
-                  ? "bg-rose-600 text-white shadow-xs font-semibold"
-                  : "bg-rose-50 text-rose-700 border border-rose-200 hover:bg-rose-100"
-              }`}
-            >
-              <span className="size-2 rounded-full bg-rose-500" />
-              Cancelados ({stats.cancelled})
-            </button>
-          </div>
-        </div>
-
         {/* 5. VISÃO EM GRADE / TABELA DE AGENDAMENTOS PROFISSIONAL */}
         {viewMode === "dia" && (
           <div className="bg-white rounded-xl border border-slate-200 overflow-x-auto shadow-2xs">
@@ -654,6 +547,11 @@ export function AdminGridView({ onLogout }: AdminGridViewProps) {
                                       <Truck size={11} /> Leva e Traz
                                     </span>
                                   )}
+                                </div>
+
+                                {/* MINI-STEPPER DE ETAPAS DA OFICINA */}
+                                <div className="pt-1 border-t border-slate-100">
+                                  <ProcessStepper status={app.status} />
                                 </div>
 
                                 {/* BOTÕES DE AÇÃO NO CARD */}
@@ -789,9 +687,15 @@ export function AdminGridView({ onLogout }: AdminGridViewProps) {
                           </strong>{" "}
                           • {svc?.short}
                         </div>
+                        <div className="pt-1.5 max-w-xs">
+                          <ProcessStepper status={a.status} />
+                        </div>
                       </div>
 
-                      <div className="flex items-center gap-2" onClick={(e) => e.stopPropagation()}>
+                      <div
+                        className="flex items-center gap-2 shrink-0"
+                        onClick={(e) => e.stopPropagation()}
+                      >
                         <button
                           type="button"
                           onClick={() => handleOpenAppointmentDetail(a)}
@@ -815,6 +719,26 @@ export function AdminGridView({ onLogout }: AdminGridViewProps) {
                 })}
               </div>
             )}
+          </div>
+        )}
+
+        {/* 6.1 VISÃO EM QUADRO (KANBAN) */}
+        {viewMode === "quadro" && (
+          <div className="space-y-4">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-1">
+              <div>
+                <h3 className="font-semibold text-sm text-slate-900">
+                  Quadro Operacional por Situação de Reparo
+                </h3>
+                <p className="text-xs text-slate-500">
+                  Acompanhamento técnico visual em 5 colunas por situação
+                </p>
+              </div>
+            </div>
+            <KanbanBoard
+              appointments={displayedAppointments}
+              onSelectAppointment={handleOpenAppointmentDetail}
+            />
           </div>
         )}
 
