@@ -62,6 +62,7 @@ Gerado por `scripts/generate_traceability.py`. Não edite manualmente; execute n
 | [SPEC-056](../specs/SPEC-056-auth-login-refinement-ux-a11y.md) | Aprovado | [TASK-056-01](../tasks/TASK-056-01-auth-login-refinement-ux-a11y.md) (Concluído) | `f9f8f9d7` docs: sincronizar matriz de rastreabilidade com TASK-056-01<br>`cdde3607` feat(auth): refinar layout split-screen, isolamento e acessibilidade wcag da rota /login | — |
 | [SPEC-057](../specs/SPEC-057-linha-do-tempo-operacional-rbac-auditoria.md) | Aprovado | [TASK-057-01](../tasks/TASK-057-01-linha-do-tempo-operacional-rbac-auditoria.md) (Concluído) | `8416d9fa` feat(booking): implementar linha do tempo operacional com RBAC e auditoria (SPEC-057) | — |
 | [SPEC-058](../specs/SPEC-058-pagina-publica-acompanhamento-mobile-first.md) | Aprovado | [TASK-058-01](../tasks/TASK-058-01-pagina-publica-acompanhamento-mobile-first.md) (Concluído) | `28d0179f` docs(sdd): sincronizar matriz de rastreabilidade para SPEC-058<br>`c3029a8e` feat(tracking): refatorar pagina publica de acompanhamento mobile-first (SPEC-058) | — |
+| [SPEC-059](../specs/SPEC-059-correcao-build-producao-ssr-tanstack-start.md) | Aprovado | [TASK-059-01](../tasks/TASK-059-01-correcao-build-producao-ssr-tanstack-start.md) (Concluído) | `1e0f11f1` fix(build): corrigir build de producao ssr e resolver erro 500 no preview | [REVIEW-059-correcao-build-producao-ssr-tanstack-start.md](../reviews/REVIEW-059-correcao-build-producao-ssr-tanstack-start.md) (Aprovado) |
 
 ## Lacunas de rastreabilidade (Traceability gaps)
 
