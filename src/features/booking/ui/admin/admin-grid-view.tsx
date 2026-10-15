@@ -551,7 +551,7 @@ export function AdminGridView({ onLogout }: AdminGridViewProps) {
 
                                 {/* MINI-STEPPER DE ETAPAS DA OFICINA */}
                                 <div className="pt-1 border-t border-slate-100">
-                                  <ProcessStepper status={app.status} />
+                                  <ProcessStepper status={app.status} appointmentId={app.id} />
                                 </div>
 
                                 {/* BOTÕES DE AÇÃO NO CARD */}
@@ -688,7 +688,7 @@ export function AdminGridView({ onLogout }: AdminGridViewProps) {
                           • {svc?.short}
                         </div>
                         <div className="pt-1.5 max-w-xs">
-                          <ProcessStepper status={a.status} />
+                          <ProcessStepper status={a.status} appointmentId={a.id} />
                         </div>
                       </div>
 

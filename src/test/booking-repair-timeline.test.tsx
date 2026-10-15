@@ -296,12 +296,12 @@ describe("SPEC-050: Linha do Tempo Dinâmica & Acompanhamento LGPD", () => {
 
     render(<RepairTimeline appointment={mockApp} />);
 
-    // Deve renderizar as etapas adaptadas a Martelinho / PDR
-    expect(screen.getByText(/1. Cadastro & Agendamento Confirmado/i)).toBeInTheDocument();
-    expect(screen.getByText(/2. Veículo Recebido na Oficina/i)).toBeInTheDocument();
-    expect(screen.getByText(/3. Vistoria Técnica & Diagnóstico/i)).toBeInTheDocument();
-    expect(screen.getByText(/5. Execução: Desamassamento PDR/i)).toBeInTheDocument();
-    expect(screen.getByText(/6. Controle de Qualidade & Entrega/i)).toBeInTheDocument();
+    // Deve renderizar as 6 etapas operacionais em sentence case
+    expect(screen.getAllByText(/Cadastro e agendamento confirmado/i)[0]).toBeInTheDocument();
+    expect(screen.getAllByText(/Veículo recebido na oficina/i)[0]).toBeInTheDocument();
+    expect(screen.getAllByText(/Vistoria técnica e diagnóstico/i)[0]).toBeInTheDocument();
+    expect(screen.getAllByText(/Execução: desamassamento PDR/i)[0]).toBeInTheDocument();
+    expect(screen.getAllByText(/Controle de qualidade e entrega/i)[0]).toBeInTheDocument();
   });
 });
 

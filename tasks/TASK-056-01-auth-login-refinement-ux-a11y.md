@@ -7,7 +7,7 @@
 | Task ID     | TASK-056-01                                                                                                   |
 | Spec Ref    | SPEC-056                                                                                                      |
 | Título      | Refinamento UX/UI, Acessibilidade WCAG 2.2 AA e Isolamento Arquitetural de Layout da Rota /login e Painel BRS |
-| Status      | Concluído                                                                                                      |
+| Status      | Concluído                                                                                                     |
 | Data        | 2026-10-15                                                                                                    |
 | Responsável | Staff Product Designer & Engenheiro Front-end Sênior                                                          |
 | Módulo      | `features/booking` & `routes/login`                                                                           |

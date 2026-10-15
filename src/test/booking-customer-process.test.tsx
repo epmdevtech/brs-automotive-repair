@@ -69,11 +69,11 @@ describe("UI: CustomerProcessDialog (SPEC-049)", () => {
     expect(screen.getByText("BRS-2026")).toBeInTheDocument();
     expect(screen.getByText(/Prata Névoa/i)).toBeInTheDocument();
 
-    // Timeline de etapas automotivas reais
-    expect(screen.getByText(/1. Cadastro & Agendamento Confirmado/i)).toBeInTheDocument();
-    expect(screen.getByText(/2. Coleta Leva e Traz/i)).toBeInTheDocument();
-    expect(screen.getByText(/3. Vistoria Técnica & Diagnóstico/i)).toBeInTheDocument();
-    expect(screen.getByText(/4. Regulação da Seguradora/i)).toBeInTheDocument();
+    // Timeline de etapas automotivas reais (SPEC-057)
+    expect(screen.getAllByText(/Cadastro e agendamento confirmado/i)[0]).toBeInTheDocument();
+    expect(screen.getAllByText(/Veículo recebido na oficina/i)[0]).toBeInTheDocument();
+    expect(screen.getAllByText(/Vistoria técnica e diagnóstico/i)[0]).toBeInTheDocument();
+    expect(screen.getAllByText(/Aprovação do orçamento/i)[0]).toBeInTheDocument();
 
     // Logística Leva e Traz em Toledo
     expect(screen.getByText(/Rua Almirante Barroso, 500/i)).toBeInTheDocument();

@@ -185,7 +185,7 @@ export function KanbanBoard({ appointments, onSelectAppointment }: KanbanBoardPr
 
                         {/* Mini-stepper de progresso */}
                         <div className="pt-1 border-t border-slate-100">
-                          <ProcessStepper status={app.status} />
+                          <ProcessStepper status={app.status} appointmentId={app.id} />
                         </div>
 
                         {/* Ações rápidas no rodapé do card */}

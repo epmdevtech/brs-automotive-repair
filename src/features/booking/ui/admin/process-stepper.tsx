@@ -1,27 +1,50 @@
+import { useMemo } from "react";
 import { Check } from "lucide-react";
 import type { AppointmentStatus } from "../../domain/types";
+import { ETAPAS_OPERACIONAIS } from "../../config/etapas.config";
+import { getEtapaEventsForAppointment, etapaAtual, progresso } from "../../domain/etapas";
 
-export const REPAIR_STAGES = [
-  { step: 1, key: "recebido", label: "Recebido", shortLabel: "Recebimento" },
-  { step: 2, key: "desmontagem", label: "Desmontagem", shortLabel: "Desmontagem" },
-  { step: 3, key: "reparo", label: "Reparo", shortLabel: "Funilaria/Reparo" },
-  { step: 4, key: "pintura", label: "Pintura", shortLabel: "Pintura/Estufa" },
-  { step: 5, key: "entrega", label: "Entrega", shortLabel: "Higienização/Entrega" },
-] as const;
+export const REPAIR_STAGES = ETAPAS_OPERACIONAIS.map((e) => ({
+  step: e.ordem,
+  key: e.id,
+  label: e.tituloCurto,
+  shortLabel: e.tituloCurto,
+}));
 
 export interface ProcessStepperProps {
   status: AppointmentStatus;
   currentStep?: number;
+  appointmentId?: string;
   className?: string;
 }
 
 /**
- * Mini-stepper horizontal compacto das 5 etapas da oficina BRS:
- * Recebido → Desmontagem → Reparo → Pintura → Entrega.
- * Altura ~20px com nós de ~8px e linhas conectoras finas no desktop,
- * e resumo textual com barra de progresso no mobile (<640px).
+ * Mini-stepper horizontal compacto das 6 etapas canônicas da oficina BRS (SPEC-057):
+ * Agendamento → Recebimento → Vistoria → Orçamento → Execução → Qualidade & Entrega.
+ * Alimenta tanto os cards de agendamento quanto o Kanban e prévias institucionais.
  */
-export function ProcessStepper({ status, currentStep, className = "" }: ProcessStepperProps) {
+export function ProcessStepper({
+  status,
+  currentStep,
+  appointmentId,
+  className = "",
+}: ProcessStepperProps) {
+  // Se houver appointmentId, lê os eventos reais append-only
+  const derived = useMemo(() => {
+    if (appointmentId) {
+      const eventos = getEtapaEventsForAppointment(appointmentId);
+      if (eventos.length > 0) {
+        const p = progresso(eventos);
+        const atual = etapaAtual(eventos);
+        return {
+          step: Math.min(atual, 6),
+          isCompleted: p.concluidas === 6,
+        };
+      }
+    }
+    return null;
+  }, [appointmentId]);
+
   // Se cancelado, exibe indicador de cancelamento
   if (status === "CANCELLED") {
     return (
@@ -34,32 +57,32 @@ export function ProcessStepper({ status, currentStep, className = "" }: ProcessS
     );
   }
 
-  // Determinar etapa numérica padrão de 1 a 5
-  let activeStep = currentStep ?? 1;
-  if (!currentStep) {
+  let activeStep = currentStep ?? derived?.step ?? 1;
+  let isAllCompleted = derived?.isCompleted ?? false;
+
+  if (!currentStep && !derived) {
     if (status === "COMPLETED" || status === "NO_SHOW") {
-      activeStep = 5;
+      activeStep = 6;
+      isAllCompleted = true;
     } else if (status === "CONFIRMED") {
-      activeStep = 3; // Em reparo
+      activeStep = 3; // Vistoria técnica
     } else {
-      activeStep = 1; // Recebido / Aberto
+      activeStep = 1; // Agendamento
     }
   }
 
-  const isAllCompleted = (status === "COMPLETED" || status === "NO_SHOW") && activeStep === 5;
   const currentStage = REPAIR_STAGES[activeStep - 1] ?? REPAIR_STAGES[0];
 
   return (
     <div className={`w-full ${className}`}>
-      {/* VISÃO DESKTOP (>=640px): 5 nós horizontais com linhas conectoras */}
+      {/* VISÃO DESKTOP (>=640px): 6 nós horizontais com linhas conectoras */}
       <div
         className="hidden sm:flex items-center justify-between w-full relative py-1"
-        aria-label={`Etapa atual da reparação: ${currentStage.label} (${activeStep} de 5)`}
+        aria-label={`Etapa atual da reparação: ${currentStage.label} (${activeStep} de 6)`}
       >
         {REPAIR_STAGES.map((stage, idx) => {
           const isCompleted = isAllCompleted || stage.step < activeStep;
           const isCurrent = !isAllCompleted && stage.step === activeStep;
-          const isPending = !isAllCompleted && stage.step > activeStep;
 
           return (
             <div key={stage.step} className="flex-1 flex items-center last:flex-none">
@@ -85,17 +108,17 @@ export function ProcessStepper({ status, currentStep, className = "" }: ProcessS
                   )}
                 </div>
 
-                {/* Tooltip de hover ou rótulo acessível */}
+                {/* Tooltip acessível */}
                 <span className="sr-only">
                   {stage.label}:{" "}
-                  {isCompleted ? "Concluído" : isCurrent ? "Em Andamento" : "Pendente"}
+                  {isCompleted ? "Concluído" : isCurrent ? "Em andamento" : "Pendente"}
                 </span>
               </div>
 
               {/* Linha conectora entre os nós */}
               {idx < REPAIR_STAGES.length - 1 && (
                 <div
-                  className={`h-0.5 flex-1 mx-1.5 rounded-full transition-colors ${
+                  className={`h-0.5 flex-1 mx-1 rounded-full transition-colors ${
                     stage.step < activeStep || isAllCompleted ? "bg-emerald-500" : "bg-slate-200"
                   }`}
                   aria-hidden="true"
@@ -113,7 +136,7 @@ export function ProcessStepper({ status, currentStep, className = "" }: ProcessS
             {isAllCompleted ? "Entrega Técnica Concluída" : currentStage.label}
           </span>
           <span className="font-mono text-slate-400">
-            {isAllCompleted ? "5/5" : `${activeStep}/5`}
+            {isAllCompleted ? "6/6" : `${activeStep}/6`}
           </span>
         </div>
         <div className="w-full h-1 bg-slate-100 rounded-full overflow-hidden">
@@ -121,7 +144,7 @@ export function ProcessStepper({ status, currentStep, className = "" }: ProcessS
             className={`h-full rounded-full transition-all duration-300 ${
               isAllCompleted ? "bg-emerald-500" : "bg-amber-500"
             }`}
-            style={{ width: `${(activeStep / 5) * 100}%` }}
+            style={{ width: `${(activeStep / 6) * 100}%` }}
           />
         </div>
       </div>
