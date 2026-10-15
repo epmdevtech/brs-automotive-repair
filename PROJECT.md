@@ -60,7 +60,7 @@
 | Camada / Dependência                 | Versão                                | Finalidade                                                   | Fonte Canônica   |
 | ------------------------------------ | ------------------------------------- | ------------------------------------------------------------ | ---------------- |
 | **Linguagem**                        | TypeScript `5.8+`                     | Tipagem estrita e segurança em tempo de compilação           | `tsconfig.json`  |
-| **Framework Fullstack**              | TanStack Start `1.168+`               | Framework SSR/híbrido com Vite e Nitro                       | `package.json`   |
+| **Framework Fullstack**              | TanStack Start `1.168+`               | Framework SSR/híbrido com Vite nativo                        | `package.json`   |
 | **Biblioteca de UI**                 | React `19.2+`                         | Renderização reativa de componentes                          | `package.json`   |
 | **Bundler / Server**                 | Vite `8.1+`                           | Dev server ultrarrápido e bundling de produção               | `vite.config.ts` |
 | **Estilização**                      | Tailwind CSS `4.3+`                   | Design system com CSS variables e suporte a modo escuro      | `src/styles.css` |
@@ -243,6 +243,7 @@ Todas as entregas obedecem ao protocolo **Universal SDD**:
 - `SPEC-056` / `TASK-056-01`: Refinamento de UX/UI, Isolamento de Layout e Acessibilidade Estrita (WCAG 2.2 AA) na Autenticação (/login) e Painel Administrativo BRS.
 - `SPEC-057` / `TASK-057-01`: Linha do Tempo Operacional com RBAC, Trilha de Auditoria Append-Only e Acessibilidade Estrita na Oficina BRS.
 - `SPEC-058` / `TASK-058-01`: Página Pública de Acompanhamento do Reparo Mobile-First (Hero Acima da Dobra, Header Isolado no Fluxo, WCAG 2.2 AA e Projeção Segura de Eventos).
+- `SPEC-059` / `TASK-059-01` / `REVIEW-059`: Correção do Build e Servidor de Produção SSR TanStack Start (Remoção do plugin Nitro, compilação de pacotes cliente e SSR em dist/server/server.js, alinhamento do Dockerfile e resolução definitiva do erro 500 em produção).
 
 ---
 
