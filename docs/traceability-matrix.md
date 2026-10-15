@@ -59,7 +59,7 @@ Gerado por `scripts/generate_traceability.py`. Não edite manualmente; execute n
 | [SPEC-053](../specs/SPEC-053-awwwards-dark-industrial-agendamentos.md) | Aprovado | [TASK-053-01](../tasks/TASK-053-01-awwwards-dark-industrial-agendamentos.md) (Concluído) | `357df1cd` feat(booking): redesenho visual awwwards dark industrial da rota agendamentos | — |
 | [SPEC-054](../specs/SPEC-054-admin-erp-light-mode-agendamentos.md) | Aprovado | [TASK-054-01](../tasks/TASK-054-01-admin-erp-light-mode-agendamentos.md) (Concluído) | `713e3945` feat(booking): redesenho administrativo erp light mode da rota agendamentos | — |
 | [SPEC-055](../specs/SPEC-055-auth-split-login-e-agenda-operacional.md) | Aprovado | [TASK-055-01](../tasks/TASK-055-01-auth-split-login-e-agenda-operacional.md) (Concluído) | `111b5163` feat(booking): autenticacao split-screen login e agenda operacional despoluida | — |
-| [SPEC-056](../specs/SPEC-056-auth-login-refinement-ux-a11y.md) | Aprovado | [TASK-056-01](../tasks/TASK-056-01-auth-login-refinement-ux-a11y.md) (Concluído) | `cdde3607` feat(auth): refinar layout split-screen, isolamento e acessibilidade wcag da rota /login | — |
+| [SPEC-056](../specs/SPEC-056-auth-login-refinement-ux-a11y.md) | Aprovado | [TASK-056-01](../tasks/TASK-056-01-auth-login-refinement-ux-a11y.md) (Concluído) | `f9f8f9d7` docs: sincronizar matriz de rastreabilidade com TASK-056-01<br>`cdde3607` feat(auth): refinar layout split-screen, isolamento e acessibilidade wcag da rota /login | — |
 
 ## Lacunas de rastreabilidade (Traceability gaps)
 
