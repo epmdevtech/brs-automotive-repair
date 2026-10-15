@@ -56,8 +56,8 @@ Gerado por `scripts/generate_traceability.py`. Não edite manualmente; execute n
 | [SPEC-050](../specs/SPEC-050-correcao-modal-agendamentos-timeline-reparacao.md) | Aprovado | [TASK-050-01](../tasks/TASK-050-01-correcao-modal-agendamentos-timeline-reparacao.md) (Concluído) | `a523bafb` feat(booking): correcao do modal de agendamentos, sincronizacao e timeline de reparacao | — |
 | [SPEC-051](../specs/SPEC-051-ux-ui-status-atendimentos-brs.md) | Aprovado | [TASK-051-01](../tasks/TASK-051-01-ux-ui-status-atendimentos-brs.md) (Concluído) | `33fea473` feat(booking): ux/ui de status operacionais, badges semanticos e filtros na agenda | — |
 | [SPEC-052](../specs/SPEC-052-ux-ui-whatsapp-status-fechados-painel.md) | Aprovado | [TASK-052-01](../tasks/TASK-052-01-ux-ui-whatsapp-status-fechados-painel.md) (Concluído) | `99c6fbf1` feat(booking): refatora botao whatsapp com affordance real e adiciona kpi e filtro de fechados | — |
-| [SPEC-053](../specs/SPEC-053-awwwards-dark-industrial-agendamentos.md) | Aprovado | [TASK-053-01](../tasks/TASK-053-01-awwwards-dark-industrial-agendamentos.md) (Concluído) | — | — |
+| [SPEC-053](../specs/SPEC-053-awwwards-dark-industrial-agendamentos.md) | Aprovado | [TASK-053-01](../tasks/TASK-053-01-awwwards-dark-industrial-agendamentos.md) (Concluído) | `357df1cd` feat(booking): redesenho visual awwwards dark industrial da rota agendamentos | — |
 
 ## Lacunas de rastreabilidade (Traceability gaps)
 
-- `TASK-053-01` não possui commit com `Task-Ref: TASK-053-01`.
+- Nenhuma detectada nos artefatos verificados.
