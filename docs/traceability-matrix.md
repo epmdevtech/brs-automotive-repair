@@ -63,7 +63,9 @@ Gerado por `scripts/generate_traceability.py`. Não edite manualmente; execute n
 | [SPEC-057](../specs/SPEC-057-linha-do-tempo-operacional-rbac-auditoria.md) | Aprovado | [TASK-057-01](../tasks/TASK-057-01-linha-do-tempo-operacional-rbac-auditoria.md) (Concluído) | `8416d9fa` feat(booking): implementar linha do tempo operacional com RBAC e auditoria (SPEC-057) | — |
 | [SPEC-058](../specs/SPEC-058-pagina-publica-acompanhamento-mobile-first.md) | Aprovado | [TASK-058-01](../tasks/TASK-058-01-pagina-publica-acompanhamento-mobile-first.md) (Concluído) | `28d0179f` docs(sdd): sincronizar matriz de rastreabilidade para SPEC-058<br>`c3029a8e` feat(tracking): refatorar pagina publica de acompanhamento mobile-first (SPEC-058) | — |
 | [SPEC-059](../specs/SPEC-059-correcao-build-producao-ssr-tanstack-start.md) | Aprovado | [TASK-059-01](../tasks/TASK-059-01-correcao-build-producao-ssr-tanstack-start.md) (Concluído) | `1e0f11f1` fix(build): corrigir build de producao ssr e resolver erro 500 no preview | [REVIEW-059-correcao-build-producao-ssr-tanstack-start.md](../reviews/REVIEW-059-correcao-build-producao-ssr-tanstack-start.md) (Aprovado) |
+| [SPEC-060](../specs/SPEC-060-otimizacao-rotas-e-correcao-hidratacao-ssr-reduced-motion.md) | Aprovado | [TASK-060-01](../tasks/TASK-060-01-remocao-export-indevido-rota-acompanhar-token.md) (Concluído)<br>[TASK-060-02](../tasks/TASK-060-02-correcao-hidratacao-ssr-page-transition-reduced-motion.md) (Concluído) | — | [REVIEW-060-otimizacao-rotas-e-correcao-hidratacao-ssr-reduced-motion.md](../reviews/REVIEW-060-otimizacao-rotas-e-correcao-hidratacao-ssr-reduced-motion.md) (Aprovado) |
 
 ## Lacunas de rastreabilidade (Traceability gaps)
 
-- Nenhuma detectada nos artefatos verificados.
+- `TASK-060-01` não possui commit com `Task-Ref: TASK-060-01`.
+- `TASK-060-02` não possui commit com `Task-Ref: TASK-060-02`.

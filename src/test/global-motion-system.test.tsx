@@ -1,5 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
+import { MotionConfig } from "framer-motion";
 import { ScrollReveal } from "@/components/ui/scroll-reveal";
 import { ImageReveal } from "@/components/ui/image-reveal";
 import { PageTransition } from "@/components/ui/page-transition";
@@ -15,7 +16,7 @@ afterEach(() => {
 });
 
 const mockReducedMotion = () => {
-  vi.stubGlobal("matchMedia", (query: string) => ({
+  window.matchMedia = vi.fn().mockImplementation((query: string) => ({
     matches: query.includes("prefers-reduced-motion"),
     media: query,
     onchange: null,
@@ -127,7 +128,7 @@ describe("SPEC-020 — Sistema Global de Motion Design Premium", () => {
     });
   });
 
-  describe("PageTransition (AC-020-04)", () => {
+  describe("PageTransition & SSR Hydration Safety (AC-020-04, AC-060-02, AC-060-03, AC-060-04)", () => {
     it("renderiza o conteúdo da página sob a chave da rota ativa", () => {
       render(
         <PageTransition pathname="/servicos">
@@ -138,16 +139,53 @@ describe("SPEC-020 — Sistema Global de Motion Design Premium", () => {
       expect(screen.getByText("Página de Serviços")).toBeInTheDocument();
     });
 
-    it("desativa transição quando prefers-reduced-motion está ativo", () => {
-      mockReducedMotion();
-
+    it("renderiza barra laser superior transitória após montagem sem reduced-motion", () => {
       const { container } = render(
-        <PageTransition pathname="/contato">
-          <div>Página de Contato</div>
+        <PageTransition pathname="/servicos">
+          <div>Página de Serviços</div>
         </PageTransition>,
       );
 
+      const laser = container.querySelector("[aria-hidden='true']");
+      expect(laser).not.toBeNull();
+      expect(laser).toHaveClass("motion-reduce:hidden");
+    });
+
+    it("desativa transição e suprime barra laser sob prefers-reduced-motion (AC-060-02)", () => {
+      mockReducedMotion();
+
+      const { container } = render(
+        <MotionConfig reducedMotion="always">
+          <PageTransition pathname="/contato">
+            <div>Página de Contato</div>
+          </PageTransition>
+        </MotionConfig>,
+      );
+
       expect(container).toHaveTextContent("Página de Contato");
+      const laser = container.querySelector("[aria-hidden='true']");
+      expect(laser).toBeNull();
+    });
+
+    it("garante isomorfismo SSR e ausência de nós prematuros no servidor (AC-060-03)", async () => {
+      const { renderToString } = await import("react-dom/server");
+      const html = renderToString(
+        <PageTransition pathname="/">
+          <div data-testid="ssr-content">Conteúdo SSR Seguro</div>
+        </PageTransition>,
+      );
+
+      expect(html).toContain("Conteúdo SSR Seguro");
+      // No SSR estático, a barra laser efêmera de transição client-side não deve ser pré-renderizada
+      expect(html).not.toContain("fixed top-0 left-0 right-0 h-[2px]");
+    });
+  });
+
+  describe("Otimização de Code-Splitting de Rotas (AC-060-01)", () => {
+    it("garante que /acompanhar/$token exporta exclusivamente Route", async () => {
+      const routeModule = await import("@/routes/acompanhar/$token");
+      expect(routeModule.Route).toBeDefined();
+      expect((routeModule as Record<string, unknown>).CustomerTrackingPage).toBeUndefined();
     });
   });
 });
