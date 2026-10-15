@@ -8,6 +8,7 @@ import {
   Clock,
   Copy,
   ExternalLink,
+  Eye,
   Filter,
   LogOut,
   MapPin,
@@ -43,6 +44,7 @@ import { logoutAdmin } from "../../domain/auth";
 import { ensureSeedData } from "../../domain/seed";
 import { ManualBookingDialog } from "./manual-booking-dialog";
 import { BlockSlotDialog } from "./block-slot-dialog";
+import { CustomerProcessDialog } from "./customer-process-dialog";
 
 type ViewMode = "dia" | "semana" | "lista" | "solicitacoes";
 
@@ -78,24 +80,41 @@ export function AdminGridView({ onLogout }: AdminGridViewProps) {
     profId: string;
   } | null>(null);
 
+  // Modal de Detalhe e Processo do Cliente
+  const [selectedAppointmentForDetail, setSelectedAppointmentForDetail] =
+    useState<Appointment | null>(null);
+  const [processDialogOpen, setProcessDialogOpen] = useState(false);
+
   const [copiedId, setCopiedId] = useState<string | null>(null);
   const [seedNotice, setSeedNotice] = useState<string | null>(null);
 
   useEffect(() => {
-    ensureSeedData(false);
+    ensureSeedData(false, currentDate);
     const unsub = localBookingRepository.subscribe((list) => {
       setAppointments(list);
+      // Garante que, se não houver agendamentos na data corrente, injeta dados fictícios imediatamente
+      const hasOnDate = list.some(
+        (a) => a.status !== "CANCELLED" && isSameCivilDay(new Date(a.startTime), currentDate),
+      );
+      if (!hasOnDate) {
+        ensureSeedData(true, currentDate);
+      }
     });
     setBlockedPeriods(getBlockedPeriods());
     return () => unsub();
-  }, []);
+  }, [currentDate]);
 
   const refreshBlocks = () => {
     setBlockedPeriods(getBlockedPeriods());
   };
 
+  const handleOpenAppointmentDetail = (app: Appointment) => {
+    setSelectedAppointmentForDetail(app);
+    setProcessDialogOpen(true);
+  };
+
   const handleResetDemoData = () => {
-    const res = ensureSeedData(true);
+    const res = ensureSeedData(true, currentDate);
     setBlockedPeriods(getBlockedPeriods());
     setSeedNotice(
       `Dados fictícios carregados: ${res.appointments} agendamentos e ${res.blocks} bloqueio técnico restaurados.`,
@@ -144,7 +163,11 @@ export function AdminGridView({ onLogout }: AdminGridViewProps) {
 
   const handleStatusChange = async (id: string, newStatus: AppointmentStatus) => {
     const res = await localBookingRepository.updateStatus(id, newStatus);
-    if (!res.ok) alert(res.error);
+    if (!res.ok) {
+      alert(res.error);
+    } else {
+      setSelectedAppointmentForDetail((prev) => (prev && prev.id === id ? res.value : prev));
+    }
   };
 
   const handleCopySummary = async (app: Appointment) => {
@@ -479,18 +502,22 @@ export function AdminGridView({ onLogout }: AdminGridViewProps) {
                               key={pro.id}
                               className="p-2.5 border-r border-[#e5dfd5] last:border-r-0 align-top"
                             >
-                              <div className="p-3 rounded-lg border border-emerald-500/30 bg-emerald-50/60 shadow-xs space-y-2">
+                              <div
+                                onClick={() => handleOpenAppointmentDetail(app)}
+                                className="p-3 rounded-lg border border-emerald-500/30 bg-emerald-50/60 hover:bg-emerald-100/70 hover:border-emerald-500/70 shadow-xs space-y-2 cursor-pointer transition-all group"
+                                title="Clique para expandir o processo completo do cliente"
+                              >
                                 <div className="flex items-center justify-between gap-1">
                                   <span className="font-mono font-bold text-[11px] text-emerald-800 bg-emerald-100/80 px-2 py-0.5 rounded">
                                     {app.protocol}
                                   </span>
-                                  <span className="text-[10px] font-semibold text-emerald-700 uppercase bg-emerald-200/50 px-1.5 py-0.5 rounded">
-                                    Confirmado
+                                  <span className="text-[10px] font-semibold text-emerald-700 uppercase bg-emerald-200/50 px-1.5 py-0.5 rounded group-hover:bg-emerald-300/80 transition-colors flex items-center gap-1">
+                                    <Eye size={10} /> Processo
                                   </span>
                                 </div>
 
                                 <div>
-                                  <div className="font-semibold text-xs text-[#201d1b]">
+                                  <div className="font-semibold text-xs text-[#201d1b] group-hover:text-emerald-950 transition-colors">
                                     {app.customer.name}
                                   </div>
                                   <div className="text-[11px] text-[#716860]">
@@ -511,7 +538,10 @@ export function AdminGridView({ onLogout }: AdminGridViewProps) {
                                 </div>
 
                                 {/* BOTÕES DE AÇÃO NO CARD */}
-                                <div className="flex items-center gap-1.5 pt-1.5 border-t border-emerald-200/60">
+                                <div
+                                  className="flex items-center gap-1.5 pt-1.5 border-t border-emerald-200/60"
+                                  onClick={(e) => e.stopPropagation()}
+                                >
                                   <a
                                     href={whatsAppLink}
                                     target="_blank"
@@ -608,7 +638,8 @@ export function AdminGridView({ onLogout }: AdminGridViewProps) {
                   return (
                     <div
                       key={a.id}
-                      className="p-3.5 rounded-lg border border-[#e5dfd5] bg-white flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs"
+                      onClick={() => handleOpenAppointmentDetail(a)}
+                      className="p-3.5 rounded-lg border border-[#e5dfd5] bg-white hover:border-emerald-400 hover:bg-emerald-50/20 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs cursor-pointer transition-all"
                     >
                       <div className="space-y-1">
                         <div className="flex items-center gap-2">
@@ -630,7 +661,15 @@ export function AdminGridView({ onLogout }: AdminGridViewProps) {
                         </div>
                       </div>
 
-                      <div className="flex items-center gap-2">
+                      <div className="flex items-center gap-2" onClick={(e) => e.stopPropagation()}>
+                        <button
+                          type="button"
+                          onClick={() => handleOpenAppointmentDetail(a)}
+                          className="py-1 px-3 rounded border border-[#ded7cc] bg-[#fbf9f6] hover:bg-[#ede7de] text-[#201d1b] text-xs font-semibold flex items-center gap-1 cursor-pointer transition-colors"
+                        >
+                          <Eye size={12} /> Ver Processo
+                        </button>
+
                         <a
                           href={whatsApp}
                           target="_blank"
@@ -674,7 +713,8 @@ export function AdminGridView({ onLogout }: AdminGridViewProps) {
                   .map((a) => (
                     <div
                       key={a.id}
-                      className="p-4 rounded-lg border border-amber-200 bg-amber-50/50 space-y-2 text-xs"
+                      onClick={() => handleOpenAppointmentDetail(a)}
+                      className="p-4 rounded-lg border border-amber-200 bg-amber-50/50 hover:bg-amber-100/50 space-y-2 text-xs cursor-pointer transition-all"
                     >
                       <div className="flex justify-between items-center">
                         <span className="font-mono font-bold text-amber-900 bg-amber-100 px-2 py-0.5 rounded">
@@ -695,8 +735,20 @@ export function AdminGridView({ onLogout }: AdminGridViewProps) {
                           {a.logistics.address}, Bairro {a.logistics.neighborhood} (Toledo-PR)
                         </strong>
                       </div>
-                      <div className="text-[11px] text-[#716860]">
-                        Veículo: {a.intake.vehicle.make} {a.intake.vehicle.model}
+                      <div className="flex items-center justify-between pt-1 border-t border-amber-200/80">
+                        <span className="text-[11px] text-[#716860]">
+                          Veículo: {a.intake.vehicle.make} {a.intake.vehicle.model}
+                        </span>
+                        <button
+                          type="button"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleOpenAppointmentDetail(a);
+                          }}
+                          className="py-1 px-2.5 rounded bg-amber-700 hover:bg-amber-800 text-white text-[11px] font-semibold flex items-center gap-1 cursor-pointer transition-colors"
+                        >
+                          <Eye size={12} /> Ver Detalhes do Processo
+                        </button>
                       </div>
                     </div>
                   ))}
@@ -705,6 +757,14 @@ export function AdminGridView({ onLogout }: AdminGridViewProps) {
           </div>
         )}
       </main>
+
+      {/* MODAL EXPANSÍVEL DO PROCESSO DO CLIENTE */}
+      <CustomerProcessDialog
+        appointment={selectedAppointmentForDetail}
+        open={processDialogOpen}
+        onOpenChange={setProcessDialogOpen}
+        onStatusChange={handleStatusChange}
+      />
 
       {/* MODAL DE AGENDAMENTO MANUAL */}
       <ManualBookingDialog

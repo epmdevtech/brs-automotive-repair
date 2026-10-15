@@ -233,6 +233,7 @@ Todas as entregas obedecem ao protocolo **Universal SDD**:
 - `SPEC-046` / `TASK-046-01`: Agendamento Auto-Confirmado pelo Cliente, Painel de Agenda Operacional com Métricas e Botão de Ação Direta para WhatsApp com Mensagem Formatada.
 - `SPEC-047` / `TASK-047-01`: Plataforma de Agenda em Grade Diária dos Técnicos, Login Administrativo com Credenciais Demo 1-Clique, Gestão de Bloqueios e Ação Direta para WhatsApp da Pré-OS.
 - `SPEC-048` / `TASK-048-01`: Carga Inicial de Dados Fictícios Realistas (Seed) para Demonstração da Agenda dos Técnicos e Botão de Restauração em 1 Clique.
+- `SPEC-049` / `TASK-049-01`: Detalhe Expansível do Processo Completo do Cliente (Quando cadastrou, timeline e anamnese) e Garantia de Seed Ativo no Painel de Agendamentos.
 
 ---
 

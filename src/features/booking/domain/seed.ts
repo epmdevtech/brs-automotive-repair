@@ -1,6 +1,6 @@
 import type { Appointment } from "./types";
-import { type BlockedPeriod, getBlockedPeriods, seedBlockedPeriods } from "./blocks";
-import { parseTimeOnDate, addMinutesToDate } from "./time";
+import { type BlockedPeriod, seedBlockedPeriods } from "./blocks";
+import { parseTimeOnDate, addMinutesToDate, isSameCivilDay } from "./time";
 import { localBookingRepository } from "../data/local/local-repository";
 
 /**
@@ -23,6 +23,10 @@ export function generateDemoAppointments(baseDate: Date = new Date()): Appointme
     return {
       startTime: start.toISOString(),
       endTime: end.toISOString(),
+      // Criação retroativa realista (1 a 4 horas antes do horário do agendamento)
+      createdAt: new Date(
+        start.getTime() - (120 + Math.floor(Math.random() * 60)) * 60 * 1000,
+      ).toISOString(),
     };
   };
 
@@ -70,7 +74,7 @@ export function generateDemoAppointments(baseDate: Date = new Date()): Appointme
         type: "presencial",
         vehicleDrivable: true,
       },
-      createdAt: new Date().toISOString(),
+      createdAt: app1Times.createdAt,
       idempotencyKey: "seed-idem-1",
     },
 
@@ -114,7 +118,7 @@ export function generateDemoAppointments(baseDate: Date = new Date()): Appointme
         vehicleDrivable: true,
         contactPerson: "Mariana ou recepção do condomínio",
       },
-      createdAt: new Date().toISOString(),
+      createdAt: app2Times.createdAt,
       idempotencyKey: "seed-idem-2",
     },
 
@@ -153,7 +157,7 @@ export function generateDemoAppointments(baseDate: Date = new Date()): Appointme
         type: "presencial",
         vehicleDrivable: true,
       },
-      createdAt: new Date().toISOString(),
+      createdAt: app3Times.createdAt,
       idempotencyKey: "seed-idem-3",
     },
 
@@ -197,7 +201,7 @@ export function generateDemoAppointments(baseDate: Date = new Date()): Appointme
         vehicleDrivable: true,
         contactPerson: "Fernanda",
       },
-      createdAt: new Date().toISOString(),
+      createdAt: app4Times.createdAt,
       idempotencyKey: "seed-idem-4",
     },
 
@@ -236,7 +240,7 @@ export function generateDemoAppointments(baseDate: Date = new Date()): Appointme
         type: "presencial",
         vehicleDrivable: true,
       },
-      createdAt: new Date().toISOString(),
+      createdAt: app5Times.createdAt,
       idempotencyKey: "seed-idem-5",
     },
 
@@ -274,7 +278,7 @@ export function generateDemoAppointments(baseDate: Date = new Date()): Appointme
         type: "presencial",
         vehicleDrivable: true,
       },
-      createdAt: new Date().toISOString(),
+      createdAt: app6Times.createdAt,
       idempotencyKey: "seed-idem-6",
     },
 
@@ -312,7 +316,7 @@ export function generateDemoAppointments(baseDate: Date = new Date()): Appointme
         type: "presencial",
         vehicleDrivable: true,
       },
-      createdAt: new Date().toISOString(),
+      createdAt: app7Times.createdAt,
       idempotencyKey: "seed-idem-7",
     },
   ];
@@ -340,45 +344,78 @@ export function generateDemoBlockedPeriods(baseDate: Date = new Date()): Blocked
 /**
  * Garante que os dados demonstrativos estejam presentes na base local.
  * Se force === true, sobrescreve mesmo se já houver dados.
+ * Se force === false, verifica se hoje tem agendamentos e mescla os dados seed
+ * para que a visualização da grade nunca fique zerada no ambiente demonstrativo.
  */
-export function ensureSeedData(force = false): { appointments: number; blocks: number } {
+export function ensureSeedData(
+  force = false,
+  baseDate: Date = new Date(),
+): { appointments: number; blocks: number } {
   if (typeof window === "undefined" || typeof localStorage === "undefined") {
     return { appointments: 0, blocks: 0 };
   }
 
-  // Se já existem registros e force não foi ativado, não sobrescreve
-  let shouldSeedApps = force;
-  if (!force) {
-    try {
-      const raw = localStorage.getItem("brs_appointments_v1");
-      shouldSeedApps = !raw || JSON.parse(raw).length === 0;
-    } catch {
-      shouldSeedApps = true;
-    }
-  }
-
   let seededAppsCount = 0;
-  if (shouldSeedApps) {
-    const demoApps = generateDemoAppointments();
+
+  if (force) {
+    const demoApps = generateDemoAppointments(baseDate);
     localBookingRepository.clearAndSeed(demoApps);
     seededAppsCount = demoApps.length;
-  }
-
-  let shouldSeedBlocks = force;
-  if (!force) {
+  } else {
     try {
-      const raw = localStorage.getItem("brs_blocked_periods");
-      shouldSeedBlocks = !raw || JSON.parse(raw).length === 0;
+      const raw = localStorage.getItem("brs_appointments_v1");
+      if (!raw || JSON.parse(raw).length === 0) {
+        const demoApps = generateDemoAppointments(baseDate);
+        localBookingRepository.clearAndSeed(demoApps);
+        seededAppsCount = demoApps.length;
+      } else {
+        const currentList: Appointment[] = JSON.parse(raw);
+        // Verifica se existem agendamentos ativos na data base (hoje)
+        const hasAppointmentsToday = currentList.some(
+          (a) => a.status !== "CANCELLED" && isSameCivilDay(new Date(a.startTime), baseDate),
+        );
+
+        if (!hasAppointmentsToday) {
+          // Mantém agendamentos não-seed criados manualmente
+          const nonSeed = currentList.filter((a) => !a.id.startsWith("seed-app-"));
+          const demoApps = generateDemoAppointments(baseDate);
+          localBookingRepository.clearAndSeed([...nonSeed, ...demoApps]);
+          seededAppsCount = demoApps.length;
+        }
+      }
     } catch {
-      shouldSeedBlocks = true;
+      const demoApps = generateDemoAppointments(baseDate);
+      localBookingRepository.clearAndSeed(demoApps);
+      seededAppsCount = demoApps.length;
     }
   }
 
   let seededBlocksCount = 0;
-  if (shouldSeedBlocks) {
-    const demoBlocks = generateDemoBlockedPeriods();
+  if (force) {
+    const demoBlocks = generateDemoBlockedPeriods(baseDate);
     seedBlockedPeriods(demoBlocks);
     seededBlocksCount = demoBlocks.length;
+  } else {
+    try {
+      const raw = localStorage.getItem("brs_blocked_periods");
+      if (!raw || JSON.parse(raw).length === 0) {
+        const demoBlocks = generateDemoBlockedPeriods(baseDate);
+        seedBlockedPeriods(demoBlocks);
+        seededBlocksCount = demoBlocks.length;
+      } else {
+        const blocks: BlockedPeriod[] = JSON.parse(raw);
+        const hasTodayBlock = blocks.some((b) => isSameCivilDay(new Date(b.startTime), baseDate));
+        if (!hasTodayBlock) {
+          const demoBlocks = generateDemoBlockedPeriods(baseDate);
+          seedBlockedPeriods(demoBlocks);
+          seededBlocksCount = demoBlocks.length;
+        }
+      }
+    } catch {
+      const demoBlocks = generateDemoBlockedPeriods(baseDate);
+      seedBlockedPeriods(demoBlocks);
+      seededBlocksCount = demoBlocks.length;
+    }
   }
 
   return {
