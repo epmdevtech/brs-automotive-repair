@@ -1,5 +1,10 @@
 import { describe, it, expect } from "vitest";
-import { intervalsOverlap, parseTimeOnDate, createTZDate } from "../features/booking/domain/time";
+import {
+  intervalsOverlap,
+  parseTimeOnDate,
+  createTZDate,
+  formatTime,
+} from "../features/booking/domain/time";
 import { normalizePhoneE164, isValidDDD } from "../features/booking/domain/phone";
 import { canTransition, transitionStatus } from "../features/booking/domain/status";
 import {
@@ -123,8 +128,8 @@ describe("Domain: Availability Engine", () => {
 
     // Nenhum slot pode iniciar ou terminar durante o intervalo de almoço (12:00 às 13:30)
     for (const slot of slots) {
-      const startHour = slot.start.getHours();
-      const startMin = slot.start.getMinutes();
+      const timeStr = formatTime(slot.start);
+      const [startHour, startMin] = timeStr.split(":").map(Number);
       const timeDecimal = startHour + startMin / 60;
       expect(timeDecimal >= 12 && timeDecimal < 13.5).toBe(false);
     }
@@ -166,9 +171,7 @@ describe("Domain: Availability Engine", () => {
       slotIntervalMinutes: 60,
     });
 
-    const hasSlot08 = slotsBruno.some(
-      (s) => s.start.getHours() === 8 && s.start.getMinutes() === 0,
-    );
+    const hasSlot08 = slotsBruno.some((s) => formatTime(s.start) === "08:00");
     expect(hasSlot08).toBe(false);
 
     // Se avaliar "Qualquer Profissional", o slot das 08:00 deve ser atribuído à 'equipe'
@@ -183,7 +186,7 @@ describe("Domain: Availability Engine", () => {
       slotIntervalMinutes: 60,
     });
 
-    const slot08 = slotsAny.find((s) => s.start.getHours() === 8 && s.start.getMinutes() === 0);
+    const slot08 = slotsAny.find((s) => formatTime(s.start) === "08:00");
     expect(slot08).toBeDefined();
     expect(slot08?.professionalId).toBe("equipe");
   });
@@ -206,7 +209,7 @@ describe("Domain: Availability Engine", () => {
       now: pastNow,
     });
 
-    const has11Presencial = slotsPresencial.some((s) => s.start.getHours() === 11);
+    const has11Presencial = slotsPresencial.some((s) => formatTime(s.start) === "11:00");
     expect(has11Presencial).toBe(true);
 
     const slotsLevaETraz = computeAvailableSlots({
@@ -222,7 +225,7 @@ describe("Domain: Availability Engine", () => {
       now: pastNow,
     });
 
-    const has11LevaETraz = slotsLevaETraz.some((s) => s.start.getHours() === 11);
+    const has11LevaETraz = slotsLevaETraz.some((s) => formatTime(s.start) === "11:00");
     expect(has11LevaETraz).toBe(false);
   });
 });
