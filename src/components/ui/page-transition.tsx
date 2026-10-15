@@ -1,5 +1,5 @@
 import * as React from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion, useReducedMotion, useReducedMotionConfig } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 export interface PageTransitionProps {
@@ -19,19 +19,26 @@ export interface PageTransitionProps {
  * - Não interfere na restauração de rolagem, nem no estado do TanStack Router ou Radix UI.
  */
 export function PageTransition({ children, pathname, className }: PageTransitionProps) {
-  const shouldReduce = useReducedMotion();
+  const [isMounted, setIsMounted] = React.useState(false);
+  const motionConfigReduced = useReducedMotionConfig();
+  const osReducedMotion = useReducedMotion();
+  const shouldReduce = motionConfigReduced ?? osReducedMotion;
+
+  React.useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   return (
     <>
       {/* Indicador de varredura laser superior na troca de rota (Awwwards Standard) */}
-      {!shouldReduce && (
+      {isMounted && !shouldReduce && (
         <motion.div
           key={`route-laser-${pathname}`}
           initial={{ scaleX: 0, opacity: 0.95 }}
           animate={{ scaleX: 1, opacity: 0 }}
           transition={{ duration: 0.42, ease: [0.22, 1, 0.36, 1] }}
           style={{ originX: 0 }}
-          className="fixed top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-primary/30 via-primary to-amber-200 z-50 pointer-events-none shadow-[0_0_12px_rgba(212,175,55,0.8)]"
+          className="fixed top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-primary/30 via-primary to-amber-200 z-50 pointer-events-none shadow-[0_0_12px_rgba(212,175,55,0.8)] motion-reduce:hidden"
           aria-hidden="true"
         />
       )}
@@ -39,7 +46,7 @@ export function PageTransition({ children, pathname, className }: PageTransition
       {/* Conteúdo da rota com entrada cinemática suave */}
       <motion.div
         key={pathname}
-        initial={shouldReduce ? false : { opacity: 0.88, y: 8 }}
+        initial={isMounted && !shouldReduce ? { opacity: 0.88, y: 8 } : false}
         animate={{ opacity: 1, y: 0 }}
         transition={{
           duration: shouldReduce ? 0.01 : 0.28,

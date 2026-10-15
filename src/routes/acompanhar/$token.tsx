@@ -51,7 +51,7 @@ export const Route = createFileRoute("/acompanhar/$token")({
   },
 });
 
-export function CustomerTrackingPage() {
+function CustomerTrackingPage() {
   const { token } = Route.useParams();
   const navigate = useNavigate();
 

@@ -57,7 +57,7 @@ ENV PORT=5210
 ENV HOST=0.0.0.0
 
 # Copiar artefatos compilados
-COPY --from=builder /app/.output ./.output
+COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/package.json ./package.json

@@ -61,7 +61,7 @@ dev: ## Inicia o servidor local de desenvolvimento no host (porta 5210)
 	fi
 	$(PKG_MANAGER) run dev
 
-build: ## Executa o build de produção (Vite + Nitro SSR)
+build: ## Executa o build de produção (TanStack Start SSR)
 	$(PKG_MANAGER) run build
 
 preview: ## Visualiza o build de produção localmente
