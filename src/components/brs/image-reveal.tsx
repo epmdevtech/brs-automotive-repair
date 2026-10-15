@@ -1,5 +1,5 @@
 import * as React from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import { MOTION_TOKENS } from "@/lib/motion-system";
 import { cn } from "@/lib/utils";
 
@@ -17,7 +17,7 @@ export interface ImageRevealProps extends React.HTMLAttributes<HTMLDivElement> {
  * - Duração: até 950ms conforme SPEC-015
  * - Curva: cubic-bezier(0.22, 1, 0.36, 1)
  * - Disparo único: once: true, margin: "-80px"
- * - Fallback imediato para prefers-reduced-motion
+ * - Resiliência SSR e acessibilidade delegadas ao MotionConfig global em __root.tsx.
  */
 export function ImageReveal({
   children,
@@ -28,18 +28,6 @@ export function ImageReveal({
   style,
   ...props
 }: ImageRevealProps) {
-  const shouldReduceMotion = useReducedMotion() ?? false;
-  const isObserverAvailable =
-    typeof window === "undefined" || typeof window.IntersectionObserver !== "undefined";
-
-  if (shouldReduceMotion || !isObserverAvailable) {
-    return (
-      <div className={cn("overflow-hidden", className)} style={style} {...props}>
-        {children}
-      </div>
-    );
-  }
-
   return (
     <motion.div
       className={cn("overflow-hidden", className)}

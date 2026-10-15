@@ -1,5 +1,5 @@
 import * as React from "react";
-import { motion, useMotionTemplate, useMotionValue, useReducedMotion } from "framer-motion";
+import { motion, useMotionTemplate, useMotionValue } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 export interface CardSpotlightProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -21,10 +21,15 @@ export function CardSpotlight({
   const mouseX = useMotionValue(-1000);
   const mouseY = useMotionValue(-1000);
   const [isHovered, setIsHovered] = React.useState(false);
-  const shouldReduceMotion = useReducedMotion() ?? false;
 
   const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
-    if (e.pointerType === "touch" || shouldReduceMotion) return;
+    if (e.pointerType === "touch") return;
+    if (
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
+      return;
+    }
     const { left, top } = e.currentTarget.getBoundingClientRect();
     mouseX.set(e.clientX - left);
     mouseY.set(e.clientY - top);
@@ -67,18 +72,16 @@ export function CardSpotlight({
       {...props}
     >
       {/* Camada 1: Glow radial âmbar suave sob o cursor */}
-      {!shouldReduceMotion && (
-        <motion.div
-          className="pointer-events-none absolute inset-0 z-0 opacity-0 transition-opacity duration-300 group-hover/spotlight:opacity-100"
-          style={{ background }}
-          aria-hidden="true"
-        />
-      )}
+      <motion.div
+        className="pointer-events-none absolute inset-0 z-0 opacity-0 transition-opacity duration-300 group-hover/spotlight:opacity-100 motion-reduce:hidden"
+        style={{ background }}
+        aria-hidden="true"
+      />
 
       {/* Camada 2: Matriz de micro-pontos automotivos (efeito reveal discreto) */}
-      {!shouldReduceMotion && isHovered && (
+      {isHovered && (
         <motion.div
-          className="pointer-events-none absolute inset-0 z-0 opacity-80"
+          className="pointer-events-none absolute inset-0 z-0 opacity-80 motion-reduce:hidden"
           style={{
             maskImage,
             WebkitMaskImage: maskImage,

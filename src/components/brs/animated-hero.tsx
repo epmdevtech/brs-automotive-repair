@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Link } from "@tanstack/react-router";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import { ArrowDown, ArrowUpRight, MapPin, Sparkles, Wrench, ShieldCheck } from "lucide-react";
 import { gsap } from "gsap";
 import { Button } from "@/components/ui/button";
@@ -77,28 +77,29 @@ function HeroLink({
 }
 
 // Variantes de transição normativas do Framer Motion (SPEC-015, SPEC-032)
-const getContainerVariants = (reduced: boolean) => ({
+// A supressão de movimento é orquestrada nativamente pelo MotionConfig em __root.tsx
+const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: reduced ? 0 : MOTION_TOKENS.stagger,
-      delayChildren: reduced ? 0 : 0.04,
+      staggerChildren: MOTION_TOKENS.stagger,
+      delayChildren: 0.04,
     },
   },
-});
+};
 
-const getItemVariants = (reduced: boolean) => ({
-  hidden: { y: reduced ? 0 : 16, opacity: 0 },
+const itemVariants = {
+  hidden: { y: 16, opacity: 0 },
   visible: {
     y: 0,
     opacity: 1,
     transition: {
-      duration: reduced ? 0.01 : MOTION_TOKENS.duration.base,
+      duration: MOTION_TOKENS.duration.base,
       ease: MOTION_TOKENS.ease,
     },
   },
-});
+};
 
 export const AnimatedHero = ({
   id = "inicio",
@@ -112,17 +113,16 @@ export const AnimatedHero = ({
   className,
   showTelemetryMetrics = true,
 }: AnimatedHeroProps) => {
-  const shouldReduceMotion = useReducedMotion() ?? false;
-  const containerVariants = getContainerVariants(shouldReduceMotion);
-  const itemVariants = getItemVariants(shouldReduceMotion);
-
   const heroRef = React.useRef<HTMLElement>(null);
   const contentRef = React.useRef<HTMLDivElement>(null);
   const glowRef = React.useRef<HTMLDivElement>(null);
 
   // Micro-parallax responsivo com GSAP quickTo para 60/120fps sem re-render (SPEC-032)
   React.useEffect(() => {
-    if (typeof window === "undefined" || shouldReduceMotion) return;
+    const isReduced =
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (typeof window === "undefined" || isReduced) return;
     const heroEl = heroRef.current;
     if (!heroEl) return;
 
@@ -162,7 +162,7 @@ export const AnimatedHero = ({
     return () => {
       heroEl.removeEventListener("mousemove", handleMouseMove);
     };
-  }, [shouldReduceMotion]);
+  }, []);
 
   return (
     <section
@@ -177,10 +177,10 @@ export const AnimatedHero = ({
       <motion.div
         className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat will-change-transform"
         style={{ backgroundImage: `url(${backgroundImageUrl})` }}
-        initial={shouldReduceMotion ? { scale: 1 } : { scale: 1.05 }}
+        initial={{ scale: 1.05 }}
         animate={{ scale: 1 }}
         transition={{
-          duration: shouldReduceMotion ? 0.01 : MOTION_TOKENS.duration.slow,
+          duration: MOTION_TOKENS.duration.slow,
           ease: MOTION_TOKENS.ease,
         }}
       >

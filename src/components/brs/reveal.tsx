@@ -1,5 +1,5 @@
 import * as React from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import { MOTION_TOKENS } from "@/lib/motion-system";
 import { cn } from "@/lib/utils";
 
@@ -21,7 +21,7 @@ export interface RevealProps extends React.HTMLAttributes<HTMLDivElement> {
  * - Duração padrão: 700ms
  * - Deslocamento padrão: 20px
  * - Disparo único: once: true, margin: "-80px"
- * - Fallback automático para prefers-reduced-motion e SSR
+ * - Resiliência SSR e acessibilidade delegadas ao MotionConfig global em __root.tsx.
  */
 export function Reveal({
   children,
@@ -35,7 +35,6 @@ export function Reveal({
   style,
   ...props
 }: RevealProps) {
-  const shouldReduceMotion = useReducedMotion() ?? false;
   const effectiveDelay = delay + staggerIndex * MOTION_TOKENS.stagger;
 
   const MotionComponent =
@@ -47,27 +46,10 @@ export function Reveal({
           ? motion.span
           : motion.div;
 
-  const isObserverAvailable =
-    typeof window !== "undefined" && typeof window.IntersectionObserver !== "undefined";
-
   const mergedStyle: React.CSSProperties = {
     "--i": staggerIndex,
     ...style,
   };
-
-  if (shouldReduceMotion || !isObserverAvailable) {
-    return (
-      <MotionComponent
-        data-reveal=""
-        className={cn(className)}
-        initial={{ opacity: 1, y: 0 }}
-        style={mergedStyle}
-        {...props}
-      >
-        {children}
-      </MotionComponent>
-    );
-  }
 
   return (
     <MotionComponent

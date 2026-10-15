@@ -1,5 +1,5 @@
 import * as React from "react";
-import { motion, useScroll, useTransform, useReducedMotion, type MotionValue } from "framer-motion";
+import { motion, useScroll, useTransform, type MotionValue } from "framer-motion";
 import { ScrollReveal } from "@/components/ui/scroll-reveal";
 import { NumericCounter } from "@/components/ui/numeric-counter";
 
@@ -9,17 +9,15 @@ function TimelineStep({
   index,
   total,
   scrollYProgress,
-  shouldReduceMotion,
 }: {
   title: string;
   copy: string;
   index: number;
   total: number;
   scrollYProgress: MotionValue<number>;
-  shouldReduceMotion: boolean;
 }) {
   const threshold = index / total;
-  const isPast = useTransform(scrollYProgress, (v) => shouldReduceMotion || v >= threshold);
+  const isPast = useTransform(scrollYProgress, (v) => v >= threshold);
   const opacity = useTransform(
     scrollYProgress,
     [Math.max(0, threshold - 0.15), threshold],
@@ -27,10 +25,13 @@ function TimelineStep({
     { clamp: true },
   );
 
-  const [active, setActive] = React.useState(shouldReduceMotion);
+  const [active, setActive] = React.useState(false);
 
   React.useEffect(() => {
-    if (shouldReduceMotion) {
+    if (
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
       setActive(true);
       return;
     }
@@ -38,13 +39,13 @@ function TimelineStep({
       setActive(latest);
     });
     return () => unsubscribe();
-  }, [isPast, shouldReduceMotion]);
+  }, [isPast]);
 
   return (
     <motion.div
       className="relative pl-10 sm:pl-14 py-2"
       style={{
-        opacity: shouldReduceMotion ? 1 : opacity,
+        opacity,
         willChange: "opacity",
       }}
     >
@@ -80,7 +81,6 @@ function TimelineStep({
 
 export function ProcessTimeline() {
   const containerRef = React.useRef<HTMLDivElement>(null);
-  const shouldReduceMotion = useReducedMotion() ?? false;
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -126,7 +126,7 @@ export function ProcessTimeline() {
           <motion.div
             className="absolute left-0 top-3 bottom-6 w-0.5 -translate-x-1/2 bg-primary origin-top pointer-events-none"
             style={{
-              scaleY: shouldReduceMotion ? 1 : scrollYProgress,
+              scaleY: scrollYProgress,
               willChange: "transform",
             }}
           />
@@ -140,7 +140,6 @@ export function ProcessTimeline() {
                 index={i}
                 total={steps.length}
                 scrollYProgress={scrollYProgress}
-                shouldReduceMotion={shouldReduceMotion}
               />
             ))}
           </div>

@@ -245,6 +245,7 @@ Todas as entregas obedecem ao protocolo **Universal SDD**:
 - `SPEC-058` / `TASK-058-01`: Página Pública de Acompanhamento do Reparo Mobile-First (Hero Acima da Dobra, Header Isolado no Fluxo, WCAG 2.2 AA e Projeção Segura de Eventos).
 - `SPEC-059` / `TASK-059-01` / `REVIEW-059`: Correção do Build e Servidor de Produção SSR TanStack Start (Remoção do plugin Nitro, compilação de pacotes cliente e SSR em dist/server/server.js, alinhamento do Dockerfile e resolução definitiva do erro 500 em produção).
 - `SPEC-060` / `TASK-060-01` / `TASK-060-02` / `REVIEW-060`: Otimização de Code-Splitting de Rotas e Resolução de Erro de Hidratação SSR sob Reduced Motion (Remoção de export indevido em /acompanhar/$token, isomorfismo SSR de PageTransition e blindagem contra erros de hidratação no React 19).
+- `SPEC-061` / `TASK-061-01` / `TASK-061-02` / `REVIEW-061`: Isomorfismo SSR e Resolução Definitiva de Hidratação nos Componentes de Motion com MotionConfig no TanStack Start (Eliminação de bifurcações manuais de JSX e hooks divergentes no SSR em ScrollReveal, ImageReveal, Reveal, MagneticButton e demais componentes, supressão de avisos warnOnce de acessibilidade e garantia de paridade absoluta com React 19).
 
 ---
 

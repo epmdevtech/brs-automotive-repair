@@ -1,5 +1,5 @@
 import * as React from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import {
   MOTION_EASE,
@@ -31,7 +31,8 @@ export interface ScrollRevealProps extends React.HTMLAttributes<HTMLDivElement> 
  * - Curva suave: bezier [0.21, 0.47, 0.32, 0.98].
  * - Duração: padrão 0.7s (faixa de 0.65s a 0.85s).
  * - Execução única: viewport={{ once: true, margin: "-60px" }}.
- * - Resiliência SSR & Acessibilidade: fallback limpo se IntersectionObserver estiver ausente ou sob prefers-reduced-motion.
+ * - Resiliência SSR & Acessibilidade: delegada ao MotionConfig global em __root.tsx,
+ *   garantindo isomorfismo absoluto de nós e atributos entre SSR e hidratação React 19.
  */
 export function ScrollReveal({
   children,
@@ -47,8 +48,6 @@ export function ScrollReveal({
   style,
   ...props
 }: ScrollRevealProps) {
-  const shouldReduceMotion = useReducedMotion() ?? false;
-
   // Mapeamento dinâmico do elemento semântico
   const MotionComponent =
     as === "article"
@@ -66,14 +65,6 @@ export function ScrollReveal({
                 : as === "nav"
                   ? motion.nav
                   : motion.div;
-
-  if (shouldReduceMotion) {
-    return (
-      <MotionComponent className={cn(className)} style={style} {...props}>
-        {children}
-      </MotionComponent>
-    );
-  }
 
   // Cálculo de deslocamento vetorial
   const getInitialPosition = () => {
