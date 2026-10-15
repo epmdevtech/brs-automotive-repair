@@ -2,13 +2,13 @@
 
 ## 1. Metadados
 
-| Campo   | Valor                                                                                                |
-| ------- | ---------------------------------------------------------------------------------------------------- |
-| SPEC    | [`SPEC-038`](../specs/SPEC-038-remocao-artefatos-genericos-ia.md)                                     |
-| TASK    | [`TASK-038-01`](../tasks/TASK-038-01-remocao-artefatos-genericos-ia.md)                               |
-| Data    | 2026-10-14                                                                                           |
-| Status  | Aprovado (100% dos Quality Gates Cumpridos)                                                          |
-| Revisor | Quality Gate Lead & Senior UX/UI Engineer EPM DevTech                                                |
+| Campo   | Valor                                                                   |
+| ------- | ----------------------------------------------------------------------- |
+| SPEC    | [`SPEC-038`](../specs/SPEC-038-remocao-artefatos-genericos-ia.md)       |
+| TASK    | [`TASK-038-01`](../tasks/TASK-038-01-remocao-artefatos-genericos-ia.md) |
+| Data    | 2026-10-14                                                              |
+| Status  | Aprovado (100% dos Quality Gates Cumpridos)                             |
+| Revisor | Quality Gate Lead & Senior UX/UI Engineer EPM DevTech                   |
 
 ---
 
@@ -31,12 +31,12 @@ Auditoria visual e técnica para erradicação de elementos estereotipados de ge
 
 ## 3. Matriz de Rastreabilidade de Critérios de Aceite
 
-| Critério | Descrição | Status | Evidência |
-| -------- | --------- | ------ | --------- |
-| **AC-038-01** | Remoção de "OFICINA ATIVA" e "BRS.HQ // TOLEDO-PR" em `/sobre` | Aprovado | `src/routes/sobre.tsx` atualizado; verificado em `anti-ai-artifacts.test.tsx` |
-| **AC-038-02** | Limpeza do eyebrow do Hero (remoção de caixa HUD e `led-status-pulse`) | Aprovado | `src/components/brs/hero.tsx` atualizado; verificado em `anti-ai-artifacts.test.tsx` |
-| **AC-038-03** | Padronização de botões em sentence case (`Solicitar avaliação`) | Aprovado | `src/components/brs/final-cta.tsx`, `src/routes/servicos/index.tsx` e testes atualizados |
-| **AC-038-04** | Validação por Quality Gates e 100% de testes automatizados | Aprovado | Vitest (213 testes passando), ESLint (0 erros) e Build Nitro SSR aprovados |
+| Critério      | Descrição                                                              | Status   | Evidência                                                                                |
+| ------------- | ---------------------------------------------------------------------- | -------- | ---------------------------------------------------------------------------------------- |
+| **AC-038-01** | Remoção de "OFICINA ATIVA" e "BRS.HQ // TOLEDO-PR" em `/sobre`         | Aprovado | `src/routes/sobre.tsx` atualizado; verificado em `anti-ai-artifacts.test.tsx`            |
+| **AC-038-02** | Limpeza do eyebrow do Hero (remoção de caixa HUD e `led-status-pulse`) | Aprovado | `src/components/brs/hero.tsx` atualizado; verificado em `anti-ai-artifacts.test.tsx`     |
+| **AC-038-03** | Padronização de botões em sentence case (`Solicitar avaliação`)        | Aprovado | `src/components/brs/final-cta.tsx`, `src/routes/servicos/index.tsx` e testes atualizados |
+| **AC-038-04** | Validação por Quality Gates e 100% de testes automatizados             | Aprovado | Vitest (213 testes passando), ESLint (0 erros) e Build Nitro SSR aprovados               |
 
 ---
 

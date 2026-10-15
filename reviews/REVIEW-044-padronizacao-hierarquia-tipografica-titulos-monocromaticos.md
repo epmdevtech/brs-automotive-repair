@@ -18,13 +18,13 @@ Todos os títulos `h1` e `h2` foram convertidos para branco monocromático de al
 
 ## 2. Verificação de Critérios de Aceitação
 
-| Critério | Descrição | Status | Evidência |
-| :--- | :--- | :--- | :--- |
-| **AC-044-01** | Hero da Home com H1 monocromático contínuo | APROVADO | `src/components/brs/hero.tsx` e `animated-hero.tsx` unificados em `BRS Reparações Automotivas.` com classe `text-white` e sem spans internos. |
-| **AC-044-02** | Heróis das rotas internas monocromáticos | APROVADO | `/servicos`, `/para-corretores`, `/sobre`, `/contato`, `/privacidade` atualizados para strings puras sem spans com `text-primary`. |
-| **AC-044-03** | Título de seções (h2) sem destaques dourados de IA | APROVADO | `src/components/brs/philosophy.tsx` sem `span.text-primary` no `h2`. |
-| **AC-044-04** | Reserva de dourado para CTAs, eyebrows e micro-ícones | APROVADO | Mantidos botões de conversão e eyebrows em caixa alta com `text-primary`. |
-| **AC-044-05** | Cobertura de testes automatizados | APROVADO | Nova suite `src/test/monochromatic-headings.test.tsx` (8 testes) e atualização em `hero-colors.test.tsx`, `motion-system.test.tsx` e `ux-ui-consolidation-three-routes.test.tsx`. |
+| Critério      | Descrição                                             | Status   | Evidência                                                                                                                                                                         |
+| :------------ | :---------------------------------------------------- | :------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **AC-044-01** | Hero da Home com H1 monocromático contínuo            | APROVADO | `src/components/brs/hero.tsx` e `animated-hero.tsx` unificados em `BRS Reparações Automotivas.` com classe `text-white` e sem spans internos.                                     |
+| **AC-044-02** | Heróis das rotas internas monocromáticos              | APROVADO | `/servicos`, `/para-corretores`, `/sobre`, `/contato`, `/privacidade` atualizados para strings puras sem spans com `text-primary`.                                                |
+| **AC-044-03** | Título de seções (h2) sem destaques dourados de IA    | APROVADO | `src/components/brs/philosophy.tsx` sem `span.text-primary` no `h2`.                                                                                                              |
+| **AC-044-04** | Reserva de dourado para CTAs, eyebrows e micro-ícones | APROVADO | Mantidos botões de conversão e eyebrows em caixa alta com `text-primary`.                                                                                                         |
+| **AC-044-05** | Cobertura de testes automatizados                     | APROVADO | Nova suite `src/test/monochromatic-headings.test.tsx` (8 testes) e atualização em `hero-colors.test.tsx`, `motion-system.test.tsx` e `ux-ui-consolidation-three-routes.test.tsx`. |
 
 ---
 

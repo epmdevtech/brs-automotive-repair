@@ -2,15 +2,15 @@
 
 ## Metadados
 
-| Campo         | Valor                                                                          |
-| ------------- | ------------------------------------------------------------------------------ |
-| Task ID       | `TASK-038-01`                                                                  |
-| Spec Ref      | `SPEC-038`                                                                     |
-| Título        | Eliminação de Artefatos de IA das Capturas de Tela                             |
-| Status        | Completed                                                                     |
-| Responsável   | Engenheiro de Software Sênior & Especialista em Design Systems                 |
-| Data Início   | 2026-10-14                                                                     |
-| Data Conclusão| 2026-10-14                                                                     |
+| Campo          | Valor                                                          |
+| -------------- | -------------------------------------------------------------- |
+| Task ID        | `TASK-038-01`                                                  |
+| Spec Ref       | `SPEC-038`                                                     |
+| Título         | Eliminação de Artefatos de IA das Capturas de Tela             |
+| Status         | Completed                                                      |
+| Responsável    | Engenheiro de Software Sênior & Especialista em Design Systems |
+| Data Início    | 2026-10-14                                                     |
+| Data Conclusão | 2026-10-14                                                     |
 
 ---
 

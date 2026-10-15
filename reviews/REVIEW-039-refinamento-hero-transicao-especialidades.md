@@ -2,13 +2,13 @@
 
 ## 1. Metadados
 
-| Campo   | Valor                                                                                                |
-| ------- | ---------------------------------------------------------------------------------------------------- |
-| SPEC    | [`SPEC-039`](../specs/SPEC-039-refinamento-hero-transicao-especialidades.md)                         |
-| TASK    | [`TASK-039-01`](../tasks/TASK-039-01-refinamento-hero-transicao-especialidades.md)                   |
-| Data    | 2026-10-14                                                                                           |
-| Status  | Aprovado (100% dos Quality Gates Cumpridos)                                                          |
-| Revisor | Quality Gate Lead & Senior Frontend/UX-UI Engineer EPM DevTech                                       |
+| Campo   | Valor                                                                              |
+| ------- | ---------------------------------------------------------------------------------- |
+| SPEC    | [`SPEC-039`](../specs/SPEC-039-refinamento-hero-transicao-especialidades.md)       |
+| TASK    | [`TASK-039-01`](../tasks/TASK-039-01-refinamento-hero-transicao-especialidades.md) |
+| Data    | 2026-10-14                                                                         |
+| Status  | Aprovado (100% dos Quality Gates Cumpridos)                                        |
+| Revisor | Quality Gate Lead & Senior Frontend/UX-UI Engineer EPM DevTech                     |
 
 ---
 
@@ -34,12 +34,12 @@ Refatoração pontual e criteriosa da Hero Section e da transição para a seç�
 
 ## 3. Matriz de Conformidade dos Critérios de Aceite
 
-| Critério | Descrição | Status | Evidência |
-| -------- | --------- | ------ | --------- |
-| **AC-039-01** | Remoção da barra de micro-benefícios (`trust-strip`) e limpeza de CSS órfão | Aprovado | `hero.tsx` e `styles.css` atualizados; verificado em `hero-especialidades-refinement.test.tsx` |
-| **AC-039-02** | Hierarquia do Hero: CTA dominante e botão secundário outline para `#especialidades` | Aprovado | `hero.tsx` e `animated-hero.tsx` atualizados; `useSmoothScroll` integrado |
-| **AC-039-03** | Transição direta para Especialidades (`py-16 md:py-24`) e diferenciais orgânicos | Aprovado | `services.tsx`, `philosophy.tsx` e `website.tsx` atualizados |
-| **AC-039-04** | Qualidade de código, acessibilidade e Quality Gates 100% verdes | Aprovado | Vitest (32 suítes, 218 testes passando), ESLint (0 erros) e Build Nitro SSR |
+| Critério      | Descrição                                                                           | Status   | Evidência                                                                                      |
+| ------------- | ----------------------------------------------------------------------------------- | -------- | ---------------------------------------------------------------------------------------------- |
+| **AC-039-01** | Remoção da barra de micro-benefícios (`trust-strip`) e limpeza de CSS órfão         | Aprovado | `hero.tsx` e `styles.css` atualizados; verificado em `hero-especialidades-refinement.test.tsx` |
+| **AC-039-02** | Hierarquia do Hero: CTA dominante e botão secundário outline para `#especialidades` | Aprovado | `hero.tsx` e `animated-hero.tsx` atualizados; `useSmoothScroll` integrado                      |
+| **AC-039-03** | Transição direta para Especialidades (`py-16 md:py-24`) e diferenciais orgânicos    | Aprovado | `services.tsx`, `philosophy.tsx` e `website.tsx` atualizados                                   |
+| **AC-039-04** | Qualidade de código, acessibilidade e Quality Gates 100% verdes                     | Aprovado | Vitest (32 suítes, 218 testes passando), ESLint (0 erros) e Build Nitro SSR                    |
 
 ---
 

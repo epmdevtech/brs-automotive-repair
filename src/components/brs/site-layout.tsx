@@ -13,6 +13,16 @@ import { Header } from "./header";
 export function SiteLayout({ children }: { children: ReactNode }) {
   const pathname = useRouterState({ select: (state) => state.location.pathname });
 
+  if (pathname?.startsWith("/agendamentos")) {
+    return (
+      <SmoothScrollProvider>
+        <main id="conteudo-principal" className="min-h-screen">
+          {children}
+        </main>
+      </SmoothScrollProvider>
+    );
+  }
+
   return (
     <SmoothScrollProvider>
       <div className="min-h-screen flex flex-col bg-background text-foreground">

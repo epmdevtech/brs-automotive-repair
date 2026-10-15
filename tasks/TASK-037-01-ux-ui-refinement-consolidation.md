@@ -2,15 +2,15 @@
 
 ## Metadados
 
-| Campo         | Valor                                                                          |
-| ------------- | ------------------------------------------------------------------------------ |
-| Task ID       | `TASK-037-01`                                                                  |
-| Spec Ref      | `SPEC-037`                                                                     |
-| Título        | Execução do Refinamento UX/UI, Consolidação e Hierarquia Editorial BRS         |
-| Status        | Completed                                                                     |
-| Responsável   | Engenheiro de Software Sênior & Especialista em UX/UI                          |
-| Data Início   | 2026-10-14                                                                     |
-| Data Conclusão| 2026-10-14                                                                     |
+| Campo          | Valor                                                                  |
+| -------------- | ---------------------------------------------------------------------- |
+| Task ID        | `TASK-037-01`                                                          |
+| Spec Ref       | `SPEC-037`                                                             |
+| Título         | Execução do Refinamento UX/UI, Consolidação e Hierarquia Editorial BRS |
+| Status         | Completed                                                              |
+| Responsável    | Engenheiro de Software Sênior & Especialista em UX/UI                  |
+| Data Início    | 2026-10-14                                                             |
+| Data Conclusão | 2026-10-14                                                             |
 
 ---
 

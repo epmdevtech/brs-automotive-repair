@@ -1,6 +1,7 @@
 # SPEC-044: Padronização da Hierarquia Tipográfica e Títulos Monocromáticos (Eliminação de Bicolorismo de IA)
 
 ## Status
+
 - **Status**: APROVADO
 - **Data**: 2026-10-14
 - **Autor**: Engenheiro Frontend Sênior & Lead UI/UX Designer
@@ -12,7 +13,7 @@
 
 Em várias rotas do projeto BRS (`/`, `/servicos`, `/para-corretores`, `/sobre`, `/contato`, `/privacidade`), os títulos principais (`h1`, `h2`) vinham aplicando um padrão visual redundante típico de templates gerados por inteligência artificial: divisão de frases em duas cores (a primeira metade em branco e a segunda em dourado/âmbar `text-primary`).
 
-Como o tom dourado/âmbar é a cor de destaque exclusiva dos botões de ação e conversão (CTAs primários como o botão de "Avaliação" no Header), sua presença indiscriminada em grandes massas de texto nos títulos gera concorrência visual severa, degrada o *affordance* dos botões de conversão e prejudica a legibilidade e a sobriedade técnica exigida por uma oficina automotiva premium.
+Como o tom dourado/âmbar é a cor de destaque exclusiva dos botões de ação e conversão (CTAs primários como o botão de "Avaliação" no Header), sua presença indiscriminada em grandes massas de texto nos títulos gera concorrência visual severa, degrada o _affordance_ dos botões de conversão e prejudica a legibilidade e a sobriedade técnica exigida por uma oficina automotiva premium.
 
 ---
 

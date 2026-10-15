@@ -2,13 +2,13 @@
 
 ## 1. Metadados
 
-| Campo   | Valor                                                                                                |
-| ------- | ---------------------------------------------------------------------------------------------------- |
-| SPEC    | [`SPEC-041`](../specs/SPEC-041-remocao-cta-avaliacao-hero-foco-descoberta.md)                       |
-| TASK    | [`TASK-041-01`](../tasks/TASK-041-01-remocao-cta-avaliacao-hero-foco-descoberta.md)                 |
-| Data    | 2026-10-14                                                                                           |
-| Status  | Aprovado (100% dos Quality Gates Cumpridos)                                                          |
-| Revisor | Quality Gate Lead & Senior Frontend/UX-UI Engineer EPM DevTech                                       |
+| Campo   | Valor                                                                               |
+| ------- | ----------------------------------------------------------------------------------- |
+| SPEC    | [`SPEC-041`](../specs/SPEC-041-remocao-cta-avaliacao-hero-foco-descoberta.md)       |
+| TASK    | [`TASK-041-01`](../tasks/TASK-041-01-remocao-cta-avaliacao-hero-foco-descoberta.md) |
+| Data    | 2026-10-14                                                                          |
+| Status  | Aprovado (100% dos Quality Gates Cumpridos)                                         |
+| Revisor | Quality Gate Lead & Senior Frontend/UX-UI Engineer EPM DevTech                      |
 
 ---
 
@@ -33,12 +33,12 @@ Otimização da jornada do usuário e eliminação de redundância na primeira d
 
 ## 3. Matriz de Conformidade dos Critérios de Aceite
 
-| Critério | Descrição | Status | Evidência |
-| -------- | --------- | ------ | --------- |
-| **AC-041-01** | Remoção de CTA duplicado de avaliação na Hero | Aprovado | `src/components/brs/hero.tsx` atualizado; validado em `hero-single-cta-discovery.test.tsx` |
-| **AC-041-02** | Botão "Ver especialidades" como CTA único com ícone de descida e smooth scroll | Aprovado | `src/components/brs/animated-hero.tsx` atualizado com `ArrowDown` e `min-h-[44px]` |
-| **AC-041-03** | Responsividade e área de toque mínima de 44px (WCAG 2.1 AA) | Aprovado | Classe `min-h-[44px]` e `hero-cta-group` sem gap órfão |
-| **AC-041-04** | Cobertura de testes e Quality Gates 100% aprovados | Aprovado | Vitest (34 suítes, 224 testes passando), ESLint (0 erros) e Build Nitro SSR |
+| Critério      | Descrição                                                                      | Status   | Evidência                                                                                  |
+| ------------- | ------------------------------------------------------------------------------ | -------- | ------------------------------------------------------------------------------------------ |
+| **AC-041-01** | Remoção de CTA duplicado de avaliação na Hero                                  | Aprovado | `src/components/brs/hero.tsx` atualizado; validado em `hero-single-cta-discovery.test.tsx` |
+| **AC-041-02** | Botão "Ver especialidades" como CTA único com ícone de descida e smooth scroll | Aprovado | `src/components/brs/animated-hero.tsx` atualizado com `ArrowDown` e `min-h-[44px]`         |
+| **AC-041-03** | Responsividade e área de toque mínima de 44px (WCAG 2.1 AA)                    | Aprovado | Classe `min-h-[44px]` e `hero-cta-group` sem gap órfão                                     |
+| **AC-041-04** | Cobertura de testes e Quality Gates 100% aprovados                             | Aprovado | Vitest (34 suítes, 224 testes passando), ESLint (0 erros) e Build Nitro SSR                |
 
 ---
 
