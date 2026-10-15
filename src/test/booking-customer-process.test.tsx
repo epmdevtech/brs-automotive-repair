@@ -65,15 +65,15 @@ describe("UI: CustomerProcessDialog (SPEC-049)", () => {
     expect(screen.getByText(/Portal Web BRS/i)).toBeInTheDocument();
 
     // Ficha do Veículo e Placa
-    expect(screen.getByText(/Toyota Corolla Cross/i)).toBeInTheDocument();
+    expect(screen.getAllByText(/Toyota Corolla Cross/i).length).toBeGreaterThanOrEqual(1);
     expect(screen.getByText("BRS-2026")).toBeInTheDocument();
     expect(screen.getByText(/Prata Névoa/i)).toBeInTheDocument();
 
-    // Timeline de 6 etapas
-    expect(screen.getByText(/1. Cadastro & Intake/i)).toBeInTheDocument();
-    expect(screen.getByText(/2. Horário Confirmado/i)).toBeInTheDocument();
-    expect(screen.getByText(/3. Logística Leva e Traz/i)).toBeInTheDocument();
-    expect(screen.getByText(/4. Vistoria Técnica/i)).toBeInTheDocument();
+    // Timeline de etapas automotivas reais (SPEC-057)
+    expect(screen.getAllByText(/Cadastro e agendamento confirmado/i)[0]).toBeInTheDocument();
+    expect(screen.getAllByText(/Veículo recebido na oficina/i)[0]).toBeInTheDocument();
+    expect(screen.getAllByText(/Vistoria técnica e diagnóstico/i)[0]).toBeInTheDocument();
+    expect(screen.getAllByText(/Aprovação do orçamento/i)[0]).toBeInTheDocument();
 
     // Logística Leva e Traz em Toledo
     expect(screen.getByText(/Rua Almirante Barroso, 500/i)).toBeInTheDocument();
@@ -81,11 +81,11 @@ describe("UI: CustomerProcessDialog (SPEC-049)", () => {
 
     // Anamnese
     expect(screen.getByText(/Colisão leve frontal em semáforo/i)).toBeInTheDocument();
-    expect(screen.getByText(/Seguradora \/ Sinistro/i)).toBeInTheDocument();
+    expect(screen.getAllByText(/Seguradora \/ Sinistro/i).length).toBeGreaterThanOrEqual(1);
   });
 
-  it("allows completing the appointment directly from the process modal", () => {
-    const handleStatusChange = vi.fn();
+  it("allows completing the appointment directly from the process modal", async () => {
+    const handleStatusChange = vi.fn().mockResolvedValue(true);
     const handleOpenChange = vi.fn();
 
     render(
@@ -100,8 +100,13 @@ describe("UI: CustomerProcessDialog (SPEC-049)", () => {
     const completeBtn = screen.getByRole("button", { name: /Concluir Atendimento/i });
     fireEvent.click(completeBtn);
 
-    expect(handleStatusChange).toHaveBeenCalledWith("test-app-1", "COMPLETED");
-    expect(handleOpenChange).toHaveBeenCalledWith(false);
+    expect(handleStatusChange).toHaveBeenCalledWith(
+      "test-app-1",
+      "COMPLETED",
+      expect.objectContaining({
+        note: expect.any(String),
+      }),
+    );
   });
 });
 

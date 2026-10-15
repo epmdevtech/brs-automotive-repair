@@ -7,9 +7,9 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import type { Appointment, DamageType, FinishType } from "../../domain/types";
+import type { Appointment, DamageType } from "../../domain/types";
 import { BRS_BOOKING_CONFIG } from "../../config/booking.config";
-import { generateProtocol, DAMAGE_AREAS_LIST, DAMAGE_TYPES_LIST } from "../../domain/intake";
+import { generateProtocol, DAMAGE_TYPES_LIST } from "../../domain/intake";
 import { normalizePhoneE164 } from "../../domain/phone";
 import { parseTimeOnDate, formatDate } from "../../domain/time";
 import { localBookingRepository } from "../../data/local/local-repository";
@@ -129,18 +129,18 @@ export function ManualBookingDialog({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-lg bg-[#fbf9f6] text-[#201d1b] border-[#e5dfd5] p-6 rounded-xl">
-        <DialogHeader className="border-b border-[#e5dfd5] pb-3">
-          <DialogTitle className="text-lg font-display font-bold text-[#201d1b]">
+      <DialogContent className="max-w-lg bg-white text-slate-900 border-slate-200 p-6 rounded-xl shadow-xl">
+        <DialogHeader className="border-b border-slate-100 pb-3">
+          <DialogTitle className="text-lg font-bold text-slate-900">
             Novo Agendamento na Baia Técnica
           </DialogTitle>
-          <DialogDescription className="text-xs text-[#716860]">
+          <DialogDescription className="text-xs text-slate-500">
             Cadastre um atendimento presencial ou coleta Leva e Traz para {formatDate(initialDate)}.
           </DialogDescription>
         </DialogHeader>
 
         {error && (
-          <div className="p-2.5 rounded bg-red-100 text-red-800 text-xs border border-red-200">
+          <div className="p-2.5 rounded-lg bg-rose-50 border border-rose-200 text-rose-700 text-xs">
             {error}
           </div>
         )}
@@ -148,11 +148,13 @@ export function ManualBookingDialog({
         <form onSubmit={handleSubmit} className="space-y-4 pt-2 text-xs">
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="font-semibold block mb-1">Nome do Cliente *</label>
+              <label className="font-medium block mb-1 text-slate-700 text-xs">
+                Nome do Cliente *
+              </label>
               <input
                 type="text"
                 required
-                className="w-full p-2 rounded border border-[#d8d0c4] bg-white"
+                className="w-full p-2.5 rounded-lg border border-slate-300 bg-white text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900 shadow-2xs"
                 placeholder="Ex: João da Silva"
                 value={customerName}
                 onChange={(e) => setCustomerName(e.target.value)}
@@ -160,11 +162,13 @@ export function ManualBookingDialog({
             </div>
 
             <div>
-              <label className="font-semibold block mb-1">Telefone (DDD + Celular) *</label>
+              <label className="font-medium block mb-1 text-slate-700 text-xs">
+                Telefone (DDD + Celular) *
+              </label>
               <input
                 type="tel"
                 required
-                className="w-full p-2 rounded border border-[#d8d0c4] bg-white"
+                className="w-full p-2.5 rounded-lg border border-slate-300 bg-white text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900 shadow-2xs"
                 placeholder="(45) 99999-8888"
                 value={customerPhone}
                 onChange={(e) => setCustomerPhone(e.target.value)}
@@ -174,32 +178,32 @@ export function ManualBookingDialog({
 
           <div className="grid grid-cols-3 gap-3">
             <div>
-              <label className="font-semibold block mb-1">Marca *</label>
+              <label className="font-medium block mb-1 text-slate-700 text-xs">Marca *</label>
               <input
                 type="text"
                 required
-                className="w-full p-2 rounded border border-[#d8d0c4] bg-white"
+                className="w-full p-2.5 rounded-lg border border-slate-300 bg-white text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900 shadow-2xs"
                 placeholder="Ex: Toyota"
                 value={vehicleMake}
                 onChange={(e) => setVehicleMake(e.target.value)}
               />
             </div>
             <div>
-              <label className="font-semibold block mb-1">Modelo *</label>
+              <label className="font-medium block mb-1 text-slate-700 text-xs">Modelo *</label>
               <input
                 type="text"
                 required
-                className="w-full p-2 rounded border border-[#d8d0c4] bg-white"
+                className="w-full p-2.5 rounded-lg border border-slate-300 bg-white text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900 shadow-2xs"
                 placeholder="Ex: Corolla"
                 value={vehicleModel}
                 onChange={(e) => setVehicleModel(e.target.value)}
               />
             </div>
             <div>
-              <label className="font-semibold block mb-1">Placa</label>
+              <label className="font-medium block mb-1 text-slate-700 text-xs">Placa</label>
               <input
                 type="text"
-                className="w-full p-2 rounded border border-[#d8d0c4] bg-white uppercase"
+                className="w-full p-2.5 rounded-lg border border-slate-300 bg-white text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900 uppercase font-mono shadow-2xs"
                 placeholder="ABC1D23"
                 value={vehiclePlate}
                 onChange={(e) => setVehiclePlate(e.target.value.toUpperCase())}
@@ -209,9 +213,11 @@ export function ManualBookingDialog({
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="font-semibold block mb-1">Especialidade / Serviço</label>
+              <label className="font-medium block mb-1 text-slate-700 text-xs">
+                Especialidade / Serviço
+              </label>
               <select
-                className="w-full p-2 rounded border border-[#d8d0c4] bg-white"
+                className="w-full p-2.5 rounded-lg border border-slate-300 bg-white text-slate-900 focus:outline-none focus:border-slate-900 shadow-2xs"
                 value={serviceId}
                 onChange={(e) => setServiceId(e.target.value)}
               >
@@ -224,9 +230,11 @@ export function ManualBookingDialog({
             </div>
 
             <div>
-              <label className="font-semibold block mb-1">Profissional / Baia</label>
+              <label className="font-medium block mb-1 text-slate-700 text-xs">
+                Profissional / Baia
+              </label>
               <select
-                className="w-full p-2 rounded border border-[#d8d0c4] bg-white"
+                className="w-full p-2.5 rounded-lg border border-slate-300 bg-white text-slate-900 focus:outline-none focus:border-slate-900 shadow-2xs"
                 value={professionalId}
                 onChange={(e) => setProfessionalId(e.target.value)}
               >
@@ -241,19 +249,23 @@ export function ManualBookingDialog({
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="font-semibold block mb-1">Horário de Início</label>
+              <label className="font-medium block mb-1 text-slate-700 text-xs">
+                Horário de Início
+              </label>
               <input
                 type="time"
-                className="w-full p-2 rounded border border-[#d8d0c4] bg-white"
+                className="w-full p-2.5 rounded-lg border border-slate-300 bg-white text-slate-900 font-mono focus:outline-none focus:border-slate-900 shadow-2xs"
                 value={time}
                 onChange={(e) => setTime(e.target.value)}
               />
             </div>
 
             <div>
-              <label className="font-semibold block mb-1">Tipo de Avaria</label>
+              <label className="font-medium block mb-1 text-slate-700 text-xs">
+                Tipo de Avaria
+              </label>
               <select
-                className="w-full p-2 rounded border border-[#d8d0c4] bg-white"
+                className="w-full p-2.5 rounded-lg border border-slate-300 bg-white text-slate-900 focus:outline-none focus:border-slate-900 shadow-2xs"
                 value={damageType}
                 onChange={(e) => setDamageType(e.target.value as DamageType)}
               >
@@ -271,27 +283,27 @@ export function ManualBookingDialog({
               type="checkbox"
               checked={isLevaETraz}
               onChange={(e) => setIsLevaETraz(e.target.checked)}
-              className="accent-[#201d1b] size-4"
+              className="accent-slate-900 size-4 cursor-pointer"
             />
-            <span className="font-medium text-[#201d1b]">
+            <span className="font-medium text-slate-800">
               Serviço Leva e Traz (Coleta em Toledo-PR)
             </span>
           </label>
 
           {isLevaETraz && (
-            <div className="p-3 rounded border border-[#d8d0c4] bg-[#ede7de] space-y-2">
+            <div className="p-3 rounded-lg border border-slate-200 bg-slate-50 space-y-2">
               <div className="grid grid-cols-2 gap-2">
                 <input
                   type="text"
                   placeholder="Rua e número"
-                  className="p-1.5 rounded border border-[#d8d0c4] bg-white text-xs"
+                  className="p-2 rounded-md border border-slate-300 bg-white text-slate-900 placeholder:text-slate-400 text-xs focus:outline-none focus:border-slate-900 shadow-2xs"
                   value={address}
                   onChange={(e) => setAddress(e.target.value)}
                 />
                 <input
                   type="text"
                   placeholder="Bairro em Toledo"
-                  className="p-1.5 rounded border border-[#d8d0c4] bg-white text-xs"
+                  className="p-2 rounded-md border border-slate-300 bg-white text-slate-900 placeholder:text-slate-400 text-xs focus:outline-none focus:border-slate-900 shadow-2xs"
                   value={neighborhood}
                   onChange={(e) => setNeighborhood(e.target.value)}
                 />
@@ -299,20 +311,20 @@ export function ManualBookingDialog({
             </div>
           )}
 
-          <div className="flex items-center justify-end gap-2 pt-3 border-t border-[#e5dfd5]">
+          <div className="flex items-center justify-end gap-2 pt-3 border-t border-slate-100">
             <Button
               type="button"
               variant="outline"
               size="sm"
               onClick={() => onOpenChange(false)}
-              className="text-xs"
+              className="text-xs border-slate-300 bg-white text-slate-700 hover:bg-slate-100 hover:text-slate-900 cursor-pointer shadow-2xs"
             >
               Cancelar
             </Button>
             <button
               type="submit"
               disabled={submitting}
-              className="px-4 py-2 rounded-lg bg-[#201d1b] hover:bg-[#34302d] text-white text-xs font-semibold cursor-pointer shadow-sm disabled:opacity-50"
+              className="px-4 py-2 rounded-lg bg-slate-900 hover:bg-black active:scale-[0.99] text-white text-xs font-semibold cursor-pointer shadow-xs disabled:opacity-50 transition-all"
             >
               {submitting ? "Gravando..." : "Confirmar Agendamento"}
             </button>

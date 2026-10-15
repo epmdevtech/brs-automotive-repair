@@ -20,6 +20,7 @@ export interface BookingConfig {
     additionalBufferMinutes: number;
   };
   storageKey: string;
+  eventsStorageKey: string;
   lockName: string;
   syncChannelName: string;
 }
@@ -135,6 +136,7 @@ export const BRS_BOOKING_CONFIG: BookingConfig = {
   },
 
   storageKey: "brs_appointments_v1",
+  eventsStorageKey: "brs_appointment_events_v1",
   lockName: "brs_booking_lock",
   syncChannelName: "brs_booking_sync",
 };

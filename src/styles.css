@@ -69,9 +69,11 @@ html.lenis body {
   );
   --hero-bottom: linear-gradient(0deg, var(--background), transparent);
 
-  /* Famílias Tipográficas Canônicas (Sora + Manrope) */
+  /* Famílias Tipográficas Canônicas (Sora + Manrope + Space Mono) */
   --font-display: "Sora", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-body: "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono:
+    "Space Mono", "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 
   /* Escala Tipográfica Fluida Awwwards Standard (SPEC-035) */
   --t-mega: clamp(3.5rem, 1.5rem + 8vw, 7.5rem); /* Display monumental, H1 de entrada */
@@ -149,6 +151,7 @@ html.lenis body {
   --color-destructive-foreground: var(--destructive-foreground);
   --font-sans: var(--font-body);
   --font-display: var(--font-display);
+  --font-mono: var(--font-mono);
   --radius-xs: var(--radius-sm);
   --radius-sm: var(--radius-sm);
   --radius-md: var(--radius-sm);

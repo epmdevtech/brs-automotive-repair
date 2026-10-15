@@ -1,6 +1,13 @@
-import type { Appointment, AppointmentStatus, Result } from "../../domain/types";
+import type {
+  Appointment,
+  AppointmentEventType,
+  AppointmentStatus,
+  Result,
+  SyncMessage,
+} from "../../domain/types";
 import { intervalsOverlap } from "../../domain/time";
 import { transitionStatus } from "../../domain/status";
+import { recordAppointmentEvent } from "../../domain/events";
 import { BRS_BOOKING_CONFIG } from "../../config/booking.config";
 import type { BookingRepository, CreateAppointmentError } from "../repository";
 
@@ -9,6 +16,8 @@ export class LocalBookingRepository implements BookingRepository {
   private lockName: string;
   private channel: BroadcastChannel | null = null;
   private subscribers: Set<(appointments: Appointment[]) => void> = new Set();
+  private instanceId: string;
+  private processedMessageIds = new Set<string>();
 
   constructor(
     storageKey: string = BRS_BOOKING_CONFIG.storageKey,
@@ -17,11 +26,39 @@ export class LocalBookingRepository implements BookingRepository {
   ) {
     this.storageKey = storageKey;
     this.lockName = lockName;
+    this.instanceId =
+      typeof crypto !== "undefined" && typeof crypto.randomUUID === "function"
+        ? crypto.randomUUID()
+        : `tab_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
 
     if (typeof window !== "undefined" && typeof BroadcastChannel !== "undefined") {
       try {
         this.channel = new BroadcastChannel(syncChannelName);
-        this.channel.onmessage = () => {
+        this.channel.onmessage = (event: MessageEvent<SyncMessage>) => {
+          const data = event.data;
+          if (!data || typeof data !== "object") {
+            this.notifySubscribers();
+            return;
+          }
+
+          // 1. Ignorar mensagens geradas pela própria instância
+          if (data.originId === this.instanceId) {
+            return;
+          }
+
+          // 2. Prevenir processamento duplicado de mensagens
+          if (data.messageId && this.processedMessageIds.has(data.messageId)) {
+            return;
+          }
+
+          if (data.messageId) {
+            this.processedMessageIds.add(data.messageId);
+            if (this.processedMessageIds.size > 200) {
+              const firstKey = this.processedMessageIds.values().next().value;
+              if (firstKey) this.processedMessageIds.delete(firstKey);
+            }
+          }
+
           this.notifySubscribers();
         };
       } catch {
@@ -43,13 +80,25 @@ export class LocalBookingRepository implements BookingRepository {
     }
   }
 
-  private writeStorage(appointments: Appointment[]): boolean {
+  private writeStorage(
+    appointments: Appointment[],
+    syncInfo?: { type: SyncMessage["type"]; recordId?: string },
+  ): boolean {
     if (typeof window === "undefined" || typeof localStorage === "undefined") {
       return false;
     }
     try {
       localStorage.setItem(this.storageKey, JSON.stringify(appointments));
-      this.channel?.postMessage({ type: "MUTATION" });
+
+      const message: SyncMessage = {
+        originId: this.instanceId,
+        messageId: `msg_${Date.now()}_${Math.random().toString(36).slice(2, 9)}`,
+        type: syncInfo?.type ?? "MUTATION",
+        recordId: syncInfo?.recordId,
+        timestamp: Date.now(),
+      };
+
+      this.channel?.postMessage(message);
       this.notifySubscribers();
       return true;
     } catch {
@@ -84,7 +133,7 @@ export class LocalBookingRepository implements BookingRepository {
   }
 
   clearAndSeed(appointments: Appointment[]): boolean {
-    return this.writeStorage(appointments);
+    return this.writeStorage(appointments, { type: "SEED_RESET" });
   }
 
   async getAppointmentById(id: string): Promise<Appointment | null> {
@@ -131,11 +180,27 @@ export class LocalBookingRepository implements BookingRepository {
 
       // 3. Persistência Atômica
       const updatedList = [...currentList, appointment];
-      const success = this.writeStorage(updatedList);
+      const success = this.writeStorage(updatedList, {
+        type: "APPOINTMENT_CREATED",
+        recordId: appointment.id,
+      });
 
       if (!success) {
         return { ok: false, error: "STORAGE_ERROR" };
       }
+
+      // Registra evento de criação
+      recordAppointmentEvent({
+        appointmentId: appointment.id,
+        type: "CREATED",
+        fromStatus: undefined,
+        toStatus: appointment.status,
+        createdAt: appointment.createdAt,
+        actorId: "customer",
+        actorName: appointment.customer.name,
+        note: "Agendamento registrado no portal BRS",
+        visibleToCustomer: true,
+      });
 
       return { ok: true, value: appointment };
     });
@@ -144,6 +209,14 @@ export class LocalBookingRepository implements BookingRepository {
   async updateStatus(
     id: string,
     targetStatus: AppointmentStatus,
+    options?: {
+      actorId?: string;
+      actorName?: string;
+      note?: string;
+      eventType?: AppointmentEventType;
+      visibleToCustomer?: boolean;
+      metadata?: Record<string, unknown>;
+    },
   ): Promise<Result<Appointment, string>> {
     return this.withLock(async () => {
       const currentList = this.readStorage();
@@ -165,7 +238,36 @@ export class LocalBookingRepository implements BookingRepository {
       };
 
       currentList[index] = updated;
-      this.writeStorage(currentList);
+      const saved = this.writeStorage(currentList, {
+        type: "APPOINTMENT_UPDATED",
+        recordId: id,
+      });
+
+      if (!saved) {
+        return { ok: false, error: "Falha ao persistir status no armazenamento local." };
+      }
+
+      // 4. Registra no histórico append-only de eventos
+      const defaultEventType: AppointmentEventType =
+        targetStatus === "COMPLETED"
+          ? "COMPLETED"
+          : targetStatus === "CANCELLED"
+            ? "CANCELLED"
+            : targetStatus === "CONFIRMED"
+              ? "CONFIRMED"
+              : "CONFIRMED";
+
+      recordAppointmentEvent({
+        appointmentId: id,
+        type: options?.eventType ?? defaultEventType,
+        fromStatus: existing.status,
+        toStatus: targetStatus,
+        actorId: options?.actorId ?? "admin",
+        actorName: options?.actorName ?? "Administrador BRS",
+        note: options?.note,
+        visibleToCustomer: options?.visibleToCustomer ?? true,
+        metadata: options?.metadata,
+      });
 
       return { ok: true, value: updated };
     });
@@ -179,6 +281,33 @@ export class LocalBookingRepository implements BookingRepository {
       this.subscribers.delete(callback);
     };
   }
+
+  close(): void {
+    this.subscribers.clear();
+    if (this.channel) {
+      this.channel.onmessage = null;
+      this.channel.close();
+      this.channel = null;
+    }
+  }
 }
 
 export const localBookingRepository = new LocalBookingRepository();
+
+/**
+ * Função de domínio centralizada para transição de status com registro de histórico append-only.
+ */
+export async function transitionAppointmentStatus(
+  id: string,
+  targetStatus: AppointmentStatus,
+  options?: {
+    actorId?: string;
+    actorName?: string;
+    note?: string;
+    eventType?: AppointmentEventType;
+    visibleToCustomer?: boolean;
+    metadata?: Record<string, unknown>;
+  },
+): Promise<Result<Appointment, string>> {
+  return localBookingRepository.updateStatus(id, targetStatus, options);
+}

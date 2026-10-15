@@ -87,8 +87,8 @@ describe("UI: AdminLogin Component", () => {
 
     expect(screen.getByText(/Acesso Administrativo/i)).toBeInTheDocument();
     expect(screen.getByText(/Painel da Oficina/i)).toBeInTheDocument();
-    expect(screen.getByPlaceholderText(/admin@brsreparacoes.com.br/i)).toBeInTheDocument();
-    expect(screen.getByPlaceholderText(/••••••••/i)).toBeInTheDocument();
+    expect(screen.getByPlaceholderText(/nome@brsreparacoes.com.br/i)).toBeInTheDocument();
+    expect(screen.getByLabelText("Senha de acesso", { selector: "input" })).toBeInTheDocument();
     expect(screen.getByRole("button", { name: /Entrar no Painel/i })).toBeInTheDocument();
     expect(
       screen.getByRole("button", { name: /Preencher dados demo em 1 clique/i }),
@@ -102,9 +102,11 @@ describe("UI: AdminLogin Component", () => {
     fireEvent.click(demoBtn);
 
     const emailInput = screen.getByPlaceholderText(
-      /admin@brsreparacoes.com.br/i,
+      /nome@brsreparacoes.com.br/i,
     ) as HTMLInputElement;
-    const passwordInput = screen.getByPlaceholderText(/••••••••/i) as HTMLInputElement;
+    const passwordInput = screen.getByLabelText("Senha de acesso", {
+      selector: "input",
+    }) as HTMLInputElement;
 
     expect(emailInput.value).toBe(DEMO_CREDENTIALS.email);
     expect(passwordInput.value).toBe(DEMO_CREDENTIALS.password);
@@ -126,8 +128,8 @@ describe("UI: AdminLogin Component", () => {
   it("displays error message on invalid submission", () => {
     render(<AdminLogin onLoginSuccess={vi.fn()} />);
 
-    const emailInput = screen.getByPlaceholderText(/admin@brsreparacoes.com.br/i);
-    const passwordInput = screen.getByPlaceholderText(/••••••••/i);
+    const emailInput = screen.getByPlaceholderText(/nome@brsreparacoes.com.br/i);
+    const passwordInput = screen.getByLabelText("Senha de acesso", { selector: "input" });
 
     fireEvent.change(emailInput, { target: { value: "invalido@teste.com" } });
     fireEvent.change(passwordInput, { target: { value: "senhaerrada" } });

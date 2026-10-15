@@ -13,10 +13,13 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as R404RouteImport } from './routes/404'
 import { Route as AgendamentosRouteImport } from './routes/agendamentos'
 import { Route as ContatoRouteImport } from './routes/contato'
+import { Route as LoginRouteImport } from './routes/login'
 import { Route as ParaCorretoresRouteImport } from './routes/para-corretores'
 import { Route as PrivacidadeRouteImport } from './routes/privacidade'
 import { Route as SobreRouteImport } from './routes/sobre'
 import { Route as TrabalhosRouteImport } from './routes/trabalhos'
+import { Route as AcompanharIndexRouteImport } from './routes/acompanhar/index'
+import { Route as AcompanharTokenRouteImport } from './routes/acompanhar/$token'
 import { Route as PropostaIndexRouteImport } from './routes/proposta/index'
 import { Route as PropostaSlugRouteImport } from './routes/proposta/$slug'
 import { Route as ServicosIndexRouteImport } from './routes/servicos/index'
@@ -44,6 +47,11 @@ const ContatoRoute = ContatoRouteImport.update({
   path: '/contato',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ParaCorretoresRoute = ParaCorretoresRouteImport.update({
   id: '/para-corretores',
   path: '/para-corretores',
@@ -62,6 +70,16 @@ const SobreRoute = SobreRouteImport.update({
 const TrabalhosRoute = TrabalhosRouteImport.update({
   id: '/trabalhos',
   path: '/trabalhos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AcompanharIndexRoute = AcompanharIndexRouteImport.update({
+  id: '/acompanhar/',
+  path: '/acompanhar/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AcompanharTokenRoute = AcompanharTokenRouteImport.update({
+  id: '/acompanhar/$token',
+  path: '/acompanhar/$token',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PropostaIndexRoute = PropostaIndexRouteImport.update({
@@ -102,14 +120,17 @@ export interface FileRoutesByFullPath {
   '/404': typeof R404Route
   '/agendamentos': typeof AgendamentosRoute
   '/contato': typeof ContatoRoute
+  '/login': typeof LoginRoute
   '/para-corretores': typeof ParaCorretoresRoute
   '/privacidade': typeof PrivacidadeRoute
   '/sobre': typeof SobreRoute
   '/trabalhos': typeof TrabalhosRoute
+  '/acompanhar/$token': typeof AcompanharTokenRoute
   '/proposta/$slug': typeof PropostaSlugRoute
   '/servicos/funilaria': typeof ServicosFunilariaRoute
   '/servicos/martelinho-de-ouro': typeof ServicosMartelinhoDeOuroRoute
   '/servicos/pintura-automotiva': typeof ServicosPinturaAutomotivaRoute
+  '/acompanhar/': typeof AcompanharIndexRoute
   '/proposta/': typeof PropostaIndexRoute
   '/servicos/': typeof ServicosIndexRoute
 }
@@ -118,14 +139,17 @@ export interface FileRoutesByTo {
   '/404': typeof R404Route
   '/agendamentos': typeof AgendamentosRoute
   '/contato': typeof ContatoRoute
+  '/login': typeof LoginRoute
   '/para-corretores': typeof ParaCorretoresRoute
   '/privacidade': typeof PrivacidadeRoute
   '/sobre': typeof SobreRoute
   '/trabalhos': typeof TrabalhosRoute
+  '/acompanhar/$token': typeof AcompanharTokenRoute
   '/proposta/$slug': typeof PropostaSlugRoute
   '/servicos/funilaria': typeof ServicosFunilariaRoute
   '/servicos/martelinho-de-ouro': typeof ServicosMartelinhoDeOuroRoute
   '/servicos/pintura-automotiva': typeof ServicosPinturaAutomotivaRoute
+  '/acompanhar': typeof AcompanharIndexRoute
   '/proposta': typeof PropostaIndexRoute
   '/servicos': typeof ServicosIndexRoute
 }
@@ -135,14 +159,17 @@ export interface FileRoutesById {
   '/404': typeof R404Route
   '/agendamentos': typeof AgendamentosRoute
   '/contato': typeof ContatoRoute
+  '/login': typeof LoginRoute
   '/para-corretores': typeof ParaCorretoresRoute
   '/privacidade': typeof PrivacidadeRoute
   '/sobre': typeof SobreRoute
   '/trabalhos': typeof TrabalhosRoute
+  '/acompanhar/$token': typeof AcompanharTokenRoute
   '/proposta/$slug': typeof PropostaSlugRoute
   '/servicos/funilaria': typeof ServicosFunilariaRoute
   '/servicos/martelinho-de-ouro': typeof ServicosMartelinhoDeOuroRoute
   '/servicos/pintura-automotiva': typeof ServicosPinturaAutomotivaRoute
+  '/acompanhar/': typeof AcompanharIndexRoute
   '/proposta/': typeof PropostaIndexRoute
   '/servicos/': typeof ServicosIndexRoute
 }
@@ -153,14 +180,17 @@ export interface FileRouteTypes {
     | '/404'
     | '/agendamentos'
     | '/contato'
+    | '/login'
     | '/para-corretores'
     | '/privacidade'
     | '/sobre'
     | '/trabalhos'
+    | '/acompanhar/$token'
     | '/proposta/$slug'
     | '/servicos/funilaria'
     | '/servicos/martelinho-de-ouro'
     | '/servicos/pintura-automotiva'
+    | '/acompanhar/'
     | '/proposta/'
     | '/servicos/'
   fileRoutesByTo: FileRoutesByTo
@@ -169,14 +199,17 @@ export interface FileRouteTypes {
     | '/404'
     | '/agendamentos'
     | '/contato'
+    | '/login'
     | '/para-corretores'
     | '/privacidade'
     | '/sobre'
     | '/trabalhos'
+    | '/acompanhar/$token'
     | '/proposta/$slug'
     | '/servicos/funilaria'
     | '/servicos/martelinho-de-ouro'
     | '/servicos/pintura-automotiva'
+    | '/acompanhar'
     | '/proposta'
     | '/servicos'
   id:
@@ -185,14 +218,17 @@ export interface FileRouteTypes {
     | '/404'
     | '/agendamentos'
     | '/contato'
+    | '/login'
     | '/para-corretores'
     | '/privacidade'
     | '/sobre'
     | '/trabalhos'
+    | '/acompanhar/$token'
     | '/proposta/$slug'
     | '/servicos/funilaria'
     | '/servicos/martelinho-de-ouro'
     | '/servicos/pintura-automotiva'
+    | '/acompanhar/'
     | '/proposta/'
     | '/servicos/'
   fileRoutesById: FileRoutesById
@@ -202,14 +238,17 @@ export interface RootRouteChildren {
   R404Route: typeof R404Route
   AgendamentosRoute: typeof AgendamentosRoute
   ContatoRoute: typeof ContatoRoute
+  LoginRoute: typeof LoginRoute
   ParaCorretoresRoute: typeof ParaCorretoresRoute
   PrivacidadeRoute: typeof PrivacidadeRoute
   SobreRoute: typeof SobreRoute
   TrabalhosRoute: typeof TrabalhosRoute
+  AcompanharTokenRoute: typeof AcompanharTokenRoute
   PropostaSlugRoute: typeof PropostaSlugRoute
   ServicosFunilariaRoute: typeof ServicosFunilariaRoute
   ServicosMartelinhoDeOuroRoute: typeof ServicosMartelinhoDeOuroRoute
   ServicosPinturaAutomotivaRoute: typeof ServicosPinturaAutomotivaRoute
+  AcompanharIndexRoute: typeof AcompanharIndexRoute
   PropostaIndexRoute: typeof PropostaIndexRoute
   ServicosIndexRoute: typeof ServicosIndexRoute
 }
@@ -244,6 +283,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContatoRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/para-corretores': {
       id: '/para-corretores'
       path: '/para-corretores'
@@ -270,6 +316,20 @@ declare module '@tanstack/react-router' {
       path: '/trabalhos'
       fullPath: '/trabalhos'
       preLoaderRoute: typeof TrabalhosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/acompanhar/': {
+      id: '/acompanhar/'
+      path: '/acompanhar'
+      fullPath: '/acompanhar/'
+      preLoaderRoute: typeof AcompanharIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/acompanhar/$token': {
+      id: '/acompanhar/$token'
+      path: '/acompanhar/$token'
+      fullPath: '/acompanhar/$token'
+      preLoaderRoute: typeof AcompanharTokenRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/proposta/': {
@@ -322,14 +382,17 @@ const rootRouteChildren: RootRouteChildren = {
   R404Route: R404Route,
   AgendamentosRoute: AgendamentosRoute,
   ContatoRoute: ContatoRoute,
+  LoginRoute: LoginRoute,
   ParaCorretoresRoute: ParaCorretoresRoute,
   PrivacidadeRoute: PrivacidadeRoute,
   SobreRoute: SobreRoute,
   TrabalhosRoute: TrabalhosRoute,
+  AcompanharTokenRoute: AcompanharTokenRoute,
   PropostaSlugRoute: PropostaSlugRoute,
   ServicosFunilariaRoute: ServicosFunilariaRoute,
   ServicosMartelinhoDeOuroRoute: ServicosMartelinhoDeOuroRoute,
   ServicosPinturaAutomotivaRoute: ServicosPinturaAutomotivaRoute,
+  AcompanharIndexRoute: AcompanharIndexRoute,
   PropostaIndexRoute: PropostaIndexRoute,
   ServicosIndexRoute: ServicosIndexRoute,
 }

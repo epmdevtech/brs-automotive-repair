@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { createFileRoute } from "@tanstack/react-router";
+import { useState, useEffect } from "react";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { buildRouteHead } from "@/lib/seo";
 import { isAdminAuthenticated } from "@/features/booking/domain/auth";
 import { AdminLogin } from "@/features/booking/ui/admin/admin-login";
@@ -18,7 +18,17 @@ export const Route = createFileRoute("/agendamentos")({
 });
 
 function AgendamentosAdminPage() {
+  const navigate = useNavigate();
   const [authenticated, setAuthenticated] = useState(() => isAdminAuthenticated());
+
+  useEffect(() => {
+    if (!isAdminAuthenticated()) {
+      navigate({
+        to: "/login",
+        search: { redirect: "/agendamentos" },
+      });
+    }
+  }, [navigate]);
 
   if (!authenticated) {
     return (
@@ -34,6 +44,7 @@ function AgendamentosAdminPage() {
     <AdminGridView
       onLogout={() => {
         setAuthenticated(false);
+        navigate({ to: "/login" });
       }}
     />
   );

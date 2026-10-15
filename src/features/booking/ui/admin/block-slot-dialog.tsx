@@ -47,21 +47,23 @@ export function BlockSlotDialog({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-md bg-[#fbf9f6] text-[#201d1b] border-[#e5dfd5] p-6 rounded-xl">
-        <DialogHeader className="border-b border-[#e5dfd5] pb-3">
-          <DialogTitle className="text-lg font-display font-bold text-[#201d1b]">
+      <DialogContent className="max-w-md bg-white text-slate-900 border-slate-200 p-6 rounded-xl shadow-xl">
+        <DialogHeader className="border-b border-slate-100 pb-3">
+          <DialogTitle className="text-lg font-bold text-slate-900">
             Bloquear Período na Agenda
           </DialogTitle>
-          <DialogDescription className="text-xs text-[#716860]">
+          <DialogDescription className="text-xs text-slate-500">
             Bloqueie horários para manutenção de cabine/estufa, treinamento ou indisponibilidade.
           </DialogDescription>
         </DialogHeader>
 
         <form onSubmit={handleSubmit} className="space-y-4 pt-2 text-xs">
           <div>
-            <label className="font-semibold block mb-1">Profissional / Baia Afetada</label>
+            <label className="font-medium block mb-1 text-slate-700 text-xs">
+              Profissional / Baia Afetada
+            </label>
             <select
-              className="w-full p-2 rounded border border-[#d8d0c4] bg-white text-xs"
+              className="w-full p-2.5 rounded-lg border border-slate-300 bg-white text-slate-900 text-xs focus:outline-none focus:border-slate-900 shadow-2xs"
               value={professionalId}
               onChange={(e) => setProfessionalId(e.target.value)}
             >
@@ -76,19 +78,23 @@ export function BlockSlotDialog({
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="font-semibold block mb-1">Início do Bloqueio</label>
+              <label className="font-medium block mb-1 text-slate-700 text-xs">
+                Início do Bloqueio
+              </label>
               <input
                 type="time"
-                className="w-full p-2 rounded border border-[#d8d0c4] bg-white text-xs"
+                className="w-full p-2.5 rounded-lg border border-slate-300 bg-white text-slate-900 text-xs font-mono focus:outline-none focus:border-slate-900 shadow-2xs"
                 value={startTime}
                 onChange={(e) => setStartTime(e.target.value)}
               />
             </div>
             <div>
-              <label className="font-semibold block mb-1">Fim do Bloqueio</label>
+              <label className="font-medium block mb-1 text-slate-700 text-xs">
+                Fim do Bloqueio
+              </label>
               <input
                 type="time"
-                className="w-full p-2 rounded border border-[#d8d0c4] bg-white text-xs"
+                className="w-full p-2.5 rounded-lg border border-slate-300 bg-white text-slate-900 text-xs font-mono focus:outline-none focus:border-slate-900 shadow-2xs"
                 value={endTime}
                 onChange={(e) => setEndTime(e.target.value)}
               />
@@ -96,30 +102,32 @@ export function BlockSlotDialog({
           </div>
 
           <div>
-            <label className="font-semibold block mb-1">Motivo do Bloqueio</label>
+            <label className="font-medium block mb-1 text-slate-700 text-xs">
+              Motivo do Bloqueio
+            </label>
             <input
               type="text"
               required
               placeholder="Ex: Limpeza e filtragem da estufa de pintura"
-              className="w-full p-2 rounded border border-[#d8d0c4] bg-white text-xs"
+              className="w-full p-2.5 rounded-lg border border-slate-300 bg-white text-slate-900 placeholder:text-slate-400 text-xs focus:outline-none focus:border-slate-900 shadow-2xs"
               value={reason}
               onChange={(e) => setReason(e.target.value)}
             />
           </div>
 
-          <div className="flex items-center justify-end gap-2 pt-3 border-t border-[#e5dfd5]">
+          <div className="flex items-center justify-end gap-2 pt-3 border-t border-slate-100">
             <Button
               type="button"
               variant="outline"
               size="sm"
               onClick={() => onOpenChange(false)}
-              className="text-xs"
+              className="text-xs border-slate-300 bg-white text-slate-700 hover:bg-slate-100 hover:text-slate-900 cursor-pointer shadow-2xs"
             >
               Cancelar
             </Button>
             <button
               type="submit"
-              className="px-4 py-2 rounded-lg bg-[#201d1b] hover:bg-[#34302d] text-white text-xs font-semibold cursor-pointer shadow-sm"
+              className="px-4 py-2 rounded-lg bg-slate-900 hover:bg-black active:scale-[0.99] text-white text-xs font-semibold cursor-pointer shadow-xs transition-all"
             >
               Salvar Bloqueio
             </button>

@@ -234,6 +234,15 @@ Todas as entregas obedecem ao protocolo **Universal SDD**:
 - `SPEC-047` / `TASK-047-01`: Plataforma de Agenda em Grade Diária dos Técnicos, Login Administrativo com Credenciais Demo 1-Clique, Gestão de Bloqueios e Ação Direta para WhatsApp da Pré-OS.
 - `SPEC-048` / `TASK-048-01`: Carga Inicial de Dados Fictícios Realistas (Seed) para Demonstração da Agenda dos Técnicos e Botão de Restauração em 1 Clique.
 - `SPEC-049` / `TASK-049-01`: Detalhe Expansível do Processo Completo do Cliente (Quando cadastrou, timeline e anamnese) e Garantia de Seed Ativo no Painel de Agendamentos.
+- `SPEC-050` / `TASK-050-01`: Correção do Modal de Agendamentos, Sincronização Multi-Aba Estruturada, Histórico Append-Only de Eventos, Timeline Automotiva Dinâmica, Acompanhamento do Cliente e Comunicação WhatsApp Custo Zero.
+- `SPEC-051` / `TASK-051-01`: Reformulação de UX/UI dos Status Operacionais, Badges Padronizados, Hierarquia Visual Neutra, Indicadores Dinâmicos e Filtros no Painel de Atendimentos.
+- `SPEC-052` / `TASK-052-01`: Refatoração UX/UI do Botão WhatsApp com Affordance Real e Inclusão do Status "Fechados" nos KPIs e Filtros da Agenda.
+- `SPEC-053` / `TASK-053-01`: Redesenho Visual Awwwards Dark Industrial para o Painel de Agendamentos e Gestão de Reparação BRS (Aesthetic Dark Premium, tipografia técnica editorial e esteira linear de engenharia).
+- `SPEC-054` / `TASK-054-01`: Redesenho do Painel Administrativo / ERP BRS em Light Mode High-End (Linear / Vercel Dashboard / Apple Pro Apps, sobriedade operacional, Stepper horizontal limpo e metadados estruturados).
+- `SPEC-055` / `TASK-055-01`: Arquitetura UX/UI de Autenticação Split-Screen (/login) e Agenda Operacional Despoluída (/agendamentos) com StatusTabs unificadas, Mini-stepper de reparo e Visão Kanban.
+- `SPEC-056` / `TASK-056-01`: Refinamento de UX/UI, Isolamento de Layout e Acessibilidade Estrita (WCAG 2.2 AA) na Autenticação (/login) e Painel Administrativo BRS.
+- `SPEC-057` / `TASK-057-01`: Linha do Tempo Operacional com RBAC, Trilha de Auditoria Append-Only e Acessibilidade Estrita na Oficina BRS.
+- `SPEC-058` / `TASK-058-01`: Página Pública de Acompanhamento do Reparo Mobile-First (Hero Acima da Dobra, Header Isolado no Fluxo, WCAG 2.2 AA e Projeção Segura de Eventos).
 
 ---
 

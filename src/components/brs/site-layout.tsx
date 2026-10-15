@@ -13,10 +13,14 @@ import { Header } from "./header";
 export function SiteLayout({ children }: { children: ReactNode }) {
   const pathname = useRouterState({ select: (state) => state.location.pathname });
 
-  if (pathname?.startsWith("/agendamentos")) {
+  if (
+    pathname?.startsWith("/agendamentos") ||
+    pathname?.startsWith("/login") ||
+    pathname?.startsWith("/acompanhar")
+  ) {
     return (
       <SmoothScrollProvider>
-        <main id="conteudo-principal" className="min-h-screen">
+        <main id="conteudo-principal" className="min-h-dvh">
           {children}
         </main>
       </SmoothScrollProvider>
