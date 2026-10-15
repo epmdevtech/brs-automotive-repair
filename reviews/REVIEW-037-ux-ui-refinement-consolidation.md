@@ -2,13 +2,13 @@
 
 ## 1. Metadados
 
-| Campo   | Valor                                                                               |
-| ------- | ----------------------------------------------------------------------------------- |
-| SPEC    | [`SPEC-037`](../specs/SPEC-037-ux-ui-refinement-consolidation.md)                   |
-| TASK    | [`TASK-037-01`](../tasks/TASK-037-01-ux-ui-refinement-consolidation.md)             |
-| Data    | 2026-10-14                                                                          |
-| Status  | Aprovado (100% dos Quality Gates Cumpridos)                                         |
-| Revisor | Quality Gate Lead & Senior UX/UI Engineer EPM DevTech                               |
+| Campo   | Valor                                                                   |
+| ------- | ----------------------------------------------------------------------- |
+| SPEC    | [`SPEC-037`](../specs/SPEC-037-ux-ui-refinement-consolidation.md)       |
+| TASK    | [`TASK-037-01`](../tasks/TASK-037-01-ux-ui-refinement-consolidation.md) |
+| Data    | 2026-10-14                                                              |
+| Status  | Aprovado (100% dos Quality Gates Cumpridos)                             |
+| Revisor | Quality Gate Lead & Senior UX/UI Engineer EPM DevTech                   |
 
 ---
 

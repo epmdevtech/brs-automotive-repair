@@ -2,15 +2,15 @@
 
 ## Metadados
 
-| Campo         | Valor                                                                                                |
-| ------------- | ---------------------------------------------------------------------------------------------------- |
-| Task ID       | `TASK-040-01`                                                                                        |
-| Spec Ref      | `SPEC-040`                                                                                           |
-| Título        | Padronização Tipográfica dos Eyebrows e Remoção de Travessões e Pseudo-elementos                     |
-| Status        | Completed                                                                                            |
-| Responsável   | Engenheiro Frontend Sênior & Especialista em UX/UI Design                                            |
-| Data Início   | 2026-10-14                                                                                           |
-| Data Conclusão| 2026-10-14                                                                                           |
+| Campo          | Valor                                                                            |
+| -------------- | -------------------------------------------------------------------------------- |
+| Task ID        | `TASK-040-01`                                                                    |
+| Spec Ref       | `SPEC-040`                                                                       |
+| Título         | Padronização Tipográfica dos Eyebrows e Remoção de Travessões e Pseudo-elementos |
+| Status         | Completed                                                                        |
+| Responsável    | Engenheiro Frontend Sênior & Especialista em UX/UI Design                        |
+| Data Início    | 2026-10-14                                                                       |
+| Data Conclusão | 2026-10-14                                                                       |
 
 ---
 

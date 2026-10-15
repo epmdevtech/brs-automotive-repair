@@ -1,0 +1,787 @@
+import { useState, useEffect, useMemo } from "react";
+import {
+  Calendar,
+  Check,
+  CheckCircle,
+  ChevronLeft,
+  ChevronRight,
+  Clock,
+  Copy,
+  ExternalLink,
+  Eye,
+  Filter,
+  LogOut,
+  MapPin,
+  MessageCircle,
+  Phone,
+  Plus,
+  RefreshCw,
+  Search,
+  Shield,
+  Slash,
+  Sparkles,
+  Truck,
+  User,
+  Wrench,
+  XCircle,
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { company } from "@/lib/brs";
+import type { Appointment, AppointmentStatus, Professional } from "../../domain/types";
+import { localBookingRepository } from "../../data/local/local-repository";
+import { formatDate, formatTime, isSameCivilDay, parseTimeOnDate } from "../../domain/time";
+import { formatPhoneBR } from "../../domain/phone";
+import { getStatusLabel } from "../../domain/status";
+import {
+  DAMAGE_AREAS_LIST,
+  DAMAGE_TYPES_LIST,
+  buildCustomerWhatsAppLink,
+  formatPreOsSummary,
+} from "../../domain/intake";
+import { getBlockedPeriods, isPeriodBlocked, type BlockedPeriod } from "../../domain/blocks";
+import { BRS_BOOKING_CONFIG } from "../../config/booking.config";
+import { logoutAdmin } from "../../domain/auth";
+import { ensureSeedData } from "../../domain/seed";
+import { ManualBookingDialog } from "./manual-booking-dialog";
+import { BlockSlotDialog } from "./block-slot-dialog";
+import { CustomerProcessDialog } from "./customer-process-dialog";
+
+type ViewMode = "dia" | "semana" | "lista" | "solicitacoes";
+
+const GRID_HOURS = [
+  "08:00",
+  "09:00",
+  "10:00",
+  "11:00",
+  "12:00", // Almoço
+  "13:00", // Almoço
+  "14:00",
+  "15:00",
+  "16:00",
+  "17:00",
+];
+
+export interface AdminGridViewProps {
+  onLogout: () => void;
+}
+
+export function AdminGridView({ onLogout }: AdminGridViewProps) {
+  const [appointments, setAppointments] = useState<Appointment[]>([]);
+  const [blockedPeriods, setBlockedPeriods] = useState<BlockedPeriod[]>([]);
+  const [viewMode, setViewMode] = useState<ViewMode>("dia");
+  const [selectedProfessionalId, setSelectedProfessionalId] = useState<string>("ALL");
+  const [currentDate, setCurrentDate] = useState<Date>(() => new Date());
+
+  // Diálogos de Ação Rápida
+  const [manualBookingOpen, setManualBookingOpen] = useState(false);
+  const [blockDialogOpen, setBlockDialogOpen] = useState(false);
+  const [selectedSlotForBooking, setSelectedSlotForBooking] = useState<{
+    time: string;
+    profId: string;
+  } | null>(null);
+
+  // Modal de Detalhe e Processo do Cliente
+  const [selectedAppointmentForDetail, setSelectedAppointmentForDetail] =
+    useState<Appointment | null>(null);
+  const [processDialogOpen, setProcessDialogOpen] = useState(false);
+
+  const [copiedId, setCopiedId] = useState<string | null>(null);
+  const [seedNotice, setSeedNotice] = useState<string | null>(null);
+
+  useEffect(() => {
+    ensureSeedData(false, currentDate);
+    const unsub = localBookingRepository.subscribe((list) => {
+      setAppointments(list);
+      // Garante que, se não houver agendamentos na data corrente, injeta dados fictícios imediatamente
+      const hasOnDate = list.some(
+        (a) => a.status !== "CANCELLED" && isSameCivilDay(new Date(a.startTime), currentDate),
+      );
+      if (!hasOnDate) {
+        ensureSeedData(true, currentDate);
+      }
+    });
+    setBlockedPeriods(getBlockedPeriods());
+    return () => unsub();
+  }, [currentDate]);
+
+  const refreshBlocks = () => {
+    setBlockedPeriods(getBlockedPeriods());
+  };
+
+  const handleOpenAppointmentDetail = (app: Appointment) => {
+    setSelectedAppointmentForDetail(app);
+    setProcessDialogOpen(true);
+  };
+
+  const handleResetDemoData = () => {
+    const res = ensureSeedData(true, currentDate);
+    setBlockedPeriods(getBlockedPeriods());
+    setSeedNotice(
+      `Dados fictícios carregados: ${res.appointments} agendamentos e ${res.blocks} bloqueio técnico restaurados.`,
+    );
+    setTimeout(() => setSeedNotice(null), 4500);
+  };
+
+  const handleLogout = () => {
+    logoutAdmin();
+    onLogout();
+  };
+
+  const changeDateBy = (days: number) => {
+    const next = new Date(currentDate);
+    next.setDate(next.getDate() + days);
+    setCurrentDate(next);
+  };
+
+  const goToToday = () => {
+    setCurrentDate(new Date());
+  };
+
+  // Profissionais filtrados
+  const displayedProfessionals = useMemo(() => {
+    if (selectedProfessionalId === "ALL") {
+      return BRS_BOOKING_CONFIG.professionals;
+    }
+    return BRS_BOOKING_CONFIG.professionals.filter((p) => p.id === selectedProfessionalId);
+  }, [selectedProfessionalId]);
+
+  // KPIs superiores
+  const stats = useMemo(() => {
+    const dayAppointments = appointments.filter(
+      (a) => a.status !== "CANCELLED" && isSameCivilDay(new Date(a.startTime), currentDate),
+    );
+    const confirmedCount = dayAppointments.filter((a) => a.status === "CONFIRMED").length;
+    const levaETrazCount = dayAppointments.filter((a) => a.logistics.type === "leva-e-traz").length;
+
+    return {
+      total: dayAppointments.length,
+      confirmed: confirmedCount,
+      levaETraz: levaETrazCount,
+      activePros: BRS_BOOKING_CONFIG.professionals.length,
+    };
+  }, [appointments, currentDate]);
+
+  const handleStatusChange = async (id: string, newStatus: AppointmentStatus) => {
+    const res = await localBookingRepository.updateStatus(id, newStatus);
+    if (!res.ok) {
+      alert(res.error);
+    } else {
+      setSelectedAppointmentForDetail((prev) => (prev && prev.id === id ? res.value : prev));
+    }
+  };
+
+  const handleCopySummary = async (app: Appointment) => {
+    const svc = BRS_BOOKING_CONFIG.services.find((s) => s.id === app.serviceId);
+    const summary = formatPreOsSummary({
+      protocol: app.protocol,
+      serviceTitle: svc?.title ?? app.serviceId,
+      scheduledTime: `${formatDate(new Date(app.startTime))} às ${formatTime(new Date(app.startTime))}`,
+      customer: app.customer,
+      intake: app.intake,
+      logistics: app.logistics,
+    });
+    try {
+      await navigator.clipboard.writeText(summary);
+      setCopiedId(app.id);
+      setTimeout(() => setCopiedId(null), 2500);
+    } catch {
+      // Fallback
+    }
+  };
+
+  const openSlotBooking = (time: string, profId: string) => {
+    setSelectedSlotForBooking({ time, profId });
+    setManualBookingOpen(true);
+  };
+
+  return (
+    <div className="min-h-screen bg-[#f3efe9] text-[#2c2724] flex flex-col font-sans selection:bg-amber-200">
+      {/* 1. BARRA DE STATUS MULTI-ABAS (IDÊNTICA À REFERÊNCIA) */}
+      <div className="w-full px-6 py-2 bg-[#ece6dc] border-b border-[#ded7cc] text-[11px] text-[#554e47] flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          <span className="size-2 rounded-full bg-emerald-500 animate-pulse" />
+          <span>
+            Ambiente Demonstrativo: sincronização multi-abas ativa via Web Locks & BroadcastChannel
+          </span>
+        </div>
+
+        <div className="flex flex-wrap items-center gap-4 text-[11px]">
+          <button
+            type="button"
+            onClick={handleResetDemoData}
+            className="text-[#716860] hover:text-[#201d1b] font-medium flex items-center gap-1.5 transition-colors cursor-pointer"
+            title="Recarrega a agenda com agendamentos fictícios de demonstração"
+          >
+            <Sparkles size={12} className="text-amber-600" />
+            <span>Restaurar Dados Fictícios</span>
+          </button>
+          <a
+            href="/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[#716860] hover:text-[#201d1b] flex items-center gap-1 transition-colors"
+          >
+            Ver site da oficina <ExternalLink size={11} />
+          </a>
+          <button
+            type="button"
+            onClick={handleLogout}
+            className="text-[#84776b] hover:text-red-700 font-medium flex items-center gap-1 transition-colors cursor-pointer"
+          >
+            <LogOut size={12} /> Sair
+          </button>
+        </div>
+      </div>
+
+      {/* BANNER DE NOTIFICAÇÃO DO SEED */}
+      {seedNotice && (
+        <div className="w-full px-6 py-2.5 bg-emerald-50 border-b border-emerald-200 text-xs text-emerald-800 flex items-center justify-between animate-fadeIn">
+          <div className="flex items-center gap-2">
+            <CheckCircle size={14} className="text-emerald-600" />
+            <span className="font-medium">{seedNotice}</span>
+          </div>
+          <button
+            type="button"
+            onClick={() => setSeedNotice(null)}
+            className="text-emerald-700 hover:text-emerald-950 text-xs font-bold px-2 py-0.5 rounded cursor-pointer"
+          >
+            Fechar
+          </button>
+        </div>
+      )}
+
+      {/* 2. CABEÇALHO DA PLATAFORMA */}
+      <header className="px-6 py-5 bg-[#fbf9f6] border-b border-[#e5dfd5] flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div className="flex items-center gap-3">
+          <div className="size-10 rounded-xl bg-[#201d1b] text-white flex items-center justify-center font-display font-bold text-base shadow-sm">
+            B
+          </div>
+          <div>
+            <div className="flex items-center gap-2">
+              <h1 className="text-xl font-display font-bold text-[#201d1b] tracking-tight">
+                Agenda dos Técnicos
+              </h1>
+              <span className="text-[10px] uppercase font-mono px-2 py-0.5 rounded bg-[#eee7de] text-[#716860] font-semibold border border-[#dfd7cc]">
+                EPM BOOKING
+              </span>
+            </div>
+            <p className="text-xs text-[#716860]">
+              BRS Reparações Automotivas • Gestão Integrada de Atendimentos
+            </p>
+          </div>
+        </div>
+
+        <div className="flex flex-wrap items-center gap-2.5">
+          <button
+            type="button"
+            onClick={() => setBlockDialogOpen(true)}
+            className="px-3.5 py-2 rounded-lg border border-[#d8d0c4] bg-[#fbf9f6] hover:bg-[#ede7de] text-xs font-semibold text-[#3b3530] flex items-center gap-1.5 transition-colors cursor-pointer"
+          >
+            <Slash size={13} className="text-[#84776b]" />
+            Bloquear Período
+          </button>
+
+          <button
+            type="button"
+            onClick={() => openSlotBooking("09:00", BRS_BOOKING_CONFIG.professionals[0].id)}
+            className="px-4 py-2 rounded-lg bg-[#201d1b] hover:bg-[#34302d] text-white text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer shadow-sm"
+          >
+            <Plus size={14} />
+            Novo Agendamento
+          </button>
+        </div>
+      </header>
+
+      {/* 3. BARRA DE NAVEGAÇÃO & CONTROLES */}
+      <div className="px-6 py-3.5 bg-[#fbf9f6] border-b border-[#e5dfd5] flex flex-col md:flex-row md:items-center justify-between gap-4">
+        {/* ABAS: DIA, SEMANA, LISTA, SOLICITAÇÕES */}
+        <div className="flex items-center gap-1 bg-[#eee7de] p-1 rounded-lg border border-[#dfd7cc]">
+          <button
+            type="button"
+            onClick={() => setViewMode("dia")}
+            className={`px-3 py-1.5 rounded text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer ${
+              viewMode === "dia"
+                ? "bg-[#fbf9f6] text-[#201d1b] shadow-xs"
+                : "text-[#716860] hover:text-[#201d1b]"
+            }`}
+          >
+            <Calendar size={13} /> Dia
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setViewMode("lista")}
+            className={`px-3 py-1.5 rounded text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer ${
+              viewMode === "lista"
+                ? "bg-[#fbf9f6] text-[#201d1b] shadow-xs"
+                : "text-[#716860] hover:text-[#201d1b]"
+            }`}
+          >
+            <Filter size={13} /> Lista
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setViewMode("solicitacoes")}
+            className={`px-3 py-1.5 rounded text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer ${
+              viewMode === "solicitacoes"
+                ? "bg-[#fbf9f6] text-[#201d1b] shadow-xs"
+                : "text-[#716860] hover:text-[#201d1b]"
+            }`}
+          >
+            <Truck size={13} /> Leva e Traz
+            {stats.levaETraz > 0 && (
+              <span className="size-4 rounded-full bg-[#201d1b] text-white text-[9px] flex items-center justify-center font-bold">
+                {stats.levaETraz}
+              </span>
+            )}
+          </button>
+        </div>
+
+        {/* NAVEGADOR DE PROFISSIONAL E DATA */}
+        <div className="flex flex-wrap items-center gap-3">
+          <div className="flex items-center gap-2 text-xs">
+            <span className="text-[#716860]">Profissional:</span>
+            <select
+              value={selectedProfessionalId}
+              onChange={(e) => setSelectedProfessionalId(e.target.value)}
+              className="py-1.5 px-3 rounded-lg border border-[#d8d0c4] bg-[#fbf9f6] text-xs font-medium text-[#201d1b]"
+            >
+              <option value="ALL">Todos os profissionais</option>
+              {BRS_BOOKING_CONFIG.professionals.map((p) => (
+                <option key={p.id} value={p.id}>
+                  {p.name}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div className="flex items-center gap-1.5">
+            <button
+              type="button"
+              onClick={() => changeDateBy(-1)}
+              className="p-1.5 rounded-lg border border-[#d8d0c4] bg-[#fbf9f6] hover:bg-[#ede7de] text-[#554e47] cursor-pointer"
+              title="Dia anterior"
+            >
+              <ChevronLeft size={14} />
+            </button>
+            <button
+              type="button"
+              onClick={goToToday}
+              className="px-3 py-1.5 rounded-lg border border-[#d8d0c4] bg-[#fbf9f6] hover:bg-[#ede7de] text-xs font-semibold text-[#201d1b] cursor-pointer"
+            >
+              Hoje
+            </button>
+            <button
+              type="button"
+              onClick={() => changeDateBy(1)}
+              className="p-1.5 rounded-lg border border-[#d8d0c4] bg-[#fbf9f6] hover:bg-[#ede7de] text-[#554e47] cursor-pointer"
+              title="Próximo dia"
+            >
+              <ChevronRight size={14} />
+            </button>
+          </div>
+
+          <div className="text-xs font-semibold text-[#201d1b] font-display">
+            {currentDate.toLocaleDateString("pt-BR", {
+              weekday: "long",
+              day: "2-digit",
+              month: "long",
+              year: "numeric",
+            })}
+          </div>
+        </div>
+      </div>
+
+      {/* 4. CARDS DE KPIS / MÉTRICAS (IDÊNTICOS À IMAGEM) */}
+      <main className="p-6 space-y-6 max-w-7xl mx-auto w-full">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="p-4 rounded-xl bg-[#fbf9f6] border border-[#e5dfd5] space-y-1 shadow-2xs">
+            <span className="text-[11px] text-[#716860] font-medium">Total de Atendimentos</span>
+            <div className="text-3xl font-display font-bold text-[#201d1b]">{stats.total}</div>
+          </div>
+
+          <div className="p-4 rounded-xl bg-[#fbf9f6] border border-[#e5dfd5] space-y-1 shadow-2xs">
+            <span className="text-[11px] text-emerald-700 font-semibold">Confirmados</span>
+            <div className="text-3xl font-display font-bold text-emerald-600">
+              {stats.confirmed}
+            </div>
+          </div>
+
+          <div className="p-4 rounded-xl bg-[#fbf9f6] border border-[#e5dfd5] space-y-1 shadow-2xs">
+            <span className="text-[11px] text-amber-700 font-semibold">Coletas Leva e Traz</span>
+            <div className="text-3xl font-display font-bold text-amber-600">{stats.levaETraz}</div>
+          </div>
+
+          <div className="p-4 rounded-xl bg-[#fbf9f6] border border-[#e5dfd5] space-y-1 shadow-2xs">
+            <span className="text-[11px] text-[#716860] font-medium">Profissionais Ativos</span>
+            <div className="text-3xl font-display font-bold text-[#201d1b]">{stats.activePros}</div>
+          </div>
+        </div>
+
+        {/* 5. VISÃO EM GRADE / MATRIX DO DIA (HORÁRIOS X PROFISSIONAIS) */}
+        {viewMode === "dia" && (
+          <div className="bg-[#fbf9f6] rounded-xl border border-[#e5dfd5] overflow-x-auto shadow-sm">
+            <table className="w-full border-collapse text-xs">
+              <thead>
+                <tr className="border-b border-[#e5dfd5] bg-[#f5f1eb]">
+                  <th className="p-3.5 text-left font-semibold text-[#716860] w-24 border-r border-[#e5dfd5]">
+                    Horário
+                  </th>
+                  {displayedProfessionals.map((pro) => (
+                    <th
+                      key={pro.id}
+                      className="p-3.5 text-center font-semibold text-[#201d1b] border-r border-[#e5dfd5] last:border-r-0 min-w-[260px]"
+                    >
+                      <div className="font-display font-bold text-xs">{pro.name}</div>
+                      <div className="text-[10px] text-[#84776b] font-normal">{pro.role}</div>
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {GRID_HOURS.map((hourStr) => {
+                  const isLunch = hourStr === "12:00" || hourStr === "13:00";
+                  const slotDate = parseTimeOnDate(currentDate, hourStr);
+
+                  return (
+                    <tr key={hourStr} className="border-b border-[#e5dfd5] last:border-b-0">
+                      {/* COLUNA DE HORÁRIO */}
+                      <td className="p-3 text-center font-mono font-semibold text-[#716860] border-r border-[#e5dfd5] bg-[#fbf9f6] align-middle">
+                        {hourStr}
+                      </td>
+
+                      {/* COLUNAS DOS PROFISSIONAIS */}
+                      {displayedProfessionals.map((pro) => {
+                        // Verifica se é almoço
+                        if (isLunch) {
+                          return (
+                            <td
+                              key={pro.id}
+                              className="p-4 text-center text-[#84776b] italic bg-[#f7f3ec] border-r border-[#e5dfd5] last:border-r-0 text-xs select-none"
+                            >
+                              Fora do expediente
+                            </td>
+                          );
+                        }
+
+                        // Verifica se há agendamento para este profissional neste dia e horário
+                        const app = appointments.find((a) => {
+                          if (a.status === "CANCELLED") return false;
+                          if (a.professionalId !== pro.id) return false;
+                          const aDate = new Date(a.startTime);
+                          return (
+                            isSameCivilDay(aDate, currentDate) && formatTime(aDate) === hourStr
+                          );
+                        });
+
+                        // Verifica se este slot está bloqueado
+                        const isBlocked = isPeriodBlocked(
+                          slotDate,
+                          new Date(slotDate.getTime() + 45 * 60 * 1000),
+                          pro.id,
+                          blockedPeriods,
+                        );
+
+                        if (app) {
+                          const svc = BRS_BOOKING_CONFIG.services.find(
+                            (s) => s.id === app.serviceId,
+                          );
+                          const isLeva = app.logistics.type === "leva-e-traz";
+                          const whatsAppLink = buildCustomerWhatsAppLink({
+                            protocol: app.protocol,
+                            customer: app.customer,
+                            intake: app.intake,
+                            serviceTitle: svc?.title ?? app.serviceId,
+                            scheduledTime: `${formatDate(slotDate)} às ${formatTime(slotDate)}`,
+                            logistics: app.logistics,
+                          });
+
+                          return (
+                            <td
+                              key={pro.id}
+                              className="p-2.5 border-r border-[#e5dfd5] last:border-r-0 align-top"
+                            >
+                              <div
+                                onClick={() => handleOpenAppointmentDetail(app)}
+                                className="p-3 rounded-lg border border-emerald-500/30 bg-emerald-50/60 hover:bg-emerald-100/70 hover:border-emerald-500/70 shadow-xs space-y-2 cursor-pointer transition-all group"
+                                title="Clique para expandir o processo completo do cliente"
+                              >
+                                <div className="flex items-center justify-between gap-1">
+                                  <span className="font-mono font-bold text-[11px] text-emerald-800 bg-emerald-100/80 px-2 py-0.5 rounded">
+                                    {app.protocol}
+                                  </span>
+                                  <span className="text-[10px] font-semibold text-emerald-700 uppercase bg-emerald-200/50 px-1.5 py-0.5 rounded group-hover:bg-emerald-300/80 transition-colors flex items-center gap-1">
+                                    <Eye size={10} /> Processo
+                                  </span>
+                                </div>
+
+                                <div>
+                                  <div className="font-semibold text-xs text-[#201d1b] group-hover:text-emerald-950 transition-colors">
+                                    {app.customer.name}
+                                  </div>
+                                  <div className="text-[11px] text-[#716860]">
+                                    {app.intake.vehicle.make} {app.intake.vehicle.model}
+                                    {app.intake.vehicle.plate
+                                      ? ` (${app.intake.vehicle.plate})`
+                                      : ""}
+                                  </div>
+                                </div>
+
+                                <div className="text-[10px] text-[#554e47] flex items-center justify-between">
+                                  <span>{svc?.short ?? app.serviceId}</span>
+                                  {isLeva && (
+                                    <span className="flex items-center gap-1 text-amber-700 font-medium">
+                                      <Truck size={11} /> Leva e Traz
+                                    </span>
+                                  )}
+                                </div>
+
+                                {/* BOTÕES DE AÇÃO NO CARD */}
+                                <div
+                                  className="flex items-center gap-1.5 pt-1.5 border-t border-emerald-200/60"
+                                  onClick={(e) => e.stopPropagation()}
+                                >
+                                  <a
+                                    href={whatsAppLink}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="flex-1 py-1.5 px-2 rounded bg-emerald-600 hover:bg-emerald-700 text-white text-[11px] font-semibold flex items-center justify-center gap-1 transition-colors"
+                                  >
+                                    <MessageCircle size={12} /> WhatsApp
+                                  </a>
+
+                                  <button
+                                    type="button"
+                                    onClick={() => handleCopySummary(app)}
+                                    title="Copiar dados da Pré-OS"
+                                    className="p-1.5 rounded border border-[#d8d0c4] bg-white hover:bg-[#ede7de] text-[#554e47] cursor-pointer"
+                                  >
+                                    <Copy size={12} />
+                                  </button>
+
+                                  <button
+                                    type="button"
+                                    onClick={() => handleStatusChange(app.id, "COMPLETED")}
+                                    title="Concluir Atendimento"
+                                    className="p-1.5 rounded border border-emerald-300 bg-white hover:bg-emerald-100 text-emerald-700 cursor-pointer"
+                                  >
+                                    <Check size={12} />
+                                  </button>
+                                </div>
+                              </div>
+                            </td>
+                          );
+                        }
+
+                        if (isBlocked) {
+                          return (
+                            <td
+                              key={pro.id}
+                              className="p-2.5 border-r border-[#e5dfd5] last:border-r-0 align-top"
+                            >
+                              <div className="p-3 rounded-lg border border-red-200 bg-red-50 text-red-800 text-xs text-center space-y-1">
+                                <Slash size={14} className="mx-auto text-red-500" />
+                                <div className="font-semibold text-[11px]">Período Bloqueado</div>
+                              </div>
+                            </td>
+                          );
+                        }
+
+                        // SLOT LIVRE: BOTÃO "+ Livre" IDENTICO À IMAGEM
+                        return (
+                          <td
+                            key={pro.id}
+                            className="p-2.5 border-r border-[#e5dfd5] last:border-r-0 align-middle text-center"
+                          >
+                            <button
+                              type="button"
+                              onClick={() => openSlotBooking(hourStr, pro.id)}
+                              className="w-full py-3.5 px-4 rounded-xl border border-dashed border-[#d8d0c4] bg-[#fbf9f6] hover:bg-[#ede7de] hover:border-[#84776b] text-[#716860] hover:text-[#201d1b] text-xs font-medium transition-all cursor-pointer flex items-center justify-center gap-1 shadow-2xs"
+                            >
+                              <span>+ Livre</span>
+                            </button>
+                          </td>
+                        );
+                      })}
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        )}
+
+        {/* 6. VISÃO EM LISTA (TABELA DETALHADA) */}
+        {viewMode === "lista" && (
+          <div className="bg-[#fbf9f6] rounded-xl border border-[#e5dfd5] p-4 space-y-3">
+            <h3 className="font-display font-bold text-sm text-[#201d1b]">
+              Listagem Cronológica de Atendimentos
+            </h3>
+            {appointments.length === 0 ? (
+              <p className="text-xs text-[#716860] py-8 text-center">
+                Nenhum atendimento cadastrado.
+              </p>
+            ) : (
+              <div className="space-y-2">
+                {appointments.map((a) => {
+                  const svc = BRS_BOOKING_CONFIG.services.find((s) => s.id === a.serviceId);
+                  const whatsApp = buildCustomerWhatsAppLink({
+                    protocol: a.protocol,
+                    customer: a.customer,
+                    intake: a.intake,
+                    serviceTitle: svc?.title ?? a.serviceId,
+                    scheduledTime: `${formatDate(new Date(a.startTime))} às ${formatTime(new Date(a.startTime))}`,
+                    logistics: a.logistics,
+                  });
+
+                  return (
+                    <div
+                      key={a.id}
+                      onClick={() => handleOpenAppointmentDetail(a)}
+                      className="p-3.5 rounded-lg border border-[#e5dfd5] bg-white hover:border-emerald-400 hover:bg-emerald-50/20 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs cursor-pointer transition-all"
+                    >
+                      <div className="space-y-1">
+                        <div className="flex items-center gap-2">
+                          <span className="font-mono font-bold text-emerald-800 bg-emerald-100 px-2 py-0.5 rounded">
+                            {a.protocol}
+                          </span>
+                          <span className="font-semibold text-[#201d1b]">{a.customer.name}</span>
+                          <span className="text-[#716860]">
+                            ({formatPhoneBR(a.customer.phone)})
+                          </span>
+                        </div>
+                        <div className="text-[11px] text-[#716860]">
+                          {formatDate(new Date(a.startTime))} às {formatTime(new Date(a.startTime))}{" "}
+                          •{" "}
+                          <strong>
+                            {a.intake.vehicle.make} {a.intake.vehicle.model}
+                          </strong>{" "}
+                          • {svc?.short}
+                        </div>
+                      </div>
+
+                      <div className="flex items-center gap-2" onClick={(e) => e.stopPropagation()}>
+                        <button
+                          type="button"
+                          onClick={() => handleOpenAppointmentDetail(a)}
+                          className="py-1 px-3 rounded border border-[#ded7cc] bg-[#fbf9f6] hover:bg-[#ede7de] text-[#201d1b] text-xs font-semibold flex items-center gap-1 cursor-pointer transition-colors"
+                        >
+                          <Eye size={12} /> Ver Processo
+                        </button>
+
+                        <a
+                          href={whatsApp}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="py-1 px-3 rounded bg-emerald-600 text-white text-xs font-semibold flex items-center gap-1 hover:bg-emerald-700 transition-colors"
+                        >
+                          <MessageCircle size={12} /> WhatsApp
+                        </a>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* 7. VISÃO EXCLUSIVA LEVA E TRAZ */}
+        {viewMode === "solicitacoes" && (
+          <div className="bg-[#fbf9f6] rounded-xl border border-[#e5dfd5] p-5 space-y-4">
+            <div className="flex items-center gap-2">
+              <Truck size={18} className="text-amber-600" />
+              <div>
+                <h3 className="font-display font-bold text-sm text-[#201d1b]">
+                  Roteiro de Coleta e Devolução Leva e Traz (Toledo-PR)
+                </h3>
+                <p className="text-xs text-[#716860]">
+                  Clientes que solicitaram retirada e entrega do veículo no endereço.
+                </p>
+              </div>
+            </div>
+
+            {appointments.filter((a) => a.logistics.type === "leva-e-traz").length === 0 ? (
+              <p className="text-xs text-[#716860] py-8 text-center">
+                Nenhuma solicitação de Leva e Traz ativa no momento.
+              </p>
+            ) : (
+              <div className="grid gap-3">
+                {appointments
+                  .filter((a) => a.logistics.type === "leva-e-traz")
+                  .map((a) => (
+                    <div
+                      key={a.id}
+                      onClick={() => handleOpenAppointmentDetail(a)}
+                      className="p-4 rounded-lg border border-amber-200 bg-amber-50/50 hover:bg-amber-100/50 space-y-2 text-xs cursor-pointer transition-all"
+                    >
+                      <div className="flex justify-between items-center">
+                        <span className="font-mono font-bold text-amber-900 bg-amber-100 px-2 py-0.5 rounded">
+                          {a.protocol}
+                        </span>
+                        <span className="font-semibold text-foreground">
+                          {formatDate(new Date(a.startTime))} às {formatTime(new Date(a.startTime))}
+                        </span>
+                      </div>
+
+                      <div className="font-medium text-[#201d1b]">
+                        Cliente: <strong>{a.customer.name}</strong> (
+                        {formatPhoneBR(a.customer.phone)})
+                      </div>
+                      <div className="text-[#554e47]">
+                        Endereço de Coleta:{" "}
+                        <strong>
+                          {a.logistics.address}, Bairro {a.logistics.neighborhood} (Toledo-PR)
+                        </strong>
+                      </div>
+                      <div className="flex items-center justify-between pt-1 border-t border-amber-200/80">
+                        <span className="text-[11px] text-[#716860]">
+                          Veículo: {a.intake.vehicle.make} {a.intake.vehicle.model}
+                        </span>
+                        <button
+                          type="button"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleOpenAppointmentDetail(a);
+                          }}
+                          className="py-1 px-2.5 rounded bg-amber-700 hover:bg-amber-800 text-white text-[11px] font-semibold flex items-center gap-1 cursor-pointer transition-colors"
+                        >
+                          <Eye size={12} /> Ver Detalhes do Processo
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+              </div>
+            )}
+          </div>
+        )}
+      </main>
+
+      {/* MODAL EXPANSÍVEL DO PROCESSO DO CLIENTE */}
+      <CustomerProcessDialog
+        appointment={selectedAppointmentForDetail}
+        open={processDialogOpen}
+        onOpenChange={setProcessDialogOpen}
+        onStatusChange={handleStatusChange}
+      />
+
+      {/* MODAL DE AGENDAMENTO MANUAL */}
+      <ManualBookingDialog
+        open={manualBookingOpen}
+        onOpenChange={setManualBookingOpen}
+        initialDate={currentDate}
+        initialTime={selectedSlotForBooking?.time ?? "09:00"}
+        initialProfessionalId={selectedSlotForBooking?.profId}
+      />
+
+      {/* MODAL DE BLOQUEIO DE HORÁRIO */}
+      <BlockSlotDialog
+        open={blockDialogOpen}
+        onOpenChange={setBlockDialogOpen}
+        selectedDate={currentDate}
+        onSuccess={refreshBlocks}
+      />
+    </div>
+  );
+}

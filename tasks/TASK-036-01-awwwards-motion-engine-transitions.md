@@ -2,15 +2,15 @@
 
 ## Metadados
 
-| Campo         | Valor                                                             |
-| ------------- | ----------------------------------------------------------------- |
-| Task ID       | `TASK-036-01`                                                     |
-| Spec Ref      | `SPEC-036`                                                        |
-| Título        | Implementação do Motion Engine, Parallax, Contadores e Transições |
-| Status        | Completed                                                         |
-| Responsável   | Lead Motion Designer & Interactive Engineer                       |
-| Data Início   | 2026-10-14                                                        |
-| Data Conclusão| 2026-10-14                                                        |
+| Campo          | Valor                                                             |
+| -------------- | ----------------------------------------------------------------- |
+| Task ID        | `TASK-036-01`                                                     |
+| Spec Ref       | `SPEC-036`                                                        |
+| Título         | Implementação do Motion Engine, Parallax, Contadores e Transições |
+| Status         | Completed                                                         |
+| Responsável    | Lead Motion Designer & Interactive Engineer                       |
+| Data Início    | 2026-10-14                                                        |
+| Data Conclusão | 2026-10-14                                                        |
 
 ---
 

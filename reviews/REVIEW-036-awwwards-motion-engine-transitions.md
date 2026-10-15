@@ -2,13 +2,13 @@
 
 ## 1. Metadados
 
-| Campo   | Valor                                                                               |
-| ------- | ----------------------------------------------------------------------------------- |
-| SPEC    | [`SPEC-036`](../specs/SPEC-036-awwwards-motion-engine-transitions.md)               |
-| TASK    | [`TASK-036-01`](../tasks/TASK-036-01-awwwards-motion-engine-transitions.md)         |
-| Data    | 2026-10-14                                                                          |
-| Status  | Aprovado (100% dos Quality Gates Cumpridos)                                         |
-| Revisor | Quality Gate Lead & Awwwards Motion Auditor                                         |
+| Campo   | Valor                                                                       |
+| ------- | --------------------------------------------------------------------------- |
+| SPEC    | [`SPEC-036`](../specs/SPEC-036-awwwards-motion-engine-transitions.md)       |
+| TASK    | [`TASK-036-01`](../tasks/TASK-036-01-awwwards-motion-engine-transitions.md) |
+| Data    | 2026-10-14                                                                  |
+| Status  | Aprovado (100% dos Quality Gates Cumpridos)                                 |
+| Revisor | Quality Gate Lead & Awwwards Motion Auditor                                 |
 
 ---
 

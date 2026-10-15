@@ -2,15 +2,15 @@
 
 ## Metadados
 
-| Campo         | Valor                                                                                                |
-| ------------- | ---------------------------------------------------------------------------------------------------- |
-| Task ID       | `TASK-041-01`                                                                                        |
-| Spec Ref      | `SPEC-041`                                                                                           |
-| Título        | Remoção do CTA de Avaliação da Hero Section e Foco na Descoberta de Serviços                         |
-| Status        | Completed                                                                                            |
-| Responsável   | Engenheiro Frontend Sênior & Especialista em UI/UX Design                                            |
-| Data Início   | 2026-10-14                                                                                           |
-| Data Conclusão| 2026-10-14                                                                                           |
+| Campo          | Valor                                                                        |
+| -------------- | ---------------------------------------------------------------------------- |
+| Task ID        | `TASK-041-01`                                                                |
+| Spec Ref       | `SPEC-041`                                                                   |
+| Título         | Remoção do CTA de Avaliação da Hero Section e Foco na Descoberta de Serviços |
+| Status         | Completed                                                                    |
+| Responsável    | Engenheiro Frontend Sênior & Especialista em UI/UX Design                    |
+| Data Início    | 2026-10-14                                                                   |
+| Data Conclusão | 2026-10-14                                                                   |
 
 ---
 

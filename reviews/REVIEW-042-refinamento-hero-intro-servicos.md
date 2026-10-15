@@ -12,11 +12,11 @@
 
 ## 2. Validação dos Critérios de Aceitação
 
-| Critério de Aceitação | Descrição | Status | Evidência |
-| --- | --- | --- | --- |
-| **AC-042-01** | Remoção total dos 3 mini-cards compactos de resumo no Hero de `/servicos` | **APROVADO** | `telemetryBadges` removido de `<PageHero>` em `src/routes/servicos/index.tsx`; nenhum card duplicado no Hero; validado por teste automatizado em `src/test/servicos-intro-refinement.test.tsx`. |
-| **AC-042-02** | Otimização do CTA do Hero para exploração de portfólio e resultados | **APROVADO** | Botão primário "Solicitar avaliação técnica" removido do Hero para evitar concorrência com o Header fixo; ação exclusiva "Ver trabalhos concluídos" mantida em estilo `.btn--secondary` com tap target mínimo de 44px; seção subsequente marcada com `id="lista-servicos"` e respiro `py-16 lg:py-20`. |
-| **AC-042-03** | Espaçamento, hierarquia tipográfica e limpeza de código | **APROVADO** | `PageHero` ajusta automaticamente margem para `mt-6 sm:mt-8` na ausência de telemetria; suporte a smooth scrolling via `useSmoothScroll` integrado para âncoras locais; remoção completa de imports não utilizados (`Wrench`, `Paintbrush`, `Car`) e do mapa `serviceIcons`. |
+| Critério de Aceitação | Descrição                                                                 | Status       | Evidência                                                                                                                                                                                                                                                                                              |
+| --------------------- | ------------------------------------------------------------------------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **AC-042-01**         | Remoção total dos 3 mini-cards compactos de resumo no Hero de `/servicos` | **APROVADO** | `telemetryBadges` removido de `<PageHero>` em `src/routes/servicos/index.tsx`; nenhum card duplicado no Hero; validado por teste automatizado em `src/test/servicos-intro-refinement.test.tsx`.                                                                                                        |
+| **AC-042-02**         | Otimização do CTA do Hero para exploração de portfólio e resultados       | **APROVADO** | Botão primário "Solicitar avaliação técnica" removido do Hero para evitar concorrência com o Header fixo; ação exclusiva "Ver trabalhos concluídos" mantida em estilo `.btn--secondary` com tap target mínimo de 44px; seção subsequente marcada com `id="lista-servicos"` e respiro `py-16 lg:py-20`. |
+| **AC-042-03**         | Espaçamento, hierarquia tipográfica e limpeza de código                   | **APROVADO** | `PageHero` ajusta automaticamente margem para `mt-6 sm:mt-8` na ausência de telemetria; suporte a smooth scrolling via `useSmoothScroll` integrado para âncoras locais; remoção completa de imports não utilizados (`Wrench`, `Paintbrush`, `Car`) e do mapa `serviceIcons`.                           |
 
 ---
 

@@ -15,6 +15,7 @@
 ## 2. Motivação e Problema de Negócio
 
 Na página de Serviços (`/servicos`), a seção Hero/Intro apresentava redundância visual e informacional:
+
 1. Uma linha de 3 mini-cards compactos de resumo dos serviços ("Funilaria Estrutural", "Pintura em Estufa", "Martelinho de Ouro") que duplicava o conteúdo detalhado logo abaixo nas faixas editoriais da mesma página.
 2. Dois botões inferiores onde o botão primário preenchido ("SOLICITAR AVALIAÇÃO TÉCNICA ↗") competia visualmente com o botão de avaliação já fixo no Header da aplicação.
 3. Elementos e imports desnecessários (`Wrench`, `Paintbrush`, `Car` e `serviceIcons`) que geravam código inútil e ruído de manutenção.

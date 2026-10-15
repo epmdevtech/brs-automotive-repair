@@ -1,8 +1,9 @@
 import * as React from "react";
-import { ArrowUpRight, Phone, Instagram, MapPin } from "lucide-react";
+import { ArrowUpRight, Phone, Instagram, MapPin, Calendar } from "lucide-react";
 import { company } from "@/lib/brs";
 import { ScrollReveal } from "@/components/ui/scroll-reveal";
 import { ContactForm } from "./contact-form";
+import { BookingDialog } from "@/features/booking/ui/booking-dialog";
 
 const external = { target: "_blank", rel: "noopener noreferrer" };
 
@@ -14,6 +15,8 @@ export function Contact({
   /** Em `/contato` o título da seção é o `h1` da página. */
   headingAs?: "h1" | "h2";
 }) {
+  const [bookingOpen, setBookingOpen] = React.useState(false);
+
   return (
     <section id="contato" className="section-space">
       <div className="page-width grid md:grid-cols-2 gap-12 md:gap-24">
@@ -34,7 +37,32 @@ export function Contact({
             método ideal de reparo.
           </p>
 
-          <div className="mt-10 pt-8 border-t border-border/60 space-y-6">
+          <div className="mt-8">
+            <button
+              type="button"
+              onClick={() => setBookingOpen(true)}
+              className="w-full p-4 rounded-lg border border-primary/40 bg-gradient-to-r from-primary/15 via-primary/10 to-transparent hover:border-primary text-left transition-all group flex items-center justify-between shadow-sm cursor-pointer"
+            >
+              <div>
+                <div className="flex items-center gap-1.5 text-xs font-mono text-primary uppercase tracking-wider mb-1">
+                  <Calendar size={13} />
+                  <span>Agendamento Online</span>
+                </div>
+                <div className="text-sm font-semibold text-white group-hover:text-primary transition-colors">
+                  Agendar Vistoria ou Leva e Traz (Pré-OS)
+                </div>
+                <p className="text-[11px] text-muted-foreground mt-0.5">
+                  Informe as avarias do veículo e reserve um horário exclusivo em Toledo-PR.
+                </p>
+              </div>
+              <ArrowUpRight
+                size={18}
+                className="text-primary shrink-0 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1"
+              />
+            </button>
+          </div>
+
+          <div className="mt-8 pt-8 border-t border-border/60 space-y-6">
             <a
               href={company.phoneHref}
               className="group block text-foreground hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary rounded-xs"
@@ -83,6 +111,8 @@ export function Contact({
           <ContactForm partner={partner} />
         </ScrollReveal>
       </div>
+
+      <BookingDialog open={bookingOpen} onOpenChange={setBookingOpen} />
     </section>
   );
 }

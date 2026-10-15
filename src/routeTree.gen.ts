@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as R404RouteImport } from './routes/404'
+import { Route as AgendamentosRouteImport } from './routes/agendamentos'
 import { Route as ContatoRouteImport } from './routes/contato'
 import { Route as ParaCorretoresRouteImport } from './routes/para-corretores'
 import { Route as PrivacidadeRouteImport } from './routes/privacidade'
@@ -31,6 +32,11 @@ const IndexRoute = IndexRouteImport.update({
 const R404Route = R404RouteImport.update({
   id: '/404',
   path: '/404',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AgendamentosRoute = AgendamentosRouteImport.update({
+  id: '/agendamentos',
+  path: '/agendamentos',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContatoRoute = ContatoRouteImport.update({
@@ -94,6 +100,7 @@ const ServicosPinturaAutomotivaRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/404': typeof R404Route
+  '/agendamentos': typeof AgendamentosRoute
   '/contato': typeof ContatoRoute
   '/para-corretores': typeof ParaCorretoresRoute
   '/privacidade': typeof PrivacidadeRoute
@@ -109,6 +116,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/404': typeof R404Route
+  '/agendamentos': typeof AgendamentosRoute
   '/contato': typeof ContatoRoute
   '/para-corretores': typeof ParaCorretoresRoute
   '/privacidade': typeof PrivacidadeRoute
@@ -125,6 +133,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/404': typeof R404Route
+  '/agendamentos': typeof AgendamentosRoute
   '/contato': typeof ContatoRoute
   '/para-corretores': typeof ParaCorretoresRoute
   '/privacidade': typeof PrivacidadeRoute
@@ -142,6 +151,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/404'
+    | '/agendamentos'
     | '/contato'
     | '/para-corretores'
     | '/privacidade'
@@ -157,6 +167,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/404'
+    | '/agendamentos'
     | '/contato'
     | '/para-corretores'
     | '/privacidade'
@@ -172,6 +183,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/404'
+    | '/agendamentos'
     | '/contato'
     | '/para-corretores'
     | '/privacidade'
@@ -188,6 +200,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   R404Route: typeof R404Route
+  AgendamentosRoute: typeof AgendamentosRoute
   ContatoRoute: typeof ContatoRoute
   ParaCorretoresRoute: typeof ParaCorretoresRoute
   PrivacidadeRoute: typeof PrivacidadeRoute
@@ -215,6 +228,13 @@ declare module '@tanstack/react-router' {
       path: '/404'
       fullPath: '/404'
       preLoaderRoute: typeof R404RouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/agendamentos': {
+      id: '/agendamentos'
+      path: '/agendamentos'
+      fullPath: '/agendamentos'
+      preLoaderRoute: typeof AgendamentosRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contato': {
@@ -300,6 +320,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   R404Route: R404Route,
+  AgendamentosRoute: AgendamentosRoute,
   ContatoRoute: ContatoRoute,
   ParaCorretoresRoute: ParaCorretoresRoute,
   PrivacidadeRoute: PrivacidadeRoute,

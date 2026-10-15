@@ -2,15 +2,15 @@
 
 ## Metadados
 
-| Campo         | Valor                                                                                  |
-| ------------- | -------------------------------------------------------------------------------------- |
-| Task ID       | `TASK-039-01`                                                                          |
-| Spec Ref      | `SPEC-039`                                                                             |
-| Título        | Refinamento da Hero Section e Transição Direta para Especialidades                     |
-| Status        | Completed                                                                              |
-| Responsável   | Engenheiro Frontend Sênior & Especialista em UX/UI Design                              |
-| Data Início   | 2026-10-14                                                                             |
-| Data Conclusão| 2026-10-14                                                                             |
+| Campo          | Valor                                                              |
+| -------------- | ------------------------------------------------------------------ |
+| Task ID        | `TASK-039-01`                                                      |
+| Spec Ref       | `SPEC-039`                                                         |
+| Título         | Refinamento da Hero Section e Transição Direta para Especialidades |
+| Status         | Completed                                                          |
+| Responsável    | Engenheiro Frontend Sênior & Especialista em UX/UI Design          |
+| Data Início    | 2026-10-14                                                         |
+| Data Conclusão | 2026-10-14                                                         |
 
 ---
 

@@ -2,15 +2,15 @@
 
 ## Metadados
 
-| Campo        | Valor                                                                                                |
-| ------------ | ---------------------------------------------------------------------------------------------------- |
-| ID           | `SPEC-038`                                                                                           |
-| Título       | Remoção de Artefatos Genéricos de IA (OFICINA ATIVA, Badges LED Pulsantes e Botões All-Caps)         |
-| Data Criação | 2026-10-14                                                                                           |
-| Status       | Approved (Aprovada)                                                                                  |
+| Campo        | Valor                                                                                                 |
+| ------------ | ----------------------------------------------------------------------------------------------------- |
+| ID           | `SPEC-038`                                                                                            |
+| Título       | Remoção de Artefatos Genéricos de IA (OFICINA ATIVA, Badges LED Pulsantes e Botões All-Caps)          |
+| Data Criação | 2026-10-14                                                                                            |
+| Status       | Approved (Aprovada)                                                                                   |
 | Autor        | Engenheiro de Software Sênior & Especialista em Design Systems EPM DevTech                            |
-| Prioridade   | Alta (P0)                                                                                            |
-| Impacto      | `src/routes/sobre.tsx`, `src/components/brs/hero.tsx`, `src/components/brs/final-cta.tsx`, `servicos`  |
+| Prioridade   | Alta (P0)                                                                                             |
+| Impacto      | `src/routes/sobre.tsx`, `src/components/brs/hero.tsx`, `src/components/brs/final-cta.tsx`, `servicos` |
 
 ---
 
@@ -33,18 +33,22 @@ Identificou-se através de capturas visuais da interface elementos gráficos est
 ## 2. Requisitos e Critérios de Aceite
 
 ### AC-038-01 — Remoção do Badge "OFICINA ATIVA" em `/sobre`
+
 - Excluir o selo verde pulsante `OFICINA ATIVA` e o identificador `BRS.HQ // TOLEDO-PR` em `src/routes/sobre.tsx`.
 - Substituir por um cabeçalho institucional sóbrio e autêntico: `Oficina em Toledo, Paraná`.
 
 ### AC-038-02 — Limpeza do Eyebrow do Hero
+
 - Eliminar o container em caixa escurecida com borda e o ponto `led-status-pulse` em `src/components/brs/hero.tsx`.
 - Substituir por um eyebrow tipográfico direto e elegante utilizando a classe normativa `.eyebrow` ou tipografia primária limpa (`Oficina Técnica Especializada • Toledo, PR`).
 
 ### AC-038-03 — Padronização Tipográfica dos Botões (Anti-All-Caps)
+
 - Substituir o texto all-caps `SOLICITAR AVALIAÇÃO` por `Solicitar avaliação` (sentence case com inicial maiúscula) em `src/components/brs/final-cta.tsx` e `src/routes/servicos/index.tsx`.
 - Garantir coerência visual em toda a interface institucional.
 
 ### AC-038-04 — Quality Gates e Testes Automatizados
+
 - Implementar suite de testes `src/test/anti-ai-artifacts.test.tsx` garantindo que:
   - O texto "OFICINA ATIVA" não existe no DOM da página `/sobre`.
   - O Hero não renderiza classes de animação pulsante artificial (`led-status-pulse`) nem containers de pill no eyebrow.

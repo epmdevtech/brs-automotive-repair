@@ -229,6 +229,11 @@ Todas as entregas obedecem ao protocolo **Universal SDD**:
 - `SPEC-042` / `TASK-042-01` / `REVIEW-042`: Refinamento Visual da Hero/Intro de Serviços (/servicos), remoção dos 3 mini-cards compactos de resumo, CTA único de exploração (Ver Trabalhos Concluídos com tap target de 44px), id lista-servicos com respiro py-16 lg:py-20 e limpeza de código.
 - `SPEC-043` / `TASK-043-01` / `REVIEW-043`: Refatoração Global de UX/UI: Despoluição de CTAs em Serviços (/servicos), Foco em Casos em Trabalhos (/trabalhos) e Atualização Editorial B2B em Para Corretores (/para-corretores).
 - `SPEC-044` / `TASK-044-01` / `REVIEW-044`: Padronização da Hierarquia Tipográfica e Títulos Monocromáticos: eliminação de frases bicolores de IA em h1/h2, unificação em branco puro e preservação da cor primária/dourada para CTAs e eyebrows.
+- `SPEC-045` / `TASK-045-01`: Módulo de Agendamento Online, Intake Técnico de Avarias (Pré-OS) e Serviço Leva e Traz em Toledo-PR com motor DDD, concorrência Web Locks API, sincronização multi-aba BroadcastChannel e dashboard administrativo.
+- `SPEC-046` / `TASK-046-01`: Agendamento Auto-Confirmado pelo Cliente, Painel de Agenda Operacional com Métricas e Botão de Ação Direta para WhatsApp com Mensagem Formatada.
+- `SPEC-047` / `TASK-047-01`: Plataforma de Agenda em Grade Diária dos Técnicos, Login Administrativo com Credenciais Demo 1-Clique, Gestão de Bloqueios e Ação Direta para WhatsApp da Pré-OS.
+- `SPEC-048` / `TASK-048-01`: Carga Inicial de Dados Fictícios Realistas (Seed) para Demonstração da Agenda dos Técnicos e Botão de Restauração em 1 Clique.
+- `SPEC-049` / `TASK-049-01`: Detalhe Expansível do Processo Completo do Cliente (Quando cadastrou, timeline e anamnese) e Garantia de Seed Ativo no Painel de Agendamentos.
 
 ---
 

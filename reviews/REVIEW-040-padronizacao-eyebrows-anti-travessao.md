@@ -2,13 +2,13 @@
 
 ## 1. Metadados
 
-| Campo   | Valor                                                                                                |
-| ------- | ---------------------------------------------------------------------------------------------------- |
-| SPEC    | [`SPEC-040`](../specs/SPEC-040-padronizacao-eyebrows-anti-travessao.md)                               |
-| TASK    | [`TASK-040-01`](../tasks/TASK-040-01-padronizacao-eyebrows-anti-travessao.md)                         |
-| Data    | 2026-10-14                                                                                           |
-| Status  | Aprovado (100% dos Quality Gates Cumpridos)                                                          |
-| Revisor | Quality Gate Lead & Senior UX/UI Engineer EPM DevTech                                                |
+| Campo   | Valor                                                                         |
+| ------- | ----------------------------------------------------------------------------- |
+| SPEC    | [`SPEC-040`](../specs/SPEC-040-padronizacao-eyebrows-anti-travessao.md)       |
+| TASK    | [`TASK-040-01`](../tasks/TASK-040-01-padronizacao-eyebrows-anti-travessao.md) |
+| Data    | 2026-10-14                                                                    |
+| Status  | Aprovado (100% dos Quality Gates Cumpridos)                                   |
+| Revisor | Quality Gate Lead & Senior UX/UI Engineer EPM DevTech                         |
 
 ---
 
@@ -37,12 +37,12 @@ Padronização refinada da tipografia dos rótulos de seção (`.eyebrow`) em to
 
 ## 3. Matriz de Conformidade dos Critérios de Aceite
 
-| Critério | Descrição | Status | Evidência |
-| -------- | --------- | ------ | --------- |
-| **AC-040-01** | Remoção de `.eyebrow::before` e eliminação de travessões pré-fixados | Aprovado | `src/styles.css` e `media-expand.tsx` limpos; verificado em `eyebrows-standardization.test.tsx` |
-| **AC-040-02** | Tipografia técnica e elegante com tracking 0.2em, text-xs e alinhamento flush | Aprovado | `.eyebrow` calibrado com `letter-spacing: 0.2em` e `font-size: 0.75rem` |
-| **AC-040-03** | Consistência global em todas as seções e páginas | Aprovado | Verificado em todos os componentes e páginas da aplicação |
-| **AC-040-04** | Cobertura de testes e Quality Gates 100% verdes | Aprovado | Vitest (33 suítes, 221 testes passando), ESLint (0 erros) e Build Nitro SSR |
+| Critério      | Descrição                                                                     | Status   | Evidência                                                                                       |
+| ------------- | ----------------------------------------------------------------------------- | -------- | ----------------------------------------------------------------------------------------------- |
+| **AC-040-01** | Remoção de `.eyebrow::before` e eliminação de travessões pré-fixados          | Aprovado | `src/styles.css` e `media-expand.tsx` limpos; verificado em `eyebrows-standardization.test.tsx` |
+| **AC-040-02** | Tipografia técnica e elegante com tracking 0.2em, text-xs e alinhamento flush | Aprovado | `.eyebrow` calibrado com `letter-spacing: 0.2em` e `font-size: 0.75rem`                         |
+| **AC-040-03** | Consistência global em todas as seções e páginas                              | Aprovado | Verificado em todos os componentes e páginas da aplicação                                       |
+| **AC-040-04** | Cobertura de testes e Quality Gates 100% verdes                               | Aprovado | Vitest (33 suítes, 221 testes passando), ESLint (0 erros) e Build Nitro SSR                     |
 
 ---
 
