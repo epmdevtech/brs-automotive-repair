@@ -118,4 +118,61 @@ export interface Appointment {
   logistics: LogisticsData;
   createdAt: string;
   idempotencyKey: string;
+  trackingToken?: string;
+}
+
+export type AppointmentEventType =
+  | "CREATED"
+  | "CONFIRMED"
+  | "VEHICLE_RECEIVED"
+  | "INSPECTION_COMPLETED"
+  | "INSURANCE_APPROVED"
+  | "REPAIR_STARTED"
+  | "PAINT_PREPARATION"
+  | "BOOTH_CURING"
+  | "QUALITY_CHECK"
+  | "COMPLETED"
+  | "CANCELLED";
+
+export interface AppointmentEvent {
+  id: string;
+  appointmentId: string;
+  type: AppointmentEventType;
+  fromStatus?: AppointmentStatus;
+  toStatus?: AppointmentStatus;
+  createdAt: string; // ISO string
+  actorId: string;
+  actorName: string;
+  note?: string;
+  visibleToCustomer: boolean;
+  metadata?: Record<string, unknown>;
+}
+
+export interface SyncMessage {
+  originId: string;
+  messageId: string;
+  type: "APPOINTMENT_UPDATED" | "APPOINTMENT_CREATED" | "SEED_RESET" | "BLOCK_CHANGED" | "MUTATION";
+  recordId?: string;
+  timestamp: number;
+}
+
+export interface CustomerTrackingMilestone {
+  id: string;
+  title: string;
+  description?: string;
+  timestamp?: string;
+  status: "completed" | "current" | "upcoming" | "bypassed" | "cancelled";
+}
+
+export interface CustomerTrackingView {
+  protocol: string;
+  serviceTitle: string;
+  technicianName: string;
+  status: AppointmentStatus;
+  maskedPlate?: string;
+  vehicleSummary: string;
+  scheduledTime: string;
+  isLevaETraz: boolean;
+  createdAt: string;
+  events: CustomerTrackingMilestone[];
 }

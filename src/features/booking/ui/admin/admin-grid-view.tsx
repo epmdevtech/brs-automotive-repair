@@ -92,13 +92,6 @@ export function AdminGridView({ onLogout }: AdminGridViewProps) {
     ensureSeedData(false, currentDate);
     const unsub = localBookingRepository.subscribe((list) => {
       setAppointments(list);
-      // Garante que, se não houver agendamentos na data corrente, injeta dados fictícios imediatamente
-      const hasOnDate = list.some(
-        (a) => a.status !== "CANCELLED" && isSameCivilDay(new Date(a.startTime), currentDate),
-      );
-      if (!hasOnDate) {
-        ensureSeedData(true, currentDate);
-      }
     });
     setBlockedPeriods(getBlockedPeriods());
     return () => unsub();
@@ -111,6 +104,15 @@ export function AdminGridView({ onLogout }: AdminGridViewProps) {
   const handleOpenAppointmentDetail = (app: Appointment) => {
     setSelectedAppointmentForDetail(app);
     setProcessDialogOpen(true);
+  };
+
+  const handleCloseProcessDialog = (open: boolean) => {
+    setProcessDialogOpen(open);
+    if (!open) {
+      setTimeout(() => {
+        setSelectedAppointmentForDetail(null);
+      }, 150);
+    }
   };
 
   const handleResetDemoData = () => {
@@ -161,12 +163,21 @@ export function AdminGridView({ onLogout }: AdminGridViewProps) {
     };
   }, [appointments, currentDate]);
 
-  const handleStatusChange = async (id: string, newStatus: AppointmentStatus) => {
-    const res = await localBookingRepository.updateStatus(id, newStatus);
+  const handleStatusChange = async (
+    id: string,
+    newStatus: AppointmentStatus,
+    options?: {
+      note?: string;
+      actorId?: string;
+      actorName?: string;
+    },
+  ): Promise<boolean> => {
+    const res = await localBookingRepository.updateStatus(id, newStatus, options);
     if (!res.ok) {
-      alert(res.error);
+      return false;
     } else {
       setSelectedAppointmentForDetail((prev) => (prev && prev.id === id ? res.value : prev));
+      return true;
     }
   };
 
@@ -762,7 +773,7 @@ export function AdminGridView({ onLogout }: AdminGridViewProps) {
       <CustomerProcessDialog
         appointment={selectedAppointmentForDetail}
         open={processDialogOpen}
-        onOpenChange={setProcessDialogOpen}
+        onOpenChange={handleCloseProcessDialog}
         onStatusChange={handleStatusChange}
       />
 
