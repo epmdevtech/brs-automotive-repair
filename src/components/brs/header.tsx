@@ -61,9 +61,9 @@ export function Header() {
           })}
         </nav>
 
-        {/* Ações da direita: Botão CTA dourado normativo (.btn--sm) e alternador móvel */}
+        {/* Ações da direita: Botão CTA dourado normativo (.btn--sm) visível em tablets/desktops e alternador móvel */}
         <div className="flex gap-2 sm:gap-3 items-center">
-          <MagneticButton className="inline-flex">
+          <MagneticButton className="hidden sm:inline-flex">
             <Button variant="primary" size="sm" asChild className="text-[11px]">
               <Link to="/contato">
                 <span className="hidden xs:inline">Solicitar avaliação</span>
@@ -117,7 +117,7 @@ export function Header() {
             className="w-full text-xs font-semibold tracking-wider uppercase mt-2 h-11"
           >
             <Link to="/contato" onClick={() => setOpen(false)}>
-              Solicitar avaliação <ArrowUpRight className="ml-1" size={14} aria-hidden="true" />
+              Avaliação <ArrowUpRight className="ml-1" size={14} aria-hidden="true" />
             </Link>
           </Button>
         </nav>
