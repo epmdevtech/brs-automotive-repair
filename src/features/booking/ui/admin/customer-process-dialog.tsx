@@ -504,7 +504,7 @@ export function CustomerProcessDialog({
                     href={selectedMilestoneWaUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="py-1.5 px-3 rounded-md bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold flex items-center gap-1.5 transition-colors shadow-2xs"
+                    className="py-1.5 px-3 rounded-md bg-[#25D366] hover:bg-[#20ba59] active:scale-[0.98] text-white text-xs font-semibold flex items-center gap-1.5 transition-all shadow-2xs"
                   >
                     <Send size={13} /> Abrir no WhatsApp
                   </a>
@@ -717,7 +717,7 @@ export function CustomerProcessDialog({
                 href={whatsAppLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="py-2 px-3.5 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold flex items-center gap-1.5 transition-colors shadow-xs"
+                className="py-2 px-3.5 rounded-lg bg-[#25D366] hover:bg-[#20ba59] active:scale-[0.98] text-white text-xs font-semibold flex items-center gap-1.5 transition-all shadow-xs"
               >
                 <MessageCircle size={14} /> Abrir WhatsApp da Pré-OS
               </a>

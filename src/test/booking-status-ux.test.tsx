@@ -179,17 +179,18 @@ describe("UI: AdminGridView KPIs & Operational Filter Bar (RF-051-04, RF-051-05)
     }
   });
 
-  it("renders semantic KPI counters for the day", () => {
+  it("renders semantic KPI counters for the day including Fechados (SPEC-052)", () => {
     render(<AdminGridView onLogout={vi.fn()} />);
 
     expect(screen.getByText(/Total do Dia/i)).toBeInTheDocument();
     expect(screen.getAllByText(/Em Andamento/i).length).toBeGreaterThanOrEqual(1);
     expect(screen.getAllByText(/Concluídos/i).length).toBeGreaterThanOrEqual(1);
     expect(screen.getAllByText(/Abertos/i).length).toBeGreaterThanOrEqual(1);
+    expect(screen.getAllByText(/Fechados/i).length).toBeGreaterThanOrEqual(1);
     expect(screen.getAllByText(/Cancelados/i).length).toBeGreaterThanOrEqual(1);
   });
 
-  it("renders the operational status filter bar and filters appointments in list view", async () => {
+  it("renders the operational status filter bar with Fechados and filters appointments in list view (SPEC-052)", async () => {
     render(<AdminGridView onLogout={vi.fn()} />);
 
     // Switch to list view
@@ -201,14 +202,29 @@ describe("UI: AdminGridView KPIs & Operational Filter Bar (RF-051-04, RF-051-05)
     // Find filter buttons
     const filterAll = screen.getByRole("button", { name: /Todos \(/i });
     const filterConcluidos = screen.getByRole("button", { name: /Concluídos \(/i });
+    const filterFechados = screen.getByRole("button", { name: /Fechados \(/i });
 
     expect(filterAll).toBeInTheDocument();
     expect(filterConcluidos).toBeInTheDocument();
+    expect(filterFechados).toBeInTheDocument();
 
     // Click on Concluídos filter
     fireEvent.click(filterConcluidos);
-
-    // Verify filter is active
     expect(filterConcluidos).toHaveClass("bg-emerald-600");
+
+    // Click on Fechados filter
+    fireEvent.click(filterFechados);
+    expect(filterFechados).toHaveClass("bg-neutral-800");
+  });
+
+  it("renders WhatsApp button with authentic #25D366 brand affordance (SPEC-052)", () => {
+    render(<AdminGridView onLogout={vi.fn()} />);
+
+    const listTab = screen.getByRole("button", { name: /Lista/i });
+    fireEvent.click(listTab);
+
+    const waButtons = screen.getAllByRole("link", { name: /WhatsApp/i });
+    expect(waButtons.length).toBeGreaterThan(0);
+    expect(waButtons[0]).toHaveClass("bg-[#25D366]");
   });
 });

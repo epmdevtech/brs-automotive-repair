@@ -35,6 +35,9 @@ export function generateDemoAppointments(baseDate: Date = new Date()): Appointme
   const app3Times = interval(today, "10:00", 60);
   const app4Times = interval(today, "15:00", 60);
   const app5Times = interval(today, "08:00", 120);
+  const app8Times = interval(today, "16:00", 60);
+  const app9Times = interval(today, "11:00", 60);
+  const app10Times = interval(today, "17:00", 60);
   const app6Times = interval(tomorrow, "10:00", 60);
   const app7Times = interval(yesterday, "14:00", 60);
 
@@ -242,6 +245,121 @@ export function generateDemoAppointments(baseDate: Date = new Date()): Appointme
       },
       createdAt: app5Times.createdAt,
       idempotencyKey: "seed-idem-5",
+    },
+
+    // 8. Técnico Pintura em Estufa - Hoje 16:00 (Concluído com Sucesso)
+    {
+      id: "seed-app-8",
+      protocol: "#BRS-9110",
+      serviceId: "avaliacao-pintura",
+      professionalId: "tecnico-pintura",
+      startTime: app8Times.startTime,
+      endTime: app8Times.endTime,
+      status: "COMPLETED",
+      customer: {
+        name: "Marcelo Dantas",
+        phone: "+5545999551122",
+        rawPhone: "(45) 99955-1122",
+        notes: "Serviço finalizado com checklist técnico e veículo pronto para entrega.",
+        consentLgpd: true,
+      },
+      intake: {
+        vehicle: {
+          make: "BMW",
+          model: "320i M Sport",
+          year: "2023",
+          plate: "RWA-9B10",
+          color: "Azul Portimão",
+          finishType: "metalica",
+        },
+        affectedAreas: ["para-choque-dianteiro"],
+        damageType: "risco-profundo-descascamento",
+        description: "Repintura de para-choque concluída com estufa térmica infravermelha.",
+        isInsurance: false,
+      },
+      logistics: {
+        type: "presencial",
+        vehicleDrivable: true,
+      },
+      createdAt: app8Times.createdAt,
+      idempotencyKey: "seed-idem-8",
+    },
+
+    // 9. Bruno Funilaria - Hoje 11:00 (Aberto / Aguardando Atendimento)
+    {
+      id: "seed-app-9",
+      protocol: "#BRS-8425",
+      serviceId: "avaliacao-funilaria",
+      professionalId: "bruno-tecnico",
+      startTime: app9Times.startTime,
+      endTime: app9Times.endTime,
+      status: "PENDING",
+      customer: {
+        name: "Renata Vasconcellos",
+        phone: "+5545999663344",
+        rawPhone: "(45) 99966-3344",
+        notes: "Novo agendamento recebido pelo formulário online. Aguardando triagem.",
+        consentLgpd: true,
+      },
+      intake: {
+        vehicle: {
+          make: "Fiat",
+          model: "Pulse Abarth",
+          year: "2024",
+          plate: "FPB-4H18",
+          color: "Vermelho Montecarlo",
+          finishType: "solida",
+        },
+        affectedAreas: ["lateral-esquerda"],
+        damageType: "colisao-com-vinco",
+        description: "Vinco na lateral após manobra em garagem.",
+        isInsurance: false,
+      },
+      logistics: {
+        type: "presencial",
+        vehicleDrivable: true,
+      },
+      createdAt: app9Times.createdAt,
+      idempotencyKey: "seed-idem-9",
+    },
+
+    // 10. Técnico Martelinho - Hoje 17:00 (Fechado / Ausente)
+    {
+      id: "seed-app-10",
+      protocol: "#BRS-7399",
+      serviceId: "martelinho-express",
+      professionalId: "tecnico-martelinho",
+      startTime: app10Times.startTime,
+      endTime: app10Times.endTime,
+      status: "NO_SHOW",
+      customer: {
+        name: "Thiago Fagundes",
+        phone: "+5545999778899",
+        rawPhone: "(45) 99977-8899",
+        notes:
+          "Cliente não compareceu ao horário agendado. Atendimento encerrado administrativamente.",
+        consentLgpd: true,
+      },
+      intake: {
+        vehicle: {
+          make: "Chevrolet",
+          model: "Onix Premier",
+          year: "2022",
+          plate: "ONX-2G55",
+          color: "Prata Switchblade",
+          finishType: "metalica",
+        },
+        affectedAreas: ["teto"],
+        damageType: "amassado-sem-risco",
+        description: "Pequena avaria no teto.",
+        isInsurance: false,
+      },
+      logistics: {
+        type: "presencial",
+        vehicleDrivable: true,
+      },
+      createdAt: app10Times.createdAt,
+      idempotencyKey: "seed-idem-10",
     },
 
     // 6. Amanhã - Bruno Funilaria

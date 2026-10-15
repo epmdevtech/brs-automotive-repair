@@ -160,6 +160,7 @@ export function AdminGridView({ onLogout }: AdminGridViewProps) {
     const inProgressCount = dayAppointments.filter((a) => a.status === "CONFIRMED").length;
     const completedCount = dayAppointments.filter((a) => a.status === "COMPLETED").length;
     const openCount = dayAppointments.filter((a) => a.status === "PENDING").length;
+    const closedCount = dayAppointments.filter((a) => a.status === "NO_SHOW").length;
     const cancelledCount = dayAppointments.filter((a) => a.status === "CANCELLED").length;
     const levaETrazCount = dayAppointments.filter((a) => a.logistics.type === "leva-e-traz").length;
 
@@ -168,6 +169,7 @@ export function AdminGridView({ onLogout }: AdminGridViewProps) {
       inProgress: inProgressCount,
       completed: completedCount,
       open: openCount,
+      closed: closedCount,
       cancelled: cancelledCount,
       levaETraz: levaETrazCount,
       activePros: BRS_BOOKING_CONFIG.professionals.length,
@@ -422,7 +424,7 @@ export function AdminGridView({ onLogout }: AdminGridViewProps) {
 
       {/* 4. CARDS DE KPIS / MÉTRICAS SEMÂNTICAS */}
       <main className="p-6 space-y-6 max-w-7xl mx-auto w-full">
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3.5">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
           <div className="p-4 rounded-xl bg-[#fbf9f6] border border-[#e5dfd5] space-y-1 shadow-2xs">
             <span className="text-[11px] text-[#716860] font-medium">Total do Dia</span>
             <div className="text-2xl lg:text-3xl font-display font-bold text-[#201d1b]">
@@ -454,6 +456,15 @@ export function AdminGridView({ onLogout }: AdminGridViewProps) {
             </span>
             <div className="text-2xl lg:text-3xl font-display font-bold text-sky-700">
               {stats.open}
+            </div>
+          </div>
+
+          <div className="p-4 rounded-xl bg-[#fbf9f6] border border-[#e5dfd5] border-l-4 border-l-neutral-400 space-y-1 shadow-2xs">
+            <span className="text-[11px] text-neutral-800 font-semibold flex items-center gap-1">
+              <Slash size={13} className="text-neutral-600" /> Fechados
+            </span>
+            <div className="text-2xl lg:text-3xl font-display font-bold text-neutral-700">
+              {stats.closed}
             </div>
           </div>
 
@@ -521,6 +532,18 @@ export function AdminGridView({ onLogout }: AdminGridViewProps) {
             >
               <span className="size-2 rounded-full bg-sky-500" />
               Abertos ({stats.open})
+            </button>
+            <button
+              type="button"
+              onClick={() => setStatusFilter("NO_SHOW")}
+              className={`px-3 py-1.5 rounded-lg font-medium transition-colors cursor-pointer flex items-center gap-1.5 ${
+                statusFilter === "NO_SHOW"
+                  ? "bg-neutral-800 text-white shadow-xs font-semibold"
+                  : "bg-neutral-100 text-neutral-800 border border-neutral-300 hover:bg-neutral-200"
+              }`}
+            >
+              <span className="size-2 rounded-full bg-neutral-500" />
+              Fechados ({stats.closed})
             </button>
             <button
               type="button"
@@ -663,9 +686,10 @@ export function AdminGridView({ onLogout }: AdminGridViewProps) {
                                     href={whatsAppLink}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="flex-1 py-1.5 px-2 rounded bg-[#201d1b] hover:bg-[#34302d] text-white text-[11px] font-semibold flex items-center justify-center gap-1 transition-colors"
+                                    className="flex-1 py-1.5 px-2.5 rounded-lg bg-[#25D366] hover:bg-[#20ba59] active:scale-[0.98] text-white text-[11px] font-semibold flex items-center justify-center gap-1.5 transition-all shadow-xs"
+                                    title="Abrir WhatsApp com dados da Pré-OS"
                                   >
-                                    <MessageCircle size={12} /> WhatsApp
+                                    <MessageCircle size={13} className="fill-white/20" /> WhatsApp
                                   </a>
 
                                   <button
@@ -796,9 +820,10 @@ export function AdminGridView({ onLogout }: AdminGridViewProps) {
                           href={whatsApp}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="py-1 px-3 rounded bg-[#201d1b] hover:bg-[#34302d] text-white text-xs font-semibold flex items-center gap-1 transition-colors"
+                          className="py-1.5 px-3.5 rounded-lg bg-[#25D366] hover:bg-[#20ba59] active:scale-[0.98] text-white text-xs font-semibold flex items-center gap-1.5 transition-all shadow-xs"
+                          title="Abrir WhatsApp com dados da Pré-OS"
                         >
-                          <MessageCircle size={12} /> WhatsApp
+                          <MessageCircle size={13} className="fill-white/20" /> WhatsApp
                         </a>
                       </div>
                     </div>
