@@ -53,6 +53,7 @@ Gerado por `scripts/generate_traceability.py`. Não edite manualmente; execute n
 | [SPEC-047](../specs/SPEC-047-plataforma-agenda-grid-login-whatsapp.md) | Not recorded | [TASK-047-01](../tasks/TASK-047-01-plataforma-agenda-grid-login-whatsapp.md) (Not recorded) | `5f68213a` docs(traceability): vincula entrega da plataforma de agenda em grade dos tecnicos | — |
 | [SPEC-048](../specs/SPEC-048-dados-ficticios-agenda-seed.md) | Not recorded | [TASK-048-01](../tasks/TASK-048-01-dados-ficticios-agenda-seed.md) (Not recorded) | `4b95c970` test(booking): torna assercoes de horarios imunes ao timezone do ambiente CI<br>`a017da0e` feat(booking): plataforma de agendamento em grade diaria, intake pre-os e seed demonstrativo | — |
 | [SPEC-049](../specs/SPEC-049-detalhe-expansivel-processo-cliente-seed-ativo.md) | Aprovado | [TASK-049-01](../tasks/TASK-049-01-detalhe-expansivel-processo-cliente-seed-ativo.md) (Concluído) | `4fc1bcc5` docs(traceability): sincroniza matriz com SPEC-049 e TASK-049-01<br>`d50b41fc` feat(booking): modal expansivel de detalhes do processo do cliente e garantia de seed ativo | — |
+| [SPEC-050](../specs/SPEC-050-correcao-modal-agendamentos-timeline-reparacao.md) | Aprovado | [TASK-050-01](../tasks/TASK-050-01-correcao-modal-agendamentos-timeline-reparacao.md) (Concluído) | `a523bafb` feat(booking): correcao do modal de agendamentos, sincronizacao e timeline de reparacao | — |
 
 ## Lacunas de rastreabilidade (Traceability gaps)
 
