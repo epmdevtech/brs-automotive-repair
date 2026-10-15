@@ -86,19 +86,16 @@ export function LoginForm({ onLoginSuccess, demo = true }: LoginFormProps) {
 
   return (
     <div className="w-full space-y-6">
-      {/* Banner de Demonstração discreto */}
-      {demo && <DemoBanner demo={demo} onFillDemo={handleFillDemo} />}
-
       {/* Cabeçalho do Cartão de Login */}
       <div className="space-y-2">
         <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-100 text-slate-700 text-[11px] font-semibold border border-slate-200">
           <Shield size={12} className="text-slate-600" aria-hidden="true" />
-          <span>Acesso Administrativo</span>
+          <span>Acesso administrativo</span>
         </div>
 
         <h1 className="text-2xl font-bold text-slate-900 tracking-tight">Painel da Oficina</h1>
-        <p className="text-xs text-slate-500 leading-relaxed">
-          Faça login para gerenciar consultas, bloqueios e equipe técnica.
+        <p className="text-sm text-slate-600 leading-relaxed">
+          Faça login para gerenciar a agenda, bloqueios de baia e equipe técnica.
         </p>
       </div>
 
@@ -107,9 +104,9 @@ export function LoginForm({ onLoginSuccess, demo = true }: LoginFormProps) {
         <div
           role="alert"
           aria-live="assertive"
-          className="p-3 rounded-lg bg-rose-50 border border-rose-200/90 text-rose-700 text-xs flex items-start gap-2 shadow-2xs animate-in fade-in duration-200"
+          className="p-3.5 rounded-lg bg-rose-50 border border-rose-200/90 text-rose-700 text-xs flex items-start gap-2.5 shadow-2xs animate-in fade-in duration-200"
         >
-          <AlertCircle size={15} className="shrink-0 mt-0.5 text-rose-600" aria-hidden="true" />
+          <AlertCircle size={16} className="shrink-0 mt-0.5 text-rose-600" aria-hidden="true" />
           <div className="leading-relaxed">
             <span className="font-semibold block">Falha no acesso</span>
             <span>{authError}</span>
@@ -121,20 +118,20 @@ export function LoginForm({ onLoginSuccess, demo = true }: LoginFormProps) {
       <form onSubmit={handleSubmit} noValidate className="space-y-4">
         {/* Campo E-mail */}
         <div className="space-y-1.5">
-          <label htmlFor="admin-email" className="text-xs font-semibold text-slate-700 block">
+          <label htmlFor="admin-email" className="text-sm font-medium text-slate-700 block">
             E-mail institucional
           </label>
           <div className="relative">
             <Mail
-              size={15}
-              className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none"
+              size={16}
+              className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none"
               aria-hidden="true"
             />
             <input
               id="admin-email"
               type="email"
               autoComplete="username"
-              placeholder="admin@brsreparacoes.com.br"
+              placeholder="nome@brsreparacoes.com.br"
               value={email}
               onChange={(e) => {
                 setEmail(e.target.value);
@@ -144,7 +141,7 @@ export function LoginForm({ onLoginSuccess, demo = true }: LoginFormProps) {
               }}
               aria-invalid={Boolean(fieldErrors.email)}
               aria-describedby={fieldErrors.email ? "email-error" : undefined}
-              className={`w-full pl-9 pr-3 py-2.5 text-xs rounded-lg border bg-white text-slate-900 placeholder:text-slate-400 focus:outline-none transition-colors shadow-2xs ${
+              className={`w-full pl-10 pr-3 h-11 sm:h-12 text-sm rounded-lg border bg-white text-slate-900 placeholder:text-slate-400 focus:outline-none transition-colors shadow-2xs ${
                 fieldErrors.email
                   ? "border-rose-300 focus:border-rose-500 focus:ring-1 focus:ring-rose-500"
                   : "border-slate-300 focus:border-slate-900 focus:ring-1 focus:ring-slate-900"
@@ -152,7 +149,7 @@ export function LoginForm({ onLoginSuccess, demo = true }: LoginFormProps) {
             />
           </div>
           {fieldErrors.email && (
-            <p id="email-error" role="alert" className="text-[11px] text-rose-600 font-medium">
+            <p id="email-error" role="alert" className="text-xs text-rose-600 font-medium">
               {fieldErrors.email}
             </p>
           )}
@@ -161,7 +158,7 @@ export function LoginForm({ onLoginSuccess, demo = true }: LoginFormProps) {
         {/* Campo Senha */}
         <div className="space-y-1.5">
           <div className="flex items-center justify-between text-xs">
-            <label htmlFor="admin-password" className="font-semibold text-slate-700">
+            <label htmlFor="admin-password" className="text-sm font-medium text-slate-700">
               Senha de acesso
             </label>
 
@@ -170,9 +167,9 @@ export function LoginForm({ onLoginSuccess, demo = true }: LoginFormProps) {
               <span
                 role="status"
                 aria-live="polite"
-                className="text-[11px] font-medium text-amber-700 bg-amber-50 px-2 py-0.5 rounded border border-amber-200 flex items-center gap-1 animate-pulse"
+                className="text-xs font-medium text-amber-800 bg-amber-50 px-2 py-0.5 rounded border border-amber-200 flex items-center gap-1 animate-pulse"
               >
-                <AlertCircle size={11} aria-hidden="true" />
+                <AlertCircle size={12} aria-hidden="true" />
                 <span>Caps Lock ativado</span>
               </span>
             )}
@@ -181,7 +178,7 @@ export function LoginForm({ onLoginSuccess, demo = true }: LoginFormProps) {
             <button
               type="button"
               onClick={() => setForgotPasswordOpen(true)}
-              className="text-[11px] text-slate-500 hover:text-slate-900 transition-colors cursor-pointer hover:underline"
+              className="min-h-[24px] px-1 inline-flex items-center text-xs text-slate-600 hover:text-slate-900 transition-colors cursor-pointer hover:underline focus:outline-none focus:ring-2 focus:ring-slate-900 rounded"
             >
               Esqueci minha senha
             </button>
@@ -189,15 +186,15 @@ export function LoginForm({ onLoginSuccess, demo = true }: LoginFormProps) {
 
           <div className="relative">
             <Lock
-              size={15}
-              className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none"
+              size={16}
+              className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none"
               aria-hidden="true"
             />
             <input
               id="admin-password"
               type={showPassword ? "text" : "password"}
               autoComplete="current-password"
-              placeholder="••••••••"
+              placeholder=""
               value={password}
               onChange={(e) => {
                 setPassword(e.target.value);
@@ -209,7 +206,7 @@ export function LoginForm({ onLoginSuccess, demo = true }: LoginFormProps) {
               onKeyUp={checkCapsLock}
               aria-invalid={Boolean(fieldErrors.password)}
               aria-describedby={fieldErrors.password ? "password-error" : undefined}
-              className={`w-full pl-9 pr-10 py-2.5 text-xs rounded-lg border bg-white text-slate-900 placeholder:text-slate-400 focus:outline-none transition-colors shadow-2xs font-mono ${
+              className={`w-full pl-10 pr-11 h-11 sm:h-12 text-sm rounded-lg border bg-white text-slate-900 focus:outline-none transition-colors shadow-2xs font-mono ${
                 fieldErrors.password
                   ? "border-rose-300 focus:border-rose-500 focus:ring-1 focus:ring-rose-500"
                   : "border-slate-300 focus:border-slate-900 focus:ring-1 focus:ring-slate-900"
@@ -220,17 +217,17 @@ export function LoginForm({ onLoginSuccess, demo = true }: LoginFormProps) {
               onClick={() => setShowPassword((prev) => !prev)}
               aria-pressed={showPassword}
               aria-label={showPassword ? "Ocultar senha de acesso" : "Exibir senha de acesso"}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700 p-0.5 rounded transition-colors cursor-pointer"
+              className="absolute right-1 top-1/2 -translate-y-1/2 size-10 flex items-center justify-center text-slate-500 hover:text-slate-800 rounded-md transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-slate-900"
             >
               {showPassword ? (
-                <EyeOff size={15} aria-hidden="true" />
+                <EyeOff size={16} aria-hidden="true" />
               ) : (
-                <Eye size={15} aria-hidden="true" />
+                <Eye size={16} aria-hidden="true" />
               )}
             </button>
           </div>
           {fieldErrors.password && (
-            <p id="password-error" role="alert" className="text-[11px] text-rose-600 font-medium">
+            <p id="password-error" role="alert" className="text-xs text-rose-600 font-medium">
               {fieldErrors.password}
             </p>
           )}
@@ -241,27 +238,32 @@ export function LoginForm({ onLoginSuccess, demo = true }: LoginFormProps) {
           type="submit"
           disabled={isLoading}
           aria-busy={isLoading}
-          className="w-full mt-2 py-2.5 px-4 rounded-lg bg-slate-900 hover:bg-black active:scale-[0.99] disabled:opacity-75 disabled:cursor-not-allowed text-white text-xs font-semibold flex items-center justify-center gap-2 transition-all cursor-pointer shadow-sm"
+          className="w-full mt-2 h-11 sm:h-12 px-4 rounded-lg bg-slate-900 hover:bg-black active:scale-[0.99] disabled:opacity-75 disabled:cursor-not-allowed text-white text-sm font-semibold flex items-center justify-center gap-2 transition-all cursor-pointer shadow-sm focus:outline-none focus:ring-2 focus:ring-slate-900 focus:ring-offset-2"
         >
           {isLoading ? (
             <>
-              <Loader2 size={14} className="animate-spin" aria-hidden="true" />
+              <Loader2 size={16} className="animate-spin" aria-hidden="true" />
               <span>Entrando...</span>
             </>
           ) : (
             <>
-              <span>Entrar no Painel</span>
-              <ArrowRight size={14} aria-hidden="true" />
+              <span>Entrar no painel</span>
+              <ArrowRight size={16} aria-hidden="true" />
             </>
           )}
         </button>
       </form>
 
-      {/* Nota de sessão e ambiente */}
-      <p className="text-[11px] text-slate-400 text-center leading-relaxed">
-        Sessão autenticada no navegador. Em ambiente corporativo, a BRS adota integração via SSO /
-        OAuth2.
-      </p>
+      {/* Bloco de Demonstração posicionado abaixo do formulário principal */}
+      {demo && <DemoBanner demo={demo} onFillDemo={handleFillDemo} />}
+
+      {/* Nota de sessão e ambiente (apenas visível em modo demo) */}
+      {demo && (
+        <p className="text-xs text-slate-500 text-center leading-relaxed">
+          Sessão temporária no navegador. Em ambiente corporativo, a BRS adota integração via SSO /
+          OAuth2.
+        </p>
+      )}
 
       {/* Dialog Informativo de Recuperação de Senha */}
       <Dialog.Root open={forgotPasswordOpen} onOpenChange={setForgotPasswordOpen}>
