@@ -47,7 +47,8 @@
     - `/sobre`: Rota institucional sobre a história, valores e estrutura física da BRS;
     - `/contato`: Rota dedicada de triagem de contato e avaliação técnica;
     - `/privacidade`: Políticas de privacidade e conformidade de dados;
-    - `/proposta/$slug`: Rota de proposta comercial personalizada confidencial (`noindex, nofollow`).
+    - `/proposta/$slug`: Rota de proposta comercial personalizada confidencial (`noindex, nofollow`);
+    - `/briefing`: Rota confidencial de execução e ingestão de briefing multinicho EPM DevTech (`noindex, nofollow`, fora dos menus públicos).
   - Configuração canônica de dados da empresa centralizada em [`src/lib/brs.ts`](src/lib/brs.ts), compartilhada diretamente entre componentes visuais e suites de teste.
   - Componentes de interface baseados nas primitivas acessíveis do **Radix UI** estilizados via Tailwind CSS v4.
   - Roteamento com `@tanstack/react-router` e cache reativo com `@tanstack/react-query`.
@@ -250,6 +251,7 @@ Todas as entregas obedecem ao protocolo **Universal SDD**:
 - `SPEC-063` / `TASK-063-01` / `REVIEW-063`: Prevenção e Blindagem Contra Estouro de Layout e Overflow Horizontal no Modo Mobile (Aplicação de overflow-x: clip e max-width 100% em html, body, SiteLayout, PageTransition, AnimatedHero e flex-wrap responsivo na classe .eyebrow para eliminar rolagem lateral no mobile).
 - `SPEC-064` / `TASK-064-01` / `REVIEW-064`: Auditoria e Refatoração UX/UI — Conversão, Integridade Editorial, Home em 6 Blocos, SEO Canônico de Produção (`https://brs.epmdevtech.com.br`) e Dados Oficiais Confirmados (Endereço e Horário).
 - `SPEC-065` / `TASK-065-01` / `REVIEW-065`: Sincronização Bidirecional da Linha do Tempo Operacional com o Status do Agendamento e Mini-Stepper em `/agendamentos` + Correção de Hidratação SSR.
+- `SPEC-066` / `TASK-066-01`: Rota Confidencial de Execução e Ingestão de Briefing Multinicho EPM DevTech (`/briefing`), sem inclusão em menus públicos, suporte nativo ao nicho de reparação automotiva, persistência local, cálculo de contraste WCAG e exportação determinística de `briefing-completo.json` e `booking-config.json`.
 
 ---
 
