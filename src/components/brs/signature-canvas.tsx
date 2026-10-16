@@ -336,7 +336,7 @@ export function SignatureCanvas({ className, interactive = true }: SignatureCanv
 
       {/* Mini-HUD de controle da experiência (Awwwards Signature HUD) */}
       {hudVisible && (
-        <div className="pointer-events-auto absolute bottom-20 right-6 sm:right-10 z-20 flex items-center gap-1.5 p-1 rounded-sm glass-panel-luxury text-[10px] font-mono tracking-wider border border-white/10 shadow-xl shadow-black/80">
+        <div className="pointer-events-auto absolute bottom-20 right-3 sm:right-10 z-20 flex items-center gap-1.5 p-1 rounded-sm glass-panel-luxury text-[10px] font-mono tracking-wider border border-white/10 shadow-xl shadow-black/80 max-w-[calc(100vw-24px)]">
           <div className="flex items-center gap-1 px-2 py-0.5 text-neutral-400">
             <Sparkles size={11} className="text-primary" />
             <span>OPTICAL HUD</span>

@@ -247,6 +247,7 @@ Todas as entregas obedecem ao protocolo **Universal SDD**:
 - `SPEC-060` / `TASK-060-01` / `TASK-060-02` / `REVIEW-060`: Otimização de Code-Splitting de Rotas e Resolução de Erro de Hidratação SSR sob Reduced Motion (Remoção de export indevido em /acompanhar/$token, isomorfismo SSR de PageTransition e blindagem contra erros de hidratação no React 19).
 - `SPEC-061` / `TASK-061-01` / `TASK-061-02` / `REVIEW-061`: Isomorfismo SSR e Resolução Definitiva de Hidratação nos Componentes de Motion com MotionConfig no TanStack Start (Eliminação de bifurcações manuais de JSX e hooks divergentes no SSR em ScrollReveal, ImageReveal, Reveal, MagneticButton e demais componentes, supressão de avisos warnOnce de acessibilidade e garantia de paridade absoluta com React 19).
 - `SPEC-062` / `TASK-062-01` / `REVIEW-062`: Refinamento UX/UI Responsivo do CTA do Header e Menu Móvel BRS (Ocultação do botão CTA na barra superior em telas móveis via hidden sm:inline-flex e simplificação do CTA no menu hambúrguer para o rótulo direto Avaliação).
+- `SPEC-063` / `TASK-063-01` / `REVIEW-063`: Prevenção e Blindagem Contra Estouro de Layout e Overflow Horizontal no Modo Mobile (Aplicação de overflow-x: clip e max-width 100% em html, body, SiteLayout, PageTransition, AnimatedHero e flex-wrap responsivo na classe .eyebrow para eliminar rolagem lateral no mobile).
 
 ---
 

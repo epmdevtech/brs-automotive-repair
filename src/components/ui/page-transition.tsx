@@ -52,7 +52,7 @@ export function PageTransition({ children, pathname, className }: PageTransition
           duration: shouldReduce ? 0.01 : 0.28,
           ease: [0.22, 1, 0.36, 1],
         }}
-        className={cn("w-full", className)}
+        className={cn("w-full max-w-full overflow-x-clip", className)}
       >
         {children}
       </motion.div>

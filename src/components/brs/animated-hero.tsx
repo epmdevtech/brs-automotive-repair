@@ -169,7 +169,7 @@ export const AnimatedHero = ({
       ref={heroRef}
       id={id}
       className={cn(
-        "relative flex min-h-screen w-full flex-col justify-center overflow-hidden bg-background text-foreground pt-28 pb-24",
+        "relative flex min-h-screen w-full max-w-full flex-col justify-center overflow-x-clip overflow-y-hidden bg-background text-foreground pt-28 pb-24",
         className,
       )}
     >
@@ -204,11 +204,11 @@ export const AnimatedHero = ({
         variants={containerVariants}
         initial="hidden"
         animate="visible"
-        className="page-width relative z-10 flex flex-col items-start justify-center text-left py-8 will-change-transform"
+        className="page-width relative z-10 flex flex-col items-start justify-center text-left py-8 will-change-transform w-full max-w-full overflow-hidden"
       >
         {/* Overline / Badge Superior */}
         {eyebrow && (
-          <motion.div variants={itemVariants} className="mb-4">
+          <motion.div variants={itemVariants} className="mb-4 max-w-full">
             {eyebrow}
           </motion.div>
         )}
@@ -216,7 +216,7 @@ export const AnimatedHero = ({
         {/* Título Principal (H1) com forte contraste */}
         <motion.h1
           variants={itemVariants}
-          className="text-4xl font-semibold tracking-tight sm:text-5xl md:text-6xl lg:text-[4.25rem] font-display leading-[1.12] max-w-4xl text-balance text-white"
+          className="text-4xl font-semibold tracking-tight sm:text-5xl md:text-6xl lg:text-[4.25rem] font-display leading-[1.12] max-w-4xl text-balance text-white break-words"
         >
           {title || "BRS Reparações Automotivas."}
         </motion.h1>
@@ -336,9 +336,9 @@ export const AnimatedHero = ({
       </motion.div>
 
       {/* Rodapé do Hero / Microdados e Navegação de Scroll */}
-      <div className="absolute bottom-6 left-0 right-0 z-10">
+      <div className="absolute bottom-6 left-0 right-0 z-10 w-full overflow-hidden">
         {bottomContent || (
-          <div className="page-width flex items-center justify-between text-xs text-neutral-400 pt-3 border-t border-white/10">
+          <div className="page-width flex items-center justify-between text-xs text-neutral-400 pt-3 border-t border-white/10 w-full">
             <span className="flex items-center gap-2 font-medium">
               <MapPin size={14} className="text-primary" aria-hidden="true" /> Toledo, Paraná
             </span>

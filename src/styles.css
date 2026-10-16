@@ -166,6 +166,8 @@ html.lenis body {
   html {
     scroll-behavior: smooth;
     scroll-padding-top: 100px;
+    overflow-x: clip;
+    max-width: 100%;
   }
   body {
     margin: 0;
@@ -178,6 +180,9 @@ html.lenis body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
+    overflow-x: clip;
+    max-width: 100%;
+    width: 100%;
   }
   h1,
   h2,
@@ -305,6 +310,7 @@ html.lenis body {
 }
 .eyebrow {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   color: var(--primary);
   text-transform: uppercase;
@@ -313,6 +319,8 @@ html.lenis body {
   font-weight: var(--weight-semibold);
   line-height: 1.5;
   letter-spacing: var(--tracking-eyebrow);
+  max-width: 100%;
+  word-break: break-word;
 }
 .section-title {
   font-family: var(--font-display);
@@ -327,6 +335,7 @@ html.lenis body {
   display: inline-flex;
   flex-direction: column;
   line-height: 1;
+  max-width: 100%;
 }
 .brand strong {
   font-family: var(--font-display);
@@ -911,7 +920,8 @@ textarea.field-input {
 }
 @media (max-width: 767px) {
   .page-width {
-    width: calc(100% - 40px);
+    width: calc(100% - 32px);
+    max-width: 100%;
   }
   .section-space {
     padding-block: 64px;
@@ -920,10 +930,15 @@ textarea.field-input {
     height: 76px;
   }
   .brand strong {
-    font-size: 32px;
+    font-size: 28px;
   }
   .brand span {
-    font-size: 6.5px;
+    font-size: 6px;
+    letter-spacing: 1px;
+  }
+  .eyebrow {
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
   }
   .hero {
     min-height: 680px;

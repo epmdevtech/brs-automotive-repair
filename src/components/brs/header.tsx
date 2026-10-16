@@ -25,14 +25,14 @@ export function Header() {
   }, []);
 
   return (
-    <header className="fixed top-3 sm:top-5 left-0 right-0 z-50 px-4 sm:px-6 pointer-events-none transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]">
+    <header className="fixed top-3 sm:top-5 left-0 right-0 z-50 px-3 sm:px-6 pointer-events-none transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] w-full max-w-full">
       {/* Cápsula flutuante centralizada */}
       <div
         className={cn(
-          "pointer-events-auto mx-auto max-w-6xl transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] rounded-xl border shadow-2xl backdrop-blur-md flex items-center justify-between",
+          "pointer-events-auto mx-auto max-w-6xl transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] rounded-xl border shadow-2xl backdrop-blur-md flex items-center justify-between w-full",
           scrolled
-            ? "bg-neutral-950/90 border-white/15 py-2 px-4 sm:px-6 shadow-black/60"
-            : "bg-neutral-950/75 border-white/10 py-2.5 sm:py-3 px-4 sm:px-8 shadow-black/40",
+            ? "bg-neutral-950/90 border-white/15 py-2 px-3 sm:px-6 shadow-black/60"
+            : "bg-neutral-950/75 border-white/10 py-2 sm:py-3 px-3 sm:px-8 shadow-black/40",
         )}
         style={{ borderRadius: "var(--radius-lg)" }}
       >
