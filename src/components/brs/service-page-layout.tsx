@@ -63,30 +63,30 @@ export function ServicePageLayout({
 }: ServicePageContent) {
   const otherServices = services.filter((item) => item.slug !== service.slug);
 
-  // Telemetria técnica específica por especialidade
+  // Destaques técnicos específicos por especialidade
   const serviceBadges: TelemetryBadge[] =
     service.slug === "funilaria"
       ? [
-          { icon: Wrench, label: "Gaps Milimétricos", detail: "< 1.0mm padrão de fábrica" },
-          { icon: ShieldAlert, label: "Mesa de Tração", detail: "Alinhamento estrutural laser" },
+          { icon: Wrench, label: "Alinhamento de Folgas", detail: "Encaixes e vincos originais" },
+          { icon: ShieldAlert, label: "Repuxo Técnico", detail: "Recuperação geométrica da chapa" },
           { icon: ShieldCheck, label: "Sem Enxerto", detail: "Geometria original restaurada" },
         ]
       : service.slug === "pintura-automotiva"
         ? [
             {
               icon: Paintbrush,
-              label: "Pressão Positiva",
-              detail: "Estufa com filtragem absoluta",
+              label: "Cabine de Pintura",
+              detail: "Estufa com controle térmico e filtragem",
             },
             {
               icon: Sparkles,
-              label: "Colorimetria Digital",
-              detail: "Leitura espectrofotométrica",
+              label: "Colorimetria",
+              detail: "Ajuste preciso de tonalidade",
             },
             {
               icon: ShieldCheck,
               label: "Verniz Alto Sólidos",
-              detail: "Proteção UV e acabamento espelhado",
+              detail: "Proteção UV e acabamento uniforme",
             },
           ]
         : [
@@ -95,7 +95,7 @@ export function ServicePageLayout({
             {
               icon: ShieldCheck,
               label: "Sem Massa Plástica",
-              detail: "Procedimento cirúrgico não invasivo",
+              detail: "Desamassamento técnico não invasivo",
             },
           ];
 
@@ -108,7 +108,7 @@ export function ServicePageLayout({
 
   return (
     <div className="pt-28 pb-20">
-      {/* Hero Section Padrão Awwwards Site of the Day */}
+      {/* Hero Section da Página de Serviço */}
       <PageHero
         breadcrumbs={[{ name: "Serviços", path: "/servicos" }, { name: service.title }]}
         codeIndex={codeIndex}
@@ -132,9 +132,6 @@ export function ServicePageLayout({
         ]}
         asideContent={
           <div className="relative rounded-sm overflow-hidden border border-white/15 shadow-2xl shadow-black/80 hover:border-primary/40 transition-colors duration-500 group">
-            <div className="absolute top-2 left-2 z-20 text-white/30 font-mono text-[9px] pointer-events-none">
-              + SPEC.VIEW // {service.slug.toUpperCase()}
-            </div>
             <ImageReveal className="relative aspect-4/3 overflow-hidden">
               <img
                 src={image}

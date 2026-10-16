@@ -2,14 +2,14 @@
 
 ## Metadados
 
-| Campo   | Valor                                                                                                 |
-| ------- | ----------------------------------------------------------------------------------------------------- |
-| ID      | REVIEW-060                                                                                            |
-| SPEC    | SPEC-060                                                                                              |
-| TASKS   | TASK-060-01, TASK-060-02                                                                              |
-| Status  | Aprovado                                                                                              |
-| Data    | 2026-10-15                                                                                            |
-| Revisor | Staff Frontend & Performance Engineer (EPMDEVTECH)                                                     |
+| Campo   | Valor                                              |
+| ------- | -------------------------------------------------- |
+| ID      | REVIEW-060                                         |
+| SPEC    | SPEC-060                                           |
+| TASKS   | TASK-060-01, TASK-060-02                           |
+| Status  | Aprovado                                           |
+| Data    | 2026-10-15                                         |
+| Revisor | Staff Frontend & Performance Engineer (EPMDEVTECH) |
 
 ---
 
@@ -18,6 +18,7 @@
 A **SPEC-060** eliminou as duas advertências/erros remanescentes identificados no console do navegador tanto em ambiente de desenvolvimento local quanto sob SSR em produção.
 
 ### 1.1 Aviso de Code-Splitting na Rota `/acompanhar/$token` (TASK-060-01)
+
 - **Problema**: O TanStack Router emitia no console:
   ```text
   $token.tsx:4 [tanstack-router] These exports from ".../src/routes/acompanhar/$token.tsx" will not be code-split and will increase your bundle size:
@@ -28,6 +29,7 @@ A **SPEC-060** eliminou as duas advertências/erros remanescentes identificados 
 - **Resultado**: Aviso completamente eliminado e pacote `dist/client/assets/_token-*.js` otimizado.
 
 ### 1.2 Erro de Hidratação SSR com `prefers-reduced-motion` (TASK-060-02)
+
 - **Problema**: Ao carregar o site com preferência de movimento reduzido ativada no sistema operacional ou navegador, o React 19 disparava erro de hidratação:
   ```text
   react-dom_client.js:2966 Uncaught Error: Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client.
@@ -45,33 +47,39 @@ A **SPEC-060** eliminou as duas advertências/erros remanescentes identificados 
 ## 2. Evidências de Validação e Quality Gates
 
 ### 2.1 Testes Automatizados (Vitest)
+
 ```bash
 bun run test
 ```
+
 - **Resultado**: 49 arquivos de teste executados, **358 testes aprovados (100% de sucesso)**.
 - Novos testes cobrindo SSR isomorfo (`renderToString`), supressão da barra laser sob reduced motion, renderização da barra laser no mount regular e verificação de export exclusivo em `/acompanhar/$token`.
 
 ### 2.2 Linter de Código (ESLint)
+
 ```bash
 bun run lint
 ```
+
 - **Resultado**: 0 erros.
 
 ### 2.3 Compilação de Produção (Vite + TanStack Start SSR)
+
 ```bash
 bun run build
 ```
+
 - **Resultado**: Sucesso completo em ~5.2s. Cliente e servidor SSR compilados em `dist/client` e `dist/server/server.js`.
 
 ---
 
 ## 3. Matriz de Critérios de Aceite
 
-| Critério | Descrição | Status | Evidência |
-| -------- | --------- | ------ | --------- |
-| **AC-060-01** | Remoção de export indevido de `CustomerTrackingPage` em `$token.tsx` | Aprovado | Teste unitário e bundle TanStack Router limpo |
-| **AC-060-02** | Eliminação do erro de hidratação sob `prefers-reduced-motion` | Aprovado | Teste com `MotionConfig reducedMotion="always"` |
-| **AC-060-03** | Isomorfismo estrito entre HTML do SSR e primeiro render do cliente | Aprovado | Teste com `renderToString` de `PageTransition` |
-| **AC-060-04** | Preservação da barra laser transitória em usuários sem restrição de movimento | Aprovado | Teste validando elemento após mount |
-| **AC-060-05** | Cobertura de testes automatizados para motion e SSR | Aprovado | 358 testes passando no Vitest |
-| **AC-060-06** | Quality Gates aprovados | Aprovado | Vitest, ESLint e Vite Build com 100% de sucesso |
+| Critério      | Descrição                                                                     | Status   | Evidência                                       |
+| ------------- | ----------------------------------------------------------------------------- | -------- | ----------------------------------------------- |
+| **AC-060-01** | Remoção de export indevido de `CustomerTrackingPage` em `$token.tsx`          | Aprovado | Teste unitário e bundle TanStack Router limpo   |
+| **AC-060-02** | Eliminação do erro de hidratação sob `prefers-reduced-motion`                 | Aprovado | Teste com `MotionConfig reducedMotion="always"` |
+| **AC-060-03** | Isomorfismo estrito entre HTML do SSR e primeiro render do cliente            | Aprovado | Teste com `renderToString` de `PageTransition`  |
+| **AC-060-04** | Preservação da barra laser transitória em usuários sem restrição de movimento | Aprovado | Teste validando elemento após mount             |
+| **AC-060-05** | Cobertura de testes automatizados para motion e SSR                           | Aprovado | 358 testes passando no Vitest                   |
+| **AC-060-06** | Quality Gates aprovados                                                       | Aprovado | Vitest, ESLint e Vite Build com 100% de sucesso |

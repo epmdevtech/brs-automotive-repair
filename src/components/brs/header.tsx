@@ -75,7 +75,7 @@ export function Header() {
 
           <button
             type="button"
-            className="lg:hidden inline-flex items-center justify-center text-white hover:bg-white/10 rounded-sm size-9 transition-colors focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2 cursor-pointer border-0 bg-transparent p-0"
+            className="lg:hidden inline-flex items-center justify-center text-white hover:bg-white/10 rounded-sm size-11 transition-colors focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2 cursor-pointer border-0 bg-transparent p-0"
             onClick={() => setOpen(!open)}
             aria-label={open ? "Fechar menu de navegação" : "Abrir menu de navegação"}
             aria-expanded={open}

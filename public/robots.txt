@@ -28,4 +28,4 @@ Allow: /
 User-agent: *
 Allow: /
 
-Sitemap: http://brs.localhost/sitemap.xml
+Sitemap: https://brs.epmdevtech.com.br/sitemap.xml

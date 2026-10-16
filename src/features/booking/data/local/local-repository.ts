@@ -8,6 +8,11 @@ import type {
 import { intervalsOverlap } from "../../domain/time";
 import { transitionStatus } from "../../domain/status";
 import { recordAppointmentEvent } from "../../domain/events";
+import {
+  ETAPA_SYNC_DOM_EVENT,
+  reconciliarStatusAgendamentosComEtapas,
+  garantirTodasEtapasConcluidas,
+} from "../../domain/etapas";
 import { BRS_BOOKING_CONFIG } from "../../config/booking.config";
 import type { BookingRepository, CreateAppointmentError } from "../repository";
 
@@ -18,6 +23,9 @@ export class LocalBookingRepository implements BookingRepository {
   private subscribers: Set<(appointments: Appointment[]) => void> = new Set();
   private instanceId: string;
   private processedMessageIds = new Set<string>();
+  private handleEtapaSync = () => {
+    this.notifySubscribers();
+  };
 
   constructor(
     storageKey: string = BRS_BOOKING_CONFIG.storageKey,
@@ -30,6 +38,10 @@ export class LocalBookingRepository implements BookingRepository {
       typeof crypto !== "undefined" && typeof crypto.randomUUID === "function"
         ? crypto.randomUUID()
         : `tab_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
+
+    if (typeof window !== "undefined" && typeof window.addEventListener === "function") {
+      window.addEventListener(ETAPA_SYNC_DOM_EVENT, this.handleEtapaSync);
+    }
 
     if (typeof window !== "undefined" && typeof BroadcastChannel !== "undefined") {
       try {
@@ -74,7 +86,15 @@ export class LocalBookingRepository implements BookingRepository {
     try {
       const raw = localStorage.getItem(this.storageKey);
       if (!raw) return [];
-      return JSON.parse(raw) as Appointment[];
+      const parsed = JSON.parse(raw) as Appointment[];
+      if (this.storageKey === BRS_BOOKING_CONFIG.storageKey && Array.isArray(parsed)) {
+        const { list, changed } = reconciliarStatusAgendamentosComEtapas(parsed);
+        if (changed) {
+          localStorage.setItem(this.storageKey, JSON.stringify(list));
+        }
+        return list;
+      }
+      return parsed;
     } catch {
       return [];
     }
@@ -238,6 +258,15 @@ export class LocalBookingRepository implements BookingRepository {
       };
 
       currentList[index] = updated;
+
+      if (targetStatus === "COMPLETED" && this.storageKey === BRS_BOOKING_CONFIG.storageKey) {
+        garantirTodasEtapasConcluidas(
+          id,
+          options?.actorName ?? "Administrador BRS",
+          existing.createdAt,
+        );
+      }
+
       const saved = this.writeStorage(currentList, {
         type: "APPOINTMENT_UPDATED",
         recordId: id,
@@ -284,6 +313,9 @@ export class LocalBookingRepository implements BookingRepository {
 
   close(): void {
     this.subscribers.clear();
+    if (typeof window !== "undefined" && typeof window.removeEventListener === "function") {
+      window.removeEventListener(ETAPA_SYNC_DOM_EVENT, this.handleEtapaSync);
+    }
     if (this.channel) {
       this.channel.onmessage = null;
       this.channel.close();

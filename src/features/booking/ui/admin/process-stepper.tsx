@@ -1,8 +1,13 @@
-import { useMemo } from "react";
+import { useMemo, useState, useEffect } from "react";
 import { Check } from "lucide-react";
 import type { AppointmentStatus } from "../../domain/types";
 import { ETAPAS_OPERACIONAIS } from "../../config/etapas.config";
-import { getEtapaEventsForAppointment, etapaAtual, progresso } from "../../domain/etapas";
+import {
+  getEtapaEventsForAppointment,
+  etapaAtual,
+  progresso,
+  ETAPA_SYNC_DOM_EVENT,
+} from "../../domain/etapas";
 
 export const REPAIR_STAGES = ETAPAS_OPERACIONAIS.map((e) => ({
   step: e.ordem,
@@ -19,7 +24,7 @@ export interface ProcessStepperProps {
 }
 
 /**
- * Mini-stepper horizontal compacto das 6 etapas canônicas da oficina BRS (SPEC-057):
+ * Mini-stepper horizontal compacto das 6 etapas canônicas da oficina BRS (SPEC-057 / SPEC-065):
  * Agendamento → Recebimento → Vistoria → Orçamento → Execução → Qualidade & Entrega.
  * Alimenta tanto os cards de agendamento quanto o Kanban e prévias institucionais.
  */
@@ -29,8 +34,23 @@ export function ProcessStepper({
   appointmentId,
   className = "",
 }: ProcessStepperProps) {
-  // Se houver appointmentId, lê os eventos reais append-only
+  const [syncRevision, setSyncRevision] = useState(0);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const handleSync = () => {
+      setSyncRevision((prev) => prev + 1);
+    };
+    window.addEventListener(ETAPA_SYNC_DOM_EVENT, handleSync);
+    return () => {
+      window.removeEventListener(ETAPA_SYNC_DOM_EVENT, handleSync);
+    };
+  }, []);
+
+  // Se houver appointmentId, lê os eventos reais append-only reativamente
   const derived = useMemo(() => {
+    void syncRevision;
+    void status;
     if (appointmentId) {
       const eventos = getEtapaEventsForAppointment(appointmentId);
       if (eventos.length > 0) {
@@ -43,7 +63,7 @@ export function ProcessStepper({
       }
     }
     return null;
-  }, [appointmentId]);
+  }, [appointmentId, status, syncRevision]);
 
   // Se cancelado, exibe indicador de cancelamento
   if (status === "CANCELLED") {

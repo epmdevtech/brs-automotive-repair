@@ -2,31 +2,36 @@
 
 ## Metadados
 
-| Campo       | Valor                                                                                              |
-| ----------- | -------------------------------------------------------------------------------------------------- |
-| Spec ID     | SPEC-059                                                                                           |
-| Título      | Correção do Build e Servidor de Produção SSR TanStack Start (Resolução do Erro 500 em Produção)    |
-| Status      | Aprovado                                                                                           |
-| Data        | 2026-10-15                                                                                         |
-| Autor       | Staff DevOps & Fullstack Engineer                                                                  |
-| Módulo      | `build`, `vite.config.ts`, `Dockerfile`, `docker-compose.yml`                                      |
-| Dependência | SPEC-002, SPEC-008, SPEC-014, SPEC-019                                                             |
+| Campo       | Valor                                                                                           |
+| ----------- | ----------------------------------------------------------------------------------------------- |
+| Spec ID     | SPEC-059                                                                                        |
+| Título      | Correção do Build e Servidor de Produção SSR TanStack Start (Resolução do Erro 500 em Produção) |
+| Status      | Aprovado                                                                                        |
+| Data        | 2026-10-15                                                                                      |
+| Autor       | Staff DevOps & Fullstack Engineer                                                               |
+| Módulo      | `build`, `vite.config.ts`, `Dockerfile`, `docker-compose.yml`                                   |
+| Dependência | SPEC-002, SPEC-008, SPEC-014, SPEC-019                                                          |
 
 ---
 
 ## 1. Visão Geral e Diagnóstico da Causa Raiz
 
 ### Problema Observado em Produção
+
 Ao acessar a raiz ou rotas da aplicação em ambiente de produção (executado via `bun run preview`, `make preview` ou container Docker `runner`), o servidor retorna imediatamente:
+
 ```text
 (index):1 Failed to load resource: the server responded with a status of 500 ()
 ```
+
 No terminal e no corpo da resposta HTML 500:
+
 ```text
 Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/.../dist/server/server.js' imported from .../node_modules/@tanstack/start-plugin-core/dist/esm/vite/preview-server-plugin/plugin.js
 ```
 
 ### Análise de Causa Raiz
+
 1. **Conflito de Plugins no Bundler**: O arquivo `vite.config.ts` mantinha um resquício histórico da transição do Lovable:
    ```typescript
    ...(command === "build"

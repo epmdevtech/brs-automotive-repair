@@ -88,7 +88,7 @@ describe("SPEC-043: Refatoração Global de UX/UI (/servicos, /trabalhos e /para
       expect(bottomBanner?.textContent).toContain(
         "Diagnóstico técnico preciso com comodidade de Leva e Traz em Toledo-PR",
       );
-      expect(bottomBanner?.textContent).toContain("Solicitar Avaliação Técnica via WhatsApp");
+      expect(bottomBanner?.textContent).toContain("Solicitar avaliação");
     });
   });
 
@@ -113,9 +113,9 @@ describe("SPEC-043: Refatoração Global de UX/UI (/servicos, /trabalhos e /para
       expect(pageHero?.querySelector("a[href='/contato']")).toBeNull();
 
       // Eyebrow e microcopy técnica corretos
-      expect(pageHero?.textContent).toContain("PORTFÓLIO & COMPROVAÇÃO TÉCNICA");
+      expect(pageHero?.textContent).toContain("PORTFÓLIO & MÉTODOS DE REPARAÇÃO");
       expect(pageHero?.textContent).toContain("Casos de Reparação e Acabamento.");
-      expect(pageHero?.textContent).toContain("Veja na prática a recuperação de vincos");
+      expect(pageHero?.textContent).toContain("Entenda como atuamos na recuperação de vincos");
     });
 
     it("possui disclaimer de transparência fotográfica compacto", () => {

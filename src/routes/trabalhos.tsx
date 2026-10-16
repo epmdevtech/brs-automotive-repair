@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Info } from "lucide-react";
+import { canonicalUrl } from "@/lib/brs";
 import { buildRouteHead, buildBreadcrumbSchema } from "@/lib/seo";
 import { PageHero } from "@/components/brs/page-hero";
 import { ProjectGallery } from "@/components/brs/project-gallery";
@@ -11,7 +12,7 @@ export const Route = createFileRoute("/trabalhos")({
     buildRouteHead({
       title: "Trabalhos e Reparações Automotivas | BRS",
       description:
-        "Galeria interativa de trabalhos e processos de reparação da BRS em Toledo-PR. Comparação antes/depois e ampliação técnica em alta resolução.",
+        "Galeria interativa de métodos e processos de reparação da BRS em Toledo-PR. Comparação antes/depois e ampliação técnica em alta resolução.",
       path: "/trabalhos",
       jsonLd: {
         "@context": "https://schema.org",
@@ -20,7 +21,7 @@ export const Route = createFileRoute("/trabalhos")({
           {
             "@type": "WebPage",
             name: "Trabalhos e Reparações Automotivas — BRS",
-            url: "http://brs.localhost/trabalhos",
+            url: canonicalUrl("/trabalhos"),
             description:
               "Galeria técnica demonstrando intervenções de funilaria, pintura e martelinho de ouro.",
           },
@@ -32,17 +33,16 @@ export const Route = createFileRoute("/trabalhos")({
 function TrabalhosPage() {
   return (
     <div className="pt-28 pb-20">
-      {/* Hero Section Padrão Awwwards Site of the Day (SPEC-034 / SPEC-043) */}
       <PageHero
         breadcrumbs={[{ name: "Trabalhos" }]}
         codeIndex="GAL.03 // PORTFÓLIO"
-        eyebrow="PORTFÓLIO & COMPROVAÇÃO TÉCNICA"
+        eyebrow="PORTFÓLIO & MÉTODOS DE REPARAÇÃO"
         title="Casos de Reparação e Acabamento."
         description={
           <p className="text-neutral-300 text-sm sm:text-base leading-relaxed">
-            Veja na prática a recuperação de vincos, alinhamento milimétrico de peças e fidelidade
-            de cor em veículos atendidos pela BRS. Compare o estado de entrada com o padrão final
-            entregue de fábrica.
+            Entenda como atuamos na recuperação de vincos, alinhamento de peças e fidelidade de cor.
+            As imagens abaixo são ilustrativas e demonstram as etapas técnicas de cada
+            especialidade.
           </p>
         }
         footerContent={
@@ -51,7 +51,7 @@ function TrabalhosPage() {
             <p>
               <span className="font-semibold text-white">Transparência Fotográfica: </span>
               Acervo fotográfico real em fase de documentação em Toledo-PR. Imagens ilustrativas
-              demonstrativas de método e tolerâncias de fábrica.
+              demonstrativas dos métodos de reparação.
             </p>
           </div>
         }

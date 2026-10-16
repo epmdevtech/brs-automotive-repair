@@ -44,21 +44,20 @@ describe("SPEC-032 — Awwwards Site of the Day Redesign (Hero, Showcase, Lenis 
     expect(screen.getByText("Diagnóstico Transparente")).toBeInTheDocument();
   });
 
-  it("HomeBeforeAfter renderiza índice técnico de caso de precisão e tolerância milimétrica", () => {
+  it("HomeBeforeAfter renderiza comparativo ilustrativo com transparência editorial", () => {
     render(<HomeBeforeAfter />);
 
-    expect(screen.getByText(/ESTUDO DE CASO \/\/ PRECISÃO 01/i)).toBeInTheDocument();
-    expect(screen.getByText(/TOLERÂNCIA < 1.0MM/i)).toBeInTheDocument();
-    expect(screen.getByText(/Gaps < 1mm conformes/i)).toBeInTheDocument();
-    expect(screen.getByText(/Repuxo a frio milimétrico/i)).toBeInTheDocument();
+    expect(screen.getByText(/Comparativo Ilustrativo de Método/i)).toBeInTheDocument();
+    expect(
+      screen.getByText(/Recuperação estrutural e alinhamento de painéis/i),
+    ).toBeInTheDocument();
+    expect(screen.getAllByText(/Fotografia ilustrativa/i).length).toBeGreaterThan(0);
   });
 
-  it("MediaExpand exibe a legenda técnica da estufa de pintura", () => {
+  it("MediaExpand exibe a legenda da estufa de pintura sem ruído técnico artificial", () => {
     render(<MediaExpand />);
 
-    expect(
-      screen.getByText(/Pintura automotiva \/\/ Estufa de Pressão Positiva/i),
-    ).toBeInTheDocument();
+    expect(screen.getByText(/Pintura automotiva em estufa/i)).toBeInTheDocument();
     expect(screen.getByText("Acabamento uniforme, do preparo ao verniz.")).toBeInTheDocument();
   });
 });

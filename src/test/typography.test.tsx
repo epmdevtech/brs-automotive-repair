@@ -53,7 +53,9 @@ describe("Sistema Tipográfico BRS (SPEC-009)", () => {
     expect(heading.className).toContain("font-display");
     expect(heading.className).toContain("font-semibold");
     expect(heading.className).not.toContain("uppercase");
-    expect(heading.textContent).toContain("BRS Reparações Automotivas.");
+    expect(heading.textContent).toContain(
+      "Funilaria, pintura em estufa e martelinho de ouro em Toledo-PR.",
+    );
   });
 
   it("renderiza cards de serviços com títulos sem caixa alta forçada", () => {

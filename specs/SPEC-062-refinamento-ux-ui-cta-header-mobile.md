@@ -2,15 +2,15 @@
 
 ## Metadados
 
-| Campo       | Valor                                                                          |
-| ----------- | ------------------------------------------------------------------------------ |
-| Spec ID     | SPEC-062                                                                       |
+| Campo       | Valor                                                                            |
+| ----------- | -------------------------------------------------------------------------------- |
+| Spec ID     | SPEC-062                                                                         |
 | Título      | Ocultação do CTA do Header no Mobile e Padronização do Rótulo no Menu Hambúrguer |
-| Status      | Aprovado                                                                       |
-| Data        | 2026-10-15                                                                     |
-| Autor       | Staff UX/UI Designer & Frontend Engineer                                       |
-| Módulo      | `components/brs/header.tsx`                                                    |
-| Dependência | SPEC-016, SPEC-021, SPEC-022, SPEC-024, SPEC-060, SPEC-061                     |
+| Status      | Aprovado                                                                         |
+| Data        | 2026-10-15                                                                       |
+| Autor       | Staff UX/UI Designer & Frontend Engineer                                         |
+| Módulo      | `components/brs/header.tsx`                                                      |
+| Dependência | SPEC-016, SPEC-021, SPEC-022, SPEC-024, SPEC-060, SPEC-061                       |
 
 ---
 

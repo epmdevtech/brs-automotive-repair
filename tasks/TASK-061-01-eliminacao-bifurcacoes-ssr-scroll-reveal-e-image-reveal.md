@@ -2,15 +2,15 @@
 
 ## Metadados
 
-| Campo       | Valor                                                                                                           |
-| ----------- | --------------------------------------------------------------------------------------------------------------- |
-| Task ID     | TASK-061-01                                                                                                     |
-| Spec Ref    | SPEC-061                                                                                                        |
-| Título      | Remoção de Early Returns de useReducedMotion em `ScrollReveal`, `ImageReveal` e `Reveal`                        |
-| Status     | Concluído                                                                                                      |
-| Data        | 2026-10-15                                                                                                      |
-| Responsável | Staff Frontend Engineer                                                                                         |
-| Módulo      | `components/ui/scroll-reveal.tsx`, `components/ui/image-reveal.tsx`, `components/brs/*`                         |
+| Campo       | Valor                                                                                    |
+| ----------- | ---------------------------------------------------------------------------------------- |
+| Task ID     | TASK-061-01                                                                              |
+| Spec Ref    | SPEC-061                                                                                 |
+| Título      | Remoção de Early Returns de useReducedMotion em `ScrollReveal`, `ImageReveal` e `Reveal` |
+| Status      | Concluído                                                                                |
+| Data        | 2026-10-15                                                                               |
+| Responsável | Staff Frontend Engineer                                                                  |
+| Módulo      | `components/ui/scroll-reveal.tsx`, `components/ui/image-reveal.tsx`, `components/brs/*`  |
 
 ---
 

@@ -2,15 +2,15 @@
 
 ## Metadados
 
-| Campo       | Valor                                                                          |
-| ----------- | ------------------------------------------------------------------------------ |
-| Spec ID     | SPEC-063                                                                       |
+| Campo       | Valor                                                                           |
+| ----------- | ------------------------------------------------------------------------------- |
+| Spec ID     | SPEC-063                                                                        |
 | Título      | Blindagem Contra Estouro de Layout (Horizontal Overflow) em Dispositivos Móveis |
-| Status      | Aprovado                                                                       |
-| Data        | 2026-10-15                                                                     |
-| Autor       | Staff UX/UI Designer & Performance Engineer                                    |
-| Módulo      | `styles.css`, `routes/__root.tsx`, `components/brs/*`, `components/ui/*`       |
-| Dependência | SPEC-016, SPEC-020, SPEC-022, SPEC-035, SPEC-040, SPEC-060, SPEC-061, SPEC-062 |
+| Status      | Aprovado                                                                        |
+| Data        | 2026-10-15                                                                      |
+| Autor       | Staff UX/UI Designer & Performance Engineer                                     |
+| Módulo      | `styles.css`, `routes/__root.tsx`, `components/brs/*`, `components/ui/*`        |
+| Dependência | SPEC-016, SPEC-020, SPEC-022, SPEC-035, SPEC-040, SPEC-060, SPEC-061, SPEC-062  |
 
 ---
 

@@ -10,16 +10,13 @@ import { HomePathways } from "@/components/brs/home-pathways";
 import { FinalCTA } from "@/components/brs/final-cta";
 
 describe("SPEC-037 — Refinamento UX/UI, Consolidação Visual e Otimização da Hierarquia Editorial", () => {
-  it("AC-037-01: Hero possui CTA primário para avaliação, CTA secundário e sem marcas HUD artificiais", () => {
+  it("AC-037-01: Hero possui CTA primário para avaliação e sem marcas HUD artificiais", () => {
     const { container } = render(<Hero />);
 
-    // Ausência de CTA duplicado para /contato na Hero (SPEC-041)
-    expect(screen.queryByRole("link", { name: /solicitar avaliação/i })).toBeNull();
-
-    // CTA Focal único para descoberta de especialidades
-    const secondaryCta = screen.getByRole("link", { name: /ver especialidades/i });
-    expect(secondaryCta).toBeInTheDocument();
-    expect(secondaryCta).toHaveAttribute("href", "#especialidades");
+    // CTA Primário dominante para /contato na Hero (SPEC-064)
+    const primaryCta = screen.getByRole("link", { name: /solicitar avaliação/i });
+    expect(primaryCta).toBeInTheDocument();
+    expect(primaryCta).toHaveAttribute("href", "/contato");
 
     // Eliminação de marcas HUD artificiais
     expect(screen.queryByText(/\+ BRS\.24/i)).toBeNull();
@@ -28,15 +25,15 @@ describe("SPEC-037 — Refinamento UX/UI, Consolidação Visual e Otimização d
     // Faixa trust-strip removida do Hero (SPEC-039)
     expect(container.querySelector(".trust-strip")).toBeNull();
 
-    // 3 Diferenciais técnicos incorporados com sucesso em Philosophy
+    // 3 Diferenciais técnicos incorporados com sucesso em ProcessTimeline / Philosophy
     const { container: philContainer } = render(<Philosophy />);
-    expect(philContainer.textContent).toContain("Reparação e pintura técnica de precisão");
-    expect(philContainer.textContent).toContain("Diagnóstico honesto e transparente");
+    expect(philContainer.textContent).toContain("Diagnóstico claro antes do serviço");
+    expect(philContainer.textContent).toContain("Orçamento e prazo alinhados antes da execução");
     expect(philContainer.textContent).toContain("Serviço de leva e traz em Toledo-PR");
   });
 
   it("AC-037-02: HomeBeforeAfter prioriza o slider e remove sobreposições HUD no frame", () => {
-    const { container } = render(<HomeBeforeAfter />);
+    render(<HomeBeforeAfter />);
 
     // Slider interativo presente
     const slider = screen.getByRole("slider");
@@ -60,24 +57,18 @@ describe("SPEC-037 — Refinamento UX/UI, Consolidação Visual e Otimização d
     expect(screen.queryByText(/02 \/ ESPECIALIDADE/i)).toBeNull();
     expect(screen.queryByText(/03 \/ ESPECIALIDADE/i)).toBeNull();
 
-    // Especialidades presentes com links contextuais
-    expect(screen.getByRole("link", { name: /conhecer funilaria/i })).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: /conhecer a pintura/i })).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: /entender o martelinho/i })).toBeInTheDocument();
+    // Especialidades presentes com link único por card (SPEC-064)
+    const detailLinks = screen.getAllByRole("link", { name: /ver detalhes do serviço/i });
+    expect(detailLinks).toHaveLength(3);
   });
 
   it("AC-037-04: Services renderiza linha de estética automotiva em apresentação editorial compacta", () => {
-    render(<Services />);
+    const { container } = render(<Services />);
 
-    expect(screen.getByText("Estética & Proteção")).toBeInTheDocument();
-    expect(
-      screen.getByText("Acabamento refinado e conservação de superfícies."),
-    ).toBeInTheDocument();
-
-    // Os 3 serviços complementares estão presentes
-    expect(screen.getByText("Espelhamento de pintura automotiva")).toBeInTheDocument();
-    expect(screen.getByText("Vitrificação cerâmica de pintura")).toBeInTheDocument();
-    expect(screen.getByText("Polimento técnico de para-brisa")).toBeInTheDocument();
+    expect(container.textContent).toContain("Estética e proteção:");
+    expect(container.textContent).toContain("espelhamento de pintura");
+    expect(container.textContent).toContain("vitrificação cerâmica");
+    expect(container.textContent).toContain("polimento técnico de para-brisa");
   });
 
   it("AC-037-05: Philosophy e ProcessTimeline compartilham fundo sutil unificado sem sobreposição de caixas cinzas pesadas", () => {
@@ -95,10 +86,10 @@ describe("SPEC-037 — Refinamento UX/UI, Consolidação Visual e Otimização d
     expect(procSection?.className).toContain("bg-secondary/20");
 
     // ProcessTimeline mantém os 4 passos essenciais
-    expect(screen.getByText("Primeiro contato")).toBeInTheDocument();
-    expect(screen.getByText("Avaliação técnica")).toBeInTheDocument();
-    expect(screen.getByText("Orçamento e alinhamento")).toBeInTheDocument();
-    expect(screen.getByText("Reparação e conferência")).toBeInTheDocument();
+    expect(screen.getAllByText("Primeiro contato").length).toBeGreaterThanOrEqual(1);
+    expect(screen.getAllByText("Avaliação técnica").length).toBeGreaterThanOrEqual(1);
+    expect(screen.getAllByText("Orçamento e alinhamento").length).toBeGreaterThanOrEqual(1);
+    expect(screen.getAllByText("Reparação e conferência").length).toBeGreaterThanOrEqual(1);
   });
 
   it("AC-037-06: HomePathways utiliza fundo limpo para alternância visual de seções", () => {
@@ -117,10 +108,10 @@ describe("SPEC-037 — Refinamento UX/UI, Consolidação Visual e Otimização d
     expect(ctaButton).toBeInTheDocument();
     expect(ctaButton).toHaveAttribute("href", "/contato");
 
-    const instagramButton = screen.getByRole("link", { name: /conhecer o instagram/i });
-    expect(instagramButton).toBeInTheDocument();
-    expect(instagramButton).toHaveAttribute("href", "https://www.instagram.com/brsreparacoes/");
+    const phoneLink = screen.getByRole("link", { name: /\(45\) 2035-9440/i });
+    expect(phoneLink).toBeInTheDocument();
+    expect(phoneLink).toHaveAttribute("href", "tel:+554520359440");
 
-    expect(screen.getByText(/Toledo-PR/i)).toBeInTheDocument();
+    expect(screen.getAllByText(/Toledo-PR/i).length).toBeGreaterThanOrEqual(1);
   });
 });

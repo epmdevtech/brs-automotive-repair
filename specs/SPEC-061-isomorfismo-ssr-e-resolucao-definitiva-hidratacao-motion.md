@@ -2,15 +2,15 @@
 
 ## Metadados
 
-| Campo       | Valor                                                                                                           |
-| ----------- | --------------------------------------------------------------------------------------------------------------- |
-| Spec ID     | SPEC-061                                                                                                        |
+| Campo       | Valor                                                                                                             |
+| ----------- | ----------------------------------------------------------------------------------------------------------------- |
+| Spec ID     | SPEC-061                                                                                                          |
 | Título      | Isomorfismo SSR e Resolução Definitiva de Hidratação nos Componentes de Motion com MotionConfig no TanStack Start |
-| Status      | Aprovado                                                                                                        |
-| Data        | 2026-10-15                                                                                                      |
-| Autor       | Staff Frontend & Performance Engineer                                                                           |
-| Módulo      | `components/ui/*` e `components/brs/*` (Motion Components)                                                      |
-| Dependência | SPEC-020, SPEC-027, SPEC-033, SPEC-036, SPEC-060                                                                |
+| Status      | Aprovado                                                                                                          |
+| Data        | 2026-10-15                                                                                                        |
+| Autor       | Staff Frontend & Performance Engineer                                                                             |
+| Módulo      | `components/ui/*` e `components/brs/*` (Motion Components)                                                        |
+| Dependência | SPEC-020, SPEC-027, SPEC-033, SPEC-036, SPEC-060                                                                  |
 
 ---
 
@@ -29,6 +29,7 @@ scroll-reveal.tsx:72 A tree hydrated but some attributes of the server rendered 
 Além disso, eram disparados avisos no console de desenvolvimento (`magnetic-button.tsx:29 You have Reduced Motion enabled on your device`) e violações de forced reflow decorrentes da destruição e recriação do nó DOM descompassado pelo React 19.
 
 ### 1.1 Causa Raiz
+
 1. O hook `useReducedMotion()` do Framer Motion retorna `false` no servidor (Node/Bun SSR por ausência de `window.matchMedia`), mas retorna `true` no cliente quando o usuário possui acessibilidade ativada.
 2. Componentes como `ScrollReveal`, `ImageReveal` e `Reveal` continham bifurcações manuais (`if (shouldReduceMotion) return ...` ou `if (shouldReduceMotion || !isObserverAvailable) return ...`):
    - No **servidor**, o componente executava o retorno com `initial={{ opacity: 0, y: distance }}` e serializava inline styles de animação no HTML estático (`style="opacity: 0; transform: translateY(24px)"`).

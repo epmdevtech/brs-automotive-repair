@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ArrowUpRight, Clock, Instagram, MapPin, Phone } from "lucide-react";
-import { company } from "@/lib/brs";
+import { company, canonicalUrl } from "@/lib/brs";
 import { buildRouteHead, buildBreadcrumbSchema } from "@/lib/seo";
 import { PageHero } from "@/components/brs/page-hero";
 import { Contact } from "@/components/brs/contact";
@@ -25,7 +25,7 @@ export const Route = createFileRoute("/contato")({
           {
             "@type": "ContactPage",
             name: "Contato e Avaliação Automotiva — BRS",
-            url: "http://brs.localhost/contato",
+            url: canonicalUrl("/contato"),
             description:
               "Canal oficial para solicitação de avaliação técnica e contato com a BRS Reparações Automotivas.",
           },
@@ -73,13 +73,13 @@ function ContatoPage() {
           },
           {
             icon: MapPin,
-            label: "Toledo — PR",
-            detail: "Atendimento & Leva e Traz",
+            label: "Endereço em Toledo-PR",
+            detail: `${company.address.street} - ${company.address.neighborhood}`,
           },
           {
             icon: Clock,
-            label: "Tempo de Resposta",
-            detail: "Diagnóstico ágil e fundamentado",
+            label: "Horário de Atendimento",
+            detail: company.openingHours,
           },
         ]}
         actions={[

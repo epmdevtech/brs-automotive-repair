@@ -8,7 +8,6 @@ import { MagneticButton } from "@/components/ui/magnetic-button";
 import { cn } from "@/lib/utils";
 import { MOTION_TOKENS } from "@/lib/motion-system";
 import { useSmoothScroll } from "@/hooks/use-smooth-scroll";
-import { SignatureCanvas } from "./signature-canvas";
 
 export interface NavLink {
   label: string;
@@ -173,7 +172,7 @@ export const AnimatedHero = ({
         className,
       )}
     >
-      {/* Background com fotografia e overlay cinemático de alto contraste */}
+      {/* Background com fotografia LCP prioritária e overlay de alto contraste */}
       <motion.div
         className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat will-change-transform"
         style={{ backgroundImage: `url(${backgroundImageUrl})` }}
@@ -184,12 +183,20 @@ export const AnimatedHero = ({
           ease: MOTION_TOKENS.ease,
         }}
       >
+        <img
+          src={backgroundImageUrl}
+          alt=""
+          aria-hidden="true"
+          fetchPriority="high"
+          loading="eager"
+          decoding="async"
+          width={1920}
+          height={1080}
+          className="absolute inset-0 h-full w-full object-cover object-center pointer-events-none"
+        />
         <div className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/80 to-black/45" />
         <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-black/60" />
       </motion.div>
-
-      {/* Experiência Signature Interativa WebGL/Canvas de Partículas e Laser (SPEC-033) */}
-      <SignatureCanvas />
 
       {/* Halo de luz ambiente dourada interativo via GSAP */}
       <div

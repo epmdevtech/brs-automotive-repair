@@ -74,6 +74,8 @@ describe("Motion utilities", () => {
   });
 });
 
+import { MediaExpand } from "@/components/brs/media-expand";
+
 describe("Website motion layer", () => {
   it("keeps the headline readable and the CTA destinations unchanged", () => {
     render(
@@ -83,16 +85,12 @@ describe("Website motion layer", () => {
     );
 
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(
-      "BRS Reparações Automotivas.",
+      "Funilaria, pintura em estufa e martelinho de ouro em Toledo-PR.",
     );
 
     const evaluation = screen.getAllByRole("link", { name: /Solicitar avaliação/ });
     expect(evaluation.length).toBeGreaterThanOrEqual(1);
     evaluation.forEach((link) => expect(link).toHaveAttribute("href", "/contato"));
-
-    expect(
-      screen.getByRole("link", { name: /ver especialidades|conhecer os serviços/i }),
-    ).toHaveAttribute("href", "#especialidades");
   });
 
   it("keeps all content visible when scroll observers are unavailable", () => {
@@ -104,16 +102,13 @@ describe("Website motion layer", () => {
 
     expect(container.querySelectorAll('[data-reveal="hidden"]')).toHaveLength(0);
 
+    render(<MediaExpand />);
     const expand = screen.getByRole("region", { name: "Acabamento em pintura automotiva" });
     expect(Number(expand.style.getPropertyValue("--p"))).toBe(1);
   });
 
   it("labels illustrative media in the cinematic transition", () => {
-    render(
-      <SiteLayout>
-        <HomePageContent />
-      </SiteLayout>,
-    );
+    render(<MediaExpand />);
     const expand = screen.getByRole("region", { name: "Acabamento em pintura automotiva" });
     expect(expand).toHaveTextContent("Fotografia ilustrativa");
   });

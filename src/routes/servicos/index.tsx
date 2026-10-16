@@ -9,7 +9,7 @@ import {
   Eye,
   CheckCircle2,
 } from "lucide-react";
-import { services, aestheticServices } from "@/lib/brs";
+import { services, aestheticServices, canonicalUrl } from "@/lib/brs";
 import { buildRouteHead, buildBreadcrumbSchema } from "@/lib/seo";
 import { Breadcrumbs } from "@/components/brs/breadcrumbs";
 import { PageHero } from "@/components/brs/page-hero";
@@ -52,7 +52,7 @@ export const Route = createFileRoute("/servicos/")({
               "@type": "ListItem",
               position: index + 1,
               name: s.title,
-              url: `http://brs.localhost${s.path}`,
+              url: canonicalUrl(s.path),
             })),
           },
         ],
@@ -425,7 +425,7 @@ function ServicesPage() {
               className="h-12 min-h-[44px] px-8 text-xs font-semibold shrink-0 cursor-pointer shadow-lg shadow-primary/15"
             >
               <Link to="/contato">
-                <span>Solicitar Avaliação Técnica via WhatsApp</span>
+                <span>Solicitar avaliação</span>
                 <ArrowUpRight className="ml-2 size-4" aria-hidden="true" />
               </Link>
             </Button>

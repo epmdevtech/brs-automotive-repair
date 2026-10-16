@@ -636,6 +636,8 @@ export function formatarTempoRelativo(isoDate?: string | null): string {
 
 const ETAPA_EVENTS_STORAGE_KEY = "brs_etapas_audit_log";
 const SYNC_CHANNEL_NAME = "brs_booking_sync";
+const APPOINTMENTS_STORAGE_KEY = "brs_appointments_v1";
+export const ETAPA_SYNC_DOM_EVENT = "brs:etapas-updated";
 
 /**
  * Lê todos os eventos de etapas do localStorage.
@@ -669,18 +671,211 @@ export function writeAllEtapaEvents(eventos: EventoEtapa[]): boolean {
 }
 
 /**
- * Emite sinal de sincronização multi-aba via BroadcastChannel.
+ * Emite sinal de sincronização na mesma aba (CustomEvent) e multi-aba (BroadcastChannel).
  */
 export function emitirSyncMultiAba(tipo: string, payload: unknown): void {
+  const timestamp = Date.now();
+  if (typeof window !== "undefined" && typeof window.dispatchEvent === "function") {
+    try {
+      window.dispatchEvent(
+        new CustomEvent(ETAPA_SYNC_DOM_EVENT, {
+          detail: { type: tipo, payload, timestamp },
+        }),
+      );
+    } catch {
+      // Fallback silencioso
+    }
+  }
   if (typeof window !== "undefined" && "BroadcastChannel" in window) {
     try {
       const channel = new BroadcastChannel(SYNC_CHANNEL_NAME);
-      channel.postMessage({ type: tipo, payload, timestamp: Date.now() });
+      channel.postMessage({ type: tipo, payload, timestamp });
       channel.close();
     } catch {
       // Fallback silencioso
     }
   }
+}
+
+/**
+ * Sincroniza o status do agendamento no localStorage ("brs_appointments_v1")
+ * a partir da situação real derivada das etapas operacionais (SPEC-065).
+ */
+export function sincronizarStatusAgendamentoPorEtapas(agendamentoId: string): void {
+  if (typeof window === "undefined" || typeof localStorage === "undefined") {
+    return;
+  }
+  try {
+    const eventos = getEtapaEventsForAppointment(agendamentoId);
+    if (eventos.length === 0) return;
+
+    const raw = localStorage.getItem(APPOINTMENTS_STORAGE_KEY);
+    if (!raw) return;
+
+    const list = JSON.parse(raw) as Array<{ id: string; status: string }>;
+    const idx = list.findIndex((a) => a.id === agendamentoId);
+    if (idx === -1) return;
+
+    const current = list[idx];
+    if (current.status === "CANCELLED" || current.status === "NO_SHOW") {
+      return;
+    }
+
+    const novaSituacao = situacao(eventos);
+    let targetStatus = current.status;
+
+    if (novaSituacao === "concluido") {
+      targetStatus = "COMPLETED";
+    } else if (novaSituacao === "em_andamento") {
+      targetStatus = "CONFIRMED";
+    } else if (novaSituacao === "aberto") {
+      if (current.status === "COMPLETED") {
+        targetStatus = "CONFIRMED";
+      }
+    }
+
+    if (current.status !== targetStatus) {
+      list[idx] = { ...current, status: targetStatus };
+      localStorage.setItem(APPOINTMENTS_STORAGE_KEY, JSON.stringify(list));
+    }
+  } catch {
+    // Fallback silencioso
+  }
+}
+
+/**
+ * Reconcilia uma lista de agendamentos com o histórico de etapas operacionais existente,
+ * corrigindo divergências como agendamentos marcados como COMPLETED enquanto ainda possuem
+ * etapas em andamento na linha do tempo operacional (SPEC-065).
+ */
+export function reconciliarStatusAgendamentosComEtapas<T extends { id: string; status: string }>(
+  appointments: T[],
+): { list: T[]; changed: boolean } {
+  let changed = false;
+  const todosEventos = readAllEtapaEvents();
+  if (todosEventos.length === 0) {
+    return { list: appointments, changed: false };
+  }
+
+  const nextList = appointments.map((app) => {
+    if (app.status === "CANCELLED" || app.status === "NO_SHOW") {
+      return app;
+    }
+
+    const eventos = todosEventos
+      .filter((e) => e.agendamentoId === app.id)
+      .sort((a, b) => new Date(a.em).getTime() - new Date(b.em).getTime());
+
+    if (eventos.length === 0) {
+      return app;
+    }
+
+    const novaSituacao = situacao(eventos);
+    let targetStatus = app.status;
+
+    if (novaSituacao === "concluido") {
+      targetStatus = "COMPLETED";
+    } else if (novaSituacao === "em_andamento") {
+      targetStatus = "CONFIRMED";
+    } else if (novaSituacao === "aberto") {
+      const teveReversaoOuDesfazer = eventos.some(
+        (e) => e.tipo === "revertida" || e.tipo === "desfeita",
+      );
+      if (app.status === "COMPLETED" && teveReversaoOuDesfazer) {
+        targetStatus = "CONFIRMED";
+      }
+    }
+
+    if (targetStatus !== app.status) {
+      changed = true;
+      return { ...app, status: targetStatus };
+    }
+    return app;
+  });
+
+  return { list: nextList, changed };
+}
+
+/**
+ * Garante que todas as 6 etapas operacionais estejam registradas como concluídas
+ * quando um agendamento é finalizado diretamente pela ação rápida de conclusão (SPEC-065).
+ */
+export function garantirTodasEtapasConcluidas(
+  agendamentoId: string,
+  autorNome = "Administrador BRS",
+  createdAt?: string,
+): EventoEtapa[] {
+  const existentes = getEtapaEventsForAppointment(agendamentoId);
+  const estados = estadoEtapas(existentes);
+  const todasConcluidas = estados.every((e) => e.estado === "concluida");
+  if (todasConcluidas && existentes.length > 0) {
+    return existentes;
+  }
+
+  const baseMs = createdAt ? new Date(createdAt).getTime() : Date.now() - 3600_000;
+  const agoraMs = Date.now();
+  const novosEventos: EventoEtapa[] = [];
+
+  for (let i = 0; i < estados.length; i++) {
+    const st = estados[i];
+    if (st.estado === "concluida") continue;
+
+    const ts = new Date(Math.min(agoraMs, baseMs + (i + 1) * 60_000) + i).toISOString();
+
+    if (st.etapaId === "qualidade_entrega") {
+      const acao6aDone = Boolean(st.acoes?.find((a) => a.acao === "aprovar_qualidade")?.concluida);
+      const acao6bDone = Boolean(st.acoes?.find((a) => a.acao === "registrar_entrega")?.concluida);
+
+      if (!acao6aDone) {
+        novosEventos.push({
+          id: `evt_auto_6a_${agendamentoId}_${Date.now()}_${i}`,
+          agendamentoId,
+          etapa: "qualidade_entrega",
+          acao: "aprovar_qualidade",
+          tipo: "concluida",
+          origem: "automatico",
+          porUsuarioId: "admin",
+          porNome: autorNome,
+          papel: "admin",
+          em: ts,
+        });
+      }
+      if (!acao6bDone) {
+        novosEventos.push({
+          id: `evt_auto_6b_${agendamentoId}_${Date.now()}_${i}`,
+          agendamentoId,
+          etapa: "qualidade_entrega",
+          acao: "registrar_entrega",
+          tipo: "concluida",
+          origem: "automatico",
+          porUsuarioId: "admin",
+          porNome: autorNome,
+          papel: "admin",
+          em: new Date(Date.now() + i + 1).toISOString(),
+        });
+      }
+    } else {
+      novosEventos.push({
+        id: `evt_auto_${st.etapaId}_${agendamentoId}_${Date.now()}_${i}`,
+        agendamentoId,
+        etapa: st.etapaId,
+        tipo: "concluida",
+        origem: "automatico",
+        porUsuarioId: st.etapaId === "agendamento_confirmado" ? null : "admin",
+        porNome: st.etapaId === "agendamento_confirmado" ? "Sistema" : autorNome,
+        papel: st.etapaId === "agendamento_confirmado" ? "sistema" : "admin",
+        em: ts,
+      });
+    }
+  }
+
+  if (novosEventos.length > 0) {
+    const todos = readAllEtapaEvents();
+    writeAllEtapaEvents([...todos, ...novosEventos]);
+    emitirSyncMultiAba("ETAPAS_SINCRONIZADAS", { agendamentoId });
+  }
+
+  return getEtapaEventsForAppointment(agendamentoId);
 }
 
 /**
@@ -694,7 +889,8 @@ export function getEtapaEventsForAppointment(agendamentoId: string): EventoEtapa
 }
 
 /**
- * Garante que agendamentos sem histórico possuam ao menos o evento inicial da Etapa 1.
+ * Garante que agendamentos sem histórico possuam ao menos o evento inicial da Etapa 1
+ * (ou as 6 etapas caso o agendamento já tenha nascido concluído no seed).
  */
 export function ensureInitialEtapaEvents(
   agendamentoId: string,
@@ -703,7 +899,24 @@ export function ensureInitialEtapaEvents(
 ): EventoEtapa[] {
   const existentes = getEtapaEventsForAppointment(agendamentoId);
   if (existentes.length > 0) {
+    sincronizarStatusAgendamentoPorEtapas(agendamentoId);
     return existentes;
+  }
+
+  // Verifica se o agendamento já está com status COMPLETED no armazenamento local (ex: seed)
+  if (typeof window !== "undefined" && typeof localStorage !== "undefined") {
+    try {
+      const rawApps = localStorage.getItem(APPOINTMENTS_STORAGE_KEY);
+      if (rawApps) {
+        const apps = JSON.parse(rawApps) as Array<{ id: string; status: string }>;
+        const match = apps.find((a) => a.id === agendamentoId);
+        if (match?.status === "COMPLETED") {
+          return garantirTodasEtapasConcluidas(agendamentoId, "Sistema", createdAt);
+        }
+      }
+    } catch {
+      // Fallback
+    }
   }
 
   const horaCriacao = createdAt || new Date().toISOString();
@@ -805,6 +1018,7 @@ export function concluirEtapa(params: ConcluirEtapaParams): {
 
   const todos = readAllEtapaEvents();
   writeAllEtapaEvents([...todos, novoEvento]);
+  sincronizarStatusAgendamentoPorEtapas(agendamentoId);
   emitirSyncMultiAba("ETAPA_CONCLUIDA", { agendamentoId, evento: novoEvento });
 
   return { sucesso: true, evento: novoEvento };
@@ -843,6 +1057,7 @@ export function desfazerUltimaAcao(
 
   const todos = readAllEtapaEvents();
   writeAllEtapaEvents([...todos, eventoDesfazer]);
+  sincronizarStatusAgendamentoPorEtapas(agendamentoId);
   emitirSyncMultiAba("ETAPA_DESFEITA", { agendamentoId, evento: eventoDesfazer });
 
   return { sucesso: true };
@@ -907,6 +1122,7 @@ export function reverterEtapa(params: ReverterEtapaParams): { sucesso: boolean; 
 
   const todos = readAllEtapaEvents();
   writeAllEtapaEvents([...todos, eventoReversao]);
+  sincronizarStatusAgendamentoPorEtapas(agendamentoId);
   emitirSyncMultiAba("ETAPA_REVERTIDA", { agendamentoId, evento: eventoReversao });
 
   return { sucesso: true };

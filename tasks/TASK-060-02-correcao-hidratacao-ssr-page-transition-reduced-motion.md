@@ -2,15 +2,15 @@
 
 ## Metadados
 
-| Campo       | Valor                                                                                                           |
-| ----------- | --------------------------------------------------------------------------------------------------------------- |
-| Task ID     | TASK-060-02                                                                                                     |
-| Spec Ref    | SPEC-060                                                                                                        |
-| Título      | Isomorfismo de Hidratação SSR e Suporte a Prefers-Reduced-Motion em `src/components/ui/page-transition.tsx`     |
-| Status      | Concluído                                                                                                       |
-| Data        | 2026-10-15                                                                                                      |
-| Responsável | Staff Frontend & Performance Engineer                                                                           |
-| Módulo      | `components/ui/page-transition.tsx`                                                                             |
+| Campo       | Valor                                                                                                       |
+| ----------- | ----------------------------------------------------------------------------------------------------------- |
+| Task ID     | TASK-060-02                                                                                                 |
+| Spec Ref    | SPEC-060                                                                                                    |
+| Título      | Isomorfismo de Hidratação SSR e Suporte a Prefers-Reduced-Motion em `src/components/ui/page-transition.tsx` |
+| Status      | Concluído                                                                                                   |
+| Data        | 2026-10-15                                                                                                  |
+| Responsável | Staff Frontend & Performance Engineer                                                                       |
+| Módulo      | `components/ui/page-transition.tsx`                                                                         |
 
 ---
 

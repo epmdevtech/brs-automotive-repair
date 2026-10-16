@@ -69,7 +69,7 @@ describe("SPEC-034 / TASK-034-01 — Awwwards Heroes Across All Routes", () => {
       expect(externalLink).toHaveAttribute("rel", "noopener noreferrer");
     });
 
-    it("renderiza coordenadas geográficas da oficina e micro-grid ambiente", () => {
+    it("renderiza índice editorial e estrutura de PageHero sem coordenadas decorativas", () => {
       const { container } = render(
         <PageHero
           codeIndex="COORDS.01"
@@ -79,7 +79,8 @@ describe("SPEC-034 / TASK-034-01 — Awwwards Heroes Across All Routes", () => {
         />,
       );
 
-      expect(screen.getByText(/COORD: 24°43'S 53°44'W/)).toBeInTheDocument();
+      expect(screen.getByText("COORDS.01")).toBeInTheDocument();
+      expect(screen.queryByText(/COORD: 24°43'S 53°44'W/)).not.toBeInTheDocument();
       expect(container.querySelector("[data-page-hero]")).toBeInTheDocument();
     });
   });

@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Link } from "@tanstack/react-router";
-import { ArrowUpRight, Instagram, MapPin, Phone } from "lucide-react";
+import { ArrowUpRight, Clock, Instagram, MapPin, Phone } from "lucide-react";
 import { company, navigation, services } from "@/lib/brs";
 import { Brand } from "@/components/brs/brand";
 import { cn } from "@/lib/utils";
@@ -23,16 +23,22 @@ export function MinimalFooter({ className }: MinimalFooterProps) {
     >
       <div className="page-width py-14 lg:py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-12">
-          {/* Coluna 1: Marca & Posicionamento Institucional */}
+          {/* Coluna 1: Marca, Endereço e Horário Oficial */}
           <div className="lg:col-span-5 flex flex-col items-start">
             <Brand />
             <p className="body-copy text-xs text-neutral-400 mt-5 max-w-sm leading-relaxed text-pretty">
-              Funilaria, pintura automotiva e martelinho de ouro com atenção aos detalhes e cuidado
-              em cada etapa.
+              Funilaria automotiva, pintura em estufa e martelinho de ouro em Toledo, Paraná.
+              Atendimento a proprietários de veículos e segurados.
             </p>
-            <div className="mt-6 flex items-center gap-2 text-xs text-neutral-400">
-              <MapPin size={14} className="text-primary shrink-0" aria-hidden="true" />
-              <span>Toledo, Paraná · Atendimento presencial e leva e traz</span>
+            <div className="mt-5 space-y-2 text-xs text-neutral-400">
+              <div className="flex items-start gap-2">
+                <MapPin size={14} className="text-primary shrink-0 mt-0.5" aria-hidden="true" />
+                <span>{company.address.full}</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Clock size={14} className="text-primary shrink-0" aria-hidden="true" />
+                <span>{company.openingHours}</span>
+              </div>
             </div>
           </div>
 
@@ -82,7 +88,7 @@ export function MinimalFooter({ className }: MinimalFooterProps) {
             </ul>
           </div>
 
-          {/* Coluna 4: Canais Oficiais & CTA */}
+          {/* Coluna 4: Canais Oficiais */}
           <div className="lg:col-span-3 flex flex-col items-start">
             <h3 className="font-display text-xs font-semibold uppercase tracking-wider text-foreground mb-4">
               Atendimento
@@ -112,7 +118,7 @@ export function MinimalFooter({ className }: MinimalFooterProps) {
         </div>
       </div>
 
-      {/* Faixa inferior: Copyright, Razão Social, CNPJ, Privacidade & Transparência Editorial */}
+      {/* Faixa inferior: Copyright, Razão Social, CNPJ e Privacidade (sem frase de demonstração temporária) */}
       <div className="border-t border-border/60 bg-secondary/20">
         <div className="page-width py-5 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-3 text-[10px] text-muted-foreground leading-relaxed">
           <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
@@ -127,9 +133,6 @@ export function MinimalFooter({ className }: MinimalFooterProps) {
               Privacidade
             </Link>
           </div>
-          <span className="text-neutral-500">
-            Demonstração institucional oficial · Fotografias ilustrativas temporárias.
-          </span>
         </div>
       </div>
     </footer>

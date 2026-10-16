@@ -140,13 +140,13 @@ describe("Sistema Unificado de Motion Design (SPEC-015)", () => {
     });
   });
 
-  describe("AC-015-08: Resumo de páginas com cartões em stagger", () => {
-    it("renderiza os três cartões de encaminhamento com revelação escalonada", () => {
+  describe("AC-015-08: Faixa de encaminhamento com revelação", () => {
+    it("renderiza a faixa discreta para corretores com revelação", () => {
       const { container } = render(<HomePathways />);
 
       expect(screen.getByText("Para corretores de seguros")).toBeInTheDocument();
       const reveals = container.querySelectorAll<HTMLElement>("[data-reveal]");
-      expect(reveals.length).toBeGreaterThanOrEqual(4);
+      expect(reveals.length).toBeGreaterThanOrEqual(1);
     });
   });
 
@@ -155,12 +155,12 @@ describe("Sistema Unificado de Motion Design (SPEC-015)", () => {
       render(<Hero />);
 
       expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(
-        "BRS Reparações Automotivas.",
+        "Funilaria, pintura em estufa e martelinho de ouro em Toledo-PR.",
       );
-      expect(
-        screen.getByRole("link", { name: /ver especialidades|conhecer os serviços/i }),
-      ).toBeInTheDocument();
-      expect(screen.queryByRole("link", { name: /solicitar avaliação/i })).toBeNull();
+      expect(screen.getByRole("link", { name: /solicitar avaliação/i })).toHaveAttribute(
+        "href",
+        "/contato",
+      );
     });
   });
 });

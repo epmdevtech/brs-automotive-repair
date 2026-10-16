@@ -2,15 +2,15 @@
 
 ## Metadados
 
-| Campo       | Valor                                                                                           |
-| ----------- | ----------------------------------------------------------------------------------------------- |
-| Task ID     | TASK-059-01                                                                                     |
-| Spec Ref    | SPEC-059                                                                                        |
-| Título      | Remoção do Plugin Nitro e Alinhamento do Bundle de Produção e Dockerfile no TanStack Start SSR  |
-| Status      | Concluído                                                                                       |
-| Data        | 2026-10-15                                                                                      |
-| Responsável | Staff DevOps & Fullstack Engineer                                                               |
-| Módulo      | `build`, `vite.config.ts`, `Dockerfile`, `docker-compose.yml`                                   |
+| Campo       | Valor                                                                                          |
+| ----------- | ---------------------------------------------------------------------------------------------- |
+| Task ID     | TASK-059-01                                                                                    |
+| Spec Ref    | SPEC-059                                                                                       |
+| Título      | Remoção do Plugin Nitro e Alinhamento do Bundle de Produção e Dockerfile no TanStack Start SSR |
+| Status      | Concluído                                                                                      |
+| Data        | 2026-10-15                                                                                     |
+| Responsável | Staff DevOps & Fullstack Engineer                                                              |
+| Módulo      | `build`, `vite.config.ts`, `Dockerfile`, `docker-compose.yml`                                  |
 
 ---
 
