@@ -1,14 +1,6 @@
 import * as React from "react";
 import { Link } from "@tanstack/react-router";
-import {
-  ArrowDown,
-  ArrowUpRight,
-  MapPin,
-  Sparkles,
-  Wrench,
-  ShieldCheck,
-  RotateCcw,
-} from "lucide-react";
+import { ArrowDown, ArrowUpRight, MapPin, Sparkles, Wrench, ShieldCheck } from "lucide-react";
 import { gsap } from "gsap";
 import { Button } from "@/components/ui/button";
 import { MagneticButton } from "@/components/ui/magnetic-button";
@@ -131,36 +123,17 @@ export const AnimatedHero = ({
     [resolvedConfig],
   );
 
-  // Estado determinístico de conclusão da introdução cinematográfica (SPEC-067)
-  const [introKey, setIntroKey] = React.useState(0);
+  // Estado determinístico de conclusão da introdução cinematográfica (SPEC-067 / SPEC-068)
   const [introComplete, setIntroComplete] = React.useState(() => {
-    if (typeof window !== "undefined") {
-      const p = new URLSearchParams(window.location.search);
-      if (p.has("intro") || p.has("replay") || p.has("anim")) return false;
-    }
     return getHasPlayedHeroIntro();
   });
 
-  const replayIntro = React.useCallback(() => {
-    setHasPlayedHeroIntro(false);
-    setIntroComplete(false);
-    setIntroKey((k) => k + 1);
-  }, []);
-
+  // Ciclo de vida da abertura, antecipação por navegação deliberada e visibilidade
   React.useEffect(() => {
     if (typeof window === "undefined") return;
-    (window as unknown as { __replayHeroIntro?: () => void }).__replayHeroIntro = replayIntro;
-  }, [replayIntro]);
-
-  // Ciclo de vida da abertura, antecipação por interação e page visibility
-  React.useEffect(() => {
-    if (typeof window === "undefined") return;
-
-    const params = new URLSearchParams(window.location.search);
-    const forceIntro = params.has("intro") || params.has("replay") || params.has("anim");
 
     const isReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if ((isReduced || getHasPlayedHeroIntro()) && !forceIntro) {
+    if (isReduced || getHasPlayedHeroIntro()) {
       setIntroComplete(true);
       setHasPlayedHeroIntro(true);
       return;
@@ -172,37 +145,12 @@ export const AnimatedHero = ({
       window.dispatchEvent(new CustomEvent("brs:hero-intro-skip"));
     };
 
-    // Antecipação imediata por qualquer interação real do usuário com o conteúdo
-    const handleEarlyInteraction = () => {
-      completeIntro();
-    };
-
-    const handleKeyDown = (e: KeyboardEvent) => {
-      // Ignora teclas modificadoras e atalhos de reload do navegador (F5, Ctrl+R, etc.)
-      if (
-        e.key === "Control" ||
-        e.key === "Shift" ||
-        e.key === "Alt" ||
-        e.key === "Meta" ||
-        e.key === "F5" ||
-        ((e.ctrlKey || e.metaKey) && (e.key === "r" || e.key === "R"))
-      ) {
-        return;
-      }
-      completeIntro();
-    };
-
     // Monitoramento de visibilidade da página: pausar/concluir se em background
     const handleVisibilityChange = () => {
       if (document.hidden) {
         completeIntro();
       }
     };
-
-    window.addEventListener("wheel", handleEarlyInteraction, { passive: true, once: true });
-    window.addEventListener("touchstart", handleEarlyInteraction, { passive: true, once: true });
-    window.addEventListener("keydown", handleKeyDown);
-    window.addEventListener("click", handleEarlyInteraction, { once: true });
     document.addEventListener("visibilitychange", handleVisibilityChange);
 
     // Conclusão natural após a sequência completa de UI e reflexo de luz
@@ -212,13 +160,59 @@ export const AnimatedHero = ({
       completeIntro();
     }, introTotalMs);
 
+    // Grace period de 600ms antes de registrar listeners de rolagem e teclado.
+    // Impede cancelamento precoce acidental por teclas residuais de reload (Ctrl+Shift+R),
+    // clique de foco da janela ou micro-oscilações de trackpad no primeiro paint.
+    let touchStartY = 0;
+    let attachedListeners = false;
+
+    const handleWheel = (e: WheelEvent) => {
+      // Ignora micro-deslocamentos de repouso no trackpad (< 25px)
+      if (Math.abs(e.deltaY) > 25 || Math.abs(e.deltaX) > 25) {
+        completeIntro();
+      }
+    };
+
+    const handleTouchStart = (e: TouchEvent) => {
+      if (e.touches.length > 0) {
+        touchStartY = e.touches[0].clientY;
+      }
+    };
+
+    const handleTouchMove = (e: TouchEvent) => {
+      if (e.touches.length > 0) {
+        const deltaY = Math.abs(e.touches[0].clientY - touchStartY);
+        if (deltaY > 30) {
+          completeIntro();
+        }
+      }
+    };
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Apenas teclas deliberadas de navegação / rolagem
+      if (e.key === "ArrowDown" || e.key === "PageDown" || e.key === " " || e.key === "Spacebar") {
+        completeIntro();
+      }
+    };
+
+    const graceTimer = setTimeout(() => {
+      attachedListeners = true;
+      window.addEventListener("wheel", handleWheel, { passive: true });
+      window.addEventListener("touchstart", handleTouchStart, { passive: true });
+      window.addEventListener("touchmove", handleTouchMove, { passive: true });
+      window.addEventListener("keydown", handleKeyDown);
+    }, 600);
+
     return () => {
       clearTimeout(timer);
-      window.removeEventListener("wheel", handleEarlyInteraction);
-      window.removeEventListener("touchstart", handleEarlyInteraction);
-      window.removeEventListener("keydown", handleKeyDown);
-      window.removeEventListener("click", handleEarlyInteraction);
+      clearTimeout(graceTimer);
       document.removeEventListener("visibilitychange", handleVisibilityChange);
+      if (attachedListeners) {
+        window.removeEventListener("wheel", handleWheel);
+        window.removeEventListener("touchstart", handleTouchStart);
+        window.removeEventListener("touchmove", handleTouchMove);
+        window.removeEventListener("keydown", handleKeyDown);
+      }
     };
   }, []);
 
@@ -269,7 +263,6 @@ export const AnimatedHero = ({
 
   return (
     <section
-      key={introKey}
       ref={heroRef}
       id={id}
       style={heroStyleVariables}
@@ -517,18 +510,6 @@ export const AnimatedHero = ({
           </div>
         )}
       </div>
-      {/* Botão de Replay Rápido em Ambiente de Desenvolvimento (DEV only) */}
-      {import.meta.env.DEV && (
-        <button
-          type="button"
-          onClick={replayIntro}
-          title="Replay Abertura Cinematográfica do Hero"
-          className="fixed bottom-4 right-4 z-50 rounded-full bg-neutral-950/90 border border-primary/50 px-3.5 py-1.5 text-xs text-primary font-mono shadow-2xl backdrop-blur-md hover:bg-primary/20 hover:border-primary transition-all flex items-center gap-1.5 cursor-pointer pointer-events-auto"
-        >
-          <RotateCcw size={12} />
-          <span>Replay Abertura</span>
-        </button>
-      )}
     </section>
   );
 };

@@ -106,7 +106,9 @@ describe("SPEC-067: Hero com Abertura Cinematográfica, Zoom Lento e Reflexo de 
     expect(header3).not.toHaveClass("header-cinematic-intro");
   });
 
-  it("fast-forwards UI reveal immediately on user interaction (early skip)", () => {
+  it("fast-forwards UI reveal on deliberate scroll (wheel >25px), not on plain click", () => {
+    vi.useFakeTimers();
+
     const { container } = render(
       <AnimatedHero
         backgroundImageUrl="/images/hero.webp"
@@ -119,14 +121,26 @@ describe("SPEC-067: Hero com Abertura Cinematográfica, Zoom Lento e Reflexo de 
     expect(heroSection).not.toHaveClass("hero-intro-complete");
     expect(getHasPlayedHeroIntro()).toBe(false);
 
-    // Simula interação do usuário (ex: clique na janela)
+    // Clique simples NÃO deve abortar a abertura cinematográfica (bug corrigido: SPEC-068)
     act(() => {
       window.dispatchEvent(new MouseEvent("click", { bubbles: true }));
     });
+    expect(heroSection).not.toHaveClass("hero-intro-complete");
+    expect(getHasPlayedHeroIntro()).toBe(false);
 
-    // Deve aplicar a classe hero-intro-complete e registrar hasPlayedHeroIntro
+    // Avançar o grace period de 600ms para os listeners de wheel/key serem registrados
+    act(() => {
+      vi.advanceTimersByTime(700);
+    });
+
+    // Rolagem deliberada (deltaY > 25px) DEVE fast-forward a abertura
+    act(() => {
+      window.dispatchEvent(new WheelEvent("wheel", { deltaY: 80, bubbles: true }));
+    });
     expect(heroSection).toHaveClass("hero-intro-complete");
     expect(getHasPlayedHeroIntro()).toBe(true);
+
+    vi.useRealTimers();
   });
 
   it("fast-forwards Header when brs:hero-intro-skip custom event is dispatched", () => {

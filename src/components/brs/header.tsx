@@ -51,7 +51,6 @@ export function Header({ isHome: isHomeProp }: HeaderProps = {}) {
       <div
         className={cn(
           "pointer-events-auto mx-auto max-w-6xl transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] rounded-xl border shadow-2xl backdrop-blur-md flex items-center justify-between w-full",
-          shouldAnimateHeader && "header-cinematic-intro",
           scrolled
             ? "bg-neutral-950/90 border-white/15 py-2 px-3 sm:px-6 shadow-black/60"
             : "bg-neutral-950/75 border-white/10 py-2 sm:py-3 px-3 sm:px-8 shadow-black/40",
