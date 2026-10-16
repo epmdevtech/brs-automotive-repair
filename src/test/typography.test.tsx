@@ -53,7 +53,7 @@ describe("Sistema Tipográfico BRS (SPEC-009)", () => {
     expect(heading.className).toContain("font-display");
     expect(heading.className).toContain("font-semibold");
     expect(heading.className).not.toContain("uppercase");
-    expect(heading.textContent).toContain(
+    expect(heading.textContent?.replace(/\u00a0/g, " ")).toContain(
       "Funilaria, pintura em estufa e martelinho de ouro em Toledo-PR.",
     );
   });

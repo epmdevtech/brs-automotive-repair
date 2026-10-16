@@ -252,6 +252,8 @@ Todas as entregas obedecem ao protocolo **Universal SDD**:
 - `SPEC-064` / `TASK-064-01` / `REVIEW-064`: Auditoria e Refatoração UX/UI — Conversão, Integridade Editorial, Home em 6 Blocos, SEO Canônico de Produção (`https://brs.epmdevtech.com.br`) e Dados Oficiais Confirmados (Endereço e Horário).
 - `SPEC-065` / `TASK-065-01` / `REVIEW-065`: Sincronização Bidirecional da Linha do Tempo Operacional com o Status do Agendamento e Mini-Stepper em `/agendamentos` + Correção de Hidratação SSR.
 - `SPEC-066` / `TASK-066-01`: Rota Confidencial de Execução e Ingestão de Briefing Multinicho EPM DevTech (`/briefing`), sem inclusão em menus públicos, suporte nativo ao nicho de reparação automotiva, persistência local, cálculo de contraste WCAG e exportação determinística de `briefing-completo.json` e `booking-config.json`.
+- `SPEC-067` / `TASK-067-01` / `REVIEW-067`: Hero com Abertura Cinematográfica, Zoom Lento e Reflexo de Luz na Lataria (Sequência CSS pura, clareamento do veículo, antecipação por interação, flag de sessão SPA e compatibilidade estrita SSR).
+
 
 ---
 
