@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { HomePageContent } from "@/components/brs/website";
 import { buildRouteHead, buildAutoBodyShopSchema } from "@/lib/seo";
 
-import { defaultHeroConfig } from "@/lib/hero-config";
+import { defaultHeroConfig, getHeroLcpPreload } from "@/lib/hero-config";
 
 export const Route = createFileRoute("/")({
   component: HomePageContent,
@@ -17,15 +17,7 @@ export const Route = createFileRoute("/")({
 
     return {
       ...baseHead,
-      links: [
-        ...(baseHead.links ?? []),
-        {
-          rel: "preload",
-          as: "image",
-          href: defaultHeroConfig.image.desktop.src,
-          fetchPriority: "high",
-        },
-      ],
+      links: [...(baseHead.links ?? []), getHeroLcpPreload(defaultHeroConfig)],
     };
   },
 });

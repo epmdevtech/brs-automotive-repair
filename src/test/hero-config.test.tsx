@@ -5,6 +5,7 @@ import {
   type HeroConfig,
   type HeroProfileType,
   defaultHeroConfig,
+  getHeroLcpPreload,
   getHeroStyleVariables,
   resolveHeroProfile,
 } from "@/lib/hero-config";
@@ -233,6 +234,88 @@ describe("SPEC-068: Desacoplamento da Animação do Hero e Configuração Centra
       // Sem selo ilustrativo no container principal Hero
       const heroRender = render(<Hero config={equipeSwapConfig} />);
       expect(heroRender.queryByText("Fotografia ilustrativa")).toBeNull();
+    });
+  });
+
+  describe("SPEC-069: Pipeline de Imagem Responsiva, Intrínsecos e Preload Casado", () => {
+    it("AC-069-01: popula avifSrcSet, webpSrcSet e sizes no perfil padrão (desktop e mobile)", () => {
+      const { desktop, mobile } = defaultHeroConfig.image;
+
+      for (const variant of [desktop, mobile]) {
+        expect(variant.avifSrcSet).toContain(".avif");
+        expect(variant.avifSrcSet).toMatch(/\b\d+w/);
+        expect(variant.webpSrcSet).toContain(".webp");
+        expect(variant.webpSrcSet).toMatch(/\b\d+w/);
+        expect(variant.sizes).toBe("100vw");
+      }
+
+      // Os srcset de AVIF e WebP devem conter o mesmo conjunto de larguras
+      const widths = (set: string) =>
+        set
+          .split(",")
+          .map((entry) => entry.trim().split(" ")[1])
+          .sort();
+      expect(widths(desktop.avifSrcSet!)).toEqual(widths(desktop.webpSrcSet!));
+    });
+
+    it("AC-069-01: o <picture> renderiza sources AVIF e WebP com srcset e sizes", () => {
+      const { container } = render(<Hero />);
+
+      const avifSource = container.querySelector("source[type='image/avif']");
+      const webpSource = container.querySelector("source[type='image/webp']");
+      expect(avifSource).toBeInTheDocument();
+      expect(webpSource).toBeInTheDocument();
+      expect(avifSource).toHaveAttribute("srcset", expect.stringContaining(".avif"));
+      expect(webpSource).toHaveAttribute("srcset", expect.stringContaining(".webp"));
+      expect(avifSource).toHaveAttribute("sizes", "100vw");
+
+      const img = container.querySelector("img.hero-photo-cinematic");
+      expect(img).toHaveAttribute("sizes", "100vw");
+    });
+
+    it("AC-069-03: as dimensões intrínsecas refletem a resolução real do asset (1920×1088 / 1280×725)", () => {
+      expect(defaultHeroConfig.image.desktop.width).toBe(1920);
+      expect(defaultHeroConfig.image.desktop.height).toBe(1088);
+      expect(defaultHeroConfig.image.mobile.width).toBe(1280);
+      expect(defaultHeroConfig.image.mobile.height).toBe(725);
+
+      // Proporção 16:9 coerente entre desktop e mobile (tolerância de arredondamento)
+      const desktopRatio =
+        defaultHeroConfig.image.desktop.width / defaultHeroConfig.image.desktop.height;
+      const mobileRatio =
+        defaultHeroConfig.image.mobile.width / defaultHeroConfig.image.mobile.height;
+      expect(Math.abs(desktopRatio - mobileRatio)).toBeLessThan(0.01);
+    });
+
+    it("AC-069-02: o preload de LCP usa imagesrcset + imagesizes com type image/avif", () => {
+      const preload = getHeroLcpPreload(defaultHeroConfig);
+
+      expect(preload.rel).toBe("preload");
+      expect(preload.as).toBe("image");
+      expect(preload.type).toBe("image/avif");
+      expect(preload.fetchPriority).toBe("high");
+      expect(preload.imageSrcSet).toContain(".avif");
+      expect(preload.imageSizes).toBe("100vw");
+      expect(preload.href).toBeUndefined();
+    });
+
+    it("AC-069-02: o preload cai para href quando não há avifSrcSet (compatibilidade)", () => {
+      const legacyConfig: HeroConfig = {
+        ...defaultHeroConfig,
+        image: {
+          ...defaultHeroConfig.image,
+          desktop: {
+            src: "/assets/brs-hero.jpg",
+            width: 1920,
+            height: 1088,
+          },
+        },
+      };
+
+      const preload = getHeroLcpPreload(legacyConfig);
+      expect(preload.href).toBe("/assets/brs-hero.jpg");
+      expect(preload.imageSrcSet).toBeUndefined();
+      expect(preload.type).toBeUndefined();
     });
   });
 });

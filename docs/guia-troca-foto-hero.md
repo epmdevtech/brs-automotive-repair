@@ -137,3 +137,47 @@ Para visualizar com exatidão onde o reflexo de luz está passando e ajustar as 
 - [ ] O flag `isIllustrative: false` foi ativado para foto real?
 - [ ] O comando `bun run test` e `bun run build` executam com 100% de sucesso?
 - [ ] As tags `og:image` e `twitter:image` em `src/lib/seo.ts` foram atualizadas com a nova imagem?
+
+---
+
+## 8. Pipeline Responsivo e Geração das Variantes (SPEC-069)
+
+O Hero serve **AVIF** (primário), **WebP** (secundário) e o **JPG importado** (fallback universal). As variantes modernas ficam versionadas em `public/hero/` com URL estável, para que o `preload` de LCP aponte para o mesmo candidato que o `<picture>` escolhe (sem download duplicado).
+
+### 8.1 Como gerar as variantes (sem novas dependências)
+
+Nenhuma biblioteca de build é utilizada. A geração é feita por CLI com o **ImageMagick** (`convert`), já disponível no ambiente:
+
+```bash
+SRC=src/assets/brs-hero.jpg
+
+convert "$SRC" -resize 1920x1088 -quality 55 public/hero/hero-1920.avif
+convert "$SRC" -resize 1920x1088 -quality 80 -define webp:method=6 public/hero/hero-1920.webp
+convert "$SRC" -resize 1280x725  -quality 55 public/hero/hero-1280.avif
+convert "$SRC" -resize 1280x725  -quality 80 -define webp:method=6 public/hero/hero-1280.webp
+convert "$SRC" -resize 960x544   -quality 55 public/hero/hero-960.avif
+convert "$SRC" -resize 960x544   -quality 80 -define webp:method=6 public/hero/hero-960.webp
+```
+
+> As larguras `960`, `1280` e `1920` compõem o `srcset` responsivo. Mantenha 3 larguras por formato.
+
+### 8.2 Pesos de referência medidos (asset ilustrativo 1920×1088)
+
+| Formato | 1920w | 1280w | 960w |
+| :--- | :--- | :--- | :--- |
+| AVIF (quality 55) | ~59 KB | ~34 KB | ~23 KB |
+| WebP (quality 80) | ~79 KB | ~44 KB | ~28 KB |
+| JPG (fallback, original) | ~186 KB | — | — |
+
+### 8.3 Regras a respeitar ao trocar a foto
+
+- Atualize `width`/`height` em `defaultHeroConfig.image` para a **resolução real** do novo arquivo (evita CLS e reserva de proporção incorreta).
+- Mantenha `sizes: "100vw"` enquanto a foto cobrir toda a largura do Hero.
+- A fonte deve ter folga de resolução ≥ 10 % sobre o tamanho exibido (o zoom chega a `1.10`). Prefira gerar a variante desktop a partir de uma foto com **pelo menos 2560 px** de largura.
+- Rode `bun run test` (inclui `hero-config.test.tsx`) e o Playwright `hero-visual-baseline.spec.ts` para validar que o perfil `veiculo-inteiro` não regrediu.
+
+
+
+## 9. Evidência Visual de Linha do Tempo
+
+O teste `e2e/hero-visual-baseline.spec.ts` grava capturas em `0 s`, `5 s`, `6 s` e `10 s` (desktop, mobile e reduced-motion) em `test-results/` como evidência manual, e compara a composição estabilizada contra o baseline versionado em `e2e/hero-visual-baseline.spec.ts-snapshots/`.

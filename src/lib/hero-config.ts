@@ -19,6 +19,25 @@ export interface HeroImageVariant {
   avifSrc?: string;
   /** Caminho opcional para variante moderna em formato WebP */
   webpSrc?: string;
+  /** Conjunto responsivo AVIF com descritores de largura (`w`), ex: "/a.avif 1280w, /b.avif 1920w" */
+  avifSrcSet?: string;
+  /** Conjunto responsivo WebP com descritores de largura (`w`) */
+  webpSrcSet?: string;
+  /** Conjunto responsivo do fallback (JPG) com descritores de largura (`w`) */
+  srcSet?: string;
+  /** Dica de seleção de recurso (atributo CSS `sizes`), ex: "100vw" */
+  sizes?: string;
+}
+
+/** Descritor do `<link rel="preload">` do LCP do Hero, casado com o `<picture>`. */
+export interface HeroLcpPreload {
+  rel: "preload";
+  as: "image";
+  href?: string;
+  type?: string;
+  imageSrcSet?: string;
+  imageSizes?: string;
+  fetchPriority: "high";
 }
 
 export interface HeroImageConfig {
@@ -228,6 +247,12 @@ export const HERO_PROFILE_PRESETS: Record<HeroProfileType, HeroProfilePreset> = 
 /**
  * Configuração canônica ativa do Hero da BRS Reparações Automotivas.
  * Para substituir a imagem por uma foto real, altere apenas este objeto.
+ *
+ * Pipeline responsivo (SPEC-069):
+ * - `src` é o fallback universal (JPG importado, hasheado pelo bundler), sem lazy loading.
+ * - `avifSrcSet`/`webpSrcSet` são as variantes modernas versionadas em `/public/hero/`,
+ *   servidas por URL estável para permitir o preload de LCP casado.
+ * - `sizes` é "100vw" pois a fotografia cobre toda a largura do Hero em qualquer breakpoint.
  */
 export const defaultHeroConfig: HeroConfig = {
   profile: "veiculo-inteiro",
@@ -235,18 +260,59 @@ export const defaultHeroConfig: HeroConfig = {
   image: {
     desktop: {
       src: heroCarImage,
-      width: 2560,
-      height: 1440,
+      width: 1920,
+      height: 1088,
+      avifSrc: "/hero/hero-1920.avif",
+      webpSrc: "/hero/hero-1920.webp",
+      avifSrcSet:
+        "/hero/hero-960.avif 960w, /hero/hero-1280.avif 1280w, /hero/hero-1920.avif 1920w",
+      webpSrcSet:
+        "/hero/hero-960.webp 960w, /hero/hero-1280.webp 1280w, /hero/hero-1920.webp 1920w",
+      sizes: "100vw",
     },
     mobile: {
       src: heroCarImage,
       width: 1280,
-      height: 1600,
+      height: 725,
+      avifSrc: "/hero/hero-1280.avif",
+      webpSrc: "/hero/hero-1280.webp",
+      avifSrcSet:
+        "/hero/hero-960.avif 960w, /hero/hero-1280.avif 1280w, /hero/hero-1920.avif 1920w",
+      webpSrcSet:
+        "/hero/hero-960.webp 960w, /hero/hero-1280.webp 1280w, /hero/hero-1920.webp 1920w",
+      sizes: "100vw",
     },
     alt: "",
     decorative: true,
   },
 };
+
+/**
+ * Monta o descritor de preload do LCP do Hero (SPEC-069), garantindo que o
+ * navegador baixe o mesmo candidato AVIF escolhido pelo `<picture>` e evite
+ * o duplo download (AVIF + JPG). Sem `avifSrcSet`, cai para o `href` do `src`.
+ */
+export function getHeroLcpPreload(config: HeroConfig = defaultHeroConfig): HeroLcpPreload {
+  const desktop = config.image.desktop;
+
+  if (desktop.avifSrcSet) {
+    return {
+      rel: "preload",
+      as: "image",
+      type: "image/avif",
+      imageSrcSet: desktop.avifSrcSet,
+      imageSizes: desktop.sizes ?? "100vw",
+      fetchPriority: "high",
+    };
+  }
+
+  return {
+    rel: "preload",
+    as: "image",
+    href: desktop.src,
+    fetchPriority: "high",
+  };
+}
 
 /**
  * Resolve e funde o perfil ativo com quaisquer sobrescritas customizadas.

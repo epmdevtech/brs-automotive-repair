@@ -272,34 +272,47 @@ export const AnimatedHero = ({
         className,
       )}
     >
-      {/* CAMADA 1: Fotografia LCP com Picture, Art Direction e Zoom Lento (SPEC-068) */}
+      {/* CAMADA 1: Fotografia LCP com Picture, Art Direction e Zoom Lento (SPEC-068 / SPEC-069) */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
         <picture>
-          {resolvedConfig.image.mobile.avifSrc && (
+          {(resolvedConfig.image.mobile.avifSrcSet ?? resolvedConfig.image.mobile.avifSrc) && (
             <source
               media="(max-width: 768px)"
               type="image/avif"
-              srcSet={resolvedConfig.image.mobile.avifSrc}
+              srcSet={resolvedConfig.image.mobile.avifSrcSet ?? resolvedConfig.image.mobile.avifSrc}
+              sizes={resolvedConfig.image.mobile.sizes}
             />
           )}
-          {resolvedConfig.image.mobile.webpSrc && (
+          {(resolvedConfig.image.mobile.webpSrcSet ?? resolvedConfig.image.mobile.webpSrc) && (
             <source
               media="(max-width: 768px)"
               type="image/webp"
-              srcSet={resolvedConfig.image.mobile.webpSrc}
+              srcSet={resolvedConfig.image.mobile.webpSrcSet ?? resolvedConfig.image.mobile.webpSrc}
+              sizes={resolvedConfig.image.mobile.sizes}
             />
           )}
           <source
             media="(max-width: 768px)"
-            srcSet={resolvedConfig.image.mobile.src}
-            width={resolvedConfig.image.mobile.width}
-            height={resolvedConfig.image.mobile.height}
+            srcSet={resolvedConfig.image.mobile.srcSet ?? resolvedConfig.image.mobile.src}
+            sizes={resolvedConfig.image.mobile.sizes}
           />
-          {resolvedConfig.image.desktop.avifSrc && (
-            <source type="image/avif" srcSet={resolvedConfig.image.desktop.avifSrc} />
+          {(resolvedConfig.image.desktop.avifSrcSet ?? resolvedConfig.image.desktop.avifSrc) && (
+            <source
+              type="image/avif"
+              srcSet={
+                resolvedConfig.image.desktop.avifSrcSet ?? resolvedConfig.image.desktop.avifSrc
+              }
+              sizes={resolvedConfig.image.desktop.sizes}
+            />
           )}
-          {resolvedConfig.image.desktop.webpSrc && (
-            <source type="image/webp" srcSet={resolvedConfig.image.desktop.webpSrc} />
+          {(resolvedConfig.image.desktop.webpSrcSet ?? resolvedConfig.image.desktop.webpSrc) && (
+            <source
+              type="image/webp"
+              srcSet={
+                resolvedConfig.image.desktop.webpSrcSet ?? resolvedConfig.image.desktop.webpSrc
+              }
+              sizes={resolvedConfig.image.desktop.sizes}
+            />
           )}
           <img
             src={resolvedConfig.image.desktop.src}
@@ -310,6 +323,7 @@ export const AnimatedHero = ({
             decoding="async"
             width={resolvedConfig.image.desktop.width}
             height={resolvedConfig.image.desktop.height}
+            sizes={resolvedConfig.image.desktop.sizes}
             className="hero-photo-cinematic absolute inset-0 h-full w-full object-cover pointer-events-none"
           />
         </picture>
