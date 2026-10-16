@@ -1079,13 +1079,13 @@ textarea.field-input {
     opacity: 0;
   }
   20% {
-    opacity: 0.12;
+    opacity: 0.6;
   }
   48% {
-    opacity: 0.32;
+    opacity: 1;
   }
   75% {
-    opacity: 0.14;
+    opacity: 0.6;
   }
   100% {
     transform: translateX(380%) skewX(-20deg);

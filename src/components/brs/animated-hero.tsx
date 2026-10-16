@@ -1,6 +1,14 @@
 import * as React from "react";
 import { Link } from "@tanstack/react-router";
-import { ArrowDown, ArrowUpRight, MapPin, Sparkles, Wrench, ShieldCheck } from "lucide-react";
+import {
+  ArrowDown,
+  ArrowUpRight,
+  MapPin,
+  Sparkles,
+  Wrench,
+  ShieldCheck,
+  RotateCcw,
+} from "lucide-react";
 import { gsap } from "gsap";
 import { Button } from "@/components/ui/button";
 import { MagneticButton } from "@/components/ui/magnetic-button";
@@ -124,14 +132,35 @@ export const AnimatedHero = ({
   );
 
   // Estado determinístico de conclusão da introdução cinematográfica (SPEC-067)
-  const [introComplete, setIntroComplete] = React.useState(() => getHasPlayedHeroIntro());
+  const [introKey, setIntroKey] = React.useState(0);
+  const [introComplete, setIntroComplete] = React.useState(() => {
+    if (typeof window !== "undefined") {
+      const p = new URLSearchParams(window.location.search);
+      if (p.has("intro") || p.has("replay") || p.has("anim")) return false;
+    }
+    return getHasPlayedHeroIntro();
+  });
+
+  const replayIntro = React.useCallback(() => {
+    setHasPlayedHeroIntro(false);
+    setIntroComplete(false);
+    setIntroKey((k) => k + 1);
+  }, []);
+
+  React.useEffect(() => {
+    if (typeof window === "undefined") return;
+    (window as unknown as { __replayHeroIntro?: () => void }).__replayHeroIntro = replayIntro;
+  }, [replayIntro]);
 
   // Ciclo de vida da abertura, antecipação por interação e page visibility
   React.useEffect(() => {
     if (typeof window === "undefined") return;
 
+    const params = new URLSearchParams(window.location.search);
+    const forceIntro = params.has("intro") || params.has("replay") || params.has("anim");
+
     const isReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (isReduced || getHasPlayedHeroIntro()) {
+    if ((isReduced || getHasPlayedHeroIntro()) && !forceIntro) {
       setIntroComplete(true);
       setHasPlayedHeroIntro(true);
       return;
@@ -240,6 +269,7 @@ export const AnimatedHero = ({
 
   return (
     <section
+      key={introKey}
       ref={heroRef}
       id={id}
       style={heroStyleVariables}
@@ -487,6 +517,18 @@ export const AnimatedHero = ({
           </div>
         )}
       </div>
+      {/* Botão de Replay Rápido em Ambiente de Desenvolvimento (DEV only) */}
+      {import.meta.env.DEV && (
+        <button
+          type="button"
+          onClick={replayIntro}
+          title="Replay Abertura Cinematográfica do Hero"
+          className="fixed bottom-4 right-4 z-50 rounded-full bg-neutral-950/90 border border-primary/50 px-3.5 py-1.5 text-xs text-primary font-mono shadow-2xl backdrop-blur-md hover:bg-primary/20 hover:border-primary transition-all flex items-center gap-1.5 cursor-pointer pointer-events-auto"
+        >
+          <RotateCcw size={12} />
+          <span>Replay Abertura</span>
+        </button>
+      )}
     </section>
   );
 };
