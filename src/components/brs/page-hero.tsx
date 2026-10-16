@@ -168,19 +168,13 @@ export function PageHero({
       />
 
       <div className="page-width relative z-10">
-        {/* Barra superior de telemetria e breadcrumbs */}
+        {/* Barra superior de breadcrumbs */}
         <div className="flex flex-wrap items-center justify-between gap-3 mb-6 pt-2">
           {breadcrumbs && <Breadcrumbs items={breadcrumbs} className="mb-0" />}
 
           {codeIndex && (
             <div className="hidden sm:flex items-center gap-2 text-[10px] font-mono tracking-widest uppercase text-neutral-400">
-              <span
-                className="size-1.5 rounded-full bg-primary led-status-pulse"
-                aria-hidden="true"
-              />
               <span className="text-primary font-medium">{codeIndex}</span>
-              <span className="text-white/20">|</span>
-              <span className="text-neutral-400">COORD: 24°43'S 53°44'W</span>
             </div>
           )}
         </div>

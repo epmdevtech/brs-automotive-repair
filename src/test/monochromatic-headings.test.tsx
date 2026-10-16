@@ -21,7 +21,9 @@ describe("SPEC-044 / TASK-044-01: Padronização da Hierarquia Tipográfica e T�
       const { container } = render(<Hero />);
       const h1 = container.querySelector("h1");
       expect(h1).not.toBeNull();
-      expect(h1?.textContent).toContain("BRS Reparações Automotivas.");
+      expect(h1?.textContent).toContain(
+        "Funilaria, pintura em estufa e martelinho de ouro em Toledo-PR.",
+      );
 
       // Não há span interno com classes de destaque dourado/âmbar
       const primarySpan = h1?.querySelector(".text-primary");
@@ -107,7 +109,7 @@ describe("SPEC-044 / TASK-044-01: Padronização da Hierarquia Tipográfica e T�
       const { container } = render(<Philosophy />);
       const h2 = container.querySelector("h2");
       expect(h2).not.toBeNull();
-      expect(h2?.textContent).toContain("Critério técnico e cuidado em cada etapa.");
+      expect(h2?.textContent).toContain("Critério técnico em cada etapa do reparo.");
       expect(h2?.querySelector(".text-primary")).toBeNull();
     });
   });

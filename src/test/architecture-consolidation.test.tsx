@@ -35,9 +35,7 @@ describe("SPEC-017 — Consolidação da arquitetura multipágina", () => {
       expect(container.querySelector("#processo")).not.toBeNull();
 
       const hrefs = Array.from(container.querySelectorAll("a")).map((a) => a.getAttribute("href"));
-      expect(hrefs).toEqual(
-        expect.arrayContaining(["/sobre", "/trabalhos", "/para-corretores", "/contato"]),
-      );
+      expect(hrefs).toEqual(expect.arrayContaining(["/para-corretores", "/contato"]));
       services.forEach((service) => expect(hrefs).toContain(service.path));
     });
 
@@ -55,11 +53,13 @@ describe("SPEC-017 — Consolidação da arquitetura multipágina", () => {
       const { container } = render(<HomePageContent />);
 
       const anchors = Array.from(container.querySelectorAll<HTMLAnchorElement>('a[href^="#"]'));
-      expect(anchors.length).toBeGreaterThan(0);
       anchors.forEach((anchor) => {
         const id = anchor.getAttribute("href")!.slice(1);
         expect(container.querySelector(`#${id}`)).not.toBeNull();
       });
+      expect(container.querySelector("#inicio")).not.toBeNull();
+      expect(container.querySelector("#servicos")).not.toBeNull();
+      expect(container.querySelector("#processo")).not.toBeNull();
     });
   });
 

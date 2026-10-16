@@ -45,7 +45,7 @@ describe("SPEC-014 — Arquitetura Multipágina, SEO Técnico e LLMs", () => {
 
       expect(uniqueCanonicals.size).toBe(PUBLIC_ROUTES.length);
       canonicalUrls.forEach((url) => {
-        expect(url).toMatch(/^http:\/\/brs\.localhost(\/.*)?$/);
+        expect(url).toMatch(/^https:\/\/brs\.epmdevtech\.com\.br(\/.*)?$/);
       });
     });
 
@@ -88,7 +88,7 @@ describe("SPEC-014 — Arquitetura Multipágina, SEO Técnico e LLMs", () => {
     it("arquivo robots.txt existe e faz apontamento para o sitemap.xml", () => {
       expect(fs.existsSync(robotsPath)).toBe(true);
       const content = fs.readFileSync(robotsPath, "utf-8");
-      expect(content).toContain("Sitemap: http://brs.localhost/sitemap.xml");
+      expect(content).toContain("Sitemap: https://brs.epmdevtech.com.br/sitemap.xml");
     });
 
     it("configura permissões documentadas para rastreadores tradicionais e motores de IA", () => {
@@ -114,7 +114,7 @@ describe("SPEC-014 — Arquitetura Multipágina, SEO Técnico e LLMs", () => {
       expect(content).toContain(company.phone);
       expect(content).toContain(company.instagram);
       expect(content).toContain("Toledo, Paraná");
-      expect(content).toContain("fotografias no site são ilustrativas temporárias");
+      expect(content).toContain("As fotografias exibidas no site são ilustrativas");
       expect(content).toContain("Funilaria Automotiva");
       expect(content).toContain("Pintura Automotiva");
       expect(content).toContain("Martelinho de Ouro");

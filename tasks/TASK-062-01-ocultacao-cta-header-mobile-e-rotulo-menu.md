@@ -2,15 +2,15 @@
 
 ## Metadados
 
-| Campo       | Valor                                                                          |
-| ----------- | ------------------------------------------------------------------------------ |
-| Task ID     | TASK-062-01                                                                    |
-| Spec Ref    | SPEC-062                                                                       |
+| Campo       | Valor                                                                           |
+| ----------- | ------------------------------------------------------------------------------- |
+| Task ID     | TASK-062-01                                                                     |
+| Spec Ref    | SPEC-062                                                                        |
 | Título      | Ajuste de Visibilidade do CTA no Header e Rótulo "Avaliação" no Menu Hambúrguer |
-| Status     | Concluído                                                                      |
-| Data        | 2026-10-15                                                                     |
-| Responsável | Staff UX/UI Designer & Frontend Engineer                                       |
-| Módulo      | `components/brs/header.tsx`, `test/header.test.tsx`                           |
+| Status      | Concluído                                                                       |
+| Data        | 2026-10-15                                                                      |
+| Responsável | Staff UX/UI Designer & Frontend Engineer                                        |
+| Módulo      | `components/brs/header.tsx`, `test/header.test.tsx`                             |
 
 ---
 

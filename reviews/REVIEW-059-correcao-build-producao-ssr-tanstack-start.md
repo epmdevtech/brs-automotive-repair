@@ -2,14 +2,14 @@
 
 ## Metadados
 
-| Campo   | Valor                                                 |
-| ------- | ----------------------------------------------------- |
-| ID      | REVIEW-059                                            |
-| SPEC    | SPEC-059                                              |
-| TASK    | TASK-059-01                                           |
-| Status  | Aprovado                                              |
-| Data    | 2026-10-15                                            |
-| Revisor | Staff DevOps & Fullstack Engineer (EPMDEVTECH)        |
+| Campo   | Valor                                          |
+| ------- | ---------------------------------------------- |
+| ID      | REVIEW-059                                     |
+| SPEC    | SPEC-059                                       |
+| TASK    | TASK-059-01                                    |
+| Status  | Aprovado                                       |
+| Data    | 2026-10-15                                     |
+| Revisor | Staff DevOps & Fullstack Engineer (EPMDEVTECH) |
 
 ---
 
@@ -18,6 +18,7 @@
 A **SPEC-059 / TASK-059-01** diagnosticou e sanou em definitivo o erro 500 (`Failed to load resource: the server responded with a status of 500 ()`) que ocorria ao acessar a aplicação em ambiente de produção / preview.
 
 ### Diagnóstico Técnico Concluído
+
 1. O arquivo `vite.config.ts` mantinha um resquício de build (`nitro({ defaultPreset: "cloudflare-module" })`).
 2. O Nitro interceptava a fase de bundling do Vite 8 e compilava o servidor em formato Cloudflare Worker em `.output/server/index.mjs`, suprimindo o compilador nativo do `@tanstack/react-start`.
 3. Por consequência, o diretório `dist/server/server.js` esperado pelo servidor de preview do TanStack Start (`previewServerPlugin`) nunca era gerado.
@@ -25,6 +26,7 @@ A **SPEC-059 / TASK-059-01** diagnosticou e sanou em definitivo o erro 500 (`Fai
 5. O `Dockerfile` (estágio `runner`) copiava `/app/.output` em vez de `/app/dist`, impedindo o funcionamento do container de produção.
 
 ### Medidas Implementadas
+
 1. **`vite.config.ts`**:
    - Remoção do import `nitro/vite` e do plugin condicional `nitro`.
    - Restauração do fluxo oficial do TanStack Start SSR (`tanstackStart({ server: { entry: "server" } })`), compilando cliente para `dist/client` e servidor SSR para `dist/server/server.js`.
@@ -43,28 +45,35 @@ A **SPEC-059 / TASK-059-01** diagnosticou e sanou em definitivo o erro 500 (`Fai
 ## 2. Evidências de Validação e Quality Gates
 
 ### 2.1 Testes Unitários e de Integração (Vitest)
+
 ```bash
 bun run test
 ```
+
 - **Resultado**: 49 arquivos de teste executados, **355 testes aprovados (100% de sucesso)**.
 - Duração total: ~149s. Zero regressões.
 
 ### 2.2 Linter de Código (ESLint)
+
 ```bash
 bun run lint
 ```
+
 - **Resultado**: 0 erros. Conformidade estrita com o linter do projeto.
 
 ### 2.3 Compilação de Produção (Vite)
+
 ```bash
 bun run build
 ```
+
 - **Resultado**: Compilação cliente concluída em ~4.1s e compilação SSR concluída em ~1.6s.
 - Artefatos gerados:
   - `dist/client/`: Assets estáticos, scripts e estilos otimizados.
   - `dist/server/server.js`: Entrypoint SSR funcional.
 
 ### 2.4 Verificação do Servidor de Preview / Produção
+
 - Inicialização do preview (`bun run preview`).
 - Requisição `GET http://127.0.0.1:5219/`:
   - `Status: 200 OK`
@@ -77,18 +86,18 @@ bun run build
 
 ## 3. Arquivos Modificados
 
-| Arquivo                                                              | Modificação                                                                                                   |
-| -------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
-| `vite.config.ts`                                                     | Remoção do plugin `nitro/vite` e restauração do compilador SSR nativo TanStack Start                           |
-| `Dockerfile`                                                         | Atualização do estágio `runner` para copiar `/app/dist` em vez de `/app/.output`                              |
-| `docker-compose.yml`                                                 | Remoção de volumes legados `.output` e `.nitro`, isolamento de `dist`                                         |
-| `Makefile`                                                           | Atualização editorial da descrição do comando `build`                                                         |
-| `src/test/production-build.test.ts`                                  | Nova suíte de testes automatizados com 4 asserções de integridade do build de produção e ausência de Nitro    |
-| `specs/SPEC-059-correcao-build-producao-ssr-tanstack-start.md`       | Especificação formal do defeito, causa raiz e requisitos de aceitação                                         |
-| `tasks/TASK-059-01-correcao-build-producao-ssr-tanstack-start.md`     | Tarefa de engenharia rastreável                                                                               |
-| `reviews/REVIEW-059-correcao-build-producao-ssr-tanstack-start.md`    | Revisão formal de aprovação da entrega                                                                        |
-| `PROJECT.md`                                                         | Registro da SPEC-059 e TASK-059-01 na governança canônica                                                      |
-| `docs/traceability-matrix.md`                                        | Matriz de rastreabilidade sincronizada                                                                        |
+| Arquivo                                                            | Modificação                                                                                                |
+| ------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------- |
+| `vite.config.ts`                                                   | Remoção do plugin `nitro/vite` e restauração do compilador SSR nativo TanStack Start                       |
+| `Dockerfile`                                                       | Atualização do estágio `runner` para copiar `/app/dist` em vez de `/app/.output`                           |
+| `docker-compose.yml`                                               | Remoção de volumes legados `.output` e `.nitro`, isolamento de `dist`                                      |
+| `Makefile`                                                         | Atualização editorial da descrição do comando `build`                                                      |
+| `src/test/production-build.test.ts`                                | Nova suíte de testes automatizados com 4 asserções de integridade do build de produção e ausência de Nitro |
+| `specs/SPEC-059-correcao-build-producao-ssr-tanstack-start.md`     | Especificação formal do defeito, causa raiz e requisitos de aceitação                                      |
+| `tasks/TASK-059-01-correcao-build-producao-ssr-tanstack-start.md`  | Tarefa de engenharia rastreável                                                                            |
+| `reviews/REVIEW-059-correcao-build-producao-ssr-tanstack-start.md` | Revisão formal de aprovação da entrega                                                                     |
+| `PROJECT.md`                                                       | Registro da SPEC-059 e TASK-059-01 na governança canônica                                                  |
+| `docs/traceability-matrix.md`                                      | Matriz de rastreabilidade sincronizada                                                                     |
 
 ---
 

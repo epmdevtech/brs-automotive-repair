@@ -19,21 +19,17 @@ describe("SPEC-039 — Refinamento da Hero Section e Transição Direta para Esp
     expect(container.querySelectorAll(".trust-item")).toHaveLength(0);
   });
 
-  it("AC-039-02: Hero possui CTA dominante e botão secundário Ver especialidades com estilo outline apontando para #especialidades", () => {
+  it("AC-039-02 / SPEC-064: Hero possui CTA único e direto 'Solicitar avaliação' apontando para /contato", () => {
     const { container } = render(
       <SmoothScrollProvider>
         <Hero />
       </SmoothScrollProvider>,
     );
 
-    // Hero não duplica o CTA de avaliação (foco exclusivo na descoberta de serviços)
-    expect(screen.queryByRole("link", { name: /solicitar avaliação/i })).toBeNull();
-
-    // Botão Secundário 'Ver especialidades' com peso outline/ghost (.btn--secondary)
-    const secondaryCta = screen.getByRole("link", { name: /ver especialidades/i });
-    expect(secondaryCta).toBeInTheDocument();
-    expect(secondaryCta).toHaveAttribute("href", "#especialidades");
-    expect(secondaryCta.className).toContain("btn--secondary");
+    const primaryCta = screen.getByRole("link", { name: /solicitar avaliação/i });
+    expect(primaryCta).toBeInTheDocument();
+    expect(primaryCta).toHaveAttribute("href", "/contato");
+    expect(primaryCta.className).toContain("btn--primary");
 
     // Limpeza de tags soltas sobre Toledo no rodapé do Hero e ausência de link duplicado no rodapé
     const footerLinks = container.querySelectorAll(".page-width a[href='#servicos']");
@@ -57,7 +53,7 @@ describe("SPEC-039 — Refinamento da Hero Section e Transição Direta para Esp
     expect(anchor).not.toBeNull();
   });
 
-  it("AC-039-04: Conecta Hero diretamente a Especialidades e incorpora diferenciais organicamente em Philosophy", () => {
+  it("AC-039-04: Conecta Hero diretamente a Especialidades e incorpora diferenciais organicamente", () => {
     const { container } = render(
       <SmoothScrollProvider>
         <HomePageContent />
@@ -71,19 +67,19 @@ describe("SPEC-039 — Refinamento da Hero Section e Transição Direta para Esp
 
     // Validação dos 3 diferenciais integrados organicamente
     const { container: philContainer } = render(<Philosophy />);
-    expect(philContainer.textContent).toContain("Reparação e pintura técnica de precisão");
-    expect(philContainer.textContent).toContain("Diagnóstico honesto e transparente");
+    expect(philContainer.textContent).toContain("Diagnóstico claro antes do serviço");
+    expect(philContainer.textContent).toContain("Orçamento e prazo alinhados antes da execução");
     expect(philContainer.textContent).toContain("Serviço de leva e traz em Toledo-PR");
   });
 
-  it("garante interação com botão secundário de rolagem suave", () => {
+  it("garante interação com botão primário de avaliação na Hero", () => {
     render(
       <SmoothScrollProvider>
         <Hero />
       </SmoothScrollProvider>,
     );
 
-    const secondaryBtn = screen.getByRole("link", { name: /ver especialidades/i });
-    expect(() => fireEvent.click(secondaryBtn)).not.toThrow();
+    const primaryBtn = screen.getByRole("link", { name: /solicitar avaliação/i });
+    expect(() => fireEvent.click(primaryBtn)).not.toThrow();
   });
 });

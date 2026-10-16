@@ -19,10 +19,12 @@ export const Route = createFileRoute("/agendamentos")({
 
 function AgendamentosAdminPage() {
   const navigate = useNavigate();
-  const [authenticated, setAuthenticated] = useState(() => isAdminAuthenticated());
+  const [authenticated, setAuthenticated] = useState(false);
 
   useEffect(() => {
-    if (!isAdminAuthenticated()) {
+    if (isAdminAuthenticated()) {
+      setAuthenticated(true);
+    } else {
       navigate({
         to: "/login",
         search: { redirect: "/agendamentos" },

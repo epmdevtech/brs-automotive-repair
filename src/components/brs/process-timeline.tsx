@@ -1,154 +1,108 @@
 import * as React from "react";
-import { motion, useScroll, useTransform, type MotionValue } from "framer-motion";
 import { ScrollReveal } from "@/components/ui/scroll-reveal";
-import { NumericCounter } from "@/components/ui/numeric-counter";
 
-function TimelineStep({
-  title,
-  copy,
-  index,
-  total,
-  scrollYProgress,
-}: {
-  title: string;
-  copy: string;
-  index: number;
-  total: number;
-  scrollYProgress: MotionValue<number>;
-}) {
-  const threshold = index / total;
-  const isPast = useTransform(scrollYProgress, (v) => v >= threshold);
-  const opacity = useTransform(
-    scrollYProgress,
-    [Math.max(0, threshold - 0.15), threshold],
-    [0.45, 1],
-    { clamp: true },
-  );
+const differentials = [
+  {
+    title: "Diagnóstico claro antes do serviço",
+    description:
+      "Avaliação presencial dos danos na lataria e na pintura para indicar apenas os procedimentos necessários para o reparo.",
+  },
+  {
+    title: "Orçamento e prazo alinhados antes da execução",
+    description:
+      "Escopo do serviço, materiais utilizados e previsão de entrega combinados com você antes de iniciar o trabalho na oficina.",
+  },
+  {
+    title: "Serviço de leva e traz em Toledo-PR",
+    description:
+      "Comodidade na retirada e entrega do veículo no perímetro urbano de Toledo, conforme disponibilidade de agendamento.",
+  },
+] as const;
 
-  const [active, setActive] = React.useState(false);
+const steps = [
+  {
+    number: "01",
+    title: "Primeiro contato",
+    copy: "Informe os dados do veículo e descreva o ocorrido para receber as orientações iniciais.",
+  },
+  {
+    number: "02",
+    title: "Avaliação técnica",
+    copy: "Inspeção presencial dos danos na lataria e pintura para definir a abordagem adequada.",
+  },
+  {
+    number: "03",
+    title: "Orçamento e alinhamento",
+    copy: "Definição clara do escopo do serviço, materiais aplicados e previsão de prazo para execução.",
+  },
+  {
+    number: "04",
+    title: "Reparação e conferência",
+    copy: "Execução do serviço na oficina e conferência de alinhamento e acabamento para a entrega.",
+  },
+] as const;
 
-  React.useEffect(() => {
-    if (
-      typeof window !== "undefined" &&
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches
-    ) {
-      setActive(true);
-      return;
-    }
-    const unsubscribe = isPast.on("change", (latest) => {
-      setActive(latest);
-    });
-    return () => unsubscribe();
-  }, [isPast]);
-
-  return (
-    <motion.div
-      className="relative pl-10 sm:pl-14 py-2"
-      style={{
-        opacity,
-        willChange: "opacity",
-      }}
-    >
-      {/* Marcador luminoso no eixo da linha com contador animado */}
-      <div
-        className={`absolute left-0 top-3 size-7 sm:size-8 -translate-x-1/2 rounded-sm border flex items-center justify-center transition-all duration-300 ${
-          active
-            ? "border-primary bg-primary/20 text-primary shadow-[0_0_12px_rgba(218,165,32,0.35)]"
-            : "border-border/80 bg-card text-muted-foreground"
-        }`}
-      >
-        <NumericCounter
-          target={index + 1}
-          padZero
-          className="text-[11px] font-semibold font-mono"
-        />
-      </div>
-
-      <div className="grid md:grid-cols-[1.2fr_2fr] gap-2 md:gap-8 items-baseline">
-        <div>
-          <span className="text-primary text-[11px] font-semibold tracking-wider uppercase">
-            Etapa 0{index + 1}
-          </span>
-          <h3 className="text-xl md:text-2xl font-semibold font-display tracking-tight text-foreground mt-1 mb-2 text-balance">
-            {title}
-          </h3>
-        </div>
-        <p className="body-copy text-xs text-pretty">{copy}</p>
-      </div>
-    </motion.div>
-  );
-}
-
+/**
+ * Bloco consolidado de Confiança e Processo (SPEC-064):
+ * - Até 3 diferenciais verificáveis sem numeração e sem promessa de "laudo".
+ * - As 4 etapas do atendimento em linha, sem cards individuais, com uma única sequência numérica (01 a 04).
+ */
 export function ProcessTimeline() {
-  const containerRef = React.useRef<HTMLDivElement>(null);
-
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start 75%", "end 60%"],
-  });
-
-  const steps = [
-    [
-      "Primeiro contato",
-      "Informe os dados do veículo e descreva o ocorrido para receber as orientações iniciais.",
-    ],
-    [
-      "Avaliação técnica",
-      "Inspeção minuciosa dos danos na lataria e pintura para diagnóstico da melhor abordagem.",
-    ],
-    [
-      "Orçamento e alinhamento",
-      "Definição clara do escopo do serviço, materiais aplicados e previsão de prazo para execução.",
-    ],
-    [
-      "Reparação e conferência",
-      "Execução do serviço com controle rigoroso de qualidade e alinhamento para a entrega do veículo.",
-    ],
-  ];
-
   return (
-    <section id="processo" className="pt-4 pb-16 bg-secondary/20 border-b border-border">
+    <section id="processo" className="py-16 md:py-24 bg-secondary/20 border-y border-border">
       <div className="page-width">
-        <ScrollReveal direction="up" delay={0.05} className="mb-10">
-          <p className="eyebrow mb-3">Etapas do atendimento</p>
+        <ScrollReveal direction="up" delay={0.05} className="mb-12 max-w-2xl">
+          <p className="eyebrow mb-4">Como trabalhamos</p>
           <h2 className="section-title">
-            Fluxo estruturado e
-            <br />
-            <span className="text-muted-foreground">decisão com total segurança.</span>
+            Diagnóstico claro e etapas definidas do início à entrega.
           </h2>
         </ScrollReveal>
 
-        <div ref={containerRef} className="relative my-8">
-          {/* Linha guia estática de fundo */}
-          <div className="absolute left-0 top-3 bottom-6 w-0.5 -translate-x-1/2 bg-border/60 pointer-events-none" />
-
-          {/* Linha vertical dinâmica de progresso com scaleY orientada por rolagem nativa */}
-          <motion.div
-            className="absolute left-0 top-3 bottom-6 w-0.5 -translate-x-1/2 bg-primary origin-top pointer-events-none"
-            style={{
-              scaleY: scrollYProgress,
-              willChange: "transform",
-            }}
-          />
-
-          <div className="space-y-8 sm:space-y-10">
-            {steps.map(([title, copy], i) => (
-              <TimelineStep
-                key={title}
-                title={title}
-                copy={copy}
-                index={i}
-                total={steps.length}
-                scrollYProgress={scrollYProgress}
-              />
-            ))}
-          </div>
+        {/* 3 Diferenciais Verificáveis (sem numeração e sem promessa de laudo) */}
+        <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-border/70 border-t border-border/80 pb-12">
+          {differentials.map((item, i) => (
+            <ScrollReveal
+              key={item.title}
+              direction="up"
+              delay={0.08 + i * 0.08}
+              className="pt-8 md:pt-10 md:px-8 first:md:pl-0 last:md:pr-0"
+            >
+              <h3 className="text-lg md:text-xl font-semibold font-display tracking-tight text-foreground mb-2.5 text-balance">
+                {item.title}
+              </h3>
+              <p className="body-copy text-xs text-pretty leading-relaxed">{item.description}</p>
+            </ScrollReveal>
+          ))}
         </div>
 
-        <p className="text-[10px] text-muted-foreground mt-8">
-          Etapas padrão do processo de reparo. Condições específicas e prazos são definidos após a
-          avaliação técnica de cada veículo.
-        </p>
+        {/* 4 Etapas do Atendimento em Linha (sequência numérica única 01 a 04, sem cards individuais) */}
+        <div className="border-t border-border/80 pt-10">
+          <p className="eyebrow mb-8">Etapas do atendimento</p>
+          <ol className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 list-none p-0 m-0">
+            {steps.map((step, i) => (
+              <ScrollReveal
+                key={step.title}
+                as="li"
+                direction="up"
+                delay={0.1 + i * 0.08}
+                className="flex flex-col border-t border-border/50 pt-4"
+              >
+                <span className="text-primary text-xs font-semibold font-mono tracking-wider mb-2">
+                  {step.number}
+                </span>
+                <h3 className="text-base md:text-lg font-semibold font-display tracking-tight text-foreground mb-2 text-balance">
+                  {step.title}
+                </h3>
+                <p className="body-copy text-xs text-pretty leading-relaxed">{step.copy}</p>
+              </ScrollReveal>
+            ))}
+          </ol>
+
+          <p className="text-[11px] text-muted-foreground mt-8">
+            Condições específicas, escopo e prazos são definidos após a avaliação técnica presencial
+            de cada veículo.
+          </p>
+        </div>
       </div>
     </section>
   );

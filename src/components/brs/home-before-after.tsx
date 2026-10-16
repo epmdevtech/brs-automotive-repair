@@ -71,21 +71,20 @@ export function HomeBeforeAfter() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 xl:gap-14 items-center">
           {/* Coluna Visual: Comparador Interativo de Imagens (7 colunas no desktop) */}
           <div ref={visualColRef} className="lg:col-span-7 flex flex-col justify-center">
-            {/* Tag técnica de indexação estilo Awwwards */}
             <div className="flex items-center justify-between text-[11px] font-mono tracking-widest uppercase text-neutral-400 mb-2 px-1">
               <span className="flex items-center gap-1.5 text-primary font-medium">
                 <SlidersHorizontal size={12} aria-hidden="true" />
-                ESTUDO DE CASO // PRECISÃO 01
+                Comparativo Ilustrativo de Método
               </span>
-              <span className="text-white/40">TOLERÂNCIA &lt; 1.0MM</span>
+              <span className="text-white/40">Fotografia ilustrativa</span>
             </div>
 
             <div className="relative rounded-sm overflow-hidden border border-white/15 hover:border-primary/40 shadow-2xl shadow-black/90 transition-colors duration-500 group">
               <BeforeAfterSlider
                 beforeImage={funilariaAntes}
                 afterImage={funilariaDepois}
-                beforeAlt="Lateral do veículo antes da recuperação estrutural (avaliação técnica da avaria)"
-                afterAlt="Lateral do veículo após alinhamento de painéis e repuxamento milimétrico"
+                beforeAlt="Lateral do veículo antes da recuperação estrutural (fotografia ilustrativa)"
+                afterAlt="Lateral do veículo após alinhamento de painéis (fotografia ilustrativa)"
                 beforeLabel="Antes (Avaria)"
                 afterLabel="Depois (Alinhado)"
                 aspectRatioClassName="aspect-16/10 sm:aspect-16/9"
@@ -99,48 +98,46 @@ export function HomeBeforeAfter() {
                 <Sparkles size={13} className="text-primary" aria-hidden="true" />
                 Interação tátil e por teclado habilitada
               </span>
-              <span className="image-note">Demonstração técnica</span>
+              <span className="image-note">Fotografia ilustrativa</span>
             </div>
           </div>
 
-          {/* Coluna Narrativa Editorial e Telemetria (5 colunas no desktop) */}
+          {/* Coluna Narrativa Editorial (5 colunas no desktop) */}
           <div ref={textColRef} className="lg:col-span-5 flex flex-col justify-center">
             <div className="space-y-4">
               <p className="eyebrow">Demonstração Técnica Antes & Depois</p>
 
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-semibold font-display tracking-tight text-white leading-tight">
-                Recuperação estrutural com padrão de fábrica.
+                Recuperação estrutural e alinhamento de painéis.
               </h2>
 
               <p className="text-sm sm:text-base text-neutral-300 leading-relaxed font-body">
-                Compare a precisão técnica no alinhamento de painéis, reconstituição de vincos e
-                tolerâncias de montagem executados na BRS em Toledo-PR. O processo prioriza a
-                geometria original da chapa, evitando enxertos pesados de massa plástica.
+                Veja como funciona o processo de alinhamento de painéis e reconstituição de vincos
+                em reparos de funilaria. O trabalho prioriza a geometria original da chapa, evitando
+                enxertos pesados de massa plástica.
               </p>
 
-              {/* Destaque do caso apresentado com HUD técnico de telemetria */}
               <div className="pt-3 pb-3 border-y border-white/10 my-4 space-y-2.5">
                 <div>
                   <p className="text-xs uppercase tracking-wider text-primary font-semibold mb-1">
-                    Caso em exibição
+                    Método demonstrado
                   </p>
                   <p className="text-sm font-medium text-white">
-                    Funilaria de Precisão & Alinhamento Estrutural
+                    Funilaria & Alinhamento de Painéis
                   </p>
                   <p className="text-xs text-neutral-400 mt-0.5">
-                    Painel lateral restaurado respeitando gaps de portas e para-lamas.
+                    Restauração de painel lateral respeitando folgas de portas e para-lamas.
                   </p>
                 </div>
 
-                {/* Especificações técnicas de oficina (Padrão Awwwards) */}
                 <div className="grid grid-cols-2 gap-2 pt-2 border-t border-white/5 text-[11px]">
                   <div className="flex items-center gap-1.5 text-neutral-300">
                     <CheckCircle2 size={12} className="text-primary shrink-0" aria-hidden="true" />
-                    <span>Gaps &lt; 1mm conformes</span>
+                    <span>Alinhamento de folgas</span>
                   </div>
                   <div className="flex items-center gap-1.5 text-neutral-300">
                     <CheckCircle2 size={12} className="text-primary shrink-0" aria-hidden="true" />
-                    <span>Repuxo a frio milimétrico</span>
+                    <span>Repuxo técnico da chapa</span>
                   </div>
                 </div>
               </div>

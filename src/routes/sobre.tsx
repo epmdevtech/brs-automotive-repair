@@ -1,6 +1,15 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { ArrowUpRight, MapPin, Phone, Instagram, ShieldCheck, Truck, Wrench } from "lucide-react";
-import { company } from "@/lib/brs";
+import {
+  ArrowUpRight,
+  Clock,
+  MapPin,
+  Phone,
+  Instagram,
+  ShieldCheck,
+  Truck,
+  Wrench,
+} from "lucide-react";
+import { company, canonicalUrl } from "@/lib/brs";
 import { buildRouteHead, buildBreadcrumbSchema } from "@/lib/seo";
 import { PageHero } from "@/components/brs/page-hero";
 import { ContactCTA } from "@/components/brs/contact-cta";
@@ -24,7 +33,7 @@ export const Route = createFileRoute("/sobre")({
           {
             "@type": "AboutPage",
             name: "Sobre a BRS Reparações Automotivas",
-            url: "http://brs.localhost/sobre",
+            url: canonicalUrl("/sobre"),
             description:
               "Apresentação institucional, princípios e atendimento da BRS Reparações Automotivas em Toledo, Paraná.",
           },
@@ -53,7 +62,7 @@ function SobrePage() {
         telemetryBadges={[
           {
             label: "Toledo — PR",
-            detail: "Atendimento regional",
+            detail: `${company.address.street} - ${company.address.neighborhood}`,
             icon: MapPin,
           },
           {
@@ -67,14 +76,14 @@ function SobrePage() {
             icon: Truck,
           },
           {
-            label: "Padrão de Fábrica",
+            label: "Acabamento Técnico",
             detail: "Vincos e folgas originais",
             icon: ShieldCheck,
           },
         ]}
         actions={[
           {
-            label: "FALAR COM A BRS",
+            label: "Falar com a BRS",
             to: "/contato",
             variant: "primary",
             icon: ArrowUpRight,
@@ -102,9 +111,13 @@ function SobrePage() {
               Reparações automotivas
             </p>
             <div className="space-y-4 border-t border-white/10 pt-5 text-xs text-neutral-300">
+              <div className="flex items-start gap-3">
+                <MapPin size={16} className="text-primary shrink-0 mt-0.5" aria-hidden="true" />
+                <span>{company.address.full}</span>
+              </div>
               <div className="flex items-center gap-3">
-                <MapPin size={16} className="text-primary shrink-0" aria-hidden="true" />
-                <span>Toledo, Paraná — Brasil</span>
+                <Clock size={16} className="text-primary shrink-0" aria-hidden="true" />
+                <span>{company.openingHours}</span>
               </div>
               <div className="flex items-center gap-3">
                 <Phone size={16} className="text-primary shrink-0" aria-hidden="true" />

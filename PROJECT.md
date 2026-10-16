@@ -248,6 +248,8 @@ Todas as entregas obedecem ao protocolo **Universal SDD**:
 - `SPEC-061` / `TASK-061-01` / `TASK-061-02` / `REVIEW-061`: Isomorfismo SSR e Resolução Definitiva de Hidratação nos Componentes de Motion com MotionConfig no TanStack Start (Eliminação de bifurcações manuais de JSX e hooks divergentes no SSR em ScrollReveal, ImageReveal, Reveal, MagneticButton e demais componentes, supressão de avisos warnOnce de acessibilidade e garantia de paridade absoluta com React 19).
 - `SPEC-062` / `TASK-062-01` / `REVIEW-062`: Refinamento UX/UI Responsivo do CTA do Header e Menu Móvel BRS (Ocultação do botão CTA na barra superior em telas móveis via hidden sm:inline-flex e simplificação do CTA no menu hambúrguer para o rótulo direto Avaliação).
 - `SPEC-063` / `TASK-063-01` / `REVIEW-063`: Prevenção e Blindagem Contra Estouro de Layout e Overflow Horizontal no Modo Mobile (Aplicação de overflow-x: clip e max-width 100% em html, body, SiteLayout, PageTransition, AnimatedHero e flex-wrap responsivo na classe .eyebrow para eliminar rolagem lateral no mobile).
+- `SPEC-064` / `TASK-064-01` / `REVIEW-064`: Auditoria e Refatoração UX/UI — Conversão, Integridade Editorial, Home em 6 Blocos, SEO Canônico de Produção (`https://brs.epmdevtech.com.br`) e Dados Oficiais Confirmados (Endereço e Horário).
+- `SPEC-065` / `TASK-065-01` / `REVIEW-065`: Sincronização Bidirecional da Linha do Tempo Operacional com o Status do Agendamento e Mini-Stepper em `/agendamentos` + Correção de Hidratação SSR.
 
 ---
 

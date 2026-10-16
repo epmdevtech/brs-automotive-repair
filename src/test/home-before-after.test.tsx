@@ -8,10 +8,12 @@ describe("HomeBeforeAfter component (SPEC-025)", () => {
 
     // Título editorial e eyebrow
     expect(screen.getByText("Demonstração Técnica Antes & Depois")).toBeInTheDocument();
-    expect(screen.getByText("Recuperação estrutural com padrão de fábrica.")).toBeInTheDocument();
+    expect(
+      screen.getByText("Recuperação estrutural e alinhamento de painéis."),
+    ).toBeInTheDocument();
 
     // Identificação do caso técnico
-    expect(screen.getByText("Funilaria de Precisão & Alinhamento Estrutural")).toBeInTheDocument();
+    expect(screen.getByText("Funilaria & Alinhamento de Painéis")).toBeInTheDocument();
   });
 
   it("renders the interactive BeforeAfterSlider within the visual column", () => {

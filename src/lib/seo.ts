@@ -76,10 +76,20 @@ export function buildAutoBodyShopSchema() {
     sameAs: [company.instagram],
     address: {
       "@type": "PostalAddress",
-      addressLocality: "Toledo",
-      addressRegion: "PR",
+      streetAddress: company.address.street,
+      addressLocality: company.address.city,
+      addressRegion: company.address.state,
+      postalCode: company.address.postalCode,
       addressCountry: "BR",
     },
+    openingHoursSpecification: [
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        opens: "08:00",
+        closes: "18:00",
+      },
+    ],
     areaServed: {
       "@type": "City",
       name: "Toledo, Paraná, Brasil",

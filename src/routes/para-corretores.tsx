@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowUpRight, Phone } from "lucide-react";
-import { company } from "@/lib/brs";
+import { company, canonicalUrl } from "@/lib/brs";
 import { buildRouteHead, buildBreadcrumbSchema } from "@/lib/seo";
 import { PageHero } from "@/components/brs/page-hero";
 import { Button } from "@/components/ui/button";
@@ -24,7 +24,7 @@ export const Route = createFileRoute("/para-corretores")({
           {
             "@type": "WebPage",
             name: "Atendimento a Corretores de Seguros — BRS Reparações Automotivas",
-            url: "http://brs.localhost/para-corretores",
+            url: canonicalUrl("/para-corretores"),
             description:
               "Diretrizes de cooperação profissional entre corretores de seguros e a oficina mecânica em Toledo-PR.",
           },

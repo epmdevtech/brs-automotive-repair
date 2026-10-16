@@ -1,44 +1,51 @@
 import { Link } from "@tanstack/react-router";
-import { ArrowUpRight, Instagram } from "lucide-react";
+import { ArrowUpRight, Clock, MapPin, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ScrollReveal } from "@/components/ui/scroll-reveal";
 import { company } from "@/lib/brs";
-import carFinish from "@/assets/funilaria-depois.jpg";
-
-const external = { target: "_blank", rel: "noopener noreferrer" };
 
 export function FinalCTA() {
   return (
-    <section className="final-band border-t border-border">
-      <img
-        src={carFinish}
-        alt="Acabamento e reflexo automotivo de alta precisão (fotografia ilustrativa)"
-        loading="lazy"
-        width={1920}
-        height={1088}
-      />
-      <ScrollReveal direction="up" delay={0.05} className="page-width relative z-10 text-center">
-        <p className="eyebrow justify-center mb-5">Seu veículo · Nosso compromisso</p>
-        <h2 className="section-title">
-          Vamos definir a melhor
-          <br />
-          solução técnica para o seu veículo?
-        </h2>
-        <p className="body-copy mt-5">
-          Converse com a equipe técnica da BRS em Toledo-PR para tirar dúvidas e agendar sua
-          avaliação sem compromisso.
+    <section className="py-16 md:py-24 bg-secondary/20 border-t border-border">
+      <ScrollReveal direction="up" delay={0.05} className="page-width text-center max-w-3xl">
+        <p className="eyebrow justify-center mb-4">Avaliação presencial</p>
+        <h2 className="section-title">Precisa avaliar um reparo no seu veículo?</h2>
+        <p className="body-copy mt-4 max-w-xl mx-auto">
+          Envie as informações do veículo para agendar uma avaliação técnica na oficina em Toledo-PR
+          ou fale diretamente pelo telefone oficial.
         </p>
-        <div className="flex flex-wrap gap-3 justify-center mt-7">
-          <Button variant="primary" asChild className="h-12 px-7 text-xs font-semibold">
+
+        <div className="flex justify-center mt-8">
+          <Button
+            variant="primary"
+            asChild
+            className="h-12 px-8 text-xs font-semibold min-h-[44px]"
+          >
             <Link to="/contato">
-              Solicitar avaliação <ArrowUpRight className="ml-1" size={14} aria-hidden="true" />
+              Solicitar avaliação <ArrowUpRight className="ml-1.5" size={14} aria-hidden="true" />
             </Link>
           </Button>
-          <Button variant="secondary" asChild className="h-12 px-6 text-xs font-medium">
-            <a href={company.instagram} {...external}>
-              <Instagram className="mr-1" size={14} aria-hidden="true" /> Conhecer o Instagram
-            </a>
-          </Button>
+        </div>
+
+        {/* Canais confirmados: telefone, endereço e horário */}
+        <div className="mt-10 pt-8 border-t border-border/60 grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs text-muted-foreground text-left sm:text-center">
+          <a
+            href={company.phoneHref}
+            className="flex sm:flex-col items-center justify-start sm:justify-center gap-2 hover:text-primary transition-colors py-1"
+          >
+            <Phone size={15} className="text-primary shrink-0" aria-hidden="true" />
+            <span className="font-medium text-foreground">{company.phone}</span>
+          </a>
+
+          <div className="flex sm:flex-col items-center justify-start sm:justify-center gap-2 py-1">
+            <MapPin size={15} className="text-primary shrink-0" aria-hidden="true" />
+            <span>{company.address.full}</span>
+          </div>
+
+          <div className="flex sm:flex-col items-center justify-start sm:justify-center gap-2 py-1">
+            <Clock size={15} className="text-primary shrink-0" aria-hidden="true" />
+            <span>{company.openingHours}</span>
+          </div>
         </div>
       </ScrollReveal>
     </section>

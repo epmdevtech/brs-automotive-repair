@@ -2,15 +2,15 @@
 
 ## Metadados
 
-| Campo       | Valor                                                                          |
-| ----------- | ------------------------------------------------------------------------------ |
-| Task ID     | TASK-063-01                                                                    |
-| Spec Ref    | SPEC-063                                                                       |
-| Título      | Aplicação de Contenção Estrita em html, body, Layout, Hero e Eyebrows          |
-| Status     | Concluído                                                                      |
-| Data        | 2026-10-15                                                                     |
-| Responsável | Staff UX/UI Designer & Performance Engineer                                    |
-| Módulo      | `styles.css`, `routes/__root.tsx`, `components/brs/*`, `components/ui/*`       |
+| Campo       | Valor                                                                    |
+| ----------- | ------------------------------------------------------------------------ |
+| Task ID     | TASK-063-01                                                              |
+| Spec Ref    | SPEC-063                                                                 |
+| Título      | Aplicação de Contenção Estrita em html, body, Layout, Hero e Eyebrows    |
+| Status      | Concluído                                                                |
+| Data        | 2026-10-15                                                               |
+| Responsável | Staff UX/UI Designer & Performance Engineer                              |
+| Módulo      | `styles.css`, `routes/__root.tsx`, `components/brs/*`, `components/ui/*` |
 
 ---
 

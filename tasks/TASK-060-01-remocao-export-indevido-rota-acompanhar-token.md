@@ -2,15 +2,15 @@
 
 ## Metadados
 
-| Campo       | Valor                                                                                                           |
-| ----------- | --------------------------------------------------------------------------------------------------------------- |
-| Task ID     | TASK-060-01                                                                                                     |
-| Spec Ref    | SPEC-060                                                                                                        |
-| Título      | Remoção de Export da Função de Componente em `src/routes/acompanhar/$token.tsx`                                 |
-| Status      | Concluído                                                                                                       |
-| Data        | 2026-10-15                                                                                                      |
-| Responsável | Staff Frontend Engineer                                                                                         |
-| Módulo      | `routes/acompanhar/$token.tsx`                                                                                  |
+| Campo       | Valor                                                                           |
+| ----------- | ------------------------------------------------------------------------------- |
+| Task ID     | TASK-060-01                                                                     |
+| Spec Ref    | SPEC-060                                                                        |
+| Título      | Remoção de Export da Função de Componente em `src/routes/acompanhar/$token.tsx` |
+| Status      | Concluído                                                                       |
+| Data        | 2026-10-15                                                                      |
+| Responsável | Staff Frontend Engineer                                                         |
+| Módulo      | `routes/acompanhar/$token.tsx`                                                  |
 
 ---
 

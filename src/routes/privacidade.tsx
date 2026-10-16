@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ShieldCheck, Lock, EyeOff, FileText } from "lucide-react";
-import { company } from "@/lib/brs";
+import { company, canonicalUrl } from "@/lib/brs";
 import { buildRouteHead, buildBreadcrumbSchema } from "@/lib/seo";
 import { PageHero } from "@/components/brs/page-hero";
 import { ScrollReveal } from "@/components/ui/scroll-reveal";
@@ -20,7 +20,7 @@ export const Route = createFileRoute("/privacidade")({
           {
             "@type": "WebPage",
             name: "Política de Privacidade — BRS Reparações Automotivas",
-            url: "http://brs.localhost/privacidade",
+            url: canonicalUrl("/privacidade"),
             description:
               "Diretrizes de transparência no tratamento de dados e privacidade da BRS Reparações Automotivas.",
           },

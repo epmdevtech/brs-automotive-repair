@@ -14,10 +14,11 @@ describe("SPEC-013 — MinimalFooter Premium BRS", () => {
     expect(screen.getByLabelText(/BRS Reparações Automotivas: início/i)).toBeInTheDocument();
     expect(
       screen.getByText(
-        /Funilaria, pintura automotiva e martelinho de ouro com atenção aos detalhes e cuidado em cada etapa./i,
+        /Funilaria automotiva, pintura em estufa e martelinho de ouro em Toledo, Paraná/i,
       ),
     ).toBeInTheDocument();
-    expect(screen.getByText(/Toledo, Paraná/i)).toBeInTheDocument();
+    expect(screen.getByText(/R\. Barão do Rio Branco, 4892/i)).toBeInTheDocument();
+    expect(screen.getByText(/Segunda a sexta, das 08h às 18h/i)).toBeInTheDocument();
   });
 
   it("renderiza todos os links de navegação com as rotas canônicas da página", () => {
@@ -63,17 +64,13 @@ describe("SPEC-013 — MinimalFooter Premium BRS", () => {
     expect(allLinks.some((href) => href.includes("github.com"))).toBe(false);
   });
 
-  it("exibe o ano atual dinamicamente e a nota de conformidade do acervo ilustrativo", () => {
+  it("exibe o ano atual dinamicamente e os dados cadastrais sem a frase de demonstração no rodapé", () => {
     render(<MinimalFooter />);
     const currentYear = new Date().getFullYear();
     expect(
       screen.getByText(new RegExp(`© ${currentYear} BRS Reparações Automotivas`, "i")),
     ).toBeInTheDocument();
-    expect(
-      screen.getByText(
-        /Demonstração institucional oficial · Fotografias ilustrativas temporárias/i,
-      ),
-    ).toBeInTheDocument();
+    expect(screen.queryByText(/Demonstração institucional oficial/i)).not.toBeInTheDocument();
     expect(screen.getByText(new RegExp(company.legalName, "i"))).toBeInTheDocument();
     expect(screen.getByText(new RegExp(company.cnpj, "i"))).toBeInTheDocument();
   });

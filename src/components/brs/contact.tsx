@@ -1,5 +1,5 @@
 import * as React from "react";
-import { ArrowUpRight, Phone, Instagram, MapPin, Calendar } from "lucide-react";
+import { ArrowUpRight, Phone, Instagram, MapPin, Clock, Calendar } from "lucide-react";
 import { company } from "@/lib/brs";
 import { ScrollReveal } from "@/components/ui/scroll-reveal";
 import { ContactForm } from "./contact-form";
@@ -12,7 +12,7 @@ export function Contact({
   headingAs: Heading = "h2",
 }: {
   partner: boolean;
-  /** Em `/contato` o título da seção é o `h1` da página. */
+  /** Em `/contato` o título da seção é `h2` abaixo do `PageHero`. */
   headingAs?: "h1" | "h2";
 }) {
   const [bookingOpen, setBookingOpen] = React.useState(false);
@@ -28,13 +28,11 @@ export function Contact({
         >
           <p className="eyebrow mb-5">Atendimento</p>
           <Heading className="section-title">
-            O primeiro passo é um
-            <br />
-            diagnóstico transparente.
+            Envie os dados do veículo ou fale pelos canais oficiais.
           </Heading>
           <p className="body-copy mt-5 max-w-[380px]">
-            Conte à equipe da BRS o que ocorreu com seu veículo e solicite orientações sobre o
-            método ideal de reparo.
+            Preencha o formulário ao lado para gerar o resumo do atendimento ou entre em contato
+            diretamente por telefone e presencialmente na oficina.
           </p>
 
           <div className="mt-8">
@@ -95,9 +93,15 @@ export function Contact({
               </span>
             </a>
 
-            <div className="pt-2 flex items-center gap-2 text-xs text-neutral-400">
-              <MapPin size={14} className="text-primary shrink-0" aria-hidden="true" />
-              <span>Toledo, Paraná · Atendimento presencial e serviço Leva e Traz</span>
+            <div className="pt-2 space-y-2 text-xs text-neutral-300">
+              <div className="flex items-start gap-2">
+                <MapPin size={14} className="text-primary shrink-0 mt-0.5" aria-hidden="true" />
+                <span>{company.address.full}</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Clock size={14} className="text-primary shrink-0" aria-hidden="true" />
+                <span>{company.openingHours}</span>
+              </div>
             </div>
           </div>
         </ScrollReveal>

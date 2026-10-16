@@ -1,4 +1,5 @@
 import hero from "@/assets/brs-hero.jpg";
+import { company } from "@/lib/brs";
 import { AnimatedHero } from "./animated-hero";
 
 export function Hero() {
@@ -11,23 +12,23 @@ export function Hero() {
           Oficina Técnica Especializada • Toledo, PR
         </span>
       }
-      title="BRS Reparações Automotivas."
+      title="Funilaria, pintura em estufa e martelinho de ouro em Toledo-PR."
       description={
-        <p className="text-neutral-400">
-          Funilaria automotiva, pintura em estufa e martelinho de ouro em Toledo, Paraná. Atenção
-          aos detalhes, diagnóstico honesto e acabamento técnico com recuperação de padrão de
-          fábrica.
+        <p className="text-neutral-300">
+          Reparação de lataria, pintura automotiva em cabine e desamassamento sem pintura.
+          Atendimento para proprietários e segurados com diagnóstico claro e orçamento alinhado
+          antes do serviço.
         </p>
       }
-      secondaryCta={{
-        text: "Ver especialidades",
-        href: "#especialidades",
+      ctaButton={{
+        text: "Solicitar avaliação",
+        href: "/contato",
       }}
       showTelemetryMetrics={false}
       bottomContent={
-        <div className="page-width flex items-center justify-between text-xs text-neutral-400 pt-3 border-t border-white/10 w-full">
-          <span className="text-[11px] text-neutral-500 font-mono tracking-wider">
-            OFICINA TÉCNICA
+        <div className="page-width flex flex-wrap items-center justify-between gap-2 text-xs text-neutral-400 pt-3 border-t border-white/10 w-full">
+          <span className="text-[11px] text-neutral-300">
+            {company.address.street} · {company.address.neighborhood} · {company.openingHours}
           </span>
           <span className="image-note text-[11px] text-neutral-400">Fotografia ilustrativa</span>
         </div>

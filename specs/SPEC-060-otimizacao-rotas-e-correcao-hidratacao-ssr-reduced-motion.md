@@ -2,15 +2,15 @@
 
 ## Metadados
 
-| Campo       | Valor                                                                                                           |
-| ----------- | --------------------------------------------------------------------------------------------------------------- |
-| Spec ID     | SPEC-060                                                                                                        |
+| Campo       | Valor                                                                                                                    |
+| ----------- | ------------------------------------------------------------------------------------------------------------------------ |
+| Spec ID     | SPEC-060                                                                                                                 |
 | Título      | Otimização de Code-Splitting de Rotas e Resolução de Erro de Hidratação SSR com Prefers-Reduced-Motion no TanStack Start |
-| Status      | Aprovado                                                                                                        |
-| Data        | 2026-10-15                                                                                                      |
-| Autor       | Staff Frontend & Performance Engineer                                                                           |
-| Módulo      | `routes/acompanhar/$token.tsx` & `components/ui/page-transition.tsx`                                            |
-| Dependência | SPEC-020, SPEC-033, SPEC-058, SPEC-059                                                                          |
+| Status      | Aprovado                                                                                                                 |
+| Data        | 2026-10-15                                                                                                               |
+| Autor       | Staff Frontend & Performance Engineer                                                                                    |
+| Módulo      | `routes/acompanhar/$token.tsx` & `components/ui/page-transition.tsx`                                                     |
+| Dependência | SPEC-020, SPEC-033, SPEC-058, SPEC-059                                                                                   |
 
 ---
 
@@ -19,18 +19,22 @@
 Ao carregar o projeto em ambiente local ou produção, dois problemas foram identificados no console do navegador:
 
 ### Problema 1: Export Indevido em Arquivo de Rota TanStack Router
+
 ```text
 $token.tsx:4 [tanstack-router] These exports from "/.../src/routes/acompanhar/$token.tsx" will not be code-split and will increase your bundle size:
 - CustomerTrackingPage
 For the best optimization, these items should either have their export statements removed, or be imported from another location that is not a route file.
 ```
+
 - **Causa Raiz**: O arquivo [`src/routes/acompanhar/$token.tsx`](src/routes/acompanhar/$token.tsx) declarava `export function CustomerTrackingPage()`. O TanStack Router exige que arquivos de rota exportem exclusivamente `Route` para garantir divisão de código (code-splitting) automática e árvore enxuta.
 
 ### Problema 2: Erro Catastrófico de Hidratação SSR (React 19) com `prefers-reduced-motion`
+
 ```text
 framer-motion.js:181 You have Reduced Motion enabled on your device. Animations may not appear as expected.
 react-dom_client.js:2966 Uncaught Error: Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client.
 ```
+
 - **Causa Raiz**: No componente [`src/components/ui/page-transition.tsx`](src/components/ui/page-transition.tsx), a renderização da barra laser utilizava uma condicional JavaScript baseada no hook `useReducedMotion()`:
   ```tsx
   const shouldReduce = useReducedMotion();

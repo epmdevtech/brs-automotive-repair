@@ -10,14 +10,23 @@ export const company = {
     name: "Bruno",
     role: "Fundador e Especialista Técnico",
     experienceYearsText: "Anos de experiência consolidada no segmento automotivo",
-    bio: "À frente da BRS, Bruno reúne anos de vivência e dedicação prática ao setor automotivo — unindo conhecimento aprofundado em funilaria, pintura e fornecimento de peças com uma conduta pautada em diagnóstico honesto e respeito rigoroso ao padrão de fábrica de cada veículo.",
+    bio: "À frente da BRS, Bruno reúne anos de vivência e dedicação prática ao setor automotivo — unindo conhecimento aprofundado em funilaria, pintura e fornecimento de peças com uma conduta pautada em diagnóstico honesto e atenção ao acabamento de cada veículo.",
   },
   phone: "(45) 2035-9440",
   phoneHref: "tel:+554520359440",
   instagram: "https://www.instagram.com/brsreparacoes/",
   city: "Toledo, Paraná",
+  address: {
+    street: "R. Barão do Rio Branco, 4892",
+    neighborhood: "Gisela",
+    city: "Toledo",
+    state: "PR",
+    postalCode: "85905-625",
+    full: "R. Barão do Rio Branco, 4892 - Gisela, Toledo - PR, 85905-625",
+  },
+  openingHours: "Segunda a sexta, das 08h às 18h",
   whatsappConfirmed: false,
-  siteUrl: "http://brs.localhost",
+  siteUrl: "https://brs.epmdevtech.com.br",
 };
 
 export function canonicalUrl(path: string = "/"): string {
@@ -134,12 +143,12 @@ export const services: ServiceDetail[] = [
     description:
       "Reparação de amassados que pode preservar a pintura original, quando as características do dano permitem.",
     fullDescription:
-      "O martelinho de ouro (Paintless Dent Removal — PDR) é uma técnica artesanal de alta precisão que restaura amassados na lataria sem a necessidade de lixar, aplicar massa plástica ou repintar o veículo. Através de alavancas especiais pelo verso do painel ou tração controlada por ventosas térmicas pela face externa, a chapa retorna à sua posição de fábrica preservando 100% da tinta e do verniz originais.",
+      "O martelinho de ouro (Paintless Dent Removal — PDR) é uma técnica artesanal de alta precisão que restaura amassados na lataria sem a necessidade de lixar, aplicar massa plástica ou repintar o veículo. Através de alavancas especiais pelo verso do painel ou tração controlada por ventosas térmicas pela face externa, a chapa retorna à sua geometria original preservando a tinta e o verniz.",
     applications: [
       "Amassados causados por chuvas de granizo em teto, capô e colunas",
       "Pequenas colisões de estacionamento e batidas de porta",
       "Vincos suaves e depressões sem rompimento da camada de tinta",
-      "Veículos que valorizam a manutenção rigorosa da originalidade de fábrica",
+      "Veículos que valorizam a preservação da pintura original",
     ],
     limitations: [
       "Inaplicável se a tinta ou o verniz estiverem trincados, descascados ou com fratura visível",
@@ -157,7 +166,7 @@ export const services: ServiceDetail[] = [
       },
       {
         title: "3. Nivelamento microscópico e acabamento",
-        desc: "Eliminação de micro-tensões residuais na chapa, restabelecendo o reflexo natural e a uniformidade de fábrica.",
+        desc: "Eliminação de micro-tensões residuais na chapa, restabelecendo o reflexo natural e a uniformidade do painel.",
       },
     ],
   },
@@ -179,7 +188,7 @@ export const aestheticServices: AestheticServiceDetail[] = [
     slug: "espelhamento",
     title: "Espelhamento de pintura automotiva",
     short: "Espelhamento",
-    tagline: "Nivelamento do verniz e eliminação de micro-riscos",
+    tagline: "Nivelamento do verniz e redução de micro-riscos",
     description:
       "Polimento técnico em etapas de corte, refino e lustro para nivelar a camada superficial do verniz. Remove marcas de lavagem (swirls), teias de aranha e oxidações superficiais, restaurando a nitidez ótica e o reflexo espelhado da pintura.",
     applications: [
@@ -193,7 +202,7 @@ export const aestheticServices: AestheticServiceDetail[] = [
       "Exige espessura mínima de verniz saudável para suportar o processo de polimento",
     ],
     benefits: [
-      "Eliminação de até 90% dos micro-riscos e hologramas superficiais",
+      "Redução visível de micro-riscos (swirls) e hologramas superficiais",
       "Reflexo nítido de espelho e toque aveludado na carroceria",
       "Acabamento com ceras e selantes técnicos de alta ancoragem",
     ],
@@ -217,7 +226,7 @@ export const aestheticServices: AestheticServiceDetail[] = [
       "Não protege contra impactos de pedriscos em rodovias ou danos mecânicos severos",
     ],
     benefits: [
-      "Durabilidade e proteção contínua de até 1 a 3 anos sob manutenção adequada",
+      "Proteção prolongada da pintura sob manutenção adequada",
       "Alta repelência hidrofóbica: a água e a sujeira deslizam sem aderir",
       "Filtro UV potente que retarda o desbotamento precoce do verniz",
     ],

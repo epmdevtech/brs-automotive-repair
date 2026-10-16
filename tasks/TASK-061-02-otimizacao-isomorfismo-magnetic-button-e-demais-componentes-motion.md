@@ -2,15 +2,15 @@
 
 ## Metadados
 
-| Campo       | Valor                                                                                                           |
-| ----------- | --------------------------------------------------------------------------------------------------------------- |
-| Task ID     | TASK-061-02                                                                                                     |
-| Spec Ref    | SPEC-061                                                                                                        |
-| Título      | Isolamento Client-Side de Media Queries e Paridade SSR em Componentes Interativos                               |
-| Status     | Concluído                                                                                                      |
-| Data        | 2026-10-15                                                                                                      |
-| Responsável | Staff Frontend & Performance Engineer                                                                           |
-| Módulo      | `components/ui/magnetic-button.tsx`, `components/brs/*`                                                         |
+| Campo       | Valor                                                                             |
+| ----------- | --------------------------------------------------------------------------------- |
+| Task ID     | TASK-061-02                                                                       |
+| Spec Ref    | SPEC-061                                                                          |
+| Título      | Isolamento Client-Side de Media Queries e Paridade SSR em Componentes Interativos |
+| Status      | Concluído                                                                         |
+| Data        | 2026-10-15                                                                        |
+| Responsável | Staff Frontend & Performance Engineer                                             |
+| Módulo      | `components/ui/magnetic-button.tsx`, `components/brs/*`                           |
 
 ---
 
