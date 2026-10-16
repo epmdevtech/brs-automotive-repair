@@ -127,6 +127,23 @@ html.lenis body {
   --zoom: 1.035;
   --gold-glow: rgb(200 169 106 / 0.1);
   --gold-line: rgb(200 169 106 / 0.55);
+
+  /* Abertura Cinematográfica, Zoom Lento e Reflexo na Lataria (SPEC-067) */
+  --hero-cinematic-header-delay: 0.8s;
+  --hero-cinematic-header-dur: 0.7s;
+  --hero-cinematic-eyebrow-delay: 1.5s;
+  --hero-cinematic-title-delay: 1.8s;
+  --hero-cinematic-title-dur: 0.9s;
+  --hero-cinematic-desc-delay: 2.4s;
+  --hero-cinematic-cta-delay: 2.9s;
+  --hero-cinematic-bottom-delay: 3.4s;
+  --hero-cinematic-overlay-delay: 1.4s;
+  --hero-cinematic-overlay-dur: 1.4s;
+  --hero-cinematic-zoom-delay: 4.2s;
+  --hero-cinematic-zoom-dur: 24s;
+  --hero-cinematic-zoom-scale: 1.1;
+  --hero-cinematic-flare-delay: 4.6s;
+  --hero-cinematic-flare-dur: 2s;
 }
 @theme inline {
   --color-background: var(--background);
@@ -992,6 +1009,200 @@ textarea.field-input {
     height: 48px;
   }
 }
+
+/* ==========================================================================
+   Abertura Cinematográfica, Zoom Lento e Reflexo na Lataria (SPEC-067)
+   ========================================================================== */
+@media (max-width: 768px) {
+  :root {
+    --hero-cinematic-header-delay: 0.5s;
+    --hero-cinematic-header-dur: 0.5s;
+    --hero-cinematic-eyebrow-delay: 1s;
+    --hero-cinematic-title-delay: 1.3s;
+    --hero-cinematic-title-dur: 0.6s;
+    --hero-cinematic-desc-delay: 1.7s;
+    --hero-cinematic-cta-delay: 2.1s;
+    --hero-cinematic-bottom-delay: 2.5s;
+    --hero-cinematic-overlay-delay: 0.8s;
+    --hero-cinematic-overlay-dur: 1s;
+    --hero-cinematic-zoom-delay: 3s;
+    --hero-cinematic-zoom-dur: 20s;
+    --hero-cinematic-zoom-scale: 1.05;
+    --hero-cinematic-flare-delay: 3.2s;
+    --hero-cinematic-flare-dur: 1.4s;
+  }
+}
+
+@keyframes heroHeaderDrop {
+  0% {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes heroFadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes heroFadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes heroSlowZoom {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scale(var(--hero-cinematic-zoom-scale, 1.1));
+  }
+}
+
+@keyframes heroFlareSweep {
+  0% {
+    transform: translateX(-140%) skewX(-20deg);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.6;
+  }
+  48% {
+    opacity: 1;
+  }
+  75% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateX(380%) skewX(-20deg);
+    opacity: 0;
+  }
+}
+
+/* Header animado somente na primeira visita à rota "/" */
+.header-cinematic-intro {
+  animation: heroHeaderDrop var(--hero-cinematic-header-dur, 0.7s) cubic-bezier(0.16, 1, 0.3, 1)
+    var(--hero-cinematic-header-delay, 0.8s) both;
+}
+
+/* Camadas do Hero: Imagem base com zoom lento desacoplada via CSS variables.
+   A animação é única e definida na montagem: NÃO é redefinida por mudança de estado
+   (evita remapear a linha do tempo e causar salto de escala — SPEC-070). */
+.hero-photo-cinematic {
+  transform-origin: var(--hero-transform-origin, 75% 50%);
+  object-position: var(--hero-object-position, center 48%);
+  will-change: transform;
+  backface-visibility: hidden;
+  animation: heroSlowZoom var(--hero-cinematic-zoom-dur, 24s) cubic-bezier(0.25, 0.1, 0.25, 1)
+    var(--hero-cinematic-zoom-delay, 4.2s) forwards;
+}
+
+@media (max-width: 768px) {
+  .hero-photo-cinematic {
+    transform-origin: var(--hero-transform-origin-mobile, var(--hero-transform-origin, 70% 50%));
+    object-position: var(--hero-object-position-mobile, var(--hero-object-position, 70% center));
+  }
+}
+
+/* Reflexo de Luz na Lataria (Camada 2: sobre a imagem, sob o overlay e sob a UI) */
+.hero-light-flare {
+  position: absolute;
+  top: var(--hero-flare-top, 0);
+  bottom: 0;
+  left: var(--hero-flare-left, 0);
+  width: var(--hero-flare-width, clamp(120px, 16vw, 240px));
+  height: var(--hero-flare-height, auto);
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0;
+  mix-blend-mode: screen;
+  filter: blur(8px);
+  will-change: transform, opacity;
+  background: linear-gradient(
+    var(--hero-flare-angle, 90deg),
+    transparent 0%,
+    rgba(255, 248, 225, 0.04) 25%,
+    rgba(255, 248, 225, var(--hero-flare-opacity, 0.35)) 50%,
+    rgba(255, 248, 225, 0.04) 75%,
+    transparent 100%
+  );
+  animation: heroFlareSweep var(--hero-cinematic-flare-dur, 2s) cubic-bezier(0.25, 1, 0.5, 1)
+    var(--hero-cinematic-flare-delay, 4.6s) both;
+}
+
+/* Overlay de legibilidade focado na coluna de texto (Camada 3) */
+.hero-overlay-cinematic {
+  z-index: 3;
+  background: linear-gradient(
+    var(--hero-overlay-direction, to right),
+    var(--hero-overlay-from, rgba(0, 0, 0, 0.95)) 0%,
+    var(--hero-overlay-via, rgba(0, 0, 0, 0.75)) 55%,
+    var(--hero-overlay-to, transparent) 100%
+  );
+  animation: heroFadeIn var(--hero-cinematic-overlay-dur, 1.4s) ease-out
+    var(--hero-cinematic-overlay-delay, 1.4s) both;
+}
+
+/* Elementos de UI (Camada 4) */
+.hero-intro-eyebrow {
+  animation: heroFadeUp 0.6s ease-out var(--hero-cinematic-eyebrow-delay, 1.5s) both;
+}
+
+.hero-intro-title,
+.hero-intro-h1 {
+  animation: heroFadeUp var(--hero-cinematic-title-dur, 0.9s) cubic-bezier(0.16, 1, 0.3, 1)
+    var(--hero-cinematic-title-delay, 1.8s) both;
+}
+
+.hero-intro-desc,
+.hero-intro-lead {
+  animation: heroFadeUp 0.7s ease-out var(--hero-cinematic-desc-delay, 2.4s) both;
+}
+
+.hero-intro-cta {
+  animation: heroFadeUp 0.7s ease-out var(--hero-cinematic-cta-delay, 2.9s) both;
+}
+
+.hero-intro-bottom,
+.hero-intro-foot {
+  animation: heroFadeIn 0.7s ease-out var(--hero-cinematic-bottom-delay, 3.4s) both;
+}
+
+/* Estado Completo (após término da abertura ou antecipação por interação ou SPA) */
+.hero-intro-complete .header-cinematic-intro,
+.hero-intro-complete.header-cinematic-intro,
+.hero-intro-complete .hero-intro-eyebrow,
+.hero-intro-complete .hero-intro-title,
+.hero-intro-complete .hero-intro-h1,
+.hero-intro-complete .hero-intro-desc,
+.hero-intro-complete .hero-intro-lead,
+.hero-intro-complete .hero-intro-cta,
+.hero-intro-complete .hero-intro-bottom,
+.hero-intro-complete .hero-intro-foot,
+.hero-intro-complete .hero-overlay-cinematic {
+  animation: none !important;
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+.hero-intro-complete .hero-light-flare {
+  display: none !important;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

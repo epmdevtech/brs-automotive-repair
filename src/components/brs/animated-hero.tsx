@@ -1,13 +1,18 @@
 import * as React from "react";
 import { Link } from "@tanstack/react-router";
-import { motion } from "framer-motion";
 import { ArrowDown, ArrowUpRight, MapPin, Sparkles, Wrench, ShieldCheck } from "lucide-react";
 import { gsap } from "gsap";
 import { Button } from "@/components/ui/button";
 import { MagneticButton } from "@/components/ui/magnetic-button";
 import { cn } from "@/lib/utils";
-import { MOTION_TOKENS } from "@/lib/motion-system";
 import { useSmoothScroll } from "@/hooks/use-smooth-scroll";
+import { getHasPlayedHeroIntro, setHasPlayedHeroIntro } from "@/lib/hero-cinematic-state";
+import {
+  type HeroConfig,
+  defaultHeroConfig,
+  resolveHeroProfile,
+  getHeroStyleVariables,
+} from "@/lib/hero-config";
 
 export interface NavLink {
   label: string;
@@ -22,7 +27,9 @@ export interface HeroAction {
 
 export interface AnimatedHeroProps {
   id?: string;
-  backgroundImageUrl: string;
+  config?: HeroConfig;
+  /** @deprecated Use `config.image` para controle completo de picture/art-direction */
+  backgroundImageUrl?: string;
   logo?: React.ReactNode;
   navLinks?: NavLink[];
   topRightAction?: React.ReactNode;
@@ -34,6 +41,7 @@ export interface AnimatedHeroProps {
   bottomContent?: React.ReactNode;
   className?: string;
   showTelemetryMetrics?: boolean;
+  debugMode?: boolean;
 }
 
 /**
@@ -49,7 +57,6 @@ function HeroLink({
   const { scrollTo } = useSmoothScroll();
 
   if (href?.startsWith("/")) {
-    // O destino vem de props genéricas; o roteador valida a rota em tempo de execução.
     return (
       <Link {...props} to={href as "/"} onClick={onClick}>
         {children}
@@ -75,33 +82,9 @@ function HeroLink({
   );
 }
 
-// Variantes de transição normativas do Framer Motion (SPEC-015, SPEC-032)
-// A supressão de movimento é orquestrada nativamente pelo MotionConfig em __root.tsx
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: MOTION_TOKENS.stagger,
-      delayChildren: 0.04,
-    },
-  },
-};
-
-const itemVariants = {
-  hidden: { y: 16, opacity: 0 },
-  visible: {
-    y: 0,
-    opacity: 1,
-    transition: {
-      duration: MOTION_TOKENS.duration.base,
-      ease: MOTION_TOKENS.ease,
-    },
-  },
-};
-
 export const AnimatedHero = ({
   id = "inicio",
+  config: configProp,
   backgroundImageUrl,
   eyebrow,
   title,
@@ -111,20 +94,135 @@ export const AnimatedHero = ({
   bottomContent,
   className,
   showTelemetryMetrics = true,
+  debugMode = false,
 }: AnimatedHeroProps) => {
   const heroRef = React.useRef<HTMLElement>(null);
   const contentRef = React.useRef<HTMLDivElement>(null);
   const glowRef = React.useRef<HTMLDivElement>(null);
 
-  // Micro-parallax responsivo com GSAP quickTo para 60/120fps sem re-render (SPEC-032)
+  // Resolução da configuração da foto do Hero (SPEC-068)
+  const resolvedConfig: HeroConfig = React.useMemo(() => {
+    if (configProp) return configProp;
+    if (backgroundImageUrl) {
+      return {
+        ...defaultHeroConfig,
+        image: {
+          ...defaultHeroConfig.image,
+          desktop: { ...defaultHeroConfig.image.desktop, src: backgroundImageUrl },
+          mobile: { ...defaultHeroConfig.image.mobile, src: backgroundImageUrl },
+        },
+      };
+    }
+    return defaultHeroConfig;
+  }, [configProp, backgroundImageUrl]);
+
+  const resolvedProfile = React.useMemo(() => resolveHeroProfile(resolvedConfig), [resolvedConfig]);
+
+  const heroStyleVariables = React.useMemo(
+    () => getHeroStyleVariables(resolvedConfig),
+    [resolvedConfig],
+  );
+
+  // Estado determinístico de conclusão da introdução cinematográfica (SPEC-067 / SPEC-068)
+  const [introComplete, setIntroComplete] = React.useState(() => {
+    return getHasPlayedHeroIntro();
+  });
+
+  // Ciclo de vida da abertura, antecipação por navegação deliberada e visibilidade
   React.useEffect(() => {
-    const isReduced =
-      typeof window !== "undefined" &&
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (typeof window === "undefined" || isReduced) return;
+    if (typeof window === "undefined") return;
+
+    const isReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (isReduced || getHasPlayedHeroIntro()) {
+      setIntroComplete(true);
+      setHasPlayedHeroIntro(true);
+      return;
+    }
+
+    const completeIntro = () => {
+      setIntroComplete(true);
+      setHasPlayedHeroIntro(true);
+      window.dispatchEvent(new CustomEvent("brs:hero-intro-skip"));
+    };
+
+    // Monitoramento de visibilidade da página: pausar/concluir se em background
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        completeIntro();
+      }
+    };
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
+    // Conclusão natural após a sequência completa de UI e reflexo de luz
+    const isMobile = window.innerWidth <= 768;
+    const introTotalMs = isMobile ? 4800 : 7000;
+    const timer = setTimeout(() => {
+      completeIntro();
+    }, introTotalMs);
+
+    // Grace period de 600ms antes de registrar listeners de rolagem e teclado.
+    // Impede cancelamento precoce acidental por teclas residuais de reload (Ctrl+Shift+R),
+    // clique de foco da janela ou micro-oscilações de trackpad no primeiro paint.
+    let touchStartY = 0;
+    let attachedListeners = false;
+
+    const handleWheel = (e: WheelEvent) => {
+      // Ignora micro-deslocamentos de repouso no trackpad (< 25px)
+      if (Math.abs(e.deltaY) > 25 || Math.abs(e.deltaX) > 25) {
+        completeIntro();
+      }
+    };
+
+    const handleTouchStart = (e: TouchEvent) => {
+      if (e.touches.length > 0) {
+        touchStartY = e.touches[0].clientY;
+      }
+    };
+
+    const handleTouchMove = (e: TouchEvent) => {
+      if (e.touches.length > 0) {
+        const deltaY = Math.abs(e.touches[0].clientY - touchStartY);
+        if (deltaY > 30) {
+          completeIntro();
+        }
+      }
+    };
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Apenas teclas deliberadas de navegação / rolagem
+      if (e.key === "ArrowDown" || e.key === "PageDown" || e.key === " " || e.key === "Spacebar") {
+        completeIntro();
+      }
+    };
+
+    const graceTimer = setTimeout(() => {
+      attachedListeners = true;
+      window.addEventListener("wheel", handleWheel, { passive: true });
+      window.addEventListener("touchstart", handleTouchStart, { passive: true });
+      window.addEventListener("touchmove", handleTouchMove, { passive: true });
+      window.addEventListener("keydown", handleKeyDown);
+    }, 600);
+
+    return () => {
+      clearTimeout(timer);
+      clearTimeout(graceTimer);
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+      if (attachedListeners) {
+        window.removeEventListener("wheel", handleWheel);
+        window.removeEventListener("touchstart", handleTouchStart);
+        window.removeEventListener("touchmove", handleTouchMove);
+        window.removeEventListener("keydown", handleKeyDown);
+      }
+    };
+  }, []);
+
+  // Micro-parallax responsivo com GSAP quickTo no conteúdo de texto
+  React.useEffect(() => {
+    if (typeof window === "undefined") return;
+    const isReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (isReduced) return;
     const heroEl = heroRef.current;
     if (!heroEl) return;
-
     if (!window.matchMedia("(pointer: fine)").matches) return;
 
     let setContentX: (val: number) => void;
@@ -167,36 +265,110 @@ export const AnimatedHero = ({
     <section
       ref={heroRef}
       id={id}
+      style={heroStyleVariables}
       className={cn(
         "relative flex min-h-screen w-full max-w-full flex-col justify-center overflow-x-clip overflow-y-hidden bg-background text-foreground pt-28 pb-24",
+        introComplete && "hero-intro-complete",
         className,
       )}
     >
-      {/* Background com fotografia LCP prioritária e overlay de alto contraste */}
-      <motion.div
-        className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat will-change-transform"
-        style={{ backgroundImage: `url(${backgroundImageUrl})` }}
-        initial={{ scale: 1.05 }}
-        animate={{ scale: 1 }}
-        transition={{
-          duration: MOTION_TOKENS.duration.slow,
-          ease: MOTION_TOKENS.ease,
-        }}
-      >
-        <img
-          src={backgroundImageUrl}
-          alt=""
+      {/* CAMADA 1: Fotografia LCP com Picture, Art Direction e Zoom Lento (SPEC-068 / SPEC-069) */}
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+        <picture>
+          {(resolvedConfig.image.mobile.avifSrcSet ?? resolvedConfig.image.mobile.avifSrc) && (
+            <source
+              media="(max-width: 768px)"
+              type="image/avif"
+              srcSet={resolvedConfig.image.mobile.avifSrcSet ?? resolvedConfig.image.mobile.avifSrc}
+              sizes={resolvedConfig.image.mobile.sizes}
+            />
+          )}
+          {(resolvedConfig.image.mobile.webpSrcSet ?? resolvedConfig.image.mobile.webpSrc) && (
+            <source
+              media="(max-width: 768px)"
+              type="image/webp"
+              srcSet={resolvedConfig.image.mobile.webpSrcSet ?? resolvedConfig.image.mobile.webpSrc}
+              sizes={resolvedConfig.image.mobile.sizes}
+            />
+          )}
+          <source
+            media="(max-width: 768px)"
+            srcSet={resolvedConfig.image.mobile.srcSet ?? resolvedConfig.image.mobile.src}
+            sizes={resolvedConfig.image.mobile.sizes}
+          />
+          {(resolvedConfig.image.desktop.avifSrcSet ?? resolvedConfig.image.desktop.avifSrc) && (
+            <source
+              type="image/avif"
+              srcSet={
+                resolvedConfig.image.desktop.avifSrcSet ?? resolvedConfig.image.desktop.avifSrc
+              }
+              sizes={resolvedConfig.image.desktop.sizes}
+            />
+          )}
+          {(resolvedConfig.image.desktop.webpSrcSet ?? resolvedConfig.image.desktop.webpSrc) && (
+            <source
+              type="image/webp"
+              srcSet={
+                resolvedConfig.image.desktop.webpSrcSet ?? resolvedConfig.image.desktop.webpSrc
+              }
+              sizes={resolvedConfig.image.desktop.sizes}
+            />
+          )}
+          <img
+            src={resolvedConfig.image.desktop.src}
+            alt={resolvedConfig.image.alt}
+            aria-hidden={resolvedConfig.image.decorative ? "true" : undefined}
+            fetchPriority="high"
+            loading="eager"
+            decoding="async"
+            width={resolvedConfig.image.desktop.width}
+            height={resolvedConfig.image.desktop.height}
+            sizes={resolvedConfig.image.desktop.sizes}
+            className="hero-photo-cinematic absolute inset-0 h-full w-full object-cover pointer-events-none"
+          />
+        </picture>
+      </div>
+
+      {/* CAMADA 2: Reflexo de Luz Único na Lataria (sob o overlay e sob a UI, se ativo no perfil) */}
+      {!introComplete && resolvedProfile.flare.enabled && (
+        <div aria-hidden="true" className="hero-light-flare pointer-events-none" />
+      )}
+
+      {/* CAMADA 3: Gradientes de Legibilidade desacoplados por perfil de overlay */}
+      <div
+        aria-hidden="true"
+        className="hero-overlay-cinematic pointer-events-none absolute inset-0"
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background via-transparent to-black/40"
+      />
+
+      {/* Modo de Depuração e Calibração Visual (apenas em DEV, zero impacto em produção) */}
+      {import.meta.env.DEV && debugMode && (
+        <div
           aria-hidden="true"
-          fetchPriority="high"
-          loading="eager"
-          decoding="async"
-          width={1920}
-          height={1080}
-          className="absolute inset-0 h-full w-full object-cover object-center pointer-events-none"
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/80 to-black/45" />
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-black/60" />
-      </motion.div>
+          className="pointer-events-none absolute inset-0 z-40 border-2 border-dashed border-emerald-400/40"
+        >
+          {resolvedProfile.flare.enabled && (
+            <div
+              className="absolute border border-amber-400/70 bg-amber-400/10 text-[10px] text-amber-200 px-1 font-mono rounded"
+              style={{
+                top: `${resolvedProfile.flare.top}%`,
+                left: `${resolvedProfile.flare.left}%`,
+                width: `${resolvedProfile.flare.width}%`,
+                height: `${resolvedProfile.flare.height}%`,
+              }}
+            >
+              Flare Zone ({resolvedProfile.flare.angle}°)
+            </div>
+          )}
+          <div className="absolute top-24 right-4 bg-black/80 text-emerald-400 text-xs px-2 py-1 rounded font-mono border border-emerald-500/30">
+            PROFILE: {resolvedConfig.profile} | FLARE:{" "}
+            {resolvedProfile.flare.enabled ? "ACTIVE" : "OFF"}
+          </div>
+        </div>
+      )}
 
       {/* Halo de luz ambiente dourada interativo via GSAP */}
       <div
@@ -205,47 +377,33 @@ export const AnimatedHero = ({
         className="pointer-events-none absolute top-1/3 left-1/3 -translate-x-1/2 -translate-y-1/2 size-[650px] rounded-full bg-primary/8 blur-[140px] will-change-transform"
       />
 
-      {/* Conteúdo principal animado do Hero */}
-      <motion.div
+      {/* CAMADA 4: Conteúdo principal de UI com entrada faseada suave */}
+      <div
         ref={contentRef}
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
         className="page-width relative z-10 flex flex-col items-start justify-center text-left py-8 will-change-transform w-full max-w-full overflow-hidden"
       >
-        {/* Overline / Badge Superior */}
-        {eyebrow && (
-          <motion.div variants={itemVariants} className="mb-4 max-w-full">
-            {eyebrow}
-          </motion.div>
-        )}
+        {/* Overline / Eyebrow (entra aos 1.5s) */}
+        {eyebrow && <div className="mb-4 max-w-full hero-intro-eyebrow">{eyebrow}</div>}
 
-        {/* Título Principal (H1) com forte contraste */}
-        <motion.h1
-          variants={itemVariants}
-          className="text-4xl font-semibold tracking-tight sm:text-5xl md:text-6xl lg:text-[4.25rem] font-display leading-[1.12] max-w-4xl text-balance text-white break-words"
-        >
+        {/* Título Principal H1 (entra aos 1.8s) com text-wrap: balance */}
+        <h1 className="text-4xl font-semibold tracking-tight sm:text-5xl md:text-6xl lg:text-[4.25rem] font-display leading-[1.12] max-w-4xl text-balance text-white break-words hero-intro-title hero-intro-h1">
           {title || "BRS Reparações Automotivas."}
-        </motion.h1>
+        </h1>
 
-        {/* Subtítulo Confortável e Nítido */}
-        <motion.div
-          variants={itemVariants}
-          className="mt-6 max-w-2xl text-base sm:text-lg leading-relaxed text-neutral-400 text-pretty"
-        >
+        {/* Subtítulo Confortável e Nítido (entra aos 2.4s) */}
+        <div className="mt-6 max-w-2xl text-base sm:text-lg leading-relaxed text-neutral-400 text-pretty hero-intro-desc hero-intro-lead">
           {description}
-        </motion.div>
+        </div>
 
-        {/* Chamadas para Ação (CTAs) */}
+        {/* Chamadas para Ação (CTAs) (entram aos 2.9s) */}
         {(ctaButton || secondaryCta) && (
-          <motion.div
-            variants={itemVariants}
+          <div
             className={cn(
-              "mt-8 flex flex-wrap items-center hero-cta-group",
+              "mt-8 flex flex-wrap items-center hero-cta-group hero-intro-cta",
               ctaButton && secondaryCta && "gap-4",
             )}
           >
-            {/* Botão Primário (se fornecido) */}
+            {/* Botão Primário */}
             {ctaButton && (
               <MagneticButton>
                 {ctaButton.href ? (
@@ -268,7 +426,7 @@ export const AnimatedHero = ({
               </MagneticButton>
             )}
 
-            {/* Botão Secundário / Descoberta de Serviços */}
+            {/* Botão Secundário */}
             {secondaryCta &&
               (secondaryCta.href ? (
                 <Button
@@ -299,15 +457,12 @@ export const AnimatedHero = ({
                   />
                 </Button>
               ))}
-          </motion.div>
+          </div>
         )}
 
-        {/* Indicadores de Telemetria e Precisão Técnica da Oficina (SPEC-032) */}
+        {/* Indicadores de Telemetria e Precisão Técnica da Oficina */}
         {showTelemetryMetrics && (
-          <motion.div
-            variants={itemVariants}
-            className="mt-10 pt-6 border-t border-white/10 grid grid-cols-1 sm:grid-cols-3 gap-3.5 w-full max-w-3xl"
-          >
+          <div className="mt-10 pt-6 border-t border-white/10 grid grid-cols-1 sm:grid-cols-3 gap-3.5 w-full max-w-3xl hero-intro-cta">
             {[
               {
                 icon: Sparkles,
@@ -338,12 +493,12 @@ export const AnimatedHero = ({
                 </span>
               </div>
             ))}
-          </motion.div>
+          </div>
         )}
-      </motion.div>
+      </div>
 
-      {/* Rodapé do Hero / Microdados e Navegação de Scroll */}
-      <div className="absolute bottom-6 left-0 right-0 z-10 w-full overflow-hidden">
+      {/* Rodapé do Hero / Microdados e Navegação (entra aos 3.4s) */}
+      <div className="absolute bottom-6 left-0 right-0 z-10 w-full overflow-hidden hero-intro-bottom hero-intro-foot">
         {bottomContent || (
           <div className="page-width flex items-center justify-between text-xs text-neutral-400 pt-3 border-t border-white/10 w-full">
             <span className="flex items-center gap-2 font-medium">
@@ -361,7 +516,11 @@ export const AnimatedHero = ({
                 className="group-hover:translate-y-0.5 transition-transform"
               />
             </a>
-            <span className="image-note text-[11px] text-neutral-400">Fotografia ilustrativa</span>
+            {resolvedConfig.isIllustrative && (
+              <span className="image-note text-[11px] text-neutral-400">
+                Fotografia ilustrativa
+              </span>
+            )}
           </div>
         )}
       </div>

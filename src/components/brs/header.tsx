@@ -4,6 +4,7 @@ import { ArrowUpRight, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { MagneticButton } from "@/components/ui/magnetic-button";
 import { primaryNavigation } from "@/lib/brs";
+import { getHasPlayedHeroIntro } from "@/lib/hero-cinematic-state";
 import { cn } from "@/lib/utils";
 import { Brand } from "./brand";
 
@@ -12,20 +13,40 @@ function isActivePath(pathname: string, href: string) {
   return href === "/" ? pathname === "/" : pathname === href || pathname.startsWith(`${href}/`);
 }
 
-export function Header() {
+export interface HeaderProps {
+  isHome?: boolean;
+}
+
+export function Header({ isHome: isHomeProp }: HeaderProps = {}) {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [introSkipped, setIntroSkipped] = useState(false);
   const pathname = useRouterState({ select: (state) => state.location.pathname });
+
+  const isHome = isHomeProp !== undefined ? isHomeProp : pathname === "/" || pathname === "";
+  const shouldAnimateHeader = isHome && !getHasPlayedHeroIntro() && !introSkipped;
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 40);
     handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+
+    const handleSkip = () => setIntroSkipped(true);
+    window.addEventListener("brs:hero-intro-skip", handleSkip);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("brs:hero-intro-skip", handleSkip);
+    };
   }, []);
 
   return (
-    <header className="fixed top-3 sm:top-5 left-0 right-0 z-50 px-3 sm:px-6 pointer-events-none transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] w-full max-w-full">
+    <header
+      className={cn(
+        "fixed top-3 sm:top-5 left-0 right-0 z-50 px-3 sm:px-6 pointer-events-none transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] w-full max-w-full",
+        shouldAnimateHeader && "header-cinematic-intro",
+      )}
+    >
       {/* Cápsula flutuante centralizada */}
       <div
         className={cn(

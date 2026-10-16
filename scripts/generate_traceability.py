@@ -125,10 +125,23 @@ def relative_link(root: Path, target: Path, label: str) -> str:
 
 
 def task_spec_reference(task: Artifact) -> str | None:
+    declared = metadata_value(task.path.read_text(encoding="utf-8"), ("SPEC", "Spec"))
+    if declared and declared.casefold() != "not recorded":
+        match = SPEC_PATTERN.search(declared)
+        if match:
+            return match.group(0)
     for reference in task.references:
         if SPEC_PATTERN.fullmatch(reference):
             return reference
     return None
+
+
+def review_references(review: Artifact) -> tuple[str, ...]:
+    declared = metadata_value(
+        review.path.read_text(encoding="utf-8"), ("SPEC/TASK", "SPEC", "Spec", "TASK", "Task")
+    )
+    references = tuple(sorted(set(SPEC_PATTERN.findall(declared) + TASK_PATTERN.findall(declared))))
+    return references or review.references
 
 
 def display_artifacts(root: Path, artifacts: Sequence[Artifact]) -> str:
@@ -172,7 +185,8 @@ def render_matrix(root: Path, data: TraceabilityData) -> str:
         linked_reviews = [
             review
             for review in data.reviews
-            if spec.identifier in review.references or bool(task_ids.intersection(review.references))
+            if spec.identifier in review_references(review)
+            or bool(task_ids.intersection(review_references(review)))
         ]
         lines.append(
             "| {spec} | {status} | {tasks} | {commits} | {reviews} |".format(

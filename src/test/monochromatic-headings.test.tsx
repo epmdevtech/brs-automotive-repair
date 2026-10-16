@@ -21,7 +21,7 @@ describe("SPEC-044 / TASK-044-01: Padronização da Hierarquia Tipográfica e T�
       const { container } = render(<Hero />);
       const h1 = container.querySelector("h1");
       expect(h1).not.toBeNull();
-      expect(h1?.textContent).toContain(
+      expect(h1?.textContent?.replace(/\u00a0/g, " ")).toContain(
         "Funilaria, pintura em estufa e martelinho de ouro em Toledo-PR.",
       );
 

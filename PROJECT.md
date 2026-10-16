@@ -47,7 +47,8 @@
     - `/sobre`: Rota institucional sobre a história, valores e estrutura física da BRS;
     - `/contato`: Rota dedicada de triagem de contato e avaliação técnica;
     - `/privacidade`: Políticas de privacidade e conformidade de dados;
-    - `/proposta/$slug`: Rota de proposta comercial personalizada confidencial (`noindex, nofollow`).
+    - `/proposta/$slug`: Rota de proposta comercial personalizada confidencial (`noindex, nofollow`);
+    - `/briefing`: Rota confidencial de execução e ingestão de briefing multinicho EPM DevTech (`noindex, nofollow`, fora dos menus públicos).
   - Configuração canônica de dados da empresa centralizada em [`src/lib/brs.ts`](src/lib/brs.ts), compartilhada diretamente entre componentes visuais e suites de teste.
   - Componentes de interface baseados nas primitivas acessíveis do **Radix UI** estilizados via Tailwind CSS v4.
   - Roteamento com `@tanstack/react-router` e cache reativo com `@tanstack/react-query`.
@@ -250,6 +251,12 @@ Todas as entregas obedecem ao protocolo **Universal SDD**:
 - `SPEC-063` / `TASK-063-01` / `REVIEW-063`: Prevenção e Blindagem Contra Estouro de Layout e Overflow Horizontal no Modo Mobile (Aplicação de overflow-x: clip e max-width 100% em html, body, SiteLayout, PageTransition, AnimatedHero e flex-wrap responsivo na classe .eyebrow para eliminar rolagem lateral no mobile).
 - `SPEC-064` / `TASK-064-01` / `REVIEW-064`: Auditoria e Refatoração UX/UI — Conversão, Integridade Editorial, Home em 6 Blocos, SEO Canônico de Produção (`https://brs.epmdevtech.com.br`) e Dados Oficiais Confirmados (Endereço e Horário).
 - `SPEC-065` / `TASK-065-01` / `REVIEW-065`: Sincronização Bidirecional da Linha do Tempo Operacional com o Status do Agendamento e Mini-Stepper em `/agendamentos` + Correção de Hidratação SSR.
+- `SPEC-066` / `TASK-066-01`: Rota Confidencial de Execução e Ingestão de Briefing Multinicho EPM DevTech (`/briefing`), sem inclusão em menus públicos, suporte nativo ao nicho de reparação automotiva, persistência local, cálculo de contraste WCAG e exportação determinística de `briefing-completo.json` e `booking-config.json`.
+- `SPEC-067` / `TASK-067-01` / `REVIEW-067`: Hero com Abertura Cinematográfica, Zoom Lento e Reflexo de Luz na Lataria (Sequência CSS pura, clareamento do veículo, antecipação por interação, flag de sessão SPA e compatibilidade estrita SSR).
+- `SPEC-068` / `TASK-068-01` / `REVIEW-068`: Desacoplamento da Animação do Hero da Foto e Configuração Centralizada (Módulo tipado hero-config, perfis veiculo-inteiro/detalhe-lataria/oficina-equipe, picture com art direction, preload LCP, controle estrito de foto ilustrativa e guia de substituição).
+- `SPEC-069` / `TASK-069-01` / `REVIEW-069`: Pipeline de Imagem Responsiva do Hero (AVIF/WebP + srcset/sizes, intrínsecos verídicos 1920×1088/1280×725, preload de LCP casado via imagesrcset/imagesizes, variantes versionadas em public/hero/ sem novas dependências e baseline visual Playwright anti-regressão).
+- `SPEC-070` / `TASK-070-01` / `REVIEW-070`: Correção da Descontinuidade ("Pulo") no Zoom do Hero (causa-raiz: redefinição de `heroSlowZoom` sob `.hero-intro-complete` remapeava a linha do tempo; corrigido com animação única, easing contínuo `cubic-bezier(0.25,0.1,0.25,1)`, camada própria e trava Vitest de continuidade; prova de delta ≤ 4×10⁻⁵ no tempo da animação).
+
 
 ---
 

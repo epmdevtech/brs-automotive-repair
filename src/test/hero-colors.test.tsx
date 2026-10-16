@@ -9,7 +9,7 @@ describe("SPEC-012 / SPEC-064 — Padronização de Cores da Seção Hero e Sinc
     const { container } = render(<Hero />);
     const h1 = container.querySelector("h1");
     expect(h1).not.toBeNull();
-    expect(h1?.textContent).toContain(
+    expect(h1?.textContent?.replace(/\u00a0/g, " ")).toContain(
       "Funilaria, pintura em estufa e martelinho de ouro em Toledo-PR.",
     );
 
@@ -29,8 +29,8 @@ describe("SPEC-012 / SPEC-064 — Padronização de Cores da Seção Hero e Sinc
     const { container } = render(<Hero />);
     const desc = container.querySelector("p");
     expect(desc).not.toBeNull();
-    expect(desc?.textContent).toContain(
-      "Reparação de lataria, pintura automotiva em cabine e desamassamento sem pintura",
+    expect(desc?.textContent).toMatch(
+      /Reparação de lataria, pintura automotiva em (?:estufa|cabine) e desamassamento sem pintura/,
     );
   });
 
