@@ -1,9 +1,13 @@
 # REVIEW-065 — Revisão Técnica: Sincronização da Linha do Tempo Operacional e Hidratação SSR em `/agendamentos`
 
-- **Spec-Ref**: `SPEC-065`
-- **Task-Ref**: `TASK-065-01`
-- **Status**: Approved
-- **Data**: 2026-10-15
+| Campo   | Valor                     |
+| ------- | ------------------------- |
+| ID      | `REVIEW-065`              |
+| SPEC    | `SPEC-065`                |
+| TASK    | `TASK-065-01`             |
+| Status  | Approved                  |
+| Data    | 2026-10-15                |
+| Revisor | Equipe Técnica EPMDEVTECH |
 
 ---
 

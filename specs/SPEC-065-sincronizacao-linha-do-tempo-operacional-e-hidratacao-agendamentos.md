@@ -1,9 +1,13 @@
 # SPEC-065 — Sincronização da Linha do Tempo Operacional com Status do Agendamento e Correção de Hidratação SSR em `/agendamentos`
 
-- **Status**: Approved
-- **Data**: 2026-10-15
-- **Autor**: Antigravity (Engenharia Frontend / Universal SDD)
-- **Rota Afetada**: `/agendamentos`
+| Campo   | Valor                                        |
+| ------- | -------------------------------------------- |
+| ID      | `SPEC-065`                                   |
+| Status  | Approved                                     |
+| Data    | 2026-10-15                                   |
+| Autor   | UX/UI & Frontend Engineering (Universal SDD) |
+| Tarefas | `TASK-065-01`                                |
+| Revisão | `REVIEW-065`                                 |
 
 ---
 

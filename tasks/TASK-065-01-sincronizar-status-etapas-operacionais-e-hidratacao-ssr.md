@@ -1,8 +1,12 @@
 # TASK-065-01 — Sincronizar Status com Etapas Operacionais e Corrigir Hidratação SSR em `/agendamentos`
 
-- **Spec-Ref**: `SPEC-065`
-- **Status**: Completed
-- **Responsável**: Antigravity
+| Campo       | Valor                        |
+| ----------- | ---------------------------- |
+| ID          | `TASK-065-01`                |
+| SPEC        | `SPEC-065`                   |
+| Status      | Completed                    |
+| Data        | 2026-10-15                   |
+| Responsável | UX/UI & Frontend Engineering |
 
 ---
 
