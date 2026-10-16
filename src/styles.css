@@ -1066,10 +1066,10 @@ textarea.field-input {
 
 @keyframes heroSlowZoom {
   0% {
-    transform: scale(1);
+    transform: translate3d(0, 0, 0) scale(1);
   }
   100% {
-    transform: scale(var(--hero-cinematic-zoom-scale, 1.1));
+    transform: translate3d(0, 0, 0) scale(var(--hero-cinematic-zoom-scale, 1.1));
   }
 }
 
@@ -1099,12 +1099,15 @@ textarea.field-input {
     var(--hero-cinematic-header-delay, 0.8s) both;
 }
 
-/* Camadas do Hero: Imagem base com zoom lento desacoplada via CSS variables */
+/* Camadas do Hero: Imagem base com zoom lento desacoplada via CSS variables.
+   A animação é única e definida na montagem: NÃO é redefinida por mudança de estado
+   (evita remapear a linha do tempo e causar salto de escala — SPEC-070). */
 .hero-photo-cinematic {
   transform-origin: var(--hero-transform-origin, 75% 50%);
   object-position: var(--hero-object-position, center 48%);
   will-change: transform;
-  animation: heroSlowZoom var(--hero-cinematic-zoom-dur, 24s) cubic-bezier(0.25, 1, 0.5, 1)
+  backface-visibility: hidden;
+  animation: heroSlowZoom var(--hero-cinematic-zoom-dur, 24s) cubic-bezier(0.25, 0.1, 0.25, 1)
     var(--hero-cinematic-zoom-delay, 4.2s) forwards;
 }
 
@@ -1200,10 +1203,6 @@ textarea.field-input {
   display: none !important;
 }
 
-.hero-intro-complete .hero-photo-cinematic {
-  animation: heroSlowZoom var(--hero-cinematic-zoom-dur, 24s) cubic-bezier(0.25, 1, 0.5, 1) 0s
-    forwards;
-}
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
