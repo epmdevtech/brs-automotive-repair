@@ -254,6 +254,8 @@ Todas as entregas obedecem ao protocolo **Universal SDD**:
 - `SPEC-066` / `TASK-066-01`: Rota Confidencial de Execução e Ingestão de Briefing Multinicho EPM DevTech (`/briefing`), sem inclusão em menus públicos, suporte nativo ao nicho de reparação automotiva, persistência local, cálculo de contraste WCAG e exportação determinística de `briefing-completo.json` e `booking-config.json`.
 - `SPEC-067` / `TASK-067-01` / `REVIEW-067`: Hero com Abertura Cinematográfica, Zoom Lento e Reflexo de Luz na Lataria (Sequência CSS pura, clareamento do veículo, antecipação por interação, flag de sessão SPA e compatibilidade estrita SSR).
 - `SPEC-068` / `TASK-068-01` / `REVIEW-068`: Desacoplamento da Animação do Hero da Foto e Configuração Centralizada (Módulo tipado hero-config, perfis veiculo-inteiro/detalhe-lataria/oficina-equipe, picture com art direction, preload LCP, controle estrito de foto ilustrativa e guia de substituição).
+- `SPEC-069` / `TASK-069-01` / `REVIEW-069`: Pipeline de Imagem Responsiva do Hero (AVIF/WebP + srcset/sizes, intrínsecos verídicos 1920×1088/1280×725, preload de LCP casado via imagesrcset/imagesizes, variantes versionadas em public/hero/ sem novas dependências e baseline visual Playwright anti-regressão).
+- `SPEC-070` / `TASK-070-01` / `REVIEW-070`: Correção da Descontinuidade ("Pulo") no Zoom do Hero (causa-raiz: redefinição de `heroSlowZoom` sob `.hero-intro-complete` remapeava a linha do tempo; corrigido com animação única, easing contínuo `cubic-bezier(0.25,0.1,0.25,1)`, camada própria e trava Vitest de continuidade; prova de delta ≤ 4×10⁻⁵ no tempo da animação).
 
 
 ---
