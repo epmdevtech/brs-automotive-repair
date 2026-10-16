@@ -1,12 +1,18 @@
-import hero from "@/assets/brs-hero.jpg";
 import { company } from "@/lib/brs";
+import { type HeroConfig, defaultHeroConfig } from "@/lib/hero-config";
 import { AnimatedHero } from "./animated-hero";
 
-export function Hero() {
+export interface HeroProps {
+  config?: HeroConfig;
+  debugMode?: boolean;
+}
+
+export function Hero({ config = defaultHeroConfig, debugMode = false }: HeroProps = {}) {
   return (
     <AnimatedHero
       id="inicio"
-      backgroundImageUrl={hero}
+      config={config}
+      debugMode={debugMode}
       eyebrow={
         <span className="eyebrow tracking-widest text-primary font-medium flex flex-wrap max-w-full">
           Oficina Técnica Especializada • Toledo, PR
@@ -30,9 +36,11 @@ export function Hero() {
           <span className="text-xs sm:text-[13px] text-neutral-200 font-medium tracking-wide">
             {company.address.street} · {company.address.neighborhood} · {company.openingHours}
           </span>
-          <span className="image-note text-xs text-neutral-200 font-medium px-2 py-0.5 rounded bg-black/50 border border-white/15">
-            Fotografia ilustrativa
-          </span>
+          {config.isIllustrative && (
+            <span className="image-note text-xs text-neutral-200 font-medium px-2 py-0.5 rounded bg-black/50 border border-white/15">
+              Fotografia ilustrativa
+            </span>
+          )}
         </div>
       }
     />

@@ -65,6 +65,7 @@ test.describe("SPEC-067: Hero Abertura Cinematográfica e Validação E2E", () =
   test("Reduced Motion: UI completa e visível imediatamente sem atrasos", async ({ page }) => {
     await page.emulateMedia({ reducedMotion: "reduce" });
     await page.goto("/");
+    await page.waitForLoadState("networkidle");
 
     const heroSection = page.locator("#inicio");
     await expect(heroSection).toHaveClass(/hero-intro-complete/);

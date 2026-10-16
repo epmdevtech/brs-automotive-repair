@@ -7,6 +7,12 @@ import { MagneticButton } from "@/components/ui/magnetic-button";
 import { cn } from "@/lib/utils";
 import { useSmoothScroll } from "@/hooks/use-smooth-scroll";
 import { getHasPlayedHeroIntro, setHasPlayedHeroIntro } from "@/lib/hero-cinematic-state";
+import {
+  type HeroConfig,
+  defaultHeroConfig,
+  resolveHeroProfile,
+  getHeroStyleVariables,
+} from "@/lib/hero-config";
 
 export interface NavLink {
   label: string;
@@ -21,7 +27,9 @@ export interface HeroAction {
 
 export interface AnimatedHeroProps {
   id?: string;
-  backgroundImageUrl: string;
+  config?: HeroConfig;
+  /** @deprecated Use `config.image` para controle completo de picture/art-direction */
+  backgroundImageUrl?: string;
   logo?: React.ReactNode;
   navLinks?: NavLink[];
   topRightAction?: React.ReactNode;
@@ -33,6 +41,7 @@ export interface AnimatedHeroProps {
   bottomContent?: React.ReactNode;
   className?: string;
   showTelemetryMetrics?: boolean;
+  debugMode?: boolean;
 }
 
 /**
@@ -75,6 +84,7 @@ function HeroLink({
 
 export const AnimatedHero = ({
   id = "inicio",
+  config: configProp,
   backgroundImageUrl,
   eyebrow,
   title,
@@ -84,10 +94,34 @@ export const AnimatedHero = ({
   bottomContent,
   className,
   showTelemetryMetrics = true,
+  debugMode = false,
 }: AnimatedHeroProps) => {
   const heroRef = React.useRef<HTMLElement>(null);
   const contentRef = React.useRef<HTMLDivElement>(null);
   const glowRef = React.useRef<HTMLDivElement>(null);
+
+  // Resolução da configuração da foto do Hero (SPEC-068)
+  const resolvedConfig: HeroConfig = React.useMemo(() => {
+    if (configProp) return configProp;
+    if (backgroundImageUrl) {
+      return {
+        ...defaultHeroConfig,
+        image: {
+          ...defaultHeroConfig.image,
+          desktop: { ...defaultHeroConfig.image.desktop, src: backgroundImageUrl },
+          mobile: { ...defaultHeroConfig.image.mobile, src: backgroundImageUrl },
+        },
+      };
+    }
+    return defaultHeroConfig;
+  }, [configProp, backgroundImageUrl]);
+
+  const resolvedProfile = React.useMemo(() => resolveHeroProfile(resolvedConfig), [resolvedConfig]);
+
+  const heroStyleVariables = React.useMemo(
+    () => getHeroStyleVariables(resolvedConfig),
+    [resolvedConfig],
+  );
 
   // Estado determinístico de conclusão da introdução cinematográfica (SPEC-067)
   const [introComplete, setIntroComplete] = React.useState(() => getHasPlayedHeroIntro());
@@ -193,41 +227,96 @@ export const AnimatedHero = ({
     <section
       ref={heroRef}
       id={id}
+      style={heroStyleVariables}
       className={cn(
         "relative flex min-h-screen w-full max-w-full flex-col justify-center overflow-x-clip overflow-y-hidden bg-background text-foreground pt-28 pb-24",
         introComplete && "hero-intro-complete",
         className,
       )}
     >
-      {/* CAMADA 1: Fotografia LCP prioritária com Zoom Lento cinematográfico */}
+      {/* CAMADA 1: Fotografia LCP com Picture, Art Direction e Zoom Lento (SPEC-068) */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-        <img
-          src={backgroundImageUrl}
-          alt=""
-          aria-hidden="true"
-          fetchPriority="high"
-          loading="eager"
-          decoding="async"
-          width={1920}
-          height={1080}
-          className="hero-photo-cinematic absolute inset-0 h-full w-full object-cover object-center pointer-events-none"
-        />
+        <picture>
+          {resolvedConfig.image.mobile.avifSrc && (
+            <source
+              media="(max-width: 768px)"
+              type="image/avif"
+              srcSet={resolvedConfig.image.mobile.avifSrc}
+            />
+          )}
+          {resolvedConfig.image.mobile.webpSrc && (
+            <source
+              media="(max-width: 768px)"
+              type="image/webp"
+              srcSet={resolvedConfig.image.mobile.webpSrc}
+            />
+          )}
+          <source
+            media="(max-width: 768px)"
+            srcSet={resolvedConfig.image.mobile.src}
+            width={resolvedConfig.image.mobile.width}
+            height={resolvedConfig.image.mobile.height}
+          />
+          {resolvedConfig.image.desktop.avifSrc && (
+            <source type="image/avif" srcSet={resolvedConfig.image.desktop.avifSrc} />
+          )}
+          {resolvedConfig.image.desktop.webpSrc && (
+            <source type="image/webp" srcSet={resolvedConfig.image.desktop.webpSrc} />
+          )}
+          <img
+            src={resolvedConfig.image.desktop.src}
+            alt={resolvedConfig.image.alt}
+            aria-hidden={resolvedConfig.image.decorative ? "true" : undefined}
+            fetchPriority="high"
+            loading="eager"
+            decoding="async"
+            width={resolvedConfig.image.desktop.width}
+            height={resolvedConfig.image.desktop.height}
+            className="hero-photo-cinematic absolute inset-0 h-full w-full object-cover pointer-events-none"
+          />
+        </picture>
       </div>
 
-      {/* CAMADA 2: Reflexo de Luz Único na Lataria (sob o overlay e sob a UI) */}
-      {!introComplete && (
+      {/* CAMADA 2: Reflexo de Luz Único na Lataria (sob o overlay e sob a UI, se ativo no perfil) */}
+      {!introComplete && resolvedProfile.flare.enabled && (
         <div aria-hidden="true" className="hero-light-flare pointer-events-none" />
       )}
 
-      {/* CAMADA 3: Gradientes de Legibilidade escurecidos à esquerda e claros sobre o veículo */}
+      {/* CAMADA 3: Gradientes de Legibilidade desacoplados por perfil de overlay */}
       <div
         aria-hidden="true"
-        className="hero-overlay-cinematic pointer-events-none absolute inset-0 bg-gradient-to-r from-black/95 via-black/75 to-black/25 md:to-transparent"
+        className="hero-overlay-cinematic pointer-events-none absolute inset-0"
       />
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background via-transparent to-black/40"
       />
+
+      {/* Modo de Depuração e Calibração Visual (apenas em DEV, zero impacto em produção) */}
+      {import.meta.env.DEV && debugMode && (
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 z-40 border-2 border-dashed border-emerald-400/40"
+        >
+          {resolvedProfile.flare.enabled && (
+            <div
+              className="absolute border border-amber-400/70 bg-amber-400/10 text-[10px] text-amber-200 px-1 font-mono rounded"
+              style={{
+                top: `${resolvedProfile.flare.top}%`,
+                left: `${resolvedProfile.flare.left}%`,
+                width: `${resolvedProfile.flare.width}%`,
+                height: `${resolvedProfile.flare.height}%`,
+              }}
+            >
+              Flare Zone ({resolvedProfile.flare.angle}°)
+            </div>
+          )}
+          <div className="absolute top-24 right-4 bg-black/80 text-emerald-400 text-xs px-2 py-1 rounded font-mono border border-emerald-500/30">
+            PROFILE: {resolvedConfig.profile} | FLARE:{" "}
+            {resolvedProfile.flare.enabled ? "ACTIVE" : "OFF"}
+          </div>
+        </div>
+      )}
 
       {/* Halo de luz ambiente dourada interativo via GSAP */}
       <div
@@ -375,7 +464,11 @@ export const AnimatedHero = ({
                 className="group-hover:translate-y-0.5 transition-transform"
               />
             </a>
-            <span className="image-note text-[11px] text-neutral-400">Fotografia ilustrativa</span>
+            {resolvedConfig.isIllustrative && (
+              <span className="image-note text-[11px] text-neutral-400">
+                Fotografia ilustrativa
+              </span>
+            )}
           </div>
         )}
       </div>

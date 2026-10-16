@@ -1099,9 +1099,10 @@ textarea.field-input {
     var(--hero-cinematic-header-delay, 0.8s) both;
 }
 
-/* Camadas do Hero: Imagem base com zoom lento */
+/* Camadas do Hero: Imagem base com zoom lento desacoplada via CSS variables */
 .hero-photo-cinematic {
-  transform-origin: 75% 50%;
+  transform-origin: var(--hero-transform-origin, 75% 50%);
+  object-position: var(--hero-object-position, center 48%);
   will-change: transform;
   animation: heroSlowZoom var(--hero-cinematic-zoom-dur, 24s) cubic-bezier(0.25, 1, 0.5, 1)
     var(--hero-cinematic-zoom-delay, 4.2s) forwards;
@@ -1109,28 +1110,29 @@ textarea.field-input {
 
 @media (max-width: 768px) {
   .hero-photo-cinematic {
-    transform-origin: 65% 50%;
-    object-position: 70% center;
+    transform-origin: var(--hero-transform-origin-mobile, var(--hero-transform-origin, 70% 50%));
+    object-position: var(--hero-object-position-mobile, var(--hero-object-position, 70% center));
   }
 }
 
 /* Reflexo de Luz na Lataria (Camada 2: sobre a imagem, sob o overlay e sob a UI) */
 .hero-light-flare {
   position: absolute;
-  top: 0;
+  top: var(--hero-flare-top, 0);
   bottom: 0;
-  left: 0;
-  width: clamp(120px, 16vw, 240px);
+  left: var(--hero-flare-left, 0);
+  width: var(--hero-flare-width, clamp(120px, 16vw, 240px));
+  height: var(--hero-flare-height, auto);
   pointer-events: none;
   z-index: 2;
   mix-blend-mode: screen;
   filter: blur(8px);
   will-change: transform, opacity;
   background: linear-gradient(
-    90deg,
+    var(--hero-flare-angle, 90deg),
     transparent 0%,
     rgba(255, 248, 225, 0.04) 25%,
-    rgba(255, 248, 225, 0.35) 50%,
+    rgba(255, 248, 225, var(--hero-flare-opacity, 0.35)) 50%,
     rgba(255, 248, 225, 0.04) 75%,
     transparent 100%
   );
@@ -1138,9 +1140,15 @@ textarea.field-input {
     var(--hero-cinematic-flare-delay, 4.6s) forwards;
 }
 
-/* Overlay de legibilidade focado na esquerda (Camada 3) */
+/* Overlay de legibilidade focado na coluna de texto (Camada 3) */
 .hero-overlay-cinematic {
   z-index: 3;
+  background: linear-gradient(
+    var(--hero-overlay-direction, to right),
+    var(--hero-overlay-from, rgba(0, 0, 0, 0.95)) 0%,
+    var(--hero-overlay-via, rgba(0, 0, 0, 0.75)) 55%,
+    var(--hero-overlay-to, transparent) 100%
+  );
   animation: heroFadeIn var(--hero-cinematic-overlay-dur, 1.4s) ease-out
     var(--hero-cinematic-overlay-delay, 1.4s) both;
 }

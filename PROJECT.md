@@ -253,6 +253,7 @@ Todas as entregas obedecem ao protocolo **Universal SDD**:
 - `SPEC-065` / `TASK-065-01` / `REVIEW-065`: Sincronização Bidirecional da Linha do Tempo Operacional com o Status do Agendamento e Mini-Stepper em `/agendamentos` + Correção de Hidratação SSR.
 - `SPEC-066` / `TASK-066-01`: Rota Confidencial de Execução e Ingestão de Briefing Multinicho EPM DevTech (`/briefing`), sem inclusão em menus públicos, suporte nativo ao nicho de reparação automotiva, persistência local, cálculo de contraste WCAG e exportação determinística de `briefing-completo.json` e `booking-config.json`.
 - `SPEC-067` / `TASK-067-01` / `REVIEW-067`: Hero com Abertura Cinematográfica, Zoom Lento e Reflexo de Luz na Lataria (Sequência CSS pura, clareamento do veículo, antecipação por interação, flag de sessão SPA e compatibilidade estrita SSR).
+- `SPEC-068` / `TASK-068-01` / `REVIEW-068`: Desacoplamento da Animação do Hero da Foto e Configuração Centralizada (Módulo tipado hero-config, perfis veiculo-inteiro/detalhe-lataria/oficina-equipe, picture com art direction, preload LCP, controle estrito de foto ilustrativa e guia de substituição).
 
 
 ---
