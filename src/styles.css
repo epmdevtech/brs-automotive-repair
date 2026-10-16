@@ -1125,6 +1125,7 @@ textarea.field-input {
   height: var(--hero-flare-height, auto);
   pointer-events: none;
   z-index: 2;
+  opacity: 0;
   mix-blend-mode: screen;
   filter: blur(8px);
   will-change: transform, opacity;
@@ -1137,7 +1138,7 @@ textarea.field-input {
     transparent 100%
   );
   animation: heroFlareSweep var(--hero-cinematic-flare-dur, 2s) cubic-bezier(0.25, 1, 0.5, 1)
-    var(--hero-cinematic-flare-delay, 4.6s) forwards;
+    var(--hero-cinematic-flare-delay, 4.6s) both;
 }
 
 /* Overlay de legibilidade focado na coluna de texto (Camada 3) */
@@ -1202,7 +1203,8 @@ textarea.field-input {
 .hero-intro-complete .hero-photo-cinematic {
   animation: heroSlowZoom var(--hero-cinematic-zoom-dur, 24s) cubic-bezier(0.25, 1, 0.5, 1) 0s
     forwards;
-}@media (prefers-reduced-motion: reduce) {
+}
+@media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }

@@ -143,8 +143,23 @@ export const AnimatedHero = ({
       window.dispatchEvent(new CustomEvent("brs:hero-intro-skip"));
     };
 
-    // Antecipação imediata por qualquer interação precoce do usuário
+    // Antecipação imediata por qualquer interação real do usuário com o conteúdo
     const handleEarlyInteraction = () => {
+      completeIntro();
+    };
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Ignora teclas modificadoras e atalhos de reload do navegador (F5, Ctrl+R, etc.)
+      if (
+        e.key === "Control" ||
+        e.key === "Shift" ||
+        e.key === "Alt" ||
+        e.key === "Meta" ||
+        e.key === "F5" ||
+        ((e.ctrlKey || e.metaKey) && (e.key === "r" || e.key === "R"))
+      ) {
+        return;
+      }
       completeIntro();
     };
 
@@ -157,7 +172,7 @@ export const AnimatedHero = ({
 
     window.addEventListener("wheel", handleEarlyInteraction, { passive: true, once: true });
     window.addEventListener("touchstart", handleEarlyInteraction, { passive: true, once: true });
-    window.addEventListener("keydown", handleEarlyInteraction, { once: true });
+    window.addEventListener("keydown", handleKeyDown);
     window.addEventListener("click", handleEarlyInteraction, { once: true });
     document.addEventListener("visibilitychange", handleVisibilityChange);
 
@@ -172,7 +187,7 @@ export const AnimatedHero = ({
       clearTimeout(timer);
       window.removeEventListener("wheel", handleEarlyInteraction);
       window.removeEventListener("touchstart", handleEarlyInteraction);
-      window.removeEventListener("keydown", handleEarlyInteraction);
+      window.removeEventListener("keydown", handleKeyDown);
       window.removeEventListener("click", handleEarlyInteraction);
       document.removeEventListener("visibilitychange", handleVisibilityChange);
     };
