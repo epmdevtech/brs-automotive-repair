@@ -7,7 +7,7 @@ export function Hero() {
       id="inicio"
       backgroundImageUrl={hero}
       eyebrow={
-        <span className="eyebrow tracking-widest text-primary font-medium block">
+        <span className="eyebrow tracking-widest text-primary font-medium flex flex-wrap max-w-full">
           Oficina Técnica Especializada • Toledo, PR
         </span>
       }
@@ -25,7 +25,7 @@ export function Hero() {
       }}
       showTelemetryMetrics={false}
       bottomContent={
-        <div className="page-width flex items-center justify-between text-xs text-neutral-400 pt-3 border-t border-white/10">
+        <div className="page-width flex items-center justify-between text-xs text-neutral-400 pt-3 border-t border-white/10 w-full">
           <span className="text-[11px] text-neutral-500 font-mono tracking-wider">
             OFICINA TÉCNICA
           </span>

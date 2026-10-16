@@ -29,7 +29,7 @@ export function SiteLayout({ children }: { children: ReactNode }) {
 
   return (
     <SmoothScrollProvider>
-      <div className="min-h-screen flex flex-col bg-background text-foreground">
+      <div className="min-h-screen flex flex-col bg-background text-foreground w-full max-w-full overflow-x-clip">
         <a
           href="#conteudo-principal"
           className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 bg-primary text-primary-foreground p-3 font-medium text-xs rounded-sm"
@@ -39,7 +39,7 @@ export function SiteLayout({ children }: { children: ReactNode }) {
 
         <Header />
 
-        <main id="conteudo-principal" className="flex-1">
+        <main id="conteudo-principal" className="flex-1 w-full max-w-full overflow-x-clip">
           <PageTransition pathname={pathname}>{children}</PageTransition>
         </main>
 
