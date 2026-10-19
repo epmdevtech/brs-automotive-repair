@@ -3,7 +3,7 @@ export function renderErrorPage(): string {
 <html lang="pt-BR">
   <head>
     <meta charset="utf-8" />
-    <title>Instabilidade ao Carregar | BRS Reparações Automotivas</title>
+    <title>Instabilidade ao Carregar | Master Chapeação e Pinturas</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style>
       body {
@@ -84,7 +84,7 @@ export function renderErrorPage(): string {
   </head>
   <body>
     <div class="card">
-      <div class="brand">BRS<span>.</span></div>
+      <div class="brand">Master<span>.</span></div>
       <h1>Instabilidade temporária</h1>
       <p>Ocorreu uma dificuldade ao carregar este conteúdo. Tente recarregar a página ou retorne ao início.</p>
       <div class="actions">

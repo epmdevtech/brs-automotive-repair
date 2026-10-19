@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import type { Appointment, DamageType } from "../../domain/types";
-import { BRS_BOOKING_CONFIG } from "../../config/booking.config";
+import { MASTER_BOOKING_CONFIG } from "../../config/booking.config";
 import { generateProtocol, DAMAGE_TYPES_LIST } from "../../domain/intake";
 import { normalizePhoneE164 } from "../../domain/phone";
 import { parseTimeOnDate, formatDate } from "../../domain/time";
@@ -36,9 +36,9 @@ export function ManualBookingDialog({
   const [vehicleMake, setVehicleMake] = useState("");
   const [vehicleModel, setVehicleModel] = useState("");
   const [vehiclePlate, setVehiclePlate] = useState("");
-  const [serviceId, setServiceId] = useState(BRS_BOOKING_CONFIG.services[0].id);
+  const [serviceId, setServiceId] = useState(MASTER_BOOKING_CONFIG.services[0].id);
   const [professionalId, setProfessionalId] = useState(
-    initialProfessionalId ?? BRS_BOOKING_CONFIG.professionals[0].id,
+    initialProfessionalId ?? MASTER_BOOKING_CONFIG.professionals[0].id,
   );
   const [time, setTime] = useState(initialTime);
   const [damageType, setDamageType] = useState<DamageType>("colisao-com-vinco");
@@ -68,7 +68,7 @@ export function ManualBookingDialog({
       return;
     }
 
-    const svc = BRS_BOOKING_CONFIG.services.find((s) => s.id === serviceId);
+    const svc = MASTER_BOOKING_CONFIG.services.find((s) => s.id === serviceId);
     const duration = svc?.durationMinutes ?? 45;
 
     const startDate = parseTimeOnDate(initialDate, time);
@@ -135,7 +135,7 @@ export function ManualBookingDialog({
             Novo Agendamento na Baia Técnica
           </DialogTitle>
           <DialogDescription className="text-xs text-slate-500">
-            Cadastre um atendimento presencial ou coleta Leva e Traz para {formatDate(initialDate)}.
+            Cadastre um atendimento presencial ou coleta Guincho para {formatDate(initialDate)}.
           </DialogDescription>
         </DialogHeader>
 
@@ -221,7 +221,7 @@ export function ManualBookingDialog({
                 value={serviceId}
                 onChange={(e) => setServiceId(e.target.value)}
               >
-                {BRS_BOOKING_CONFIG.services.map((s) => (
+                {MASTER_BOOKING_CONFIG.services.map((s) => (
                   <option key={s.id} value={s.id}>
                     {s.title}
                   </option>
@@ -238,7 +238,7 @@ export function ManualBookingDialog({
                 value={professionalId}
                 onChange={(e) => setProfessionalId(e.target.value)}
               >
-                {BRS_BOOKING_CONFIG.professionals.map((p) => (
+                {MASTER_BOOKING_CONFIG.professionals.map((p) => (
                   <option key={p.id} value={p.id}>
                     {p.name}
                   </option>
@@ -286,7 +286,7 @@ export function ManualBookingDialog({
               className="accent-slate-900 size-4 cursor-pointer"
             />
             <span className="font-medium text-slate-800">
-              Serviço Leva e Traz (Coleta em Toledo-PR)
+              Serviço de Guincho (Coleta em Toledo-PR)
             </span>
           </label>
 

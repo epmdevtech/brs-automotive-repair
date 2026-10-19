@@ -1,4 +1,4 @@
-# Módulo de Conhecimento: Arquitetura Frontend BRS
+# Módulo de Conhecimento: Arquitetura Frontend Master
 
 ## Metadados
 

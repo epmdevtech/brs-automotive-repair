@@ -107,7 +107,7 @@ export interface TimeSlot {
 
 export interface Appointment {
   id: string;
-  protocol: string; // e.g. #BRS-7492
+  protocol: string; // e.g. #Master-7492
   serviceId: string;
   professionalId: string;
   startTime: string; // ISO string em UTC/TZ

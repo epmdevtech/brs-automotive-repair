@@ -14,9 +14,9 @@ export const Route = createFileRoute("/login")({
   component: LoginPage,
   head: () =>
     buildRouteHead({
-      title: "Painel da Oficina | Acesso Administrativo BRS",
+      title: "Painel da Oficina | Acesso Administrativo Master",
       description:
-        "Acesso administrativo seguro para gestão de agendamentos e equipe técnica da BRS Reparações Automotivas.",
+        "Acesso administrativo seguro para gestão de agendamentos e equipe técnica da Master Chapeação e Pinturas.",
       path: "/login",
       noindex: true,
     }),

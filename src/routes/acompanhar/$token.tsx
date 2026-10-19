@@ -10,6 +10,7 @@ import {
   Clock,
   Copy,
   ExternalLink,
+  Facebook,
   Instagram,
   MapPin,
   MessageCircle,
@@ -37,9 +38,9 @@ export const Route = createFileRoute("/acompanhar/$token")({
   component: CustomerTrackingPage,
   head: () => {
     const baseHead = buildRouteHead({
-      title: "Acompanhamento do Reparo | BRS Reparações Automotivas",
+      title: "Acompanhamento do Reparo | Master Chapeação e Pinturas",
       description:
-        "Consulte em tempo real a evolução técnica do reparo do seu veículo na BRS Reparações Automotivas.",
+        "Consulte em tempo real a evolução técnica do reparo do seu veículo na Master Chapeação e Pinturas.",
       path: "/acompanhar",
       noindex: true,
     });
@@ -180,14 +181,14 @@ function CustomerTrackingPage() {
           <Link
             to="/"
             className="flex items-center gap-2.5 group focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-[#D4AF37] rounded-lg p-1"
-            title="BRS Reparações Automotivas - Ir para início"
+            title="Master Chapeação e Pinturas - Ir para início"
           >
             <div className="size-8 sm:size-9 rounded-lg bg-gradient-to-br from-[#D4AF37] to-[#A68322] flex items-center justify-center font-bold font-display text-neutral-950 text-base shadow-sm">
               B
             </div>
             <div className="flex flex-col">
               <span className="font-display font-bold text-white text-sm sm:text-base tracking-tight leading-tight group-hover:text-[#D4AF37] transition-colors">
-                BRS Reparações
+                Master Chapeação
               </span>
               <span className="text-[10px] text-neutral-400 font-medium tracking-wide">
                 Canal do cliente
@@ -464,26 +465,35 @@ function CustomerTrackingPage() {
               aria-label="Canais e endereço da oficina"
               className="p-5 rounded-2xl border border-neutral-800 bg-[#13161B]/60 text-white space-y-3 text-xs"
             >
-              <div className="font-semibold text-white text-sm">BRS Reparações Automotivas</div>
+              <div className="font-semibold text-white text-sm">Master Chapeação e Pinturas</div>
               <div className="space-y-1 text-neutral-400 text-xs">
                 <p className="flex items-start gap-1.5">
                   <MapPin size={13} className="text-[#D4AF37] shrink-0 mt-0.5" />
-                  <span>Av. Senador Attilio Fontana, 3427 • Toledo - PR</span>
+                  <span>{company.address.full}</span>
                 </p>
                 <p className="flex items-center gap-1.5 pl-4 text-[11px] text-neutral-400">
-                  Segunda a sexta: das 08h às 12h e 13h30 às 18h
+                  {company.openingHours}
                 </p>
               </div>
 
               <div className="pt-2 border-t border-neutral-800/80 flex items-center gap-2">
                 <a
-                  href="https://instagram.com/brsreparacoes"
+                  href={company.instagram.url}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-1.5 text-[11px] text-neutral-400 hover:text-white transition-colors"
                 >
                   <Instagram size={13} />
-                  <span>@brsreparacoes</span>
+                  <span>{company.instagram.handle}</span>
+                </a>
+                <a
+                  href={company.social.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-[11px] text-neutral-400 hover:text-white transition-colors"
+                >
+                  <Facebook size={13} />
+                  <span>Facebook</span>
                 </a>
               </div>
             </section>
@@ -695,7 +705,7 @@ function CustomerTrackingPage() {
         <a
           href={CONTATO_OFICINA.telefoneHref}
           className="min-h-[44px] px-4 flex items-center justify-center gap-1.5 rounded-xl bg-neutral-900 border border-neutral-700 active:bg-neutral-800 text-neutral-200 text-xs font-semibold transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-[#D4AF37]"
-          title="Ligar para a BRS"
+          title="Ligar para a Master"
           aria-label="Ligar para a oficina"
         >
           <Phone size={15} className="text-[#D4AF37]" />
@@ -773,7 +783,7 @@ function TrackingNotFound({
           <div className="size-8 rounded-lg bg-gradient-to-br from-[#D4AF37] to-[#A68322] flex items-center justify-center font-bold text-neutral-950 text-sm">
             B
           </div>
-          <span className="font-display font-bold text-white text-sm">BRS Reparações</span>
+          <span className="font-display font-bold text-white text-sm">Master Chapeação</span>
         </Link>
         <a
           href={CONTATO_OFICINA.telefoneHref}
@@ -808,7 +818,7 @@ function TrackingNotFound({
                 type="text"
                 value={searchProtocol}
                 onChange={(e) => onSearchChange(e.target.value)}
-                placeholder="Digite seu protocolo (ex: BRS-7391)"
+                placeholder="Digite seu protocolo (ex: Master-7391)"
                 className="w-full text-xs bg-[#0B0D10] border border-neutral-800 rounded-xl pl-9 pr-3 py-2.5 text-white placeholder:text-neutral-500 focus:outline-hidden focus:border-[#D4AF37]"
                 required
               />
@@ -833,12 +843,21 @@ function TrackingNotFound({
               </a>
               <span className="text-neutral-600">•</span>
               <a
-                href="https://instagram.com/brsreparacoes"
+                href={company.instagram.url}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-neutral-400 hover:text-white"
               >
-                @brsreparacoes
+                Instagram
+              </a>
+              <span className="text-neutral-600">•</span>
+              <a
+                href={company.social.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-neutral-400 hover:text-white"
+              >
+                Facebook
               </a>
             </div>
           </div>
@@ -846,7 +865,7 @@ function TrackingNotFound({
       </main>
 
       <footer className="py-4 border-t border-neutral-900 text-center text-[10px] text-neutral-400">
-        © 2026 BRS Reparações Automotivas • Toledo - PR
+        © 2026 Master Chapeação e Pinturas • Toledo - PR
       </footer>
     </div>
   );

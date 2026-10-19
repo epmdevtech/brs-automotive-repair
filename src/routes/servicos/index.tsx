@@ -37,9 +37,9 @@ export const Route = createFileRoute("/servicos/")({
   component: ServicesPage,
   head: () =>
     buildRouteHead({
-      title: "Serviços e Estética Automotiva | BRS Reparações Automotivas",
+      title: "Serviços e Estética Automotiva | Master Chapeação e Pinturas",
       description:
-        "Especialidades da BRS em Toledo-PR: funilaria, pintura em estufa, martelinho de ouro, espelhamento, vitrificação cerâmica e polimento de para-brisa.",
+        "Especialidades da Master em Toledo-PR: funilaria, pintura em estufa, martelinho de ouro, espelhamento, vitrificação cerâmica e polimento de para-brisa.",
       path: "/servicos",
       jsonLd: {
         "@context": "https://schema.org",
@@ -47,7 +47,7 @@ export const Route = createFileRoute("/servicos/")({
           buildBreadcrumbSchema([{ name: "Serviços", path: "/servicos" }]),
           {
             "@type": "ItemList",
-            name: "Especialidades Técnicas da BRS Reparações Automotivas",
+            name: "Especialidades Técnicas da Master Chapeação e Pinturas",
             itemListElement: services.map((s, index) => ({
               "@type": "ListItem",
               position: index + 1,
@@ -81,7 +81,7 @@ function ServicesPage() {
         title="Recuperação técnica de precisão. Preservação do padrão de fábrica."
         description={
           <p className="text-neutral-300 text-sm sm:text-base leading-relaxed">
-            A BRS Reparações Automotivas concentra sua atuação em três frentes complementares de
+            A Master Chapeação e Pinturas concentra sua atuação em três frentes complementares de
             reparação veicular em Toledo, Paraná. Cada serviço é conduzido mediante diagnóstico
             individualizado da deformação metálica e da integridade da camada de verniz.
           </p>
@@ -304,7 +304,7 @@ function ServicesPage() {
               Estética Automotiva, Vitrificação & Cuidados com Superfícies
             </h2>
             <p className="text-xs sm:text-sm text-neutral-300 leading-relaxed">
-              Além da funilaria e pintura em estufa, a BRS Reparações Automotivas realiza serviços
+              Além da funilaria e pintura em estufa, a Master Chapeação e Pinturas realiza serviços
               especializados de acabamento de precisão, proteção cerâmica de verniz e recuperação
               óptica de vidros para valorizar e proteger o padrão estético do seu veículo.
             </p>
@@ -391,7 +391,7 @@ function ServicesPage() {
           </div>
         </section>
 
-        {/* Banner Final de Conversão com Leva e Traz (Único Ponto Focal da Rota) */}
+        {/* Banner Final de Conversão com Guincho (Único Ponto Focal da Rota) */}
         <ScrollReveal
           direction="up"
           delay={0.15}
@@ -410,7 +410,7 @@ function ServicesPage() {
                 <span>Comodidade Urbana em Toledo-PR</span>
               </div>
               <h3 className="text-2xl sm:text-3xl font-semibold font-display tracking-tight text-white mb-3">
-                Diagnóstico técnico preciso com comodidade de Leva e Traz em Toledo-PR
+                Diagnóstico técnico preciso com comodidade do guincho em Toledo-PR
               </h3>
               <p className="text-xs sm:text-sm text-neutral-300 leading-relaxed">
                 Envie as fotos da avaria pelo canal oficial ou agende a retirada do veículo no seu

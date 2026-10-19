@@ -32,11 +32,11 @@ export function Header({ isHome: isHomeProp }: HeaderProps = {}) {
     window.addEventListener("scroll", handleScroll, { passive: true });
 
     const handleSkip = () => setIntroSkipped(true);
-    window.addEventListener("brs:hero-intro-skip", handleSkip);
+    window.addEventListener("master:hero-intro-skip", handleSkip);
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("brs:hero-intro-skip", handleSkip);
+      window.removeEventListener("master:hero-intro-skip", handleSkip);
     };
   }, []);
 

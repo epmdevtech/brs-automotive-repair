@@ -8,9 +8,9 @@ import type { Appointment } from "../features/booking/domain/types";
 describe("UI: CustomerProcessDialog (SPEC-049)", () => {
   const mockAppointment: Appointment = {
     id: "test-app-1",
-    protocol: "#BRS-9999",
+    protocol: "#Master-9999",
     serviceId: "avaliacao-funilaria",
-    professionalId: "bruno-tecnico",
+    professionalId: "equipe-tecnica",
     startTime: new Date().toISOString(),
     endTime: new Date(Date.now() + 45 * 60 * 1000).toISOString(),
     status: "CONFIRMED",
@@ -26,7 +26,7 @@ describe("UI: CustomerProcessDialog (SPEC-049)", () => {
         make: "Toyota",
         model: "Corolla Cross",
         year: "2023",
-        plate: "BRS-2026",
+        plate: "MST-2026",
         color: "Prata Névoa",
         finishType: "metalica",
       },
@@ -54,7 +54,7 @@ describe("UI: CustomerProcessDialog (SPEC-049)", () => {
     );
 
     // Protocolo e Nome
-    expect(screen.getByText("#BRS-9999")).toBeInTheDocument();
+    expect(screen.getByText("#Master-9999")).toBeInTheDocument();
     expect(
       screen.getByText(/Processo Completo do Cliente • Marcelo Silveira/i),
     ).toBeInTheDocument();
@@ -62,11 +62,11 @@ describe("UI: CustomerProcessDialog (SPEC-049)", () => {
     // Destaque "Quando Cadastrou"
     expect(screen.getByText(/Registro de Cadastro do Cliente/i)).toBeInTheDocument();
     expect(screen.getByText(/Cadastrado em/i)).toBeInTheDocument();
-    expect(screen.getByText(/Portal Web BRS/i)).toBeInTheDocument();
+    expect(screen.getByText(/Portal Web Master/i)).toBeInTheDocument();
 
     // Ficha do Veículo e Placa
     expect(screen.getAllByText(/Toyota Corolla Cross/i).length).toBeGreaterThanOrEqual(1);
-    expect(screen.getByText("BRS-2026")).toBeInTheDocument();
+    expect(screen.getByText("MST-2026")).toBeInTheDocument();
     expect(screen.getByText(/Prata Névoa/i)).toBeInTheDocument();
 
     // Timeline de etapas automotivas reais (SPEC-057)
@@ -75,7 +75,7 @@ describe("UI: CustomerProcessDialog (SPEC-049)", () => {
     expect(screen.getAllByText(/Vistoria técnica e diagnóstico/i)[0]).toBeInTheDocument();
     expect(screen.getAllByText(/Aprovação do orçamento/i)[0]).toBeInTheDocument();
 
-    // Logística Leva e Traz em Toledo
+    // Logística Guincho em Toledo
     expect(screen.getByText(/Rua Almirante Barroso, 500/i)).toBeInTheDocument();
     expect(screen.getAllByText(/Vila Becker/i).length).toBeGreaterThanOrEqual(1);
 

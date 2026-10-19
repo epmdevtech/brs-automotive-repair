@@ -21,7 +21,7 @@ export function ProposalModulesCatalog({
             Módulos de Software Sob Medida
           </h2>
           <p className="mt-4 text-neutral-300 text-sm sm:text-base leading-relaxed">
-            Cada solução atende a uma demanda operacional ou comercial bem delimitada da BRS
+            Cada solução atende a uma demanda operacional ou comercial bem delimitada da Master
             Reparações Automotivas. Escolha os módulos que deseja avaliar para compor o investimento
             sob medida para o seu momento.
           </p>

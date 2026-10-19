@@ -1,6 +1,6 @@
 /**
  * etapas.config.ts — Fonte única da verdade para regras, papéis e semântica
- * da Linha do Tempo Operacional da BRS Reparações Automotivas (SPEC-057).
+ * da Linha do Tempo Operacional da Master Chapeação e Pinturas (SPEC-057).
  * Nenhuma regra de papel ou sequência pode ficar dispersa em componentes.
  */
 

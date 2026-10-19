@@ -16,7 +16,7 @@ describe("SPEC-035 / TASK-035-01 — Awwwards Design System & Anti-AI Genericnes
 
       // Brief e Diagnóstico
       expect(designDoc).toContain("Brief & Diagnóstico Canônico");
-      expect(designDoc).toContain("BRS Reparações Automotivas");
+      expect(designDoc).toContain("Master Chapeação e Pinturas");
 
       // Concept Card
       expect(designDoc).toContain("Concept Card");

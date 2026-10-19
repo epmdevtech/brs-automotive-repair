@@ -8,7 +8,7 @@ describe("Header component and floating capsule navbar", () => {
     render(<Header />);
 
     expect(screen.getByRole("banner")).toBeInTheDocument();
-    expect(screen.getByText("BRS")).toBeInTheDocument();
+    expect(screen.getByLabelText(/Master Chapeação e Pinturas: início/i)).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "Início" })).toHaveAttribute("href", "/");
     expect(screen.getByRole("link", { name: "Serviços" })).toHaveAttribute("href", "/servicos");
   });

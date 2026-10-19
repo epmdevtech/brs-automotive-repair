@@ -75,12 +75,12 @@ export const DAMAGE_TYPES_LIST: DamageTypeItem[] = [
     id: "outros",
     label: "Outra necessidade ou orientação geral",
     recommendedService: "Avaliação Geral",
-    description: "Vistoria diagnóstica pelo especialista técnico Bruno.",
+    description: "Vistoria diagnóstica realizada pela equipe técnica da Master.",
   },
 ];
 
 /**
- * Gera um protocolo único curto e memorável no padrão #BRS-XXXXX.
+ * Gera um protocolo único curto e memorável no padrão #MST-XXXXX.
  */
 export function generateProtocol(): string {
   const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
@@ -88,12 +88,12 @@ export function generateProtocol(): string {
   for (let i = 0; i < 5; i++) {
     result += chars.charAt(Math.floor(Math.random() * chars.length));
   }
-  return `#BRS-${result}`;
+  return `#MST-${result}`;
 }
 
 /**
  * Formata o resumo da Pré-OS em texto legível para o cliente ou para envio
- * no canal oficial confirmado (Instagram @brsreparacoes / Telefone).
+ * no canal oficial confirmado (Facebook Master Chapeação e Pinturas / Telefone).
  */
 export function formatPreOsSummary(params: {
   protocol: string;
@@ -133,8 +133,8 @@ export function formatPreOsSummary(params: {
     ``,
     `📍 *LOGÍSTICA / ATENDIMENTO*:`,
     logistics.type === "leva-e-traz"
-      ? `• Modalidade: Serviço Leva e Traz (Coleta em Toledo-PR)\n• Endereço: ${logistics.address ?? ""}, Bairro ${logistics.neighborhood ?? ""}\n• Veículo rodando?: ${logistics.vehicleDrivable ? "Sim" : "Não (requer guincho)"}`
-      : `• Modalidade: Atendimento Presencial na Oficina BRS (Toledo-PR)`,
+      ? `• Modalidade: Serviço de Guincho (Remoção em Toledo-PR)\n• Endereço: ${logistics.address ?? ""}, Bairro ${logistics.neighborhood ?? ""}\n• Veículo rodando?: ${logistics.vehicleDrivable ? "Sim" : "Não (requer guincho)"}`
+      : `• Modalidade: Atendimento Presencial na Oficina Master (Toledo-PR)`,
   ].filter((line): line is string => line !== null);
 
   return lines.join("\n");
@@ -155,12 +155,12 @@ export function buildCustomerWhatsAppLink(appointment: {
   const digits = appointment.customer.phone.replace(/\D/g, "");
   const levaText =
     appointment.logistics.type === "leva-e-traz"
-      ? `\n📍 *Modalidade*: Serviço Leva e Traz (Coleta em Toledo-PR no endereço: ${appointment.logistics.address ?? ""}, ${appointment.logistics.neighborhood ?? ""})`
-      : `\n📍 *Modalidade*: Atendimento presencial na oficina BRS em Toledo-PR`;
+      ? `\n📍 *Modalidade*: Serviço de Guincho (Coleta em Toledo-PR no endereço: ${appointment.logistics.address ?? ""}, ${appointment.logistics.neighborhood ?? ""})`
+      : `\n📍 *Modalidade*: Atendimento presencial na oficina Master em Toledo-PR`;
 
   const message = [
     `Olá, ${appointment.customer.name.trim()}!`,
-    `Aqui é da equipe da *BRS Reparações Automotivas* (Toledo-PR).`,
+    `Aqui é da equipe da *Master Chapeação e Pinturas* (Toledo-PR).`,
     ``,
     `Confirmamos o recebimento do seu agendamento na nossa agenda técnica! 🚗✨`,
     `• *Protocolo*: ${appointment.protocol}`,

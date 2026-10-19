@@ -42,12 +42,12 @@ export function generateDemoAppointments(baseDate: Date = new Date()): Appointme
   const app7Times = interval(yesterday, "14:00", 60);
 
   return [
-    // 1. Bruno - Funilaria Hoje 09:00 (Presencial)
+    // 1. Equipe Técnica - Funilaria Hoje 09:00 (Presencial)
     {
       id: "seed-app-1",
-      protocol: "#BRS-8412",
+      protocol: "#Master-8412",
       serviceId: "avaliacao-funilaria",
-      professionalId: "bruno-tecnico",
+      professionalId: "equipe-tecnica",
       startTime: app1Times.startTime,
       endTime: app1Times.endTime,
       status: "CONFIRMED",
@@ -81,12 +81,12 @@ export function generateDemoAppointments(baseDate: Date = new Date()): Appointme
       idempotencyKey: "seed-idem-1",
     },
 
-    // 2. Bruno - Funilaria Hoje 14:00 (Leva e Traz - Toledo/PR)
+    // 2. Equipe Técnica - Funilaria Hoje 14:00 (Guincho - Toledo/PR)
     {
       id: "seed-app-2",
-      protocol: "#BRS-8415",
+      protocol: "#Master-8415",
       serviceId: "avaliacao-funilaria",
-      professionalId: "bruno-tecnico",
+      professionalId: "equipe-tecnica",
       startTime: app2Times.startTime,
       endTime: app2Times.endTime,
       status: "CONFIRMED",
@@ -94,7 +94,7 @@ export function generateDemoAppointments(baseDate: Date = new Date()): Appointme
         name: "Mariana Siqueira",
         phone: "+5545991348890",
         rawPhone: "(45) 99134-8890",
-        notes: "Solicitou serviço Leva e Traz em domicílio corporativo no Centro de Toledo.",
+        notes: "Solicitou serviço de guincho em domicílio corporativo no Centro de Toledo.",
         consentLgpd: true,
       },
       intake: {
@@ -128,7 +128,7 @@ export function generateDemoAppointments(baseDate: Date = new Date()): Appointme
     // 3. Técnico Martelinho - Hoje 10:00 (Presencial - Granizo)
     {
       id: "seed-app-3",
-      protocol: "#BRS-7391",
+      protocol: "#Master-7391",
       serviceId: "martelinho-express",
       professionalId: "tecnico-martelinho",
       startTime: app3Times.startTime,
@@ -164,10 +164,10 @@ export function generateDemoAppointments(baseDate: Date = new Date()): Appointme
       idempotencyKey: "seed-idem-3",
     },
 
-    // 4. Técnico Martelinho - Hoje 15:00 (Leva e Traz - Jd. La Salle)
+    // 4. Técnico Martelinho - Hoje 15:00 (Guincho - Jd. La Salle)
     {
       id: "seed-app-4",
-      protocol: "#BRS-7394",
+      protocol: "#Master-7394",
       serviceId: "martelinho-express",
       professionalId: "tecnico-martelinho",
       startTime: app4Times.startTime,
@@ -177,7 +177,7 @@ export function generateDemoAppointments(baseDate: Date = new Date()): Appointme
         name: "Fernanda Castilho",
         phone: "+5545998773321",
         rawPhone: "(45) 99877-3321",
-        notes: "Leva e Traz com coleta agendada na Parigot de Souza.",
+        notes: "Guincho com remoção agendada na Parigot de Souza.",
         consentLgpd: true,
       },
       intake: {
@@ -211,7 +211,7 @@ export function generateDemoAppointments(baseDate: Date = new Date()): Appointme
     // 5. Técnico Pintura em Estufa - Hoje 08:00 (Pintura Especializada com Estufa)
     {
       id: "seed-app-5",
-      protocol: "#BRS-9102",
+      protocol: "#Master-9102",
       serviceId: "avaliacao-pintura",
       professionalId: "tecnico-pintura",
       startTime: app5Times.startTime,
@@ -250,7 +250,7 @@ export function generateDemoAppointments(baseDate: Date = new Date()): Appointme
     // 8. Técnico Pintura em Estufa - Hoje 16:00 (Concluído com Sucesso)
     {
       id: "seed-app-8",
-      protocol: "#BRS-9110",
+      protocol: "#Master-9110",
       serviceId: "avaliacao-pintura",
       professionalId: "tecnico-pintura",
       startTime: app8Times.startTime,
@@ -285,12 +285,12 @@ export function generateDemoAppointments(baseDate: Date = new Date()): Appointme
       idempotencyKey: "seed-idem-8",
     },
 
-    // 9. Bruno Funilaria - Hoje 11:00 (Aberto / Aguardando Atendimento)
+    // 9. Equipe Técnica - Hoje 11:00 (Aberto / Aguardando Atendimento)
     {
       id: "seed-app-9",
-      protocol: "#BRS-8425",
+      protocol: "#Master-8425",
       serviceId: "avaliacao-funilaria",
-      professionalId: "bruno-tecnico",
+      professionalId: "equipe-tecnica",
       startTime: app9Times.startTime,
       endTime: app9Times.endTime,
       status: "PENDING",
@@ -326,7 +326,7 @@ export function generateDemoAppointments(baseDate: Date = new Date()): Appointme
     // 10. Técnico Martelinho - Hoje 17:00 (Fechado / Ausente)
     {
       id: "seed-app-10",
-      protocol: "#BRS-7399",
+      protocol: "#Master-7399",
       serviceId: "martelinho-express",
       professionalId: "tecnico-martelinho",
       startTime: app10Times.startTime,
@@ -362,12 +362,12 @@ export function generateDemoAppointments(baseDate: Date = new Date()): Appointme
       idempotencyKey: "seed-idem-10",
     },
 
-    // 6. Amanhã - Bruno Funilaria
+    // 6. Amanhã - Equipe Técnica
     {
       id: "seed-app-6",
-      protocol: "#BRS-8420",
+      protocol: "#Master-8420",
       serviceId: "avaliacao-funilaria",
-      professionalId: "bruno-tecnico",
+      professionalId: "equipe-tecnica",
       startTime: app6Times.startTime,
       endTime: app6Times.endTime,
       status: "CONFIRMED",
@@ -403,7 +403,7 @@ export function generateDemoAppointments(baseDate: Date = new Date()): Appointme
     // 7. Ontem - Concluído para Histórico
     {
       id: "seed-app-7",
-      protocol: "#BRS-7380",
+      protocol: "#Master-7380",
       serviceId: "martelinho-express",
       professionalId: "tecnico-martelinho",
       startTime: app7Times.startTime,
@@ -481,7 +481,7 @@ export function ensureSeedData(
     seededAppsCount = demoApps.length;
   } else {
     try {
-      const raw = localStorage.getItem("brs_appointments_v1");
+      const raw = localStorage.getItem("master_appointments_v1");
       if (!raw || JSON.parse(raw).length === 0) {
         const demoApps = generateDemoAppointments(baseDate);
         localBookingRepository.clearAndSeed(demoApps);
@@ -515,7 +515,7 @@ export function ensureSeedData(
     seededBlocksCount = demoBlocks.length;
   } else {
     try {
-      const raw = localStorage.getItem("brs_blocked_periods");
+      const raw = localStorage.getItem("master_blocked_periods");
       if (!raw || JSON.parse(raw).length === 0) {
         const demoBlocks = generateDemoBlockedPeriods(baseDate);
         seedBlockedPeriods(demoBlocks);

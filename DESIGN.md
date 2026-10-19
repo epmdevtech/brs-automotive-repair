@@ -1,6 +1,6 @@
 # DESIGN.md — Especificação de Design e Direção Criativa (Awwwards Standard)
 
-> **Projeto:** BRS Reparações Automotivas (Toledo — PR)  
+> **Projeto:** Master Chapeação e Pinturas (Toledo — PR)  
 > **Padrão de Qualidade:** Awwwards Site of the Day (Design 40%, Usability 30%, Creativity 20%, Content 10%)  
 > **Framework Metodológico:** Universal SDD (Spec-Driven Development)
 
@@ -8,12 +8,12 @@
 
 ## 1. Brief & Diagnóstico Canônico
 
-- **Objeto & Identidade:** A BRS Reparações Automotivas é uma oficina técnica especializada em funilaria estrutural, pintura em estufa de pressão positiva e martelinho de ouro sediada em Toledo, Paraná. Fundada em 2024 pelo mestre reparador Bruno, opera com base na preservação estrita do padrão de montadora (folgas originais, vincos de fábrica e ausência de massa plástica excessiva).
+- **Objeto & Identidade:** A Master Chapeação e Pinturas é uma oficina técnica especializada em funilaria estrutural, pintura em estufa de pressão positiva e martelinho de ouro sediada em Toledo, Paraná. Constituída em 2023, opera com base na preservação estrita do padrão de montadora (folgas originais, vincos de fábrica e ausência de massa plástica excessiva).
 - **Público-Alvo:**
   1. Motoristas e proprietários de veículos exigentes que buscam restauração técnica honesta e acabamento cirúrgico;
   2. Corretores de seguros e reguladores de sinistro que necessitam de previsibilidade, laudos claros e cumprimento estrito de prazos sob a prerrogativa legal de livre escolha de oficina;
   3. Clientes corporativos de propostas comerciais personalizadas (apresentações individualizadas EPM DevTech).
-- **Objetivo da Experiência:** Superar a percepção habitual de oficina mecânica convencional e estabelecer a BRS como um centro de alta precisão estética e engenharia automotiva, combinando tipografia de contraste monumental, iluminação especular de estufa, telemetria técnica e micro-interações fluidas.
+- **Objetivo da Experiência:** Superar a percepção habitual de oficina mecânica convencional e estabelecer a Master como um centro de alta precisão estética e engenharia automotiva, combinando tipografia de contraste monumental, iluminação especular de estufa, telemetria técnica e micro-interações fluidas.
 
 ---
 
@@ -34,7 +34,7 @@ Screenshot:   Hero cinemático com iluminação especular de estufa, telemetria 
 
 A paleta de cores rejeita convenções genéricas e emana diretamente do universo da oficina automotiva de elite (chassis grafite, chapas de aço escovado, estufa pressurizada com luz especular e sinalizadores de calibração):
 
-| Papel Funcional | Valor Hex / Token                   | Semântica no Universo BRS                             | Relação de Contraste                 |
+| Papel Funcional | Valor Hex / Token                   | Semântica no Universo Master                             | Relação de Contraste                 |
 | :-------------- | :---------------------------------- | :---------------------------------------------------- | :----------------------------------- |
 | **Ground**      | `#0b0d10` (`oklch(0.14 0.005 260)`) | Chassis grafite profundo, negro automotivo            | Fundo imersivo principal             |
 | **Ink**         | `#f3f4f6` (`oklch(0.98 0 0)`)       | Aço polido claro, reflexo metálico                    | > 14:1 contra o ground (AAA)         |
@@ -98,14 +98,14 @@ O layout rejeita a monotonia de espaçamentos uniformes fixos e adota quatro **e
 
 ## 6. Plano de Composição por Famílias de Layout
 
-Cada página e seção do ecossistema BRS utiliza uma família de layout distinta, evitando a repetição monótona:
+Cada página e seção do ecossistema Master utiliza uma família de layout distinta, evitando a repetição monótona:
 
 1. **Poster / Split Frame (`PageHero`):** Título expressivo à esquerda em `--t-xl`, coordenadas técnicas superiores (`COORD: 24°43'S 53°44'W`), badges de telemetria e moldura técnica ou imagem ilustrativa à direita.
 2. **Matriz Editorial com Bordas Compartilhadas (`ServicePageLayout`):** Aplicações vs Limitações técnicas sem cartões soltos, divididas por hairlines finos de 1px a 10% de opacidade.
 3. **Sequência Linear de Engenharia (`Etapas do Processo`):** Blocos numerados 01 a 04 com numerais tabulares e explicações objetivas.
 4. **Comparador Óptico de Precisão (`/trabalhos` e Home):** Slider de alta definição antes/depois com arrasto suave, inspeção de gaps e suporte pleno a navegação por teclado (ArrowLeft/ArrowRight).
 5. **Ledger Editorial B2B (`/para-corretores`):** Lista estruturada de diretrizes técnicas com linhas de divisão limpas, ressaltando o direito de livre escolha de oficina.
-6. **Painel de Avaliação Honesta (`/contato`):** Formulário client-side seguro (sem simulações falsas de envio) com preparação de mensagem formatada para cópia e envio direto nos canais oficiais confirmados (`@brsreparacoes` e telefone).
+6. **Painel de Avaliação Honesta (`/contato`):** Formulário client-side seguro (sem simulações falsas de envio) com preparação de mensagem formatada para cópia e envio direto nos canais oficiais confirmados (`@masterchapeacao2022` e telefone).
 7. **Apresentação Comercial Confidencial (`/proposta/$slug`):** Proposta executiva modular de engenharia digital EPM DevTech, com coordenadas, índice `PRO.08`, detalhamento de escopo transparente e ausência explícita de mensalidades ocultas.
 
 ---
@@ -114,12 +114,12 @@ Cada página e seção do ecossistema BRS utiliza uma família de layout distint
 
 A auditoria contra os "AI Tells" (vícios estilísticos de inteligência artificial generativa) estabelece as seguintes garantias obrigatórias:
 
-| Vício Comum de IA                                           | Diretriz e Solução Adotada na BRS                                                                                                                                     | Status de Conformidade               |
+| Vício Comum de IA                                           | Diretriz e Solução Adotada na Master                                                                                                                                     | Status de Conformidade               |
 | :---------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :----------------------------------- |
-| **Gradientes roxos/azuis planos** (`#6366f1` / `#a855f7`)   | Banidos integralmente do CSS e componentes. Iluminação ambiente baseada exclusivamente em halos pontuais de estufa automotiva (ouro metálico BRS e verde calibração). | **100% Livre de Roxo/Azul Genérico** |
+| **Gradientes roxos/azuis planos** (`#6366f1` / `#a855f7`)   | Banidos integralmente do CSS e componentes. Iluminação ambiente baseada exclusivamente em halos pontuais de estufa automotiva (ouro metálico Master e verde calibração). | **100% Livre de Roxo/Azul Genérico** |
 | **Kits de 3 cards flutuantes idênticos com sombras suaves** | Substituídos por matrizes editoriais com bordas hairlines compartilhadas (`border-white/10`), pares assimétricos e listas tipo ledger.                                | **100% Arquitetural e Editorial**    |
 | **Heróis centralizados sobre nuvem difusa**                 | Adotada estrutura assimétrica (Sora Display à esquerda, telemetria em chips nítidos e painel de engenharia à direita).                                                | **100% Padrão Awwwards Poster**      |
-| **Métricas ou depoimentos inventados**                      | Falsas alegações como "99% clientes satisfeitos" são terminantemente proibidas. Dados reais: CNPJ oficial, localização em Toledo-PR, fundador Bruno.                  | **100% Honesto e Conforme**          |
+| **Métricas ou depoimentos inventados**                      | Falsas alegações como "99% clientes satisfeitos" são terminantemente proibidas. Dados reais: CNPJ oficial, localização em Toledo-PR e equipe técnica.                  | **100% Honesto e Conforme**          |
 | **Glassmorphism indiscriminado**                            | Rejeitado blur decorativo em todos os elementos. Apenas painéis técnicos pontuais utilizam leve backdrop blur com bordas de precisão de 1px.                          | **100% Controlado**                  |
 | **Cursor nativo ocultado**                                  | O cursor nativo do sistema operacional permanece sempre visível. Efeitos magnéticos atuam como suplemento tátil e nunca barram o cursor padrão.                       | **100% Acessível**                   |
 | **Scroll-jacking que trava a rolagem**                      | Lenis provê inércia suave respeitando o scroll nativo do browser; em nenhum momento a rolagem é sequestrada ou bloqueada.                                             | **100% Fluido e 60 FPS**             |

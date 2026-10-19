@@ -44,23 +44,23 @@ function ProposalIndexPage() {
         </h1>
 
         <p className="mt-3 text-xs sm:text-sm text-neutral-400 leading-relaxed">
-          Proposta comercial personalizada desenvolvida para a BRS Reparações Automotivas.
+          Proposta comercial personalizada desenvolvida para a Master Chapeação e Pinturas.
         </p>
 
-        {/* Atalho Proeminente para a Proposta Modular Ativa da BRS */}
+        {/* Atalho Proeminente para a Proposta Modular Ativa da Master */}
         <div className="mt-6 p-5 rounded-xl border border-primary/40 bg-gradient-to-b from-primary/10 to-transparent text-left">
           <div className="flex items-center gap-2 text-primary text-[11px] font-semibold uppercase tracking-wider mb-1.5">
             <Sparkles className="size-3.5" aria-hidden="true" />
             <span>Proposta Oficial Modular</span>
           </div>
-          <h2 className="text-sm font-semibold text-white mb-1">BRS Reparações Automotivas</h2>
+          <h2 className="text-sm font-semibold text-white mb-1">Master Chapeação e Pinturas</h2>
           <p className="text-xs text-neutral-300 mb-4 leading-relaxed">
             Portfólio Modular de Software Automotivo (6 Soluções Sob Medida)
           </p>
           <Button variant="primary" asChild size="default" className="w-full text-xs font-semibold">
-            <Link to="/proposta/$slug" params={{ slug: "brs-reparacoes" }}>
+            <Link to="/proposta/$slug" params={{ slug: "master-chapeacao-pinturas" }}>
               <Layers className="mr-1.5 size-4" aria-hidden="true" />
-              <span>Abrir Proposta Modular BRS</span>
+              <span>Abrir Proposta Modular Master</span>
               <ArrowRight className="ml-1.5 size-4" aria-hidden="true" />
             </Link>
           </Button>
@@ -77,7 +77,7 @@ function ProposalIndexPage() {
             </span>
           </div>
           <Button variant="ghost" asChild size="sm" className="text-xs text-primary shrink-0">
-            <Link to="/proposta/$slug" params={{ slug: "brs-digital-presence" }}>
+            <Link to="/proposta/$slug" params={{ slug: "master-digital-presence" }}>
               Ver versão clássica
             </Link>
           </Button>
@@ -99,7 +99,7 @@ function ProposalIndexPage() {
               <input
                 id="proposal-ref-input"
                 type="text"
-                placeholder="ex: brs-reparacoes"
+                placeholder="ex: master-chapeacao-pinturas"
                 value={slugInput}
                 onChange={(e) => setSlugInput(e.target.value)}
                 className="w-full bg-neutral-900 border border-white/15 rounded-sm px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-primary font-mono placeholder:text-neutral-600"

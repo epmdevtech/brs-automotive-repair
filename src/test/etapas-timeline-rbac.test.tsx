@@ -89,7 +89,7 @@ describe("SPEC-057: Matriz de Permissões RBAC (Papel × Etapa × Ação)", () =
           agendamentoId: "app-t1",
           etapa: "veiculo_recebido",
           tipo: "concluida",
-          porNome: "Bruno",
+          porNome: "Equipe Técnica",
           papel: "tecnico",
           em: new Date().toISOString(),
         },
@@ -113,7 +113,7 @@ describe("SPEC-057: Matriz de Permissões RBAC (Papel × Etapa × Ação)", () =
           agendamentoId: "app-t1",
           etapa: "veiculo_recebido",
           tipo: "concluida",
-          porNome: "Bruno",
+          porNome: "Equipe Técnica",
           papel: "tecnico",
           em: new Date().toISOString(),
         },
@@ -122,7 +122,7 @@ describe("SPEC-057: Matriz de Permissões RBAC (Papel × Etapa × Ação)", () =
           agendamentoId: "app-t1",
           etapa: "vistoria_diagnostico",
           tipo: "concluida",
-          porNome: "Bruno",
+          porNome: "Equipe Técnica",
           papel: "tecnico",
           em: new Date().toISOString(),
         },
@@ -146,7 +146,7 @@ describe("SPEC-057: Matriz de Permissões RBAC (Papel × Etapa × Ação)", () =
           agendamentoId: "app-t1",
           etapa: "veiculo_recebido",
           tipo: "concluida",
-          porNome: "Bruno",
+          porNome: "Equipe Técnica",
           papel: "tecnico",
           em: new Date().toISOString(),
         },
@@ -155,7 +155,7 @@ describe("SPEC-057: Matriz de Permissões RBAC (Papel × Etapa × Ação)", () =
           agendamentoId: "app-t1",
           etapa: "vistoria_diagnostico",
           tipo: "concluida",
-          porNome: "Bruno",
+          porNome: "Equipe Técnica",
           papel: "tecnico",
           em: new Date().toISOString(),
         },
@@ -188,7 +188,7 @@ describe("SPEC-057: Matriz de Permissões RBAC (Papel × Etapa × Ação)", () =
           agendamentoId: "app-t1",
           etapa: "veiculo_recebido",
           tipo: "concluida",
-          porNome: "Bruno",
+          porNome: "Equipe Técnica",
           papel: "tecnico",
           em: new Date().toISOString(),
         },
@@ -197,7 +197,7 @@ describe("SPEC-057: Matriz de Permissões RBAC (Papel × Etapa × Ação)", () =
           agendamentoId: "app-t1",
           etapa: "vistoria_diagnostico",
           tipo: "concluida",
-          porNome: "Bruno",
+          porNome: "Equipe Técnica",
           papel: "tecnico",
           em: new Date().toISOString(),
         },
@@ -215,7 +215,7 @@ describe("SPEC-057: Matriz de Permissões RBAC (Papel × Etapa × Ação)", () =
           agendamentoId: "app-t1",
           etapa: "execucao_pdr",
           tipo: "concluida",
-          porNome: "Bruno",
+          porNome: "Equipe Técnica",
           papel: "tecnico",
           em: new Date().toISOString(),
         },
@@ -234,7 +234,7 @@ describe("SPEC-057: Matriz de Permissões RBAC (Papel × Etapa × Ação)", () =
           etapa: "qualidade_entrega",
           acao: "aprovar_qualidade",
           tipo: "concluida",
-          porNome: "Bruno",
+          porNome: "Equipe Técnica",
           papel: "tecnico",
           em: new Date().toISOString(),
         },
@@ -320,7 +320,7 @@ describe("SPEC-057: Matriz de Permissões RBAC (Papel × Etapa × Ação)", () =
           agendamentoId: "app-t2",
           etapa: "vistoria_diagnostico",
           tipo: "concluida",
-          porNome: "Bruno",
+          porNome: "Equipe Técnica",
           papel: "tecnico",
           em: new Date().toISOString(),
         },
@@ -353,7 +353,7 @@ describe("SPEC-057: Matriz de Permissões RBAC (Papel × Etapa × Ação)", () =
           agendamentoId: "app-t2",
           etapa: "vistoria_diagnostico",
           tipo: "concluida",
-          porNome: "Bruno",
+          porNome: "Equipe Técnica",
           papel: "tecnico",
           em: new Date().toISOString(),
         },
@@ -386,7 +386,7 @@ describe("SPEC-057: Matriz de Permissões RBAC (Papel × Etapa × Ação)", () =
           agendamentoId: "app-t2",
           etapa: "veiculo_recebido",
           tipo: "concluida",
-          porNome: "Bruno",
+          porNome: "Equipe Técnica",
           papel: "tecnico",
           em: new Date().toISOString(),
         },
@@ -395,7 +395,7 @@ describe("SPEC-057: Matriz de Permissões RBAC (Papel × Etapa × Ação)", () =
           agendamentoId: "app-t2",
           etapa: "vistoria_diagnostico",
           tipo: "concluida",
-          porNome: "Bruno",
+          porNome: "Equipe Técnica",
           papel: "tecnico",
           em: new Date().toISOString(),
         },
@@ -413,7 +413,7 @@ describe("SPEC-057: Matriz de Permissões RBAC (Papel × Etapa × Ação)", () =
           agendamentoId: "app-t2",
           etapa: "execucao_pdr",
           tipo: "concluida",
-          porNome: "Bruno",
+          porNome: "Equipe Técnica",
           papel: "tecnico",
           em: new Date().toISOString(),
         },
@@ -423,7 +423,7 @@ describe("SPEC-057: Matriz de Permissões RBAC (Papel × Etapa × Ação)", () =
           etapa: "qualidade_entrega",
           acao: "aprovar_qualidade",
           tipo: "concluida",
-          porNome: "Bruno",
+          porNome: "Equipe Técnica",
           papel: "tecnico",
           em: new Date().toISOString(),
         },
@@ -538,7 +538,7 @@ describe("SPEC-057: Derivações Puras (estadoEtapas, etapaAtual, progresso, sit
         "concluida",
         20,
         "tecnico",
-        "Bruno",
+        "Equipe Técnica",
         "aprovar_qualidade",
       ),
       criarEvento(
@@ -595,16 +595,16 @@ describe("SPEC-057: Formatadores Seguros de Data e Hora (Sem Fragmentos Órfãos
 
   it("formatarConclusaoEtapa une horário e autor sem partículas soltas 'às' ou 'por'", () => {
     const hoje = new Date();
-    const formatadoCompleto = formatarConclusaoEtapa(hoje.toISOString(), "Bruno Silva");
-    expect(formatadoCompleto.textoVisual).toMatch(/^Concluído · \d{2}:\d{2} · por Bruno Silva$/);
+    const formatadoCompleto = formatarConclusaoEtapa(hoje.toISOString(), "Equipe Técnica");
+    expect(formatadoCompleto.textoVisual).toMatch(/^Concluído · \d{2}:\d{2} · por Equipe Técnica$/);
     expect(formatadoCompleto.textoVisual).not.toContain(" às ");
 
     const formatadoSemAutor = formatarConclusaoEtapa(hoje.toISOString(), undefined);
     expect(formatadoSemAutor.textoVisual).toMatch(/^Concluído · \d{2}:\d{2}$/);
     expect(formatadoSemAutor.textoVisual).not.toContain(" por ");
 
-    const formatadoSemData = formatarConclusaoEtapa(undefined, "Bruno Silva");
-    expect(formatadoSemData.textoVisual).toBe("Concluído · por Bruno Silva");
+    const formatadoSemData = formatarConclusaoEtapa(undefined, "Equipe Técnica");
+    expect(formatadoSemData.textoVisual).toBe("Concluído · por Equipe Técnica");
 
     const formatadoVazio = formatarConclusaoEtapa(undefined, undefined);
     expect(formatadoVazio.textoVisual).toBe("Concluído");
@@ -647,7 +647,7 @@ describe("SPEC-057: Mutações com Idempotência, Pré-condições e Auditoria",
       etapa: "veiculo_recebido",
       etapaEsperada: "veiculo_recebido",
       autorId: "usr-tech",
-      autorNome: "Bruno Técnico",
+      autorNome: "Equipe Técnica",
       papel: "tecnico",
     });
 
@@ -656,7 +656,7 @@ describe("SPEC-057: Mutações com Idempotência, Pré-condições e Auditoria",
     const eventosAtuais = getEtapaEventsForAppointment(agendamentoId);
     expect(eventosAtuais.length).toBe(2);
     expect(eventosAtuais[1].etapa).toBe("veiculo_recebido");
-    expect(eventosAtuais[1].porNome).toBe("Bruno Técnico");
+    expect(eventosAtuais[1].porNome).toBe("Equipe Técnica");
   });
 
   it("concluirEtapa rejeita avanço se a etapaEsperada divergir (concorrência entre abas)", () => {
@@ -679,7 +679,7 @@ describe("SPEC-057: Mutações com Idempotência, Pré-condições e Auditoria",
       etapa: "vistoria_diagnostico",
       etapaEsperada: "vistoria_diagnostico", // Mas a atual no banco ainda é veiculo_recebido!
       autorId: "usr-tech",
-      autorNome: "Bruno Técnico",
+      autorNome: "Equipe Técnica",
       papel: "tecnico",
     });
 
@@ -706,7 +706,7 @@ describe("SPEC-057: Mutações com Idempotência, Pré-condições e Auditoria",
       etapa: "veiculo_recebido",
       etapaEsperada: "veiculo_recebido",
       autorId: "usr-tech",
-      autorNome: "Bruno Técnico",
+      autorNome: "Equipe Técnica",
       papel: "tecnico",
     });
     expect(res1.sucesso).toBe(true);
@@ -717,7 +717,7 @@ describe("SPEC-057: Mutações com Idempotência, Pré-condições e Auditoria",
       etapa: "veiculo_recebido",
       etapaEsperada: "veiculo_recebido",
       autorId: "usr-tech",
-      autorNome: "Bruno Técnico",
+      autorNome: "Equipe Técnica",
       papel: "tecnico",
     });
     // Não duplica no storage
@@ -743,7 +743,7 @@ describe("SPEC-057: Mutações com Idempotência, Pré-condições e Auditoria",
         etapa: "veiculo_recebido",
         tipo: "concluida",
         porUsuarioId: "usr-tech",
-        porNome: "Bruno",
+        porNome: "Equipe Técnica",
         papel: "tecnico",
         em: new Date(agora - 2_000).toISOString(), // 2 segundos atrás
       },
@@ -753,7 +753,7 @@ describe("SPEC-057: Mutações com Idempotência, Pré-condições e Auditoria",
     // Pode desfazer por ser o mesmo usuário e dentro de 10s
     expect(podeDesfazer(eventosDentroJanela, "usr-tech", "tecnico").pode).toBe(true);
 
-    const resDesfazer = desfazerUltimaAcao(agendamentoId, "usr-tech", "Bruno", "tecnico");
+    const resDesfazer = desfazerUltimaAcao(agendamentoId, "usr-tech", "Equipe Técnica", "tecnico");
     expect(resDesfazer.sucesso).toBe(true);
 
     // Agora testamos com evento ocorrido há 15 segundos
@@ -773,7 +773,7 @@ describe("SPEC-057: Mutações com Idempotência, Pré-condições e Auditoria",
         etapa: "veiculo_recebido",
         tipo: "concluida",
         porUsuarioId: "usr-tech",
-        porNome: "Bruno",
+        porNome: "Equipe Técnica",
         papel: "tecnico",
         em: new Date(agora - 15_000).toISOString(), // 15 segundos atrás (>10s)
       },
@@ -781,7 +781,7 @@ describe("SPEC-057: Mutações com Idempotência, Pré-condições e Auditoria",
     writeAllEtapaEvents(eventosExpirados);
 
     expect(podeDesfazer(eventosExpirados, "usr-tech", "tecnico").pode).toBe(false);
-    const resFalha = desfazerUltimaAcao(agendamentoId, "usr-tech", "Bruno", "tecnico");
+    const resFalha = desfazerUltimaAcao(agendamentoId, "usr-tech", "Equipe Técnica", "tecnico");
     expect(resFalha.sucesso).toBe(false);
   });
 
@@ -802,7 +802,7 @@ describe("SPEC-057: Mutações com Idempotência, Pré-condições e Auditoria",
         etapa: "veiculo_recebido",
         tipo: "concluida",
         porUsuarioId: "usr-tech",
-        porNome: "Bruno",
+        porNome: "Equipe Técnica",
         papel: "admin",
         em: new Date().toISOString(),
       },
@@ -867,7 +867,7 @@ describe("SPEC-057: Mutações com Idempotência, Pré-condições e Auditoria",
         agendamentoId,
         etapa: "veiculo_recebido",
         tipo: "concluida",
-        porNome: "Bruno",
+        porNome: "Equipe Técnica",
         papel: "tecnico",
         em: new Date(agora - 1800_000).toISOString(),
       },
@@ -902,9 +902,9 @@ describe("SPEC-057: Mutações com Idempotência, Pré-condições e Auditoria",
 describe("SPEC-057: Componente UI TimelineOperacional (WCAG 2.2 AA & Stepper)", () => {
   const mockApp: Appointment = {
     id: "app-ui-timeline-test",
-    protocol: "#BRS-9090",
+    protocol: "#Master-9090",
     serviceId: "avaliacao-funilaria",
-    professionalId: "bruno-tecnico",
+    professionalId: "equipe-tecnica",
     startTime: new Date().toISOString(),
     endTime: new Date(Date.now() + 45 * 60 * 1000).toISOString(),
     status: "CONFIRMED",
@@ -997,7 +997,7 @@ describe("SPEC-057: Componente UI TimelineOperacional (WCAG 2.2 AA & Stepper)", 
         etapa: "veiculo_recebido",
         tipo: "concluida",
         porUsuarioId: "tech-1",
-        porNome: "Bruno",
+        porNome: "Equipe Técnica",
         papel: "tecnico",
         em: new Date(Date.now() - 2000_000).toISOString(),
       },
@@ -1007,7 +1007,7 @@ describe("SPEC-057: Componente UI TimelineOperacional (WCAG 2.2 AA & Stepper)", 
         etapa: "vistoria_diagnostico",
         tipo: "concluida",
         porUsuarioId: "tech-1",
-        porNome: "Bruno",
+        porNome: "Equipe Técnica",
         papel: "tecnico",
         em: new Date(Date.now() - 1000_000).toISOString(),
       },

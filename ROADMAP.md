@@ -1,6 +1,6 @@
-# ROADMAP: BRS Reparações Automotivas
+# ROADMAP: Master Chapeação e Pinturas
 
-Planejamento de evolução da presença digital da BRS Reparações Automotivas sob o framework **Universal SDD**.
+Planejamento de evolução da presença digital da Master Chapeação e Pinturas sob o framework **Universal SDD**.
 
 ---
 
@@ -20,21 +20,21 @@ Planejamento de evolução da presença digital da BRS Reparações Automotivas 
 - [x] Implementação de navegação ancorada suave (`#inicio`, `#servicos`, `#trabalho`, `#corretores`, `#sobre`, `#contato`).
 - [x] Galeria de serviços, linha do tempo do processo de reparo e seção para corretores de seguros.
 - [x] Acordeão de dúvidas frequentes (FAQ) com Radix UI.
-- [x] Fluxo honesto de contato preparando mensagem para cópia no canal oficial (Instagram `@brsreparacoes`).
+- [x] Fluxo honesto de contato preparando mensagem para cópia no canal oficial (Instagram `@masterchapeacao2022`).
 - [x] Testes automatizados das regras comerciais em Vitest (`src/test/brs.test.ts`).
 - [x] Configuração da porta local `5210` e proxy `http://brs.localhost` no Caddyfile.
 - [x] Infraestrutura containerizada Docker multi-stage e automação via Makefile (`SPEC-002`).
 - [x] Auditoria técnica, modularização de componentes e refinamento editorial profissional (`SPEC-003`).
 - [x] Esteira de CI/CD automatizada com GitHub Actions para quality gates e validação Docker (`SPEC-004`).
-- [x] Refinamento de UI, Motion Design e Microinterações com referências do 21st.dev adaptadas à BRS (`SPEC-005`).
+- [x] Refinamento de UI, Motion Design e Microinterações com referências do 21st.dev adaptadas à Master (`SPEC-005`).
 - [x] Seção Hero animada com biblioteca `framer-motion` v14 e componente `AnimatedHero` inspirado no 21st.dev (`SPEC-006`).
 - [x] Galeria interativa Antes/Depois com `BeforeAfterSlider`, Lightbox Dialog em alta definição e serviços com `CardSpotlight` (`SPEC-007`).
 - [x] Expurgar dependências e resíduos Lovable, unificar Header em container fixed único e redesenhar Hero com UX/UI premium (`SPEC-008`).
 - [x] Refinamento exclusivo do sistema tipográfico com Sora (500/600) e Manrope (400/500/600), tokens fluidos `clamp()` e regras de estabilidade visual (`SPEC-009`).
 - [x] Auditoria e implementação de Scroll Reveal Premium com tokens calibrados (16px, 520ms, ease suave), execução estritamente única e suporte total a acessibilidade (`SPEC-010`).
-- [x] Substituição do favicon residual Lovable pelo pacote oficial de favicons e ícones BRS Reparações Automotivas (`SPEC-011`).
+- [x] Substituição do favicon residual Lovable pelo pacote oficial de favicons e ícones Master Chapeação e Pinturas (`SPEC-011`).
 - [x] Padronização das cores da seção Hero (H1, badge overline, descrição, botão primário e botão secundário) alinhadas 100% aos tokens do site (`SPEC-012`).
-- [x] Implementação de Footer Premium Minimal inspirado na referência 21st.dev com identidade BRS, canais reais e acessibilidade (`SPEC-013`).
+- [x] Implementação de Footer Premium Minimal inspirado na referência 21st.dev com identidade Master, canais reais e acessibilidade (`SPEC-013`).
 - [x] Refatoração multipágina com 10 rotas reais em TanStack Start, SEO técnico completo (JSON-LD Schema.org, sitemap.xml, robots.txt) e otimização para LLMs com llms.txt (`SPEC-014`).
 - [x] Sistema unificado de motion design e scroll reveal premium com tokens centrais, primitivos `<Reveal>` e `<ImageReveal>`, linha de progresso com scroll nas etapas e acessibilidade total (`SPEC-015`).
 - [x] Refinamento premium da Navbar em cápsula flutuante centralizada, glassmorphism escuro (`backdrop-blur-md`, `border-white/10`), botão dourado `rounded-full` com brilho no hover e menu mobile escuro (`SPEC-016`).
@@ -43,7 +43,7 @@ Planejamento de evolução da presença digital da BRS Reparações Automotivas 
 
 ### Fase 2: Pré-requisitos para Publicação Definitiva (Em Andamento 🟡)
 
-- [ ] **Identidade Visual e Logo Real**: Substituir o logotipo tipográfico provisório pelo logo original fornecido pelo proprietário da BRS.
+- [ ] **Identidade Visual e Logo Real**: Substituir o logotipo tipográfico provisório pelo logo original fornecido pelo proprietário da Master.
 - [ ] **Acervo Fotográfico Real**: Substituir as imagens ilustrativas atuais (`brs-hero.jpg`, `funilaria.jpg`, etc.) por fotografias autorizadas das instalações da oficina e equipe em Toledo-PR (populando os sliders com pares de fotos reais de clientes atendidos).
 - [ ] **Canal WhatsApp Oficial**: Validar e confirmar número oficial de WhatsApp com o proprietário antes de habilitar integração direta na página.
 - [ ] **Aprovação Formal de Conteúdo**: Validação do posicionamento e textos pelo proprietário da oficina.

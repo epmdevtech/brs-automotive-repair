@@ -5,7 +5,7 @@ import { AnimatedHero } from "@/components/brs/animated-hero";
 describe("AnimatedHero component", () => {
   const dummyProps = {
     backgroundImageUrl: "/test-bg.jpg",
-    title: "BRS Reparações Automotivas",
+    title: "Master Chapeação e Pinturas",
     description: "Recuperação estética e estrutural de alta precisão em Toledo.",
     ctaButton: {
       text: "Avaliação Gratuita",
@@ -23,13 +23,13 @@ describe("AnimatedHero component", () => {
     render(<AnimatedHero {...dummyProps} />);
 
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(
-      "BRS Reparações Automotivas",
+      "Master Chapeação e Pinturas",
     );
     expect(
       screen.getByText("Recuperação estética e estrutural de alta precisão em Toledo."),
     ).toBeInTheDocument();
     expect(screen.getByText("Toledo, Paraná")).toBeInTheDocument();
-    expect(screen.getByText("Fotografia ilustrativa")).toBeInTheDocument();
+    expect(screen.queryByText("Fotografia ilustrativa")).toBeNull();
   });
 
   it("triggers ctaButton onClick and preserves anchor href destinations", () => {

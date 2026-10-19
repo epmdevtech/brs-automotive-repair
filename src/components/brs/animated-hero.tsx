@@ -142,7 +142,7 @@ export const AnimatedHero = ({
     const completeIntro = () => {
       setIntroComplete(true);
       setHasPlayedHeroIntro(true);
-      window.dispatchEvent(new CustomEvent("brs:hero-intro-skip"));
+      window.dispatchEvent(new CustomEvent("master:hero-intro-skip"));
     };
 
     // Monitoramento de visibilidade da página: pausar/concluir se em background
@@ -387,7 +387,7 @@ export const AnimatedHero = ({
 
         {/* Título Principal H1 (entra aos 1.8s) com text-wrap: balance */}
         <h1 className="text-4xl font-semibold tracking-tight sm:text-5xl md:text-6xl lg:text-[4.25rem] font-display leading-[1.12] max-w-4xl text-balance text-white break-words hero-intro-title hero-intro-h1">
-          {title || "BRS Reparações Automotivas."}
+          {title || "Master Chapeação e Pinturas."}
         </h1>
 
         {/* Subtítulo Confortável e Nítido (entra aos 2.4s) */}
@@ -509,7 +509,7 @@ export const AnimatedHero = ({
               aria-label="Rolar para a seção de serviços"
               className="hidden sm:flex items-center gap-2 text-[10px] uppercase tracking-[2px] text-neutral-300 hover:text-white transition-colors font-medium group"
             >
-              Conheça a BRS{" "}
+              Conheça a Master{" "}
               <ArrowDown
                 size={14}
                 aria-hidden="true"

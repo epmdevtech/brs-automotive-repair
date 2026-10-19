@@ -58,7 +58,7 @@ export function StepContratante({
             id="razao_social"
             value={c.razao_social}
             onChange={(e) => updateContratante("razao_social", e.target.value)}
-            placeholder="Ex: Brs Comercio de Pecas Automotivas LTDA"
+            placeholder="Ex: Master Comercio de Pecas Automotivas LTDA"
             className="bg-neutral-900/60 border-white/10 text-white text-xs h-10"
           />
         </div>
@@ -72,7 +72,7 @@ export function StepContratante({
             id="nome_fantasia"
             value={c.nome_fantasia || ""}
             onChange={(e) => updateContratante("nome_fantasia", e.target.value)}
-            placeholder="Ex: BRS Reparações Automotivas"
+            placeholder="Ex: Master Chapeação e Pinturas"
             className="bg-neutral-900/60 border-white/10 text-white text-xs h-10"
           />
         </div>
@@ -156,7 +156,7 @@ export function StepContratante({
             id="contato_operacional"
             value={c.contato_operacional}
             onChange={(e) => updateContratante("contato_operacional", e.target.value)}
-            placeholder="(45) 2035-9440"
+            placeholder="(45) 99954-5442"
             className="bg-neutral-900/60 border-white/10 text-white text-xs h-10"
           />
         </div>
@@ -170,7 +170,7 @@ export function StepContratante({
             id="aprovador_final"
             value={c.aprovador_final}
             onChange={(e) => updateContratante("aprovador_final", e.target.value)}
-            placeholder="Ex: Bruno (Fundador)"
+            placeholder="Ex: Maria Silva (Diretora)"
             className="bg-neutral-900/60 border-white/10 text-white text-xs h-10"
           />
         </div>

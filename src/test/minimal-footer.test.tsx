@@ -5,20 +5,22 @@ import { MinimalFooter } from "@/components/ui/minimal-footer";
 import { HomePageContent, SiteLayout } from "@/components/brs/website";
 import { company } from "@/lib/brs";
 
-describe("SPEC-013 — MinimalFooter Premium BRS", () => {
-  it("renderiza a marca oficial da BRS e o texto institucional aprovado", () => {
+describe("SPEC-013 — MinimalFooter Premium Master", () => {
+  it("renderiza a marca oficial da Master e o texto institucional aprovado", () => {
     const { container } = render(<MinimalFooter />);
     const footer = container.querySelector("footer");
     expect(footer).not.toBeNull();
 
-    expect(screen.getByLabelText(/BRS Reparações Automotivas: início/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/Master Chapeação e Pinturas: início/i)).toBeInTheDocument();
     expect(
       screen.getByText(
-        /Funilaria automotiva, pintura em estufa e martelinho de ouro em Toledo, Paraná/i,
+        /Chapeação, funilaria, pintura em estufa, martelinho de ouro e guincho em Toledo, Paraná/i,
       ),
     ).toBeInTheDocument();
-    expect(screen.getByText(/R\. Barão do Rio Branco, 4892/i)).toBeInTheDocument();
-    expect(screen.getByText(/Segunda a sexta, das 08h às 18h/i)).toBeInTheDocument();
+    expect(screen.getByText(/Av\. Maripá, 4138/i)).toBeInTheDocument();
+    expect(
+      screen.getByText(/Segunda a sexta, das 08h às 12h e das 13h30 às 18h30/i),
+    ).toBeInTheDocument();
   });
 
   it("renderiza todos os links de navegação com as rotas canônicas da página", () => {
@@ -37,7 +39,7 @@ describe("SPEC-013 — MinimalFooter Premium BRS", () => {
     expect(hrefs).toContain("/contato");
   });
 
-  it("disponibiliza links oficiais confirmados de telefone e Instagram, sem redes sociais falsas", () => {
+  it("disponibiliza links oficiais confirmados de telefone, Instagram e Facebook, sem redes sociais falsas", () => {
     const { container } = render(<MinimalFooter />);
 
     // Link de telefone oficial tel:
@@ -45,12 +47,18 @@ describe("SPEC-013 — MinimalFooter Premium BRS", () => {
     expect(phoneLink).not.toBeNull();
     expect(phoneLink?.textContent).toContain(company.phone);
 
-    // Link de Instagram oficial
-    const instaLink = container.querySelector(`a[href="${company.instagram}"]`);
+    // Links oficiais de Instagram e Facebook
+    const instaLink = container.querySelector(`a[href="${company.instagram.url}"]`);
     expect(instaLink).not.toBeNull();
     expect(instaLink).toHaveAttribute("target", "_blank");
     expect(instaLink).toHaveAttribute("rel", "noopener noreferrer");
-    expect(instaLink?.textContent).toContain("@brsreparacoes");
+    expect(instaLink?.textContent).toContain(company.instagram.handle);
+
+    const faceLink = container.querySelector(`a[href="${company.social.url}"]`);
+    expect(faceLink).not.toBeNull();
+    expect(faceLink).toHaveAttribute("target", "_blank");
+    expect(faceLink).toHaveAttribute("rel", "noopener noreferrer");
+    expect(faceLink?.textContent).toContain("Master Chapeação e Pinturas");
 
     // Garante que não existem links ou redes sociais fictícias de SaaS
     const allLinks = Array.from(container.querySelectorAll("a")).map(
@@ -59,7 +67,7 @@ describe("SPEC-013 — MinimalFooter Premium BRS", () => {
     expect(allLinks.some((href) => href.includes("twitter.com") || href.includes("x.com"))).toBe(
       false,
     );
-    expect(allLinks.some((href) => href.includes("facebook.com"))).toBe(false);
+    expect(allLinks.some((href) => href.includes("linkedin.com"))).toBe(false);
     expect(allLinks.some((href) => href.includes("linkedin.com"))).toBe(false);
     expect(allLinks.some((href) => href.includes("github.com"))).toBe(false);
   });
@@ -68,7 +76,7 @@ describe("SPEC-013 — MinimalFooter Premium BRS", () => {
     render(<MinimalFooter />);
     const currentYear = new Date().getFullYear();
     expect(
-      screen.getByText(new RegExp(`© ${currentYear} BRS Reparações Automotivas`, "i")),
+      screen.getByText(new RegExp(`© ${currentYear} Master Chapeação e Pinturas`, "i")),
     ).toBeInTheDocument();
     expect(screen.queryByText(/Demonstração institucional oficial/i)).not.toBeInTheDocument();
     expect(screen.getByText(new RegExp(company.legalName, "i"))).toBeInTheDocument();

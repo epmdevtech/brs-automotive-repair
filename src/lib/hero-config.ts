@@ -1,4 +1,5 @@
-import heroCarImage from "@/assets/brs-hero.jpg";
+import heroDesktopImage from "@/assets/master/hero-fallback.jpg";
+import heroMobileImage from "@/assets/master/hero-mobile.jpg";
 
 /**
  * Perfis disponíveis para caracterização visual da fotografia do Hero.
@@ -245,7 +246,7 @@ export const HERO_PROFILE_PRESETS: Record<HeroProfileType, HeroProfilePreset> = 
 };
 
 /**
- * Configuração canônica ativa do Hero da BRS Reparações Automotivas.
+ * Configuração canônica ativa do Hero da Master Chapeação e Pinturas.
  * Para substituir a imagem por uma foto real, altere apenas este objeto.
  *
  * Pipeline responsivo (SPEC-069):
@@ -256,30 +257,28 @@ export const HERO_PROFILE_PRESETS: Record<HeroProfileType, HeroProfilePreset> = 
  */
 export const defaultHeroConfig: HeroConfig = {
   profile: "veiculo-inteiro",
-  isIllustrative: true,
+  isIllustrative: false,
   image: {
     desktop: {
-      src: heroCarImage,
-      width: 1920,
-      height: 1088,
-      avifSrc: "/hero/hero-1920.avif",
-      webpSrc: "/hero/hero-1920.webp",
+      src: heroDesktopImage,
+      width: 1280,
+      height: 720,
+      avifSrc: "/hero/master-hero-1280.avif",
+      webpSrc: "/hero/master-hero-1280.webp",
       avifSrcSet:
-        "/hero/hero-960.avif 960w, /hero/hero-1280.avif 1280w, /hero/hero-1920.avif 1920w",
+        "/hero/master-hero-640.avif 640w, /hero/master-hero-960.avif 960w, /hero/master-hero-1280.avif 1280w",
       webpSrcSet:
-        "/hero/hero-960.webp 960w, /hero/hero-1280.webp 1280w, /hero/hero-1920.webp 1920w",
+        "/hero/master-hero-640.webp 640w, /hero/master-hero-960.webp 960w, /hero/master-hero-1280.webp 1280w",
       sizes: "100vw",
     },
     mobile: {
-      src: heroCarImage,
-      width: 1280,
-      height: 725,
-      avifSrc: "/hero/hero-1280.avif",
-      webpSrc: "/hero/hero-1280.webp",
-      avifSrcSet:
-        "/hero/hero-960.avif 960w, /hero/hero-1280.avif 1280w, /hero/hero-1920.avif 1920w",
-      webpSrcSet:
-        "/hero/hero-960.webp 960w, /hero/hero-1280.webp 1280w, /hero/hero-1920.webp 1920w",
+      src: heroMobileImage,
+      width: 900,
+      height: 964,
+      avifSrc: "/hero/master-hero-mobile-900.avif",
+      webpSrc: "/hero/master-hero-mobile-900.webp",
+      avifSrcSet: "/hero/master-hero-mobile-600.avif 600w, /hero/master-hero-mobile-900.avif 900w",
+      webpSrcSet: "/hero/master-hero-mobile-600.webp 600w, /hero/master-hero-mobile-900.webp 900w",
       sizes: "100vw",
     },
     alt: "",

@@ -110,7 +110,10 @@ test.describe("SPEC-022 — Padronização de Botões, Elementos de Forma e Limp
     await expect(instagramBtn).toBeVisible();
     await expect(instagramBtn).toHaveClass(/btn--primary/);
     await expect(instagramBtn).not.toHaveClass(/btn-bevel-4/);
-    await expect(instagramBtn).toHaveAttribute("href", "https://www.instagram.com/brsreparacoes/");
+    await expect(instagramBtn).toHaveAttribute(
+      "href",
+      "https://www.instagram.com/masterchapeacao2022/",
+    );
 
     // Clique para copiar
     await copyBtn.click();

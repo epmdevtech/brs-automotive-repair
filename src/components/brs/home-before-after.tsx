@@ -152,7 +152,7 @@ export function HomeBeforeAfter() {
                 </Button>
               </div>
 
-              {/* Nota de transparência fotográfica (regra de conformidade BRS) */}
+              {/* Nota de transparência fotográfica (regra de conformidade Master) */}
               <p className="text-[11px] text-neutral-400 flex items-start gap-1.5 pt-2">
                 <ShieldCheck
                   size={14}

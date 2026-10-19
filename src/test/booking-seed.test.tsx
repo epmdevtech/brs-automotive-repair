@@ -16,7 +16,7 @@ describe("Domain: Seed Data Generator (SPEC-048)", () => {
     }
   });
 
-  it("generates realistic demo appointments matching BRS business model", () => {
+  it("generates realistic demo appointments matching Master business model", () => {
     const list = generateDemoAppointments();
 
     expect(list.length).toBeGreaterThanOrEqual(6);

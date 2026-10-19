@@ -137,6 +137,10 @@ describe("SPEC-021 — Sistema Premium de CTAs, Conversão e Microinterações",
       expect(instagramBtn).toHaveClass("btn--primary");
       expect(instagramBtn).not.toHaveClass("btn-bevel-4");
 
+      const facebookBtn = screen.getByRole("link", { name: /abrir facebook/i });
+      expect(facebookBtn).toHaveClass("btn--secondary");
+      expect(facebookBtn).not.toHaveClass("btn-bevel-4");
+
       vi.useRealTimers();
     });
   });

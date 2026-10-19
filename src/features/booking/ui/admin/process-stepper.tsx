@@ -24,7 +24,7 @@ export interface ProcessStepperProps {
 }
 
 /**
- * Mini-stepper horizontal compacto das 6 etapas canônicas da oficina BRS (SPEC-057 / SPEC-065):
+ * Mini-stepper horizontal compacto das 6 etapas canônicas da oficina Master (SPEC-057 / SPEC-065):
  * Agendamento → Recebimento → Vistoria → Orçamento → Execução → Qualidade & Entrega.
  * Alimenta tanto os cards de agendamento quanto o Kanban e prévias institucionais.
  */

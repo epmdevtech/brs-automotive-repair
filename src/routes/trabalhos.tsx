@@ -10,9 +10,9 @@ export const Route = createFileRoute("/trabalhos")({
   component: TrabalhosPage,
   head: () =>
     buildRouteHead({
-      title: "Trabalhos e Reparações Automotivas | BRS",
+      title: "Trabalhos e Reparações Automotivas | Master",
       description:
-        "Galeria interativa de métodos e processos de reparação da BRS em Toledo-PR. Comparação antes/depois e ampliação técnica em alta resolução.",
+        "Galeria interativa de métodos e processos de reparação da Master em Toledo-PR. Comparação antes/depois e ampliação técnica em alta resolução.",
       path: "/trabalhos",
       jsonLd: {
         "@context": "https://schema.org",
@@ -20,7 +20,7 @@ export const Route = createFileRoute("/trabalhos")({
           buildBreadcrumbSchema([{ name: "Trabalhos", path: "/trabalhos" }]),
           {
             "@type": "WebPage",
-            name: "Trabalhos e Reparações Automotivas — BRS",
+            name: "Trabalhos e Reparações Automotivas — Master",
             url: canonicalUrl("/trabalhos"),
             description:
               "Galeria técnica demonstrando intervenções de funilaria, pintura e martelinho de ouro.",

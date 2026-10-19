@@ -8,7 +8,7 @@ import { ProjectGallery } from "@/components/brs/project-gallery";
 import { Header } from "@/components/brs/header";
 import { Route } from "@/routes/__root";
 
-describe("Sistema Tipográfico BRS (SPEC-009)", () => {
+describe("Sistema Tipográfico Master (SPEC-009)", () => {
   it("carrega exclusivamente Sora e Manrope com pesos otimizados no Head", () => {
     const headConfig = Route.options.head?.({} as never);
     const stylesheetLink = headConfig?.links?.find(

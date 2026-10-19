@@ -1,5 +1,5 @@
 /**
- * Sistema Centralizado de Motion Design — BRS Reparações Automotivas
+ * Sistema Centralizado de Motion Design — Master Chapeação e Pinturas
  * Conforme especificado em SPEC-015:
  * - Duração: 600 a 800ms (máscaras de imagem até 1000ms)
  * - Curva: cubic-bezier(0.22, 1, 0.36, 1) — desaceleração suave, sem bounce

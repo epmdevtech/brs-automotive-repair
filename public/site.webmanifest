@@ -1,7 +1,7 @@
 {
-  "name": "BRS Reparações Automotivas",
-  "short_name": "BRS",
-  "description": "Funilaria, pintura automotiva em estufa e martelinho de ouro em Toledo-PR.",
+  "name": "Master Chapeação e Pinturas",
+  "short_name": "Master",
+  "description": "Chapeação, funilaria, pintura automotiva em estufa, martelinho de ouro e guincho em Toledo-PR.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#0b0d10",

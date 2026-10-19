@@ -4,10 +4,27 @@ import { services } from "@/lib/brs";
 import { ScrollReveal } from "@/components/ui/scroll-reveal";
 import { ParallaxImage } from "@/components/ui/parallax-image";
 import funilariaImg from "@/assets/funilaria.jpg";
-import pinturaImg from "@/assets/pintura.jpg";
+import pinturaImg from "@/assets/master/pintura.jpg";
 import martelinhoImg from "@/assets/martelinho.jpg";
+import estruturaImg from "@/assets/master/estrutura.jpg";
 
-const serviceImages = [funilariaImg, pinturaImg, martelinhoImg];
+const serviceImages = [
+  {
+    src: estruturaImg,
+    alt: "Fachada da Master Chapeação e Pinturas com veículo em atendimento na oficina",
+    illustrative: false,
+  },
+  {
+    src: pinturaImg,
+    alt: "Veículo branco finalizado sob as luzes da estufa de pintura da Master",
+    illustrative: false,
+  },
+  {
+    src: martelinhoImg,
+    alt: "Técnica de martelinho de ouro em painel automotivo (fotografia ilustrativa)",
+    illustrative: true,
+  },
+];
 
 /**
  * Seção de Especialidades — Arquitetura Enxuta e Orientada à Conversão (SPEC-064)
@@ -53,17 +70,19 @@ export function Services() {
               <div>
                 <div className="relative aspect-16/10 mb-6 overflow-hidden rounded-xs border border-white/10 group-hover:border-primary/40 transition-colors duration-500">
                   <ParallaxImage
-                    src={serviceImages[i]}
-                    alt={`${service.title} (fotografia ilustrativa da atividade)`}
+                    src={serviceImages[i].src}
+                    alt={serviceImages[i].alt}
                     width={1200}
                     height={800}
                     speed={6}
                     aspectRatioClassName="aspect-16/10"
                     imageClassName="transition-transform duration-700 ease-out group-hover:scale-105"
                   >
-                    <span className="absolute bottom-3 right-3 text-[8px] uppercase tracking-wider px-2 py-1 bg-background/85 text-muted-foreground border border-border/50 backdrop-blur-xs rounded-xs pointer-events-none z-10">
-                      Fotografia ilustrativa
-                    </span>
+                    {serviceImages[i].illustrative && (
+                      <span className="absolute bottom-3 right-3 text-[8px] uppercase tracking-wider px-2 py-1 bg-background/85 text-muted-foreground border border-border/50 backdrop-blur-xs rounded-xs pointer-events-none z-10">
+                        Fotografia ilustrativa
+                      </span>
+                    )}
                   </ParallaxImage>
                 </div>
 

@@ -29,7 +29,7 @@ interface SignatureCanvasProps {
 const GOLD_PALETTE = [
   "rgba(212, 175, 55, ", // Gold metallic
   "rgba(230, 195, 85, ", // Light gold
-  "rgba(200, 169, 106, ", // Canonical BRS Gold
+  "rgba(200, 169, 106, ", // Canonical Master Gold
   "rgba(255, 255, 255, ", // High-light specular
 ];
 

@@ -9,19 +9,19 @@ O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.
 ### Adicionado
 
 - **Linha de Estética Automotiva & Proteção de Superfícies** (`SPEC-030` / `TASK-030-01` / `REVIEW-030`):
-  - Inclusão dos novos serviços captados para a BRS: Espelhamento de Pintura automotiva (`espelhamento`), Vitrificação Cerâmica (`vitrificacao`) e Polimento Técnico de Para-brisa (`polimento-de-parabrisa`).
+  - Inclusão dos novos serviços captados para a Master: Espelhamento de Pintura automotiva (`espelhamento`), Vitrificação Cerâmica (`vitrificacao`) e Polimento Técnico de Para-brisa (`polimento-de-parabrisa`).
   - Preservação estrita dos 3 pilares estruturais canônicos de reparação (Funilaria, Pintura, Martelinho) em `services` com rotas especializadas próprias.
   - Criação da coleção `aestheticServices` e unificada `allOfferedServices` em `src/lib/brs.ts`.
   - Seção editorial na rota `/servicos` com benefícios, processos e limitações honestas de cada serviço estético.
   - Bloco complementar de estética e proteção na Home (`src/components/brs/services.tsx`) sob a matriz de especialidades.
   - Dropdown com agrupamento visual (`<optgroup>`) no formulário de contato (`src/components/brs/contact-form.tsx`).
   - Enriquecimento de SEO e catálogo de ofertas no Schema.org `AutoBodyShop`.
-- **Dados Cadastrais Oficiais e Histórico do Fundador Bruno** (`SPEC-031` / `TASK-031-01` / `REVIEW-031`):
-  - Razão Social: `Brs Comercio de Pecas Automotivas LTDA`
-  - Nome Fantasia: `Brs Comercio de Pecas Automotivas`
-  - CNPJ: `53.877.400/0001-46` (sem pontuação: `53877400000146`)
-  - Data de Fundação Oficial: `09/02/2024`
-  - Fundador: **Bruno** (liderança técnica e anos de prática consolidada no segmento automotivo regional).
+- **Dados Cadastrais Oficiais e Histórico do Fundador Equipe Master** (`SPEC-031` / `TASK-031-01` / `REVIEW-031`):
+  - Razão Social: `LCL Chapeação LTDA`
+  - Nome Fantasia: `LCL Chapeação`
+  - CNPJ: `51.784.844/0001-01` (sem pontuação: `51784844000101`)
+  - Data de Fundação Oficial: `11/08/2023`
+  - Fundador: **Equipe Master** (liderança técnica e anos de prática consolidada no segmento automotivo regional).
   - Exibição legal e fiscal no rodapé (`src/components/ui/minimal-footer.tsx`).
   - Bloco de liderança, trajetória técnica e painel de dados cadastrais na rota institucional `/sobre`.
   - Identificação precisa da controladora legal na Política de Privacidade (`/privacidade`) sob conformidade com a LGPD.
@@ -32,11 +32,11 @@ O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.
 ### Adicionado
 
 - Adoção completa do framework **Universal SDD** com governança de agentes, tarefas e especificações.
-- Landing page institucional completa da **BRS Reparações Automotivas** (`src/components/brs/website.tsx`).
+- Landing page institucional completa da **Master Chapeação e Pinturas** (`src/components/brs/website.tsx`).
 - Configuração centralizada e fonte única de verdade em `src/lib/brs.ts`.
 - Design system automotivo escuro com Tailwind CSS v4, tipografia Barlow Condensed / Manrope e componentes Radix UI acessíveis.
 - Seções temáticas: Início (Hero), Serviços (Funilaria, Pintura, Martelinho), Filosofia de trabalho, Galeria de projetos, Linha do tempo do processo, Parcerias com corretores de seguro, Serviço Leva e Traz, Sobre a oficina, FAQ e Formulário de Contato.
-- Fluxo honesto de contato preparando mensagem para cópia no canal oficial (Instagram `@brsreparacoes`).
+- Fluxo honesto de contato preparando mensagem para cópia no canal oficial (Instagram `@masterchapeacao2022`).
 - Suíte de testes automatizados com Vitest (`src/test/brs.test.ts` e `src/test/app-routing.test.tsx`).
 - Alocação e configuração estrita da porta local `5210` e proxy `http://brs.localhost` no Caddyfile.
 - Especificação formal inicial `SPEC-001`, tarefa `TASK-001-01` e revisão `REVIEW-001`.
@@ -86,16 +86,16 @@ O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.
 - Suporte a `prefers-reduced-motion: reduce` e fallback com conteúdo 100% visível no DOM caso JavaScript ou IntersectionObserver não estejam disponíveis.
 - Nova suíte de testes unitários [`src/test/scroll-reveal.test.tsx`](src/test/scroll-reveal.test.tsx) com 11 testes cobrindo critérios de aceitação, unobserve e tokens de CSS.
 - Especificação `SPEC-010`, tarefa `TASK-010-01` e revisão `REVIEW-010`.
-- Expurgo definitivo do favicon residual da Lovable e implementação do pacote oficial de favicons e ícones da BRS Reparações Automotivas (`public/favicon.svg`, `public/favicon.ico`, `public/apple-touch-icon.png`, `public/favicon-96x96.png`, `public/web-app-manifest-192x192.png`, `public/web-app-manifest-512x512.png` e `public/site.webmanifest`) (`SPEC-011`).
+- Expurgo definitivo do favicon residual da Lovable e implementação do pacote oficial de favicons e ícones da Master Chapeação e Pinturas (`public/favicon.svg`, `public/favicon.ico`, `public/apple-touch-icon.png`, `public/favicon-96x96.png`, `public/web-app-manifest-192x192.png`, `public/web-app-manifest-512x512.png` e `public/site.webmanifest`) (`SPEC-011`).
 - Atualização das tags de cabeçalho no RootRoute (`src/routes/__root.tsx`) com links canônicos de favicons e meta tag `theme-color`.
 - Nova suíte de testes unitários [`src/test/favicon.test.tsx`](src/test/favicon.test.tsx) validando integridade de assets e metadados.
 - Especificação `SPEC-011`, tarefa `TASK-011-01` e revisão `REVIEW-011`.
 - Padronização cromática rigorosa da seção Hero: destaque do H1 (`text-primary`), badge overline (`border-primary/20 bg-primary/10 text-primary`), descrição (`text-neutral-400`), botão primário (`bg-primary text-primary-foreground hover:bg-primary/90`) sincronizado com a Navbar, e botão secundário com estética dark refinada (`SPEC-012`).
 - Nova suíte de testes unitários [`src/test/hero-colors.test.tsx`](src/test/hero-colors.test.tsx) validando as 5 frentes cromáticas da Hero.
 - Especificação `SPEC-012`, tarefa `TASK-012-01` e revisão `REVIEW-012`.
-- Implementação do rodapé definitivo `MinimalFooter` (`src/components/ui/minimal-footer.tsx`) inspirado no 21st.dev e adaptado à identidade BRS, com layout responsivo de 4 colunas em desktop e empilhado no mobile (`SPEC-013`).
+- Implementação do rodapé definitivo `MinimalFooter` (`src/components/ui/minimal-footer.tsx`) inspirado no 21st.dev e adaptado à identidade Master, com layout responsivo de 4 colunas em desktop e empilhado no mobile (`SPEC-013`).
 - Refatoração de `src/components/brs/footer.tsx` assegurando unicidade arquitetural de exatamente um elemento `footer` no DOM.
-- Validação e restrição a canais de contato reais (Instagram oficial `@brsreparacoes` e telefone fixo `(45) 2035-9440`), âncoras válidas existentes, ano de copyright dinâmico e aviso de conformidade de imagem ilustrativa.
+- Validação e restrição a canais de contato reais (Instagram oficial `@masterchapeacao2022` e telefone fixo `(45) 99954-5442`), âncoras válidas existentes, ano de copyright dinâmico e aviso de conformidade de imagem ilustrativa.
 - Nova suíte de testes unitários [`src/test/minimal-footer.test.tsx`](src/test/minimal-footer.test.tsx) validando os 6 critérios de aceitação.
 - Especificação `SPEC-013`, tarefa `TASK-013-01` e revisão `REVIEW-013`.
 - Refatoração da arquitetura para site multipágina com 10 rotas reais em TanStack Start (`/`, `/servicos/`, `/servicos/funilaria`, `/servicos/pintura-automotiva`, `/servicos/martelinho-de-ouro`, `/trabalhos`, `/para-corretores`, `/sobre`, `/contato`, `/privacidade` e `/404`) preservando layout único e navegação suave no root (`SPEC-014`).
@@ -118,7 +118,7 @@ O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.
 - Painel mobile redesenhado em estilo flutuante escuro (`rounded-2xl`, `bg-neutral-950/95`, `backdrop-blur-lg`, `border-white/10 mt-2`).
 - Atualização e expansão da suíte de testes unitários [`src/test/header.test.tsx`](src/test/header.test.tsx) cobrindo classes de cápsula flutuante, botão CTA e unicidade do header.
 - Especificação `SPEC-016`, tarefa `TASK-016-01` e revisão `REVIEW-016`.
-- Auditoria UX/UI e consolidação da arquitetura SPA + Multi-Route da BRS: eliminação da duplicação editorial entre a homepage e rotas específicas (`SPEC-017`).
+- Auditoria UX/UI e consolidação da arquitetura SPA + Multi-Route da Master: eliminação da duplicação editorial entre a homepage e rotas específicas (`SPEC-017`).
 - Homepage (`/`) reestruturada em narrativa enxuta orientada à conversão: Hero, faixa de confiança, transição MediaExpand, especialidades resumidas, diferenciais, processo, cartões de encaminhamento `HomePathways` e CTA final.
 - Centralização de seções específicas em suas rotas exclusivas: `ProjectGallery` em `/trabalhos`, parceria com corretores em `/para-corretores`, institucional em `/sobre`, e atendimento, formulário seguro e `FAQAccordion` em `/contato`.
 - Migração completa de links internos de navegação para `<Link>` do TanStack Router, permitindo transições client-side sem recargas de página.
@@ -154,12 +154,12 @@ O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.
 - Respeito irrestrito a `prefers-reduced-motion` e resiliência em ambiente SSR do TanStack Start e Nitro.
 - Nova suíte de testes automatizados com Vitest [`src/test/global-motion-system.test.tsx`](src/test/global-motion-system.test.tsx) com 12 testes aprovados.
 - Especificação `SPEC-020`, tarefa `TASK-020-01` e revisão `REVIEW-020`.
-- Sistema Premium de CTAs, Conversão e Microinterações para a BRS Reparações Automotivas (`SPEC-021`).
+- Sistema Premium de CTAs, Conversão e Microinterações para a Master Chapeação e Pinturas (`SPEC-021`).
 - Design System de botões enriquecido em `src/styles.css` e `src/components/ui/button.tsx` com geometria chanfrada automotiva nos 4 cantos (`btn-bevel-4` e `btn-bevel-4-sm`) e sombras extrudadas técnicas (`shadow-bevel-gold`, `shadow-bevel-dark`).
 - Implementação de novas variantes semânticas: `primary`, `secondary`, `tertiary` e `compact`, preservando total compatibilidade com variantes legadas.
 - Microinteração magnética fluida e contida (`src/components/ui/magnetic-button.tsx`) com atração elástica de 5px exclusiva para desktop (`hover: hover` e `pointer: fine`) e desativação sob `prefers-reduced-motion` e touch.
 - Padronização rigorosa da hierarquia de CTAs em 3 níveis em todas as rotas (Header, Hero, Services, ServicePageLayout, ContactCTA, Trabalhos, Para Corretores, Sobre, 404 e MinimalFooter), eliminando termos vagos ("Saiba mais", "Ver detalhes").
-- Refatoração do formulário de contato (`src/components/brs/contact-form.tsx`) com máquina de estados explícita (`idle`, `submitting`, `success`, `error`), bloqueio contra cliques múltiplos e diálogo modal com mensagem estruturada para o canal confirmado no Instagram `@brsreparacoes`.
+- Refatoração do formulário de contato (`src/components/brs/contact-form.tsx`) com máquina de estados explícita (`idle`, `submitting`, `success`, `error`), bloqueio contra cliques múltiplos e diálogo modal com mensagem estruturada para o canal confirmado no Instagram `@masterchapeacao2022`.
 - Instalação e integração do Playwright com suíte ponta a ponta (`e2e/cta-conversion.spec.ts`) validando geometria, navegação por teclado (Tab) e fluxo completo do formulário.
 - Nova suíte de testes unitários Vitest [`src/test/cta-conversion-system.test.tsx`](src/test/cta-conversion-system.test.tsx) cobrindo variantes chanfradas, microinteração e estados de formulário.
 - Padronização Global de Botões, Elementos de Forma (Dois Raios Normativos 4px e 12px, Zero Clip-Path) e Limpeza de Redundâncias no Hero (`SPEC-022`).
@@ -173,7 +173,7 @@ O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.
 - Atualização e aprovação de 100% dos testes unitários Vitest (132/132 testes) e testes E2E Playwright (19/19 testes).
 - Especificação `SPEC-022`, tarefa `TASK-022-01` e revisão `REVIEW-022`.
 - Refatoração Editorial de UI & Eliminação de Card Slop (Anti-Card Slop & Premium Automotive Design) (`SPEC-023`).
-- Eliminação de padrões genéricos de card slop (grades monótonas de 3 a 4 caixas, sombras pesadas, ícones encapsulados em quadradinhos e badges sobrepostos a fotografias) em todo o portal da BRS.
+- Eliminação de padrões genéricos de card slop (grades monótonas de 3 a 4 caixas, sombras pesadas, ícones encapsulados em quadradinhos e badges sobrepostos a fotografias) em todo o portal da Master.
 - Introdução de arquitetura editorial de UI: matrizes contínuas com bordas compartilhadas (`border-y`, `divide-x`, `divide-y`), linhas expansivas de 12 colunas para serviços com fotografias integradas e hierarquia tipográfica forte.
 - Refatoração de componentes estruturais: `Services`, `HomePathways`, `ProjectGallery`, `ServicePageLayout`, `Contact`, além das páginas `/servicos/index.tsx`, `/para-corretores.tsx` e `/sobre.tsx`.
 - Preservação estrita das regras de negócio e dados canônicos em `src/lib/brs.ts`, estabilidade dos contratos de botões `.btn` e garantia de 100% de sucesso em testes Vitest (132 testes) e Playwright (19 testes).
@@ -187,7 +187,7 @@ O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.
 - Comparador Antes e Depois: Home, Galeria e Componente Reutilizável (`SPEC-025`).
 - Aprimoramento do componente reutilizável `BeforeAfterSlider` (`src/components/brs/before-after-slider.tsx`) com navegação estendida por teclado (`PageUp`/`PageDown` em saltos de 10%), affordance visual discreta de arraste com fade suave durante interação (`hint`), semântica ARIA de slider, anel de foco acessível e suporte a carregamento prioritário de imagem (`priority`).
 - Criação e montagem da seção editorial `HomeBeforeAfter` (`src/components/brs/home-before-after.tsx`) na página inicial (`src/components/brs/website.tsx`) posicionada imediatamente após o Hero, com composição assimétrica de 12 colunas no desktop (7 colunas para o comparador e 5 colunas para narrativa e CTAs).
-- Integração de conversão fluida com CTA direcionando para a rota canônica da galeria (`/trabalhos`) e garantia de conformidade fotográfica transparente da BRS.
+- Integração de conversão fluida com CTA direcionando para a rota canônica da galeria (`/trabalhos`) e garantia de conformidade fotográfica transparente da Master.
 - Reutilização consistente do componente na galeria de trabalhos (`ProjectGallery` e modal Lightbox em alta definição).
 - Novas suítes de testes unitários Vitest (`src/test/home-before-after.test.tsx` e ampliação de `src/test/before-after-slider.test.tsx`) com 140/140 testes aprovados e testes ponta a ponta Playwright (`e2e/before-after-showcase.spec.ts`).
 - Especificação `SPEC-025`, tarefa `TASK-025-01` e revisão `REVIEW-025`.
@@ -209,15 +209,15 @@ O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.
 - Correção de Hidratação SSR e Visibilidade da Proposta Comercial (`TASK-027-02`).
 - Diagnóstico e correção do aviso `client:525 A tree hydrated but some attributes of the server rendered HTML didn't match the client properties`: remoção de wrappers bloqueantes de animação `<ScrollReveal>` de todos os 10 componentes da proposta comercial (`ProposalHero`, `ProposalOpportunity`, `ProposalSolution`, `ProposalScope`, `ProposalInvestmentSection`, `ProposalConditions`, `ProposalTimeline`, `ProposalResponsibilities`, `ProposalFaq`, `ProposalAcceptance`), restabelecendo renderização e visibilidade imediata de todo o documento comercial sem dependência de JavaScript de scroll e eliminando qualquer risco de tela em branco no navegador.
 - Criação e aprovação da tarefa `TASK-027-02` e revisão `REVIEW-027-02`, com evidência visual fullPage em `e2e-screenshots/proposal-view.png` e 100% de aprovação no Playwright Chromium.
-- Proposta Comercial Modular EPM DevTech para BRS Reparações Automotivas (`SPEC-028`).
+- Proposta Comercial Modular EPM DevTech para Master Chapeação e Pinturas (`SPEC-028`).
 - Criação e disponibilização da rota comercial `/proposta/brs-reparacoes`, apresentando um portfólio de 6 soluções digitais de software sob medida para o setor automotivo: EPM Web (R$ 2.490), EPM Booking Auto (R$ 3.990), EPM CRM Auto (R$ 4.990), EPM Oficina (R$ 7.490), EPM Connect (A partir de R$ 1.990) e EPM Insights (R$ 2.490).
 - Cada solução do catálogo especifica objetivo de negócio, escopo-base incluído, exclusões fora do escopo, dependências técnicas e nota sobre custos de operação.
 - Implementação de Matriz Comparativa de Soluções com visualização completa em tabela para desktop/tablet e cartões otimizados para telas de celular.
 - Estruturação de 5 Alternativas de Combinações Sugeridas com seleção em 1 clique que atualiza instantaneamente o simulador de orçamento: Presença Digital (R$ 2.490), Captação e Agendamento (R$ 6.480), Gestão Comercial (R$ 7.480), Operação Digital em destaque (R$ 18.960) e Ecossistema Expandido (A partir de R$ 23.440).
 - Transparência de infraestrutura e custos recorrentes segregados: Registro de Domínio oficial no Registro.br, Hospedagem Cloud/CDN, Armazenamento de fotos de OS, Provedor homologado WhatsApp API e Suporte sob demanda sem lock-in ou mensalidade mandatória.
-- Ciclo de execução do projeto em 9 etapas visuais numeradas, destacando a manifestação de interesse como próximo passo da direção da BRS.
+- Ciclo de execução do projeto em 9 etapas visuais numeradas, destacando a manifestação de interesse como próximo passo da direção da Master.
 - Simulador dinâmico de orçamento em tempo real com modal Radix Dialog acessível contendo prévia da mensagem gerada para cópia e envio direto via WhatsApp ou E-mail.
-- Atualização do portal `/proposta` com atalho proeminente para a proposta modular da BRS e preservação da proposta clássica de presença digital.
+- Atualização do portal `/proposta` com atalho proeminente para a proposta modular da Master e preservação da proposta clássica de presença digital.
 - Garantia de 100% de conformidade com os Quality Gates: 173 testes unitários no Vitest aprovados com 100% de sucesso, 0 erros no ESLint, Prettier formatado, compilação de produção Vite + Nitro SSR sem falhas e 3 testes E2E Playwright aprovados com screenshots capturados em desktop e mobile.
 - Especificação `SPEC-028`, tarefa `TASK-028-01` e revisão `REVIEW-028`.
 - Refatoração Canônica: Website Multipágina com Arquitetura de Rotas Dedicadas (`SPEC-029`).

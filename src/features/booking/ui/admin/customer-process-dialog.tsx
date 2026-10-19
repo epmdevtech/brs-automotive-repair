@@ -37,7 +37,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import type { Appointment, AppointmentStatus } from "../../domain/types";
-import { BRS_BOOKING_CONFIG } from "../../config/booking.config";
+import { MASTER_BOOKING_CONFIG } from "../../config/booking.config";
 import { formatDate, formatTime, formatDateTime } from "../../domain/time";
 import { formatPhoneBR } from "../../domain/phone";
 import { canTransition } from "../../domain/status";
@@ -91,8 +91,8 @@ export function CustomerProcessDialog({
 
   if (!appointment) return null;
 
-  const service = BRS_BOOKING_CONFIG.services.find((s) => s.id === appointment.serviceId);
-  const professional = BRS_BOOKING_CONFIG.professionals.find(
+  const service = MASTER_BOOKING_CONFIG.services.find((s) => s.id === appointment.serviceId);
+  const professional = MASTER_BOOKING_CONFIG.professionals.find(
     (p) => p.id === appointment.professionalId,
   );
   const isLeva = appointment.logistics.type === "leva-e-traz";
@@ -181,8 +181,8 @@ export function CustomerProcessDialog({
     setIsPending(true);
     try {
       const result = await onStatusChange(appointment.id, "COMPLETED", {
-        actorId: professional?.id ?? "bruno-tecnico",
-        actorName: professional?.name ?? "Bruno (Funilaria & Vistoria)",
+        actorId: professional?.id ?? "equipe-tecnica",
+        actorName: professional?.name ?? "Equipe Técnica Master",
         note: "Atendimento concluído com sucesso e checklist técnico validado.",
       });
 
@@ -214,7 +214,7 @@ export function CustomerProcessDialog({
     try {
       const result = await onStatusChange(appointment.id, "CANCELLED", {
         actorId: "admin",
-        actorName: "Administrador BRS",
+        actorName: "Administrador Master",
         note: cancelReason.trim() ? cancelReason.trim() : "Cancelamento solicitado no painel.",
       });
 
@@ -249,7 +249,7 @@ export function CustomerProcessDialog({
     try {
       const result = await onStatusChange(appointment.id, "NO_SHOW", {
         actorId: "admin",
-        actorName: "Administrador BRS",
+        actorName: "Administrador Master",
         note: "Cliente não compareceu ao horário agendado. Atendimento encerrado administrativamente.",
       });
 
@@ -383,7 +383,7 @@ export function CustomerProcessDialog({
                     ({getCreatedRelative()})
                   </div>
                   <div className="text-[11px] text-slate-400 mt-0.5">
-                    Canal de Entrada: Portal Web BRS (Auto-Confirmação pelo Cliente)
+                    Canal de Entrada: Portal Web Master (Auto-Confirmação pelo Cliente)
                   </div>
                 </div>
               </div>
@@ -641,7 +641,7 @@ export function CustomerProcessDialog({
               <div className="p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-2 text-xs">
                 <div className="font-semibold text-slate-900 flex items-center gap-1.5 text-xs">
                   <Truck size={14} className="text-slate-700" />
-                  <span>Roteiro Leva e Traz (Toledo-PR)</span>
+                  <span>Roteiro Guincho (Toledo-PR)</span>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-slate-700 pt-1">

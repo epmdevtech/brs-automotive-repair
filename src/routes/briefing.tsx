@@ -6,9 +6,9 @@ export const Route = createFileRoute("/briefing")({
   component: BriefingPage,
   head: () =>
     buildRouteHead({
-      title: "Portal de Briefing do Projeto | EPM DevTech & BRS Reparações",
+      title: "Portal de Briefing do Projeto | EPM DevTech & Master Chapeação",
       description:
-        "Portal confidencial para preenchimento, validação e ingestão do briefing técnico de presença digital e agendamento da BRS Reparações Automotivas.",
+        "Portal confidencial para preenchimento, validação e ingestão do briefing técnico de presença digital e agendamento da Master Chapeação e Pinturas.",
       path: "/briefing",
       noindex: true,
     }),

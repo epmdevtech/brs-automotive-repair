@@ -105,7 +105,7 @@ export function ProposalInvestmentSection({ proposal }: ProposalInvestmentProps)
 
               <p className="text-xs sm:text-sm text-neutral-300 leading-relaxed">
                 {investment.recurringDescription ||
-                  "Não há cobrança de taxa de manutenção mensal mandatória. A plataforma e o código pertencem à BRS Reparações Automotivas."}
+                  "Não há cobrança de taxa de manutenção mensal mandatória. A plataforma e o código pertencem à Master Chapeação e Pinturas."}
               </p>
             </div>
 

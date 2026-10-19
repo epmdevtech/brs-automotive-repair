@@ -8,9 +8,9 @@ export const Route = createFileRoute("/acompanhar/")({
   component: AcompanharIndexPage,
   head: () => {
     const baseHead = buildRouteHead({
-      title: "Consulta de Reparação Automotiva | BRS Reparações",
+      title: "Consulta de Reparação Automotiva | Master Chapeação",
       description:
-        "Consulte o status do reparo do seu veículo através do número de protocolo na BRS Reparações Automotivas.",
+        "Consulte o status do reparo do seu veículo através do número de protocolo na Master Chapeação e Pinturas.",
       path: "/acompanhar",
       noindex: true,
     });
@@ -48,7 +48,7 @@ function AcompanharIndexPage() {
             </div>
             <div className="flex flex-col">
               <span className="font-display font-bold text-white text-sm group-hover:text-[#D4AF37] transition-colors">
-                BRS Reparações
+                Master Chapeação
               </span>
               <span className="text-[10px] text-neutral-400 font-medium">Canal do cliente</span>
             </div>
@@ -73,14 +73,14 @@ function AcompanharIndexPage() {
 
           <div className="space-y-1.5">
             <span className="text-[10px] uppercase font-bold tracking-widest text-[#D4AF37] bg-[#D4AF37]/10 px-2.5 py-1 rounded-full border border-[#D4AF37]/20">
-              Área do cliente • BRS
+              Área do cliente • Master
             </span>
             <h1 className="text-xl sm:text-2xl font-bold font-display text-white mt-3 tracking-tight">
               Acompanhe o reparo do seu veículo
             </h1>
             <p className="text-xs text-neutral-400 leading-relaxed pt-1">
               Digite o número do protocolo informado no momento da entrega do veículo (ex:{" "}
-              <strong className="text-neutral-300 font-mono">#BRS-7391</strong>) para verificar o
+              <strong className="text-neutral-300 font-mono">#Master-7391</strong>) para verificar o
               andamento técnico em tempo real.
             </p>
           </div>
@@ -92,7 +92,7 @@ function AcompanharIndexPage() {
                 type="text"
                 value={protocol}
                 onChange={(e) => setProtocol(e.target.value)}
-                placeholder="Digite seu protocolo (ex: BRS-7391)"
+                placeholder="Digite seu protocolo (ex: Master-7391)"
                 className="w-full text-xs bg-[#0B0D10] border border-neutral-800 rounded-xl pl-10 pr-4 py-3 text-white placeholder:text-neutral-500 focus:outline-hidden focus:border-[#D4AF37] shadow-inner"
                 required
               />
@@ -116,7 +116,7 @@ function AcompanharIndexPage() {
 
       {/* RODAPÉ DISCRETO */}
       <footer className="py-4 border-t border-neutral-900 text-center text-[10px] text-neutral-400">
-        © 2026 BRS Reparações Automotivas • Toledo - PR
+        © 2026 Master Chapeação e Pinturas • Toledo - PR
       </footer>
     </div>
   );

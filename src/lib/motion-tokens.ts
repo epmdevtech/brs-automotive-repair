@@ -1,5 +1,5 @@
 /**
- * Tokens e Variantes Globais de Motion Design — BRS Reparações Automotivas
+ * Tokens e Variantes Globais de Motion Design — Master Chapeação e Pinturas
  *
  * Princípios de Design:
  * - Precisão e acabamento artesanal

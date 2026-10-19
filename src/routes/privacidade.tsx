@@ -9,9 +9,9 @@ export const Route = createFileRoute("/privacidade")({
   component: PrivacidadePage,
   head: () =>
     buildRouteHead({
-      title: "Política de Privacidade | BRS Reparações Automotivas",
+      title: "Política de Privacidade | Master Chapeação e Pinturas",
       description:
-        "Compromisso de privacidade e conformidade com a LGPD da BRS em Toledo-PR. Ausência de cookies invasivos e processamento estritamente local de mensagens.",
+        "Compromisso de privacidade e conformidade com a LGPD da Master em Toledo-PR. Ausência de cookies invasivos e processamento estritamente local de mensagens.",
       path: "/privacidade",
       jsonLd: {
         "@context": "https://schema.org",
@@ -19,10 +19,10 @@ export const Route = createFileRoute("/privacidade")({
           buildBreadcrumbSchema([{ name: "Privacidade", path: "/privacidade" }]),
           {
             "@type": "WebPage",
-            name: "Política de Privacidade — BRS Reparações Automotivas",
+            name: "Política de Privacidade — Master Chapeação e Pinturas",
             url: canonicalUrl("/privacidade"),
             description:
-              "Diretrizes de transparência no tratamento de dados e privacidade da BRS Reparações Automotivas.",
+              "Diretrizes de transparência no tratamento de dados e privacidade da Master Chapeação e Pinturas.",
           },
         ],
       },
@@ -124,7 +124,8 @@ function PrivacidadePage() {
             <p className="text-xs sm:text-sm text-neutral-300 leading-relaxed">
               O compartilhamento de dados ocorre somente quando você, por livre e espontânea
               vontade, copia a mensagem formatada para enviar pelo Instagram oficial
-              (@brsreparacoes) ou liga diretamente para nossa central telefônica.
+              (@masterchapeacao2022), pela página da Master no Facebook ou liga diretamente para
+              nossa central telefônica.
             </p>
           </ScrollReveal>
 

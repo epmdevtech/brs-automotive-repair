@@ -59,7 +59,7 @@ export function AuthSplitLayout({ children, imageSrc }: AuthSplitLayoutProps) {
 
       {/* COLUNA DIREITA: PAINEL INSTITUCIONAL DA MARCA (Desktop >=1024px) */}
       <aside
-        aria-label="Apresentação Institucional BRS"
+        aria-label="Apresentação Institucional Master"
         className="hidden lg:flex flex-1 relative bg-[#0b1329] text-white flex-col justify-between p-10 xl:p-14 2xl:p-16 h-full overflow-y-auto select-none"
       >
         {/* Background com imagem opcional ou gradiente institucional dourado sutil (~8%) */}
@@ -67,7 +67,7 @@ export function AuthSplitLayout({ children, imageSrc }: AuthSplitLayoutProps) {
           <div className="absolute inset-0 z-0">
             <img
               src={imageSrc}
-              alt="Instalações BRS"
+              alt="Instalações Master"
               className="w-full h-full object-cover opacity-25 filter grayscale contrast-125"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[#070b18] via-[#0b1329]/90 to-[#0b1329]/70" />

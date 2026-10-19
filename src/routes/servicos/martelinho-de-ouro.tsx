@@ -11,7 +11,7 @@ export const Route = createFileRoute("/servicos/martelinho-de-ouro")({
   component: MartelinhoPage,
   head: () =>
     buildRouteHead({
-      title: "Martelinho de Ouro em Toledo | BRS",
+      title: "Martelinho de Ouro em Toledo | Master",
       description:
         "Martelinho de ouro artesanal (PDR) em Toledo-PR. Desamasse seu veículo sem repintar, preservando 100% da originalidade de fábrica e o valor de revenda.",
       path: "/servicos/martelinho-de-ouro",
@@ -39,10 +39,10 @@ function MartelinhoPage() {
       service={service}
       eyebrow="Especialidade Artesanal"
       title="Martelinho de Ouro (PDR) em Toledo."
-      intro="O martelinho de ouro é a técnica que permite desamassar painéis e lataria sem recorrer a lixamentos, massas ou repintura. Na BRS, atuamos com alavancas anatômicas e ventosas térmicas para recuperar a superfície preservando intacta a pintura de fábrica, garantindo que o veículo não sofra desvalorização comercial."
+      intro="O martelinho de ouro é a técnica que permite desamassar painéis e lataria sem recorrer a lixamentos, massas ou repintura. Na Master, atuamos com alavancas anatômicas e ventosas térmicas para recuperar a superfície preservando intacta a pintura de fábrica, garantindo que o veículo não sofra desvalorização comercial."
       heroCtaLabel="Avaliar viabilidade de PDR"
       image={martelinhoServico}
-      imageAlt="Especialista em martelinho de ouro PDR nivelando painel com régua de luz na BRS (fotografia ilustrativa)"
+      imageAlt="Especialista em martelinho de ouro PDR nivelando painel com régua de luz na Master (fotografia ilustrativa)"
       applicationsIcon={Sparkles}
       applicationsTitle="Casos Ideais para o Martelinho"
       limitationsTitle="Quando o PDR Não é Indicado"
@@ -50,7 +50,7 @@ function MartelinhoPage() {
       processEyebrow="Processo Artesanal"
       processTitle="Como Funciona o Desamassamento sem Repintura"
       ctaTitle="Tem um amassado sem dano na pintura?"
-      ctaText="Mantenha a originalidade de fábrica do seu carro. Faça uma triagem rápida na BRS em Toledo-PR."
+      ctaText="Mantenha a originalidade de fábrica do seu carro. Faça uma triagem rápida na Master em Toledo-PR."
       ctaLabel="Agendar avaliação de martelinho de ouro"
     />
   );
