@@ -350,8 +350,14 @@ html.lenis body {
 }
 .brand {
   display: inline-flex;
-  flex-direction: column;
+  align-items: center;
   line-height: 1;
+  max-width: 100%;
+}
+.brand-logo {
+  display: block;
+  width: auto;
+  height: 34px;
   max-width: 100%;
 }
 .brand strong {
@@ -946,12 +952,8 @@ textarea.field-input {
   .header-inner {
     height: 76px;
   }
-  .brand strong {
-    font-size: 28px;
-  }
-  .brand span {
-    font-size: 6px;
-    letter-spacing: 1px;
+  .brand-logo {
+    height: 28px;
   }
   .eyebrow {
     font-size: 0.7rem;

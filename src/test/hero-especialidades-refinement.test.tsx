@@ -69,7 +69,7 @@ describe("SPEC-039 — Refinamento da Hero Section e Transição Direta para Esp
     const { container: philContainer } = render(<Philosophy />);
     expect(philContainer.textContent).toContain("Diagnóstico claro antes do serviço");
     expect(philContainer.textContent).toContain("Orçamento e prazo alinhados antes da execução");
-    expect(philContainer.textContent).toContain("Serviço de leva e traz em Toledo-PR");
+    expect(philContainer.textContent).toContain("Serviço de guincho em Toledo-PR");
   });
 
   it("garante interação com botão primário de avaliação na Hero", () => {

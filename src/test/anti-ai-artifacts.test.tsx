@@ -15,8 +15,8 @@ describe("SPEC-038 — Remoção de Artefatos Genéricos de IA (OFICINA ATIVA, B
     // Não deve existir o texto 'OFICINA ATIVA'
     expect(screen.queryByText(/OFICINA ATIVA/i)).toBeNull();
 
-    // Não deve existir o identificador tech 'BRS.HQ // TOLEDO-PR'
-    expect(screen.queryByText(/BRS\.HQ \/\/ TOLEDO-PR/i)).toBeNull();
+    // Não deve existir o identificador tech 'Master.HQ // TOLEDO-PR'
+    expect(screen.queryByText(/Master\.HQ \/\/ TOLEDO-PR/i)).toBeNull();
 
     // Não deve haver nenhum ponto pulsante verde no card
     const greenPulse = container.querySelector(".bg-emerald-400.animate-pulse");

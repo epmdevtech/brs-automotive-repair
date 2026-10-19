@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { ArrowUpRight, Clock, Instagram, MapPin, Phone } from "lucide-react";
+import { ArrowUpRight, Clock, Facebook, Instagram, MapPin, Phone } from "lucide-react";
 import { company, canonicalUrl } from "@/lib/brs";
 import { buildRouteHead, buildBreadcrumbSchema } from "@/lib/seo";
 import { PageHero } from "@/components/brs/page-hero";
@@ -14,9 +14,9 @@ export const Route = createFileRoute("/contato")({
   component: ContatoPage,
   head: () =>
     buildRouteHead({
-      title: "Contato e Avaliação Automotiva | BRS",
+      title: "Contato e Avaliação Automotiva | Master",
       description:
-        "Fale com a BRS Reparações Automotivas em Toledo-PR. Solicite uma avaliação, agende seu atendimento e tire dúvidas sobre funilaria, pintura e martelinho.",
+        "Fale com a Master Chapeação e Pinturas em Toledo-PR. Solicite uma avaliação, agende seu atendimento e tire dúvidas sobre funilaria, pintura e martelinho.",
       path: "/contato",
       jsonLd: {
         "@context": "https://schema.org",
@@ -24,10 +24,10 @@ export const Route = createFileRoute("/contato")({
           buildBreadcrumbSchema([{ name: "Contato", path: "/contato" }]),
           {
             "@type": "ContactPage",
-            name: "Contato e Avaliação Automotiva — BRS",
+            name: "Contato e Avaliação Automotiva — Master",
             url: canonicalUrl("/contato"),
             description:
-              "Canal oficial para solicitação de avaliação técnica e contato com a BRS Reparações Automotivas.",
+              "Canal oficial para solicitação de avaliação técnica e contato com a Master Chapeação e Pinturas.",
           },
         ],
       },
@@ -57,7 +57,7 @@ function ContatoPage() {
           <p className="text-neutral-300 text-sm sm:text-base leading-relaxed">
             {isPartner
               ? "Atendimento prioritário para corretores de seguros em Toledo e região. Comunicação técnica clara para liberação de sinistros, vistorias complementares e acompanhamento de etapas."
-              : "Conte à equipe da BRS o que ocorreu com seu veículo e solicite orientações técnicas sobre o método ideal de recuperação estética ou estrutural."}
+              : "Conte à equipe da Master o que ocorreu com seu veículo e solicite orientações técnicas sobre o método ideal de recuperação estética ou estrutural."}
           </p>
         }
         telemetryBadges={[
@@ -69,7 +69,12 @@ function ContatoPage() {
           {
             icon: Instagram,
             label: "Instagram Oficial",
-            detail: "@brsreparacoes",
+            detail: company.instagram.handle,
+          },
+          {
+            icon: Facebook,
+            label: "Facebook Oficial",
+            detail: "Master Chapeação e Pinturas",
           },
           {
             icon: MapPin,

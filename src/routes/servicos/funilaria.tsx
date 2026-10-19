@@ -11,7 +11,7 @@ export const Route = createFileRoute("/servicos/funilaria")({
   component: FunilariaPage,
   head: () =>
     buildRouteHead({
-      title: "Funilaria Automotiva em Toledo | BRS",
+      title: "Funilaria Automotiva em Toledo | Master",
       description:
         "Funilaria técnica especializada em Toledo-PR. Recuperação de lataria, alinhamento de painéis e preservação de gaps originais com diagnóstico honesto.",
       path: "/servicos/funilaria",
@@ -39,18 +39,18 @@ function FunilariaPage() {
       service={service}
       eyebrow="Especialidade Técnica"
       title="Funilaria Automotiva de Precisão em Toledo."
-      intro="A funilaria técnica da BRS é fundamentada na restauração geométrica das peças metálicas do veículo após colisões ou impactos. O objetivo primordial é recuperar as linhas, vincos e encaixes originais, minimizando a necessidade de massas e garantindo perfeita continuidade visual com a carroceria."
+      intro="A funilaria técnica da Master é fundamentada na restauração geométrica das peças metálicas do veículo após colisões ou impactos. O objetivo primordial é recuperar as linhas, vincos e encaixes originais, minimizando a necessidade de massas e garantindo perfeita continuidade visual com a carroceria."
       heroCtaLabel="Solicitar avaliação técnica"
       image={funilariaServico}
-      imageAlt="Serviço de alinhamento e funilaria de precisão na BRS (fotografia ilustrativa)"
+      imageAlt="Serviço de alinhamento e funilaria de precisão na Master (fotografia ilustrativa)"
       applicationsIcon={Wrench}
       applicationsTitle="Quando a Funilaria é Aplicada"
       limitationsTitle="Limitações e Critérios Éticos"
-      limitationNote="Na BRS, se a recuperação colocar em risco a segurança ou o resultado estético do veículo, orientamos de forma transparente a troca da peça."
+      limitationNote="Na Master, se a recuperação colocar em risco a segurança ou o resultado estético do veículo, orientamos de forma transparente a troca da peça."
       processEyebrow="Metodologia"
       processTitle="Etapas da Recuperação em Funilaria"
       ctaTitle="Precisa avaliar a lataria do seu veículo?"
-      ctaText="Agende uma avaliação na BRS em Toledo-PR para receber um parecer honesto sobre a viabilidade de recuperação da sua peça."
+      ctaText="Agende uma avaliação na Master em Toledo-PR para receber um parecer honesto sobre a viabilidade de recuperação da sua peça."
       ctaLabel="Solicitar avaliação de funilaria"
     />
   );

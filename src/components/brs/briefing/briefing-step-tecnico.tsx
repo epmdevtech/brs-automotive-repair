@@ -58,7 +58,7 @@ export function StepTecnico({ data, onChange }: StepTecnicoProps) {
           <Input
             value={tec.dominio_personalizado || ""}
             onChange={(e) => updateTecnico("dominio_personalizado", e.target.value)}
-            placeholder="Ex: brsreparacoes.com.br"
+            placeholder="Ex: masterchapeacao.com.br"
             className="bg-neutral-900/60 border-white/10 text-white text-xs h-10 font-mono"
           />
         </div>

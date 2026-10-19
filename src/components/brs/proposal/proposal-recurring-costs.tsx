@@ -118,9 +118,9 @@ export function ProposalRecurringCosts({ recurringCosts }: ProposalRecurringCost
               Princípio de Independência e Titularidade EPM DevTech:
             </strong>
             Todos os domínios, contas de hospedagem e acessos oficiais de API são configurados em
-            nome da <strong>BRS Reparações Automotivas</strong>. Caso o cliente decida no futuro não
-            contratar suporte contínuo, a posse e o controle da operação digital permanecem 100% sob
-            gestão da BRS, sem lock-in.
+            nome da <strong>Master Chapeação e Pinturas</strong>. Caso o cliente decida no futuro
+            não contratar suporte contínuo, a posse e o controle da operação digital permanecem 100%
+            sob gestão da Master, sem lock-in.
           </div>
         </div>
       </div>

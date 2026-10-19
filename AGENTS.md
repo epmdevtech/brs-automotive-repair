@@ -4,11 +4,11 @@ Este repositório adota o **Universal SDD (Spec-Driven Development)** integrado 
 
 ---
 
-## 1. Diretrizes Arquiteturais e Regras de Negócio do Projeto BRS
+## 1. Diretrizes Arquiteturais e Regras de Negócio do Projeto Master
 
-- **Fonte Única de Verdade**: Mantenha as informações da empresa, serviços e validação do formulário de contato no módulo seguro para navegador [`src/lib/brs.ts`](file:///home/elessandro/%C3%81rea%20de%20Trabalho/Dev/EPMDEVTECH_Clientes/BRS/src/lib/brs.ts). Todos os componentes e testes devem importar dele.
+- **Fonte Única de Verdade**: Mantenha as informações da empresa, serviços e validação do formulário de contato no módulo seguro para navegador [`src/lib/brs.ts`](file:///home/elessandro/%C3%81rea%20de%20Trabalho/Dev/EPMDEVTECH_Clientes/Master/src/lib/brs.ts). Todos os componentes e testes devem importar dele.
 - **Website Multipágina com Rotas Especializadas**: O projeto é um website multipágina moderno estruturado com TanStack Router e TanStack Start, com rotas completas dedicadas (`/` para Início, `/servicos` para Visão Geral de Serviços, `/servicos/funilaria` para Funilaria, `/servicos/pintura-automotiva` para Pintura, `/servicos/martelinho-de-ouro` para Martelinho, `/trabalhos` para Portfólio & Comparador Antes/Depois, `/para-corretores` para Parceiros e Seguros, `/sobre` para Institucional, `/contato` para Avaliação Técnica, `/privacidade` para Políticas de Privacidade, e `/proposta/$slug` para Apresentação Comercial). NUNCA reduza ou trate o projeto como uma landing page de página única.
-- **Fluxo de Contato Honesto**: O formulário de contato prepara uma mensagem formatada para cópia manual no canal oficial confirmado (Instagram `@brsreparacoes`). Nunca persista dados no frontend nem simule envio falso, evitando dependência de WhatsApp não confirmado ou backend desnecessário.
+- **Fluxo de Contato Honesto**: O formulário de contato prepara uma mensagem formatada para cópia manual no canal oficial confirmado (Instagram `@masterchapeacao2022`). Nunca persista dados no frontend nem simule envio falso, evitando dependência de WhatsApp não confirmado ou backend desnecessário.
 - **Mídia Ilustrativa**: Qualquer mídia genérica ou ilustrativa deve ser explicitamente identificada como ilustrativa. Nunca apresente imagens ilustrativas como evidência de instalações reais da oficina ou reparos concluídos.
 - **Porta Local e Proxy**: O frontend roda na porta **5210** em modo estrito (`strictPort: true` no Vite e `--port 5210` no package.json). O domínio local configurado no Caddy é `http://brs.localhost`.
 
@@ -18,12 +18,12 @@ Este repositório adota o **Universal SDD (Spec-Driven Development)** integrado 
 
 Antes de propor ou executar qualquer alteração:
 
-1. Leia [`PROJECT.md`](file:///home/elessandro/%C3%81rea%20de%20Trabalho/Dev/EPMDEVTECH_Clientes/BRS/PROJECT.md) para absorver o estado canônico, stack e regras ativas;
-2. Identifique o workflow ativo em [`workflows/`](file:///home/elessandro/%C3%81rea%20de%20Trabalho/Dev/EPMDEVTECH_Clientes/BRS/workflows/);
-3. Leia o contrato do papel ativo em [`agents/`](file:///home/elessandro/%C3%81rea%20de%20Trabalho/Dev/EPMDEVTECH_Clientes/BRS/agents/);
-4. Localize a SPEC aprovada em [`specs/`](file:///home/elessandro/%C3%81rea%20de%20Trabalho/Dev/EPMDEVTECH_Clientes/BRS/specs/);
-5. Localize a TASK atribuída em [`tasks/`](file:///home/elessandro/%C3%81rea%20de%20Trabalho/Dev/EPMDEVTECH_Clientes/BRS/tasks/);
-6. Consulte padrões em [`standards/`](file:///home/elessandro/%C3%81rea%20de%20Trabalho/Dev/EPMDEVTECH_Clientes/BRS/standards/), ADRs em [`adr/`](file:///home/elessandro/%C3%81rea%20de%20Trabalho/Dev/EPMDEVTECH_Clientes/BRS/adr/) e conhecimento em [`knowledge/`](file:///home/elessandro/%C3%81rea%20de%20Trabalho/Dev/EPMDEVTECH_Clientes/BRS/knowledge/).
+1. Leia [`PROJECT.md`](file:///home/elessandro/%C3%81rea%20de%20Trabalho/Dev/EPMDEVTECH_Clientes/Master/PROJECT.md) para absorver o estado canônico, stack e regras ativas;
+2. Identifique o workflow ativo em [`workflows/`](file:///home/elessandro/%C3%81rea%20de%20Trabalho/Dev/EPMDEVTECH_Clientes/Master/workflows/);
+3. Leia o contrato do papel ativo em [`agents/`](file:///home/elessandro/%C3%81rea%20de%20Trabalho/Dev/EPMDEVTECH_Clientes/Master/agents/);
+4. Localize a SPEC aprovada em [`specs/`](file:///home/elessandro/%C3%81rea%20de%20Trabalho/Dev/EPMDEVTECH_Clientes/Master/specs/);
+5. Localize a TASK atribuída em [`tasks/`](file:///home/elessandro/%C3%81rea%20de%20Trabalho/Dev/EPMDEVTECH_Clientes/Master/tasks/);
+6. Consulte padrões em [`standards/`](file:///home/elessandro/%C3%81rea%20de%20Trabalho/Dev/EPMDEVTECH_Clientes/Master/standards/), ADRs em [`adr/`](file:///home/elessandro/%C3%81rea%20de%20Trabalho/Dev/EPMDEVTECH_Clientes/Master/adr/) e conhecimento em [`knowledge/`](file:///home/elessandro/%C3%81rea%20de%20Trabalho/Dev/EPMDEVTECH_Clientes/Master/knowledge/).
 
 > [!CAUTION]
 > Na ausência de SPEC aprovada e TASK atribuída, **não inicie implementação**.
@@ -35,11 +35,11 @@ Antes de propor ou executar qualquer alteração:
 Quando houver conflito entre informações, obedeça a esta precedência:
 
 1. Instruções humanas explícitas e atuais;
-2. SPEC aprovada da mudança em [`specs/`](file:///home/elessandro/%C3%81rea%20de%20Trabalho/Dev/EPMDEVTECH_Clientes/BRS/specs/);
-3. [`PROJECT.md`](file:///home/elessandro/%C3%81rea%20de%20Trabalho/Dev/EPMDEVTECH_Clientes/BRS/PROJECT.md) e ADRs aceitos em [`adr/`](file:///home/elessandro/%C3%81rea%20de%20Trabalho/Dev/EPMDEVTECH_Clientes/BRS/adr/);
+2. SPEC aprovada da mudança em [`specs/`](file:///home/elessandro/%C3%81rea%20de%20Trabalho/Dev/EPMDEVTECH_Clientes/Master/specs/);
+3. [`PROJECT.md`](file:///home/elessandro/%C3%81rea%20de%20Trabalho/Dev/EPMDEVTECH_Clientes/Master/PROJECT.md) e ADRs aceitos em [`adr/`](file:///home/elessandro/%C3%81rea%20de%20Trabalho/Dev/EPMDEVTECH_Clientes/Master/adr/);
 4. Workflows e perfis ativos;
-5. Padrões normativos em [`standards/`](file:///home/elessandro/%C3%81rea%20de%20Trabalho/Dev/EPMDEVTECH_Clientes/BRS/standards/);
-6. Base de conhecimento auxiliar em [`knowledge/`](file:///home/elessandro/%C3%81rea%20de%20Trabalho/Dev/EPMDEVTECH_Clientes/BRS/knowledge/).
+5. Padrões normativos em [`standards/`](file:///home/elessandro/%C3%81rea%20de%20Trabalho/Dev/EPMDEVTECH_Clientes/Master/standards/);
+6. Base de conhecimento auxiliar em [`knowledge/`](file:///home/elessandro/%C3%81rea%20de%20Trabalho/Dev/EPMDEVTECH_Clientes/Master/knowledge/).
 
 ---
 
@@ -57,7 +57,7 @@ Quando houver conflito entre informações, obedeça a esta precedência:
   Task-Ref: TASK-NNN-XX
   ```
 - **Orçamento de Contexto (Context Budget)**:
-  Carregue [`docs/context-budget.md`](file:///home/elessandro/%C3%81rea%20de%20Trabalho/Dev/EPMDEVTECH_Clientes/BRS/docs/context-budget.md) e recupere seletivamente apenas os módulos de `knowledge/` necessários.
+  Carregue [`docs/context-budget.md`](file:///home/elessandro/%C3%81rea%20de%20Trabalho/Dev/EPMDEVTECH_Clientes/Master/docs/context-budget.md) e recupere seletivamente apenas os módulos de `knowledge/` necessários.
 - **Encerramento e Handover**:
   Ao concluir uma tarefa, reporte sempre:
   1. Escopo implementado;

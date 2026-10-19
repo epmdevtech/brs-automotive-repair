@@ -335,7 +335,7 @@ export interface BookingConfig {
  */
 export function buildBookingConfig(
   dados: Partial<BriefingDadosCompletos>,
-  nomeNegocio: string = "BRS Reparações Automotivas",
+  nomeNegocio: string = "Master Chapeação e Pinturas",
 ): BookingConfig {
   const contratante = dados.contratante || {
     razao_social: nomeNegocio,
@@ -422,10 +422,10 @@ export function buildBookingConfig(
 }
 
 // ==========================================
-// SEED CANÔNICO DA BRS REPARAÇÕES
+// SEED CANÔNICO DA MASTER CHAPEAÇÃO E PINTURAS
 // ==========================================
 
-export const brsDefaultBriefing: BriefingDadosCompletos = {
+export const masterDefaultBriefing: BriefingDadosCompletos = {
   nicho: "oficina_automotiva",
   versao: "1.0",
   contratante: {
@@ -433,14 +433,14 @@ export const brsDefaultBriefing: BriefingDadosCompletos = {
     nome_fantasia: company.name,
     cnpj: company.cnpj,
     endereco_faturamento: company.address.full,
-    email_financeiro: "financeiro@brsreparacoes.com.br",
-    responsavel_legal: `${company.founder.name} (Fundador e Diretor)`,
+    email_financeiro: "oficynamastertoledo@gmail.com",
+    responsavel_legal: "Equipe Master (Direção)",
     contato_operacional: company.phone,
-    aprovador_final: company.founder.name,
+    aprovador_final: "Equipe Master",
   },
   identidade_visual: {
-    logo_arquivo_id: "logo-brs.svg",
-    manual_marca_id: "manual-identidade-brs.pdf",
+    logo_arquivo_id: "logo-master.webp",
+    manual_marca_id: "manual-identidade-master.pdf",
     cor_primaria_hex: "#D4AF37",
     cor_secundaria_hex: "#1C1F26",
     cor_fundo_hex: "#0B0D10",
@@ -454,16 +454,16 @@ export const brsDefaultBriefing: BriefingDadosCompletos = {
   equipe: {
     membros: [
       {
-        id: "membro-bruno",
-        nome: "Bruno Rafael dos Santos",
-        miniBio: company.founder.bio,
+        id: "membro-equipe-tecnica",
+        nome: "Equipe Técnica Master",
+        miniBio: company.team.bio,
         formacao: "Especialista em Reparação Estrutural, Funilaria Fina e Pintura em Estufa",
         camposNicho: {
           especialidade_tecnica: "Funilaria & Pintura Automotiva de Alta Precisão",
           certificacoes_fabricante: "Certificação em Colorimetria e Alinhamento Técnico de Painéis",
         },
         unidadesIds: ["unidade-matriz-toledo"],
-        diasHorarios: "Segunda a Sexta, 08h às 18h",
+        diasHorarios: "Segunda a Sexta, 08h às 12h e das 13h30 às 18h30",
         aceitaAgendamentoOnline: true,
         autorizacaoUsoImagem: true,
       },
@@ -478,7 +478,7 @@ export const brsDefaultBriefing: BriefingDadosCompletos = {
           certificacoes_fabricante: "Treinamento Técnico em Preservação de Pintura Original",
         },
         unidadesIds: ["unidade-matriz-toledo"],
-        diasHorarios: "Segunda a Sexta, 08h às 18h",
+        diasHorarios: "Segunda a Sexta, 08h às 12h e das 13h30 às 18h30",
         aceitaAgendamentoOnline: true,
         autorizacaoUsoImagem: true,
       },
@@ -493,7 +493,7 @@ export const brsDefaultBriefing: BriefingDadosCompletos = {
         descricao:
           "Alinhamento milimétrico de chapas, recuperação de vincos e soldagem técnica de segurança.",
         duracaoMinutos: 180,
-        profissionaisIds: ["membro-bruno"],
+        profissionaisIds: ["membro-equipe-tecnica"],
         exigeAvaliacaoPrevia: true,
         intervaloAposAtendimentoMinutos: 30,
         exibirValorNoSite: "sob_consulta",
@@ -509,7 +509,7 @@ export const brsDefaultBriefing: BriefingDadosCompletos = {
         descricao:
           "Aplicação de tintas premium e vernizes de alto sólido com cura térmica em estufa pressurizada.",
         duracaoMinutos: 240,
-        profissionaisIds: ["membro-bruno"],
+        profissionaisIds: ["membro-equipe-tecnica"],
         exigeAvaliacaoPrevia: true,
         intervaloAposAtendimentoMinutos: 45,
         exibirValorNoSite: "sob_consulta",
@@ -541,7 +541,7 @@ export const brsDefaultBriefing: BriefingDadosCompletos = {
         descricao:
           "Espelhamento, vitrificação cerâmica e remoção de micro-riscos preservando a espessura do verniz.",
         duracaoMinutos: 120,
-        profissionaisIds: ["membro-bruno"],
+        profissionaisIds: ["membro-equipe-tecnica"],
         exigeAvaliacaoPrevia: false,
         intervaloAposAtendimentoMinutos: 20,
         exibirValorNoSite: "a_partir_de",
@@ -564,7 +564,7 @@ export const brsDefaultBriefing: BriefingDadosCompletos = {
     canais_aviso_novo_agendamento: ["whatsapp", "email"],
     camposNicho: {
       solicita_placa_modelo_reserva: true,
-      atende_emergencia_guincho: false,
+      atende_emergencia_guincho: true,
       oferece_leva_e_traz: true,
     },
   },
@@ -572,14 +572,15 @@ export const brsDefaultBriefing: BriefingDadosCompletos = {
     locais: [
       {
         id: "unidade-matriz-toledo",
-        nomeIdentificador: "BRS Oficina Central Toledo",
+        nomeIdentificador: "Master Toledo",
         enderecoCompleto: company.address.full,
         telefone: company.phone,
         whatsapp: company.phone,
-        linkMapa: "https://maps.google.com/?q=Toledo+PR+BRS+Reparacoes",
+        linkMapa:
+          "https://www.google.com/maps/search/?api=1&query=Av.+Marip%C3%A1%2C+4138%2C+Centro%2C+Toledo+-+PR",
         estacionamento: "Pátio próprio seguro com monitoramento para clientes e peritos",
         acessibilidadePcd: true,
-        fotosArquivosIds: ["fachada-brs.webp", "box-estufa.webp"],
+        fotosArquivosIds: ["fachada-master.webp", "box-estufa-master.webp"],
         camposNicho: {
           cidade: "Toledo",
           estado: "PR",
@@ -597,15 +598,17 @@ export const brsDefaultBriefing: BriefingDadosCompletos = {
     objetivos_indicadores_sucesso:
       "Aumentar a taxa de orçamentos qualificados agendados pelo portal e consolidar autoridade regional.",
     texto_sobre:
-      "A BRS Reparações Automotivas nasceu da dedicação artesanal aliada à tecnologia em funilaria, pintura em estufa e martelinho de ouro.",
+      "A Master Chapeação e Pinturas nasceu da dedicação artesanal aliada à tecnologia em funilaria, pintura em estufa e martelinho de ouro.",
     principais_diferenciais:
-      "Atendimento transparente, estufa profissional, colorimetria de precisão, preservação de pintura original e comodidade com Leva e Traz.",
+      "Atendimento transparente, estufa profissional, colorimetria de precisão, preservação de pintura original e comodidade com Guincho.",
     cidades_bairros_atendidos: "Toledo-PR e municípios vizinhos do Oeste do Paraná.",
-    link_google_meu_negocio: "https://g.page/brs-reparacoes-toledo",
-    redes_sociais: "Instagram: @brsreparacoes",
+    link_google_meu_negocio:
+      "https://www.google.com/maps/search/?api=1&query=Av.+Marip%C3%A1%2C+4138%2C+Centro%2C+Toledo+-+PR",
+    redes_sociais:
+      "Instagram: https://www.instagram.com/masterchapeacao2022/ | Facebook: https://www.facebook.com/1630662447189202",
   },
   tecnico: {
-    dominio_personalizado: "brsreparacoes.com.br",
+    dominio_personalizado: "masterchapeacao.com.br",
     onde_dominio_registrado: "Registro.br",
     sistema_gestao_atual: "Planilhas e WhatsApp comercial",
   },
@@ -619,7 +622,7 @@ export const brsDefaultBriefing: BriefingDadosCompletos = {
 // PERSISTÊNCIA EM LOCALSTORAGE E UTILITÁRIOS
 // ==========================================
 
-export const BRIEFING_STORAGE_KEY = "brs_briefing_draft_v1";
+export const BRIEFING_STORAGE_KEY = "master_briefing_draft_v1";
 
 export function saveBriefingDraft(dados: Partial<BriefingDadosCompletos>): void {
   if (typeof window === "undefined") return;
@@ -631,14 +634,14 @@ export function saveBriefingDraft(dados: Partial<BriefingDadosCompletos>): void 
 }
 
 export function loadBriefingDraft(): Partial<BriefingDadosCompletos> {
-  if (typeof window === "undefined") return brsDefaultBriefing;
+  if (typeof window === "undefined") return masterDefaultBriefing;
   try {
     const raw = localStorage.getItem(BRIEFING_STORAGE_KEY);
-    if (!raw) return brsDefaultBriefing;
+    if (!raw) return masterDefaultBriefing;
     const parsed = JSON.parse(raw);
     return parsed;
   } catch {
-    return brsDefaultBriefing;
+    return masterDefaultBriefing;
   }
 }
 

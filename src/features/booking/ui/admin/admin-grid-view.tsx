@@ -29,7 +29,7 @@ import { formatPhoneBR } from "../../domain/phone";
 import { getStatusBorderClass } from "../../domain/status";
 import { buildCustomerWhatsAppLink, formatPreOsSummary } from "../../domain/intake";
 import { getBlockedPeriods, isPeriodBlocked, type BlockedPeriod } from "../../domain/blocks";
-import { BRS_BOOKING_CONFIG } from "../../config/booking.config";
+import { MASTER_BOOKING_CONFIG } from "../../config/booking.config";
 import { logoutAdmin } from "../../domain/auth";
 import { ensureSeedData } from "../../domain/seed";
 import { ManualBookingDialog } from "./manual-booking-dialog";
@@ -137,9 +137,9 @@ export function AdminGridView({ onLogout }: AdminGridViewProps) {
   // Profissionais filtrados
   const displayedProfessionals = useMemo(() => {
     if (selectedProfessionalId === "ALL") {
-      return BRS_BOOKING_CONFIG.professionals;
+      return MASTER_BOOKING_CONFIG.professionals;
     }
-    return BRS_BOOKING_CONFIG.professionals.filter((p) => p.id === selectedProfessionalId);
+    return MASTER_BOOKING_CONFIG.professionals.filter((p) => p.id === selectedProfessionalId);
   }, [selectedProfessionalId]);
 
   // KPIs superiores semânticos
@@ -162,7 +162,7 @@ export function AdminGridView({ onLogout }: AdminGridViewProps) {
       closed: closedCount,
       cancelled: cancelledCount,
       levaETraz: levaETrazCount,
-      activePros: BRS_BOOKING_CONFIG.professionals.length,
+      activePros: MASTER_BOOKING_CONFIG.professionals.length,
     };
   }, [appointments, currentDate]);
 
@@ -190,7 +190,7 @@ export function AdminGridView({ onLogout }: AdminGridViewProps) {
   };
 
   const handleCopySummary = async (app: Appointment) => {
-    const svc = BRS_BOOKING_CONFIG.services.find((s) => s.id === app.serviceId);
+    const svc = MASTER_BOOKING_CONFIG.services.find((s) => s.id === app.serviceId);
     const summary = formatPreOsSummary({
       protocol: app.protocol,
       serviceTitle: svc?.title ?? app.serviceId,
@@ -273,7 +273,7 @@ export function AdminGridView({ onLogout }: AdminGridViewProps) {
       <header className="px-6 py-4 bg-white border-b border-slate-200 flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div className="flex items-center gap-3">
           <div className="size-9 rounded-lg bg-slate-900 text-white flex items-center justify-center font-bold text-sm shadow-xs">
-            B
+            M
           </div>
           <div>
             <div className="flex items-center gap-2">
@@ -302,7 +302,7 @@ export function AdminGridView({ onLogout }: AdminGridViewProps) {
 
           <button
             type="button"
-            onClick={() => openSlotBooking("09:00", BRS_BOOKING_CONFIG.professionals[0].id)}
+            onClick={() => openSlotBooking("09:00", MASTER_BOOKING_CONFIG.professionals[0].id)}
             className="px-3.5 py-2 rounded-lg bg-slate-900 hover:bg-black active:scale-[0.99] text-white text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer shadow-sm"
           >
             <Plus size={14} />
@@ -360,7 +360,7 @@ export function AdminGridView({ onLogout }: AdminGridViewProps) {
                 : "text-slate-600 hover:text-slate-900"
             }`}
           >
-            <Truck size={13} /> Leva e Traz
+            <Truck size={13} /> Guincho
             {stats.levaETraz > 0 && (
               <span className="size-4 rounded-full bg-slate-900 text-white text-[9px] flex items-center justify-center font-bold">
                 {stats.levaETraz}
@@ -379,7 +379,7 @@ export function AdminGridView({ onLogout }: AdminGridViewProps) {
               className="py-1.5 px-3 rounded-lg border border-slate-200 bg-white text-xs font-medium text-slate-800 focus:outline-none focus:border-slate-900 shadow-2xs"
             >
               <option value="ALL">Todos os profissionais</option>
-              {BRS_BOOKING_CONFIG.professionals.map((p) => (
+              {MASTER_BOOKING_CONFIG.professionals.map((p) => (
                 <option key={p.id} value={p.id}>
                   {p.name}
                 </option>
@@ -494,7 +494,7 @@ export function AdminGridView({ onLogout }: AdminGridViewProps) {
                         );
 
                         if (app) {
-                          const svc = BRS_BOOKING_CONFIG.services.find(
+                          const svc = MASTER_BOOKING_CONFIG.services.find(
                             (s) => s.id === app.serviceId,
                           );
                           const isLeva = app.logistics.type === "leva-e-traz";
@@ -544,7 +544,7 @@ export function AdminGridView({ onLogout }: AdminGridViewProps) {
                                   <span className="truncate">{svc?.short ?? app.serviceId}</span>
                                   {isLeva && (
                                     <span className="flex items-center gap-1 text-slate-700 font-medium text-[10px]">
-                                      <Truck size={11} /> Leva e Traz
+                                      <Truck size={11} /> Guincho
                                     </span>
                                   )}
                                 </div>
@@ -649,7 +649,7 @@ export function AdminGridView({ onLogout }: AdminGridViewProps) {
             ) : (
               <div className="space-y-2">
                 {displayedAppointments.map((a) => {
-                  const svc = BRS_BOOKING_CONFIG.services.find((s) => s.id === a.serviceId);
+                  const svc = MASTER_BOOKING_CONFIG.services.find((s) => s.id === a.serviceId);
                   const whatsApp = buildCustomerWhatsAppLink({
                     protocol: a.protocol,
                     customer: a.customer,
@@ -749,7 +749,7 @@ export function AdminGridView({ onLogout }: AdminGridViewProps) {
               <Truck size={18} className="text-slate-700" />
               <div>
                 <h3 className="font-semibold text-sm text-slate-900">
-                  Roteiro de Coleta e Devolução Leva e Traz (Toledo-PR)
+                  Roteiro de Remoção com Guincho (Toledo-PR)
                 </h3>
                 <p className="text-xs text-slate-500">
                   Clientes que solicitaram retirada e entrega do veículo no endereço.
@@ -759,7 +759,7 @@ export function AdminGridView({ onLogout }: AdminGridViewProps) {
 
             {appointments.filter((a) => a.logistics.type === "leva-e-traz").length === 0 ? (
               <p className="text-xs text-slate-500 py-8 text-center">
-                Nenhuma solicitação de Leva e Traz ativa no momento.
+                Nenhuma solicitação de Guincho ativa no momento.
               </p>
             ) : (
               <div className="grid gap-3">

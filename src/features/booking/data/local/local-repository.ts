@@ -13,7 +13,7 @@ import {
   reconciliarStatusAgendamentosComEtapas,
   garantirTodasEtapasConcluidas,
 } from "../../domain/etapas";
-import { BRS_BOOKING_CONFIG } from "../../config/booking.config";
+import { MASTER_BOOKING_CONFIG } from "../../config/booking.config";
 import type { BookingRepository, CreateAppointmentError } from "../repository";
 
 export class LocalBookingRepository implements BookingRepository {
@@ -28,9 +28,9 @@ export class LocalBookingRepository implements BookingRepository {
   };
 
   constructor(
-    storageKey: string = BRS_BOOKING_CONFIG.storageKey,
-    lockName: string = BRS_BOOKING_CONFIG.lockName,
-    syncChannelName: string = BRS_BOOKING_CONFIG.syncChannelName,
+    storageKey: string = MASTER_BOOKING_CONFIG.storageKey,
+    lockName: string = MASTER_BOOKING_CONFIG.lockName,
+    syncChannelName: string = MASTER_BOOKING_CONFIG.syncChannelName,
   ) {
     this.storageKey = storageKey;
     this.lockName = lockName;
@@ -87,7 +87,7 @@ export class LocalBookingRepository implements BookingRepository {
       const raw = localStorage.getItem(this.storageKey);
       if (!raw) return [];
       const parsed = JSON.parse(raw) as Appointment[];
-      if (this.storageKey === BRS_BOOKING_CONFIG.storageKey && Array.isArray(parsed)) {
+      if (this.storageKey === MASTER_BOOKING_CONFIG.storageKey && Array.isArray(parsed)) {
         const { list, changed } = reconciliarStatusAgendamentosComEtapas(parsed);
         if (changed) {
           localStorage.setItem(this.storageKey, JSON.stringify(list));
@@ -218,7 +218,7 @@ export class LocalBookingRepository implements BookingRepository {
         createdAt: appointment.createdAt,
         actorId: "customer",
         actorName: appointment.customer.name,
-        note: "Agendamento registrado no portal BRS",
+        note: "Agendamento registrado no portal Master",
         visibleToCustomer: true,
       });
 
@@ -259,10 +259,10 @@ export class LocalBookingRepository implements BookingRepository {
 
       currentList[index] = updated;
 
-      if (targetStatus === "COMPLETED" && this.storageKey === BRS_BOOKING_CONFIG.storageKey) {
+      if (targetStatus === "COMPLETED" && this.storageKey === MASTER_BOOKING_CONFIG.storageKey) {
         garantirTodasEtapasConcluidas(
           id,
-          options?.actorName ?? "Administrador BRS",
+          options?.actorName ?? "Administrador Master",
           existing.createdAt,
         );
       }
@@ -292,7 +292,7 @@ export class LocalBookingRepository implements BookingRepository {
         fromStatus: existing.status,
         toStatus: targetStatus,
         actorId: options?.actorId ?? "admin",
-        actorName: options?.actorName ?? "Administrador BRS",
+        actorName: options?.actorName ?? "Administrador Master",
         note: options?.note,
         visibleToCustomer: options?.visibleToCustomer ?? true,
         metadata: options?.metadata,

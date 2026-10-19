@@ -23,7 +23,7 @@ describe("SPEC-056: Refinamento de UX/UI e Acessibilidade (WCAG 2.2 AA) na Auten
     const emailInput = screen.getByLabelText(/E-mail institucional/i);
     expect(emailInput).toBeInTheDocument();
     expect(emailInput).toHaveAttribute("id", "admin-email");
-    expect(emailInput).toHaveAttribute("placeholder", "nome@brsreparacoes.com.br");
+    expect(emailInput).toHaveAttribute("placeholder", "nome@master.local");
 
     // Label e input de senha associados (sem placeholder de bolinhas falsas)
     const passwordInput = screen.getByLabelText("Senha de acesso", { selector: "input" });

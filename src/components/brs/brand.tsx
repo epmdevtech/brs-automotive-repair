@@ -2,11 +2,15 @@ import { Link } from "@tanstack/react-router";
 
 export function Brand() {
   return (
-    <Link to="/" aria-label="BRS Reparações Automotivas: início" className="brand">
-      <strong>
-        BRS<span className="sr-only"> Reparações Automotivas</span>
-      </strong>
-      <span aria-hidden="true">REPARAÇÕES AUTOMOTIVAS</span>
+    <Link to="/" aria-label="Master Chapeação e Pinturas: início" className="brand">
+      <img
+        src="/master/logo.webp"
+        alt="Master Chapeação e Pinturas"
+        width={512}
+        height={172}
+        className="brand-logo"
+        decoding="async"
+      />
     </Link>
   );
 }

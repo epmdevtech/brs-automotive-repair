@@ -3,7 +3,7 @@ import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { BookingDialog } from "../features/booking/ui/booking-dialog";
 import { AdminBookingDashboard } from "../features/booking/ui/admin/admin-dashboard";
 
-describe("UI: BookingDialog (Intake Pré-OS & Leva e Traz)", () => {
+describe("UI: BookingDialog (Intake Pré-OS & Guincho)", () => {
   it("renders the dialog with Step 1 Vehicle & Damage Intake when open", () => {
     render(<BookingDialog open={true} onOpenChange={() => {}} />);
 
@@ -36,8 +36,8 @@ describe("UI: BookingDialog (Intake Pré-OS & Leva e Traz)", () => {
     // Avançar para Step 3: Modalidade
     fireEvent.click(screen.getByRole("button", { name: /Avançar/i }));
 
-    expect(await screen.findByText(/Modalidade de Atendimento & Leva e Traz/i)).toBeInTheDocument();
-    expect(screen.getByText(/Serviço Leva e Traz \(Toledo-PR\)/i)).toBeInTheDocument();
+    expect(await screen.findByText(/Modalidade de Atendimento & Guincho/i)).toBeInTheDocument();
+    expect(screen.getByText(/Serviço de Guincho \(Toledo-PR\)/i)).toBeInTheDocument();
   });
 });
 
@@ -45,7 +45,7 @@ describe("UI: AdminBookingDashboard", () => {
   it("renders the admin dashboard header, metrics and search input", () => {
     render(<AdminBookingDashboard />);
 
-    expect(screen.getByText(/Painel de Agendamentos BRS/i)).toBeInTheDocument();
+    expect(screen.getByText(/Painel de Agendamentos Master/i)).toBeInTheDocument();
     expect(screen.getByText(/Confirmados \(Agenda\)/i)).toBeInTheDocument();
     expect(
       screen.getByPlaceholderText(/Buscar por cliente, telefone, protocolo/i),

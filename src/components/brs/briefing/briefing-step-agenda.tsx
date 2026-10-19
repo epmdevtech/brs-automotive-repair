@@ -177,7 +177,7 @@ export function StepAgenda({ data, onChange }: StepAgendaProps) {
             />
             <div>
               <span className="text-xs font-medium text-white block flex items-center gap-1.5">
-                <Truck className="size-3.5 text-primary" /> Serviço Leva e Traz
+                <Truck className="size-3.5 text-primary" /> Serviço de Guincho
               </span>
               <span className="text-[11px] text-neutral-400 leading-tight block mt-0.5">
                 Habilita opção para retirada e entrega do veículo na residência/empresa em Toledo.

@@ -15,10 +15,10 @@ import {
 } from "./etapas";
 import type { Appointment } from "./types";
 import { company } from "@/lib/brs";
-import { BRS_BOOKING_CONFIG } from "../config/booking.config";
+import { MASTER_BOOKING_CONFIG } from "../config/booking.config";
 
 export const CONTATO_OFICINA = {
-  telefoneFormatado: company.phone || "(45) 2035-9440",
+  telefoneFormatado: company.phone || "(45) 99954-5442",
   telefoneHref: company.phoneHref || "tel:+554520359440",
   // Número comercial de WhatsApp (a confirmar formalmente com o negócio)
   whatsappNumero: "554520359440",
@@ -47,8 +47,8 @@ export interface PublicCustomerStepDto {
 }
 
 export interface PublicCustomerTrackingDto {
-  protocolo: string; // Ex: "#BRS-7391"
-  protocoloLimpo: string; // Ex: "BRS-7391"
+  protocolo: string; // Ex: "#Master-7391"
+  protocoloLimpo: string; // Ex: "Master-7391"
   statusGeral: "em_andamento" | "concluido" | "cancelado";
   etapaAtualOrdem: number; // 1 a 6
   etapasConcluidasQtd: number; // 0 a 6
@@ -207,7 +207,7 @@ export function toPublicCustomerTrackingDto(
   // Previsão de entrega somente se explicitamente informada (nunca inventar)
   const previsaoEntrega = (appointment.intake as { deliveryEstimate?: string })?.deliveryEstimate;
 
-  const prof = BRS_BOOKING_CONFIG.professionals.find((p) => p.id === appointment.professionalId);
+  const prof = MASTER_BOOKING_CONFIG.professionals.find((p) => p.id === appointment.professionalId);
   const tecnicoPrimeiroNome = extrairPrimeiroNomeTecnico(prof?.name || appointment.professionalId);
 
   return {

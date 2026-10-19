@@ -15,9 +15,9 @@ import type { Appointment, SyncMessage } from "../features/booking/domain/types"
 describe("SPEC-050: Correção dos Botões no Modal de Processo (Fechar, Concluir, Cancelar)", () => {
   const baseAppointment: Appointment = {
     id: "app-test-50",
-    protocol: "#BRS-5050",
+    protocol: "#Master-5050",
     serviceId: "avaliacao-funilaria",
-    professionalId: "bruno-tecnico",
+    professionalId: "equipe-tecnica",
     startTime: new Date().toISOString(),
     endTime: new Date(Date.now() + 45 * 60 * 1000).toISOString(),
     status: "CONFIRMED",
@@ -104,7 +104,7 @@ describe("SPEC-050: Correção dos Botões no Modal de Processo (Fechar, Conclui
       "app-test-50",
       "COMPLETED",
       expect.objectContaining({
-        actorName: "Bruno (Funilaria & Vistoria)",
+        actorName: "Equipe Técnica Master",
       }),
     );
 
@@ -185,9 +185,9 @@ describe("SPEC-050: Sincronização Multi-Aba Estruturada & Web Locks (LocalBook
   it("registra transição de status no histórico append-only de eventos", async () => {
     const app: Appointment = {
       id: "app-sync-1",
-      protocol: "#BRS-1010",
+      protocol: "#Master-1010",
       serviceId: "avaliacao-funilaria",
-      professionalId: "bruno-tecnico",
+      professionalId: "equipe-tecnica",
       startTime: new Date().toISOString(),
       endTime: new Date(Date.now() + 45 * 60 * 1000).toISOString(),
       status: "CONFIRMED",
@@ -209,8 +209,8 @@ describe("SPEC-050: Sincronização Multi-Aba Estruturada & Web Locks (LocalBook
     repository.clearAndSeed([app]);
 
     const res = await repository.updateStatus("app-sync-1", "COMPLETED", {
-      actorId: "bruno-tecnico",
-      actorName: "Bruno",
+      actorId: "equipe-tecnica",
+      actorName: "Equipe Técnica",
       note: "Pintura em estufa concluída e polida.",
     });
 
@@ -230,9 +230,9 @@ describe("SPEC-050: Sincronização Multi-Aba Estruturada & Web Locks (LocalBook
   it("rejeita transições de status inválidas de acordo com a FSM", async () => {
     const app: Appointment = {
       id: "app-invalid-1",
-      protocol: "#BRS-2020",
+      protocol: "#Master-2020",
       serviceId: "avaliacao-funilaria",
-      professionalId: "bruno-tecnico",
+      professionalId: "equipe-tecnica",
       startTime: new Date().toISOString(),
       endTime: new Date(Date.now() + 45 * 60 * 1000).toISOString(),
       status: "COMPLETED",
@@ -273,7 +273,7 @@ describe("SPEC-050: Linha do Tempo Dinâmica & Acompanhamento LGPD", () => {
   it("renderiza a timeline com eventos persistidos e identifica status das etapas", () => {
     const mockApp: Appointment = {
       id: "app-timeline-1",
-      protocol: "#BRS-7777",
+      protocol: "#Master-7777",
       serviceId: "martelinho-express",
       professionalId: "tecnico-martelinho",
       startTime: new Date().toISOString(),
@@ -308,9 +308,9 @@ describe("SPEC-050: Linha do Tempo Dinâmica & Acompanhamento LGPD", () => {
 describe("SPEC-050: Gerador de Mensagens WhatsApp Custo Zero (Sem APIs Pagas)", () => {
   const mockApp: Appointment = {
     id: "app-wa-1",
-    protocol: "#BRS-8888",
+    protocol: "#Master-8888",
     serviceId: "avaliacao-funilaria",
-    professionalId: "bruno-tecnico",
+    professionalId: "equipe-tecnica",
     startTime: new Date(2026, 9, 20, 14, 0).toISOString(),
     endTime: new Date(2026, 9, 20, 14, 45).toISOString(),
     status: "CONFIRMED",
@@ -320,7 +320,7 @@ describe("SPEC-050: Gerador de Mensagens WhatsApp Custo Zero (Sem APIs Pagas)", 
       consentLgpd: true,
     },
     intake: {
-      vehicle: { make: "Chevrolet", model: "S10 High Country", plate: "BRS-1020" },
+      vehicle: { make: "Chevrolet", model: "S10 High Country", plate: "Master-1020" },
       affectedAreas: ["lateral-esquerda"],
       damageType: "colisao-com-vinco",
     },
@@ -334,11 +334,11 @@ describe("SPEC-050: Gerador de Mensagens WhatsApp Custo Zero (Sem APIs Pagas)", 
 
     const m1 = MILESTONE_MESSAGES[0].generateText(mockApp);
     expect(m1).toContain("Confirmamos o agendamento da sua avaliação");
-    expect(m1).toContain("#BRS-8888");
+    expect(m1).toContain("#Master-8888");
     expect(m1).toContain("Chevrolet S10 High Country");
 
     const m2 = MILESTONE_MESSAGES[1].generateText(mockApp);
-    expect(m2).toContain("já foi recebido no pátio da *BRS Reparações*");
+    expect(m2).toContain("já foi recebido no pátio da *Master Chapeação*");
 
     const m3 = MILESTONE_MESSAGES[2].generateText(mockApp);
     expect(m3).toContain("A vistoria técnica detalhada");

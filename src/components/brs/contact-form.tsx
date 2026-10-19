@@ -1,5 +1,5 @@
 import { useState, useEffect, type FormEvent } from "react";
-import { ArrowUpRight, Check, Copy, Instagram, Loader2 } from "lucide-react";
+import { ArrowUpRight, Check, Copy, Facebook, Instagram, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import {
@@ -209,7 +209,7 @@ export function ContactForm({ partner }: { partner: boolean }) {
 
         <p className="text-[10px] text-muted-foreground leading-relaxed">
           Seus dados não são armazenados em banco. O formulário formata uma mensagem para você
-          enviar com um clique diretamente pelo Instagram oficial da BRS.
+          copiar e enviar manualmente pela página oficial da Master no Instagram ou no Facebook.
         </p>
 
         <Button
@@ -251,8 +251,8 @@ export function ContactForm({ partner }: { partner: boolean }) {
             Mensagem pronta para envio
           </DialogTitle>
           <DialogDescription className="text-xs text-muted-foreground mt-0.5 text-pretty">
-            Copie o texto estruturado abaixo e envie em uma conversa no Instagram oficial da BRS.
-            Nenhuma informação foi enviada ainda.
+            Copie o texto estruturado abaixo e envie em uma conversa no Instagram oficial ou na
+            página da Master no Facebook. Nenhuma informação foi enviada ainda.
           </DialogDescription>
           <textarea
             aria-label="Mensagem formatada"
@@ -270,8 +270,13 @@ export function ContactForm({ partner }: { partner: boolean }) {
               {copied ? "Mensagem copiada" : "Copiar mensagem"}
             </Button>
             <Button variant="primary" asChild className="flex-1 gap-2 text-xs font-semibold">
-              <a href={company.instagram} {...external}>
+              <a href={company.instagram.url} {...external}>
                 <Instagram size={16} aria-hidden="true" /> Abrir Instagram
+              </a>
+            </Button>
+            <Button variant="secondary" asChild className="flex-1 gap-2 text-xs font-medium">
+              <a href={company.social.url} {...external}>
+                <Facebook size={16} aria-hidden="true" /> Abrir Facebook
               </a>
             </Button>
           </div>

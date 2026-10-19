@@ -3,7 +3,7 @@ import type { Appointment, DamageArea, DamageType, FinishType, TimeSlot } from "
 import { computeAvailableSlots, computeAvailableDays } from "../domain/availability";
 import { generateProtocol } from "../domain/intake";
 import { normalizePhoneE164 } from "../domain/phone";
-import { BRS_BOOKING_CONFIG } from "../config/booking.config";
+import { MASTER_BOOKING_CONFIG } from "../config/booking.config";
 import { localBookingRepository } from "../data/local/local-repository";
 
 export type BookingStep = 1 | 2 | 3 | 4 | 5 | 6;
@@ -97,7 +97,7 @@ export function useBooking(): UseBookingReturn {
   const [isInsurance, setIsInsurance] = useState(false);
 
   // Step 2: Serviço
-  const [serviceId, setServiceId] = useState<string>(BRS_BOOKING_CONFIG.services[0].id);
+  const [serviceId, setServiceId] = useState<string>(MASTER_BOOKING_CONFIG.services[0].id);
 
   // Step 3: Logística
   const [logisticsType, setLogisticsType] = useState<"presencial" | "leva-e-traz">("presencial");
@@ -135,7 +135,8 @@ export function useBooking(): UseBookingReturn {
 
   const activeService = useMemo(() => {
     return (
-      BRS_BOOKING_CONFIG.services.find((s) => s.id === serviceId) ?? BRS_BOOKING_CONFIG.services[0]
+      MASTER_BOOKING_CONFIG.services.find((s) => s.id === serviceId) ??
+      MASTER_BOOKING_CONFIG.services[0]
     );
   }, [serviceId]);
 
@@ -150,14 +151,14 @@ export function useBooking(): UseBookingReturn {
     return computeAvailableSlots({
       date: selectedDate,
       service: activeService,
-      workingHours: BRS_BOOKING_CONFIG.workingHours,
+      workingHours: MASTER_BOOKING_CONFIG.workingHours,
       existingAppointments: appointments,
-      professionals: BRS_BOOKING_CONFIG.professionals,
+      professionals: MASTER_BOOKING_CONFIG.professionals,
       isLevaETraz: logisticsType === "leva-e-traz",
-      levaETrazBufferMinutes: BRS_BOOKING_CONFIG.levaETraz.additionalBufferMinutes,
-      slotIntervalMinutes: BRS_BOOKING_CONFIG.slotIntervalMinutes,
-      minNoticeMinutes: BRS_BOOKING_CONFIG.minNoticeMinutes,
-      timezone: BRS_BOOKING_CONFIG.timezone,
+      levaETrazBufferMinutes: MASTER_BOOKING_CONFIG.levaETraz.additionalBufferMinutes,
+      slotIntervalMinutes: MASTER_BOOKING_CONFIG.slotIntervalMinutes,
+      minNoticeMinutes: MASTER_BOOKING_CONFIG.minNoticeMinutes,
+      timezone: MASTER_BOOKING_CONFIG.timezone,
     });
   }, [selectedDate, activeService, appointments, logisticsType]);
 
@@ -170,15 +171,15 @@ export function useBooking(): UseBookingReturn {
     return computeAvailableDays({
       yearMonth,
       service: activeService,
-      workingHours: BRS_BOOKING_CONFIG.workingHours,
+      workingHours: MASTER_BOOKING_CONFIG.workingHours,
       existingAppointments: appointments,
-      professionals: BRS_BOOKING_CONFIG.professionals,
+      professionals: MASTER_BOOKING_CONFIG.professionals,
       isLevaETraz: logisticsType === "leva-e-traz",
-      levaETrazBufferMinutes: BRS_BOOKING_CONFIG.levaETraz.additionalBufferMinutes,
-      slotIntervalMinutes: BRS_BOOKING_CONFIG.slotIntervalMinutes,
-      minNoticeMinutes: BRS_BOOKING_CONFIG.minNoticeMinutes,
-      maxAdvanceDays: BRS_BOOKING_CONFIG.maxAdvanceDays,
-      timezone: BRS_BOOKING_CONFIG.timezone,
+      levaETrazBufferMinutes: MASTER_BOOKING_CONFIG.levaETraz.additionalBufferMinutes,
+      slotIntervalMinutes: MASTER_BOOKING_CONFIG.slotIntervalMinutes,
+      minNoticeMinutes: MASTER_BOOKING_CONFIG.minNoticeMinutes,
+      maxAdvanceDays: MASTER_BOOKING_CONFIG.maxAdvanceDays,
+      timezone: MASTER_BOOKING_CONFIG.timezone,
     });
   }, [selectedDate, activeService, appointments, logisticsType]);
 
@@ -220,7 +221,7 @@ export function useBooking(): UseBookingReturn {
       id: `app-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
       protocol,
       serviceId,
-      professionalId: selectedSlot.professionalId ?? BRS_BOOKING_CONFIG.professionals[0].id,
+      professionalId: selectedSlot.professionalId ?? MASTER_BOOKING_CONFIG.professionals[0].id,
       startTime: selectedSlot.start.toISOString(),
       endTime: selectedSlot.end.toISOString(),
       status: "CONFIRMED",

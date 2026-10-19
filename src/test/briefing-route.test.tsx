@@ -48,7 +48,7 @@ describe("Briefing Route & UI Integration", () => {
   it("persiste dados editados no localStorage através do autosave", async () => {
     render(<BriefingContainer />);
 
-    const inputRazaoSocial = screen.getByPlaceholderText(/Brs Comercio de Pecas/i);
+    const inputRazaoSocial = screen.getByPlaceholderText(/Master Comercio de Pecas/i);
     expect(inputRazaoSocial).toBeInTheDocument();
 
     // Digita nova razão social dentro de act

@@ -75,7 +75,7 @@ describe("SPEC-043: Refatoração Global de UX/UI (/servicos, /trabalhos e /para
       expect(buttonsInsideEstetica?.length || 0).toBe(0);
     });
 
-    it("Bottom CTA Banner de Leva e Traz é o ponto focal de conversão da rota", () => {
+    it("Bottom CTA Banner de Guincho é o ponto focal de conversão da rota", () => {
       const Component = ServicosRoute.options.component as React.ComponentType;
       const { container } = render(
         <SmoothScrollProvider>
@@ -86,7 +86,7 @@ describe("SPEC-043: Refatoração Global de UX/UI (/servicos, /trabalhos e /para
       const bottomBanner = container.querySelector("#leva-e-traz");
       expect(bottomBanner).not.toBeNull();
       expect(bottomBanner?.textContent).toContain(
-        "Diagnóstico técnico preciso com comodidade de Leva e Traz em Toledo-PR",
+        "Diagnóstico técnico preciso com comodidade do guincho em Toledo-PR",
       );
       expect(bottomBanner?.textContent).toContain("Solicitar avaliação");
     });
@@ -179,9 +179,9 @@ describe("SPEC-043: Refatoração Global de UX/UI (/servicos, /trabalhos e /para
 
       // Conexão Profissional (Bottom CTA)
       expect(container.textContent).toContain(
-        "Vamos estabelecer um canal de relacionamento com a BRS?",
+        "Vamos estabelecer um canal de relacionamento com a Master?",
       );
-      expect(container.textContent).toContain("Falar com a equipe da BRS");
+      expect(container.textContent).toContain("Falar com a equipe da Master");
     });
   });
 });

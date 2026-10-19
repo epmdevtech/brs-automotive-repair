@@ -9,7 +9,7 @@ export interface BlockedPeriod {
   createdAt: string;
 }
 
-const BLOCKS_STORAGE_KEY = "brs_blocked_periods";
+const BLOCKS_STORAGE_KEY = "master_blocked_periods";
 
 export function getBlockedPeriods(): BlockedPeriod[] {
   if (typeof window === "undefined" || typeof localStorage === "undefined") {

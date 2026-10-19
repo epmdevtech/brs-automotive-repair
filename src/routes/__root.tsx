@@ -25,7 +25,7 @@ function NotFoundComponent() {
         <h2 className="mt-4 text-xl font-semibold text-foreground">Página não encontrada</h2>
         <p className="mt-2 text-sm text-neutral-400">
           O endereço que você tentou acessar não existe ou foi alterado. Utilize os atalhos abaixo
-          para navegar pelo conteúdo oficial da BRS.
+          para navegar pelo conteúdo oficial da Master.
         </p>
         <div className="mt-6 flex flex-wrap justify-center gap-3">
           <Button variant="primary" asChild>
@@ -85,7 +85,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { name: "theme-color", content: "#0b0d10" },
-      { property: "og:site_name", content: "BRS Reparações Automotivas" },
+      { property: "og:site_name", content: "Master Chapeação e Pinturas" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { ArrowUpRight, Phone, Instagram, MapPin, Clock, Calendar } from "lucide-react";
+import { ArrowUpRight, Phone, Facebook, Instagram, MapPin, Clock, Calendar } from "lucide-react";
 import { company } from "@/lib/brs";
 import { ScrollReveal } from "@/components/ui/scroll-reveal";
 import { ContactForm } from "./contact-form";
@@ -47,7 +47,7 @@ export function Contact({
                   <span>Agendamento Online</span>
                 </div>
                 <div className="text-sm font-semibold text-white group-hover:text-primary transition-colors">
-                  Agendar Vistoria ou Leva e Traz (Pré-OS)
+                  Agendar Vistoria ou Guincho (Pré-OS)
                 </div>
                 <p className="text-[11px] text-muted-foreground mt-0.5">
                   Informe as avarias do veículo e reserve um horário exclusivo em Toledo-PR.
@@ -75,7 +75,7 @@ export function Contact({
             </a>
 
             <a
-              href={company.instagram}
+              href={company.instagram.url}
               {...external}
               className="group block text-foreground hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary rounded-xs"
             >
@@ -84,7 +84,26 @@ export function Contact({
                 <span>Instagram Oficial</span>
               </div>
               <span className="text-base sm:text-lg font-medium text-white group-hover:text-primary transition-colors inline-flex items-center gap-1">
-                @brsreparacoes
+                {company.instagram.handle}
+                <ArrowUpRight
+                  size={14}
+                  className="text-primary transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                  aria-hidden="true"
+                />
+              </span>
+            </a>
+
+            <a
+              href={company.social.url}
+              {...external}
+              className="group block text-foreground hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary rounded-xs"
+            >
+              <div className="flex items-center gap-2 text-xs font-mono text-muted-foreground uppercase tracking-wider mb-1">
+                <Facebook size={14} className="text-primary" aria-hidden="true" />
+                <span>Facebook Oficial</span>
+              </div>
+              <span className="text-base sm:text-lg font-medium text-white group-hover:text-primary transition-colors inline-flex items-center gap-1">
+                Master Chapeação e Pinturas
                 <ArrowUpRight
                   size={14}
                   className="text-primary transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"

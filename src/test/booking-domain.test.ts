@@ -95,8 +95,8 @@ describe("Domain: Availability Engine", () => {
   };
 
   const professionals: Professional[] = [
-    { id: "bruno", name: "Bruno", role: "Especialista", sortOrder: 1 },
-    { id: "equipe", name: "Equipe BRS", role: "Técnico", sortOrder: 2 },
+    { id: "bruno", name: "Equipe Técnica", role: "Especialista", sortOrder: 1 },
+    { id: "equipe", name: "Equipe Master", role: "Técnico", sortOrder: 2 },
   ];
 
   const workingHours: WorkingHours = {
@@ -141,7 +141,7 @@ describe("Domain: Availability Engine", () => {
 
     const existing: Appointment = {
       id: "app-1",
-      protocol: "#BRS-0001",
+      protocol: "#Master-0001",
       serviceId: service.id,
       professionalId: "bruno",
       startTime: appStart.toISOString(),
@@ -191,11 +191,11 @@ describe("Domain: Availability Engine", () => {
     expect(slot08?.professionalId).toBe("equipe");
   });
 
-  it("applies extra logistics buffer for Leva e Traz", () => {
+  it("applies extra logistics buffer for Guincho", () => {
     // Turno termina às 12:00.
     // Duração: 45 min. Buffer normal: 15 min. Ocupação normal: 60 min.
     // Slot das 11:00 cabe no turno (11:00 + 60 min = 12:00).
-    // Com Leva e Traz (+30 min buffer): ocupação = 45 + 15 + 30 = 90 min.
+    // Com Guincho (+30 min buffer): ocupação = 45 + 15 + 30 = 90 min.
     // Slot das 11:00 ocuparia até 12:30 (ultrapassa 12:00 do turno), então NÃO deve ser ofertado!
     const slotsPresencial = computeAvailableSlots({
       date: monday,

@@ -1,4 +1,4 @@
-# Módulo de Conhecimento: Regras de Negócio e Domínio BRS
+# Módulo de Conhecimento: Regras de Negócio e Domínio Master
 
 ## Metadados
 
@@ -12,10 +12,10 @@
 
 ## 1. Identidade e Localização da Empresa
 
-- **Razão / Nome Fantasia**: BRS Reparações Automotivas
+- **Razão / Nome Fantasia**: Master Chapeação e Pinturas
 - **Cidade e Estado**: Toledo, Paraná (Brasil)
-- **Telefone Público**: (45) 2035-9440 (`tel:+554520359440`)
-- **Canal Oficial Confirmado**: Instagram [`@brsreparacoes`](https://www.instagram.com/brsreparacoes/)
+- **Telefone Público**: (45) 99954-5442 (`tel:+5545999545442`)
+- **Canal Oficial Confirmado**: Instagram [`@masterchapeacao2022`](https://www.instagram.com/masterchapeacao2022/)
 - **Status do WhatsApp**: Não confirmado formalmente pelo proprietário (`whatsappConfirmed: false` em `src/lib/brs.ts`). Não deve haver botões ou promessas de atendimento por WhatsApp até liberação explícita.
 
 ---
@@ -44,12 +44,12 @@ O site atende a dois segmentos:
 O gerador de mensagens em `src/lib/brs.ts` adapta a introdução conforme o público selecionado:
 
 - Para corretores: _"Olá! Gostaria de conversar sobre uma possível parceria para atendimento de segurados."_
-- Para particulares: _"Olá! Conheci a BRS pelo site e gostaria de solicitar uma avaliação para meu veículo."_
+- Para particulares: _"Olá! Conheci a Master pelo site e gostaria de solicitar uma avaliação para meu veículo."_
 
 ---
 
 ## 4. Política de Mídia e Imagens Ilustrativas
 
 - As fotos atuais de serviços e oficina são categorizadas como **ilustrativas**.
-- É terminantemente proibido descrever as fotos ilustrativas como se fossem a sede física real da BRS ou fotos reais de clientes até que o acervo oficial seja entregue pelo proprietário.
+- É terminantemente proibido descrever as fotos ilustrativas como se fossem a sede física real da Master ou fotos reais de clientes até que o acervo oficial seja entregue pelo proprietário.
 - Comparativos do tipo "Antes e Depois" só poderão ser ativados mediante fornecimento de fotos reais autorizadas.

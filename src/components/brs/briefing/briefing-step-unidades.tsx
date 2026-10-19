@@ -114,7 +114,7 @@ export function StepUnidades({ data, onChange }: StepUnidadesProps) {
                 <Input
                   value={unidade.nomeIdentificador}
                   onChange={(e) => updateUnidade(idx, { nomeIdentificador: e.target.value })}
-                  placeholder="Ex: BRS Oficina Central Toledo"
+                  placeholder="Ex: Master Toledo - Centro"
                   className="bg-neutral-900/80 border-white/10 text-white text-xs h-9"
                 />
               </div>
@@ -125,7 +125,7 @@ export function StepUnidades({ data, onChange }: StepUnidadesProps) {
                 <Input
                   value={unidade.telefone || ""}
                   onChange={(e) => updateUnidade(idx, { telefone: e.target.value })}
-                  placeholder="(45) 2035-9440"
+                  placeholder="(45) 99954-5442"
                   className="bg-neutral-900/80 border-white/10 text-white text-xs h-9"
                 />
               </div>
@@ -138,7 +138,7 @@ export function StepUnidades({ data, onChange }: StepUnidadesProps) {
                 <Input
                   value={unidade.enderecoCompleto}
                   onChange={(e) => updateUnidade(idx, { enderecoCompleto: e.target.value })}
-                  placeholder="R. Barão do Rio Branco, 4892 - Gisela, Toledo - PR, 85905-625"
+                  placeholder="Av. Maripá, 4138 - Centro, Toledo - PR, 85901-000"
                   className="bg-neutral-900/80 border-white/10 text-white text-xs h-9"
                 />
               </div>

@@ -68,7 +68,7 @@ export function TimelineOperacional({
   // Sessão atual do usuário
   const session = getAdminSession();
   const papelAtivo: Papel = usuarioPapelCustom || normalizarPapel(session?.role);
-  const autorNome = session?.name || "Operador BRS";
+  const autorNome = session?.name || "Operador Master";
   const autorId = session?.email || "operador-demo";
 
   // Estado local sincronizado de eventos
@@ -107,7 +107,7 @@ export function TimelineOperacional({
     carregarEventos();
 
     if (typeof window !== "undefined" && "BroadcastChannel" in window) {
-      const channel = new BroadcastChannel("brs_booking_sync");
+      const channel = new BroadcastChannel("master_booking_sync");
       channel.onmessage = (msg) => {
         if (msg.data?.payload?.agendamentoId === agendamentoId) {
           startTransition(() => {

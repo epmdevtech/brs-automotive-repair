@@ -50,7 +50,9 @@ describe("SPEC-012 / SPEC-064 — Padronização de Cores da Seção Hero e Sinc
 
   it("exibe endereço e horário confirmados na barra inferior da Hero (SPEC-064)", () => {
     render(<Hero />);
-    expect(screen.getByText(/R\. Barão do Rio Branco, 4892/i)).toBeInTheDocument();
-    expect(screen.getByText(/Segunda a sexta, das 08h às 18h/i)).toBeInTheDocument();
+    expect(screen.getByText(/Av\. Maripá, 4138/i)).toBeInTheDocument();
+    expect(
+      screen.getByText(/Segunda a sexta, das 08h às 12h e das 13h30 às 18h30/i),
+    ).toBeInTheDocument();
   });
 });

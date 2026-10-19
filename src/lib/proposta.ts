@@ -1,6 +1,6 @@
 /**
  * Módulo de Negócio e Domínio — Proposta Comercial Personalizada
- * EPM DevTech | BRS Reparações Automotivas
+ * EPM DevTech | Master Chapeação e Pinturas
  * Fonte Única de Verdade para Propostas Comerciais (SPEC-027 / TASK-027-01)
  */
 
@@ -374,12 +374,12 @@ export function generateModularAcceptanceMessage(
  * Repositório Canônico de Propostas Comerciais EPM DevTech
  */
 export const commercialProposals: Record<string, CommercialProposal> = {
-  "brs-digital-presence": {
-    id: "prop-epm-brs-01",
-    slug: "brs-digital-presence",
+  "master-digital-presence": {
+    id: "prop-epm-master-01",
+    slug: "master-digital-presence",
     status: "ready",
-    clientName: "Direção & Proprietário BRS",
-    companyName: "BRS Reparações Automotivas",
+    clientName: "Direção & Proprietário Master",
+    companyName: "Master Chapeação e Pinturas",
     projectTitle: "Presença Digital Institucional & Captação Automotiva de Alta Fidelidade",
     projectSubtitle:
       "Uma presença digital sob medida para valorizar a excelência técnica em Funilaria, Pintura e Martelinho de Ouro em Toledo-PR.",
@@ -397,7 +397,7 @@ export const commercialProposals: Record<string, CommercialProposal> = {
     diagnosisAndOpportunity: {
       title: "Diagnóstico & Objetivos de Posicionamento",
       description:
-        "A BRS Reparações Automotivas oferece serviços artesanais e tecnológicos de alto padrão em Toledo-PR, mas precisa que sua presença digital transmita a mesma autoridade e precisão observadas na oficina física.",
+        "A Master Chapeação e Pinturas oferece serviços artesanais e tecnológicos de alto padrão em Toledo-PR, mas precisa que sua presença digital transmita a mesma autoridade e precisão observadas na oficina física.",
       objectives: [
         "Apresentação profissional das 3 áreas de especialidade (Funilaria, Pintura em Estufa e Martelinho de Ouro PDR).",
         "Demonstração técnica de restaurações com comparadores visuais Antes e Depois autênticos.",
@@ -409,7 +409,7 @@ export const commercialProposals: Record<string, CommercialProposal> = {
     solutionOverview: {
       title: "Solução Proposta",
       description:
-        "Desenvolvimento de uma plataforma web institucional contemporânea, rápida e acessível, alinhada à identidade visual automotiva escura e dourada da BRS, construída sobre arquitetura moderna em React 19 e TanStack Start.",
+        "Desenvolvimento de uma plataforma web institucional contemporânea, rápida e acessível, alinhada à identidade visual automotiva escura e dourada da Master, construída sobre arquitetura moderna em React 19 e TanStack Start.",
       highlights: [
         "Arquitetura moderna SPA multipágina com SSR híbrido e navegação client-side instantânea.",
         "Design editorial premium (Sora e Manrope) com estética Anti-Card Slop e acabamento de luxo.",
@@ -471,7 +471,7 @@ export const commercialProposals: Record<string, CommercialProposal> = {
         id: "esc-7",
         title: "Treinamento & Homologação Guiada",
         description:
-          "Acompanhamento da equipe da BRS durante a validação em ambiente de staging e entrega das instruções operacionais.",
+          "Acompanhamento da equipe da Master durante a validação em ambiente de staging e entrega das instruções operacionais.",
         included: true,
         category: "Gestão & Adicionais",
       },
@@ -505,7 +505,7 @@ export const commercialProposals: Record<string, CommercialProposal> = {
         id: "esc-exc-4",
         title: "Criação de Nova Identidade Visual / Logotipo",
         description:
-          "O projeto aplica a marca BRS existente; redesenho ou branding completo não faz parte deste escopo.",
+          "O projeto aplica a marca Master existente; redesenho ou branding completo não faz parte deste escopo.",
         included: false,
         category: "Conteúdo & Mídia",
       },
@@ -520,9 +520,9 @@ export const commercialProposals: Record<string, CommercialProposal> = {
       hasRecurringMonthly: false,
       recurringMonthlyValue: 0,
       recurringDescription:
-        "Sem mensalidade obrigatória ou cobrança recorrente fixa. A BRS torna-se proprietária integral do projeto desenvolvido. Suportes adicionais e novas funcionalidades são combinados sob demanda.",
+        "Sem mensalidade obrigatória ou cobrança recorrente fixa. A Master torna-se proprietária integral do projeto desenvolvido. Suportes adicionais e novas funcionalidades são combinados sob demanda.",
       thirdPartyCosts:
-        "Custos diretos de terceiros: Registro do domínio (.com.br junto ao Registro.br por ~R$ 40/ano) e hospedagem cloud gerenciada (~R$ 0 a R$ 30/mês conforme tráfego) ficam sob titularidade direta da BRS.",
+        "Custos diretos de terceiros: Registro do domínio (.com.br junto ao Registro.br por ~R$ 40/ano) e hospedagem cloud gerenciada (~R$ 0 a R$ 30/mês conforme tráfego) ficam sob titularidade direta da Master.",
     },
     paymentConditions: [
       {
@@ -552,7 +552,7 @@ export const commercialProposals: Record<string, CommercialProposal> = {
         step: 1,
         title: "Alinhamento & Briefing de Negócio",
         description:
-          "Reunião de alinhamento com a EPM DevTech para coleta de informações essenciais, preferências de estilo e recebimento dos materiais da BRS.",
+          "Reunião de alinhamento com a EPM DevTech para coleta de informações essenciais, preferências de estilo e recebimento dos materiais da Master.",
         estimatedDuration: "2 a 3 dias úteis",
       },
       {
@@ -607,7 +607,7 @@ export const commercialProposals: Record<string, CommercialProposal> = {
       {
         question: "Existe alguma mensalidade obrigatória?",
         answer:
-          "Não. A EPM DevTech entrega a plataforma concluída sem nenhuma taxa de manutenção mensal mandatória. A BRS só investe em manutenções ou novas funcionalidades caso solicite novas demandas pontuais no futuro.",
+          "Não. A EPM DevTech entrega a plataforma concluída sem nenhuma taxa de manutenção mensal mandatória. A Master só investe em manutenções ou novas funcionalidades caso solicite novas demandas pontuais no futuro.",
       },
       {
         question: "Como funciona a etapa de briefing?",
@@ -617,12 +617,12 @@ export const commercialProposals: Record<string, CommercialProposal> = {
       {
         question: "Quem fornece as fotos e textos do site?",
         answer:
-          "A EPM DevTech estrutura toda a redação técnica editorial dos serviços. As fotos da oficina física devem ser fornecidas pela BRS. Enquanto as fotos definitivas não forem fornecidas, o site utiliza mídia de alta qualidade explicitamente identificada como ilustrativa.",
+          "A EPM DevTech estrutura toda a redação técnica editorial dos serviços. As fotos da oficina física devem ser fornecidas pela Master. Enquanto as fotos definitivas não forem fornecidas, o site utiliza mídia de alta qualidade explicitamente identificada como ilustrativa.",
       },
       {
         question: "O que acontece ao clicar em 'Tenho interesse nesta proposta'?",
         answer:
-          "O clique não realiza cobranças nem assina contrato. Ele apenas manifesta formalmente que a BRS tem interesse em avançar, abrindo o canal com a EPM DevTech para agendarmos o alinhamento inicial e o briefing.",
+          "O clique não realiza cobranças nem assina contrato. Ele apenas manifesta formalmente que a Master tem interesse em avançar, abrindo o canal com a EPM DevTech para agendarmos o alinhamento inicial e o briefing.",
       },
     ],
     nextStepsBriefing: {
@@ -648,16 +648,16 @@ export const commercialProposals: Record<string, CommercialProposal> = {
       cta: true,
     },
   },
-  "brs-reparacoes": {
-    id: "prop-epm-brs-modular-02",
-    slug: "brs-reparacoes",
+  "master-chapeacao-pinturas": {
+    id: "prop-epm-master-modular-02",
+    slug: "master-chapeacao-pinturas",
     status: "ready",
     isModularPortfolio: true,
-    clientName: "Direção & Equipe BRS",
-    companyName: "BRS Reparações Automotivas",
-    projectTitle: "Uma estrutura digital preparada para a próxima fase da BRS.",
+    clientName: "Direção & Equipe Master",
+    companyName: "Master Chapeação e Pinturas",
+    projectTitle: "Uma estrutura digital preparada para a próxima fase da Master.",
     projectSubtitle:
-      "Uma proposta de soluções digitais para fortalecer a presença online, organizar o atendimento e criar oportunidades de evolução para a operação da BRS Reparações Automotivas.",
+      "Uma proposta de soluções digitais para fortalecer a presença online, organizar o atendimento e criar oportunidades de evolução para a operação da Master Chapeação e Pinturas.",
     author: "EPM DevTech",
     authorRole: "Engenharia de Software & Arquitetura de Sistemas",
     authorContact: {
@@ -686,7 +686,7 @@ export const commercialProposals: Record<string, CommercialProposal> = {
     solutionOverview: {
       title: "Portfólio Modular de Software Sob Medida",
       description:
-        "Cada solução digital foi concebida de forma independente e modular. A BRS tem total liberdade para iniciar pelo site institucional e acoplar novos módulos operacionais conforme sua demanda e momento de investimento.",
+        "Cada solução digital foi concebida de forma independente e modular. A Master tem total liberdade para iniciar pelo site institucional e acoplar novos módulos operacionais conforme sua demanda e momento de investimento.",
       highlights: [
         "Arquitetura modular independente: contrate apenas o que faz sentido agora.",
         "Transparência técnica: escopos, limitações e integrações explicitadas sem ambiguidades.",
@@ -733,7 +733,7 @@ export const commercialProposals: Record<string, CommercialProposal> = {
           "Definição dos canais oficiais confirmados de atendimento da oficina.",
         ],
         recurringCostsNote:
-          "Hospedagem básica e domínio (.com.br) contratados sob titularidade da BRS.",
+          "Hospedagem básica e domínio (.com.br) contratados sob titularidade da Master.",
         isAvailableForSelection: true,
         commercialNotes: "Produto de entrada; não inclui módulos de gestão ou agendamento.",
       },
@@ -765,7 +765,7 @@ export const commercialProposals: Record<string, CommercialProposal> = {
         ],
         dependencies: [
           "EPM Web ou aplicação web homologada para hospedagem do fluxo.",
-          "Definição das regras de horário e dias de atendimento pela equipe da BRS.",
+          "Definição das regras de horário e dias de atendimento pela equipe da Master.",
         ],
         recurringCostsNote: "Consumo padrão de infraestrutura de banco de dados e hospedagem.",
         isAvailableForSelection: true,
@@ -785,7 +785,7 @@ export const commercialProposals: Record<string, CommercialProposal> = {
         deliverables: [
           "Cadastro centralizado de clientes (particulares e corretores parceiros).",
           "Cadastro e vinculação de histórico de veículos aos proprietários.",
-          "Registro da origem de captação do contato (Instagram, indicação, balcão, site).",
+          "Registro da origem de captação do contato (Facebook, indicação, balcão, site).",
           "Funil comercial configurável em 7 etapas: Novo Contato, Qualificação, Avaliação, Orçamento, Negociação, Fechado e Perdido.",
           "Registro de linha do tempo com histórico de notas, ligações e interações.",
           "Gestão de tarefas internas e lembretes de retorno para follow-up de orçamentos.",
@@ -799,7 +799,7 @@ export const commercialProposals: Record<string, CommercialProposal> = {
           "Importação irrestrita ou saneamento de planilhas desorganizadas legadas.",
           "Licenças pagas de softwares de terceiros.",
         ],
-        dependencies: ["Definição do fluxo de atendimento e etapas comerciais padrão da BRS."],
+        dependencies: ["Definição do fluxo de atendimento e etapas comerciais padrão da Master."],
         recurringCostsNote: "Infraestrutura de banco de dados seguro na nuvem.",
         isAvailableForSelection: true,
         commercialNotes:
@@ -869,7 +869,7 @@ export const commercialProposals: Record<string, CommercialProposal> = {
         dependencies: [
           "Módulo EPM Booking Auto ou EPM Oficina contratado para fornecimento dos gatilhos.",
           "Contratação e aprovação de conta em provedor de mensageria selecionado.",
-          "Número de WhatsApp oficial validado e aprovado pela BRS.",
+          "Número de WhatsApp oficial validado e aprovado pela Master.",
         ],
         recurringCostsNote:
           "Tarifas de consumo de mensagens cobradas diretamente pelo provedor de API.",
@@ -903,7 +903,7 @@ export const commercialProposals: Record<string, CommercialProposal> = {
         ],
         dependencies: [
           "Ao menos 1 módulo operacional contratado (EPM Booking Auto, EPM CRM Auto ou EPM Oficina).",
-          "Alimentação contínua dos dados pela equipe da BRS.",
+          "Alimentação contínua dos dados pela equipe da Master.",
         ],
         recurringCostsNote:
           "Sem custo adicional de terceiros (roda sobre a infraestrutura da plataforma).",
@@ -919,7 +919,7 @@ export const commercialProposals: Record<string, CommercialProposal> = {
         badge: "Entrada Essencial",
         moduleIds: ["epm-web"],
         description:
-          "Website institucional multipágina completo com rotas dedicadas para posicionar a BRS com autoridade na internet e atrair novos contatos qualificados.",
+          "Website institucional multipágina completo com rotas dedicadas para posicionar a Master com autoridade na internet e atrair novos contatos qualificados.",
         referencePrice: 2490,
         isStartingPrice: false,
         highlight: false,
@@ -983,7 +983,7 @@ export const commercialProposals: Record<string, CommercialProposal> = {
         title: "Registro de Domínio Oficial (.com.br)",
         estimatedValueText: "~ R$ 40,00 / ano",
         description:
-          "Contratado e registrado diretamente no Registro.br sob a titularidade e CNPJ da BRS Reparações Automotivas.",
+          "Contratado e registrado diretamente no Registro.br sob a titularidade e CNPJ da Master Chapeação e Pinturas.",
         status: "third_party",
       },
       {
@@ -1028,14 +1028,14 @@ export const commercialProposals: Record<string, CommercialProposal> = {
         step: 1,
         title: "Apresentação da Proposta",
         description:
-          "Apresentação consultiva do portfólio modular pela EPM DevTech para avaliação da direção da BRS.",
+          "Apresentação consultiva do portfólio modular pela EPM DevTech para avaliação da direção da Master.",
         duration: "Etapa Concluída",
       },
       {
         step: 2,
         title: "Manifestação de Interesse",
         description:
-          "A BRS seleciona os módulos prioritários e compartilha sua intenção de avançar para a fase técnica.",
+          "A Master seleciona os módulos prioritários e compartilha sua intenção de avançar para a fase técnica.",
         duration: "Iniciativa do Cliente",
       },
       {
@@ -1077,7 +1077,7 @@ export const commercialProposals: Record<string, CommercialProposal> = {
         step: 8,
         title: "Validação & Homologação",
         description:
-          "Apresentação da plataforma em ambiente de staging para testes práticos e aprovação pela equipe da BRS.",
+          "Apresentação da plataforma em ambiente de staging para testes práticos e aprovação pela equipe da Master.",
         duration: "3 a 5 dias úteis",
       },
       {
@@ -1093,13 +1093,13 @@ export const commercialProposals: Record<string, CommercialProposal> = {
         id: "mod-esc-1",
         title: "Website Multipágina com Arquitetura de Rotas Especializadas",
         description:
-          "Plataforma digital completa em TanStack Router com rotas independentes (/servicos, /trabalhos, /para-corretores, /sobre, /contato) sob medida para a BRS.",
+          "Plataforma digital completa em TanStack Router com rotas independentes (/servicos, /trabalhos, /para-corretores, /sobre, /contato) sob medida para a Master.",
         included: true,
         category: "Frontend & Experiência",
       },
       {
         id: "mod-esc-2",
-        title: "Arquitetura Editorial e Design System Exclusivo BRS",
+        title: "Arquitetura Editorial e Design System Exclusivo Master",
         description:
           "Identidade visual automotiva escura e dourada, tipografia Sora/Manrope e conformidade Anti-Card Slop.",
         included: true,
@@ -1109,7 +1109,7 @@ export const commercialProposals: Record<string, CommercialProposal> = {
         id: "mod-esc-3",
         title: "Código-Fonte Proprietário e Licenciamento Claro",
         description:
-          "A BRS torna-se detentora do projeto desenvolvido sem aprisionamento a mensalidades compulsórias.",
+          "A Master torna-se detentora do projeto desenvolvido sem aprisionamento a mensalidades compulsórias.",
         included: true,
         category: "Infraestrutura & SEO",
       },
@@ -1144,7 +1144,7 @@ export const commercialProposals: Record<string, CommercialProposal> = {
       recurringDescription:
         "Sem mensalidade obrigatória na implantação. Despesas de infraestrutura e serviços externos são discriminadas de forma independente.",
       thirdPartyCosts:
-        "Custos diretos de terceiros sob responsabilidade da BRS (domínio, hospedagem e consumo de mensageria).",
+        "Custos diretos de terceiros sob responsabilidade da Master (domínio, hospedagem e consumo de mensageria).",
     },
     paymentConditions: [
       {
@@ -1156,7 +1156,7 @@ export const commercialProposals: Record<string, CommercialProposal> = {
       {
         title: "Saldo Final na Homologação",
         description:
-          "50% restante pago após a validação completa pela BRS em ambiente de testes, antes do apontamento do domínio oficial.",
+          "50% restante pago após a validação completa pela Master em ambiente de testes, antes do apontamento do domínio oficial.",
       },
       {
         title: "Formas de Pagamento",
@@ -1188,7 +1188,7 @@ export const commercialProposals: Record<string, CommercialProposal> = {
         step: 3,
         title: "Homologação & Validação",
         description:
-          "Período de testes assistidos pela BRS em ambiente de homologação para validação de fluxos.",
+          "Período de testes assistidos pela Master em ambiente de homologação para validação de fluxos.",
         estimatedDuration: "3 a 5 dias úteis",
       },
       {
@@ -1227,7 +1227,7 @@ export const commercialProposals: Record<string, CommercialProposal> = {
       {
         question: "O módulo Booking confirma horários automaticamente?",
         answer:
-          "Não. O Booking Auto opera como um pré-agendamento estruturado para a oficina analisar e confirmar. Isso garante que a BRS mantenha o controle manual de sua capacidade operacional e disponibilidade de box.",
+          "Não. O Booking Auto opera como um pré-agendamento estruturado para a oficina analisar e confirmar. Isso garante que a Master mantenha o controle manual de sua capacidade operacional e disponibilidade de box.",
       },
       {
         question: "O CRM pode ser integrado ao site?",
@@ -1242,12 +1242,12 @@ export const commercialProposals: Record<string, CommercialProposal> = {
       {
         question: "Existe alguma mensalidade obrigatória de software?",
         answer:
-          "Não há mensalidade mandatória de licenciamento de software. A BRS torna-se dona do código desenvolvido. Apenas custos de infraestrutura direta de terceiros (domínio e hospedagem) permanecem sob titularidade da oficina.",
+          "Não há mensalidade mandatória de licenciamento de software. A Master torna-se dona do código desenvolvido. Apenas custos de infraestrutura direta de terceiros (domínio e hospedagem) permanecem sob titularidade da oficina.",
       },
       {
         question: "Como funciona a etapa de briefing?",
         answer:
-          "Após manifestar interesse nos módulos e assinarmos o contrato, a equipe da EPM DevTech conduz uma sessão interativa com a BRS para coletar os dados essenciais sem formulários cansativos.",
+          "Após manifestar interesse nos módulos e assinarmos o contrato, a equipe da EPM DevTech conduz uma sessão interativa com a Master para coletar os dados essenciais sem formulários cansativos.",
       },
       {
         question: "Os valores de implantação incluem integrações com sistemas externos?",
@@ -1257,7 +1257,7 @@ export const commercialProposals: Record<string, CommercialProposal> = {
       {
         question: "O que acontece ao clicar em 'Tenho interesse nesta proposta'?",
         answer:
-          "O botão não efetua cobrança nem gera vínculo jurídico imediato. Ele prepara um resumo claro dos módulos que a BRS tem interesse em avaliar e direciona para o alinhamento com a EPM DevTech.",
+          "O botão não efetua cobrança nem gera vínculo jurídico imediato. Ele prepara um resumo claro dos módulos que a Master tem interesse em avaliar e direciona para o alinhamento com a EPM DevTech.",
       },
     ],
     nextStepsBriefing: {

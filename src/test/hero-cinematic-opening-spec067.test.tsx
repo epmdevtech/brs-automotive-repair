@@ -21,7 +21,7 @@ describe("SPEC-067: Hero com Abertura Cinematográfica, Zoom Lento e Reflexo de 
       <AnimatedHero
         backgroundImageUrl="/images/hero-car.webp"
         eyebrow="OFICINA TÉCNICA ESPECIALIZADA • TOLEDO, PR"
-        title="BRS Reparações Automotivas"
+        title="Master Chapeação e Pinturas"
         description="Recuperação estética e estrutural."
         bottomContent={<div>Rodapé de teste</div>}
       />,
@@ -64,7 +64,7 @@ describe("SPEC-067: Hero com Abertura Cinematográfica, Zoom Lento e Reflexo de 
     expect(primaryCta).toHaveAttribute("href", "/contato");
 
     // Rodapé de viewport com alto contraste e aviso de fotografia ilustrativa
-    expect(screen.getByText("Fotografia ilustrativa")).toBeInTheDocument();
+    expect(screen.queryByText("Fotografia ilustrativa")).toBeNull();
     expect(screen.getByText(new RegExp(company.openingHours))).toBeInTheDocument();
     expect(container.querySelector(".hero-intro-foot")).toBeInTheDocument();
   });
@@ -73,7 +73,7 @@ describe("SPEC-067: Hero com Abertura Cinematográfica, Zoom Lento e Reflexo de 
     render(
       <AnimatedHero
         backgroundImageUrl="/images/hero.webp"
-        title="BRS Teste"
+        title="Master Teste"
         description="Descrição"
         ctaButton={{ text: "Avaliação", href: "/contato" }}
         secondaryCta={{ text: `Ligar ${company.phone}`, href: company.phoneHref }}
@@ -112,7 +112,7 @@ describe("SPEC-067: Hero com Abertura Cinematográfica, Zoom Lento e Reflexo de 
     const { container } = render(
       <AnimatedHero
         backgroundImageUrl="/images/hero.webp"
-        title="BRS Teste"
+        title="Master Teste"
         description="Descrição"
       />,
     );
@@ -143,13 +143,13 @@ describe("SPEC-067: Hero com Abertura Cinematográfica, Zoom Lento e Reflexo de 
     vi.useRealTimers();
   });
 
-  it("fast-forwards Header when brs:hero-intro-skip custom event is dispatched", () => {
+  it("fast-forwards Header when master:hero-intro-skip custom event is dispatched", () => {
     const { container } = render(<Header isHome={true} />);
     const header = container.querySelector("header");
     expect(header).toHaveClass("header-cinematic-intro");
 
     act(() => {
-      window.dispatchEvent(new CustomEvent("brs:hero-intro-skip"));
+      window.dispatchEvent(new CustomEvent("master:hero-intro-skip"));
     });
 
     expect(header).not.toHaveClass("header-cinematic-intro");
@@ -171,7 +171,7 @@ describe("SPEC-067: Hero com Abertura Cinematográfica, Zoom Lento e Reflexo de 
     const { container } = render(
       <AnimatedHero
         backgroundImageUrl="/images/hero.webp"
-        title="BRS Redução"
+        title="Master Redução"
         description="Sem animações"
       />,
     );

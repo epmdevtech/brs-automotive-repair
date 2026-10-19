@@ -23,7 +23,7 @@ describe("SPEC-027 / TASK-027-01 — Domínio da Proposta Comercial", () => {
 
   describe("2. Validação Rigorosa de Completude e Prevenção de Placeholders", () => {
     it("aprova proposta completa sem campos pendentes", () => {
-      const pilotProposal = commercialProposals["brs-digital-presence"];
+      const pilotProposal = commercialProposals["master-digital-presence"];
       expect(pilotProposal).toBeDefined();
 
       const validation = validateProposalCompleteness(pilotProposal);
@@ -34,7 +34,7 @@ describe("SPEC-027 / TASK-027-01 — Domínio da Proposta Comercial", () => {
 
     it("rejeita proposta com slug inválido ou vazio", () => {
       const invalid = {
-        ...commercialProposals["brs-digital-presence"],
+        ...commercialProposals["master-digital-presence"],
         slug: "Slug Invalido Com Espacos!",
       };
       const validation = validateProposalCompleteness(invalid);
@@ -44,9 +44,9 @@ describe("SPEC-027 / TASK-027-01 — Domínio da Proposta Comercial", () => {
 
     it("rejeita proposta com valor total zerado ou negativo", () => {
       const invalid = {
-        ...commercialProposals["brs-digital-presence"],
+        ...commercialProposals["master-digital-presence"],
         investment: {
-          ...commercialProposals["brs-digital-presence"].investment,
+          ...commercialProposals["master-digital-presence"].investment,
           totalValue: 0,
         },
       };
@@ -57,7 +57,7 @@ describe("SPEC-027 / TASK-027-01 — Domínio da Proposta Comercial", () => {
 
     it("rejeita propostas que contenham placeholders genéricos ou termos contaminados de outros segmentos", () => {
       const contaminated: CommercialProposal = {
-        ...commercialProposals["brs-digital-presence"],
+        ...commercialProposals["master-digital-presence"],
         projectTitle: "Site para Consultório Odontológico de Alto Padrão",
       };
       const validation = validateProposalCompleteness(contaminated);
@@ -69,9 +69,9 @@ describe("SPEC-027 / TASK-027-01 — Domínio da Proposta Comercial", () => {
 
     it("exige descrição explícita quando a proposta não possui mensalidade mandatória", () => {
       const invalid: CommercialProposal = {
-        ...commercialProposals["brs-digital-presence"],
+        ...commercialProposals["master-digital-presence"],
         investment: {
-          ...commercialProposals["brs-digital-presence"].investment,
+          ...commercialProposals["master-digital-presence"].investment,
           hasRecurringMonthly: false,
           recurringDescription: "",
         },
@@ -83,10 +83,10 @@ describe("SPEC-027 / TASK-027-01 — Domínio da Proposta Comercial", () => {
   });
 
   describe("3. Repositório de Propostas e Consulta por Slug", () => {
-    it("recupera com sucesso a proposta piloto da BRS", () => {
-      const found = getProposalBySlug("brs-digital-presence");
+    it("recupera com sucesso a proposta piloto da Master", () => {
+      const found = getProposalBySlug("master-digital-presence");
       expect(found).toBeDefined();
-      expect(found?.companyName).toBe("BRS Reparações Automotivas");
+      expect(found?.companyName).toBe("Master Chapeação e Pinturas");
       expect(found?.author).toBe("EPM DevTech");
       expect(found?.investment.totalValue).toBe(3800);
       expect(found?.investment.hasRecurringMonthly).toBe(false);
@@ -105,7 +105,7 @@ describe("SPEC-027 / TASK-027-01 — Domínio da Proposta Comercial", () => {
 
   describe("4. Geração Honesta de Mensagem de Manifestação de Interesse", () => {
     it("gera mensagem pré-formatada com dados da proposta e contato do cliente", () => {
-      const proposal = commercialProposals["brs-digital-presence"];
+      const proposal = commercialProposals["master-digital-presence"];
       const message = generateAcceptanceMessage(proposal, {
         name: "Carlos Diretor",
         notes: "Podemos iniciar na próxima terça-feira.",
@@ -114,7 +114,7 @@ describe("SPEC-027 / TASK-027-01 — Domínio da Proposta Comercial", () => {
       expect(message).toContain("Olá, equipe EPM DevTech!");
       expect(message).toContain(proposal.projectTitle);
       expect(message).toContain(proposal.companyName);
-      expect(message).toContain("Ref. Proposta: brs-digital-presence");
+      expect(message).toContain("Ref. Proposta: master-digital-presence");
       expect(message).toContain("Carlos Diretor");
       expect(message).toContain("Podemos iniciar na próxima terça-feira.");
       expect(message).toContain("etapa de briefing");
@@ -125,9 +125,9 @@ describe("SPEC-027 / TASK-027-01 — Domínio da Proposta Comercial", () => {
     });
   });
 
-  describe("5. SPEC-028 / TASK-028-01 — Portfólio Modular BRS Reparações", () => {
-    it("aprova e valida a proposta modular brs-reparacoes sem pendências", () => {
-      const modularProposal = getProposalBySlug("brs-reparacoes");
+  describe("5. SPEC-028 / TASK-028-01 — Portfólio Modular Master Chapeação", () => {
+    it("aprova e valida a proposta modular master-chapeacao-pinturas sem pendências", () => {
+      const modularProposal = getProposalBySlug("master-chapeacao-pinturas");
       expect(modularProposal).toBeDefined();
       expect(modularProposal?.isModularPortfolio).toBe(true);
 
@@ -138,7 +138,7 @@ describe("SPEC-027 / TASK-027-01 — Domínio da Proposta Comercial", () => {
     });
 
     it("contém exatamente os 6 módulos do catálogo automotivo com escopo e exclusões", () => {
-      const proposal = getProposalBySlug("brs-reparacoes")!;
+      const proposal = getProposalBySlug("master-chapeacao-pinturas")!;
       const modules = proposal.modulesCatalog;
       expect(modules).toBeDefined();
       expect(modules).toHaveLength(6);
@@ -168,7 +168,7 @@ describe("SPEC-027 / TASK-027-01 — Domínio da Proposta Comercial", () => {
     });
 
     it("contém as 5 combinações de pacotes sugeridos", () => {
-      const proposal = getProposalBySlug("brs-reparacoes")!;
+      const proposal = getProposalBySlug("master-chapeacao-pinturas")!;
       const bundles = proposal.bundles;
       expect(bundles).toBeDefined();
       expect(bundles).toHaveLength(5);
@@ -193,7 +193,7 @@ describe("SPEC-027 / TASK-027-01 — Domínio da Proposta Comercial", () => {
     });
 
     it("segrega custos recorrentes e despesas de terceiros", () => {
-      const proposal = getProposalBySlug("brs-reparacoes")!;
+      const proposal = getProposalBySlug("master-chapeacao-pinturas")!;
       const rec = proposal.recurringCosts;
       expect(rec).toBeDefined();
       expect(rec!.length).toBeGreaterThanOrEqual(5);
@@ -207,7 +207,7 @@ describe("SPEC-027 / TASK-027-01 — Domínio da Proposta Comercial", () => {
     });
 
     it("contém as 9 etapas completas do ciclo de execução", () => {
-      const proposal = getProposalBySlug("brs-reparacoes")!;
+      const proposal = getProposalBySlug("master-chapeacao-pinturas")!;
       const steps = proposal.executionSteps;
       expect(steps).toBeDefined();
       expect(steps).toHaveLength(9);
@@ -221,7 +221,7 @@ describe("SPEC-027 / TASK-027-01 — Domínio da Proposta Comercial", () => {
     });
 
     it("calcula corretamente os totais e flags no utilitário modular", () => {
-      const proposal = getProposalBySlug("brs-reparacoes")!;
+      const proposal = getProposalBySlug("master-chapeacao-pinturas")!;
       const catalog = proposal.modulesCatalog!;
 
       // 1 módulo sem flag de "a partir de"
@@ -242,16 +242,16 @@ describe("SPEC-027 / TASK-027-01 — Domínio da Proposta Comercial", () => {
     });
 
     it("gera mensagem de manifestação de interesse modular pré-formatada", () => {
-      const proposal = getProposalBySlug("brs-reparacoes")!;
+      const proposal = getProposalBySlug("master-chapeacao-pinturas")!;
       const message = generateModularAcceptanceMessage(proposal, ["epm-web", "epm-booking"], {
-        name: "Diretoria BRS",
+        name: "Diretoria Master",
         notes: "Prioridade para o agendamento online.",
       });
 
       expect(message).toContain("Olá, equipe EPM DevTech!");
-      expect(message).toContain("BRS Reparações Automotivas");
-      expect(message).toContain("Ref. Proposta: brs-reparacoes");
-      expect(message).toContain("Diretoria BRS");
+      expect(message).toContain("Master Chapeação e Pinturas");
+      expect(message).toContain("Ref. Proposta: master-chapeacao-pinturas");
+      expect(message).toContain("Diretoria Master");
       expect(message).toContain("EPM Web (Presença digital automotiva)");
       expect(message).toContain("EPM Booking Auto (Solicitações de avaliação e agendamento)");
       expect(message).toContain("R$");

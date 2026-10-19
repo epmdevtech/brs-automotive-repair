@@ -87,7 +87,7 @@ describe("UI: AdminLogin Component", () => {
 
     expect(screen.getByText(/Acesso Administrativo/i)).toBeInTheDocument();
     expect(screen.getByText(/Painel da Oficina/i)).toBeInTheDocument();
-    expect(screen.getByPlaceholderText(/nome@brsreparacoes.com.br/i)).toBeInTheDocument();
+    expect(screen.getByPlaceholderText(/nome@master.local/i)).toBeInTheDocument();
     expect(screen.getByLabelText("Senha de acesso", { selector: "input" })).toBeInTheDocument();
     expect(screen.getByRole("button", { name: /Entrar no Painel/i })).toBeInTheDocument();
     expect(
@@ -101,9 +101,7 @@ describe("UI: AdminLogin Component", () => {
     const demoBtn = screen.getByRole("button", { name: /Preencher dados demo em 1 clique/i });
     fireEvent.click(demoBtn);
 
-    const emailInput = screen.getByPlaceholderText(
-      /nome@brsreparacoes.com.br/i,
-    ) as HTMLInputElement;
+    const emailInput = screen.getByPlaceholderText(/nome@master.local/i) as HTMLInputElement;
     const passwordInput = screen.getByLabelText("Senha de acesso", {
       selector: "input",
     }) as HTMLInputElement;
@@ -128,7 +126,7 @@ describe("UI: AdminLogin Component", () => {
   it("displays error message on invalid submission", () => {
     render(<AdminLogin onLoginSuccess={vi.fn()} />);
 
-    const emailInput = screen.getByPlaceholderText(/nome@brsreparacoes.com.br/i);
+    const emailInput = screen.getByPlaceholderText(/nome@master.local/i);
     const passwordInput = screen.getByLabelText("Senha de acesso", { selector: "input" });
 
     fireEvent.change(emailInput, { target: { value: "invalido@teste.com" } });
@@ -146,23 +144,23 @@ describe("UI: AdminGridView Component", () => {
 
     expect(screen.getByText(/Agenda dos Técnicos/i)).toBeInTheDocument();
     expect(screen.getByText(/EPM BOOKING/i)).toBeInTheDocument();
-    expect(screen.getAllByText(/Bruno \(Funilaria & Vistoria\)/i).length).toBeGreaterThanOrEqual(1);
+    expect(screen.getAllByText(/Equipe Técnica Master/i).length).toBeGreaterThanOrEqual(1);
     expect(screen.getAllByText(/Técnico Martelinho de Ouro/i).length).toBeGreaterThanOrEqual(1);
     expect(screen.getAllByText(/Técnico Pintura em Estufa/i).length).toBeGreaterThanOrEqual(1);
     expect(screen.getByText(/Novo Agendamento/i)).toBeInTheDocument();
     expect(screen.getByText(/Bloquear Período/i)).toBeInTheDocument();
   });
 
-  it("allows switching tabs between Dia, Lista and Leva e Traz", () => {
+  it("allows switching tabs between Dia, Lista and Guincho", () => {
     render(<AdminGridView onLogout={vi.fn()} />);
 
     const listTab = screen.getByRole("button", { name: /Lista/i });
     fireEvent.click(listTab);
     expect(screen.getByText(/Listagem Cronológica de Atendimentos/i)).toBeInTheDocument();
 
-    const levaTab = screen.getByRole("button", { name: /Leva e Traz/i });
+    const levaTab = screen.getByRole("button", { name: /Guincho/i });
     fireEvent.click(levaTab);
-    expect(screen.getByText(/Roteiro de Coleta e Devolução Leva e Traz/i)).toBeInTheDocument();
+    expect(screen.getByText(/Roteiro de Remoção com Guincho/i)).toBeInTheDocument();
   });
 
   it("opens manual booking dialog when clicking + Livre", () => {

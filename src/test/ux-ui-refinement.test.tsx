@@ -19,7 +19,7 @@ describe("SPEC-037 — Refinamento UX/UI, Consolidação Visual e Otimização d
     expect(primaryCta).toHaveAttribute("href", "/contato");
 
     // Eliminação de marcas HUD artificiais
-    expect(screen.queryByText(/\+ BRS\.24/i)).toBeNull();
+    expect(screen.queryByText(/\+ Master\.24/i)).toBeNull();
     expect(screen.queryByText(/COORD: 24°43'S/i)).toBeNull();
 
     // Faixa trust-strip removida do Hero (SPEC-039)
@@ -29,7 +29,7 @@ describe("SPEC-037 — Refinamento UX/UI, Consolidação Visual e Otimização d
     const { container: philContainer } = render(<Philosophy />);
     expect(philContainer.textContent).toContain("Diagnóstico claro antes do serviço");
     expect(philContainer.textContent).toContain("Orçamento e prazo alinhados antes da execução");
-    expect(philContainer.textContent).toContain("Serviço de leva e traz em Toledo-PR");
+    expect(philContainer.textContent).toContain("Serviço de guincho em Toledo-PR");
   });
 
   it("AC-037-02: HomeBeforeAfter prioriza o slider e remove sobreposições HUD no frame", () => {
@@ -108,9 +108,9 @@ describe("SPEC-037 — Refinamento UX/UI, Consolidação Visual e Otimização d
     expect(ctaButton).toBeInTheDocument();
     expect(ctaButton).toHaveAttribute("href", "/contato");
 
-    const phoneLink = screen.getByRole("link", { name: /\(45\) 2035-9440/i });
+    const phoneLink = screen.getByRole("link", { name: /\(45\) 99954-5442/i });
     expect(phoneLink).toBeInTheDocument();
-    expect(phoneLink).toHaveAttribute("href", "tel:+554520359440");
+    expect(phoneLink).toHaveAttribute("href", "tel:+5545999545442");
 
     expect(screen.getAllByText(/Toledo-PR/i).length).toBeGreaterThanOrEqual(1);
   });

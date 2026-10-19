@@ -13,7 +13,7 @@ describe("Data: LocalBookingRepository with Atomic Traps & Idempotency", () => {
 
   const baseAppointment: Appointment = {
     id: "app-test-1",
-    protocol: "#BRS-9999",
+    protocol: "#Master-9999",
     serviceId: "avaliacao-funilaria",
     professionalId: "bruno",
     startTime: "2026-10-19T08:00:00.000Z",
@@ -42,7 +42,7 @@ describe("Data: LocalBookingRepository with Atomic Traps & Idempotency", () => {
 
     const list = await repo.listAppointments();
     expect(list.length).toBe(1);
-    expect(list[0].protocol).toBe("#BRS-9999");
+    expect(list[0].protocol).toBe("#Master-9999");
   });
 
   it("returns existing appointment on idempotent retry", async () => {
@@ -70,7 +70,7 @@ describe("Data: LocalBookingRepository with Atomic Traps & Idempotency", () => {
     const colliding: Appointment = {
       ...baseAppointment,
       id: "app-test-2",
-      protocol: "#BRS-8888",
+      protocol: "#Master-8888",
       idempotencyKey: "uuid-different",
       startTime: "2026-10-19T08:15:00.000Z",
       endTime: "2026-10-19T09:00:00.000Z",

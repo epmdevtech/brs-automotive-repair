@@ -20,13 +20,13 @@ describe("SPEC-027 / TASK-027-01 — Componentes e Roteamento de Proposta Comerc
       expect(matches.at(-1)?.routeId).not.toBe(rootRouteId);
     });
 
-    it("resolve com sucesso a rota individualizada /proposta/brs-digital-presence", () => {
-      const matches = router.matchRoutes("/proposta/brs-digital-presence");
+    it("resolve com sucesso a rota individualizada /proposta/master-digital-presence", () => {
+      const matches = router.matchRoutes("/proposta/master-digital-presence");
       expect(matches.length).toBeGreaterThan(0);
       expect(matches.at(-1)?.routeId).not.toBe(rootRouteId);
     });
 
-    it("garante que /proposta não está listada no menu primário público da BRS", () => {
+    it("garante que /proposta não está listada no menu primário público da Master", () => {
       const publicPaths = primaryNavigation.map(([, href]) => href);
       expect(publicPaths).not.toContain("/proposta");
       expect(publicPaths.some((p) => p.startsWith("/proposta"))).toBe(false);
@@ -36,7 +36,7 @@ describe("SPEC-027 / TASK-027-01 — Componentes e Roteamento de Proposta Comerc
       const head = buildRouteHead({
         title: "Proposta Comercial",
         description: "Apresentação comercial",
-        path: "/proposta/brs-digital-presence",
+        path: "/proposta/master-digital-presence",
         noindex: true,
       });
 
@@ -47,15 +47,15 @@ describe("SPEC-027 / TASK-027-01 — Componentes e Roteamento de Proposta Comerc
   });
 
   describe("2. Renderização da Proposta Comercial Pronta", () => {
-    const proposal = commercialProposals["brs-digital-presence"];
+    const proposal = commercialProposals["master-digital-presence"];
 
     it("renderiza o cabeçalho com identificação do cliente e autoria discreta da EPM DevTech", () => {
       render(<ProposalView proposal={proposal} />);
 
-      expect(screen.getByText(/Preparada para BRS Reparações Automotivas/i)).toBeInTheDocument();
+      expect(screen.getByText(/Preparada para Master Chapeação e Pinturas/i)).toBeInTheDocument();
       expect(screen.getByText(proposal.projectTitle)).toBeInTheDocument();
       expect(screen.getByText(/Autoria: EPM DevTech/i)).toBeInTheDocument();
-      expect(screen.getAllByText(/Ref: brs-digital-presence/i).length).toBeGreaterThanOrEqual(1);
+      expect(screen.getAllByText(/Ref: master-digital-presence/i).length).toBeGreaterThanOrEqual(1);
       expect(screen.getByText(proposal.clientName)).toBeInTheDocument();
     });
 
@@ -168,7 +168,7 @@ describe("SPEC-027 / TASK-027-01 — Componentes e Roteamento de Proposta Comerc
 
       expect(screen.getByText("Proposta não localizada")).toBeInTheDocument();
       expect(screen.getByText("slug-inexistente")).toBeInTheDocument();
-      expect(screen.getByRole("link", { name: /página inicial brs/i })).toBeInTheDocument();
+      expect(screen.getByRole("link", { name: /página inicial Master/i })).toBeInTheDocument();
       expect(screen.getByRole("link", { name: /falar com a epm devtech/i })).toHaveAttribute(
         "href",
         "mailto:contato@epmdevtech.com.br",
@@ -177,10 +177,10 @@ describe("SPEC-027 / TASK-027-01 — Componentes e Roteamento de Proposta Comerc
 
     it("bloqueia proposta em rascunho com dados incompletos e exibe aviso de pendências", () => {
       const draftWithMissingData: CommercialProposal = {
-        ...commercialProposals["brs-digital-presence"],
+        ...commercialProposals["master-digital-presence"],
         status: "draft",
         investment: {
-          ...commercialProposals["brs-digital-presence"].investment,
+          ...commercialProposals["master-digital-presence"].investment,
           totalValue: 0,
         },
       };

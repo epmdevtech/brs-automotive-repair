@@ -1,10 +1,10 @@
-# PROJECT: BRS Reparações Automotivas
+# PROJECT: Master Chapeação e Pinturas
 
 ## Metadados
 
 | Campo                   | Valor                                                           |
 | ----------------------- | --------------------------------------------------------------- |
-| Nome do Projeto         | BRS Reparações Automotivas (`brs`)                              |
+| Nome do Projeto         | Master Chapeação e Pinturas (`brs`)                              |
 | Organização             | EPMDEVTECH Clientes                                             |
 | Responsável             | Engenharia & Produto EPMDEVTECH                                 |
 | Estado                  | Ativo / Website Institucional Multipágina Estruturado com Rotas |
@@ -17,17 +17,17 @@
 
 ## 1. Visão Geral e Domínio
 
-- **Problema e resultado principal**: Prover uma presença digital institucional de alta credibilidade para a **BRS Reparações Automotivas**, localizada em Toledo-PR. O projeto é um website institucional multipágina completo com rotas dedicadas para cada especialidade (Funilaria, Pintura em Estufa e Martelinho de Ouro), galeria de trabalhos concluídos com comparador Antes/Depois, área exclusiva para corretores de seguros, apresentação institucional da oficina e canal de contato e avaliação técnica.
+- **Problema e resultado principal**: Prover uma presença digital institucional de alta credibilidade para a **Master Chapeação e Pinturas**, localizada em Toledo-PR. O projeto é um website institucional multipágina completo com rotas dedicadas para cada especialidade (Funilaria, Pintura em Estufa e Martelinho de Ouro), galeria de trabalhos concluídos com comparador Antes/Depois, área exclusiva para corretores de seguros, apresentação institucional da oficina e canal de contato e avaliação técnica.
 - **Usuários e partes interessadas**:
   - _Clientes Particulares (Proprietários de Veículos)_: Buscam restauração estética, recuperação de colisões ou martelinho de ouro sem danificar a pintura original, com agilidade e clareza no contato.
   - _Corretores de Seguros e Parceiros_: Buscam oficina de confiança em Toledo-PR com padrão de acabamento para encaminhamento de sinistros e atendimento a segurados.
-  - _Proprietário da BRS_: Deseja consolidação da marca na região, centralização de contatos no canal oficial e posicionamento honesto no mercado.
+  - _Proprietário da Master_: Deseja consolidação da marca na região, centralização de contatos no canal oficial e posicionamento honesto no mercado.
 - **Termos importantes do domínio**:
   - `Funilaria automotiva`: Reparação da lataria estrutural e alinhamento de painéis.
   - `Pintura automotiva`: Preparação, colorimetria e aplicação com acabamento uniforme e verniz de alta resistência.
   - `Martelinho de ouro`: Desamassamento técnico preservando a pintura original quando a integridade do verniz permite.
   - `Serviço Leva e Traz`: Comodidade opcional para clientes da cidade de Toledo-PR.
-  - `Canal Oficial Confirmado`: Instagram (`@brsreparacoes`) e telefone fixo `(45) 2035-9440`.
+  - `Canal Oficial Confirmado`: Instagram (`@masterchapeacao2022`) e telefone fixo `(45) 99954-5442`.
   - `WhatsApp Não Confirmado`: Diretriz estrita de não divulgar WhatsApp até confirmação formal do número pelo proprietário.
 
 ---
@@ -44,7 +44,7 @@
     - `/servicos/martelinho-de-ouro`: Rota dedicada da especialidade de Martelinho de Ouro;
     - `/trabalhos`: Portfólio completo de projetos e comparador interativo Antes/Depois;
     - `/para-corretores`: Rota voltada para corretores de seguros e parcerias de sinistro;
-    - `/sobre`: Rota institucional sobre a história, valores e estrutura física da BRS;
+    - `/sobre`: Rota institucional sobre a história, valores e estrutura física da Master;
     - `/contato`: Rota dedicada de triagem de contato e avaliação técnica;
     - `/privacidade`: Políticas de privacidade e conformidade de dados;
     - `/proposta/$slug`: Rota de proposta comercial personalizada confidencial (`noindex, nofollow`);
@@ -77,7 +77,7 @@
 ## 4. Estrutura do Repositório
 
 ```text
-BRS/
+Master/
 ├── .github/
 │   └── workflows/      # Esteiras de CI/CD (GitHub Actions: ci.yml)
 ├── agents/             # Definição e contratos dos agentes IA (Universal SDD)
@@ -152,7 +152,7 @@ BRS/
 ## 6. APIs, Dados e Integrações
 
 - **Sem Backend Desnecessário**: O projeto é intencionalmente autocontido no frontend, dispensando banco de dados ou APIs proprietárias no estágio atual.
-- **Canal de Contato**: O formulário gera uma mensagem formatada com os dados preenchidos (nome, telefone, veículo, serviço desejado e descrição) que o usuário copia com um clique para colar no Instagram `@brsreparacoes` ou ligar via `(45) 2035-9440`.
+- **Canal de Contato**: O formulário gera uma mensagem formatada com os dados preenchidos (nome, telefone, veículo, serviço desejado e descrição) que o usuário copia com um clique para colar no Instagram `@masterchapeacao2022` ou ligar via `(45) 99954-5442`.
 - **Dados Estruturados SEO**: Schema.org `AutoBodyShop` implementado na rota raiz (`src/routes/index.tsx`) com cidade, telefone e catálogo dos 3 serviços.
 
 ---
@@ -185,7 +185,7 @@ BRS/
 
 Todas as entregas obedecem ao protocolo **Universal SDD**:
 
-- `SPEC-001` / `TASK-001-01` / `REVIEW-001`: Estrutura da Landing Page Institucional BRS, Design Tokens e Fluxo Honesto de Contato.
+- `SPEC-001` / `TASK-001-01` / `REVIEW-001`: Estrutura da Landing Page Institucional Master, Design Tokens e Fluxo Honesto de Contato.
 - `SPEC-002` / `TASK-002-01` / `REVIEW-002`: Infraestrutura Containerizada com Docker, Docker Compose e Automação via Makefile.
 - `SPEC-003` / `TASK-003-01` / `REVIEW-003`: Auditoria Técnica, Remoção de Artefatos de IA, Modularização em 15 Submódulos e Refinamento Editorial.
 - `SPEC-004` / `TASK-004-01` / `REVIEW-004`: Esteira de Integração Contínua (CI/CD) com GitHub Actions e Validação de Containers Docker.
@@ -195,9 +195,9 @@ Todas as entregas obedecem ao protocolo **Universal SDD**:
 - `SPEC-008` / `TASK-008-01` / `REVIEW-008`: Expurgar Vínculos Lovable, Configuração Nativa Vite, Unificação de Header Único e Redesign da Seção Hero.
 - `SPEC-009` / `TASK-009-01` / `REVIEW-009`: Refinamento do Sistema Tipográfico com Sora e Manrope, Tokens Fluidos clamp() e Regras de Estabilidade Visual.
 - `SPEC-010` / `TASK-010-01` / `REVIEW-010`: Auditoria e Implementação de Scroll Reveal Premium com Tokens Calibrados, Disparo Único via IntersectionObserver e Suporte a Acessibilidade.
-- `SPEC-011` / `TASK-011-01` / `REVIEW-011`: Substituição do Favicon Lovable pelo Pacote Oficial de Favicons e Ícones da BRS Reparações Automotivas.
+- `SPEC-011` / `TASK-011-01` / `REVIEW-011`: Substituição do Favicon Lovable pelo Pacote Oficial de Favicons e Ícones da Master Chapeação e Pinturas.
 - `SPEC-012` / `TASK-012-01` / `REVIEW-012`: Padronização Rigorosa das Cores de Tipografia e Botões da Seção Hero Alinhadas aos Tokens do Projeto.
-- `SPEC-013` / `TASK-013-01` / `REVIEW-013`: Implementação de Footer Premium Minimal Inspirado no 21st.dev com Identidade BRS, Canais Reais e Acessibilidade.
+- `SPEC-013` / `TASK-013-01` / `REVIEW-013`: Implementação de Footer Premium Minimal Inspirado no 21st.dev com Identidade Master, Canais Reais e Acessibilidade.
 - `SPEC-014` / `TASK-014-01` / `REVIEW-014`: Refatoração Multipágina em TanStack Start, SEO Técnico Canônico e Otimização para LLMs com llms.txt.
 - `SPEC-015` / `TASK-015-01` / `REVIEW-015`: Sistema Unificado de Motion Design e Scroll Reveal Premium com Tokens Normativos e Primitivos de Animação.
 - `SPEC-016` / `TASK-016-01` / `REVIEW-016`: Refinamento Premium da Navbar com Cápsula Flutuante Centralizada, Glassmorphism Escuro e Botão Dourado com Cantos Arredondados.
@@ -213,10 +213,10 @@ Todas as entregas obedecem ao protocolo **Universal SDD**:
 - `SPEC-026` / `TASK-026-01` / `REVIEW-026`: Pares de Imagens Genuinamente Distintos para o Antes e Depois das 3 Especialidades e Diversificação Fotográfica no Acervo Público.
 - `SPEC-027` / `TASK-027-01` / `REVIEW-027`: Rota de Proposta Comercial Personalizada (`/proposta/$slug` e `/proposta`), Arquitetura de 10 Seções de Alta Conversão, Validação Comercial de Completude e Transição Honesta para Briefing.
 - `SPEC-027` / `TASK-027-02` / `REVIEW-027-02`: Correção de Hidratação SSR e Visibilidade da Proposta Comercial, eliminação de wrappers bloqueantes de animação e restauração de 100% da visualização no navegador real.
-- `SPEC-028` / `TASK-028-01` / `REVIEW-028`: Proposta Comercial Modular EPM DevTech para BRS Reparações Automotivas (`/proposta/brs-reparacoes`), Portfólio de 6 Módulos Especializados com Escopos e Exclusões, Matriz Comparativa Responsiva, 5 Pacotes Sugeridos em 1 Clique, Segregação de Custos de Terceiros e Infraestrutura, Fluxo Visual em 9 Etapas e Simulador Dinâmico de Orçamento.
+- `SPEC-028` / `TASK-028-01` / `REVIEW-028`: Proposta Comercial Modular EPM DevTech para Master Chapeação e Pinturas (`/proposta/brs-reparacoes`), Portfólio de 6 Módulos Especializados com Escopos e Exclusões, Matriz Comparativa Responsiva, 5 Pacotes Sugeridos em 1 Clique, Segregação de Custos de Terceiros e Infraestrutura, Fluxo Visual em 9 Etapas e Simulador Dinâmico de Orçamento.
 - `SPEC-029` / `TASK-029-01` / `REVIEW-029`: Refatoração Canônica: Website Multipágina com Arquitetura de Rotas Dedicadas (TanStack Router), eliminação de vestígios conceituais de landing page em `AGENTS.md`, `PROJECT.md`, proposta comercial (`src/lib/proposta.ts`) e suítes de teste.
 - `SPEC-030` / `TASK-030-01` / `REVIEW-030`: Implementação da Linha de Estética Automotiva & Proteção de Superfícies (Espelhamento de Pintura, Vitrificação Cerâmica e Polimento Técnico de Para-brisa) com preservação dos 3 pilares estruturais canônicos de reparação.
-- `SPEC-031` / `TASK-031-01` / `REVIEW-031`: Integração de Dados Cadastrais Oficiais (Razão Social: `Brs Comercio de Pecas Automotivas LTDA`, CNPJ: `53.877.400/0001-46`, Fundação: `09/02/2024`) e Histórico de Experiência Prática do Fundador Bruno no Segmento Automotivo.
+- `SPEC-031` / `TASK-031-01` / `REVIEW-031`: Integração de Dados Cadastrais Oficiais (Razão Social: `LCL Chapeação LTDA`, CNPJ: `51.784.844/0001-01`, Fundação: `11/08/2023`) e Histórico de Experiência Prática da Equipe Técnica no Segmento Automotivo.
 - `SPEC-032` / `TASK-032-01` / `REVIEW-032`: Redesign Awwwards Site of the Day da Home Landing Page (Hero e Showcase), Paleta de Cores de Luxo Automotivo, Tipografia Editorial de Alta Precisão, Lenis Smooth Scroll e Coreografia de Movimento GSAP.
 - `SPEC-033` / `TASK-033-01` / `REVIEW-033`: Experiência Signature Interativa WebGL/Canvas de Partículas & Laser e Transições de Página Cinemáticas sem Quebra de Estado da UI.
 - `SPEC-034` / `TASK-034-01` / `REVIEW-034`: Redesign Awwwards Standard dos Heroes em Todas as Rotas com Tipografia, Paleta de Cores, Lenis e Coreografia GSAP.
@@ -238,18 +238,18 @@ Todas as entregas obedecem ao protocolo **Universal SDD**:
 - `SPEC-050` / `TASK-050-01`: Correção do Modal de Agendamentos, Sincronização Multi-Aba Estruturada, Histórico Append-Only de Eventos, Timeline Automotiva Dinâmica, Acompanhamento do Cliente e Comunicação WhatsApp Custo Zero.
 - `SPEC-051` / `TASK-051-01`: Reformulação de UX/UI dos Status Operacionais, Badges Padronizados, Hierarquia Visual Neutra, Indicadores Dinâmicos e Filtros no Painel de Atendimentos.
 - `SPEC-052` / `TASK-052-01`: Refatoração UX/UI do Botão WhatsApp com Affordance Real e Inclusão do Status "Fechados" nos KPIs e Filtros da Agenda.
-- `SPEC-053` / `TASK-053-01`: Redesenho Visual Awwwards Dark Industrial para o Painel de Agendamentos e Gestão de Reparação BRS (Aesthetic Dark Premium, tipografia técnica editorial e esteira linear de engenharia).
-- `SPEC-054` / `TASK-054-01`: Redesenho do Painel Administrativo / ERP BRS em Light Mode High-End (Linear / Vercel Dashboard / Apple Pro Apps, sobriedade operacional, Stepper horizontal limpo e metadados estruturados).
+- `SPEC-053` / `TASK-053-01`: Redesenho Visual Awwwards Dark Industrial para o Painel de Agendamentos e Gestão de Reparação Master (Aesthetic Dark Premium, tipografia técnica editorial e esteira linear de engenharia).
+- `SPEC-054` / `TASK-054-01`: Redesenho do Painel Administrativo / ERP Master em Light Mode High-End (Linear / Vercel Dashboard / Apple Pro Apps, sobriedade operacional, Stepper horizontal limpo e metadados estruturados).
 - `SPEC-055` / `TASK-055-01`: Arquitetura UX/UI de Autenticação Split-Screen (/login) e Agenda Operacional Despoluída (/agendamentos) com StatusTabs unificadas, Mini-stepper de reparo e Visão Kanban.
-- `SPEC-056` / `TASK-056-01`: Refinamento de UX/UI, Isolamento de Layout e Acessibilidade Estrita (WCAG 2.2 AA) na Autenticação (/login) e Painel Administrativo BRS.
-- `SPEC-057` / `TASK-057-01`: Linha do Tempo Operacional com RBAC, Trilha de Auditoria Append-Only e Acessibilidade Estrita na Oficina BRS.
+- `SPEC-056` / `TASK-056-01`: Refinamento de UX/UI, Isolamento de Layout e Acessibilidade Estrita (WCAG 2.2 AA) na Autenticação (/login) e Painel Administrativo Master.
+- `SPEC-057` / `TASK-057-01`: Linha do Tempo Operacional com RBAC, Trilha de Auditoria Append-Only e Acessibilidade Estrita na Oficina Master.
 - `SPEC-058` / `TASK-058-01`: Página Pública de Acompanhamento do Reparo Mobile-First (Hero Acima da Dobra, Header Isolado no Fluxo, WCAG 2.2 AA e Projeção Segura de Eventos).
 - `SPEC-059` / `TASK-059-01` / `REVIEW-059`: Correção do Build e Servidor de Produção SSR TanStack Start (Remoção do plugin Nitro, compilação de pacotes cliente e SSR em dist/server/server.js, alinhamento do Dockerfile e resolução definitiva do erro 500 em produção).
 - `SPEC-060` / `TASK-060-01` / `TASK-060-02` / `REVIEW-060`: Otimização de Code-Splitting de Rotas e Resolução de Erro de Hidratação SSR sob Reduced Motion (Remoção de export indevido em /acompanhar/$token, isomorfismo SSR de PageTransition e blindagem contra erros de hidratação no React 19).
 - `SPEC-061` / `TASK-061-01` / `TASK-061-02` / `REVIEW-061`: Isomorfismo SSR e Resolução Definitiva de Hidratação nos Componentes de Motion com MotionConfig no TanStack Start (Eliminação de bifurcações manuais de JSX e hooks divergentes no SSR em ScrollReveal, ImageReveal, Reveal, MagneticButton e demais componentes, supressão de avisos warnOnce de acessibilidade e garantia de paridade absoluta com React 19).
-- `SPEC-062` / `TASK-062-01` / `REVIEW-062`: Refinamento UX/UI Responsivo do CTA do Header e Menu Móvel BRS (Ocultação do botão CTA na barra superior em telas móveis via hidden sm:inline-flex e simplificação do CTA no menu hambúrguer para o rótulo direto Avaliação).
+- `SPEC-062` / `TASK-062-01` / `REVIEW-062`: Refinamento UX/UI Responsivo do CTA do Header e Menu Móvel Master (Ocultação do botão CTA na barra superior em telas móveis via hidden sm:inline-flex e simplificação do CTA no menu hambúrguer para o rótulo direto Avaliação).
 - `SPEC-063` / `TASK-063-01` / `REVIEW-063`: Prevenção e Blindagem Contra Estouro de Layout e Overflow Horizontal no Modo Mobile (Aplicação de overflow-x: clip e max-width 100% em html, body, SiteLayout, PageTransition, AnimatedHero e flex-wrap responsivo na classe .eyebrow para eliminar rolagem lateral no mobile).
-- `SPEC-064` / `TASK-064-01` / `REVIEW-064`: Auditoria e Refatoração UX/UI — Conversão, Integridade Editorial, Home em 6 Blocos, SEO Canônico de Produção (`https://brs.epmdevtech.com.br`) e Dados Oficiais Confirmados (Endereço e Horário).
+- `SPEC-064` / `TASK-064-01` / `REVIEW-064`: Auditoria e Refatoração UX/UI — Conversão, Integridade Editorial, Home em 6 Blocos, SEO Canônico de Produção (`https://master.epmdevtech.com.br`) e Dados Oficiais Confirmados (Endereço e Horário).
 - `SPEC-065` / `TASK-065-01` / `REVIEW-065`: Sincronização Bidirecional da Linha do Tempo Operacional com o Status do Agendamento e Mini-Stepper em `/agendamentos` + Correção de Hidratação SSR.
 - `SPEC-066` / `TASK-066-01`: Rota Confidencial de Execução e Ingestão de Briefing Multinicho EPM DevTech (`/briefing`), sem inclusão em menus públicos, suporte nativo ao nicho de reparação automotiva, persistência local, cálculo de contraste WCAG e exportação determinística de `briefing-completo.json` e `booking-config.json`.
 - `SPEC-067` / `TASK-067-01` / `REVIEW-067`: Hero com Abertura Cinematográfica, Zoom Lento e Reflexo de Luz na Lataria (Sequência CSS pura, clareamento do veículo, antecipação por interação, flag de sessão SPA e compatibilidade estrita SSR).
@@ -271,4 +271,4 @@ Conforme estipulado no [`ROADMAP.md`](ROADMAP.md):
 
 ---
 
-© 2026 EPM DEVTECH & BRS Reparações Automotivas. Todos os direitos reservados.
+© 2026 EPM DEVTECH & Master Chapeação e Pinturas. Todos os direitos reservados.

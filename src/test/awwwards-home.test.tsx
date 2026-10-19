@@ -28,7 +28,7 @@ describe("SPEC-032 — Awwwards Site of the Day Redesign (Hero, Showcase, Lenis 
     expect(button).toBeInTheDocument();
   });
 
-  it("Hero exibe o status de telemetria técnica e LED pulsante da BRS em Toledo-PR", () => {
+  it("Hero exibe o status de telemetria técnica e LED pulsante da Master em Toledo-PR", () => {
     render(<Hero />);
 
     expect(screen.getByText(/Oficina Técnica Especializada • Toledo, PR/i)).toBeInTheDocument();

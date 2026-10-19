@@ -273,18 +273,18 @@ describe("SPEC-068: Desacoplamento da Animação do Hero e Configuração Centra
       expect(img).toHaveAttribute("sizes", "100vw");
     });
 
-    it("AC-069-03: as dimensões intrínsecas refletem a resolução real do asset (1920×1088 / 1280×725)", () => {
-      expect(defaultHeroConfig.image.desktop.width).toBe(1920);
-      expect(defaultHeroConfig.image.desktop.height).toBe(1088);
-      expect(defaultHeroConfig.image.mobile.width).toBe(1280);
-      expect(defaultHeroConfig.image.mobile.height).toBe(725);
+    it("AC-069-03: as dimensões intrínsecas refletem a resolução real do asset (1280×720 / 900×964)", () => {
+      expect(defaultHeroConfig.image.desktop.width).toBe(1280);
+      expect(defaultHeroConfig.image.desktop.height).toBe(720);
+      expect(defaultHeroConfig.image.mobile.width).toBe(900);
+      expect(defaultHeroConfig.image.mobile.height).toBe(964);
 
-      // Proporção 16:9 coerente entre desktop e mobile (tolerância de arredondamento)
+      // Recorte mobile é retrato (art direction), portanto mais alto que o desktop
       const desktopRatio =
         defaultHeroConfig.image.desktop.width / defaultHeroConfig.image.desktop.height;
       const mobileRatio =
         defaultHeroConfig.image.mobile.width / defaultHeroConfig.image.mobile.height;
-      expect(Math.abs(desktopRatio - mobileRatio)).toBeLessThan(0.01);
+      expect(mobileRatio).toBeLessThan(desktopRatio);
     });
 
     it("AC-069-02: o preload de LCP usa imagesrcset + imagesizes com type image/avif", () => {

@@ -1,18 +1,18 @@
-# BRS Reparações Automotivas
+# Master Chapeação e Pinturas
 
 > 🚧 **Status:** Landing Page Institucional Implementada (Pré-Publicação Definitiva). Governança sob o **Universal SDD v1.0**.
 
-> **Presença digital institucional da BRS Reparações Automotivas em Toledo-PR. Desenvolvimento orientado por especificações (Spec-Driven Development) para máxima qualidade, acessibilidade e transparência.**
+> **Presença digital institucional da Master Chapeação e Pinturas em Toledo-PR. Desenvolvimento orientado por especificações (Spec-Driven Development) para máxima qualidade, acessibilidade e transparência.**
 
 ---
 
 ## Sobre o Projeto
 
-O site da **BRS Reparações Automotivas** foi desenvolvido para apresentar a oficina mecânica e de funilaria/pintura situada em Toledo, Paraná. Com uma identidade visual premium inspirada na precisão automotiva, a plataforma atende tanto proprietários de veículos particulares quanto corretores de seguros.
+O site da **Master Chapeação e Pinturas** foi desenvolvido para apresentar a oficina mecânica e de funilaria/pintura situada em Toledo, Paraná. Com uma identidade visual premium inspirada na precisão automotiva, a plataforma atende tanto proprietários de veículos particulares quanto corretores de seguros.
 
 ### Destaques da Solução
 
-- **Transparência e Honestidade Comercial**: Nenhum canal não confirmado é prometido. O formulário de contato prepara uma mensagem completa para envio direto pelo canal oficial validado (Instagram `@brsreparacoes`).
+- **Transparência e Honestidade Comercial**: Nenhum canal não confirmado é prometido. O formulário de contato prepara uma mensagem completa para envio direto pelo canal oficial validado (Instagram `@masterchapeacao2022`).
 - **Mídia Ilustrativa Clara**: Todas as fotos genéricas de serviços são declaradas como ilustrativas até a coleta e autorização das fotos reais da oficina.
 - **Acessibilidade Completa**: Interface desenvolvida com primitivas Radix UI e suporte pleno a navegação por teclado (WCAG 2.1 AA).
 - **Alta Performance**: Arquitetura híbrida SSR com TanStack Start, React 19 e Tailwind CSS v4.
@@ -121,4 +121,4 @@ O projeto possui uma esteira automatizada configurada em [`.github/workflows/ci.
 
 ---
 
-© 2026 EPM DEVTECH & BRS Reparações Automotivas.
+© 2026 EPM DEVTECH & Master Chapeação e Pinturas.

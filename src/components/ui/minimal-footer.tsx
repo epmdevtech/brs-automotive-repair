@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Link } from "@tanstack/react-router";
-import { ArrowUpRight, Clock, Instagram, MapPin, Phone } from "lucide-react";
+import { ArrowUpRight, Clock, Facebook, Instagram, MapPin, Phone } from "lucide-react";
 import { company, navigation, services } from "@/lib/brs";
 import { Brand } from "@/components/brs/brand";
 import { cn } from "@/lib/utils";
@@ -27,8 +27,8 @@ export function MinimalFooter({ className }: MinimalFooterProps) {
           <div className="lg:col-span-5 flex flex-col items-start">
             <Brand />
             <p className="body-copy text-xs text-neutral-400 mt-5 max-w-sm leading-relaxed text-pretty">
-              Funilaria automotiva, pintura em estufa e martelinho de ouro em Toledo, Paraná.
-              Atendimento a proprietários de veículos e segurados.
+              Chapeação, funilaria, pintura em estufa, martelinho de ouro e guincho em Toledo,
+              Paraná. Atendimento a proprietários de veículos, segurados e corretores.
             </p>
             <div className="mt-5 space-y-2 text-xs text-neutral-400">
               <div className="flex items-start gap-2">
@@ -82,7 +82,7 @@ export function MinimalFooter({ className }: MinimalFooterProps) {
                   to="/servicos"
                   className="hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary rounded-xs"
                 >
-                  Serviço Leva e Traz
+                  Serviço de Guincho
                 </Link>
               </li>
             </ul>
@@ -104,13 +104,24 @@ export function MinimalFooter({ className }: MinimalFooterProps) {
               </a>
 
               <a
-                href={company.instagram}
+                href={company.instagram.url}
                 {...external}
                 className="flex items-center gap-2.5 hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary rounded-xs py-0.5"
-                aria-label="Abrir Instagram oficial da BRS em nova aba"
+                aria-label="Abrir Instagram oficial da Master em nova aba"
               >
                 <Instagram size={14} className="text-primary shrink-0" aria-hidden="true" />
-                <span>@brsreparacoes</span>
+                <span>{company.instagram.handle}</span>
+                <ArrowUpRight size={12} className="text-neutral-500" aria-hidden="true" />
+              </a>
+
+              <a
+                href={company.social.url}
+                {...external}
+                className="flex items-center gap-2.5 hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary rounded-xs py-0.5"
+                aria-label="Abrir Facebook oficial da Master em nova aba"
+              >
+                <Facebook size={14} className="text-primary shrink-0" aria-hidden="true" />
+                <span>Master Chapeação e Pinturas</span>
                 <ArrowUpRight size={12} className="text-neutral-500" aria-hidden="true" />
               </a>
             </div>
@@ -122,7 +133,7 @@ export function MinimalFooter({ className }: MinimalFooterProps) {
       <div className="border-t border-border/60 bg-secondary/20">
         <div className="page-width py-5 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-3 text-[10px] text-muted-foreground leading-relaxed">
           <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
-            <span>© {currentYear} BRS Reparações Automotivas. Todos os direitos reservados.</span>
+            <span>© {currentYear} Master Chapeação e Pinturas. Todos os direitos reservados.</span>
             <span className="text-neutral-500 font-mono text-[9px]">
               {company.legalName} · CNPJ: {company.cnpj}
             </span>

@@ -8,8 +8,8 @@ export const Route = createFileRoute("/404")({
   component: NotFoundPage,
   head: () =>
     buildRouteHead({
-      title: "Página Não Encontrada (404) | BRS Reparações Automotivas",
-      description: "A página solicitada não foi encontrada no site da BRS Reparações Automotivas.",
+      title: "Página Não Encontrada (404) | Master Chapeação e Pinturas",
+      description: "A página solicitada não foi encontrada no site da Master Chapeação e Pinturas.",
       path: "/404",
     }),
 });
