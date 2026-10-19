@@ -74,7 +74,7 @@ export function ProposalModularAcceptance({
     : null;
 
   const mailtoUrl = `mailto:${proposal.authorContact.email}?subject=${encodeURIComponent(
-    `Manifestação de Interesse - Proposta Comercial Modular BRS (${proposal.slug})`,
+    `Manifestação de Interesse - Proposta Comercial Modular Master (${proposal.slug})`,
   )}&body=${encodedMessage}`;
 
   return (
@@ -290,14 +290,14 @@ export function ProposalModularAcceptance({
                 htmlFor="mod-contact-name"
                 className="block text-xs font-mono text-neutral-300 mb-1.5"
               >
-                Nome do Responsável na BRS:
+                Nome do Responsável na Master:
               </label>
               <input
                 id="mod-contact-name"
                 type="text"
                 value={contactName}
                 onChange={(e) => setContactName(e.target.value)}
-                placeholder="Ex: Responsável Comercial / Direção BRS"
+                placeholder="Ex: Responsável Comercial / Direção Master"
                 className="w-full px-3.5 py-2.5 rounded-md bg-neutral-900 border border-white/10 text-white text-xs sm:text-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
               />
             </div>

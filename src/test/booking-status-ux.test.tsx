@@ -76,7 +76,7 @@ describe("UI: StatusBadge Component (RF-051-01)", () => {
 describe("UI: CustomerProcessDialog Disambiguation (RF-051-06)", () => {
   const mockAppointment: Appointment = {
     id: "app-test-999",
-    protocol: "BRS-9999",
+    protocol: "Master-9999",
     trackingToken: "token-999",
     professionalId: "bruno-funilaria",
     serviceId: "funilaria-express",
@@ -116,7 +116,7 @@ describe("UI: CustomerProcessDialog Disambiguation (RF-051-06)", () => {
     );
 
     // Protocol badge is neutral
-    expect(screen.getByText("BRS-9999")).toBeInTheDocument();
+    expect(screen.getByText("Master-9999")).toBeInTheDocument();
     // Modal close button is specifically "Fechar Janela"
     expect(screen.getByRole("button", { name: /Fechar Janela/i })).toBeInTheDocument();
     // Action buttons are explicit

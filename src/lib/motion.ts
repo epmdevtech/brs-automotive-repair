@@ -1,7 +1,7 @@
 import type { CSSProperties } from "react";
 
 /**
- * Sistema de movimento da BRS: utilitários puros e sem dependências externas.
+ * Sistema de movimento da Master: utilitários puros e sem dependências externas.
  * Os valores visuais (duração, easing, distância) vivem em `src/styles.css`
  * como tokens (`--dur-*`, `--ease-out`, `--distance`, `--stagger`).
  */

@@ -12,7 +12,7 @@ export const Route = createFileRoute("/para-corretores")({
   component: ParaCorretoresPage,
   head: () =>
     buildRouteHead({
-      title: "Atendimento para Corretores de Seguros | BRS",
+      title: "Atendimento para Corretores de Seguros | Master",
       description:
         "Canal profissional de relacionamento técnico para corretores de seguros e peritos em Toledo-PR. Suporte em avarias, documentação e livre escolha de oficina.",
       path: "/para-corretores",
@@ -23,7 +23,7 @@ export const Route = createFileRoute("/para-corretores")({
           buildBreadcrumbSchema([{ name: "Para corretores", path: "/para-corretores" }]),
           {
             "@type": "WebPage",
-            name: "Atendimento a Corretores de Seguros — BRS Reparações Automotivas",
+            name: "Atendimento a Corretores de Seguros — Master Chapeação e Pinturas",
             url: canonicalUrl("/para-corretores"),
             description:
               "Diretrizes de cooperação profissional entre corretores de seguros e a oficina mecânica em Toledo-PR.",
@@ -49,7 +49,7 @@ function ParaCorretoresPage() {
               etapa.
             </p>
             <p>
-              A BRS Reparações Automotivas estabelece um canal profissional de relacionamento com
+              A Master Chapeação e Pinturas estabelece um canal profissional de relacionamento com
               corretores de seguros e demais profissionais do setor, oferecendo suporte técnico na
               avaliação das avarias, elaboração de orçamentos, documentação fotográfica e
               acompanhamento dos serviços de reparação.
@@ -71,7 +71,7 @@ function ParaCorretoresPage() {
             icon: ArrowUpRight,
           },
           {
-            label: "(45) 2035-9440",
+            label: "(45) 99954-5442",
             href: company.phoneHref,
             variant: "secondary",
             icon: Phone,
@@ -201,8 +201,9 @@ function ParaCorretoresPage() {
             Independência técnica. Clareza nas relações. Respeito ao segurado.
           </h2>
           <p className="text-xs sm:text-sm text-neutral-400 mt-3 leading-relaxed">
-            A BRS conduz seu relacionamento profissional com base na transparência das informações,
-            na responsabilidade técnica e no respeito às decisões do proprietário do veículo.
+            A Master conduz seu relacionamento profissional com base na transparência das
+            informações, na responsabilidade técnica e no respeito às decisões do proprietário do
+            veículo.
           </p>
         </ScrollReveal>
 
@@ -221,10 +222,10 @@ function ParaCorretoresPage() {
               </h3>
               <p className="text-xs text-neutral-400 leading-relaxed text-pretty">
                 A escolha da oficina deve respeitar os direitos aplicáveis ao consumidor e as
-                condições pertinentes ao atendimento securitário. A BRS está disponível para receber
-                segurados encaminhados por corretores, independentemente de eventual indicação de
-                rede referenciada, sem apresentar essa relação como credenciamento quando ele não
-                existir.
+                condições pertinentes ao atendimento securitário. A Master está disponível para
+                receber segurados encaminhados por corretores, independentemente de eventual
+                indicação de rede referenciada, sem apresentar essa relação como credenciamento
+                quando ele não existir.
               </p>
             </div>
           </ScrollReveal>
@@ -287,12 +288,13 @@ function ParaCorretoresPage() {
             <div className="max-w-2xl">
               <p className="eyebrow mb-2">Conexão Profissional</p>
               <h3 className="text-2xl sm:text-3xl font-semibold font-display tracking-tight text-white mb-3">
-                Vamos estabelecer um canal de relacionamento com a BRS?
+                Vamos estabelecer um canal de relacionamento com a Master?
               </h3>
               <p className="text-xs sm:text-sm text-neutral-300 leading-relaxed mb-3">
                 Se você atua com corretagem de seguros, regulação, análise de sinistros ou gestão de
                 atendimento a segurados, nossa equipe está disponível para apresentar a estrutura de
-                atendimento da BRS e conversar sobre possibilidades de relacionamento profissional.
+                atendimento da Master e conversar sobre possibilidades de relacionamento
+                profissional.
               </p>
               <p className="text-xs sm:text-sm text-neutral-400 leading-relaxed">
                 Entre em contato para agendar uma visita, conhecer nossos processos de reparação ou
@@ -307,17 +309,17 @@ function ParaCorretoresPage() {
                 className="h-12 min-h-[44px] px-8 text-xs font-semibold cursor-pointer shadow-lg shadow-primary/15"
               >
                 <Link to="/contato" search={{ audience: "corretor" }}>
-                  <span>Falar com a equipe da BRS</span>
+                  <span>Falar com a equipe da Master</span>
                   <ArrowUpRight className="ml-2 size-4" aria-hidden="true" />
                 </Link>
               </Button>
               <div className="text-xs text-neutral-400 flex items-center gap-2 pt-1 font-mono">
-                <span className="text-white font-medium">BRS Reparações</span>
+                <span className="text-white font-medium">Master Chapeação</span>
                 <span>•</span>
                 <span>Toledo — PR</span>
                 <span>•</span>
                 <a href={company.phoneHref} className="text-primary hover:underline">
-                  (45) 2035-9440
+                  (45) 99954-5442
                 </a>
               </div>
             </div>

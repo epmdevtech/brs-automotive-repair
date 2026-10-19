@@ -31,7 +31,7 @@ export interface LoginFormProps {
 }
 
 /**
- * Formulário de autenticação administrativa da BRS.
+ * Formulário de autenticação administrativa da Master.
  * Implementa validação com Zod, aviso acessível de Caps Lock,
  * alternância de visibilidade de senha com aria-pressed e alerta de erro com role="alert".
  */
@@ -131,7 +131,7 @@ export function LoginForm({ onLoginSuccess, demo = true }: LoginFormProps) {
               id="admin-email"
               type="email"
               autoComplete="username"
-              placeholder="nome@brsreparacoes.com.br"
+              placeholder="nome@master.local"
               value={email}
               onChange={(e) => {
                 setEmail(e.target.value);
@@ -260,8 +260,8 @@ export function LoginForm({ onLoginSuccess, demo = true }: LoginFormProps) {
       {/* Nota de sessão e ambiente (apenas visível em modo demo) */}
       {demo && (
         <p className="text-xs text-slate-500 text-center leading-relaxed">
-          Sessão temporária no navegador. Em ambiente corporativo, a BRS adota integração via SSO /
-          OAuth2.
+          Sessão temporária no navegador. Em ambiente corporativo, a Master adota integração via SSO
+          / OAuth2.
         </p>
       )}
 
@@ -280,7 +280,7 @@ export function LoginForm({ onLoginSuccess, demo = true }: LoginFormProps) {
             <Dialog.Description className="text-xs text-slate-600 leading-relaxed">
               Por políticas de segurança interna da oficina, a redefinição de senhas administrativas
               deve ser solicitada presencialmente à gerência técnica ou por e-mail ao suporte
-              interno da BRS.
+              interno da Master.
             </Dialog.Description>
 
             <div className="pt-2 flex justify-end">

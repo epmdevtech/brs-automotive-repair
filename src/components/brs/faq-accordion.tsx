@@ -10,24 +10,24 @@ import { ScrollReveal } from "@/components/ui/scroll-reveal";
 export function FAQAccordion() {
   const questions = [
     [
-      "Quais serviços a BRS realiza?",
-      "A BRS atua com funilaria automotiva, pintura automotiva em estufa e martelinho de ouro. A indicação do procedimento adequado depende da avaliação presencial da chapa e do verniz.",
+      "Quais serviços a Master realiza?",
+      "A Master atua com funilaria automotiva, pintura automotiva em estufa e martelinho de ouro. A indicação do procedimento adequado depende da avaliação presencial da chapa e do verniz.",
     ],
     [
       "Como solicitar uma avaliação do veículo?",
-      "Você pode ligar diretamente para (45) 2035-9440 ou iniciar o contato pelo Instagram oficial @brsreparacoes. Utilize o formulário abaixo para estruturar sua mensagem e enviá-la com praticidade.",
+      "Você pode ligar diretamente para (45) 99954-5442 ou iniciar o contato pelo Instagram oficial @masterchapeacao2022 ou pela página da Master no Facebook. Utilize o formulário abaixo para estruturar sua mensagem e enviá-la com praticidade.",
     ],
     [
       "É possível enviar fotos antes da avaliação presencial?",
       "Sim. Pelo Instagram oficial você pode enviar fotos das avarias para uma triagem inicial, embora danos estruturais ou detalhes de pintura possam demandar uma inspeção presencial.",
     ],
     [
-      "A BRS atende corretores de seguros?",
-      "Sim. A BRS está aberta a parcerias com corretores de Toledo e região para atendimento de sinistros e reparos de segurados com total transparência e pontualidade.",
+      "A Master atende corretores de seguros?",
+      "Sim. A Master está aberta a parcerias com corretores de Toledo e região para atendimento de sinistros e reparos de segurados com total transparência e pontualidade.",
     ],
     [
-      "Como funciona o serviço de leva e traz?",
-      "Disponibilizamos a opção de busca e entrega de veículos em Toledo. Entre em contato por telefone para verificar a disponibilidade e as condições de atendimento.",
+      "A Master oferece serviço de guincho?",
+      "Sim. A Master oferece atendimento com guincho para veículos que não podem rodar. Entre em contato por telefone para verificar a disponibilidade e as condições de atendimento.",
     ],
     [
       "Qual é a previsão de prazo para os reparos?",
@@ -35,7 +35,7 @@ export function FAQAccordion() {
     ],
     [
       "Qual é o canal oficial de contato?",
-      "O telefone fixo oficial é (45) 2035-9440 e o perfil oficial no Instagram é @brsreparacoes. Não realizamos atendimento por WhatsApp até homologação formal desse canal.",
+      "O telefone oficial é (45) 99954-5442, o Instagram oficial é @masterchapeacao2022 e a página no Facebook é Master Chapeação e Pinturas. Não realizamos atendimento por WhatsApp até homologação formal desse canal.",
     ],
   ];
 

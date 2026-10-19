@@ -9,9 +9,9 @@ export const Route = createFileRoute("/agendamentos")({
   component: AgendamentosAdminPage,
   head: () =>
     buildRouteHead({
-      title: "Painel de Agendamentos & Pré-OS | BRS",
+      title: "Painel de Agendamentos & Pré-OS | Master",
       description:
-        "Plataforma administrativa de gestão de agendamentos e horários dos técnicos da BRS.",
+        "Plataforma administrativa de gestão de agendamentos e horários dos técnicos da Master.",
       path: "/agendamentos",
       noindex: true,
     }),

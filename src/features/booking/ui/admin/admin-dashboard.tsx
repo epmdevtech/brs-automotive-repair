@@ -29,7 +29,7 @@ import {
   buildCustomerWhatsAppLink,
   formatPreOsSummary,
 } from "../../domain/intake";
-import { BRS_BOOKING_CONFIG } from "../../config/booking.config";
+import { MASTER_BOOKING_CONFIG } from "../../config/booking.config";
 
 type TabFilter = "CONFIRMED" | "TODAY" | "LEVA_E_TRAZ" | "COMPLETED" | "ALL";
 
@@ -101,7 +101,7 @@ export function AdminBookingDashboard() {
   };
 
   const handleCopySummary = async (app: Appointment) => {
-    const svc = BRS_BOOKING_CONFIG.services.find((s) => s.id === app.serviceId);
+    const svc = MASTER_BOOKING_CONFIG.services.find((s) => s.id === app.serviceId);
     const summary = formatPreOsSummary({
       protocol: app.protocol,
       serviceTitle: svc?.title ?? app.serviceId,
@@ -128,7 +128,7 @@ export function AdminBookingDashboard() {
             Agenda Oficial & Pré-OS da Oficina
           </span>
           <h2 className="text-xl md:text-2xl font-display font-semibold text-foreground tracking-tight">
-            Painel de Agendamentos BRS
+            Painel de Agendamentos Master
           </h2>
           <p className="text-xs text-muted-foreground mt-0.5">
             Horários auto-confirmados pelos clientes com detalhes técnicos do veículo e contato
@@ -183,7 +183,7 @@ export function AdminBookingDashboard() {
           }`}
         >
           <div className="text-[11px] font-mono uppercase text-muted-foreground mb-1 flex items-center gap-1">
-            <Truck size={12} className="text-primary" /> Coleta Leva e Traz
+            <Truck size={12} className="text-primary" /> Remoção com Guincho
           </div>
           <div className="text-2xl font-display font-bold text-foreground">{metrics.levaETraz}</div>
         </div>
@@ -212,7 +212,7 @@ export function AdminBookingDashboard() {
           />
           <input
             type="text"
-            placeholder="Buscar por cliente, telefone, protocolo (#BRS-...) ou veículo..."
+            placeholder="Buscar por cliente, telefone, protocolo (#Master-...) ou veículo..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             className="field-input pl-9 text-xs"
@@ -224,7 +224,7 @@ export function AdminBookingDashboard() {
             [
               ["CONFIRMED", "Confirmados"],
               ["TODAY", "Hoje"],
-              ["LEVA_E_TRAZ", "Leva e Traz"],
+              ["LEVA_E_TRAZ", "Guincho"],
               ["COMPLETED", "Concluídos"],
               ["ALL", "Todos"],
             ] as const
@@ -260,7 +260,7 @@ export function AdminBookingDashboard() {
       ) : (
         <div className="space-y-4">
           {filteredAppointments.map((app) => {
-            const svc = BRS_BOOKING_CONFIG.services.find((s) => s.id === app.serviceId);
+            const svc = MASTER_BOOKING_CONFIG.services.find((s) => s.id === app.serviceId);
             const isLeva = app.logistics.type === "leva-e-traz";
             const scheduledDate = new Date(app.startTime);
             const isToday = isSameCivilDay(scheduledDate, today);
@@ -307,7 +307,7 @@ export function AdminBookingDashboard() {
                     )}
                     {isLeva && (
                       <span className="text-[10px] flex items-center gap-1 text-primary bg-primary/5 px-2 py-0.5 rounded border border-primary/20">
-                        <Truck size={12} /> Leva e Traz em Toledo
+                        <Truck size={12} /> Guincho em Toledo
                       </span>
                     )}
                   </div>

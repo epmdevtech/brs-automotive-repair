@@ -1,5 +1,5 @@
 # ==============================================================================
-# BRS Reparações Automotivas — Makefile de Automação (Universal SDD)
+# Master Chapeação e Pinturas — Makefile de Automação (Universal SDD)
 # ==============================================================================
 
 # Detecção automática do gerenciador de pacotes
@@ -22,7 +22,7 @@ RESET := \033[0m
 .PHONY: help
 help: ## Exibe a lista de comandos disponíveis
 	@echo "$(CYAN)==================================================================$(RESET)"
-	@echo "$(BOLD)$(GREEN)BRS Reparações Automotivas — Automação DevOps & SDD$(RESET)"
+	@echo "$(BOLD)$(GREEN)Master Chapeação e Pinturas — Automação DevOps & SDD$(RESET)"
 	@echo "$(CYAN)==================================================================$(RESET)"
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "  $(CYAN)%-20s$(RESET) %s\n", $$1, $$2}'
 
@@ -101,11 +101,11 @@ docker-up: ## Inicializa em segundo plano (-d) com Live Reload instantâneo e li
 		echo "$(YELLOW)A porta $(PORT) está ocupada por um processo local fora do Docker.$(RESET)"; \
 		$(MAKE) free-port; \
 	fi
-	@echo "$(CYAN)Iniciando container Docker da BRS Reparações em segundo plano com Live Reload...$(RESET)"
+	@echo "$(CYAN)Iniciando container Docker da Master Chapeação em segundo plano com Live Reload...$(RESET)"
 	docker compose up -d --build
 	@echo ""
 	@echo "$(BOLD)$(GREEN)==================================================================$(RESET)"
-	@echo "$(BOLD)$(GREEN)✓ BRS Reparações Automotivas em execução em segundo plano!$(RESET)"
+	@echo "$(BOLD)$(GREEN)✓ Master Chapeação e Pinturas em execução em segundo plano!$(RESET)"
 	@echo "$(BOLD)$(GREEN)==================================================================$(RESET)"
 	@echo "  • Local:       $(CYAN)http://localhost:$(PORT)$(RESET)"
 	@echo "  • Proxy Caddy: $(CYAN)http://brs.localhost$(RESET)"
@@ -121,7 +121,7 @@ docker-up: ## Inicializa em segundo plano (-d) com Live Reload instantâneo e li
 down: docker-down ## Atalho: Para e remove os containers em execução
 
 docker-down: ## Para e remove os containers Docker em execução
-	@echo "$(YELLOW)Parando containers da BRS Reparações...$(RESET)"
+	@echo "$(YELLOW)Parando containers da Master Chapeação...$(RESET)"
 	docker compose down
 	@echo "$(GREEN)✓ Containers parados com sucesso.$(RESET)"
 

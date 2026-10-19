@@ -13,7 +13,7 @@ const differentials = [
       "Escopo do serviço, materiais utilizados e previsão de entrega combinados com você antes de iniciar o trabalho na oficina.",
   },
   {
-    title: "Serviço de leva e traz em Toledo-PR",
+    title: "Serviço de guincho em Toledo-PR",
     description:
       "Comodidade na retirada e entrega do veículo no perímetro urbano de Toledo, conforme disponibilidade de agendamento.",
   },

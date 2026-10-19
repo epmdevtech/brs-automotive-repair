@@ -12,7 +12,7 @@ test.describe("Scroll Reveal Motion Behavior", () => {
 
     // Initial opacity before scrolling down
     const initialOpacity = await levaETraz.evaluate((el) => window.getComputedStyle(el).opacity);
-    console.log("Leva e Traz opacity before scroll:", initialOpacity);
+    console.log("Guincho opacity before scroll:", initialOpacity);
     expect(parseFloat(initialOpacity)).toBe(0);
 
     // Scroll into view
@@ -20,7 +20,7 @@ test.describe("Scroll Reveal Motion Behavior", () => {
     await page.waitForTimeout(800);
 
     const animatedOpacity = await levaETraz.evaluate((el) => window.getComputedStyle(el).opacity);
-    console.log("Leva e Traz opacity after scroll:", animatedOpacity);
+    console.log("Guincho opacity after scroll:", animatedOpacity);
     expect(parseFloat(animatedOpacity)).toBeGreaterThan(0.9);
   });
 

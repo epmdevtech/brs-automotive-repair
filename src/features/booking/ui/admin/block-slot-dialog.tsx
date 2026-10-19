@@ -7,7 +7,7 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { BRS_BOOKING_CONFIG } from "../../config/booking.config";
+import { MASTER_BOOKING_CONFIG } from "../../config/booking.config";
 import { saveBlockedPeriod } from "../../domain/blocks";
 import { parseTimeOnDate } from "../../domain/time";
 
@@ -68,7 +68,7 @@ export function BlockSlotDialog({
               onChange={(e) => setProfessionalId(e.target.value)}
             >
               <option value="ALL">Todos os Profissionais (Oficina Toda)</option>
-              {BRS_BOOKING_CONFIG.professionals.map((p) => (
+              {MASTER_BOOKING_CONFIG.professionals.map((p) => (
                 <option key={p.id} value={p.id}>
                   {p.name}
                 </option>

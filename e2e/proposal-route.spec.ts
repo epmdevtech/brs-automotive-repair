@@ -11,7 +11,7 @@ test.describe("SPEC-027 & SPEC-028 — Rotas de Proposta Comercial no Navegador 
       }
     });
 
-    await page.goto("/proposta/brs-reparacoes");
+    await page.goto("/proposta/master-chapeacao-pinturas");
     await page.waitForLoadState("networkidle");
 
     // Valida cabeçalho e títulos da proposta modular
@@ -90,7 +90,7 @@ test.describe("SPEC-027 & SPEC-028 — Rotas de Proposta Comercial no Navegador 
     page,
   }) => {
     await page.setViewportSize({ width: 375, height: 812 });
-    await page.goto("/proposta/brs-reparacoes");
+    await page.goto("/proposta/master-chapeacao-pinturas");
     await page.waitForLoadState("networkidle");
 
     // Valida elementos no celular
@@ -113,7 +113,7 @@ test.describe("SPEC-027 & SPEC-028 — Rotas de Proposta Comercial no Navegador 
     await expect(directButton).toBeVisible();
 
     await directButton.click();
-    await page.waitForURL("**/proposta/brs-reparacoes");
+    await page.waitForURL("**/proposta/master-chapeacao-pinturas");
     await expect(page.getByText("Preparada para BRS Reparações Automotivas")).toBeVisible();
   });
 });

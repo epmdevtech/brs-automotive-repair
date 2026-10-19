@@ -8,13 +8,13 @@ export interface AdminUser {
 }
 
 export const DEMO_CREDENTIALS = {
-  email: "admin@brsreparacoes.com.br",
+  email: "admin@master.local",
   password: "demo123",
-  name: "Bruno (Avaliador Técnico)",
+  name: "Avaliador Técnico",
   role: "Administrador / Oficina",
 };
 
-const SESSION_KEY = "brs_admin_session";
+const SESSION_KEY = "master_admin_session";
 
 export function getAdminSession(): AdminUser | null {
   if (typeof window === "undefined" || typeof localStorage === "undefined") {

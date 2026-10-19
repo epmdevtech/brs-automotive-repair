@@ -634,10 +634,10 @@ export function formatarTempoRelativo(isoDate?: string | null): string {
 // CAMADA DE PERSISTÊNCIA, MUTRAÇÕES CONCORRENTES E SINCRONIZAÇÃO MULTI-ABA
 // ---------------------------------------------------------------------------
 
-const ETAPA_EVENTS_STORAGE_KEY = "brs_etapas_audit_log";
-const SYNC_CHANNEL_NAME = "brs_booking_sync";
-const APPOINTMENTS_STORAGE_KEY = "brs_appointments_v1";
-export const ETAPA_SYNC_DOM_EVENT = "brs:etapas-updated";
+const ETAPA_EVENTS_STORAGE_KEY = "master_etapas_audit_log";
+const SYNC_CHANNEL_NAME = "master_booking_sync";
+const APPOINTMENTS_STORAGE_KEY = "master_appointments_v1";
+export const ETAPA_SYNC_DOM_EVENT = "master:etapas-updated";
 
 /**
  * Lê todos os eventos de etapas do localStorage.
@@ -698,7 +698,7 @@ export function emitirSyncMultiAba(tipo: string, payload: unknown): void {
 }
 
 /**
- * Sincroniza o status do agendamento no localStorage ("brs_appointments_v1")
+ * Sincroniza o status do agendamento no localStorage ("master_appointments_v1")
  * a partir da situação real derivada das etapas operacionais (SPEC-065).
  */
 export function sincronizarStatusAgendamentoPorEtapas(agendamentoId: string): void {
@@ -802,7 +802,7 @@ export function reconciliarStatusAgendamentosComEtapas<T extends { id: string; s
  */
 export function garantirTodasEtapasConcluidas(
   agendamentoId: string,
-  autorNome = "Administrador BRS",
+  autorNome = "Administrador Master",
   createdAt?: string,
 ): EventoEtapa[] {
   const existentes = getEtapaEventsForAppointment(agendamentoId);

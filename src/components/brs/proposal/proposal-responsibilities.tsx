@@ -18,7 +18,7 @@ export function ProposalResponsibilities({ proposal }: ProposalResponsibilitiesP
           </h2>
           <p className="mt-4 text-neutral-300 text-sm sm:text-base leading-relaxed">
             O sucesso e a pontualidade da entrega dependem da cooperação transparente entre a equipe
-            técnica da EPM DevTech e a equipe da BRS.
+            técnica da EPM DevTech e a equipe da Master.
           </p>
         </div>
 
@@ -52,7 +52,7 @@ export function ProposalResponsibilities({ proposal }: ProposalResponsibilitiesP
             </ul>
           </div>
 
-          {/* Responsabilidades do Cliente (BRS) */}
+          {/* Responsabilidades do Cliente (Master) */}
           <div className="p-7 rounded-xl border border-white/10 bg-white/[0.01]">
             <div className="flex items-center gap-3 pb-4 mb-6 border-b border-white/10">
               <div className="size-8 rounded-full bg-neutral-800 text-neutral-300 flex items-center justify-center shrink-0">
@@ -60,7 +60,7 @@ export function ProposalResponsibilities({ proposal }: ProposalResponsibilitiesP
               </div>
               <div>
                 <h3 className="text-sm sm:text-base font-display font-semibold text-neutral-200">
-                  Responsabilidades do Cliente (BRS)
+                  Responsabilidades do Cliente (Master)
                 </h3>
                 <span className="text-xs text-muted-foreground">Insumos, validação e acessos</span>
               </div>

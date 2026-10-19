@@ -8,7 +8,7 @@ export const Route = createFileRoute("/")({
   component: HomePageContent,
   head: () => {
     const baseHead = buildRouteHead({
-      title: "BRS Reparações Automotivas | Toledo - PR",
+      title: "Master Chapeação e Pinturas | Toledo - PR",
       description:
         "Oficina de funilaria automotiva, pintura em estufa e martelinho de ouro em Toledo-PR. Diagnóstico honesto, precisão técnica e cuidado em cada etapa.",
       path: "/",

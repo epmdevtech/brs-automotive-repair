@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Gera favicons e ícones oficiais de alta precisão para a BRS Reparações Automotivas.
+Gera favicons e ícones oficiais de alta precisão para a Master Chapeação e Pinturas.
 """
 
 import os
@@ -40,7 +40,7 @@ def create_brand_icon_pillow(size=512):
         width=int(actual_size * 0.008)
     )
 
-    # Tipografia das letras BRS
+    # Tipografia das letras Master
     font_path = "/usr/share/fonts/truetype/liberation/LiberationSans-Bold.ttf"
     if not os.path.exists(font_path):
         font_path = "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
@@ -116,7 +116,7 @@ def create_svg():
   <!-- Friso superior automotivo discreto -->
   <line x1="128" y1="102" x2="384" y2="102" stroke="url(#gold)" stroke-width="4" stroke-opacity="0.4" stroke-linecap="round"/>
 
-  <!-- Monograma BRS -->
+  <!-- Monograma Master -->
   <g font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-weight="900" font-size="184" letter-spacing="-3">
     <text x="256" y="320" text-anchor="middle">
       <tspan fill="#FFFFFF">BR</tspan><tspan fill="url(#gold)">S</tspan>

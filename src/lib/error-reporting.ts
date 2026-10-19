@@ -58,6 +58,6 @@ export function reportAppError(error: unknown, context: Record<string, unknown> 
   );
 
   if (process.env.NODE_ENV === "development") {
-    console.error("[BRS Error Reporter]:", describeThrown(error), context);
+    console.error("[Master Error Reporter]:", describeThrown(error), context);
   }
 }

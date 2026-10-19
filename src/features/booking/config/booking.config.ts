@@ -25,8 +25,8 @@ export interface BookingConfig {
   syncChannelName: string;
 }
 
-export const BRS_BOOKING_CONFIG: BookingConfig = {
-  projectName: "BRS Reparações Automotivas",
+export const MASTER_BOOKING_CONFIG: BookingConfig = {
+  projectName: "Master Chapeação e Pinturas",
   nicheName: "Reparações Automotivas, Funilaria, Pintura e Martelinho de Ouro",
   businessName: `${company.name} (${company.legalName})`,
   timezone: "America/Sao_Paulo",
@@ -101,9 +101,9 @@ export const BRS_BOOKING_CONFIG: BookingConfig = {
 
   professionals: [
     {
-      id: "bruno-tecnico",
-      name: "Bruno (Funilaria & Vistoria)",
-      role: "Fundador e Avaliador Técnico",
+      id: "equipe-tecnica",
+      name: "Equipe Técnica Master",
+      role: "Avaliação e Vistoria Técnica",
       sortOrder: 1,
     },
     {
@@ -135,8 +135,8 @@ export const BRS_BOOKING_CONFIG: BookingConfig = {
     additionalBufferMinutes: 30,
   },
 
-  storageKey: "brs_appointments_v1",
-  eventsStorageKey: "brs_appointment_events_v1",
-  lockName: "brs_booking_lock",
-  syncChannelName: "brs_booking_sync",
+  storageKey: "master_appointments_v1",
+  eventsStorageKey: "master_appointment_events_v1",
+  lockName: "master_booking_lock",
+  syncChannelName: "master_booking_sync",
 };

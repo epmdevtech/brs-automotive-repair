@@ -49,7 +49,7 @@ export function StepConteudo({ data, onChange }: StepConteudoProps) {
           <Textarea
             value={c.principais_diferenciais || ""}
             onChange={(e) => updateConteudo("principais_diferenciais", e.target.value)}
-            placeholder="Ex: Estufa pressurizada de alta tecnologia, colorimetria computadorizada precisa, atendimento Leva e Traz..."
+            placeholder="Ex: Estufa pressurizada de alta tecnologia, colorimetria computadorizada precisa, atendimento Guincho..."
             className="bg-neutral-900/60 border-white/10 text-white text-xs min-h-[70px]"
           />
         </div>
@@ -99,7 +99,7 @@ export function StepConteudo({ data, onChange }: StepConteudoProps) {
           <Input
             value={c.redes_sociais || ""}
             onChange={(e) => updateConteudo("redes_sociais", e.target.value)}
-            placeholder="Ex: Instagram: @brsreparacoes"
+            placeholder="Ex: Facebook: Master Chapeação e Pinturas"
             className="bg-neutral-900/60 border-white/10 text-white text-xs h-10"
           />
         </div>

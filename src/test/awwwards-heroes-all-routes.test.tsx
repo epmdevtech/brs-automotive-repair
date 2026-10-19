@@ -36,7 +36,7 @@ describe("SPEC-034 / TASK-034-01 — Awwwards Heroes Across All Routes", () => {
             },
             {
               label: "Ação Externa",
-              href: "https://instagram.com/brsreparacoes",
+              href: "https://www.facebook.com/1630662447189202",
               variant: "secondary",
               target: "_blank",
               rel: "noopener noreferrer",
@@ -64,7 +64,7 @@ describe("SPEC-034 / TASK-034-01 — Awwwards Heroes Across All Routes", () => {
       expect(internalLink).toHaveAttribute("href", "/contato");
 
       const externalLink = screen.getByRole("link", { name: /Ação Externa/i });
-      expect(externalLink).toHaveAttribute("href", "https://instagram.com/brsreparacoes");
+      expect(externalLink).toHaveAttribute("href", "https://www.facebook.com/1630662447189202");
       expect(externalLink).toHaveAttribute("target", "_blank");
       expect(externalLink).toHaveAttribute("rel", "noopener noreferrer");
     });
@@ -86,7 +86,7 @@ describe("SPEC-034 / TASK-034-01 — Awwwards Heroes Across All Routes", () => {
   });
 
   describe("2. ProposalHero com Padrão Awwwards", () => {
-    const proposal = commercialProposals["brs-digital-presence"];
+    const proposal = commercialProposals["master-digital-presence"];
 
     it("renderiza o cabeçalho técnico com índice de seção PRO.08 e telemetria", () => {
       render(<ProposalHero proposal={proposal} />);

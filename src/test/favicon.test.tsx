@@ -4,7 +4,7 @@ import { describe, expect, it } from "vitest";
 
 import { Route } from "@/routes/__root";
 
-describe("SPEC-011 — Identidade Visual de Favicon BRS e Expurgo Lovable", () => {
+describe("SPEC-011 — Identidade Visual de Favicon Master e Expurgo Lovable", () => {
   const publicDir = path.resolve(process.cwd(), "public");
 
   it("verifica a presença de todos os assets de favicon e ícones no diretório public", () => {
@@ -26,24 +26,23 @@ describe("SPEC-011 — Identidade Visual de Favicon BRS e Expurgo Lovable", () =
     });
   });
 
-  it("valida que favicon.svg representa fielmente a marca BRS", () => {
+  it("valida que favicon.svg representa fielmente a marca Master", () => {
     const svgPath = path.join(publicDir, "favicon.svg");
     const svgContent = fs.readFileSync(svgPath, "utf-8");
 
-    // Verifica elementos canônicos da marca BRS
-    expect(svgContent).toContain("BR");
-    expect(svgContent).toContain("S");
-    expect(svgContent).toContain("REPARAÇÕES");
-    expect(svgContent).toMatch(/#f59e0b/i); // Dourado âmbar oficial
+    // O favicon usa o recorte oficial da marca embutido como PNG
+    expect(svgContent).toContain("<image");
+    expect(svgContent).toContain("data:image/png;base64,");
     expect(svgContent).not.toContain("lovable");
+    expect(svgContent).not.toContain("BRS Repara");
   });
 
-  it("valida que site.webmanifest contém dados oficiais da BRS", () => {
+  it("valida que site.webmanifest contém dados oficiais da Master", () => {
     const manifestPath = path.join(publicDir, "site.webmanifest");
     const manifest = JSON.parse(fs.readFileSync(manifestPath, "utf-8"));
 
-    expect(manifest.name).toBe("BRS Reparações Automotivas");
-    expect(manifest.short_name).toBe("BRS");
+    expect(manifest.name).toBe("Master Chapeação e Pinturas");
+    expect(manifest.short_name).toBe("Master");
     expect(manifest.theme_color).toBe("#0b0d10");
     expect(manifest.background_color).toBe("#0b0d10");
     expect(manifest.icons.length).toBeGreaterThanOrEqual(3);

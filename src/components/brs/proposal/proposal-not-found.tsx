@@ -42,7 +42,7 @@ export function ProposalNotFound({ slug }: ProposalNotFoundProps) {
           <Button variant="primary" asChild size="sm">
             <Link to="/">
               <ArrowLeft className="size-3.5 mr-1.5" aria-hidden="true" />
-              <span>Página inicial BRS</span>
+              <span>Página inicial Master</span>
             </Link>
           </Button>
 

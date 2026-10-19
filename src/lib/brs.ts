@@ -1,32 +1,54 @@
 export const company = {
-  name: "BRS Reparações Automotivas",
-  legalName: "Brs Comercio de Pecas Automotivas LTDA",
-  tradeName: "Brs Comercio de Pecas Automotivas",
-  cnpj: "53.877.400/0001-46",
-  cnpjRaw: "53877400000146",
-  foundedDate: "2024-02-09",
-  foundedFormatted: "09/02/2024",
-  founder: {
-    name: "Bruno",
-    role: "Fundador e Especialista Técnico",
-    experienceYearsText: "Anos de experiência consolidada no segmento automotivo",
-    bio: "À frente da BRS, Bruno reúne anos de vivência e dedicação prática ao setor automotivo — unindo conhecimento aprofundado em funilaria, pintura e fornecimento de peças com uma conduta pautada em diagnóstico honesto e atenção ao acabamento de cada veículo.",
+  name: "Master Chapeação e Pinturas",
+  legalName: "LCL Chapeação LTDA",
+  tradeName: "Master Chapeação e Pinturas",
+  cnpj: "51.784.844/0001-01",
+  cnpjRaw: "51784844000101",
+  foundedDate: "2023-08-11",
+  foundedFormatted: "11/08/2023",
+  team: {
+    name: "Equipe Master",
+    role: "Equipe técnica",
+    experienceYearsText:
+      "Atendimento técnico especializado em chapeação, pintura e martelinho de ouro",
+    bio: "A Master Chapeação e Pinturas reúne uma equipe com vivência prática em funilaria, pintura em estufa e martelinho de ouro, com conduta pautada em diagnóstico honesto e atenção ao acabamento de cada veículo.",
   },
-  phone: "(45) 2035-9440",
-  phoneHref: "tel:+554520359440",
-  instagram: "https://www.instagram.com/brsreparacoes/",
+  phone: "(45) 99954-5442",
+  phoneHref: "tel:+5545999545442",
+  social: {
+    label: "Facebook",
+    handle: "Master Chapeação e Pinturas",
+    url: "https://www.facebook.com/1630662447189202",
+  },
+  instagram: {
+    label: "Instagram",
+    handle: "@masterchapeacao2022",
+    url: "https://www.instagram.com/masterchapeacao2022/",
+  },
+  socials: [
+    {
+      label: "Instagram",
+      handle: "@masterchapeacao2022",
+      url: "https://www.instagram.com/masterchapeacao2022/",
+    },
+    {
+      label: "Facebook",
+      handle: "Master Chapeação e Pinturas",
+      url: "https://www.facebook.com/1630662447189202",
+    },
+  ],
   city: "Toledo, Paraná",
   address: {
-    street: "R. Barão do Rio Branco, 4892",
-    neighborhood: "Gisela",
+    street: "Av. Maripá, 4138",
+    neighborhood: "Centro",
     city: "Toledo",
     state: "PR",
-    postalCode: "85905-625",
-    full: "R. Barão do Rio Branco, 4892 - Gisela, Toledo - PR, 85905-625",
+    postalCode: "85901-000",
+    full: "Av. Maripá, 4138 - Centro, Toledo - PR, 85901-000",
   },
-  openingHours: "Segunda a sexta, das 08h às 18h",
+  openingHours: "Segunda a sexta, das 08h às 12h e das 13h30 às 18h30",
   whatsappConfirmed: false,
-  siteUrl: "https://brs.epmdevtech.com.br",
+  siteUrl: "https://master.epmdevtech.com.br",
 };
 
 export function canonicalUrl(path: string = "/"): string {
@@ -40,7 +62,7 @@ export const navigation = [
   ["Serviços", "/servicos"],
   ["Nosso trabalho", "/trabalhos"],
   ["Para corretores", "/para-corretores"],
-  ["A BRS", "/sobre"],
+  ["A Master", "/sobre"],
   ["Contato", "/contato"],
 ] as const;
 
@@ -74,7 +96,7 @@ export const services: ServiceDetail[] = [
     description:
       "Reparação de danos na lataria, com atenção às linhas, aos encaixes e à recuperação visual do veículo.",
     fullDescription:
-      "A funilaria técnica da BRS atua na recuperação de painéis, portas, paralamas, capôs e componentes metálicos avariados por colisões. O trabalho prioriza o restabelecimento milimétrico das folgas e vincos originais do fabricante, empregando ferramentas de repuxo e conformação adequadas para manter a resistência do material.",
+      "A funilaria técnica da Master atua na recuperação de painéis, portas, paralamas, capôs e componentes metálicos avariados por colisões. O trabalho prioriza o restabelecimento milimétrico das folgas e vincos originais do fabricante, empregando ferramentas de repuxo e conformação adequadas para manter a resistência do material.",
     applications: [
       "Deformações médias e grandes em portas, laterais, capô e paralamas",
       "Desalinhamento de linhas de cintura e frestas entre componentes adjacentes",
@@ -108,7 +130,7 @@ export const services: ServiceDetail[] = [
     description:
       "Preparação e pintura voltadas à uniformidade de cor, à qualidade do acabamento e à integração visual da peça reparada.",
     fullDescription:
-      "O setor de pintura da BRS opera com cabine com controle térmico e filtragem de partículas para evitar contaminações. O processo abrange desde o lixamento técnico com primers anticorrosivos de alta aderência até a colorimetria rigorosa e aplicação de verniz de alto sólido, assegurando brilho, durabilidade e transição imperceptível em relação às peças vizinhas.",
+      "O setor de pintura da Master opera com cabine com controle térmico e filtragem de partículas para evitar contaminações. O processo abrange desde o lixamento técnico com primers anticorrosivos de alta aderência até a colorimetria rigorosa e aplicação de verniz de alto sólido, assegurando brilho, durabilidade e transição imperceptível em relação às peças vizinhas.",
     applications: [
       "Repintura de painéis reparados em funilaria ou substituídos",
       "Correção de riscos profundos, arranhões com perda de camada de verniz e marcas de atrito",
@@ -283,7 +305,7 @@ export function contactMessage(values: ContactValues) {
   const intro =
     values.audience === "corretor"
       ? "Olá! Gostaria de conversar sobre uma possível parceria para atendimento de segurados."
-      : "Olá! Conheci a BRS pelo site e gostaria de solicitar uma avaliação para meu veículo.";
+      : "Olá! Conheci a Master pelo site e gostaria de solicitar uma avaliação para meu veículo.";
   return [
     intro,
     `Nome: ${values.name.trim()}`,

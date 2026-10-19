@@ -17,9 +17,9 @@ import type { Appointment } from "@/features/booking/domain/types";
 describe("SPEC-065 — Sincronização da Linha do Tempo Operacional e Hidratação SSR em /agendamentos", () => {
   const sampleAppointment: Appointment = {
     id: "seed-app-1",
-    protocol: "#BRS-8412",
+    protocol: "#Master-8412",
     serviceId: "avaliacao-funilaria",
-    professionalId: "bruno-tecnico",
+    professionalId: "equipe-tecnica",
     startTime: new Date().toISOString(),
     endTime: new Date(Date.now() + 60 * 60 * 1000).toISOString(),
     status: "COMPLETED",
@@ -52,7 +52,7 @@ describe("SPEC-065 — Sincronização da Linha do Tempo Operacional e Hidrataç
 
   it("AC-065-03: reconcilia automaticamente agendamentos com status COMPLETED mas linha do tempo em andamento (Etapa 5 de 6 · 4 concluídas)", async () => {
     // Simula o cenário reportado: agendamento salvo como COMPLETED, mas com 4 etapas concluídas (Etapa 5 em execução)
-    localStorage.setItem("brs_appointments_v1", JSON.stringify([sampleAppointment]));
+    localStorage.setItem("master_appointments_v1", JSON.stringify([sampleAppointment]));
 
     const fourCompletedEvents: EventoEtapa[] = [
       {
@@ -69,7 +69,7 @@ describe("SPEC-065 — Sincronização da Linha do Tempo Operacional e Hidrataç
         agendamentoId: sampleAppointment.id,
         etapa: "veiculo_recebido",
         tipo: "concluida",
-        porNome: "Bruno",
+        porNome: "Equipe Técnica",
         papel: "admin",
         em: new Date(Date.now() - 2400_000).toISOString(),
       },
@@ -78,7 +78,7 @@ describe("SPEC-065 — Sincronização da Linha do Tempo Operacional e Hidrataç
         agendamentoId: sampleAppointment.id,
         etapa: "vistoria_diagnostico",
         tipo: "concluida",
-        porNome: "Bruno",
+        porNome: "Equipe Técnica",
         papel: "admin",
         em: new Date(Date.now() - 1800_000).toISOString(),
       },
@@ -87,7 +87,7 @@ describe("SPEC-065 — Sincronização da Linha do Tempo Operacional e Hidrataç
         agendamentoId: sampleAppointment.id,
         etapa: "aprovacao_orcamento",
         tipo: "concluida",
-        porNome: "Bruno",
+        porNome: "Equipe Técnica",
         papel: "admin",
         em: new Date(Date.now() - 600_000).toISOString(),
       },

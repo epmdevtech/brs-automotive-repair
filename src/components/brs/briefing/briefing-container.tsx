@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import {
   BriefingDadosCompletos,
-  brsDefaultBriefing,
+  masterDefaultBriefing,
   loadBriefingDraft,
   saveBriefingDraft,
   clearBriefingDraft,
@@ -70,12 +70,12 @@ export function BriefingContainer() {
     }));
   };
 
-  // Restaurar dados canônicos da BRS
-  const handleRestoreBrsData = () => {
+  // Restaurar dados canônicos da Master
+  const handleRestoreMasterData = () => {
     if (
-      window.confirm("Deseja restaurar os dados padrão oficiais da BRS Reparações Automotivas?")
+      window.confirm("Deseja restaurar os dados padrão oficiais da Master Chapeação e Pinturas?")
     ) {
-      setData(brsDefaultBriefing);
+      setData(masterDefaultBriefing);
       setPendingFlags({});
       setActiveStep(1);
     }
@@ -215,11 +215,11 @@ export function BriefingContainer() {
             type="button"
             variant="outline"
             size="sm"
-            onClick={handleRestoreBrsData}
+            onClick={handleRestoreMasterData}
             className="text-xs border-primary/30 text-primary hover:bg-primary/10 gap-1"
-            title="Carregar dados canônicos da BRS Reparações"
+            title="Carregar dados canônicos da Master Chapeação"
           >
-            <RotateCcw className="size-3.5" /> Restaurar BRS
+            <RotateCcw className="size-3.5" /> Restaurar Master
           </Button>
 
           <Button

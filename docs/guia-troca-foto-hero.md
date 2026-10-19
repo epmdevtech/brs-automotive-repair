@@ -1,4 +1,4 @@
-# Guia Operacional — Substituição e Calibração da Foto do Hero (BRS Reparações Automotivas)
+# Guia Operacional — Substituição e Calibração da Foto do Hero (Master Chapeação e Pinturas)
 
 > **Documento Normativo — SPEC-068**  
 > Destinado a engenheiros de software, designers, proprietários da oficina e agentes de inteligência artificial (LLMs).
@@ -10,7 +10,7 @@
 Toda a animação cinematográfica do Hero (revelação gradual da interface, zoom lento da imagem e reflexo de luz na lataria) foi **completamente desacoplada dos arquivos de imagem**.
 
 Toda a dependência da foto reside em um único arquivo de configuração tipado:
-👉 [`src/lib/hero-config.ts`](file:///home/elessandro/%C3%81rea%20de%20Trabalho/Dev/EPMDEVTECH_Clientes/BRS/src/lib/hero-config.ts)
+👉 [`src/lib/hero-config.ts`](file:///home/elessandro/%C3%81rea%20de%20Trabalho/Dev/EPMDEVTECH_Clientes/Master/src/lib/hero-config.ts)
 
 Para substituir a foto ilustrativa atual por uma fotografia real da oficina, **não é necessário alterar nenhuma linha de código CSS, temporizador ou JSX de animação**.
 
@@ -57,7 +57,7 @@ export const defaultHeroConfig: HeroConfig = {
       height: 1500,
       webpSrc: "/images/hero-oficina-real-mobile.webp", // opcional
     },
-    alt: "Oficina técnica e estufa de pintura da BRS Reparações em Toledo-PR",
+    alt: "Oficina técnica e estufa de pintura da Master Chapeação em Toledo-PR",
     decorative: false,
   },
 };

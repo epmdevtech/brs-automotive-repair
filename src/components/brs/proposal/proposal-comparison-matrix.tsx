@@ -16,7 +16,7 @@ export function ProposalComparisonMatrix({ modules }: ProposalComparisonMatrixPr
           </h2>
           <p className="mt-4 text-neutral-300 text-sm sm:text-base leading-relaxed">
             Compare o objetivo, complexidade de implantação e dependências de cada módulo para
-            identificar a combinação mais assertiva para a BRS.
+            identificar a combinação mais assertiva para a Master.
           </p>
         </div>
 

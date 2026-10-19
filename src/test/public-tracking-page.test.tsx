@@ -12,9 +12,9 @@ import type { EventoEtapa } from "@/features/booking/domain/etapas";
 describe("Página Pública de Acompanhamento (SPEC-058 / TASK-058-01)", () => {
   const baseAppointment: Appointment = {
     id: "app-test-civic",
-    protocol: "#BRS-7391",
+    protocol: "#Master-7391",
     serviceId: "martelinho-express",
-    professionalId: "bruno-tecnico",
+    professionalId: "equipe-tecnica",
     startTime: "2026-10-15T08:00:00.000Z",
     endTime: "2026-10-15T09:30:00.000Z",
     status: "CONFIRMED",
@@ -73,7 +73,7 @@ describe("Página Pública de Acompanhamento (SPEC-058 / TASK-058-01)", () => {
     });
 
     it("extrai o primeiro nome de técnico legítimo e omite cargos genéricos", () => {
-      expect(extrairPrimeiroNomeTecnico("Bruno (Funilaria & Vistoria)")).toBe("Bruno");
+      expect(extrairPrimeiroNomeTecnico("Equipe Técnica Master")).toBe("Equipe");
       expect(extrairPrimeiroNomeTecnico("Lucas Martins")).toBe("Lucas");
       expect(extrairPrimeiroNomeTecnico("Técnico Martelinho de Ouro")).toBeUndefined();
       expect(extrairPrimeiroNomeTecnico("Técnico Pintura em Estufa")).toBeUndefined();
@@ -84,11 +84,11 @@ describe("Página Pública de Acompanhamento (SPEC-058 / TASK-058-01)", () => {
     it("projeta o DTO sem vazar notas confidenciais, telefones completos ou documentos do cliente", () => {
       const dto = toPublicCustomerTrackingDto(baseAppointment, eventosEtapa2);
 
-      expect(dto.protocolo).toBe("#BRS-7391");
+      expect(dto.protocolo).toBe("#Master-7391");
       expect(dto.veiculoResumo).toBe("Honda Civic G10 Touring (2021)");
       expect(dto.placaMascarada).toBe("BCX-***4");
       expect(dto.servicoTitulo).toBe("Martelinho de ouro (PDR)");
-      expect(dto.tecnicoPrimeiroNome).toBe("Bruno");
+      expect(dto.tecnicoPrimeiroNome).toBe("Equipe");
 
       // Garantir que notas confidenciais e dados sensíveis não estão nas propriedades do DTO
       const dtoStr = JSON.stringify(dto);
@@ -141,7 +141,7 @@ describe("Página Pública de Acompanhamento (SPEC-058 / TASK-058-01)", () => {
           tipo: "concluida",
           origem: "manual",
           porUsuarioId: "u-1",
-          porNome: "Bruno",
+          porNome: "Equipe Técnica",
           papel: "avaliador",
           em: "2026-10-15T09:00:00.000Z",
         },
@@ -177,11 +177,11 @@ describe("Página Pública de Acompanhamento (SPEC-058 / TASK-058-01)", () => {
 
   describe("Canais de Atendimento e Links Rápidos (F6)", () => {
     it("constrói links corretos de WhatsApp com protocolo e texto contextualizado", () => {
-      const linkGeral = CONTATO_OFICINA.construirLinkWhatsApp("#BRS-7391");
+      const linkGeral = CONTATO_OFICINA.construirLinkWhatsApp("#Master-7391");
       expect(linkGeral).toContain("wa.me/554520359440");
-      expect(linkGeral).toContain(encodeURIComponent("#BRS-7391"));
+      expect(linkGeral).toContain(encodeURIComponent("#Master-7391"));
 
-      const linkAprovacao = CONTATO_OFICINA.construirLinkWhatsAppAprovacao("#BRS-7391");
+      const linkAprovacao = CONTATO_OFICINA.construirLinkWhatsAppAprovacao("#Master-7391");
       expect(linkAprovacao).toContain("wa.me/554520359440");
       expect(linkAprovacao).toContain(encodeURIComponent("aprovar o orçamento"));
     });
@@ -192,7 +192,7 @@ describe("Página Pública de Acompanhamento (SPEC-058 / TASK-058-01)", () => {
       const { SiteLayout } = await import("@/components/brs/site-layout");
       const tanstackRouter = await import("@tanstack/react-router");
       vi.spyOn(tanstackRouter, "useRouterState").mockReturnValue(
-        "/acompanhar/BRS-7391" as unknown as ReturnType<typeof tanstackRouter.useRouterState>,
+        "/acompanhar/Master-7391" as unknown as ReturnType<typeof tanstackRouter.useRouterState>,
       );
 
       render(

@@ -188,7 +188,7 @@ export function StepServicos({ data, onChange }: StepServicosProps) {
                   className="w-full bg-neutral-900/80 border border-white/10 text-white text-xs h-9 rounded-md px-3"
                 >
                   <option value="no_box">Presencial no Box</option>
-                  <option value="leva_e_traz">Com Serviço Leva e Traz</option>
+                  <option value="leva_e_traz">Com Serviço de Guincho</option>
                   <option value="socorro_externo">Socorro Externo / No Local</option>
                 </select>
               </div>

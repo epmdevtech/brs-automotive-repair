@@ -7,24 +7,28 @@ import {
   validateContact,
   contactMessage,
 } from "@/lib/brs";
-describe("Verified BRS business rules", () => {
+describe("Verified Master business rules", () => {
   it("uses the supplied public phone", () => {
-    expect(company.phoneHref).toBe("tel:+554520359440");
+    expect(company.phoneHref).toBe("tel:+5545999545442");
   });
   it("keeps unconfirmed WhatsApp disabled", () => {
     expect(company.whatsappConfirmed).toBe(false);
   });
+  it("uses the official Facebook", () => {
+    expect(company.social.url).toBe("https://www.facebook.com/1630662447189202");
+  });
   it("uses the official Instagram", () => {
-    expect(company.instagram).toBe("https://www.instagram.com/brsreparacoes/");
+    expect(company.instagram.url).toBe("https://www.instagram.com/masterchapeacao2022/");
+    expect(company.instagram.handle).toBe("@masterchapeacao2022");
   });
   it("maintains official corporate registration data and founder history", () => {
-    expect(company.legalName).toBe("Brs Comercio de Pecas Automotivas LTDA");
-    expect(company.tradeName).toBe("Brs Comercio de Pecas Automotivas");
-    expect(company.cnpj).toBe("53.877.400/0001-46");
-    expect(company.cnpjRaw).toBe("53877400000146");
-    expect(company.foundedFormatted).toBe("09/02/2024");
-    expect(company.founder.name).toBe("Bruno");
-    expect(company.founder.experienceYearsText).toContain("experiência");
+    expect(company.legalName).toBe("LCL Chapeação LTDA");
+    expect(company.tradeName).toBe("Master Chapeação e Pinturas");
+    expect(company.cnpj).toBe("51.784.844/0001-01");
+    expect(company.cnpjRaw).toBe("51784844000101");
+    expect(company.foundedFormatted).toBe("11/08/2023");
+    expect(company.team.name).toBe("Equipe Master");
+    expect(company.team.experienceYearsText).toContain("especializado");
   });
   it("offers only the three confirmed services", () => {
     expect(services.map((s) => s.short)).toEqual(["Funilaria", "Pintura", "Martelinho de ouro"]);
@@ -69,7 +73,7 @@ describe("Verified BRS business rules", () => {
       contactMessage({
         name: "Ana",
         phone: "45999999999",
-        description: "Conhecer a BRS",
+        description: "Conhecer a Master",
         vehicle: "",
         service: "",
         audience: "corretor",

@@ -5,7 +5,7 @@ import { formatTime } from "../../domain/time";
 import { formatPhoneBR } from "../../domain/phone";
 import { getStatusBorderClass, getStatusLabel } from "../../domain/status";
 import { buildCustomerWhatsAppLink, formatPreOsSummary } from "../../domain/intake";
-import { BRS_BOOKING_CONFIG } from "../../config/booking.config";
+import { MASTER_BOOKING_CONFIG } from "../../config/booking.config";
 import { ProcessStepper } from "./process-stepper";
 
 export interface KanbanBoardProps {
@@ -60,7 +60,7 @@ const COLUMNS: KanbanColumnConfig[] = [
 ];
 
 /**
- * Visão em Quadro (KanbanBoard) operacional de atendimentos BRS.
+ * Visão em Quadro (KanbanBoard) operacional de atendimentos Master.
  * Organiza os atendimentos pelas 5 situações operacionais em colunas com cards técnicos,
  * mini-stepper de etapas e atalhos rápidos de contato.
  */
@@ -68,11 +68,11 @@ export function KanbanBoard({ appointments, onSelectAppointment }: KanbanBoardPr
   const [copiedId, setCopiedId] = useState<string | null>(null);
 
   const getProfessionalName = (profId: string) => {
-    return BRS_BOOKING_CONFIG.professionals.find((p) => p.id === profId)?.name || profId;
+    return MASTER_BOOKING_CONFIG.professionals.find((p) => p.id === profId)?.name || profId;
   };
 
   const getServiceName = (serviceId: string) => {
-    return BRS_BOOKING_CONFIG.services.find((s) => s.id === serviceId)?.name || serviceId;
+    return MASTER_BOOKING_CONFIG.services.find((s) => s.id === serviceId)?.name || serviceId;
   };
 
   const handleCopy = (e: React.MouseEvent, app: Appointment) => {

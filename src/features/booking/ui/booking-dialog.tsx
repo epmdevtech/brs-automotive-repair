@@ -7,6 +7,7 @@ import {
   Clock,
   Copy,
   Info,
+  Facebook,
   Instagram,
   Loader2,
   MapPin,
@@ -25,7 +26,7 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { company } from "@/lib/brs";
-import { BRS_BOOKING_CONFIG } from "../config/booking.config";
+import { MASTER_BOOKING_CONFIG } from "../config/booking.config";
 import { DAMAGE_AREAS_LIST, DAMAGE_TYPES_LIST, formatPreOsSummary } from "../domain/intake";
 import { formatTime, formatDate } from "../domain/time";
 import { formatPhoneBR } from "../domain/phone";
@@ -48,8 +49,8 @@ export function BookingDialog({ open, onOpenChange, defaultServiceId }: BookingD
   }
 
   const activeService =
-    BRS_BOOKING_CONFIG.services.find((s) => s.id === booking.serviceId) ??
-    BRS_BOOKING_CONFIG.services[0];
+    MASTER_BOOKING_CONFIG.services.find((s) => s.id === booking.serviceId) ??
+    MASTER_BOOKING_CONFIG.services[0];
 
   const morningSlots = booking.availableSlots.filter((s) => s.start.getHours() < 12);
   const afternoonSlots = booking.availableSlots.filter((s) => s.start.getHours() >= 12);
@@ -99,7 +100,7 @@ export function BookingDialog({ open, onOpenChange, defaultServiceId }: BookingD
           <DialogTitle className="text-xl md:text-2xl font-display font-semibold text-foreground tracking-tight">
             {booking.step === 1 && "Identificação do Veículo & Triagem de Avarias"}
             {booking.step === 2 && "Especialidade Técnica Desejada"}
-            {booking.step === 3 && "Modalidade de Atendimento & Leva e Traz"}
+            {booking.step === 3 && "Modalidade de Atendimento & Guincho"}
             {booking.step === 4 && "Escolha da Data & Horário do Slot"}
             {booking.step === 5 && "Seus Dados de Contato"}
             {booking.step === 6 && "Pré-OS Gerada com Sucesso"}
@@ -110,7 +111,7 @@ export function BookingDialog({ open, onOpenChange, defaultServiceId }: BookingD
             {booking.step === 2 &&
               "Selecione o serviço para o qual deseja realizar a vistoria técnica presencial ou remota."}
             {booking.step === 3 &&
-              "Defina se você levará o carro à BRS ou se prefere a comodidade da coleta Leva e Traz em Toledo-PR."}
+              "Defina se você levará o carro à Master ou se prefere a comodidade do serviço de guincho em Toledo-PR."}
             {booking.step === 4 &&
               "Consulte a disponibilidade real em nosso motor matemático anti-colisão."}
             {booking.step === 5 &&
@@ -265,7 +266,7 @@ export function BookingDialog({ open, onOpenChange, defaultServiceId }: BookingD
             </p>
 
             <div className="grid gap-3">
-              {BRS_BOOKING_CONFIG.services.map((svc) => {
+              {MASTER_BOOKING_CONFIG.services.map((svc) => {
                 const isSelected = booking.serviceId === svc.id;
                 return (
                   <div
@@ -327,8 +328,8 @@ export function BookingDialog({ open, onOpenChange, defaultServiceId }: BookingD
                   </span>
                 </div>
                 <p className="text-xs text-muted-foreground leading-relaxed">
-                  Você leva o veículo até a sede da BRS em Toledo-PR no horário agendado. Inspeção
-                  em rampa e luminária técnica de linhas.
+                  Você leva o veículo até a sede da Master em Toledo-PR no horário agendado.
+                  Inspeção em rampa e luminária técnica de linhas.
                 </p>
               </div>
 
@@ -350,7 +351,7 @@ export function BookingDialog({ open, onOpenChange, defaultServiceId }: BookingD
                     }
                   />
                   <span className="text-sm font-semibold text-foreground">
-                    Serviço Leva e Traz (Toledo-PR)
+                    Serviço de Guincho (Toledo-PR)
                   </span>
                 </div>
                 <p className="text-xs text-muted-foreground leading-relaxed">
@@ -560,7 +561,7 @@ export function BookingDialog({ open, onOpenChange, defaultServiceId }: BookingD
               />
               <span className="leading-relaxed">
                 Concordo com o registro das informações técnicas do meu veículo para fins exclusivos
-                de agendamento de vistoria e contato da BRS Reparações Automotivas.
+                de agendamento de vistoria e contato da Master Chapeação e Pinturas.
               </span>
             </label>
           </div>
@@ -579,7 +580,7 @@ export function BookingDialog({ open, onOpenChange, defaultServiceId }: BookingD
               </div>
               <p className="text-xs text-muted-foreground max-w-md mx-auto">
                 Seu horário foi reservado automaticamente na agenda da oficina. A Pré-OS foi gerada
-                e a equipe da BRS já visualiza seu agendamento.
+                e a equipe da Master já visualiza seu agendamento.
               </p>
             </div>
 
@@ -602,8 +603,8 @@ export function BookingDialog({ open, onOpenChange, defaultServiceId }: BookingD
                 <span className="text-muted-foreground">Modalidade:</span>
                 <span className="text-foreground">
                   {booking.createdAppointment.logistics.type === "leva-e-traz"
-                    ? "Leva e Traz (Toledo-PR)"
-                    : "Presencial na BRS"}
+                    ? "Guincho (Toledo-PR)"
+                    : "Presencial na Master"}
                 </span>
               </div>
               <div className="flex justify-between">
@@ -633,15 +634,25 @@ export function BookingDialog({ open, onOpenChange, defaultServiceId }: BookingD
                 )}
               </Button>
 
-              <div className="grid sm:grid-cols-2 gap-3">
+              <div className="grid sm:grid-cols-3 gap-3">
                 <a
-                  href={company.instagram}
+                  href={company.instagram.url}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center gap-2 h-10 px-4 rounded border border-border bg-secondary/30 hover:bg-secondary/60 text-xs font-medium text-foreground transition-colors"
                 >
                   <Instagram size={14} className="text-primary" />
-                  Instagram @brsreparacoes
+                  Instagram
+                </a>
+
+                <a
+                  href={company.social.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 h-10 px-4 rounded border border-border bg-secondary/30 hover:bg-secondary/60 text-xs font-medium text-foreground transition-colors"
+                >
+                  <Facebook size={14} className="text-primary" />
+                  Facebook
                 </a>
 
                 <a
@@ -690,7 +701,7 @@ export function BookingDialog({ open, onOpenChange, defaultServiceId }: BookingD
                 }
                 if (booking.step === 3 && booking.logisticsType === "leva-e-traz") {
                   if (!booking.address || !booking.neighborhood) {
-                    alert("Informe o endereço e o bairro para o serviço Leva e Traz.");
+                    alert("Informe o endereço e o bairro para o serviço Guincho.");
                     return;
                   }
                 }

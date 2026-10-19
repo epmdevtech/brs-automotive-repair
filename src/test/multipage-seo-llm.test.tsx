@@ -45,7 +45,7 @@ describe("SPEC-014 — Arquitetura Multipágina, SEO Técnico e LLMs", () => {
 
       expect(uniqueCanonicals.size).toBe(PUBLIC_ROUTES.length);
       canonicalUrls.forEach((url) => {
-        expect(url).toMatch(/^https:\/\/brs\.epmdevtech\.com\.br(\/.*)?$/);
+        expect(url).toMatch(/^https:\/\/master\.epmdevtech\.com\.br(\/.*)?$/);
       });
     });
 
@@ -88,7 +88,7 @@ describe("SPEC-014 — Arquitetura Multipágina, SEO Técnico e LLMs", () => {
     it("arquivo robots.txt existe e faz apontamento para o sitemap.xml", () => {
       expect(fs.existsSync(robotsPath)).toBe(true);
       const content = fs.readFileSync(robotsPath, "utf-8");
-      expect(content).toContain("Sitemap: https://brs.epmdevtech.com.br/sitemap.xml");
+      expect(content).toContain("Sitemap: https://master.epmdevtech.com.br/sitemap.xml");
     });
 
     it("configura permissões documentadas para rastreadores tradicionais e motores de IA", () => {
@@ -110,11 +110,11 @@ describe("SPEC-014 — Arquitetura Multipágina, SEO Técnico e LLMs", () => {
       expect(fs.existsSync(llmsPath)).toBe(true);
       const content = fs.readFileSync(llmsPath, "utf-8");
 
-      expect(content).toContain("# BRS Reparações Automotivas — Toledo, PR");
+      expect(content).toContain("# Master Chapeação e Pinturas — Toledo, PR");
       expect(content).toContain(company.phone);
-      expect(content).toContain(company.instagram);
+      expect(content).toContain(company.social.url);
       expect(content).toContain("Toledo, Paraná");
-      expect(content).toContain("As fotografias exibidas no site são ilustrativas");
+      expect(content).toContain("são reais");
       expect(content).toContain("Funilaria Automotiva");
       expect(content).toContain("Pintura Automotiva");
       expect(content).toContain("Martelinho de Ouro");
@@ -126,7 +126,7 @@ describe("SPEC-014 — Arquitetura Multipágina, SEO Técnico e LLMs", () => {
 
     it("não contém dados inventados ou certificações/convênios falsos", () => {
       const content = fs.readFileSync(llmsPath, "utf-8");
-      expect(content).not.toContain("CNPJ");
+      expect(content).toContain(company.cnpj);
       expect(content).not.toContain("4.9 estrelas");
       expect(content).not.toContain("convênio exclusivo");
     });

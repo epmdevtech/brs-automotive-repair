@@ -1,58 +1,66 @@
-# BRS Reparações Automotivas — Toledo, PR
+# Master Chapeação e Pinturas — Toledo, PR
 
-> Oficina especializada em funilaria automotiva, pintura automotiva em estufa e martelinho de ouro (PDR) localizada em Toledo, Paraná, Brasil.
+> Oficina especializada em chapeação, funilaria automotiva, pintura automotiva em estufa, martelinho de ouro (PDR) e serviço de guincho em Toledo, Paraná, Brasil.
 
 ## Sobre a Empresa
-- **Nome**: BRS Reparações Automotivas
+- **Nome**: Master Chapeação e Pinturas
+- **Razão Social**: LCL Chapeação LTDA
+- **CNPJ**: 51.784.844/0001-01
 - **Localização**: Toledo, Paraná, Brasil
-- **Endereço Oficial**: R. Barão do Rio Branco, 4892 - Gisela, Toledo - PR, 85905-625
-- **Horário de Funcionamento**: Segunda a sexta, das 08h às 18h (Sábado e domingo: Fechado)
-- **Telefone Oficial**: (45) 2035-9440 (chamadas telefônicas)
-- **Instagram Oficial**: https://www.instagram.com/brsreparacoes/
-- **Atendimento**: Presencial na oficina e serviço de busca/entrega (Leva e Traz) no perímetro urbano de Toledo.
+- **Endereço Oficial**: Av. Maripá, 4138 - Centro, Toledo - PR, 85901-000
+- **Horário de Funcionamento**: Segunda a sexta, das 08h às 12h e das 13h30 às 18h30
+- **Telefone Oficial**: (45) 99954-5442 (chamadas telefônicas)
+- **Instagram Oficial**: https://www.instagram.com/masterchapeacao2022/
+- **Facebook Oficial**: https://www.facebook.com/1630662447189202
+- **Atendimento**: Presencial na oficina e serviço de guincho.
 - **Canal WhatsApp**: Desabilitado/Não confirmado formalmente.
-- **Transparência de Imagens**: As fotografias exibidas no site são ilustrativas e estão explicitamente identificadas.
+- **Transparência de Imagens**: As fotos da fachada, da estufa e do veículo em atendimento são reais. Imagens de funilaria, martelinho de ouro e comparações antes/depois sem registro fotográfico próprio permanecem identificadas como ilustrativas.
 
 ## Especialidades e Serviços Confirmados
 
-### 1. Funilaria Automotiva
+### 1. Chapeação e Funilaria Automotiva
 - **Finalidade**: Recuperação da geometria da lataria, alinhamento de painéis, portas, paralamas e capôs após colisões.
 - **Foco**: Restauração precisa de vincos e folgas originais do fabricante.
 - **Limitação**: Peças com deformação severa e fadiga estrutural são encaminhadas para substituição por peça nova homologada.
-- **URL**: https://brs.epmdevtech.com.br/servicos/funilaria
+- **URL**: https://master.epmdevtech.com.br/servicos/funilaria
 
 ### 2. Pintura Automotiva
 - **Finalidade**: Preparação de superfícies e repintura em cabine com controle térmico e filtragem de partículas.
 - **Foco**: Aplicação de primers anticorrosivos, colorimetria de precisão para equalização de tonalidade e verniz de alto sólido.
 - **Cuidados**: Demanda período de cura progressiva nas primeiras semanas pós-entrega.
-- **URL**: https://brs.epmdevtech.com.br/servicos/pintura-automotiva
+- **URL**: https://master.epmdevtech.com.br/servicos/pintura-automotiva
 
 ### 3. Martelinho de Ouro (PDR — Paintless Dent Removal)
 - **Finalidade**: Desamassamento artesanal sem repintura através de alavancas pelo verso do painel ou ventosas térmicas pela face externa.
 - **Foco**: Preservação da pintura original e manutenção do valor de revenda do veículo.
 - **Aplicações**: Amassados de granizo, batidas de porta em estacionamento e vincos suaves.
 - **Limitação**: Inaplicável quando a tinta ou o verniz estiverem trincados, rompidos ou quando a chapa sofreu estiramento elástico severo.
-- **URL**: https://brs.epmdevtech.com.br/servicos/martelinho-de-ouro
+- **URL**: https://master.epmdevtech.com.br/servicos/martelinho-de-ouro
+
+### 4. Guincho e Remoção
+- **Finalidade**: Remoção de veículos que não podem circular até a oficina para avaliação técnica.
+- **Disponibilidade**: Sob confirmação por telefone, conforme localização e agenda.
+- **URL**: https://master.epmdevtech.com.br/contato
 
 ## Atendimento a Corretores e Segurados
 - **Livre Escolha**: O segurado tem direito legal garantido à livre escolha da oficina de sua preferência para realização do reparo do sinistro.
 - **Apoio ao Corretor**: Elaboração de orçamentos técnicos ágeis, fotos de etapas e cumprimento rigoroso de prazos acordados.
-- **Transparência**: A BRS não divulga convênios ou credenciamentos fictícios com seguradoras; atende segurados de qualquer companhia por livre escolha.
-- **URL**: https://brs.epmdevtech.com.br/para-corretores
+- **Transparência**: A Master não divulga convênios ou credenciamentos fictícios com seguradoras; atende segurados de qualquer companhia por livre escolha.
+- **URL**: https://master.epmdevtech.com.br/para-corretores
 
 ## Fluxo de Avaliação e Contato
 - O formulário de contato do site é processado no dispositivo do usuário (os dados não são armazenados em banco de dados).
-- O formulário formata a mensagem com as avarias para cópia e envio pelo Instagram oficial `@brsreparacoes` ou para ligação no telefone `(45) 2035-9440`.
-- **URL**: https://brs.epmdevtech.com.br/contato
+- O formulário formata a mensagem com as avarias para cópia e envio manual pelo Instagram oficial `@masterchapeacao2022`, pela página no Facebook ou para ligação no telefone `(45) 99954-5442`.
+- **URL**: https://master.epmdevtech.com.br/contato
 
 ## Índice de Páginas Canônicas
-- Início: https://brs.epmdevtech.com.br/
-- Visão Geral de Serviços: https://brs.epmdevtech.com.br/servicos
-- Funilaria Automotiva: https://brs.epmdevtech.com.br/servicos/funilaria
-- Pintura Automotiva: https://brs.epmdevtech.com.br/servicos/pintura-automotiva
-- Martelinho de Ouro: https://brs.epmdevtech.com.br/servicos/martelinho-de-ouro
-- Galeria de Trabalhos: https://brs.epmdevtech.com.br/trabalhos
-- Para Corretores: https://brs.epmdevtech.com.br/para-corretores
-- Sobre a Oficina: https://brs.epmdevtech.com.br/sobre
-- Avaliação e Contato: https://brs.epmdevtech.com.br/contato
-- Política de Privacidade: https://brs.epmdevtech.com.br/privacidade
+- Início: https://master.epmdevtech.com.br/
+- Visão Geral de Serviços: https://master.epmdevtech.com.br/servicos
+- Chapeação e Funilaria: https://master.epmdevtech.com.br/servicos/funilaria
+- Pintura Automotiva: https://master.epmdevtech.com.br/servicos/pintura-automotiva
+- Martelinho de Ouro: https://master.epmdevtech.com.br/servicos/martelinho-de-ouro
+- Galeria de Trabalhos: https://master.epmdevtech.com.br/trabalhos
+- Para Corretores: https://master.epmdevtech.com.br/para-corretores
+- Sobre a Oficina: https://master.epmdevtech.com.br/sobre
+- Avaliação e Contato: https://master.epmdevtech.com.br/contato
+- Política de Privacidade: https://master.epmdevtech.com.br/privacidade

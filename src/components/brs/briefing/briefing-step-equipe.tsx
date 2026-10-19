@@ -113,7 +113,7 @@ export function StepEquipe({ data, onChange }: StepEquipeProps) {
                 <Input
                   value={membro.nome}
                   onChange={(e) => updateMembro(idx, { nome: e.target.value })}
-                  placeholder="Ex: Bruno Rafael dos Santos"
+                  placeholder="Ex: Equipe Técnica Master"
                   className="bg-neutral-900/80 border-white/10 text-white text-xs h-9"
                 />
               </div>

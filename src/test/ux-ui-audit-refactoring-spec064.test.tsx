@@ -11,7 +11,7 @@ import { company, canonicalUrl, aestheticServices } from "@/lib/brs";
 import { buildRouteHead, buildAutoBodyShopSchema } from "@/lib/seo";
 
 describe("SPEC-064 — Auditoria e Refatoração UX/UI (Conversão, Integridade Editorial, Home em 6 Blocos e SEO)", () => {
-  it("CA-01 & CA-02: Hero declara o que a BRS faz e onde no H1 e possui CTA dominante 'Solicitar avaliação'", () => {
+  it("CA-01 & CA-02: Hero declara o que a Master faz e onde no H1 e possui CTA dominante 'Solicitar avaliação'", () => {
     const { container } = render(<Hero />);
 
     const h1 = screen.getByRole("heading", { level: 1 });
@@ -29,7 +29,7 @@ describe("SPEC-064 — Auditoria e Refatoração UX/UI (Conversão, Integridade 
     // Presença de img com fetchPriority='high' para LCP e aviso de fotografia ilustrativa
     const lcpImg = container.querySelector('img[fetchpriority="high"]');
     expect(lcpImg).not.toBeNull();
-    expect(screen.getByText("Fotografia ilustrativa")).toBeInTheDocument();
+    expect(screen.queryByText("Fotografia ilustrativa")).toBeNull();
   });
 
   it("CA-03: Services exibe 3 cards com apenas 1 link por card ('Ver detalhes do serviço') e linha compacta de estética", () => {
@@ -56,7 +56,7 @@ describe("SPEC-064 — Auditoria e Refatoração UX/UI (Conversão, Integridade 
 
     expect(screen.getByText("Diagnóstico claro antes do serviço")).toBeInTheDocument();
     expect(screen.getByText("Orçamento e prazo alinhados antes da execução")).toBeInTheDocument();
-    expect(screen.getByText("Serviço de leva e traz em Toledo-PR")).toBeInTheDocument();
+    expect(screen.getByText("Serviço de guincho em Toledo-PR")).toBeInTheDocument();
 
     // Ausência da palavra 'laudo' e da numeração duplicada 'Etapa 01'
     expect(container.textContent?.toLowerCase()).not.toContain("laudo");
@@ -84,7 +84,7 @@ describe("SPEC-064 — Auditoria e Refatoração UX/UI (Conversão, Integridade 
   it("CA-01 & CA-04: FinalCTA e MinimalFooter exibem canais confirmados (telefone, endereço, horário) sem imagem repetida e sem frase de demonstração", () => {
     const { container: ctaContainer } = render(<FinalCTA />);
     expect(ctaContainer.querySelector("img")).toBeNull();
-    expect(screen.queryByRole("link", { name: /conhecer o instagram/i })).toBeNull();
+    expect(screen.queryByRole("link", { name: /conhecer o facebook/i })).toBeNull();
     expect(screen.getByRole("link", { name: /solicitar avaliação/i })).toHaveAttribute(
       "href",
       "/contato",
@@ -99,21 +99,21 @@ describe("SPEC-064 — Auditoria e Refatoração UX/UI (Conversão, Integridade 
     expect(footerContainer.textContent).not.toContain("Demonstração institucional oficial");
   });
 
-  it("CA-04 & CA-05: SEO canônico usa https://brs.epmdevtech.com.br e aestheticServices não contém números sem respaldo", () => {
-    expect(company.siteUrl).toBe("https://brs.epmdevtech.com.br");
-    expect(canonicalUrl("/servicos")).toBe("https://brs.epmdevtech.com.br/servicos");
+  it("CA-04 & CA-05: SEO canônico usa https://master.epmdevtech.com.br e aestheticServices não contém números sem respaldo", () => {
+    expect(company.siteUrl).toBe("https://master.epmdevtech.com.br");
+    expect(canonicalUrl("/servicos")).toBe("https://master.epmdevtech.com.br/servicos");
 
     const head = buildRouteHead({
-      title: "BRS",
+      title: "Master",
       description: "Desc",
       path: "/",
     });
-    expect(head.links[0]?.href).toBe("https://brs.epmdevtech.com.br/");
+    expect(head.links[0]?.href).toBe("https://master.epmdevtech.com.br/");
 
     const schema = buildAutoBodyShopSchema();
-    expect(schema.url).toBe("https://brs.epmdevtech.com.br/");
-    expect(schema.address.streetAddress).toBe("R. Barão do Rio Branco, 4892");
-    expect(schema.address.postalCode).toBe("85905-625");
+    expect(schema.url).toBe("https://master.epmdevtech.com.br/");
+    expect(schema.address.streetAddress).toBe("Av. Maripá, 4138");
+    expect(schema.address.postalCode).toBe("85901-000");
     expect(schema.openingHoursSpecification).toHaveLength(1);
 
     const allBenefits = aestheticServices.flatMap((s) => s.benefits).join(" ");

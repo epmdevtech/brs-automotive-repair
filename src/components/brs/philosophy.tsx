@@ -12,7 +12,7 @@ export function Philosophy() {
       "Escopo do serviço, materiais utilizados e previsão de entrega combinados com você antes de iniciar o trabalho na oficina.",
     ],
     [
-      "Serviço de leva e traz em Toledo-PR",
+      "Serviço de guincho em Toledo-PR",
       "Comodidade na retirada e entrega do veículo no perímetro urbano de Toledo, conforme disponibilidade de agendamento.",
     ],
   ];

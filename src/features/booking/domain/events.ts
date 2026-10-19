@@ -6,7 +6,7 @@ import type {
   CustomerTrackingMilestone,
   CustomerTrackingView,
 } from "./types";
-import { BRS_BOOKING_CONFIG } from "../config/booking.config";
+import { MASTER_BOOKING_CONFIG } from "../config/booking.config";
 import { formatDate, formatTime, formatDateTime } from "./time";
 import { company } from "@/lib/brs";
 
@@ -18,7 +18,7 @@ export function readEventsFromStorage(): AppointmentEvent[] {
     return [];
   }
   try {
-    const raw = localStorage.getItem(BRS_BOOKING_CONFIG.eventsStorageKey);
+    const raw = localStorage.getItem(MASTER_BOOKING_CONFIG.eventsStorageKey);
     if (!raw) return [];
     return JSON.parse(raw) as AppointmentEvent[];
   } catch {
@@ -34,7 +34,7 @@ export function writeEventsToStorage(events: AppointmentEvent[]): boolean {
     return false;
   }
   try {
-    localStorage.setItem(BRS_BOOKING_CONFIG.eventsStorageKey, JSON.stringify(events));
+    localStorage.setItem(MASTER_BOOKING_CONFIG.eventsStorageKey, JSON.stringify(events));
     return true;
   } catch {
     return false;
@@ -130,7 +130,7 @@ export function ensureInitialEvents(appointment: Appointment): AppointmentEvent[
       toStatus: "CONFIRMED",
       createdAt: confirmTime,
       actorId: "system",
-      actorName: "BRS Sistema de Agenda",
+      actorName: "Master Sistema de Agenda",
       note: "Horário reservado com sucesso na grade operacional",
       visibleToCustomer: true,
     });
@@ -149,7 +149,7 @@ export function ensureInitialEvents(appointment: Appointment): AppointmentEvent[
       toStatus: "COMPLETED",
       createdAt: completeTime,
       actorId: appointment.professionalId,
-      actorName: "Técnico BRS",
+      actorName: "Técnico Master",
       note: "Serviço finalizado com checklist de qualidade aprovado",
       visibleToCustomer: true,
     });
@@ -166,7 +166,7 @@ export function ensureInitialEvents(appointment: Appointment): AppointmentEvent[
       toStatus: "CANCELLED",
       createdAt: cancelTime,
       actorId: "admin",
-      actorName: "Atendimento BRS",
+      actorName: "Atendimento Master",
       note: "Agendamento cancelado no painel administrativo",
       visibleToCustomer: true,
     });
@@ -228,10 +228,10 @@ export function buildServiceMilestones(
   const isReceivedDone = Boolean(receivedEvt || isCompleted);
   milestones.push({
     id: "m_received",
-    title: isLeva ? "2. Coleta Leva e Traz (Toledo-PR)" : "2. Veículo Recebido na Oficina",
+    title: isLeva ? "2. Remoção com Guincho (Toledo-PR)" : "2. Veículo Recebido na Oficina",
     description: isLeva
       ? `Agendado para coleta no bairro ${appointment.logistics.neighborhood ?? "Toledo-PR"}.`
-      : `Recepção direta no box de entrada da BRS Reparações.`,
+      : `Recepção direta no box de entrada da Master Chapeação.`,
     timestamp: receivedEvt?.createdAt,
     status: isCancelled ? "cancelled" : isReceivedDone ? "completed" : "current",
   });
@@ -326,8 +326,8 @@ export function buildCustomerTrackingView(
   appointment: Appointment,
   events: AppointmentEvent[],
 ): CustomerTrackingView {
-  const service = BRS_BOOKING_CONFIG.services.find((s) => s.id === appointment.serviceId);
-  const professional = BRS_BOOKING_CONFIG.professionals.find(
+  const service = MASTER_BOOKING_CONFIG.services.find((s) => s.id === appointment.serviceId);
+  const professional = MASTER_BOOKING_CONFIG.professionals.find(
     (p) => p.id === appointment.professionalId,
   );
   const slotDate = new Date(appointment.startTime);
@@ -335,7 +335,7 @@ export function buildCustomerTrackingView(
   return {
     protocol: appointment.protocol,
     serviceTitle: service?.title ?? appointment.serviceId,
-    technicianName: professional?.name ?? "Equipe Técnica BRS",
+    technicianName: professional?.name ?? "Equipe Técnica Master",
     status: appointment.status,
     maskedPlate: maskPlate(appointment.intake.vehicle.plate),
     vehicleSummary: `${appointment.intake.vehicle.make} ${appointment.intake.vehicle.model}${
@@ -367,13 +367,13 @@ export const MILESTONE_MESSAGES: MilestoneMessageOption[] = [
       const slot = new Date(app.startTime);
       return (
         `Olá, ${app.customer.name}! 👋\n\n` +
-        `Confirmamos o agendamento da sua avaliação na *BRS Reparações Automotivas*.\n\n` +
+        `Confirmamos o agendamento da sua avaliação na *Master Chapeação e Pinturas*.\n\n` +
         `📌 *Protocolo:* ${app.protocol}\n` +
         `🚗 *Veículo:* ${app.intake.vehicle.make} ${app.intake.vehicle.model}\n` +
         `📅 *Data e Horário:* ${formatDate(slot)} às ${formatTime(slot)}\n` +
-        `📍 *Local:* Av. Senador Attilio Fontana, 3427 - Toledo - PR\n\n` +
+        `📍 *Local:* ${company.address.full}\n\n` +
         `Caso precise de algo antes do horário, estamos à disposição!\n` +
-        `*BRS Reparações Automotivas* • Toledo-PR`
+        `*Master Chapeação e Pinturas* • Toledo-PR`
       );
     },
   },
@@ -384,10 +384,10 @@ export const MILESTONE_MESSAGES: MilestoneMessageOption[] = [
     generateText: (app) => {
       return (
         `Olá, ${app.customer.name}! 🚘\n\n` +
-        `Informamos que o seu veículo *${app.intake.vehicle.make} ${app.intake.vehicle.model}* já foi recebido no pátio da *BRS Reparações* (Protocolo: ${app.protocol}).\n\n` +
+        `Informamos que o seu veículo *${app.intake.vehicle.make} ${app.intake.vehicle.model}* já foi recebido no pátio da *Master Chapeação* (Protocolo: ${app.protocol}).\n\n` +
         `Realizamos o checklist de entrada e o veículo foi encaminhado para a vistoria técnica.\n\n` +
         `Qualquer atualização avisaremos por aqui!\n` +
-        `*BRS Reparações Automotivas*`
+        `*Master Chapeação e Pinturas*`
       );
     },
   },
@@ -402,7 +402,7 @@ export const MILESTONE_MESSAGES: MilestoneMessageOption[] = [
         `📋 *Protocolo:* ${app.protocol}\n` +
         `O laudo técnico de avarias e a listagem de insumos/reparos estão prontos para prosseguimento.\n\n` +
         `Estamos à disposição para esclarecer qualquer detalhe técnico.\n` +
-        `*BRS Reparações Automotivas*`
+        `*Master Chapeação e Pinturas*`
       );
     },
   },
@@ -421,7 +421,7 @@ export const MILESTONE_MESSAGES: MilestoneMessageOption[] = [
         `Atualização do seu atendimento (Protocolo: ${app.protocol}):\n\n` +
         `O seu veículo *${app.intake.vehicle.make} ${app.intake.vehicle.model}* já está na fase de *${serviceName}*.\n\n` +
         `Seguimos os mais rigorosos padrões de alinhamento e acabamento automotivo.\n\n` +
-        `*BRS Reparações Automotivas*`
+        `*Master Chapeação e Pinturas*`
       );
     },
   },
@@ -434,10 +434,10 @@ export const MILESTONE_MESSAGES: MilestoneMessageOption[] = [
         `Excelente notícia, ${app.customer.name}! 🎉✨\n\n` +
         `O seu veículo *${app.intake.vehicle.make} ${app.intake.vehicle.model}* está com todos os reparos concluídos e passou com sucesso pelo nosso controle de qualidade!\n\n` +
         `📌 *Protocolo:* ${app.protocol}\n` +
-        `📍 *Endereço para Retirada:* Av. Senador Attilio Fontana, 3427 - Toledo - PR\n` +
-        `⏰ *Horário de Atendimento:* Segunda a Sexta, das 08h às 18h\n\n` +
-        `Agradecemos a confiança no trabalho da equipe BRS!\n` +
-        `*BRS Reparações Automotivas*`
+        `📍 *Endereço para Retirada:* ${company.address.full}\n` +
+        `⏰ *Horário de Atendimento:* ${company.openingHours}\n\n` +
+        `Agradecemos a confiança no trabalho da equipe Master!\n` +
+        `*Master Chapeação e Pinturas*`
       );
     },
   },

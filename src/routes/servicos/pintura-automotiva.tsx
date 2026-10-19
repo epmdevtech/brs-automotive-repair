@@ -11,7 +11,7 @@ export const Route = createFileRoute("/servicos/pintura-automotiva")({
   component: PinturaPage,
   head: () =>
     buildRouteHead({
-      title: "Pintura Automotiva em Toledo | BRS",
+      title: "Pintura Automotiva em Toledo | Master",
       description:
         "Pintura automotiva em estufa com controle de temperatura em Toledo-PR. Colorimetria precisa, primers anticorrosivos e cura térmica de alta resistência.",
       path: "/servicos/pintura-automotiva",
@@ -39,10 +39,10 @@ function PinturaPage() {
       service={service}
       eyebrow="Especialidade Técnica"
       title="Pintura Automotiva em Estufa em Toledo."
-      intro="O acabamento de pintura da BRS alia rigor em preparação de superfície com aplicação em cabine com controle térmico e fluxo de ar filtrado. Cada reparo passa por análise colorimétrica minuciosa para garantir a correspondência de tonalidade e textura com as peças originais do veículo."
+      intro="O acabamento de pintura da Master alia rigor em preparação de superfície com aplicação em cabine com controle térmico e fluxo de ar filtrado. Cada reparo passa por análise colorimétrica minuciosa para garantir a correspondência de tonalidade e textura com as peças originais do veículo."
       heroCtaLabel="Solicitar avaliação de pintura"
       image={pinturaServico}
-      imageAlt="Técnico aplicando pintura automotiva e verniz em estufa pressurizada na BRS (fotografia ilustrativa)"
+      imageAlt="Técnico aplicando pintura automotiva e verniz em estufa pressurizada na Master (fotografia ilustrativa)"
       applicationsIcon={Paintbrush}
       applicationsTitle="Aplicações da Pintura"
       limitationsTitle="Requisitos de Cura e Limitações"
@@ -50,7 +50,7 @@ function PinturaPage() {
       processEyebrow="Processo Técnico"
       processTitle="Ciclo de Preparação e Pintura em Cabine"
       ctaTitle="Precisa repintar ou retocar uma peça do veículo?"
-      ctaText="Traga seu carro para uma conferência de tonalidade e orçamento sem surpresas na BRS em Toledo-PR."
+      ctaText="Traga seu carro para uma conferência de tonalidade e orçamento sem surpresas na Master em Toledo-PR."
       ctaLabel="Agendar avaliação de pintura"
     />
   );

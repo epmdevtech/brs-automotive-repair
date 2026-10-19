@@ -4,6 +4,7 @@ import {
   Clock,
   MapPin,
   Phone,
+  Facebook,
   Instagram,
   ShieldCheck,
   Truck,
@@ -22,20 +23,20 @@ export const Route = createFileRoute("/sobre")({
   component: SobrePage,
   head: () =>
     buildRouteHead({
-      title: "Sobre a BRS Reparações Automotivas | Toledo - PR",
+      title: "Sobre a Master Chapeação e Pinturas | Toledo - PR",
       description:
-        "História, princípios e estrutura técnica da BRS Reparações Automotivas em Toledo, Paraná. Especialistas em funilaria, pintura em estufa e martelinho de ouro.",
+        "História, princípios e estrutura técnica da Master Chapeação e Pinturas em Toledo, Paraná. Especialistas em funilaria, pintura em estufa e martelinho de ouro.",
       path: "/sobre",
       jsonLd: {
         "@context": "https://schema.org",
         "@graph": [
-          buildBreadcrumbSchema([{ name: "Sobre a BRS", path: "/sobre" }]),
+          buildBreadcrumbSchema([{ name: "Sobre a Master", path: "/sobre" }]),
           {
             "@type": "AboutPage",
-            name: "Sobre a BRS Reparações Automotivas",
+            name: "Sobre a Master Chapeação e Pinturas",
             url: canonicalUrl("/sobre"),
             description:
-              "Apresentação institucional, princípios e atendimento da BRS Reparações Automotivas em Toledo, Paraná.",
+              "Apresentação institucional, princípios e atendimento da Master Chapeação e Pinturas em Toledo, Paraná.",
           },
         ],
       },
@@ -48,15 +49,15 @@ function SobrePage() {
       <PageHero
         codeIndex="INS.04 // INSTITUCIONAL"
         eyebrow="Oficina Técnica Especializada"
-        breadcrumbs={[{ name: "A BRS" }]}
+        breadcrumbs={[{ name: "A Master" }]}
         title="Oficina Técnica Especializada em Toledo, Paraná."
         description={
           <>
-            A <strong className="text-white">BRS Reparações Automotivas</strong> nasceu para atender
-            motoristas e corretores de seguros que buscam um nível superior de acabamento, respeito
-            aos prazos e honestidade no diagnóstico da avaria veicular, sem soluções improvisadas.
-            Toda intervenção visa devolver à carroceria as folgas, vincos e a integridade de pintura
-            concebidos pela montadora.
+            A <strong className="text-white">Master Chapeação e Pinturas</strong> nasceu para
+            atender motoristas e corretores de seguros que buscam um nível superior de acabamento,
+            respeito aos prazos e honestidade no diagnóstico da avaria veicular, sem soluções
+            improvisadas. Toda intervenção visa devolver à carroceria as folgas, vincos e a
+            integridade de pintura concebidos pela montadora.
           </>
         }
         telemetryBadges={[
@@ -83,18 +84,26 @@ function SobrePage() {
         ]}
         actions={[
           {
-            label: "Falar com a BRS",
+            label: "Falar com a Master",
             to: "/contato",
             variant: "primary",
             icon: ArrowUpRight,
           },
           {
-            label: "Instagram @brsreparacoes",
-            href: company.instagram,
+            label: "Instagram Oficial",
+            href: company.instagram.url,
             variant: "secondary",
             target: "_blank",
             rel: "noopener noreferrer",
             icon: Instagram,
+          },
+          {
+            label: "Facebook Oficial",
+            href: company.social.url,
+            variant: "secondary",
+            target: "_blank",
+            rel: "noopener noreferrer",
+            icon: Facebook,
           },
         ]}
         asideContent={
@@ -105,7 +114,7 @@ function SobrePage() {
               </span>
             </div>
             <p className="font-display text-5xl sm:text-6xl font-semibold tracking-tight text-white mb-2">
-              BRS<span className="text-primary">.</span>
+              Master<span className="text-primary">.</span>
             </p>
             <p className="font-mono text-xs uppercase tracking-[2px] text-muted-foreground mb-6">
               Reparações automotivas
@@ -127,7 +136,7 @@ function SobrePage() {
               </div>
               <div className="flex items-center gap-3">
                 <Truck size={16} className="text-primary shrink-0" aria-hidden="true" />
-                <span>Serviço Leva e Traz sob consulta urbana</span>
+                <span>Serviço de Guincho sob consulta urbana</span>
               </div>
             </div>
           </div>
@@ -196,7 +205,7 @@ function SobrePage() {
               </h3>
               <p className="text-xs text-neutral-400 leading-relaxed text-pretty">
                 Sabemos o impacto da ausência do carro no dia a dia. Oferecemos o serviço de busca e
-                entrega (Leva e Traz) em Toledo para facilitar o andamento do reparo.
+                entrega (Guincho) em Toledo para facilitar o andamento do reparo.
               </p>
             </div>
           </ScrollReveal>
@@ -213,23 +222,21 @@ function SobrePage() {
             </h2>
             <div className="space-y-4 text-neutral-300 text-sm leading-relaxed">
               <p>
-                A <strong className="text-white">BRS Reparações Automotivas</strong> é liderada por{" "}
-                <strong className="text-white">{company.founder.name}</strong>, profissional com
-                anos de experiência prática e conhecimento aprofundado no setor de autopeças,
-                funilaria técnica, pintura automotiva e processos de recuperação veicular.
+                A <strong className="text-white">Master Chapeação e Pinturas</strong> reúne uma
+                equipe técnica com experiência prática em chapeação, funilaria, pintura automotiva,
+                martelinho de ouro e atendimento com guincho em Toledo e região.
               </p>
               <p>
-                Embora a sociedade empresária{" "}
-                <strong className="text-white">{company.legalName}</strong> tenha sido formalmente
-                fundada em{" "}
+                A sociedade empresária <strong className="text-white">{company.legalName}</strong>{" "}
+                foi formalmente constituída em{" "}
                 <span className="font-mono text-primary">{company.foundedFormatted}</span> (CNPJ{" "}
-                {company.cnpj}), a vivência operacional e os padrões de exigência de Bruno no
-                mercado automotivo antecedem sua abertura formal em vários anos.
+                {company.cnpj}) e mantém a operação da Master na Av. Maripá, 4138, no Centro de
+                Toledo.
               </p>
               <p className="text-xs text-neutral-400">
-                Essa combinação entre uma estrutura jurídica formalizada e anos de prática nas
-                oficinas assegura aos motoristas e corretores de Toledo a tranquilidade de tratar
-                com quem realmente entende de chaparia, colorimetria e tolerâncias mecânicas.
+                A estrutura formalizada e a prática diária na oficina permitem atender motoristas
+                particulares, seguradoras e corretores com diagnóstico transparente, cuidado com o
+                acabamento e respeito aos prazos combinados.
               </p>
             </div>
           </ScrollReveal>
@@ -270,10 +277,10 @@ function SobrePage() {
                   Responsável Técnico
                 </dt>
                 <dd className="text-foreground font-medium mt-0.5">
-                  {company.founder.name} · {company.founder.role}
+                  {company.team.name} · {company.team.role}
                 </dd>
                 <dd className="text-[11px] text-muted-foreground mt-1">
-                  {company.founder.experienceYearsText}
+                  {company.team.experienceYearsText}
                 </dd>
               </div>
             </dl>
@@ -284,7 +291,7 @@ function SobrePage() {
       <ContactCTA
         title="Deseja conhecer nosso trabalho de perto?"
         description="Visite a oficina ou entre em contato pelo telefone para conversar com nosso responsável técnico."
-        label="Entrar em contato com a BRS"
+        label="Entrar em contato com a Master"
       />
     </div>
   );
