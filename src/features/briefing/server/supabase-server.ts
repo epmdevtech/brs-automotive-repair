@@ -36,6 +36,28 @@ function parseCookieHeader(header: string): Record<string, string> {
 }
 
 /**
+ * Opções de cookie da sessão.
+ *
+ * O `@supabase/ssr` não marca o cookie como `httpOnly` por padrão e o mantém
+ * por 400 dias, o que deixa o token da sessão legível por JavaScript. A
+ * aplicação declara explicitamente as opções para manter o cookie inacessível
+ * ao script da página e restrito ao envio na mesma origem.
+ */
+export function resolveBriefingCookieOptions(isSecureRequest: boolean): {
+  path: string;
+  sameSite: "lax";
+  httpOnly: boolean;
+  secure: boolean;
+} {
+  return {
+    path: "/",
+    sameSite: "lax",
+    httpOnly: true,
+    secure: isSecureRequest,
+  };
+}
+
+/**
  * Cria o cliente Supabase para uso no servidor, com sessão por cookie.
  * O cookie é lido da requisição e as respostas de autenticação são
  * repropagadas para o navegador pelo middleware de resposta.
@@ -47,8 +69,10 @@ export async function createBriefingServerClient(): Promise<SupabaseClient> {
 
   const headers = getRequestHeaders();
   const jar = parseCookieHeader(headers.get("cookie") ?? "");
+  const isSecureRequest = headers.get("x-forwarded-proto") === "https";
 
   return createServerClient(env.url, env.anonKey, {
+    cookieOptions: resolveBriefingCookieOptions(isSecureRequest),
     cookies: {
       getAll() {
         return Object.entries(jar).map(([name, value]) => ({ name, value }));

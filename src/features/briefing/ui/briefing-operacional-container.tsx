@@ -13,6 +13,7 @@ import { applyCepLookup } from "../domain/address";
 import type { CepLookupResult } from "../domain/cep-service";
 import { useBriefingDraft } from "./use-briefing-draft";
 import { useBriefingServer } from "./use-briefing-server";
+import { BriefingSignOutButton } from "./briefing-sign-out-button";
 
 const AUTOSAVE_DELAY_MS = 900;
 
@@ -374,6 +375,7 @@ export function BriefingOperacionalContainer() {
           >
             {showReview ? "Voltar ao formulário" : "Revisar"}
           </Button>
+          <BriefingSignOutButton />
         </div>
       </header>
 

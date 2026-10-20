@@ -1,10 +1,11 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { z } from "zod";
 import { buildRouteHead } from "@/lib/seo";
+import { sanitizeRedirectTarget } from "@/lib/redirect";
 import { BriefingLoginForm } from "@/features/briefing/ui/briefing-login-form";
 
 const loginSearchSchema = z.object({
-  redirect: z.string().optional().catch("/briefing"),
+  redirect: z.string().optional().catch(undefined),
 });
 
 export const Route = createFileRoute("/login")({
@@ -23,7 +24,7 @@ export const Route = createFileRoute("/login")({
 function LoginPage() {
   const navigate = useNavigate();
   const search = Route.useSearch();
-  const targetRedirect = search.redirect || "/briefing";
+  const targetRedirect = sanitizeRedirectTarget(search.redirect);
 
   return (
     <main className="min-h-screen bg-neutral-950 text-neutral-200 antialiased">

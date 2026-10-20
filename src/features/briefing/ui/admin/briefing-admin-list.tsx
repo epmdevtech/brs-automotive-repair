@@ -10,6 +10,7 @@ import {
 } from "../../domain/status";
 import { listAdminBriefings } from "../../server/functions";
 import { formatDateTimeUtc } from "../../domain/format";
+import { BriefingSignOutButton } from "../briefing-sign-out-button";
 import type { BriefingSummary } from "../../server/briefing-service";
 
 export function BriefingAdminList() {
@@ -53,17 +54,21 @@ export function BriefingAdminList() {
 
   return (
     <div className="mx-auto w-full max-w-6xl px-4 sm:px-6">
-      <header className="border-b border-white/10 pb-5">
-        <p className="font-mono text-[0.65rem] uppercase tracking-[0.25em] text-[var(--brand-text-accent)]">
-          EPM DevTech · Painel administrativo
-        </p>
-        <h1 className="mt-2 font-display text-2xl font-semibold text-white sm:text-3xl">
-          Briefings recebidos
-        </h1>
-        <p className="mt-2 max-w-2xl text-sm leading-relaxed text-neutral-400">
-          Levantamentos operacionais enviados pela Master Chapeação e Pinturas. Cada registro é
-          gravado com rastreabilidade de status e auditoria.
-        </p>
+      <header className="flex flex-wrap items-start justify-between gap-4 border-b border-white/10 pb-5">
+        <div>
+          <p className="font-mono text-[0.65rem] uppercase tracking-[0.25em] text-[var(--brand-text-accent)]">
+            EPM DevTech · Painel administrativo
+          </p>
+          <h1 className="mt-2 font-display text-2xl font-semibold text-white sm:text-3xl">
+            Briefings recebidos
+          </h1>
+          <p className="mt-2 max-w-2xl text-sm leading-relaxed text-neutral-400">
+            Levantamentos operacionais enviados pela Master Chapeação e Pinturas. Cada registro é
+            gravado com rastreabilidade de status e auditoria.
+          </p>
+        </div>
+
+        <BriefingSignOutButton />
       </header>
 
       <section className="mt-5 border border-white/10 bg-white/[0.02] p-4">
