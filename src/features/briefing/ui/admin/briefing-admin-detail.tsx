@@ -48,13 +48,21 @@ export function BriefingAdminDetail({ briefingId }: BriefingAdminDetailProps) {
   }, [load]);
 
   const pendingBySection = useMemo(() => {
-    const map: Record<string, string[]> = {};
-    for (const section of Object.entries(detail?.sections ?? {})) {
-      const items = Object.entries(section[1].pending)
-        .filter(([, value]) => value)
-        .map(([fieldId]) => fieldId);
-      if (items.length > 0) map[section[0]] = items;
+    const map: Record<string, { fieldId: string; label: string }[]> = {};
+
+    for (const [sectionKey, section] of Object.entries(detail?.sections ?? {})) {
+      const items: { fieldId: string; label: string }[] = [];
+
+      for (const [fieldId, isPending] of Object.entries(section.pending)) {
+        if (!isPending) continue;
+        const step = BRIEFING_STEPS.find((item) => item.id === sectionKey);
+        const field = step?.fields.find((item) => item.id === fieldId);
+        items.push({ fieldId, label: field?.label ?? fieldId });
+      }
+
+      if (items.length > 0) map[sectionKey] = items;
     }
+
     return map;
   }, [detail]);
 
@@ -182,6 +190,15 @@ export function BriefingAdminDetail({ briefingId }: BriefingAdminDetailProps) {
             timeStyle: "short",
           })}
         </p>
+        {detail.owner ? (
+          <p className="mt-1 text-sm text-neutral-400">
+            Preenchido por:{" "}
+            <span className="text-neutral-200">
+              {detail.owner.displayName ?? detail.owner.userId}
+            </span>{" "}
+            · papel {detail.owner.role === "admin" ? "administrador" : "cliente"}
+          </p>
+        ) : null}
         {detail.briefing.clientMessage ? (
           <p className="mt-3 border border-amber-300/30 bg-amber-300/5 p-3 text-sm text-amber-100">
             Complementação solicitada: {detail.briefing.clientMessage}
@@ -351,6 +368,19 @@ export function BriefingAdminDetail({ briefingId }: BriefingAdminDetailProps) {
               ) : (
                 <p className="mt-2 text-sm text-neutral-500">Sem respostas registradas.</p>
               )}
+
+              {pendingFields.length > 0 ? (
+                <div className="mt-3 border border-amber-300/20 bg-amber-300/5 p-3">
+                  <p className="font-mono text-[0.65rem] uppercase tracking-[0.25em] text-amber-200/80">
+                    Aguardando o cliente
+                  </p>
+                  <ul className="mt-2 space-y-1 text-xs text-amber-100/90">
+                    {pendingFields.map((pending) => (
+                      <li key={pending.fieldId}>{pending.label}</li>
+                    ))}
+                  </ul>
+                </div>
+              ) : null}
             </article>
           );
         })}

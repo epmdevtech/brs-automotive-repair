@@ -31,8 +31,15 @@ export interface BriefingSummary {
   clientMessage: string | null;
 }
 
+export interface BriefingOwner {
+  userId: string;
+  displayName: string | null;
+  role: "client" | "admin";
+}
+
 export interface BriefingDetail {
   briefing: BriefingSummary;
+  owner: BriefingOwner | null;
   sections: Record<string, { values: BriefingSectionValues; pending: BriefingSectionPending }>;
   files: BriefingFileRow[];
   activity: BriefingActivityRow[];
@@ -152,6 +159,20 @@ export async function loadBriefingDetailById(
 
   const activity = session.role === "admin" ? await listActivity(client, session, briefingId) : [];
 
+  const { data: ownerRow } = await client
+    .from("profiles")
+    .select("id, display_name, role")
+    .eq("id", briefing.owner_user_id)
+    .maybeSingle();
+
+  const owner: BriefingOwner | null = ownerRow
+    ? {
+        userId: String(ownerRow["id"]),
+        displayName: (ownerRow["display_name"] as string | null) ?? null,
+        role: ownerRow["role"] === "admin" ? "admin" : "client",
+      }
+    : null;
+
   const sections: BriefingDetail["sections"] = {};
   for (const row of (answerRows ?? []) as BriefingAnswerRow[]) {
     sections[row.section_key] = {
@@ -162,6 +183,7 @@ export async function loadBriefingDetailById(
 
   return {
     briefing: toSummary(briefing),
+    owner,
     sections,
     files: (fileRows ?? []) as BriefingFileRow[],
     activity,

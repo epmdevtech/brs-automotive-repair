@@ -112,14 +112,11 @@ export function BriefingOperacionalContainer() {
       // Etapas com obrigatórios em aberto não são gravadas: o servidor exigiria
       // a resposta ou a pendência declarada, e o salvamento só é retomado
       // quando a etapa estiver completa.
-      const missingRequired = step.fields.some(
-        (field) =>
-          field.required &&
-          !pending[field.id] &&
-          !(typeof values[field.id] === "string"
-            ? values[field.id].trim().length > 0
-            : values[field.id] === true),
-      );
+      const missingRequired = step.fields.some((field) => {
+        if (!field.required || pending[field.id]) return false;
+        const value = values[field.id];
+        return typeof value === "string" ? value.trim().length === 0 : value !== true;
+      });
 
       if (missingRequired) return;
 

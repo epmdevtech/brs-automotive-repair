@@ -77,7 +77,15 @@ export function BriefingLoginForm({ onAuthenticated }: BriefingLoginFormProps) {
           Chapeação e Pinturas e cada ação é registrada.
         </p>
 
-        <form className="mt-6 space-y-4" onSubmit={handleSubmit(onSubmit)} noValidate>
+        <form
+          className="mt-6 space-y-4"
+          onSubmit={(event) => {
+            // Impede a submissão nativa (que colocaria a senha na URL antes da hidratação).
+            event.preventDefault();
+            void handleSubmit(onSubmit)(event);
+          }}
+          noValidate
+        >
           <div className="space-y-1.5">
             <label htmlFor="briefing-login-email" className="text-sm font-medium text-neutral-200">
               E-mail
@@ -138,10 +146,11 @@ export function BriefingLoginForm({ onAuthenticated }: BriefingLoginFormProps) {
           ) : null}
 
           <Button
-            type="submit"
+            type="button"
             variant="primary"
             className="w-full justify-center"
             disabled={isSubmitting}
+            onClick={() => void handleSubmit(onSubmit)()}
           >
             <LogIn aria-hidden="true" />
             {isSubmitting ? "Entrando…" : "Entrar"}

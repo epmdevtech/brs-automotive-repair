@@ -31,7 +31,20 @@ end
 $$;
 
 -- =========================================================================
--- 2. Funções auxiliares
+-- 2. Tabela profiles (precisa existir antes de is_admin(), pois funções
+--    `language sql` são validadas na criação)
+-- =========================================================================
+
+create table if not exists public.profiles (
+  id uuid primary key references auth.users(id) on delete cascade,
+  display_name text,
+  role public.profile_role not null default 'client',
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now()
+);
+
+-- =========================================================================
+-- 3. Funções auxiliares
 -- =========================================================================
 
 create or replace function public.set_updated_at()
@@ -65,16 +78,8 @@ revoke all on function public.is_admin() from public;
 grant execute on function public.is_admin() to authenticated;
 
 -- =========================================================================
--- 3. Tabelas
+-- 4. Demais tabelas
 -- =========================================================================
-
-create table if not exists public.profiles (
-  id uuid primary key references auth.users(id) on delete cascade,
-  display_name text,
-  role public.profile_role not null default 'client',
-  created_at timestamptz not null default now(),
-  updated_at timestamptz not null default now()
-);
 
 create table if not exists public.briefings (
   id uuid primary key default gen_random_uuid(),
@@ -151,7 +156,7 @@ create index if not exists briefing_activity_briefing_idx
   on public.briefing_activity (briefing_id, created_at desc);
 
 -- =========================================================================
--- 4. Gatilhos
+-- 5. Gatilhos
 -- =========================================================================
 
 drop trigger if exists profiles_set_updated_at on public.profiles;
@@ -257,7 +262,7 @@ create trigger on_auth_user_created
   for each row execute function public.handle_new_user();
 
 -- =========================================================================
--- 5. Row Level Security
+-- 6. Row Level Security
 -- =========================================================================
 
 alter table public.profiles enable row level security;
@@ -413,7 +418,7 @@ create policy briefing_activity_select_admin
 drop policy if exists briefing_activity_insert_client on public.briefing_activity;
 
 -- =========================================================================
--- 6. Registro de atividade (função controlada)
+-- 7. Registro de atividade (função controlada)
 -- =========================================================================
 
 create or replace function public.log_briefing_activity(
@@ -465,7 +470,7 @@ revoke all on function public.log_briefing_activity(uuid, text, jsonb) from publ
 grant execute on function public.log_briefing_activity(uuid, text, jsonb) to authenticated;
 
 -- =========================================================================
--- 7. Storage privado
+-- 8. Storage privado
 -- =========================================================================
 
 insert into storage.buckets (id, name, public, file_size_limit, allowed_mime_types)
