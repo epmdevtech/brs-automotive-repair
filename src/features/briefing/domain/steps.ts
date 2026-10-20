@@ -159,7 +159,7 @@ function photoStatusField(id: string, label: string): BriefingField {
 
 export const BRIEFING_STEPS: BriefingStep[] = [
   {
-    id: "empresa",
+    id: "company_identification",
     number: 1,
     title: "Identificação da empresa",
     shortLabel: "Empresa",
@@ -236,7 +236,7 @@ export const BRIEFING_STEPS: BriefingStep[] = [
     ],
   },
   {
-    id: "servicos",
+    id: "services",
     number: 2,
     title: "Serviços e especialidades",
     shortLabel: "Serviços",
@@ -287,7 +287,7 @@ export const BRIEFING_STEPS: BriefingStep[] = [
     ],
   },
   {
-    id: "estrutura",
+    id: "facility",
     number: 3,
     title: "Estrutura física",
     shortLabel: "Estrutura",
@@ -338,7 +338,7 @@ export const BRIEFING_STEPS: BriefingStep[] = [
     ],
   },
   {
-    id: "equipamentos",
+    id: "equipment",
     number: 4,
     title: "Equipamentos e ferramentas",
     shortLabel: "Equipamentos",
@@ -374,7 +374,7 @@ export const BRIEFING_STEPS: BriefingStep[] = [
     ],
   },
   {
-    id: "equipe",
+    id: "team",
     number: 5,
     title: "Equipe e responsabilidades",
     shortLabel: "Equipe",
@@ -408,7 +408,7 @@ export const BRIEFING_STEPS: BriefingStep[] = [
     ],
   },
   {
-    id: "processos",
+    id: "operations",
     number: 6,
     title: "Processos operacionais",
     shortLabel: "Processos",
@@ -442,7 +442,7 @@ export const BRIEFING_STEPS: BriefingStep[] = [
     ],
   },
   {
-    id: "capacidade",
+    id: "capacity",
     number: 7,
     title: "Capacidade operacional e prazos",
     shortLabel: "Capacidade",
@@ -485,7 +485,7 @@ export const BRIEFING_STEPS: BriefingStep[] = [
     ],
   },
   {
-    id: "qualidade",
+    id: "quality",
     number: 8,
     title: "Qualidade, garantia e rastreabilidade",
     shortLabel: "Qualidade",
@@ -518,7 +518,7 @@ export const BRIEFING_STEPS: BriefingStep[] = [
     ],
   },
   {
-    id: "documentacao",
+    id: "compliance",
     number: 9,
     title: "Documentação e regularidade",
     shortLabel: "Documentos",
@@ -552,7 +552,7 @@ export const BRIEFING_STEPS: BriefingStep[] = [
     ],
   },
   {
-    id: "sistemas",
+    id: "technology",
     number: 10,
     title: "Sistemas e tecnologia",
     shortLabel: "Sistemas",
@@ -577,7 +577,7 @@ export const BRIEFING_STEPS: BriefingStep[] = [
     ],
   },
   {
-    id: "fornecedores",
+    id: "suppliers",
     number: 11,
     title: "Fornecedores e terceiros",
     shortLabel: "Fornecedores",
@@ -612,7 +612,7 @@ export const BRIEFING_STEPS: BriefingStep[] = [
     ],
   },
   {
-    id: "credenciamento",
+    id: "accreditation_interest",
     number: 12,
     title: "Interesse em credenciamento",
     shortLabel: "Credenciamento",
@@ -668,7 +668,7 @@ export const BRIEFING_STEPS: BriefingStep[] = [
     ],
   },
   {
-    id: "fotos",
+    id: "portfolio",
     number: 13,
     title: "Fotos e portfólio",
     shortLabel: "Fotos",
@@ -706,7 +706,7 @@ export const BRIEFING_STEPS: BriefingStep[] = [
     ],
   },
   {
-    id: "site",
+    id: "website_content",
     number: 14,
     title: "Informações para o site",
     shortLabel: "Site",
@@ -738,7 +738,7 @@ export const BRIEFING_STEPS: BriefingStep[] = [
     ],
   },
   {
-    id: "confirmacao",
+    id: "observations",
     number: 15,
     title: "Observações e confirmação",
     shortLabel: "Confirmação",
