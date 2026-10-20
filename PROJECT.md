@@ -48,7 +48,10 @@
     - `/contato`: Rota dedicada de triagem de contato e avaliação técnica;
     - `/privacidade`: Políticas de privacidade e conformidade de dados;
     - `/proposta/$slug`: Rota de proposta comercial personalizada confidencial (`noindex, nofollow`);
-    - `/briefing`: Rota confidencial de briefing operacional e preparação para credenciamento da Master, com 15 etapas, pendências explícitas, rascunho local e exportação manual (`noindex, nofollow`, fora dos menus públicos).
+    - `/briefing`: Rota confidencial de briefing operacional da Master com 15 etapas validadas por React Hook Form e Zod, persistência real em PostgreSQL (Supabase) com Row Level Security, retomada de preenchimento e envio idempotente (`noindex, nofollow`, fora dos menus públicos);
+    - `/briefing/confirmacao`: Confirmação exibida somente após o servidor confirmar a persistência do envio (`noindex, nofollow`);
+    - `/login`: Autenticação segura por Supabase Auth (e-mail e senha, sessão por cookie SSR) para o briefing e o painel administrativo (`noindex, nofollow`);
+    - `/admin/briefings` e `/admin/briefings/$briefingId`: Painel administrativo da EPM DevTech com listagem, busca, filtros, respostas por etapa, pendências, notas internas isoladas, solicitação de complemento, alteração controlada de status, arquivos autorizados e trilha de auditoria (`noindex, nofollow`).
   - Configuração canônica de dados da empresa centralizada em [`src/lib/brs.ts`](src/lib/brs.ts), compartilhada diretamente entre componentes visuais e suites de teste.
   - Componentes de interface baseados nas primitivas acessíveis do **Radix UI** estilizados via Tailwind CSS v4.
   - Roteamento com `@tanstack/react-router` e cache reativo com `@tanstack/react-query`.
@@ -70,6 +73,7 @@
 | **Motion Design**                    | Framer Motion `14.1+`                 | Animações de entrada escalonadas, gestos e AnimatedHero      | `package.json`   |
 | **Formulários e Validação**          | Zod `3.25+` / React Hook Form         | Validação declarativa e segura                               | `package.json`   |
 | **Testes Unitários & Integração**    | Vitest `4.1+` / React Testing Library | Testes automatizados das regras e rotas                      | `src/test/`      |
+| **Dados e Autenticação do Briefing**  | Supabase `2.118+` / `@supabase/ssr` `0.12+` | Auth por cookie SSR, PostgreSQL com RLS e Storage privado  | `package.json`   |
 | **Gerenciador de Pacotes / Runtime** | Bun `1.4+`                            | Execução de scripts, testes e resolução de dependências      | `bun.lock`       |
 
 ---
@@ -151,8 +155,10 @@ Master/
 
 ## 6. APIs, Dados e Integrações
 
-- **Sem Backend Desnecessário**: O projeto é intencionalmente autocontido no frontend, dispensando banco de dados ou APIs proprietárias no estágio atual.
-- **Briefing Operacional Local**: A rota `/briefing` mantém respostas e metadados de fotos apenas no `localStorage` do navegador, com exportação manual. Não há upload, envio automático, autenticação de produção nem armazenamento seguro; essas capacidades dependem de backend e permanecem fora do escopo atual.
+- **Backend do Site Institucional**: As páginas públicas continuam autocontidas no frontend, sem banco de dados ou APIs proprietárias.
+- **Backend do Briefing (Supabase)**: A rota `/briefing` usa Supabase (Auth + PostgreSQL + Storage) como camada de dados: sessão por cookie no servidor, `Row Level Security` em todas as tabelas, transições de status validadas no banco, auditoria por função `security definer` e arquivos em bucket privado com URL assinada curta. As migrações versionadas estão em [`supabase/migrations/`](supabase/migrations/) e a operação está documentada em [`docs/supabase-briefing.md`](docs/supabase-briefing.md).
+- **Estado da Persistência**: O código, as migrações e a documentação estão prontos, mas a **persistência real ainda não foi validada**: o projeto Supabase de destino e as credenciais não foram fornecidos. Sem `SUPABASE_URL` e `SUPABASE_ANON_KEY`, a interface informa que a persistência está indisponível e não simula gravação nem envio.
+- **Cache Local como Apoio**: O `localStorage` do navegador mantém apenas um cache de apoio do preenchimento; o banco de dados é a fonte de verdade e nenhuma resposta depende do cache local.
 - **Canal de Contato**: O formulário gera uma mensagem formatada com os dados preenchidos (nome, telefone, veículo, serviço desejado e descrição) que o usuário copia com um clique para colar no Instagram `@masterchapeacao2022` ou ligar via `(45) 99954-5442`.
 - **Dados Estruturados SEO**: Schema.org `AutoBodyShop` implementado na rota raiz (`src/routes/index.tsx`) com cidade, telefone e catálogo dos 3 serviços.
 
@@ -260,6 +266,7 @@ Todas as entregas obedecem ao protocolo **Universal SDD**:
 - `SPEC-070` / `TASK-070-01` / `REVIEW-070`: Correção da Descontinuidade ("Pulo") no Zoom do Hero (causa-raiz: redefinição de `heroSlowZoom` sob `.hero-intro-complete` remapeava a linha do tempo; corrigido com animação única, easing contínuo `cubic-bezier(0.25,0.1,0.25,1)`, camada própria e trava Vitest de continuidade; prova de delta ≤ 4×10⁻⁵ no tempo da animação).
 - `SPEC-071` / `TASK-071-01` / `REVIEW-071`: Rebranding para MASTER Chapeação e Pinturas (logo oficial, fotos reais, paleta preta/vermelha/branca e dados oficiais sincronizados).
 - `SPEC-072` / `TASK-072-01` / `REVIEW-072`: Briefing Operacional e Preparação para Credenciamento da Master (`/briefing`) em 15 etapas, com pendências explícitas, rascunho local versionado, metadados de fotos sem upload e exportação manual em JSON/relatório.
+- `SPEC-073` / `TASK-073-01` a `TASK-073-04` / `REVIEW-073`: Briefing da Master com persistência real em Supabase (Auth, PostgreSQL com RLS e Storage privado), schema Zod por etapa validado no cliente e no servidor, envio idempotente, arquivos privados com URL assinada, painel administrativo com isolamento de dados internos e degradação honesta sem backend configurado.
 
 
 ---

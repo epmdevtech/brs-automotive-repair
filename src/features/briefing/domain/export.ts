@@ -59,11 +59,11 @@ export function buildBriefingExport(draft: BriefingDraft): BriefingExport {
     pending: getPendingItems(draft),
     photos: draft.photos,
     disclaimers: [
-      "Este arquivo foi gerado localmente no navegador e não foi enviado automaticamente a nenhum servidor.",
+      "Este arquivo foi gerado localmente no navegador a partir das respostas carregadas do servidor da EPM DevTech.",
       "As respostas não foram publicadas no site público e dependem de revisão da EPM DevTech.",
       "Itens marcados como Pendente exigem confirmação do responsável antes de qualquer uso comercial.",
-      "As imagens listadas não foram enviadas nem armazenadas; apenas os metadados foram registrados.",
-      "A conclusão local não representa credenciamento, aprovação, regularidade documental ou certificação.",
+      "Os arquivos enviados ficam em armazenamento privado; este pacote contém apenas os metadados deles.",
+      "O envio do briefing não representa credenciamento, aprovação, regularidade documental ou certificação.",
     ],
   };
 }
