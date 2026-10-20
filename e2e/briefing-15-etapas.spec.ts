@@ -320,9 +320,9 @@ test.describe("SPEC-073 — percurso E2E do briefing da Master", () => {
     await expect(cepField).toHaveValue("85900-000");
 
     // Falha da consulta externa de CEP não bloqueia o preenchimento manual.
-    await expect(
-      page.getByText(/CEP não localizado|Preencha o endereço manualmente/i),
-    ).toBeVisible({ timeout: 15_000 });
+    await expect(page.getByText(/CEP não localizado|Preencha o endereço manualmente/i)).toBeVisible(
+      { timeout: 15_000 },
+    );
     await page.getByRole("textbox", { name: "Endereço (logradouro)" }).fill("Av. das Indústrias");
     await page.getByRole("textbox", { name: "Bairro" }).fill("Centro");
 
