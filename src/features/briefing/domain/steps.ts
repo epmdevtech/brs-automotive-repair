@@ -837,7 +837,7 @@ export const BRIEFING_STEPS: BriefingStep[] = [
     title: "Fotos e portfólio",
     shortLabel: "Fotos",
     description:
-      "Os arquivos não são enviados nem armazenados. Apenas nome, categoria, descrição e autorização ficam no rascunho local.",
+      "Envie fotos da estrutura e dos serviços. Os arquivos ficam em armazenamento privado, acessíveis apenas por você e pela equipe autorizada, e o envio não autoriza publicação no site.",
     kind: "photos",
     fields: [
       photoStatusField("fotos.fachada", "Fachada"),
@@ -931,7 +931,7 @@ export const BRIEFING_STEPS: BriefingStep[] = [
     title: "Observações e confirmação",
     shortLabel: "Confirmação",
     description:
-      "Revise as informações e registre as declarações. A conclusão é local e não representa envio automático.",
+      "Revise as informações e registre as declarações. O envio registra o briefing para análise da EPM DevTech e não representa credenciamento nem publicação.",
     kind: "fields",
     fields: [
       textarea("confirmacao.observacoes", "Observações gerais", { span: 2 }),
@@ -948,6 +948,8 @@ export const BRIEFING_STEPS: BriefingStep[] = [
       }),
       text("confirmacao.data", "Data de conclusão", {
         type: "date",
+        format: "date",
+        help: "Preenchida em dia, mês e ano. O valor é gravado no formato AAAA-MM-DD.",
         span: 2,
       }),
       checkbox(
