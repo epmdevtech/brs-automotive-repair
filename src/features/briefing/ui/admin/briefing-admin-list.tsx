@@ -9,6 +9,7 @@ import {
   type BriefingStatus,
 } from "../../domain/status";
 import { listAdminBriefings } from "../../server/functions";
+import { formatDateTimeUtc } from "../../domain/format";
 import type { BriefingSummary } from "../../server/briefing-service";
 
 export function BriefingAdminList() {
@@ -172,17 +173,11 @@ export function BriefingAdminList() {
                     {BRIEFING_STATUS_LABELS[item.status]}
                   </td>
                   <td className="py-3 pr-4 text-neutral-400">
-                    {new Date(item.updatedAt).toLocaleString("pt-BR", {
-                      dateStyle: "short",
-                      timeStyle: "short",
-                    })}
+                    {formatDateTimeUtc(item.updatedAt)}
                   </td>
                   <td className="py-3 pr-4 text-neutral-400">
                     {item.submittedAt
-                      ? new Date(item.submittedAt).toLocaleString("pt-BR", {
-                          dateStyle: "short",
-                          timeStyle: "short",
-                        })
+                      ? formatDateTimeUtc(item.submittedAt)
                       : "—"}
                   </td>
                   <td className="py-3">

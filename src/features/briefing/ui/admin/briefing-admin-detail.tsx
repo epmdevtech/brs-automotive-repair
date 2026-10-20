@@ -13,6 +13,7 @@ import {
   requestBriefingComplement,
 } from "../../server/functions";
 import type { BriefingDetail } from "../../server/briefing-service";
+import { formatDateTimeUtc } from "../../domain/format";
 
 interface BriefingAdminDetailProps {
   briefingId: string;
@@ -185,10 +186,7 @@ export function BriefingAdminDetail({ briefingId }: BriefingAdminDetailProps) {
         </h1>
         <p className="mt-2 text-sm text-neutral-400">
           Situação: {BRIEFING_STATUS_LABELS[detail.briefing.status]} · atualizado em{" "}
-          {new Date(detail.briefing.updatedAt).toLocaleString("pt-BR", {
-            dateStyle: "short",
-            timeStyle: "short",
-          })}
+          {formatDateTimeUtc(detail.briefing.updatedAt)}
         </p>
         {detail.owner ? (
           <p className="mt-1 text-sm text-neutral-400">
@@ -396,10 +394,7 @@ export function BriefingAdminDetail({ briefingId }: BriefingAdminDetailProps) {
               <li key={entry.id} className="border border-white/10 bg-neutral-950/40 p-3">
                 <p className="font-mono text-xs text-[var(--brand-text-accent)]">{entry.action}</p>
                 <p className="mt-1 text-xs text-neutral-500">
-                  {new Date(entry.created_at).toLocaleString("pt-BR", {
-                    dateStyle: "short",
-                    timeStyle: "short",
-                  })}
+                  {formatDateTimeUtc(entry.created_at)}
                 </p>
                 {typeof entry.metadata?.["note"] === "string" ? (
                   <p className="mt-1 text-xs text-neutral-300">{entry.metadata["note"]}</p>

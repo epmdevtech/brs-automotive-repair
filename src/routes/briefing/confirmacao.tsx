@@ -3,6 +3,7 @@ import { CheckCircle2 } from "lucide-react";
 import { buildRouteHead } from "@/lib/seo";
 import { loadOwnBriefing } from "@/features/briefing/server/functions";
 import { BRIEFING_STATUS_LABELS } from "@/features/briefing/domain/status";
+import { formatDateTimeUtc } from "@/features/briefing/domain/format";
 
 export const Route = createFileRoute("/briefing/confirmacao")({
   loader: async () => {
@@ -65,12 +66,7 @@ function BriefingConfirmationPage() {
           </div>
           <div className="border border-white/10 bg-white/[0.02] p-4">
             <dt className="text-xs text-neutral-500">Envio confirmado em</dt>
-            <dd className="mt-1 text-sm text-white">
-              {new Date(submittedAt).toLocaleString("pt-BR", {
-                dateStyle: "short",
-                timeStyle: "short",
-              })}
-            </dd>
+            <dd className="mt-1 text-sm text-white">{formatDateTimeUtc(submittedAt)} UTC</dd>
           </div>
         </dl>
 
