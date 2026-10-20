@@ -140,6 +140,19 @@ Credenciais: `E2E_EMAIL` e `E2E_PASSWORD` no `.env`. Com a chave privilegiada
 disponível, o teste cria (ou garante) a conta de teste já confirmada e apaga os
 briefings anteriores do usuário de teste, tornando a execução repetível.
 
+## 7.2 Evidência em PDF
+
+O registro persistido pode ser convertido em documento PDF de evidência (cabeçalho
+com identificador, situação e datas, as 15 etapas com campo e resposta, e a
+trilha de auditoria):
+
+```sh
+bun run scripts/briefing-evidence-pdf.ts [briefingId]
+```
+
+Saída: `docs/evidencia-briefing-15-etapas.pdf` (e o HTML auxiliar). O script usa
+o Chromium já instalado pelo Playwright — nenhuma dependência nova.
+
 ## 8. Segurança aplicada
 
 - RLS ativa em todas as tabelas; nenhuma política irrestrita.
