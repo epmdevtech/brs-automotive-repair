@@ -35,12 +35,13 @@ Rebrandar a demonstração atual para MASTER Chapeação e Pinturas, aplicando l
 
 - [x] Inspecionar repositório, branches, stack e acervo local.
 - [x] Criar SPEC-071 e TASK-071-01.
-- [ ] Gerar derivados otimizados (hero AVIF/WebP, cards WebP, logo e favicons).
-- [ ] Atualizar `src/lib/brs.ts`, SEO, rotas e componentes.
-- [ ] Aplicar fotos reais e logo.
-- [ ] Atualizar manifest, `llms.txt`, `robots.txt`, `sitemap.xml` e docs.
-- [ ] Atualizar testes afetados.
-- [ ] Executar lint, test, build e QA visual.
+- [x] Gerar derivados otimizados (hero AVIF/WebP, cards WebP, logo e favicons).
+- [x] Atualizar `src/lib/brs.ts`, SEO, rotas e componentes.
+- [x] Aplicar fotos reais e logo.
+- [x] Alinhar a paleta à logo oficial (vermelho, preto e branco), removendo o dourado residual da demonstração BRS.
+- [x] Atualizar manifest, `llms.txt`, `robots.txt`, `sitemap.xml` e docs.
+- [x] Atualizar testes afetados.
+- [x] Executar lint, test, build e QA visual.
 
 ## 4. Validação
 
@@ -55,13 +56,14 @@ Rebrandar a demonstração atual para MASTER Chapeação e Pinturas, aplicando l
 
 ## 5. Condição de Conclusão
 
-- [ ] Escopo implementado sem expansão.
-- [ ] Testes e validações aplicáveis aprovados.
-- [ ] Documentação e rastreabilidade atualizadas.
-- [ ] Limitações e desvios registrados.
+- [x] Escopo implementado sem expansão.
+- [x] Testes e validações aplicáveis aprovados.
+- [x] Documentação e rastreabilidade atualizadas.
+- [x] Limitações e desvios registrados.
 
 ## 6. Resultado
 
-- Mudanças feitas: em andamento.
-- Evidência: em andamento.
-- Trabalho em aberto: aprovação humana e integração em `develop`.
+- Mudanças feitas: identidade MASTER aplicada (nome, logo, favicons, fotos reais, SEO/JSON-LD, manifest, `llms.txt`, `robots.txt`, `sitemap.xml`), paleta alinhada ao vermelho da logo (`--brand-primary`) e dourado residual removido de componentes e da proposta comercial.
+- Evidência: `bun run lint` com 0 erros (7 warnings pré-existentes de fast-refresh); `bun run test` com 57 arquivos e 420 testes aprovados; `bun run build` concluído (`✓ built in 2.71s`).
+- Limitações e desvios: PDR/martelinho e pares antes/depois permanecem ilustrativos e identificados por ausência de acervo real; não houve commit, push, merge ou deploy nesta execução.
+- Trabalho em aberto: aprovação humana das alterações pendentes no `git status`.

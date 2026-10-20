@@ -39,8 +39,10 @@ A paleta de cores rejeita convenções genéricas e emana diretamente do univers
 | **Ground**      | `#0b0d10` (`oklch(0.14 0.005 260)`) | Chassis grafite profundo, negro automotivo            | Fundo imersivo principal             |
 | **Ink**         | `#f3f4f6` (`oklch(0.98 0 0)`)       | Aço polido claro, reflexo metálico                    | > 14:1 contra o ground (AAA)         |
 | **Muted**       | `#9ca3af` (`oklch(0.73 0.01 260)`)  | Cinza técnico de telemetria e especificações          | >= 5.8:1 contra o ground (AA)        |
-| **Line**        | `rgba(255, 255, 255, 0.10)`         | Hairline de gap milimétrico e separadores             | Traço cirúrgico de 1px               |
-| **Accent**      | `#c8a96a` (`--gold`) / `#10b981`    | Ouro metálico de acabamento e LED de calibração ativa | Contraste tátil e estado operacional |
+| **Line**        | `rgba(255, 255, 255, 0.14)`         | Hairline de gap milimétrico e separadores             | Traço cirúrgico de 1px               |
+| **Accent**      | `#e01b24` (`--brand-primary`)        | Vermelho da logo, extraído de "MASTER"                | 4.83:1 com branco (AA)               |
+| **Accent Text** | `#f26b6f` (`--brand-text-accent`)    | Vermelho claro para texto pequeno sobre fundo escuro  | 6.59:1 contra o ground (AA)          |
+| **Accent Soft** | `rgb(224 27 36 / 0.12)`              | Glows, badges e fundos sutis                          | Uso decorativo de baixa opacidade    |
 | **Curtain**     | `#060709`                           | Cortina escura de transição contínua entre páginas    | Máscara de wipe de rota              |
 
 ---
