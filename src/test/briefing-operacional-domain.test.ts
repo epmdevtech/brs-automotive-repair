@@ -126,7 +126,7 @@ describe("Briefing operacional — domínio", () => {
         stepNumber: 1,
         stepTitle: "Identificação da empresa",
         fieldId: "empresa.cnpj",
-        label: "CNPJ",
+        label: "CNPJ da empresa",
       },
       {
         stepNumber: 15,
@@ -196,7 +196,7 @@ describe("Briefing operacional — domínio", () => {
         stepNumber: 1,
         stepTitle: "Identificação da empresa",
         fieldId: "empresa.cnpj",
-        label: "CNPJ",
+        label: "CNPJ da empresa",
       },
     ]);
     expect(exportData.disclaimers.join(" ")).toMatch(/não foram publicadas/i);
@@ -208,7 +208,7 @@ describe("Briefing operacional — domínio", () => {
 
     const report = generateBriefingReportText(exportData);
     expect(report).toContain("PENDÊNCIAS");
-    expect(report).toContain("Etapa 1 — CNPJ");
+    expect(report).toContain("Etapa 1 — CNPJ da empresa");
     expect(report).toContain("armazenamento privado");
     expect(buildExportFileName(draft)).toMatch(
       /^briefing-operacional-master-chapeacao-e-pinturas-\d{4}-\d{2}-\d{2}\.json$/,

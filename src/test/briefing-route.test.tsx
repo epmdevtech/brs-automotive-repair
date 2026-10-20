@@ -99,9 +99,7 @@ describe("Briefing operacional — rota privada em 15 etapas com persistência r
 
     fireEvent.click(screen.getByRole("button", { name: /Próxima etapa/i }));
 
-    expect(
-      await screen.findByText(/Para avançar, informe ou marque como pendente/i),
-    ).toBeInTheDocument();
+    expect(await screen.findByText(/Para avançar, corrija os campos abaixo/i)).toBeInTheDocument();
     expect(screen.getByText("Etapa 01 de 15")).toBeInTheDocument();
 
     fireEvent.click(screen.getByLabelText(/Marcar .*Razão social.* como pendente/i));
@@ -190,6 +188,8 @@ describe("Briefing operacional — rota privada em 15 etapas com persistência r
     fireEvent.click(screen.getByRole("button", { name: /^Revisar$/ }));
     expect(await screen.findByText("Revisão final")).toBeInTheDocument();
 
+    const confirmacao = screen.getByRole("checkbox", { name: /Confirmo que as informações/i });
+    fireEvent.click(confirmacao);
     fireEvent.click(screen.getByRole("button", { name: /Enviar para análise/i }));
 
     await waitFor(() => {
@@ -213,7 +213,10 @@ describe("Briefing operacional — rota privada em 15 etapas com persistência r
     await openBriefing();
 
     fireEvent.click(screen.getByRole("button", { name: /^Revisar$/ }));
-    fireEvent.click(await screen.findByRole("button", { name: /Enviar para análise/i }));
+    const enviar = await screen.findByRole("button", { name: /Enviar para análise/i });
+    expect(enviar).toBeDisabled();
+    fireEvent.click(screen.getByRole("checkbox", { name: /Confirmo que as informações/i }));
+    fireEvent.click(screen.getByRole("button", { name: /Enviar para análise/i }));
 
     expect(
       await screen.findByText(/Briefing enviado e registrado no banco de dados/i),
