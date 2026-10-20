@@ -106,8 +106,44 @@ async function ensureTestUser(): Promise<void> {
   throw new Error(`Falha ao garantir o usuário de teste: ${response.status} ${message}`);
 }
 
+/**
+ * Remove os briefings anteriores do usuário de teste para que cada execução
+ * comece de um rascunho limpo (o app mantém um briefing ativo por usuário).
+ */
+async function resetTestBriefings(): Promise<void> {
+  if (!SUPABASE_URL || !SUPABASE_SERVICE_ROLE_KEY) return;
+
+  const usersResponse = await fetch(`${SUPABASE_URL}/auth/v1/admin/users?page=1&per_page=50`, {
+    headers: {
+      apikey: SUPABASE_SERVICE_ROLE_KEY,
+      Authorization: `Bearer ${SUPABASE_SERVICE_ROLE_KEY}`,
+    },
+  });
+
+  if (!usersResponse.ok) return;
+
+  const payload = (await usersResponse.json()) as {
+    users?: { id: string; email?: string }[];
+  };
+  const testUser = payload.users?.find((user) => user.email === TEST_EMAIL);
+  if (!testUser) return;
+
+  await fetch(`${SUPABASE_URL}/rest/v1/briefings?owner_user_id=eq.${testUser.id}`, {
+    method: "DELETE",
+    headers: {
+      apikey: SUPABASE_SERVICE_ROLE_KEY,
+      Authorization: `Bearer ${SUPABASE_SERVICE_ROLE_KEY}`,
+    },
+  });
+}
+
 async function login(page: Page): Promise<void> {
   await page.goto("/login");
+
+  // O botão só habilita após a hidratação: espera determinística de que o
+  // React já assumiu os inputs (preencher antes disso perde os valores).
+  await expect(page.getByRole("button", { name: "Entrar" })).toBeEnabled({ timeout: 20_000 });
+
   await page.getByRole("textbox", { name: "E-mail" }).fill(TEST_EMAIL);
   await page.getByLabel("Senha").fill(TEST_PASSWORD);
   await page.getByRole("button", { name: "Entrar" }).click();
@@ -121,15 +157,20 @@ async function waitForServerSync(page: Page): Promise<void> {
 }
 
 async function fillFirstControlOfStep(page: Page, stepNumber: number): Promise<void> {
-  const control = page
-    .locator(
-      'textarea, input[type="text"], input[type="email"], input[type="tel"], input[type="number"], input[type="date"]',
-    )
-    .first();
+  const value = `Registro de validação E2E — etapa ${String(stepNumber).padStart(2, "0")}`;
 
-  if ((await control.count()) === 0) return;
+  // Prioriza campos de texto livre: campos de e-mail, telefone, número e data
+  // têm validação de formato e não aceitam o texto de validação.
+  const textarea = page.locator("textarea").first();
+  if ((await textarea.count()) > 0) {
+    await textarea.fill(value);
+    return;
+  }
 
-  await control.fill(`Registro de validação E2E — etapa ${String(stepNumber).padStart(2, "0")}`);
+  const textInput = page.locator('input[type="text"]').first();
+  if ((await textInput.count()) > 0) {
+    await textInput.fill(value);
+  }
 }
 
 interface PersistedEvidence {
@@ -146,6 +187,7 @@ interface PersistedEvidence {
   answeredFields: number;
   pendingCount: number;
   activityActions: string[];
+  activityActionsVisibleToClient: string[];
   anonymousVisibility: string;
 }
 
@@ -170,7 +212,7 @@ async function readPersistedBriefing(): Promise<PersistedEvidence> {
   };
 
   const briefingsResponse = await fetch(
-    `${SUPABASE_URL}/rest/v1/briefings?select=*&order=updated_at&limit=1`,
+    `${SUPABASE_URL}/rest/v1/briefings?select=*&order=updated_at.desc&limit=1`,
     { headers },
   );
   const briefings = (await briefingsResponse.json()) as PersistedEvidence["briefing"][];
@@ -186,11 +228,26 @@ async function readPersistedBriefing(): Promise<PersistedEvidence> {
     answers: { values?: Record<string, unknown>; pending?: Record<string, boolean> };
   }[];
 
+  // Auditoria: visivel apenas para quem tem papel admin (service role no teste).
   const activityResponse = await fetch(
+    `${SUPABASE_URL}/rest/v1/briefing_activity?select=action&briefing_id=eq.${briefing.id}&order=created_at`,
+    {
+      headers: SUPABASE_SERVICE_ROLE_KEY
+        ? {
+            apikey: SUPABASE_SERVICE_ROLE_KEY,
+            Authorization: `Bearer ${SUPABASE_SERVICE_ROLE_KEY}`,
+          }
+        : headers,
+    },
+  );
+  const activity = (await activityResponse.json()) as { action: string }[];
+
+  // O proprio cliente nao enxerga a auditoria: leitura com o token do cliente.
+  const clientActivityResponse = await fetch(
     `${SUPABASE_URL}/rest/v1/briefing_activity?select=action&briefing_id=eq.${briefing.id}`,
     { headers },
   );
-  const activity = (await activityResponse.json()) as { action: string }[];
+  const clientActivity = (await clientActivityResponse.json()) as { action: string }[];
 
   const anonymousResponse = await fetch(`${SUPABASE_URL}/rest/v1/briefings?select=id&limit=5`, {
     headers: { apikey: SUPABASE_ANON_KEY as string },
@@ -211,6 +268,7 @@ async function readPersistedBriefing(): Promise<PersistedEvidence> {
     answeredFields,
     pendingCount,
     activityActions: activity.map((entry) => entry.action),
+    activityActionsVisibleToClient: clientActivity.map((entry) => entry.action),
     anonymousVisibility: anonymous,
   };
 }
@@ -222,11 +280,13 @@ test.describe("SPEC-073 — percurso E2E do briefing da Master", () => {
       "SUPABASE_URL e SUPABASE_ANON_KEY são obrigatórios para o percurso E2E do briefing.",
     );
     await ensureTestUser();
+    await resetTestBriefings();
   });
 
   test("percorre as 15 etapas, envia o briefing e evidencia o registro persistido", async ({
     page,
   }, testInfo) => {
+    test.setTimeout(240_000);
     await login(page);
 
     // Regressão: as credenciais nunca podem aparecer na URL (submissão nativa).
@@ -301,5 +361,7 @@ test.describe("SPEC-073 — percurso E2E do briefing da Master", () => {
     expect(evidence.sectionKeys).toContain("company_identification");
     expect(evidence.sectionKeys).toContain("observations");
     expect(evidence.anonymousVisibility).toBe("[]");
+    expect(evidence.activityActions).toContain("submitted");
+    expect(evidence.activityActionsVisibleToClient).toHaveLength(0);
   });
 });

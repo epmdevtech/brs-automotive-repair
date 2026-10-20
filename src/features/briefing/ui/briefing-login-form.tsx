@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -21,6 +21,13 @@ export interface BriefingLoginFormProps {
 export function BriefingLoginForm({ onAuthenticated }: BriefingLoginFormProps) {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [unavailable, setUnavailable] = useState(false);
+  const [hydrated, setHydrated] = useState(false);
+
+  // O botão só é habilitado após a hidratação: cliques anteriores a ela seriam
+  // perdidos e o formulário não poderia ser submetido de forma nativa.
+  useEffect(() => {
+    setHydrated(true);
+  }, []);
 
   const {
     register,
@@ -149,8 +156,8 @@ export function BriefingLoginForm({ onAuthenticated }: BriefingLoginFormProps) {
             type="button"
             variant="primary"
             className="w-full justify-center"
-            disabled={isSubmitting}
-            onClick={() => void handleSubmit(onSubmit)()}
+            disabled={isSubmitting || !hydrated}
+            onClick={(event) => void handleSubmit(onSubmit)(event)}
           >
             <LogIn aria-hidden="true" />
             {isSubmitting ? "Entrando…" : "Entrar"}

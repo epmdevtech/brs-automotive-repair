@@ -13,37 +13,46 @@ export interface BriefingSectionPayload {
 export const MAX_SECTION_PAYLOAD_BYTES = 200 * 1024;
 
 const REQUIRED_MESSAGE = "Campo obrigatório";
+const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+const NUMBER_PATTERN = /^-?\d+([.,]\d+)?$/;
+const DATE_PATTERN = /^\d{4}-\d{2}-\d{2}$/;
+const PHONE_PATTERN = /^[\d\s()+.-]{8,30}$/;
 const INVALID_OPTION_MESSAGE = "Selecione uma das opções disponíveis";
 const INVALID_EMAIL_MESSAGE = "Informe um e-mail válido";
 const INVALID_NUMBER_MESSAGE = "Informe um número válido";
 
 function baseStringSchema(field: BriefingField): z.ZodString {
   const max = field.maxLength ?? 5000;
+  return z.string().trim().max(max);
+}
 
-  switch (field.type) {
-    case "email":
-      return z.string().trim().max(max).email(INVALID_EMAIL_MESSAGE);
-    case "number":
-      return z
-        .string()
-        .trim()
-        .max(max)
-        .regex(/^-?\d+([.,]\d+)?$/, INVALID_NUMBER_MESSAGE);
-    case "date":
-      return z
-        .string()
-        .trim()
-        .max(max)
-        .regex(/^\d{4}-\d{2}-\d{2}$/, "Informe uma data válida (AAAA-MM-DD)");
-    case "tel":
-      return z
-        .string()
-        .trim()
-        .max(max)
-        .regex(/^[\d\s()+.-]{8,30}$/, "Informe um telefone válido");
-    default:
-      return z.string().trim().max(max);
-  }
+/**
+ * Aplica o formato esperado do campo. Valores vazios são ignorados: campo não
+ * preenchido é tratado como "não respondido" (e reportado como obrigatório
+ * quando for o caso), nunca como formato inválido.
+ */
+function withFormat(schema: z.ZodString, field: BriefingField) {
+  return schema.superRefine((value, ctx) => {
+    if (value.length === 0) return;
+
+    const invalid = (message: string) => ctx.addIssue({ code: z.ZodIssueCode.custom, message });
+
+    if (field.type === "email" && !EMAIL_PATTERN.test(value)) {
+      invalid(INVALID_EMAIL_MESSAGE);
+      return;
+    }
+    if (field.type === "number" && !NUMBER_PATTERN.test(value)) {
+      invalid(INVALID_NUMBER_MESSAGE);
+      return;
+    }
+    if (field.type === "date" && !DATE_PATTERN.test(value)) {
+      invalid("Informe uma data válida (AAAA-MM-DD)");
+      return;
+    }
+    if (field.type === "tel" && !PHONE_PATTERN.test(value)) {
+      invalid("Informe um telefone válido");
+    }
+  });
 }
 
 function fieldSchema(field: BriefingField, isPending: boolean): z.ZodTypeAny {
@@ -61,15 +70,18 @@ function fieldSchema(field: BriefingField, isPending: boolean): z.ZodTypeAny {
     const allowed = new Set(field.options.map((option) => option.value));
     const withLength = isRequired ? base.min(1, REQUIRED_MESSAGE) : base;
 
-    const refined = withLength.refine(
-      (value) => value.length === 0 || allowed.has(value),
-      INVALID_OPTION_MESSAGE,
-    );
+    const refined = withLength.superRefine((value, ctx) => {
+      if (value.length > 0 && !allowed.has(value)) {
+        ctx.addIssue({ code: z.ZodIssueCode.custom, message: INVALID_OPTION_MESSAGE });
+      }
+    });
 
     return isRequired ? refined : refined.optional();
   }
 
-  return isRequired ? base.min(1, REQUIRED_MESSAGE) : base.optional();
+  return isRequired
+    ? withFormat(base.min(1, REQUIRED_MESSAGE), field)
+    : withFormat(base, field).optional();
 }
 
 /**

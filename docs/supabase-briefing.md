@@ -120,6 +120,26 @@ indisponível — comportamento esperado e testado.
    - o download de arquivo responde por URL assinada de 5 minutos.
 5. Nenhum deploy de produção é executado sem autorização humana explícita.
 
+## 7.1 Percurso E2E das 15 etapas
+
+Com o dev server em execução (porta 5210) e `SUPABASE_SERVICE_ROLE_KEY` preenchida
+no `.env`:
+
+```sh
+bunx playwright test e2e/briefing-15-etapas.spec.ts
+```
+
+O percurso autentica pela tela real de login, percorre as 15 etapas preenchendo e
+confirmando a sincronização com o servidor em cada uma, envia o briefing e exibe
+a evidência lida do Supabase: identificador, empresa, situação, `submitted_at`, as
+15 `section_key` gravadas, campos respondidos, pendências, ações de auditoria e a
+prova de que o cliente não enxerga a auditoria e o anon não enxerga o briefing
+(RLS). Screenshots em `e2e-screenshots/`.
+
+Credenciais: `E2E_EMAIL` e `E2E_PASSWORD` no `.env`. Com a chave privilegiada
+disponível, o teste cria (ou garante) a conta de teste já confirmada e apaga os
+briefings anteriores do usuário de teste, tornando a execução repetível.
+
 ## 8. Segurança aplicada
 
 - RLS ativa em todas as tabelas; nenhuma política irrestrita.

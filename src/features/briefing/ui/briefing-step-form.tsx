@@ -20,6 +20,16 @@ interface BriefingStepFormProps {
 type FormValues = Record<string, string | boolean>;
 
 /**
+ * O React Hook Form interpreta "." como separador de caminho aninhado, e os
+ * ids do briefing são pontuados (ex.: "empresa.razaoSocial"). Os nomes
+ * internos do formulário usam "__" e são traduzidos de volta para o id real
+ * na validação, mantendo o contrato persistido intacto.
+ */
+function toFormName(fieldId: string): string {
+  return fieldId.replace(/\./g, "__");
+}
+
+/**
  * Etapa do briefing gerenciada com React Hook Form e validada com o schema
  * Zod da própria etapa. A pendência declarada pelo cliente dispensa o
  * preenchimento do campo obrigatório correspondente.
@@ -34,20 +44,40 @@ export const BriefingStepForm = forwardRef<BriefingStepFormHandle, BriefingStepF
     schemaRef.current = schema;
 
     const resolver = useCallback(
-      async (values: FormValues, context: unknown, options: unknown) =>
-        (
-          zodResolver as unknown as (
-            schema: unknown,
-          ) => (values: FormValues, context: unknown, options: unknown) => Promise<never>
-        )(schemaRef.current)(values, context, options),
-      [],
+      async (values: FormValues, context: unknown, options: unknown) => {
+        const flat: FormValues = {};
+
+        for (const field of step.fields) {
+          const value = values[toFormName(field.id)];
+          if (value !== undefined) flat[field.id] = value;
+        }
+
+        const result = schemaRef.current.safeParse(flat);
+
+        if (result.success) {
+          return { values: flat, errors: {} };
+        }
+
+        const errors: Record<string, { type: string; message: string }> = {};
+
+        for (const issue of result.error.issues) {
+          const name = toFormName(String(issue.path[0] ?? ""));
+          errors[name] = { type: "validation", message: issue.message };
+        }
+
+        void context;
+        void options;
+
+        return { values: flat, errors };
+      },
+      [step.fields],
     );
 
     const defaultValues = useMemo<FormValues>(() => {
       const values: FormValues = {};
       for (const field of step.fields) {
         const value = draft.values[field.id];
-        if (value !== undefined) values[field.id] = value;
+        if (value !== undefined) values[toFormName(field.id)] = value;
       }
       return values;
     }, [draft.values, step.fields]);
@@ -77,11 +107,11 @@ export const BriefingStepForm = forwardRef<BriefingStepFormHandle, BriefingStepF
 
     useEffect(() => {
       for (const field of step.fields) {
-        register(field.id);
+        register(toFormName(field.id));
       }
       return () => {
         for (const field of step.fields) {
-          unregister(field.id);
+          unregister(toFormName(field.id));
         }
       };
     }, [register, step.fields, unregister]);
@@ -95,12 +125,12 @@ export const BriefingStepForm = forwardRef<BriefingStepFormHandle, BriefingStepF
     );
 
     function handleChange(fieldId: string, value: BriefingValue) {
-      setValue(fieldId, value, { shouldDirty: true, shouldValidate: false });
+      setValue(toFormName(fieldId), value, { shouldDirty: true, shouldValidate: false });
       onValueChange(fieldId, value);
     }
 
     function handlePendingChange(fieldId: string, pending: boolean) {
-      clearErrors(fieldId);
+      clearErrors(toFormName(fieldId));
       onPendingChange(fieldId, pending);
     }
 
@@ -110,7 +140,7 @@ export const BriefingStepForm = forwardRef<BriefingStepFormHandle, BriefingStepF
         <div className="grid grid-cols-1 gap-x-4 gap-y-5 sm:grid-cols-2">
           {step.fields.map((field) => {
             const value = draft.values[field.id];
-            const fieldError = errors[field.id];
+            const fieldError = errors[toFormName(field.id)];
             return (
               <BriefingFieldInput
                 key={field.id}

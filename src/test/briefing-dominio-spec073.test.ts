@@ -124,6 +124,47 @@ describe("SPEC-073 — domínio validado do briefing", () => {
       }
     });
 
+    it("aceita campos de e-mail, telefone, número e data em branco", () => {
+      const step = BRIEFING_STEPS.find((item) => item.id === "company_identification")!;
+      const schema = buildSectionSchema(step);
+      const result = schema.safeParse({
+        "empresa.razaoSocial": "LCL Chapeação LTDA",
+        "empresa.proprietario": "Responsável",
+        "empresa.email": "",
+        "empresa.telefone": "",
+        "empresa.cep": "",
+        "empresa.estado": "",
+      });
+
+      expect(result.success).toBe(true);
+    });
+
+    it("recusa e-mail preenchido em formato inválido", () => {
+      const step = BRIEFING_STEPS.find((item) => item.id === "company_identification")!;
+      const schema = buildSectionSchema(step);
+      const result = schema.safeParse({
+        "empresa.razaoSocial": "LCL Chapeação LTDA",
+        "empresa.proprietario": "Responsável",
+        "empresa.email": "email-sem-arroba",
+      });
+
+      expect(result.success).toBe(false);
+    });
+
+    it("grava a etapa no servidor mesmo com campos de formato em branco", () => {
+      const step = BRIEFING_STEPS.find((item) => item.id === "company_identification")!;
+      const validation = validateSectionPayload(step, {
+        values: {
+          "empresa.razaoSocial": "LCL Chapeação LTDA",
+          "empresa.proprietario": "Responsável",
+          "empresa.email": "",
+        },
+        pending: {},
+      });
+
+      expect(validation.ok).toBe(true);
+    });
+
     it("recusa declarações finais não confirmadas", () => {
       const lastStep = BRIEFING_STEPS[BRIEFING_STEPS.length - 1]!;
       const schema = buildSectionSchema(lastStep);
