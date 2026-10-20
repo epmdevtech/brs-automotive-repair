@@ -35,3 +35,8 @@ dist-ssr
 test-results/
 playwright-report/
 e2e-screenshots/
+
+# Environment variables (never version real credentials)
+.env
+.env.*
+!.env.example
