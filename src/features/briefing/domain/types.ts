@@ -1,6 +1,10 @@
 export type BriefingFieldType =
   "text" | "email" | "tel" | "number" | "date" | "textarea" | "select" | "checkbox";
 
+/** Formato canônico do valor, usado pelas máscaras e validadores do domínio. */
+export type BriefingFieldFormat =
+  "cep" | "cnpj" | "phone" | "date" | "integer" | "decimal" | "email";
+
 export interface BriefingFieldOption {
   value: string;
   label: string;
@@ -10,6 +14,12 @@ export interface BriefingField {
   id: string;
   label: string;
   type: BriefingFieldType;
+  /** Formato canônico aplicado pela máscara e pelo validador do domínio. */
+  format?: BriefingFieldFormat;
+  /** Agrupamento visual por assunto dentro da etapa. */
+  group?: string;
+  /** Estilo do controle de seleção (radio group em telas cheia). */
+  control?: "select" | "radio";
   required?: boolean;
   allowPending?: boolean;
   placeholder?: string;

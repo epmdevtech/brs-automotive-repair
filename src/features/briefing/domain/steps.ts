@@ -120,6 +120,15 @@ function checkbox(id: string, label: string, extras: FieldExtras = {}): Briefing
   return { id, label, type: "checkbox", ...extras };
 }
 
+function selectRadio(
+  id: string,
+  label: string,
+  options: BriefingFieldOption[],
+  extras: FieldExtras = {},
+): BriefingField {
+  return { ...select(id, label, options, extras), control: "radio" };
+}
+
 function select(
   id: string,
   label: string,
@@ -146,11 +155,11 @@ function processField(id: string, label: string): BriefingField {
 }
 
 function documentField(id: string, label: string): BriefingField {
-  return select(id, label, DOCUMENT, { span: 2 });
+  return selectRadio(id, label, DOCUMENT, { span: 2 });
 }
 
 function systemField(id: string, label: string): BriefingField {
-  return select(id, label, SYSTEM, { span: 2 });
+  return selectRadio(id, label, SYSTEM, { span: 2 });
 }
 
 function photoStatusField(id: string, label: string): BriefingField {
@@ -178,15 +187,27 @@ export const BRIEFING_STEPS: BriefingStep[] = [
         placeholder: "Ex.: Master Chapeação e Pinturas",
         span: 2,
       }),
-      text("empresa.cnpj", "CNPJ", {
+      text("empresa.cnpj", "CNPJ da empresa", {
+        format: "cnpj",
         placeholder: "00.000.000/0000-00",
         inputMode: "numeric",
         allowPending: true,
-        help: "O CNPJ não será exibido publicamente sem autorização.",
+        help: "Usado apenas para conferência cadastral. Não comprova regularidade fiscal e não será exibido publicamente sem autorização.",
         span: 2,
       }),
-      text("empresa.anoFundacao", "Ano de fundação", { inputMode: "numeric", span: 1 }),
-      text("empresa.tempoMercado", "Tempo de atuação no mercado", { span: 1 }),
+      text("empresa.anoFundacao", "Ano de fundação", {
+        format: "integer",
+        inputMode: "numeric",
+        placeholder: "Ex.: 2023",
+        help: "Entre 1900 e o ano atual.",
+        span: 1,
+      }),
+      text("empresa.tempoMercado", "Tempo de atuação no mercado (anos)", {
+        inputMode: "numeric",
+        placeholder: "Ex.: 3",
+        help: "Quantos anos a oficina atua no mercado, contados a partir da fundação.",
+        span: 1,
+      }),
       text("empresa.proprietario", "Proprietário ou responsável legal", {
         required: true,
         allowPending: true,
@@ -198,36 +219,72 @@ export const BRIEFING_STEPS: BriefingStep[] = [
       }),
       text("empresa.telefone", "Telefone comercial", {
         type: "tel",
+        format: "phone",
         inputMode: "tel",
         autoComplete: "tel",
+        placeholder: "(45) 99999-9999",
+        help: "Com DDD. Fixo ou celular.",
         span: 1,
       }),
       text("empresa.whatsapp", "WhatsApp comercial", {
         type: "tel",
+        format: "phone",
         inputMode: "tel",
-        help: "Será divulgado apenas após confirmação formal.",
+        placeholder: "(45) 99999-9999",
+        help: "Preencha apenas se o número recebe WhatsApp. Será divulgado apenas após confirmação formal.",
         span: 1,
       }),
       text("empresa.email", "E-mail comercial", {
         type: "email",
+        format: "email",
         inputMode: "email",
         autoComplete: "email",
+        placeholder: "contato@empresa.com.br",
+        help: "Usado para contato sobre o briefing e sobre o projeto do site.",
         span: 2,
       }),
-      text("empresa.endereco", "Endereço completo", {
+      text("empresa.endereco", "Endereço (logradouro)", {
         autoComplete: "street-address",
+        placeholder: "Ex.: Av. das Indústrias",
         span: 2,
       }),
-      text("empresa.cep", "CEP", { inputMode: "numeric", autoComplete: "postal-code", span: 1 }),
+      text("empresa.enderecoNumero", "Número", {
+        inputMode: "numeric",
+        placeholder: "Ex.: 1234",
+        help: "Preencha “S/N” quando o local não tiver número.",
+        span: 1,
+      }),
+      text("empresa.enderecoComplemento", "Complemento", {
+        placeholder: "Ex.: Galpão 2",
+        span: 1,
+      }),
+      text("empresa.bairro", "Bairro", { span: 1 }),
+      text("empresa.cep", "CEP", {
+        format: "cep",
+        inputMode: "numeric",
+        autoComplete: "postal-code",
+        placeholder: "00000-000",
+        help: "A consulta é apenas um auxílio: o endereço pode ser digitado manualmente.",
+        span: 1,
+      }),
       text("empresa.cidade", "Cidade", { autoComplete: "address-level2", span: 1 }),
       select("empresa.estado", "Estado", UFS, {
         autoComplete: "address-level1",
         span: 1,
       }),
       text("empresa.horarioFuncionamento", "Horário de funcionamento", { span: 2 }),
-      select("empresa.atendeSabado", "Atende aos sábados?", YES_NO_CONFIRM, { span: 1 }),
-      select("empresa.outrasUnidades", "Possui outras unidades?", YES_NO_CONFIRM, { span: 1 }),
-      textarea("empresa.regiaoAtendida", "Região geográfica atendida", { span: 2 }),
+      selectRadio("empresa.atendeSabado", "Atende aos sábados?", YES_NO_CONFIRM, { span: 1 }),
+      selectRadio("empresa.outrasUnidades", "Possui outras unidades?", YES_NO_CONFIRM, { span: 1 }),
+      textarea("empresa.unidadesAdicionais", "Quais outras unidades e em quais municípios?", {
+        placeholder: "Ex.: unidade de Estrela, na região de Toledo",
+        help: "Aparece quando a resposta for “sim” ou “precisa confirmar”.",
+        span: 2,
+      }),
+      textarea("empresa.regiaoAtendida", "Região geográfica atendida", {
+        placeholder: "Ex.: Toledo, Marechal Cândido Rondon, Cascavel e região",
+        help: "Cidades e raio de atendimento habitual.",
+        span: 2,
+      }),
       textarea("empresa.historia", "História da empresa", { span: 2 }),
       textarea("empresa.diferenciais", "Diferenciais comerciais", { span: 2 }),
       textarea("empresa.missaoVisaoValores", "Missão, visão e valores, se definidos", {
@@ -266,7 +323,25 @@ export const BRIEFING_STEPS: BriefingStep[] = [
       textarea("servicos.atividadesTerceirizadas", "Quais atividades são terceirizadas?", {
         span: 2,
       }),
-      textarea("servicos.tiposVeiculos", "Quais tipos de veículos são atendidos?", { span: 2 }),
+      textarea("servicos.terceirizadosDetalhe", "Quais atividades são terceirizadas e com quem?", {
+        placeholder: "Ex.: tercerização de pintura em partner externo",
+        help: "Aparece quando algum serviço está marcado como terceirizado.",
+        span: 2,
+      }),
+      textarea("servicos.tiposVeiculos", "Quais tipos de veículos são atendidos?", {
+        placeholder: "Ex.: Passenger, SUVs, picapes e vans",
+        help: "Categoria, aplicação e models mais frequentes.",
+        span: 2,
+      }),
+      textarea(
+        "servicos.volumesPorEspecialidade",
+        "Volume aproximado por especialidade (opcional)",
+        {
+          placeholder: "Ex.: funilaria 6 veículos/semana; pintura 4 veículos/semana",
+          help: "Ajuda a dimensionar a operação. Estimativas são bem-vindas.",
+          span: 2,
+        },
+      ),
       textarea(
         "servicos.limitacoes",
         "Existem limitações por marca, modelo, tamanho ou complexidade?",
@@ -382,16 +457,22 @@ export const BRIEFING_STEPS: BriefingStep[] = [
       "Informe apenas dados profissionais. Não registre CPF, RG ou endereço residencial de colaboradores.",
     kind: "fields",
     fields: [
-      text("equipe.totalColaboradores", "Quantidade total de colaboradores", {
+      text("equipe.totalColaboradores", "Total de colaboradores (pessoas)", {
+        format: "integer",
         inputMode: "numeric",
+        placeholder: "Ex.: 12",
         span: 1,
       }),
-      text("equipe.profissionaisReparacao", "Profissionais de reparação", {
+      text("equipe.profissionaisReparacao", "Profissionais de reparação (pessoas)", {
+        format: "integer",
         inputMode: "numeric",
+        placeholder: "Ex.: 8",
         span: 1,
       }),
-      text("equipe.administrativo", "Pessoas na administração e atendimento", {
+      text("equipe.administrativo", "Pessoas na administração e atendimento (pessoas)", {
+        format: "integer",
         inputMode: "numeric",
+        placeholder: "Ex.: 4",
         span: 1,
       }),
       textarea("equipe.funcoes", "Funções existentes", { span: 2 }),
@@ -402,9 +483,19 @@ export const BRIEFING_STEPS: BriefingStep[] = [
       text("equipe.respQualidade", "Responsável pelo controle de qualidade", { span: 1 }),
       text("equipe.respEntrega", "Responsável pela entrega", { span: 1 }),
       textarea("equipe.atividadesTerceirizadas", "Atividades terceirizadas", { span: 2 }),
-      select("equipe.ampliar", "Capacidade de ampliar a equipe quando necessário", YES_NO_CONFIRM, {
+      textarea("equipe.condicoesAmpliacao", "Como a equipe é ampliada quando necessário?", {
+        placeholder: "Ex.: mais dois profissionais por temporada e contratos temporários",
+        help: "Aparece quando a resposta for “sim”.",
         span: 2,
       }),
+      selectRadio(
+        "equipe.ampliar",
+        "Capacidade de ampliar a equipe quando necessário",
+        YES_NO_CONFIRM,
+        {
+          span: 2,
+        },
+      ),
     ],
   },
   {
@@ -450,19 +541,59 @@ export const BRIEFING_STEPS: BriefingStep[] = [
       "Diferencie números comprovados de estimativas. Nenhum indicador será tratado como auditado.",
     kind: "fields",
     fields: [
-      text("capacidade.mediaRecebidos", "Média mensal de veículos recebidos", {
-        span: 1,
-      }),
-      text("capacidade.mediaEntregues", "Média mensal de veículos entregues", {
-        span: 1,
-      }),
-      text("capacidade.servicosSimultaneos", "Quantidade de serviços simultâneos", {
+      text("capacidade.mediaRecebidos", "Veículos recebidos (média por dia)", {
+        format: "integer",
         inputMode: "numeric",
+        placeholder: "Ex.: 6",
+        help: "Quantidade diária média de veículos que entram na oficina.",
         span: 1,
       }),
-      text("capacidade.capacidadeAdicional", "Capacidade adicional estimada", { span: 1 }),
-      text("capacidade.prazoSimples", "Prazo médio de reparos simples", { span: 1 }),
-      text("capacidade.prazoComplexos", "Prazo médio de reparos complexos", { span: 1 }),
+      text("capacidade.mediaEntregues", "Veículos entregues (média por dia)", {
+        format: "integer",
+        inputMode: "numeric",
+        placeholder: "Ex.: 5",
+        help: "Quantidade diária média de veículos finalizados.",
+        span: 1,
+      }),
+      text("capacidade.servicosSimultaneos", "Veículos em serviço ao mesmo tempo", {
+        format: "integer",
+        inputMode: "numeric",
+        placeholder: "Ex.: 10",
+        help: "Capacidade real de trabalho simultâneo, considerando as baias.",
+        span: 1,
+      }),
+      text("capacidade.capacidadeAdicional", "Capacidade adicional (veículos)", {
+        format: "integer",
+        inputMode: "numeric",
+        placeholder: "Ex.: 4",
+        help: "Quantos veículos a mais a oficina conseguiria atender em um pico.",
+        span: 1,
+      }),
+      text("capacidade.prazoSimples", "Prazo de reparos simples (dias)", {
+        inputMode: "numeric",
+        placeholder: "Ex.: 5",
+        help: "Prazo médio de um reparo simples, como amaciamento ou pintura de painel.",
+        span: 1,
+      }),
+      text("capacidade.prazoComplexos", "Prazo de reparos complexos (dias)", {
+        inputMode: "numeric",
+        placeholder: "Ex.: 20",
+        help: "Prazo médio de um reparo completo de funilaria.",
+        span: 1,
+      }),
+      selectRadio(
+        "capacidade.prazoBase",
+        "Os prazos acima são contados em:",
+        [
+          { value: "uteis", label: "Dias úteis" },
+          { value: "corridos", label: "Dias corridos" },
+          { value: "confirmar", label: "Precisa confirmar" },
+        ],
+        {
+          help: "Define a base de cálculo usada nos prazos informados.",
+          span: 2,
+        },
+      ),
       textarea("capacidade.sazonalidade", "Sazonalidade da demanda", { span: 2 }),
       textarea("capacidade.definicaoPrazos", "Como os prazos são definidos", { span: 2 }),
       textarea("capacidade.atrasos", "Tratamento de atrasos por peças ou autorização", {
@@ -493,25 +624,35 @@ export const BRIEFING_STEPS: BriefingStep[] = [
       "Não informe certificações, garantias ou indicadores sem comprovação. Pendências são bem-vindas.",
     kind: "fields",
     fields: [
-      select("qualidade.checklistFinal", "Checklist de inspeção final", YES_NO_PARTIAL, {
+      selectRadio("qualidade.checklistFinal", "Checklist de inspeção final", YES_NO_PARTIAL, {
         span: 2,
       }),
       textarea("qualidade.padroes", "Padrões de qualidade para pintura e acabamento", {
         span: 2,
       }),
-      select("qualidade.fotos", "Fotos antes, durante e depois do serviço", YES_NO_PARTIAL, {
+      selectRadio("qualidade.fotos", "Fotos antes, durante e depois do serviço", YES_NO_PARTIAL, {
         span: 2,
       }),
-      select("qualidade.historico", "Histórico dos reparos", YES_NO_PARTIAL, { span: 2 }),
-      select("qualidade.retrabalho", "Controle de retrabalho", YES_NO_PARTIAL, { span: 2 }),
-      select("qualidade.reclamacoes", "Registro de reclamações", YES_NO_PARTIAL, { span: 2 }),
+      selectRadio("qualidade.historico", "Histórico dos reparos", YES_NO_PARTIAL, { span: 2 }),
+      selectRadio("qualidade.retrabalho", "Controle de retrabalho", YES_NO_PARTIAL, { span: 2 }),
+      selectRadio("qualidade.reclamacoes", "Registro de reclamações", YES_NO_PARTIAL, { span: 2 }),
       textarea("qualidade.politicaGarantia", "Política de garantia", { span: 2 }),
+      text("qualidade.prazoGarantia", "Prazo de garantia informado aos clientes", {
+        placeholder: "Ex.: 90 dias em pintura, 6 meses em funilaria",
+        help: "Pode ser informado em dias, meses ou por tipo de serviço.",
+        span: 2,
+      }),
       textarea("qualidade.atendimentoGarantia", "Procedimentos de atendimento em garantia", {
         span: 2,
       }),
-      select("qualidade.rastreabilidade", "Rastreabilidade de peças e materiais", YES_NO_PARTIAL, {
-        span: 2,
-      }),
+      selectRadio(
+        "qualidade.rastreabilidade",
+        "Rastreabilidade de peças e materiais",
+        YES_NO_PARTIAL,
+        {
+          span: 2,
+        },
+      ),
       textarea("qualidade.origemPecas", "Origem e tipo das peças utilizadas", { span: 2 }),
       textarea("qualidade.indicadores", "Indicadores de qualidade acompanhados", { span: 2 }),
       textarea("qualidade.certificacoes", "Certificações e programas de qualidade", { span: 2 }),
@@ -606,6 +747,15 @@ export const BRIEFING_STEPS: BriefingStep[] = [
       ),
       textarea("fornecedores.terceirizados", "Serviços terceirizados e parceiros", { span: 2 }),
       textarea("fornecedores.criterios", "Critérios de seleção de fornecedores", { span: 2 }),
+      textarea(
+        "fornecedores.pecasContratanteDetalhes",
+        "Quais peças ficam por conta do contratante?",
+        {
+          placeholder: "Ex.: vidros e itens de terceiros",
+          help: "Aparece quando a resposta for “sim”.",
+          span: 2,
+        },
+      ),
       textarea("fornecedores.custos", "Como custos adicionais são comunicados e autorizados", {
         span: 2,
       }),
@@ -620,15 +770,19 @@ export const BRIEFING_STEPS: BriefingStep[] = [
       "Registre o interesse comercial. Não há garantia de aprovação ou credenciamento automático.",
     kind: "fields",
     fields: [
-      textarea("credenciamento.seguradoras", "Quais seguradoras pretende atender?", { span: 2 }),
-      select("credenciamento.jaPossui", "Já possui credenciamento?", YES_NO_CONFIRM, {
+      textarea("credenciamento.seguradoras", "Quais seguradoras pretende atender?", {
+        placeholder: "Ex.: HDI Seguros, Zurich, Porto Seguro",
+        help: "A lista de requisitos e o processo de cada seguradora são confirmados depois com a EPM DevTech.",
+        span: 2,
+      }),
+      selectRadio("credenciamento.jaPossui", "Já possui credenciamento?", YES_NO_CONFIRM, {
         span: 2,
       }),
       textarea("credenciamento.candidaturas", "Candidaturas em andamento", { span: 2 }),
       textarea("credenciamento.negativas", "Já houve negativa? Qual motivo foi informado?", {
         span: 2,
       }),
-      select(
+      selectRadio(
         "credenciamento.associacoes",
         "Interesse em associações de proteção veicular?",
         YES_NO_CONFIRM,
@@ -636,7 +790,12 @@ export const BRIEFING_STEPS: BriefingStep[] = [
           span: 2,
         },
       ),
-      select(
+      textarea("credenciamento.quaisAssociacoes", "Quais associações de proteção veicular?", {
+        placeholder: "Ex.: associação de reparadores da região",
+        help: "Aparece quando a resposta for “sim”.",
+        span: 2,
+      }),
+      selectRadio(
         "credenciamento.frotas",
         "Interesse em frotas empresariais e locadoras?",
         YES_NO_CONFIRM,
@@ -644,9 +803,14 @@ export const BRIEFING_STEPS: BriefingStep[] = [
           span: 2,
         },
       ),
+      textarea("credenciamento.quaisFrotas", "Quais frotas ou locadoras?", {
+        placeholder: "Ex.: transportadora local, locadora de veículos",
+        help: "Aparece quando a resposta for “sim”.",
+        span: 2,
+      }),
       text("credenciamento.regiao", "Região prioritária", { span: 1 }),
       text("credenciamento.volume", "Volume adicional pretendido", { span: 1 }),
-      select(
+      selectRadio(
         "credenciamento.negociacao",
         "Capacidade de negociar preços e condições?",
         YES_NO_CONFIRM,
@@ -654,7 +818,7 @@ export const BRIEFING_STEPS: BriefingStep[] = [
           span: 2,
         },
       ),
-      select(
+      selectRadio(
         "credenciamento.procedimentos",
         "Capacidade de cumprir procedimentos de vistoria, orçamento e autorização?",
         YES_NO_CONFIRM,
@@ -714,18 +878,36 @@ export const BRIEFING_STEPS: BriefingStep[] = [
       "Estas respostas alimentam a revisão da EPM DevTech. Nada será publicado automaticamente.",
     kind: "fields",
     fields: [
-      text("site.telefone", "Telefone público", { type: "tel", inputMode: "tel", span: 1 }),
-      text("site.whatsapp", "WhatsApp público", { type: "tel", inputMode: "tel", span: 1 }),
-      text("site.email", "E-mail público", { type: "email", inputMode: "email", span: 2 }),
+      text("site.telefone", "Telefone público", {
+        type: "tel",
+        format: "phone",
+        inputMode: "tel",
+        placeholder: "(45) 99999-9999",
+        span: 1,
+      }),
+      text("site.whatsapp", "WhatsApp público", {
+        type: "tel",
+        format: "phone",
+        inputMode: "tel",
+        placeholder: "(45) 99999-9999",
+        span: 1,
+      }),
+      text("site.email", "E-mail público", {
+        type: "email",
+        format: "email",
+        inputMode: "email",
+        placeholder: "contato@empresa.com.br",
+        span: 2,
+      }),
       text("site.endereco", "Endereço para divulgação", { span: 2 }),
       text("site.horarios", "Horários de funcionamento", { span: 2 }),
       textarea("site.redesSociais", "Redes sociais oficiais", { span: 2 }),
       textarea("site.servicosDestaque", "Serviços que devem receber destaque", { span: 2 }),
       textarea("site.diferenciais", "Diferenciais comprováveis", { span: 2 }),
-      select("site.autorizacaoImagens", "Autoriza o uso das imagens no site?", AUTHORIZATION, {
+      selectRadio("site.autorizacaoImagens", "Autoriza o uso das imagens no site?", AUTHORIZATION, {
         span: 2,
       }),
-      select(
+      selectRadio(
         "site.autorizacaoInformacoes",
         "Autoriza o uso das informações institucionais no site?",
         AUTHORIZATION,
@@ -733,6 +915,12 @@ export const BRIEFING_STEPS: BriefingStep[] = [
       ),
       textarea("site.naoDivulgar", "Informações que não devem ser divulgadas", { span: 2 }),
       text("site.responsavelAprovacao", "Responsável pela aprovação final do conteúdo", {
+        placeholder: "Informe a função, não dados pessoais",
+        span: 2,
+      }),
+      text("site.responsavelConteudo", "Quem responde pelo conteúdo publicado no site?", {
+        placeholder: "Ex.: Proprietário",
+        help: "Informe a função. Não é necessário enviar documentos pessoais.",
         span: 2,
       }),
     ],

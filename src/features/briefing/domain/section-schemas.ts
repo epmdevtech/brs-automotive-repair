@@ -1,5 +1,15 @@
 import { z } from "zod";
 import { BRIEFING_STEPS } from "./steps";
+import {
+  isValidCep,
+  isValidCnpj,
+  isValidDecimal,
+  isValidEmail,
+  isValidInteger,
+  isValidIsoDate,
+  isValidPhone,
+} from "./masks";
+import { pruneConditionalValues } from "./conditional";
 import type { BriefingField, BriefingStep } from "./types";
 
 export type BriefingSectionValues = Record<string, string | boolean>;
@@ -20,6 +30,11 @@ const PHONE_PATTERN = /^[\d\s()+.-]{8,30}$/;
 const INVALID_OPTION_MESSAGE = "Selecione uma das opções disponíveis";
 const INVALID_EMAIL_MESSAGE = "Informe um e-mail válido";
 const INVALID_NUMBER_MESSAGE = "Informe um número válido";
+const INVALID_CEP_MESSAGE = "Informe um CEP com 8 dígitos";
+const INVALID_CNPJ_MESSAGE = "Informe um CNPJ válido (dígitos verificadores)";
+const INVALID_PHONE_MESSAGE = "Informe um telefone com DDD válido";
+const INVALID_INTEGER_MESSAGE = "Informe um número inteiro";
+const INVALID_DATE_MESSAGE = "Informe uma data válida";
 
 function baseStringSchema(field: BriefingField): z.ZodString {
   const max = field.maxLength ?? 5000;
@@ -36,6 +51,32 @@ function withFormat(schema: z.ZodString, field: BriefingField) {
     if (value.length === 0) return;
 
     const invalid = (message: string) => ctx.addIssue({ code: z.ZodIssueCode.custom, message });
+
+    switch (field.format) {
+      case "cep":
+        if (!isValidCep(value)) invalid(INVALID_CEP_MESSAGE);
+        return;
+      case "cnpj":
+        if (!isValidCnpj(value)) invalid(INVALID_CNPJ_MESSAGE);
+        return;
+      case "phone":
+        if (!isValidPhone(value)) invalid(INVALID_PHONE_MESSAGE);
+        return;
+      case "integer":
+        if (!isValidInteger(value)) invalid(INVALID_INTEGER_MESSAGE);
+        return;
+      case "decimal":
+        if (!isValidDecimal(value)) invalid(INVALID_NUMBER_MESSAGE);
+        return;
+      case "date":
+        if (!isValidIsoDate(value)) invalid(INVALID_DATE_MESSAGE);
+        return;
+      case "email":
+        if (!isValidEmail(value)) invalid(INVALID_EMAIL_MESSAGE);
+        return;
+      default:
+        break;
+    }
 
     if (field.type === "email" && !EMAIL_PATTERN.test(value)) {
       invalid(INVALID_EMAIL_MESSAGE);
@@ -136,8 +177,11 @@ export function validateSectionPayload(
     if (isPending === true) pending[fieldId] = true;
   }
 
-  const schema = buildSectionSchema(step, pending);
-  const result = schema.safeParse(payload.values ?? {});
+  // Campos condicionais ocultados não entram na validação nem no payload.
+  const pruned = pruneConditionalValues(step.id, payload.values ?? {}, pending);
+
+  const schema = buildSectionSchema(step, pruned.pending);
+  const result = schema.safeParse(pruned.values);
 
   if (!result.success) {
     const issue = result.error.issues[0];
@@ -159,7 +203,7 @@ export function validateSectionPayload(
     }
   }
 
-  return { ok: true, values, pending };
+  return { ok: true, values, pending: pruned.pending };
 }
 
 export function estimateSectionBytes(payload: BriefingSectionPayload): number {
