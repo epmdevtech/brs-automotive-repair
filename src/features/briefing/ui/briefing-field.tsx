@@ -1,7 +1,13 @@
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
+import { lookupCep, type CepLookupResult } from "../domain/cep-service";
+import { isValidCep } from "../domain/masks";
 import type { BriefingField, BriefingValue } from "../domain/types";
+import { DateField } from "./fields/date-field";
+import { MaskedTextField } from "./fields/masked-text-field";
+import { RadioGroupField } from "./fields/radio-group-field";
 
 interface BriefingFieldProps {
   field: BriefingField;
@@ -11,6 +17,7 @@ interface BriefingFieldProps {
   errorMessage?: string | undefined;
   onChange: (value: BriefingValue) => void;
   onPendingChange: (pending: boolean) => void;
+  onCepResolved?: ((result: CepLookupResult) => void) | undefined;
 }
 
 export function BriefingFieldInput({
@@ -21,11 +28,12 @@ export function BriefingFieldInput({
   errorMessage,
   onChange,
   onPendingChange,
+  onCepResolved,
 }: BriefingFieldProps) {
   const helpId = field.help ? `${field.id}-help` : undefined;
   const errorId = `${field.id}-error`;
   const answered = pending || (field.type === "checkbox" ? value === true : isNonEmpty(value));
-  const hasError = showError && Boolean(field.required) && !answered;
+  const hasError = showError && !answered;
   const describedBy =
     [helpId, hasError ? errorId : undefined].filter(Boolean).join(" ") || undefined;
 
@@ -63,7 +71,7 @@ export function BriefingFieldInput({
         ) : null}
         {hasError ? (
           <p id={errorId} role="alert" className="text-xs text-red-300">
-            Confirmação obrigatória. Marque a declaração para continuar.
+            {errorMessage ?? "Confirmação obrigatória. Marque a declaração para continuar."}
           </p>
         ) : null}
       </div>
@@ -76,31 +84,139 @@ export function BriefingFieldInput({
     pending && "opacity-60",
   );
 
+  const label = (
+    <div className="flex flex-wrap items-center justify-between gap-2">
+      <label htmlFor={field.id} className="text-sm font-medium text-neutral-200">
+        {field.label}
+        {field.required ? (
+          <span className="ml-1 text-[var(--brand-text-accent)]" aria-hidden="true">
+            *
+          </span>
+        ) : null}
+      </label>
+
+      {field.allowPending ? (
+        <label className="inline-flex cursor-pointer items-center gap-1.5 text-xs text-neutral-400">
+          <input
+            type="checkbox"
+            checked={pending}
+            onChange={(event) => onPendingChange(event.target.checked)}
+            className="size-3.5 cursor-pointer accent-[var(--brand-primary)]"
+            aria-label={`Marcar “${field.label}” como pendente`}
+          />
+          Pendente
+        </label>
+      ) : null}
+    </div>
+  );
+
+  const help = field.help ? (
+    <p id={helpId} className="text-xs text-neutral-500">
+      {field.help}
+    </p>
+  ) : null;
+
+  const error = hasError ? (
+    <p id={errorId} role="alert" className="text-xs text-red-300">
+      {errorMessage ?? "Campo obrigatório: informe uma resposta ou marque como pendente."}
+    </p>
+  ) : null;
+
+  if (field.type === "select" && field.control === "radio") {
+    return (
+      <div className={cn("space-y-1.5", field.span === 2 && "sm:col-span-2")}>
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          <span className="text-sm font-medium text-neutral-200">
+            {field.label}
+            {field.required ? (
+              <span className="ml-1 text-[var(--brand-text-accent)]" aria-hidden="true">
+                *
+              </span>
+            ) : null}
+          </span>
+          {field.allowPending ? (
+            <label className="inline-flex cursor-pointer items-center gap-1.5 text-xs text-neutral-400">
+              <input
+                type="checkbox"
+                checked={pending}
+                onChange={(event) => onPendingChange(event.target.checked)}
+                className="size-3.5 cursor-pointer accent-[var(--brand-primary)]"
+                aria-label={`Marcar “${field.label}” como pendente`}
+              />
+              Pendente
+            </label>
+          ) : null}
+        </div>
+        <RadioGroupField
+          field={field}
+          value={value}
+          invalid={hasError}
+          describedBy={describedBy}
+          disabled={pending}
+          onChange={onChange}
+        />
+        {help}
+        {error}
+      </div>
+    );
+  }
+
+  if (field.format === "date") {
+    return (
+      <div className={cn("space-y-1.5", field.span === 2 && "sm:col-span-2")}>
+        {label}
+        <DateField
+          id={field.id}
+          value={stringValue || undefined}
+          invalid={hasError}
+          describedBy={describedBy}
+          disabled={pending}
+          onChange={(canonical) => onChange(canonical)}
+        />
+        {help}
+        {error}
+      </div>
+    );
+  }
+
+  if (field.format === "cep") {
+    return (
+      <CepField
+        field={field}
+        value={stringValue}
+        pending={pending}
+        hasError={hasError}
+        describedBy={describedBy}
+        onChange={onChange}
+        onCepResolved={onCepResolved}
+        label={label}
+        help={help}
+        error={error}
+      />
+    );
+  }
+
+  if (field.format === "cnpj" || field.format === "phone" || field.format === "decimal") {
+    return (
+      <div className={cn("space-y-1.5", field.span === 2 && "sm:col-span-2")}>
+        {label}
+        <MaskedTextField
+          field={field}
+          value={value}
+          invalid={hasError}
+          describedBy={describedBy}
+          disabled={pending}
+          onChange={onChange}
+        />
+        {help}
+        {error}
+      </div>
+    );
+  }
+
   return (
     <div className={cn("space-y-1.5", field.span === 2 && "sm:col-span-2")}>
-      <div className="flex flex-wrap items-center justify-between gap-2">
-        <label htmlFor={field.id} className="text-sm font-medium text-neutral-200">
-          {field.label}
-          {field.required ? (
-            <span className="ml-1 text-[var(--brand-text-accent)]" aria-hidden="true">
-              *
-            </span>
-          ) : null}
-        </label>
-
-        {field.allowPending ? (
-          <label className="inline-flex cursor-pointer items-center gap-1.5 text-xs text-neutral-400">
-            <input
-              type="checkbox"
-              checked={pending}
-              onChange={(event) => onPendingChange(event.target.checked)}
-              className="size-3.5 cursor-pointer accent-[var(--brand-primary)]"
-              aria-label={`Marcar “${field.label}” como pendente`}
-            />
-            Pendente
-          </label>
-        ) : null}
-      </div>
+      {label}
 
       {field.type === "textarea" ? (
         <Textarea
@@ -128,12 +244,12 @@ export function BriefingFieldInput({
           aria-required={field.required ? true : undefined}
           aria-describedby={describedBy}
           className={cn(
-            "flex h-9 w-full rounded-md border px-3 py-1 text-base shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-1 disabled:cursor-not-allowed md:text-sm",
+            "flex h-10 w-full rounded-md border px-3 py-1 text-base shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-1 disabled:cursor-not-allowed md:text-sm",
             controlClass,
           )}
         >
           <option value="">Selecione…</option>
-          {field.options?.map((option) => (
+          {(field.options ?? []).map((option) => (
             <option key={option.value} value={option.value}>
               {option.label}
             </option>
@@ -160,11 +276,7 @@ export function BriefingFieldInput({
         />
       )}
 
-      {field.help ? (
-        <p id={helpId} className="text-xs text-neutral-500">
-          {field.help}
-        </p>
-      ) : null}
+      {help}
 
       {pending ? (
         <p className="text-xs text-amber-300/90">
@@ -172,11 +284,91 @@ export function BriefingFieldInput({
         </p>
       ) : null}
 
-      {hasError ? (
-        <p id={errorId} role="alert" className="text-xs text-red-300">
-          {errorMessage ?? "Campo obrigatório: informe uma resposta ou marque como pendente."}
-        </p>
-      ) : null}
+      {error}
+    </div>
+  );
+}
+
+interface CepFieldProps {
+  field: BriefingField;
+  value: string;
+  pending: boolean;
+  hasError: boolean;
+  describedBy: string | undefined;
+  onChange: (value: BriefingValue) => void;
+  onCepResolved?: ((result: CepLookupResult) => void) | undefined;
+  label: ReactNode;
+  help: ReactNode;
+  error: ReactNode;
+}
+
+/**
+ * Campo de CEP com máscara e consulta assistida. A consulta é um auxílio:
+ * falha, timeout ou CEP inexistente apenas geram aviso e nunca impedem o
+ * preenchimento manual do endereço.
+ */
+function CepField({
+  field,
+  value,
+  pending,
+  hasError,
+  describedBy,
+  onChange,
+  onCepResolved,
+  label,
+  help,
+  error,
+}: CepFieldProps) {
+  const [status, setStatus] = useState<"idle" | "loading" | "found" | "not_found">("idle");
+  const lastQueryRef = useRef<string>("");
+  const callbackRef = useRef(onCepResolved);
+  callbackRef.current = onCepResolved;
+
+  useEffect(() => {
+    if (!isValidCep(value)) {
+      setStatus("idle");
+      return;
+    }
+
+    if (lastQueryRef.current === value) return;
+    lastQueryRef.current = value;
+
+    const timer = setTimeout(async () => {
+      setStatus("loading");
+      const result = await lookupCep(value);
+      if (!result) {
+        setStatus("not_found");
+        return;
+      }
+      setStatus("found");
+      callbackRef.current?.(result);
+    }, 600);
+
+    return () => clearTimeout(timer);
+  }, [value]);
+
+  return (
+    <div className={cn("space-y-1.5", field.span === 2 && "sm:col-span-2")}>
+      {label}
+      <MaskedTextField
+        field={field}
+        value={value}
+        invalid={hasError}
+        describedBy={describedBy}
+        disabled={pending}
+        onChange={onChange}
+      />
+      <p aria-live="polite" className="text-xs text-neutral-500">
+        {status === "loading"
+          ? "Consultando CEP…"
+          : status === "not_found"
+            ? "CEP não localizado. Preencha o endereço manualmente."
+            : status === "found"
+              ? "Endereço preenchido a partir do CEP. Confira e ajuste se necessário."
+              : ""}
+      </p>
+      {help}
+      {error}
     </div>
   );
 }

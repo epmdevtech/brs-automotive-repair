@@ -9,7 +9,12 @@ import {
   RotateCcw,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { getMissingRequiredFieldsAll, getPendingItems } from "../domain/progress";
+import {
+  getMissingRequiredFields,
+  getMissingRequiredFieldsAll,
+  getPendingItems,
+} from "../domain/progress";
+import { BRIEFING_STEPS } from "../domain/steps";
 import {
   buildBriefingExport,
   buildExportFileName,
@@ -39,6 +44,41 @@ export function BriefingReview({
   submitted,
 }: BriefingReviewProps) {
   const [copyStatus, setCopyStatus] = useState<string | null>(null);
+  const [confirmed, setConfirmed] = useState(false);
+
+  const stepStatus = useMemo(
+    () =>
+      BRIEFING_STEPS.map((step) => {
+        const missing = getMissingRequiredFields(step, draft);
+        const pending = step.fields.filter((field) => draft.pending[field.id]).length;
+        const answered = step.fields.filter((field) => {
+          const value = draft.values[field.id];
+          return draft.pending[field.id] || (typeof value === "string" && value.trim().length > 0);
+        }).length;
+
+        return { step, missing, pending, answered };
+      }),
+    [draft],
+  );
+
+  const publicationAuthorization = useMemo(() => {
+    const images = draft.values["site.autorizacaoImagens"];
+    const information = draft.values["site.autorizacaoInformacoes"];
+    const photos = draft.values["fotos.autorizacaoPublicacao"];
+
+    const label = (value: unknown) => {
+      if (value === "autorizo") return "autorizado";
+      if (value === "nao_autorizo") return "não autorizado";
+      if (value === "confirmar") return "a confirmar";
+      return "não informado";
+    };
+
+    return [
+      { label: "Uso de imagens no site", value: label(images) },
+      { label: "Uso das informações institucionais", value: label(information) },
+      { label: "Publicação do acervo de fotos", value: label(photos) },
+    ];
+  }, [draft.values]);
 
   const exportData = useMemo(() => buildBriefingExport(draft), [draft]);
   const reportText = useMemo(() => generateBriefingReportText(exportData), [exportData]);
@@ -90,7 +130,7 @@ export function BriefingReview({
             <p className="mt-2 max-w-2xl text-sm leading-relaxed text-neutral-400">
               Revise as respostas e as pendências. O envio registra o briefing no banco de dados da
               EPM DevTech; nada é publicado no site e nenhuma seguradora é contatada por este
-              formulário.
+              formulário. O envio confirma apenas o recebimento das informações para análise.
             </p>
           </div>
           <span
@@ -208,6 +248,64 @@ export function BriefingReview({
       </section>
 
       <section className="border border-white/10 bg-white/[0.02] p-4 sm:p-6">
+        <h3 className="font-display text-lg font-semibold text-white">Situação por etapa</h3>
+        <p className="mt-1 text-xs text-neutral-500">
+          Etapas com campo obrigatório em aberto aparecem destacadas. Clique para corrigir.
+        </p>
+        <ul className="mt-3 grid gap-2 sm:grid-cols-2">
+          {stepStatus.map(({ step, missing, pending, answered }) => (
+            <li
+              key={step.id}
+              className={
+                missing.length > 0
+                  ? "border border-amber-300/30 bg-amber-300/5 p-3 text-xs"
+                  : "border border-white/10 bg-neutral-950/40 p-3 text-xs"
+              }
+            >
+              <div className="flex items-center justify-between gap-2">
+                <span className="font-medium text-neutral-200">
+                  {step.number}. {step.title}
+                </span>
+                <button
+                  type="button"
+                  onClick={() => onEditStep(step.number)}
+                  className="text-[var(--brand-text-accent)] underline underline-offset-2 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]"
+                >
+                  Abrir
+                </button>
+              </div>
+              <p className="mt-1 text-neutral-400">
+                {answered} respondidos · {pending} pendente(s) · {missing.length} obrigatório(s) em
+                aberto
+              </p>
+              {missing.length > 0 ? (
+                <ul className="mt-1 list-disc space-y-0.5 pl-4 text-amber-100/90">
+                  {missing.map((field) => (
+                    <li key={field.id}>{field.label}</li>
+                  ))}
+                </ul>
+              ) : null}
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section className="border border-white/10 bg-white/[0.02] p-4 sm:p-6">
+        <h3 className="font-display text-lg font-semibold text-white">Autorizações registradas</h3>
+        <p className="mt-1 text-xs text-neutral-500">
+          A autorização de publicação é uma decisão separada do envio do briefing.
+        </p>
+        <dl className="mt-3 grid gap-2 sm:grid-cols-3">
+          {publicationAuthorization.map((item) => (
+            <div key={item.label} className="border border-white/10 bg-neutral-950/40 p-3">
+              <dt className="text-xs text-neutral-500">{item.label}</dt>
+              <dd className="mt-1 text-sm text-neutral-100">{item.value}</dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+
+      <section className="border border-white/10 bg-white/[0.02] p-4 sm:p-6">
         <h3 className="font-display text-lg font-semibold text-white">Pendências registradas</h3>
         {pendingItems.length === 0 ? (
           <p className="mt-2 text-sm text-neutral-400">Nenhuma pendência registrada.</p>
@@ -287,15 +385,30 @@ export function BriefingReview({
               Briefing enviado e registrado no banco de dados da EPM DevTech.
             </p>
           ) : (
-            <Button
-              type="button"
-              variant="primary"
-              onClick={onSubmit}
-              disabled={submitState === "submitting"}
-            >
-              <CheckCircle2 aria-hidden="true" />
-              {submitState === "submitting" ? "Enviando…" : "Enviar para análise"}
-            </Button>
+            <div className="w-full space-y-3">
+              <label className="flex cursor-pointer items-start gap-3 text-xs leading-relaxed text-neutral-300">
+                <input
+                  type="checkbox"
+                  checked={confirmed}
+                  onChange={(event) => setConfirmed(event.target.checked)}
+                  className="mt-0.5 size-4 shrink-0 cursor-pointer accent-[var(--brand-primary)]"
+                />
+                <span>
+                  Confirmo que as informações preenchidas refletem a operação da oficina e autorizo
+                  a EPM DevTech a analisar este material. Entendo que o envio não representa
+                  credenciamento, aprovação nem publicação das informações.
+                </span>
+              </label>
+              <Button
+                type="button"
+                variant="primary"
+                onClick={onSubmit}
+                disabled={submitState === "submitting" || !confirmed}
+              >
+                <CheckCircle2 aria-hidden="true" />
+                {submitState === "submitting" ? "Enviando…" : "Enviar para análise"}
+              </Button>
+            </div>
           )}
           <Button
             type="button"

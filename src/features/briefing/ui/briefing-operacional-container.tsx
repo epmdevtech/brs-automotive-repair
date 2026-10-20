@@ -9,6 +9,8 @@ import { BriefingPhotosPanel } from "./briefing-photos-panel";
 import { BriefingReview } from "./briefing-review";
 import { BriefingStepForm, type BriefingStepFormHandle } from "./briefing-step-form";
 import { BriefingStepper } from "./briefing-stepper";
+import { applyCepLookup } from "../domain/address";
+import type { CepLookupResult } from "../domain/cep-service";
 import { useBriefingDraft } from "./use-briefing-draft";
 import { useBriefingServer } from "./use-briefing-server";
 
@@ -25,6 +27,10 @@ export function BriefingOperacionalContainer() {
   const [submitted, setSubmitted] = useState(false);
   const [photoMessage, setPhotoMessage] = useState<string | null>(null);
   const [loadError, setLoadError] = useState<string | null>(null);
+  const [briefingStatus, setBriefingStatus] = useState<"draft" | "enviado">("draft");
+  const [errorSummary, setErrorSummary] = useState<
+    { fieldId: string; label: string; message: string }[]
+  >([]);
   const [uploading, setUploading] = useState(false);
   const formRef = useRef<BriefingStepFormHandle>(null);
 
@@ -85,6 +91,7 @@ export function BriefingOperacionalContainer() {
 
       hydrateFromServer(values, pending, photos);
       setSubmitted(data.briefing.status !== "draft");
+      setBriefingStatus(data.briefing.status === "draft" ? "draft" : "enviado");
     }
 
     void bootstrap();
@@ -136,6 +143,7 @@ export function BriefingOperacionalContainer() {
   useEffect(() => {
     if (!hydrated) return;
     if (server.status === "unavailable" || server.status === "error") return;
+    if (briefingStatus === "enviado") return;
 
     if (autosaveTimerRef.current !== null) {
       window.clearTimeout(autosaveTimerRef.current);
@@ -150,7 +158,15 @@ export function BriefingOperacionalContainer() {
         window.clearTimeout(autosaveTimerRef.current);
       }
     };
-  }, [activeStepNumber, draft.pending, draft.values, hydrated, persistCurrentStep, server.status]);
+  }, [
+    activeStepNumber,
+    briefingStatus,
+    draft.pending,
+    draft.values,
+    hydrated,
+    persistCurrentStep,
+    server.status,
+  ]);
 
   function focusField(fieldId: string) {
     window.setTimeout(() => {
@@ -162,9 +178,14 @@ export function BriefingOperacionalContainer() {
     const valid = await formRef.current?.validate();
     if (valid === false) {
       setShowErrors(true);
-      if (missingForCurrentStep[0]) focusField(missingForCurrentStep[0].id);
+      const summary = formRef.current?.getErrorSummary() ?? [];
+      setErrorSummary(summary);
+      const firstInvalid = summary[0]?.fieldId ?? missingForCurrentStep[0]?.id;
+      if (firstInvalid) focusField(firstInvalid);
       return;
     }
+
+    setErrorSummary([]);
 
     if (!canAdvanceStep(currentStep, draft)) {
       setShowErrors(true);
@@ -194,7 +215,17 @@ export function BriefingOperacionalContainer() {
   function handleSelectStep(stepNumber: number) {
     setShowReview(false);
     setShowErrors(false);
+    setErrorSummary([]);
     setActiveStepNumber(stepNumber);
+  }
+
+  function handleCepResolved(result: CepLookupResult) {
+    const { values } = applyCepLookup(draft.values as Record<string, string | boolean>, result);
+    for (const [fieldId, value] of Object.entries(values)) {
+      if (draft.values[fieldId] === undefined) {
+        setValue(fieldId, value as BriefingValue);
+      }
+    }
   }
 
   async function handleSubmit() {
@@ -346,6 +377,19 @@ export function BriefingOperacionalContainer() {
         </div>
       </header>
 
+      {briefingStatus === "enviado" ? (
+        <div className="mt-5 border border-emerald-400/30 bg-emerald-400/5 p-4">
+          <h2 className="font-display text-base font-semibold text-white">
+            Briefing já enviado para análise
+          </h2>
+          <p className="mt-2 text-sm leading-relaxed text-neutral-300">
+            As respostas deste briefing já foram registradas pela EPM DevTech e não podem ser
+            alteradas. Se for necessário complementar alguma informação, use a página de confirmação
+            para acompanhar o pedido ou peça um novo envio à EPM DevTech.
+          </p>
+        </div>
+      ) : null}
+
       <div className="mt-5 border border-white/10 bg-white/[0.02] p-3 sm:p-4">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <p className="flex items-center gap-2 text-xs text-neutral-400">
@@ -412,6 +456,10 @@ export function BriefingOperacionalContainer() {
 
       {!showReview ? (
         <>
+          <p aria-live="polite" className="sr-only">
+            Etapa {currentStep.number} de 15: {currentStep.title}.
+          </p>
+
           <div className="mt-5">
             <BriefingStepper
               steps={BRIEFING_STEPS}
@@ -421,17 +469,37 @@ export function BriefingOperacionalContainer() {
             />
           </div>
 
-          {showErrors && missingForCurrentStep.length > 0 ? (
+          {showErrors && (errorSummary.length > 0 || missingForCurrentStep.length > 0) ? (
             <div
               role="alert"
+              tabIndex={-1}
+              ref={(element) => {
+                if (element && errorSummary.length > 0) element.focus();
+              }}
               className="mt-4 border border-red-400/30 bg-red-400/5 p-3 text-sm text-red-100"
             >
-              <p className="font-medium">Para avançar, informe ou marque como pendente:</p>
-              <ul className="mt-1 list-disc space-y-0.5 pl-5 text-xs">
-                {missingForCurrentStep.map((field) => (
-                  <li key={field.id}>{field.label}</li>
-                ))}
-              </ul>
+              <p className="font-medium">Para avançar, corrija os campos abaixo:</p>
+              {errorSummary.length > 0 ? (
+                <ul className="mt-1 list-disc space-y-0.5 pl-5 text-xs">
+                  {errorSummary.map((error) => (
+                    <li key={error.fieldId}>
+                      <button
+                        type="button"
+                        onClick={() => focusField(error.fieldId)}
+                        className="text-left underline underline-offset-2 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-primary)]"
+                      >
+                        {error.label}: {error.message}
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <ul className="mt-1 list-disc space-y-0.5 pl-5 text-xs">
+                  {missingForCurrentStep.map((field) => (
+                    <li key={field.id}>{field.label}</li>
+                  ))}
+                </ul>
+              )}
             </div>
           ) : null}
 
@@ -472,6 +540,7 @@ export function BriefingOperacionalContainer() {
                 onPendingChange={(fieldId: string, pending: boolean) =>
                   setPending(fieldId, pending)
                 }
+                onCepResolved={handleCepResolved}
               />
 
               {currentStep.kind === "photos" ? (
