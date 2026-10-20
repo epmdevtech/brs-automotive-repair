@@ -9,6 +9,7 @@ import {
   addBriefingInternalNote,
   changeAdminBriefingStatus,
   createBriefingFileUrl,
+  exportBriefingPdf,
   loadAdminBriefing,
   requestBriefingComplement,
 } from "../../server/functions";
@@ -27,6 +28,8 @@ export function BriefingAdminDetail({ briefingId }: BriefingAdminDetailProps) {
   const [complementMessage, setComplementMessage] = useState("");
   const [internalNote, setInternalNote] = useState("");
   const [busy, setBusy] = useState(false);
+  const [exporting, setExporting] = useState(false);
+  const [exportMessage, setExportMessage] = useState<string | null>(null);
 
   const load = useCallback(async () => {
     setLoading(true);
@@ -66,6 +69,43 @@ export function BriefingAdminDetail({ briefingId }: BriefingAdminDetailProps) {
 
     return map;
   }, [detail]);
+
+  async function handleExportPdf() {
+    setExporting(true);
+    setExportMessage(null);
+    setActionMessage(null);
+
+    const result = await exportBriefingPdf({ data: { briefingId } });
+
+    if (!result.ok) {
+      setExporting(false);
+      setExportMessage(result.error.message);
+      return;
+    }
+
+    const binary = atob(result.data.base64);
+    const bytes = new Uint8Array(binary.length);
+    for (let index = 0; index < binary.length; index += 1) {
+      bytes[index] = binary.charCodeAt(index);
+    }
+
+    const blob = new Blob([bytes], { type: "application/pdf" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = result.data.fileName;
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    URL.revokeObjectURL(url);
+
+    setExporting(false);
+    setExportMessage(
+      `Evidência gerada: ${result.data.fileName} (${result.data.pageCount} página(s), ${Math.round(
+        result.data.sizeBytes / 1024,
+      )} KB).`,
+    );
+  }
 
   async function handleStatusChange(to: BriefingStatus) {
     setBusy(true);
@@ -204,6 +244,15 @@ export function BriefingAdminDetail({ briefingId }: BriefingAdminDetailProps) {
         ) : null}
       </header>
 
+      {exportMessage ? (
+        <p
+          role="status"
+          className="mt-3 border border-white/10 bg-white/5 p-3 text-xs text-neutral-200"
+        >
+          {exportMessage}
+        </p>
+      ) : null}
+
       {actionMessage ? (
         <p
           role="status"
@@ -292,6 +341,27 @@ export function BriefingAdminDetail({ briefingId }: BriefingAdminDetailProps) {
           <FileText aria-hidden="true" />
           Registrar nota
         </Button>
+      </section>
+
+      <section className="mt-4 border border-white/10 bg-white/[0.02] p-4">
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <div>
+            <h2 className="font-display text-lg font-semibold text-white">Evidência do briefing</h2>
+            <p className="mt-1 text-xs text-neutral-500">
+              PDF com identificação, as 15 etapas com respostas, pendências e a trilha de auditoria.
+              Documento interno da EPM DevTech.
+            </p>
+          </div>
+          <Button
+            type="button"
+            variant="secondary"
+            disabled={exporting}
+            onClick={() => void handleExportPdf()}
+          >
+            <FileText aria-hidden="true" />
+            {exporting ? "Gerando PDF…" : "Baixar evidência (PDF)"}
+          </Button>
+        </div>
       </section>
 
       <section className="mt-4 border border-white/10 bg-white/[0.02] p-4">

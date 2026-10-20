@@ -14,6 +14,7 @@ import {
   deleteBriefingFile,
   uploadBriefingFile,
 } from "@/features/briefing/server/file-service";
+import { exportBriefingPdf } from "@/features/briefing/server/pdf-service";
 import {
   requireBriefingAdmin,
   requireBriefingSession,
@@ -317,7 +318,42 @@ describe("SPEC-073 — camada de servidor do briefing", () => {
     });
   });
 
-  describe("6. Arquivos privados", () => {
+  describe("6. Exportação de evidência em PDF", () => {
+    it("recusa a exportação para cliente sem papel de administrador", async () => {
+      const client = clientSession(state, CLIENT_A, "client");
+      const session = await requireBriefingSession(client);
+
+      await expect(exportBriefingPdf(client, session as never, "briefing-a")).rejects.toMatchObject(
+        { code: "forbidden" },
+      );
+    });
+
+    it("gera o PDF a partir do registro do briefing", async () => {
+      completeAllSections(state, "briefing-a");
+      const client = clientSession(state, ADMIN, "admin");
+      const session = await requireBriefingAdmin(client);
+
+      const exported = await exportBriefingPdf(client, session, "briefing-a");
+
+      expect(exported.fileName).toMatch(/^evidencia-briefing-.+-\d{4}-\d{2}-\d{2}\.pdf$/);
+      expect(exported.pageCount).toBeGreaterThan(0);
+      expect(exported.sizeBytes).toBeGreaterThan(1000);
+
+      const bytes = Buffer.from(exported.base64, "base64");
+      expect(bytes.subarray(0, 5).toString("latin1")).toBe("%PDF-");
+    });
+
+    it("recusa a exportação de briefing inexistente", async () => {
+      const client = clientSession(state, ADMIN, "admin");
+      const session = await requireBriefingAdmin(client);
+
+      await expect(exportBriefingPdf(client, session, "inexistente")).rejects.toMatchObject({
+        code: "not_found",
+      });
+    });
+  });
+
+  describe("7. Arquivos privados", () => {
     it("recusa formato não permitido e arquivo acima do limite", async () => {
       const client = clientSession(state, CLIENT_A, "client");
       const session = await requireBriefingSession(client);

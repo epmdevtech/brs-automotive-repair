@@ -63,12 +63,17 @@ A migração cria:
 ## 4. Promoção de papel
 
 O gatilho `profiles_guard_role` impede que um usuário eleve o próprio papel. Para
-promover um administrador, use o SQL Editor com uma sessão de administrador do
-Supabase (o papel do dashboard):
+promover um administrador, use o SQL Editor (sessão `postgres`):
 
 ```sql
 update public.profiles set role = 'admin' where id = '<uuid-do-usuário>';
 ```
+
+> **Atenção:** até aplicar a migração `20261021000100_profile_role_guard_privileged.sql`,
+> o comando acima é recusado com `42501 — Alteração de papel não permitida`, porque o
+> gatilho original exigia que o próprio chamador já fosse administrador. A migração
+> corrige isso liberando sessões privilegiadas (SQL Editor, chave de serviço e
+> administrador autenticado), sem abrir caminho para elevação pelo cliente.
 
 Não existe endpoint de aplicação para alteração de papel, e o papel nunca é lido
 de parâmetro enviado pelo navegador.
@@ -139,6 +144,20 @@ prova de que o cliente não enxerga a auditoria e o anon não enxerga o briefing
 Credenciais: `E2E_EMAIL` e `E2E_PASSWORD` no `.env`. Com a chave privilegiada
 disponível, o teste cria (ou garante) a conta de teste já confirmada e apaga os
 briefings anteriores do usuário de teste, tornando a execução repetível.
+
+## 7.3 Evidência em PDF pelo painel
+
+Com um usuário `admin` autenticado, o detalhe do briefing em
+`/admin/briefings/<id>` oferece **"Baixar evidência (PDF)"**. A geração acontece
+no servidor, a partir do mesmo registro exibido no painel, usando o escritor de
+PDF sem dependência (`ADR-003`): identificação, as 15 etapas com respostas e
+pendências e a trilha de auditoria. O cliente não tem acesso ao gerador.
+
+Para gerar o mesmo documento por linha de comando:
+
+```sh
+bun run scripts/briefing-evidence-pdf.ts [briefingId]
+```
 
 ## 7.2 Evidência em PDF
 

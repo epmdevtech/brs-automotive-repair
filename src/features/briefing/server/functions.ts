@@ -243,6 +243,20 @@ export const addBriefingInternalNote = createServerFn({ method: "POST" })
     }),
   );
 
+export const exportBriefingPdf = createServerFn({ method: "POST" })
+  .validator(z.object({ briefingId: z.string().uuid("Identificador inválido") }))
+  .handler(async ({ data }) =>
+    runBriefingOperation(async () => {
+      const { createBriefingServerClient } = await import("./supabase-server");
+      const { requireBriefingAdmin } = await import("./auth-service");
+      const { exportBriefingPdf: exportPdf } = await import("./pdf-service");
+
+      const client = await createBriefingServerClient();
+      const session = await requireBriefingAdmin(client);
+      return exportPdf(client, session, data.briefingId);
+    }),
+  );
+
 export const uploadBriefingFile = createServerFn({ method: "POST" })
   .validator(
     z.object({
