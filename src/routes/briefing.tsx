@@ -1,14 +1,14 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { buildRouteHead } from "@/lib/seo";
-import { BriefingContainer } from "@/components/brs/briefing/briefing-container";
+import { BriefingOperacionalContainer } from "@/features/briefing/ui/briefing-operacional-container";
 
 export const Route = createFileRoute("/briefing")({
   component: BriefingPage,
   head: () =>
     buildRouteHead({
-      title: "Portal de Briefing do Projeto | EPM DevTech & Master Chapeação",
+      title: "Briefing Operacional e Credenciamento | EPM DevTech & Master Chapeação",
       description:
-        "Portal confidencial para preenchimento, validação e ingestão do briefing técnico de presença digital e agendamento da Master Chapeação e Pinturas.",
+        "Rota confidencial para o briefing operacional, comercial e documental da Master Chapeação e Pinturas, com pendências explícitas, rascunho local e exportação manual.",
       path: "/briefing",
       noindex: true,
     }),
@@ -17,7 +17,7 @@ export const Route = createFileRoute("/briefing")({
 function BriefingPage() {
   return (
     <main className="min-h-screen bg-neutral-950 text-neutral-200 pt-20 sm:pt-28 pb-16 antialiased">
-      <BriefingContainer />
+      <BriefingOperacionalContainer />
     </main>
   );
 }

@@ -75,7 +75,8 @@ Gerado por `scripts/generate_traceability.py`. Não edite manualmente; execute n
 | [SPEC-069](../specs/SPEC-069-pipeline-imagem-responsiva-hero-avif-webp-baseline-visual.md) | Approved | [TASK-069-01](../tasks/TASK-069-01-pipeline-imagem-responsiva-hero-avif-webp-baseline-visual.md) (Completed) | `0913a8b8` feat(hero): pipeline de imagem responsiva avif/webp e baseline visual | [REVIEW-069-pipeline-imagem-responsiva-hero-avif-webp-baseline-visual.md](../reviews/REVIEW-069-pipeline-imagem-responsiva-hero-avif-webp-baseline-visual.md) (Aprovado) |
 | [SPEC-070](../specs/SPEC-070-correcao-descontinuidade-zoom-hero.md) | Approved | [TASK-070-01](../tasks/TASK-070-01-correcao-descontinuidade-zoom-hero.md) (Completed) | `3dc0cad3` fix(hero): corrigir descontinuidade no zoom removendo redeclaracao da animacao | [REVIEW-070-correcao-descontinuidade-zoom-hero.md](../reviews/REVIEW-070-correcao-descontinuidade-zoom-hero.md) (Approved) |
 | [SPEC-071](../specs/SPEC-071-nova-proposta-master-chapeacao-pinturas.md) | Approved | [TASK-071-01](../tasks/TASK-071-01-nova-proposta-master-chapeacao-pinturas.md) (Done) | `aaa343cf` feat(branding): alinhar identidade cromatica ao vermelho da logo Master<br>`75ce70c7` feat(branding): rebrand da demonstração para Master Chapeação e Pinturas | [REVIEW-071-nova-proposta-master-chapeacao-pinturas.md](../reviews/REVIEW-071-nova-proposta-master-chapeacao-pinturas.md) (Approved) |
+| [SPEC-072](../specs/SPEC-072-briefing-operacional-credenciamento-master.md) | Approved | [TASK-072-01](../tasks/TASK-072-01-briefing-operacional-credenciamento-master.md) (Done) | — | [REVIEW-072-briefing-operacional-credenciamento-master.md](../reviews/REVIEW-072-briefing-operacional-credenciamento-master.md) (Approved) |
 
 ## Lacunas de rastreabilidade (Traceability gaps)
 
-- Nenhuma detectada nos artefatos verificados.
+- `TASK-072-01` não possui commit com `Task-Ref: TASK-072-01`.
