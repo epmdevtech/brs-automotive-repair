@@ -10,14 +10,14 @@ export function ProposalRecurringCosts({ recurringCosts }: ProposalRecurringCost
   const getCategoryIcon = (category: string) => {
     const catLower = category.toLowerCase();
     if (catLower.includes("domínio") || catLower.includes("endereçamento"))
-      return <Globe className="size-5 text-primary" aria-hidden="true" />;
+      return <Globe className="size-5 text-brand-accent" aria-hidden="true" />;
     if (catLower.includes("hospedagem") || catLower.includes("cloud"))
-      return <Server className="size-5 text-primary" aria-hidden="true" />;
+      return <Server className="size-5 text-brand-accent" aria-hidden="true" />;
     if (catLower.includes("armazenamento") || catLower.includes("storage"))
-      return <Database className="size-5 text-primary" aria-hidden="true" />;
+      return <Database className="size-5 text-brand-accent" aria-hidden="true" />;
     if (catLower.includes("mensageria") || catLower.includes("whatsapp"))
-      return <MessageSquare className="size-5 text-primary" aria-hidden="true" />;
-    return <Wrench className="size-5 text-primary" aria-hidden="true" />;
+      return <MessageSquare className="size-5 text-brand-accent" aria-hidden="true" />;
+    return <Wrench className="size-5 text-brand-accent" aria-hidden="true" />;
   };
 
   const getStatusBadge = (status: RecurringCostItem["status"]) => {
@@ -25,7 +25,7 @@ export function ProposalRecurringCosts({ recurringCosts }: ProposalRecurringCost
       case "third_party":
         return {
           label: "Conta Direta do Cliente / Terceiro",
-          className: "bg-amber-500/10 text-amber-300 border-amber-500/30",
+          className: "bg-primary/10 text-brand-accent border-primary/30",
         };
       case "included":
         return {
@@ -101,7 +101,7 @@ export function ProposalRecurringCosts({ recurringCosts }: ProposalRecurringCost
                   <span className="text-[11px] font-mono text-neutral-400 block uppercase tracking-wider">
                     Estimativa de Custo
                   </span>
-                  <span className="text-base sm:text-lg font-mono font-bold text-primary block mt-1">
+                  <span className="text-base sm:text-lg font-mono font-bold text-brand-accent block mt-1">
                     {item.estimatedValueText}
                   </span>
                 </div>
@@ -112,7 +112,7 @@ export function ProposalRecurringCosts({ recurringCosts }: ProposalRecurringCost
 
         {/* Nota explicativa de segurança e governança */}
         <div className="mt-8 p-5 sm:p-6 rounded-xl border border-primary/20 bg-primary/[0.03] flex items-start gap-3.5">
-          <ShieldAlert className="size-5 text-primary shrink-0 mt-0.5" aria-hidden="true" />
+          <ShieldAlert className="size-5 text-brand-accent shrink-0 mt-0.5" aria-hidden="true" />
           <div className="text-xs sm:text-sm text-neutral-300 leading-relaxed">
             <strong className="text-white block mb-1">
               Princípio de Independência e Titularidade EPM DevTech:

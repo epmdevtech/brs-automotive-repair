@@ -31,7 +31,7 @@ export function ProposalFaq({ proposal }: ProposalFaqProps) {
           <Accordion type="single" collapsible className="w-full">
             {faq.map((item, idx) => (
               <AccordionItem value={`prop-faq-${idx}`} key={idx} className="border-white/10">
-                <AccordionTrigger className="py-4 text-sm sm:text-base font-medium text-left gap-4 hover:no-underline hover:text-primary transition-colors text-white">
+                <AccordionTrigger className="py-4 text-sm sm:text-base font-medium text-left gap-4 hover:no-underline hover:text-brand-accent transition-colors text-white">
                   {item.question}
                 </AccordionTrigger>
                 <AccordionContent className="text-xs sm:text-sm text-neutral-400 leading-relaxed pr-6 pb-4">

@@ -55,8 +55,8 @@ export function ProposalView({ proposal }: ProposalViewProps) {
   if (!validation.isValid && proposal.status === "draft") {
     return (
       <div className="min-h-[70vh] flex items-center justify-center py-24 px-4 bg-background">
-        <div className="max-w-lg w-full text-center p-8 rounded-xl border border-amber-500/30 bg-amber-500/[0.03]">
-          <div className="size-12 rounded-full bg-amber-500/15 text-amber-400 flex items-center justify-center mx-auto mb-4">
+        <div className="max-w-lg w-full text-center p-8 rounded-xl border border-primary/30 bg-primary/5">
+          <div className="size-12 rounded-full bg-primary/10 text-brand-accent flex items-center justify-center mx-auto mb-4">
             <Clock className="size-6" aria-hidden="true" />
           </div>
 
@@ -72,7 +72,7 @@ export function ProposalView({ proposal }: ProposalViewProps) {
           </p>
 
           <div className="mt-6 p-4 rounded-lg bg-neutral-950 border border-white/10 text-left text-xs font-mono text-neutral-400 max-h-40 overflow-y-auto">
-            <p className="text-amber-400 font-semibold mb-2">Campos / Validações pendentes:</p>
+            <p className="text-brand-accent font-semibold mb-2">Campos / Validações pendentes:</p>
             <ul className="list-disc list-inside space-y-1">
               {validation.missingFields.map((f, i) => (
                 <li key={`m-${i}`}>Campo obrigatório: {f}</li>

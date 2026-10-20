@@ -19,7 +19,7 @@ export function StepIdentidade({
 }: StepIdentidadeProps) {
   const idv = data.identidade_visual || {
     logo_arquivo_id: "logo.png",
-    cor_primaria_hex: "#D4AF37",
+    cor_primaria_hex: "#E01B24",
     cor_secundaria_hex: "#1C1F26",
     cor_fundo_hex: "#0B0D10",
     sites_referencia_positivos: "",
@@ -39,7 +39,7 @@ export function StepIdentidade({
 
   // Cálculo de contraste WCAG entre Cor Primária e Cor de Fundo
   const bgHex = idv.cor_fundo_hex || "#0B0D10";
-  const primaryHex = idv.cor_primaria_hex || "#D4AF37";
+  const primaryHex = idv.cor_primaria_hex || "#E01B24";
   const contrastRatio = getContrastRatio(primaryHex, bgHex);
   const wcag = evaluateWCAGContrast(contrastRatio);
 
@@ -62,7 +62,7 @@ export function StepIdentidade({
           <div className="flex items-center gap-2">
             <input
               type="color"
-              value={idv.cor_primaria_hex.startsWith("#") ? idv.cor_primaria_hex : "#D4AF37"}
+              value={idv.cor_primaria_hex.startsWith("#") ? idv.cor_primaria_hex : "#E01B24"}
               onChange={(e) => updateIdv("cor_primaria_hex", e.target.value.toUpperCase())}
               className="size-10 rounded-lg cursor-pointer bg-neutral-900 border border-white/10 p-0.5"
             />
@@ -70,7 +70,7 @@ export function StepIdentidade({
               id="cor_primaria_hex"
               value={idv.cor_primaria_hex}
               onChange={(e) => updateIdv("cor_primaria_hex", e.target.value.toUpperCase())}
-              placeholder="#D4AF37"
+              placeholder="#E01B24"
               className="bg-neutral-900/60 border-white/10 text-white text-xs h-10 font-mono"
             />
           </div>
@@ -125,7 +125,7 @@ export function StepIdentidade({
       <div className="p-4 rounded-xl border border-white/10 bg-neutral-900/40">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-3">
           <div className="flex items-center gap-2">
-            <Sparkles className="size-4 text-primary" />
+            <Sparkles className="size-4 text-brand-accent" />
             <h4 className="text-xs font-semibold uppercase tracking-wider text-white">
               Auditor de Contraste WCAG 2.2 em Tempo Real
             </h4>
@@ -136,7 +136,7 @@ export function StepIdentidade({
               className={
                 wcag.passesNormalAA
                   ? "border-emerald-500/40 text-emerald-400 bg-emerald-500/10 text-xs"
-                  : "border-amber-500/40 text-amber-400 bg-amber-500/10 text-xs"
+                  : "border-primary/30 text-brand-accent bg-primary/10 text-xs"
               }
             >
               {wcag.passesNormalAA ? (

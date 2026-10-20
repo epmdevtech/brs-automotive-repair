@@ -155,7 +155,11 @@ export function ServicePageLayout({
           <ScrollReveal direction="up" delay={0.1} className="py-8 md:py-10 md:pr-10 lg:pr-12">
             <div>
               <div className="flex items-center gap-3 mb-6">
-                <ApplicationsIcon size={18} className="text-primary shrink-0" aria-hidden="true" />
+                <ApplicationsIcon
+                  size={18}
+                  className="text-brand-accent shrink-0"
+                  aria-hidden="true"
+                />
                 <h2 className="text-xl sm:text-2xl font-semibold font-display text-white">
                   {applicationsTitle}
                 </h2>
@@ -178,7 +182,7 @@ export function ServicePageLayout({
           >
             <div>
               <div className="flex items-center gap-3 mb-6">
-                <ShieldAlert size={18} className="text-amber-500 shrink-0" aria-hidden="true" />
+                <ShieldAlert size={18} className="text-brand-accent shrink-0" aria-hidden="true" />
                 <h2 className="text-xl sm:text-2xl font-semibold font-display text-white">
                   {limitationsTitle}
                 </h2>
@@ -186,12 +190,12 @@ export function ServicePageLayout({
               <ul className="space-y-4 text-xs sm:text-sm text-neutral-300">
                 {service.limitations.map((limit) => (
                   <li key={limit} className="flex items-start gap-3">
-                    <span className="size-1.5 rounded-full bg-amber-500 shrink-0 mt-2" />
+                    <span className="size-1.5 rounded-full bg-primary shrink-0 mt-2" />
                     <span className="leading-relaxed">{limit}</span>
                   </li>
                 ))}
               </ul>
-              <p className="mt-8 text-xs text-neutral-400 border-l border-amber-500/40 pl-4 py-1 leading-relaxed">
+              <p className="mt-8 text-xs text-neutral-400 border-l border-primary/30 pl-4 py-1 leading-relaxed">
                 * {limitationNote}
               </p>
             </div>
@@ -217,7 +221,7 @@ export function ServicePageLayout({
               className="py-8 sm:py-10 sm:px-8 first:sm:pl-0 last:sm:pr-0 flex flex-col justify-between"
             >
               <div>
-                <span className="font-mono text-[11px] font-semibold text-primary uppercase tracking-wider block mb-3">
+                <span className="font-mono text-[11px] font-semibold text-brand-accent uppercase tracking-wider block mb-3">
                   Fase 0{idx + 1}
                 </span>
                 <h3 className="text-base sm:text-lg font-semibold font-display text-white mb-2">
@@ -240,10 +244,10 @@ export function ServicePageLayout({
             <ScrollReveal as="li" key={item.slug} direction="up" delay={idx * 0.12}>
               <Link
                 to={item.path}
-                className="group py-6 flex items-center justify-between gap-4 transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary rounded-xs px-2 -mx-2"
+                className="group py-6 flex items-center justify-between gap-4 transition-colors hover:text-brand-accent focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary rounded-xs px-2 -mx-2"
               >
                 <div>
-                  <span className="block text-base font-semibold font-display text-white group-hover:text-primary transition-colors">
+                  <span className="block text-base font-semibold font-display text-white group-hover:text-brand-accent transition-colors">
                     {item.title}
                   </span>
                   <span className="block text-xs text-neutral-400 leading-relaxed mt-1 max-w-xl">
@@ -252,7 +256,7 @@ export function ServicePageLayout({
                 </div>
                 <ArrowUpRight
                   size={18}
-                  className="text-primary shrink-0 transition-transform duration-200 group-hover:translate-x-1 group-hover:-translate-y-1"
+                  className="text-brand-accent shrink-0 transition-transform duration-200 group-hover:translate-x-1 group-hover:-translate-y-1"
                   aria-hidden="true"
                 />
               </Link>

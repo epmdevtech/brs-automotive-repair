@@ -72,7 +72,7 @@ export function StepUnidades({ data, onChange }: StepUnidadesProps) {
           onClick={addUnidade}
           variant="outline"
           size="sm"
-          className="border-primary/40 text-primary hover:bg-primary/10 gap-1.5 text-xs"
+          className="border-primary/40 text-brand-accent hover:bg-primary/10 gap-1.5 text-xs"
         >
           <Plus className="size-3.5" /> Adicionar Unidade
         </Button>
@@ -86,7 +86,7 @@ export function StepUnidades({ data, onChange }: StepUnidadesProps) {
           >
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <div className="size-7 rounded-lg bg-primary/10 text-primary flex items-center justify-center font-bold text-xs">
+                <div className="size-7 rounded-lg bg-primary/10 text-brand-accent flex items-center justify-center font-bold text-xs">
                   {idx + 1}
                 </div>
                 <h4 className="text-sm font-semibold text-white">
@@ -133,7 +133,7 @@ export function StepUnidades({ data, onChange }: StepUnidadesProps) {
               {/* Endereço Completo */}
               <div className="space-y-1.5 md:col-span-2">
                 <Label className="text-xs text-neutral-300 font-medium flex items-center gap-1.5">
-                  <MapPin className="size-3 text-primary" /> Endereço Completo de Atendimento *
+                  <MapPin className="size-3 text-brand-accent" /> Endereço Completo de Atendimento *
                 </Label>
                 <Input
                   value={unidade.enderecoCompleto}
@@ -177,8 +177,8 @@ export function StepUnidades({ data, onChange }: StepUnidadesProps) {
                   className="accent-primary size-4"
                 />
                 <span className="flex items-center gap-1">
-                  <Accessibility className="size-3.5 text-primary" /> Possui acessibilidade para
-                  pessoas com deficiência (PCD)
+                  <Accessibility className="size-3.5 text-brand-accent" /> Possui acessibilidade
+                  para pessoas com deficiência (PCD)
                 </span>
               </label>
             </div>

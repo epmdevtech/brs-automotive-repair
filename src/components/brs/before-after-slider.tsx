@@ -270,7 +270,7 @@ export function BeforeAfterSlider({
             {beforeLabel}
           </span>
           <span
-            className="absolute top-3 right-3 z-10 text-[9px] font-semibold tracking-wider uppercase px-2 py-1 rounded-sm bg-background/85 text-primary border border-primary/40 pointer-events-none transition-opacity duration-150 backdrop-blur-xs"
+            className="absolute top-3 right-3 z-10 text-[9px] font-semibold tracking-wider uppercase px-2 py-1 rounded-sm bg-background/85 text-brand-accent border border-primary/40 pointer-events-none transition-opacity duration-150 backdrop-blur-xs"
             style={{ opacity: afterOpacity }}
           >
             {afterLabel}
@@ -285,7 +285,7 @@ export function BeforeAfterSlider({
       >
         <div
           className={cn(
-            "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-8 rounded-sm bg-background/95 border border-primary/70 text-primary shadow-xl shadow-black/80 flex items-center justify-center transition-transform duration-150",
+            "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-8 rounded-sm bg-background/95 border border-primary/70 text-brand-accent shadow-xl shadow-black/80 flex items-center justify-center transition-transform duration-150",
             isDragging ? "scale-110 border-primary shadow-primary/20" : "group-hover:scale-105",
           )}
           aria-hidden="true"

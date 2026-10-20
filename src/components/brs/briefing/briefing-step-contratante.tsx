@@ -89,7 +89,7 @@ export function StepContratante({
               </span>
             )}
             {cnpjValid === false && (
-              <span className="flex items-center gap-1 text-[11px] text-amber-400 font-medium">
+              <span className="flex items-center gap-1 text-[11px] text-brand-accent font-medium">
                 <AlertTriangle className="size-3.5" /> CNPJ Inválido
               </span>
             )}

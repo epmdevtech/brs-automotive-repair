@@ -72,7 +72,7 @@ export function HomeBeforeAfter() {
           {/* Coluna Visual: Comparador Interativo de Imagens (7 colunas no desktop) */}
           <div ref={visualColRef} className="lg:col-span-7 flex flex-col justify-center">
             <div className="flex items-center justify-between text-[11px] font-mono tracking-widest uppercase text-neutral-400 mb-2 px-1">
-              <span className="flex items-center gap-1.5 text-primary font-medium">
+              <span className="flex items-center gap-1.5 text-brand-accent font-medium">
                 <SlidersHorizontal size={12} aria-hidden="true" />
                 Comparativo Ilustrativo de Método
               </span>
@@ -95,7 +95,7 @@ export function HomeBeforeAfter() {
 
             <div className="flex items-center justify-between text-[11px] text-neutral-400 mt-3 px-1">
               <span className="flex items-center gap-1.5 font-medium text-neutral-300">
-                <Sparkles size={13} className="text-primary" aria-hidden="true" />
+                <Sparkles size={13} className="text-brand-accent" aria-hidden="true" />
                 Interação tátil e por teclado habilitada
               </span>
               <span className="image-note">Fotografia ilustrativa</span>
@@ -119,7 +119,7 @@ export function HomeBeforeAfter() {
 
               <div className="pt-3 pb-3 border-y border-white/10 my-4 space-y-2.5">
                 <div>
-                  <p className="text-xs uppercase tracking-wider text-primary font-semibold mb-1">
+                  <p className="text-xs uppercase tracking-wider text-brand-accent font-semibold mb-1">
                     Método demonstrado
                   </p>
                   <p className="text-sm font-medium text-white">
@@ -132,11 +132,19 @@ export function HomeBeforeAfter() {
 
                 <div className="grid grid-cols-2 gap-2 pt-2 border-t border-white/5 text-[11px]">
                   <div className="flex items-center gap-1.5 text-neutral-300">
-                    <CheckCircle2 size={12} className="text-primary shrink-0" aria-hidden="true" />
+                    <CheckCircle2
+                      size={12}
+                      className="text-brand-accent shrink-0"
+                      aria-hidden="true"
+                    />
                     <span>Alinhamento de folgas</span>
                   </div>
                   <div className="flex items-center gap-1.5 text-neutral-300">
-                    <CheckCircle2 size={12} className="text-primary shrink-0" aria-hidden="true" />
+                    <CheckCircle2
+                      size={12}
+                      className="text-brand-accent shrink-0"
+                      aria-hidden="true"
+                    />
                     <span>Repuxo técnico da chapa</span>
                   </div>
                 </div>
@@ -156,7 +164,7 @@ export function HomeBeforeAfter() {
               <p className="text-[11px] text-neutral-400 flex items-start gap-1.5 pt-2">
                 <ShieldCheck
                   size={14}
-                  className="text-primary shrink-0 mt-0.5"
+                  className="text-brand-accent shrink-0 mt-0.5"
                   aria-hidden="true"
                 />
                 <span>

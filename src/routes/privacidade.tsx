@@ -42,7 +42,7 @@ function PrivacidadePage() {
             A <strong className="text-white">{company.legalName}</strong> (nome fantasia{" "}
             <em>{company.tradeName}</em>, operando sob a marca comercial{" "}
             <strong className="text-white">{company.name}</strong>, inscrita no CNPJ sob o nº{" "}
-            <span className="font-mono text-primary">{company.cnpj}</span>), sediada em Toledo,
+            <span className="font-mono text-brand-accent">{company.cnpj}</span>), sediada em Toledo,
             Paraná, preza pela transparência e pela proteção da privacidade dos seus visitantes e
             clientes, em total consonância com a Lei Geral de Proteção de Dados (LGPD — Lei Federal
             nº 13.709/2018).
@@ -79,7 +79,7 @@ function PrivacidadePage() {
             delay={0.0}
             className="p-6 sm:p-8 rounded-xl border border-border bg-card/40"
           >
-            <div className="size-8 rounded-sm bg-primary/10 border border-primary/30 flex items-center justify-center text-primary mb-4">
+            <div className="size-8 rounded-sm bg-primary/10 border border-primary/30 flex items-center justify-center text-brand-accent mb-4">
               <EyeOff size={16} aria-hidden="true" />
             </div>
             <h2 className="text-lg font-semibold font-display text-white mb-3">
@@ -97,7 +97,7 @@ function PrivacidadePage() {
             delay={0.12}
             className="p-6 sm:p-8 rounded-xl border border-border bg-card/40"
           >
-            <div className="size-8 rounded-sm bg-primary/10 border border-primary/30 flex items-center justify-center text-primary mb-4">
+            <div className="size-8 rounded-sm bg-primary/10 border border-primary/30 flex items-center justify-center text-brand-accent mb-4">
               <Lock size={16} aria-hidden="true" />
             </div>
             <h2 className="text-lg font-semibold font-display text-white mb-3">
@@ -115,7 +115,7 @@ function PrivacidadePage() {
             delay={0.24}
             className="p-6 sm:p-8 rounded-xl border border-border bg-card/40"
           >
-            <div className="size-8 rounded-sm bg-primary/10 border border-primary/30 flex items-center justify-center text-primary mb-4">
+            <div className="size-8 rounded-sm bg-primary/10 border border-primary/30 flex items-center justify-center text-brand-accent mb-4">
               <FileText size={16} aria-hidden="true" />
             </div>
             <h2 className="text-lg font-semibold font-display text-white mb-3">
@@ -134,7 +134,7 @@ function PrivacidadePage() {
             delay={0.36}
             className="p-6 sm:p-8 rounded-xl border border-border bg-card/40"
           >
-            <div className="size-8 rounded-sm bg-primary/10 border border-primary/30 flex items-center justify-center text-primary mb-4">
+            <div className="size-8 rounded-sm bg-primary/10 border border-primary/30 flex items-center justify-center text-brand-accent mb-4">
               <ShieldCheck size={16} aria-hidden="true" />
             </div>
             <h2 className="text-lg font-semibold font-display text-white mb-3">

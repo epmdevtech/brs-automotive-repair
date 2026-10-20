@@ -101,7 +101,7 @@ export function BriefingContainer() {
         },
         identidade_visual: {
           logo_arquivo_id: "logo.png",
-          cor_primaria_hex: "#D4AF37",
+          cor_primaria_hex: "#E01B24",
           cor_secundaria_hex: "#1C1F26",
           cor_fundo_hex: "#0B0D10",
         },
@@ -166,7 +166,7 @@ export function BriefingContainer() {
       {/* CABEÇALHO DO PORTAL DE BRIEFING */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8 border-b border-white/10 pb-6">
         <div>
-          <div className="flex items-center gap-2 text-primary text-xs font-semibold uppercase tracking-wider mb-1">
+          <div className="flex items-center gap-2 text-brand-accent text-xs font-semibold uppercase tracking-wider mb-1">
             <FileCheck2 className="size-4" />
             <span>Portal de Engenharia de Briefings EPM DEVTECH</span>
           </div>
@@ -216,7 +216,7 @@ export function BriefingContainer() {
             variant="outline"
             size="sm"
             onClick={handleRestoreMasterData}
-            className="text-xs border-primary/30 text-primary hover:bg-primary/10 gap-1"
+            className="text-xs border-primary/30 text-brand-accent hover:bg-primary/10 gap-1"
             title="Carregar dados canônicos da Master Chapeação"
           >
             <RotateCcw className="size-3.5" /> Restaurar Master

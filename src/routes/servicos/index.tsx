@@ -139,12 +139,12 @@ function ServicesPage() {
                 className={`md:col-span-6 flex flex-col justify-between ${isReverse ? "md:col-start-1" : ""}`}
               >
                 <div>
-                  <span className="font-mono text-xs font-semibold text-primary uppercase tracking-widest block mb-3">
+                  <span className="font-mono text-xs font-semibold text-brand-accent uppercase tracking-widest block mb-3">
                     0{index + 1} / ESPECIALIDADE TÉCNICA
                   </span>
 
                   <h2 className="text-2xl sm:text-3xl lg:text-4xl font-semibold font-display tracking-tight text-white mb-3">
-                    <Link to={service.path} className="hover:text-primary transition-colors">
+                    <Link to={service.path} className="hover:text-brand-accent transition-colors">
                       {service.title}
                     </Link>
                   </h2>
@@ -162,7 +162,7 @@ function ServicesPage() {
                         <li key={i} className="text-xs text-neutral-300 flex items-start gap-2.5">
                           <Check
                             size={14}
-                            className="text-primary shrink-0 mt-0.5"
+                            className="text-brand-accent shrink-0 mt-0.5"
                             aria-hidden="true"
                           />
                           <span>{app}</span>
@@ -176,7 +176,7 @@ function ServicesPage() {
                   <Link
                     to="/trabalhos"
                     search={{ filtro: service.slug }}
-                    className="inline-flex items-center gap-2 text-xs font-semibold tracking-wider uppercase text-primary hover:text-white transition-colors group cursor-pointer"
+                    className="inline-flex items-center gap-2 text-xs font-semibold tracking-wider uppercase text-brand-accent hover:text-white transition-colors group cursor-pointer"
                   >
                     <span>Ver casos deste serviço no portfólio</span>
                     <ArrowUpRight
@@ -212,7 +212,7 @@ function ServicesPage() {
             className="py-8 md:py-10 md:px-8 first:md:pl-0 last:md:pr-0 flex flex-col justify-between"
           >
             <div>
-              <span className="font-mono text-[11px] font-semibold text-primary uppercase tracking-wider block mb-2">
+              <span className="font-mono text-[11px] font-semibold text-brand-accent uppercase tracking-wider block mb-2">
                 01 / PEQUENOS AMASSADOS
               </span>
               <h3 className="text-lg md:text-xl font-semibold font-display text-white mb-3">
@@ -227,7 +227,7 @@ function ServicesPage() {
               <a
                 href="#martelinho-pdr"
                 onClick={(e) => handleSmoothScroll(e, "#martelinho-pdr")}
-                className="text-xs font-semibold text-primary hover:text-white inline-flex items-center gap-1.5 transition-colors cursor-pointer"
+                className="text-xs font-semibold text-brand-accent hover:text-white inline-flex items-center gap-1.5 transition-colors cursor-pointer"
               >
                 <span>Ver método Martelinho PDR</span>
                 <ArrowDown size={13} aria-hidden="true" />
@@ -241,7 +241,7 @@ function ServicesPage() {
             className="py-8 md:py-10 md:px-8 first:md:pl-0 last:md:pr-0 flex flex-col justify-between"
           >
             <div>
-              <span className="font-mono text-[11px] font-semibold text-primary uppercase tracking-wider block mb-2">
+              <span className="font-mono text-[11px] font-semibold text-brand-accent uppercase tracking-wider block mb-2">
                 02 / AVARIAS ESTRUTURAIS
               </span>
               <h3 className="text-lg md:text-xl font-semibold font-display text-white mb-3">
@@ -256,7 +256,7 @@ function ServicesPage() {
               <a
                 href="#funilaria-estrutural"
                 onClick={(e) => handleSmoothScroll(e, "#funilaria-estrutural")}
-                className="text-xs font-semibold text-primary hover:text-white inline-flex items-center gap-1.5 transition-colors cursor-pointer"
+                className="text-xs font-semibold text-brand-accent hover:text-white inline-flex items-center gap-1.5 transition-colors cursor-pointer"
               >
                 <span>Ver processo de Funilaria</span>
                 <ArrowDown size={13} aria-hidden="true" />
@@ -270,7 +270,7 @@ function ServicesPage() {
             className="py-8 md:py-10 md:px-8 first:md:pl-0 last:md:pr-0 flex flex-col justify-between"
           >
             <div>
-              <span className="font-mono text-[11px] font-semibold text-primary uppercase tracking-wider block mb-2">
+              <span className="font-mono text-[11px] font-semibold text-brand-accent uppercase tracking-wider block mb-2">
                 03 / DANOS AO ACABAMENTO
               </span>
               <h3 className="text-lg md:text-xl font-semibold font-display text-white mb-3">
@@ -285,7 +285,7 @@ function ServicesPage() {
               <a
                 href="#pintura-estufa"
                 onClick={(e) => handleSmoothScroll(e, "#pintura-estufa")}
-                className="text-xs font-semibold text-primary hover:text-white inline-flex items-center gap-1.5 transition-colors cursor-pointer"
+                className="text-xs font-semibold text-brand-accent hover:text-white inline-flex items-center gap-1.5 transition-colors cursor-pointer"
               >
                 <span>Ver Pintura em Estufa</span>
                 <ArrowDown size={13} aria-hidden="true" />
@@ -297,7 +297,7 @@ function ServicesPage() {
         {/* Seção Editorial de Estética Automotiva, Vitrificação e Polimento de Para-brisa (SPEC-030) */}
         <section id="estetica-automotiva" className="mt-20 pt-16 border-t border-border/80">
           <div className="max-w-3xl mb-12">
-            <span className="font-mono text-xs font-semibold text-primary uppercase tracking-widest block mb-3">
+            <span className="font-mono text-xs font-semibold text-brand-accent uppercase tracking-widest block mb-3">
               ESTÉTICA & PROTEÇÃO
             </span>
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-semibold font-display tracking-tight text-white mb-4">
@@ -314,11 +314,11 @@ function ServicesPage() {
             {aestheticServices.map((aes, idx) => {
               const icon =
                 aes.slug === "espelhamento" ? (
-                  <Sparkles className="size-5 text-primary" aria-hidden="true" />
+                  <Sparkles className="size-5 text-brand-accent" aria-hidden="true" />
                 ) : aes.slug === "vitrificacao" ? (
-                  <ShieldCheck className="size-5 text-primary" aria-hidden="true" />
+                  <ShieldCheck className="size-5 text-brand-accent" aria-hidden="true" />
                 ) : (
-                  <Eye className="size-5 text-primary" aria-hidden="true" />
+                  <Eye className="size-5 text-brand-accent" aria-hidden="true" />
                 );
 
               return (
@@ -333,7 +333,7 @@ function ServicesPage() {
                       <div className="size-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center shrink-0">
                         {icon}
                       </div>
-                      <span className="text-[10px] font-mono uppercase tracking-wider px-2 py-0.5 rounded-sm bg-primary/10 text-primary border border-primary/30 font-semibold">
+                      <span className="text-[10px] font-mono uppercase tracking-wider px-2 py-0.5 rounded-sm bg-primary/10 text-brand-accent border border-primary/30 font-semibold">
                         Estética Técnica
                       </span>
                     </div>
@@ -360,7 +360,7 @@ function ServicesPage() {
                             className="flex items-start gap-2 text-xs text-neutral-300 leading-relaxed"
                           >
                             <CheckCircle2
-                              className="size-3.5 text-primary shrink-0 mt-0.5"
+                              className="size-3.5 text-brand-accent shrink-0 mt-0.5"
                               aria-hidden="true"
                             />
                             <span>{b}</span>
@@ -405,8 +405,8 @@ function ServicesPage() {
 
           <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
             <div className="max-w-2xl">
-              <div className="flex items-center gap-2 text-xs font-mono tracking-widest uppercase text-primary mb-3">
-                <Truck size={16} className="text-primary shrink-0" aria-hidden="true" />
+              <div className="flex items-center gap-2 text-xs font-mono tracking-widest uppercase text-brand-accent mb-3">
+                <Truck size={16} className="text-brand-accent shrink-0" aria-hidden="true" />
                 <span>Comodidade Urbana em Toledo-PR</span>
               </div>
               <h3 className="text-2xl sm:text-3xl font-semibold font-display tracking-tight text-white mb-3">

@@ -47,7 +47,7 @@ function TrabalhosPage() {
         }
         footerContent={
           <div className="py-2.5 px-3.5 rounded-sm border border-primary/20 bg-primary/5 flex items-center gap-2.5 text-[11px] text-neutral-300">
-            <Info size={14} className="text-primary shrink-0" aria-hidden="true" />
+            <Info size={14} className="text-brand-accent shrink-0" aria-hidden="true" />
             <p>
               <span className="font-semibold text-white">Transparência Fotográfica: </span>
               Acervo fotográfico real em fase de documentação em Toledo-PR. Imagens ilustrativas

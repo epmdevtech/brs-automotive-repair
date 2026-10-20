@@ -34,7 +34,7 @@ function ProposalIndexPage() {
   return (
     <div className="min-h-[75vh] flex items-center justify-center py-24 px-4 bg-background">
       <div className="max-w-md w-full text-center p-8 rounded-xl border border-white/10 bg-card/40">
-        <div className="size-12 rounded-full bg-primary/10 text-primary flex items-center justify-center mx-auto mb-4">
+        <div className="size-12 rounded-full bg-primary/10 text-brand-accent flex items-center justify-center mx-auto mb-4">
           <FileCheck className="size-6" aria-hidden="true" />
         </div>
 
@@ -49,7 +49,7 @@ function ProposalIndexPage() {
 
         {/* Atalho Proeminente para a Proposta Modular Ativa da Master */}
         <div className="mt-6 p-5 rounded-xl border border-primary/40 bg-gradient-to-b from-primary/10 to-transparent text-left">
-          <div className="flex items-center gap-2 text-primary text-[11px] font-semibold uppercase tracking-wider mb-1.5">
+          <div className="flex items-center gap-2 text-brand-accent text-[11px] font-semibold uppercase tracking-wider mb-1.5">
             <Sparkles className="size-3.5" aria-hidden="true" />
             <span>Proposta Oficial Modular</span>
           </div>
@@ -76,7 +76,7 @@ function ProposalIndexPage() {
               Presença Digital Inicial
             </span>
           </div>
-          <Button variant="ghost" asChild size="sm" className="text-xs text-primary shrink-0">
+          <Button variant="ghost" asChild size="sm" className="text-xs text-brand-accent shrink-0">
             <Link to="/proposta/$slug" params={{ slug: "master-digital-presence" }}>
               Ver versão clássica
             </Link>
@@ -114,7 +114,7 @@ function ProposalIndexPage() {
         </div>
 
         <div className="mt-8 pt-6 border-t border-white/10 flex items-center justify-center gap-2 text-[11px] text-muted-foreground font-mono">
-          <Shield className="size-3.5 text-primary/70" aria-hidden="true" />
+          <Shield className="size-3.5 text-brand-accent/70" aria-hidden="true" />
           <span>Acesso individualizado · Documento confidencial</span>
         </div>
       </div>

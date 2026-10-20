@@ -29,7 +29,7 @@ describe("SPEC-040 — Padronização Tipográfica dos Rótulos de Seção (Eyeb
     // Classe eyebrow deve possuir estilo técnico e elegante
     expect(cssContent).toMatch(/\.eyebrow\s*\{[^}]*text-transform:\s*uppercase/);
     expect(cssContent).toMatch(/\.eyebrow\s*\{[^}]*letter-spacing:\s*var\(--tracking-eyebrow\)/);
-    expect(cssContent).toMatch(/\.eyebrow\s*\{[^}]*color:\s*var\(--primary\)/);
+    expect(cssContent).toMatch(/\.eyebrow\s*\{[^}]*color:\s*var\(--brand-text-accent\)/);
     expect(cssContent).toMatch(/\.eyebrow\s*\{[^}]*font-size:\s*0\.75rem/);
   });
 

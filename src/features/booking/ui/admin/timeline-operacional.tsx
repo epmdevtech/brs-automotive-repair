@@ -349,16 +349,16 @@ export function TimelineOperacional({
       {mensagemConflito && (
         <div
           role="alert"
-          className="p-3 rounded-lg bg-amber-50 border border-amber-200 text-amber-900 text-xs flex items-center justify-between gap-2 shadow-2xs"
+          className="p-3 rounded-lg bg-primary/5 border border-primary/30 text-primary text-xs flex items-center justify-between gap-2 shadow-2xs"
         >
           <div className="flex items-center gap-2">
-            <ShieldAlert size={15} className="text-amber-700 shrink-0" />
+            <ShieldAlert size={15} className="text-primary shrink-0" />
             <span>{mensagemConflito}</span>
           </div>
           <button
             type="button"
             onClick={() => setMensagemConflito(null)}
-            className="p-1 hover:bg-amber-100 rounded text-amber-800 cursor-pointer"
+            className="p-1 hover:bg-primary/10 rounded text-primary cursor-pointer"
             aria-label="Fechar alerta"
           >
             <X size={13} />
@@ -462,9 +462,9 @@ export function TimelineOperacional({
                   {item.precisaAlertaInatividade && (
                     <div
                       role="status"
-                      className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded bg-amber-50 border border-amber-200 text-[10px] font-semibold text-amber-800 animate-pulse mt-1"
+                      className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded bg-primary/5 border border-primary/30 text-[10px] font-semibold text-primary animate-pulse mt-1"
                     >
-                      <AlertTriangle size={10} className="text-amber-700 shrink-0" />
+                      <AlertTriangle size={10} className="text-primary shrink-0" />
                       <span>
                         Sem atualização há {Math.floor((item.tempoInativoMinutos || 0) / 60)} h
                       </span>
@@ -536,7 +536,7 @@ export function TimelineOperacional({
                     </span>
 
                     {item.precisaAlertaInatividade && (
-                      <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded bg-amber-50 border border-amber-200 text-[10px] font-semibold text-amber-800 shrink-0">
+                      <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded bg-primary/5 border border-primary/30 text-[10px] font-semibold text-primary shrink-0">
                         <AlertTriangle size={10} />
                         <span>Sem atualização</span>
                       </span>
@@ -600,7 +600,7 @@ export function TimelineOperacional({
                   registrar esta etapa.
                 </span>
               ) : (
-                <span className="text-amber-800">
+                <span className="text-primary">
                   Aguardando:{" "}
                   <strong>
                     {ETAPA_CONFIG_MAP[etapaAtualAtiva.etapaId].responsaveisConclusao
@@ -805,7 +805,7 @@ export function TimelineOperacional({
                         isCorrecao
                           ? "bg-rose-50/70 border-rose-200 text-rose-950"
                           : isPedido
-                            ? "bg-amber-50/70 border-amber-200 text-amber-950"
+                            ? "bg-primary/5 border-primary/20 text-primary"
                             : "bg-slate-50 border-slate-200/90 text-slate-900"
                       }`}
                     >

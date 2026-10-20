@@ -45,7 +45,7 @@ export function ProposalExecutionSteps({ steps }: ProposalExecutionStepsProps) {
                       <span
                         className={`size-8 rounded-full flex items-center justify-center text-xs font-mono font-bold ${
                           isCurrentAction
-                            ? "bg-primary text-neutral-950"
+                            ? "bg-primary text-white"
                             : isCompleted
                               ? "bg-emerald-500 text-neutral-950"
                               : "bg-white/10 text-neutral-300"
@@ -55,7 +55,7 @@ export function ProposalExecutionSteps({ steps }: ProposalExecutionStepsProps) {
                       </span>
 
                       {isCurrentAction && (
-                        <span className="text-[10px] font-mono uppercase tracking-wider px-2 py-0.5 rounded-sm bg-primary/20 text-primary border border-primary/30 font-semibold">
+                        <span className="text-[10px] font-mono uppercase tracking-wider px-2 py-0.5 rounded-sm bg-primary/20 text-brand-accent border border-primary/30 font-semibold">
                           Próximo Passo
                         </span>
                       )}
@@ -88,7 +88,7 @@ export function ProposalExecutionSteps({ steps }: ProposalExecutionStepsProps) {
                   <div className="mt-5 pt-4 border-t border-primary/20">
                     <a
                       href="#aceite"
-                      className="inline-flex items-center gap-1.5 text-xs text-primary font-semibold hover:underline"
+                      className="inline-flex items-center gap-1.5 text-xs text-brand-accent font-semibold hover:underline"
                     >
                       Avançar para seleção e manifestação de interesse
                       <ArrowRight className="size-3.5" aria-hidden="true" />

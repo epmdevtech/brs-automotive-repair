@@ -53,7 +53,7 @@ export function StepTecnico({ data, onChange }: StepTecnicoProps) {
         {/* Domínio Personalizado */}
         <div className="space-y-1.5">
           <Label className="text-xs text-neutral-300 font-medium flex items-center gap-1.5">
-            <Globe className="size-3 text-primary" /> Domínio Próprio Pretendido
+            <Globe className="size-3 text-brand-accent" /> Domínio Próprio Pretendido
           </Label>
           <Input
             value={tec.dominio_personalizado || ""}
@@ -92,7 +92,7 @@ export function StepTecnico({ data, onChange }: StepTecnicoProps) {
         {/* Data Desejada de Lançamento */}
         <div className="space-y-1.5">
           <Label className="text-xs text-neutral-300 font-medium flex items-center gap-1.5">
-            <Calendar className="size-3 text-primary" /> Previsão Desejada de Publicação
+            <Calendar className="size-3 text-brand-accent" /> Previsão Desejada de Publicação
           </Label>
           <Input
             value={prazos.data_desejada_lancamento || ""}

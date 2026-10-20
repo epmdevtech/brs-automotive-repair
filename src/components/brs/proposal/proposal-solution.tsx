@@ -33,7 +33,7 @@ export function ProposalSolution({ proposal }: ProposalSolutionProps) {
                   className="p-6 rounded-lg bg-card/60 border border-border/70 hover:border-primary/40 transition-all flex flex-col justify-between"
                 >
                   <div>
-                    <div className="size-10 rounded-md bg-primary/10 text-primary flex items-center justify-center mb-4">
+                    <div className="size-10 rounded-md bg-primary/10 text-brand-accent flex items-center justify-center mb-4">
                       <Icon className="size-5" aria-hidden="true" />
                     </div>
                     <h3 className="text-sm font-semibold text-white mb-2 leading-snug">

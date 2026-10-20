@@ -167,7 +167,7 @@ export function LoginForm({ onLoginSuccess, demo = true }: LoginFormProps) {
               <span
                 role="status"
                 aria-live="polite"
-                className="text-xs font-medium text-amber-800 bg-amber-50 px-2 py-0.5 rounded border border-amber-200 flex items-center gap-1 animate-pulse"
+                className="text-xs font-medium text-primary bg-primary/5 px-2 py-0.5 rounded border border-primary/30 flex items-center gap-1 animate-pulse"
               >
                 <AlertCircle size={12} aria-hidden="true" />
                 <span>Caps Lock ativado</span>

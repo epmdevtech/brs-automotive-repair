@@ -82,7 +82,7 @@ export function Header({ isHome: isHomeProp }: HeaderProps = {}) {
           })}
         </nav>
 
-        {/* Ações da direita: Botão CTA dourado normativo (.btn--sm) visível em tablets/desktops e alternador móvel */}
+        {/* Ações da direita: Botão CTA vermelho normativo (.btn--sm) visível em tablets/desktops e alternador móvel */}
         <div className="flex gap-2 sm:gap-3 items-center">
           <MagneticButton className="hidden sm:inline-flex">
             <Button variant="primary" size="sm" asChild className="text-[11px]">
@@ -125,7 +125,7 @@ export function Header({ isHome: isHomeProp }: HeaderProps = {}) {
                 aria-current={active ? "page" : undefined}
                 className={cn(
                   "text-sm font-medium transition-colors py-1",
-                  active ? "text-primary" : "text-neutral-200 hover:text-primary",
+                  active ? "text-brand-accent" : "text-neutral-200 hover:text-brand-accent",
                 )}
               >
                 {label}
