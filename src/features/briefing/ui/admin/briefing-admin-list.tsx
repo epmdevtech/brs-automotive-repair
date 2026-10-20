@@ -176,9 +176,7 @@ export function BriefingAdminList() {
                     {formatDateTimeUtc(item.updatedAt)}
                   </td>
                   <td className="py-3 pr-4 text-neutral-400">
-                    {item.submittedAt
-                      ? formatDateTimeUtc(item.submittedAt)
-                      : "—"}
+                    {item.submittedAt ? formatDateTimeUtc(item.submittedAt) : "—"}
                   </td>
                   <td className="py-3">
                     <Link
