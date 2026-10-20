@@ -12,7 +12,6 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as R404RouteImport } from './routes/404'
 import { Route as AgendamentosRouteImport } from './routes/agendamentos'
-import { Route as BriefingRouteImport } from './routes/briefing'
 import { Route as ContatoRouteImport } from './routes/contato'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as ParaCorretoresRouteImport } from './routes/para-corretores'
@@ -21,12 +20,16 @@ import { Route as SobreRouteImport } from './routes/sobre'
 import { Route as TrabalhosRouteImport } from './routes/trabalhos'
 import { Route as AcompanharIndexRouteImport } from './routes/acompanhar/index'
 import { Route as AcompanharTokenRouteImport } from './routes/acompanhar/$token'
+import { Route as BriefingIndexRouteImport } from './routes/briefing/index'
+import { Route as BriefingConfirmacaoRouteImport } from './routes/briefing/confirmacao'
 import { Route as PropostaIndexRouteImport } from './routes/proposta/index'
 import { Route as PropostaSlugRouteImport } from './routes/proposta/$slug'
 import { Route as ServicosIndexRouteImport } from './routes/servicos/index'
 import { Route as ServicosFunilariaRouteImport } from './routes/servicos/funilaria'
 import { Route as ServicosMartelinhoDeOuroRouteImport } from './routes/servicos/martelinho-de-ouro'
 import { Route as ServicosPinturaAutomotivaRouteImport } from './routes/servicos/pintura-automotiva'
+import { Route as AdminBriefingsIndexRouteImport } from './routes/admin/briefings/index'
+import { Route as AdminBriefingsBriefingIdRouteImport } from './routes/admin/briefings/$briefingId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -41,11 +44,6 @@ const R404Route = R404RouteImport.update({
 const AgendamentosRoute = AgendamentosRouteImport.update({
   id: '/agendamentos',
   path: '/agendamentos',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const BriefingRoute = BriefingRouteImport.update({
-  id: '/briefing',
-  path: '/briefing',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContatoRoute = ContatoRouteImport.update({
@@ -88,6 +86,16 @@ const AcompanharTokenRoute = AcompanharTokenRouteImport.update({
   path: '/acompanhar/$token',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BriefingIndexRoute = BriefingIndexRouteImport.update({
+  id: '/briefing/',
+  path: '/briefing/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BriefingConfirmacaoRoute = BriefingConfirmacaoRouteImport.update({
+  id: '/briefing/confirmacao',
+  path: '/briefing/confirmacao',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PropostaIndexRoute = PropostaIndexRouteImport.update({
   id: '/proposta/',
   path: '/proposta/',
@@ -120,12 +128,22 @@ const ServicosPinturaAutomotivaRoute =
     path: '/servicos/pintura-automotiva',
     getParentRoute: () => rootRouteImport,
   } as any)
+const AdminBriefingsIndexRoute = AdminBriefingsIndexRouteImport.update({
+  id: '/admin/briefings/',
+  path: '/admin/briefings/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminBriefingsBriefingIdRoute =
+  AdminBriefingsBriefingIdRouteImport.update({
+    id: '/admin/briefings/$briefingId',
+    path: '/admin/briefings/$briefingId',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/404': typeof R404Route
   '/agendamentos': typeof AgendamentosRoute
-  '/briefing': typeof BriefingRoute
   '/contato': typeof ContatoRoute
   '/login': typeof LoginRoute
   '/para-corretores': typeof ParaCorretoresRoute
@@ -133,19 +151,22 @@ export interface FileRoutesByFullPath {
   '/sobre': typeof SobreRoute
   '/trabalhos': typeof TrabalhosRoute
   '/acompanhar/$token': typeof AcompanharTokenRoute
+  '/briefing/confirmacao': typeof BriefingConfirmacaoRoute
   '/proposta/$slug': typeof PropostaSlugRoute
   '/servicos/funilaria': typeof ServicosFunilariaRoute
   '/servicos/martelinho-de-ouro': typeof ServicosMartelinhoDeOuroRoute
   '/servicos/pintura-automotiva': typeof ServicosPinturaAutomotivaRoute
   '/acompanhar/': typeof AcompanharIndexRoute
+  '/briefing/': typeof BriefingIndexRoute
   '/proposta/': typeof PropostaIndexRoute
   '/servicos/': typeof ServicosIndexRoute
+  '/admin/briefings/$briefingId': typeof AdminBriefingsBriefingIdRoute
+  '/admin/briefings/': typeof AdminBriefingsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/404': typeof R404Route
   '/agendamentos': typeof AgendamentosRoute
-  '/briefing': typeof BriefingRoute
   '/contato': typeof ContatoRoute
   '/login': typeof LoginRoute
   '/para-corretores': typeof ParaCorretoresRoute
@@ -153,20 +174,23 @@ export interface FileRoutesByTo {
   '/sobre': typeof SobreRoute
   '/trabalhos': typeof TrabalhosRoute
   '/acompanhar/$token': typeof AcompanharTokenRoute
+  '/briefing/confirmacao': typeof BriefingConfirmacaoRoute
   '/proposta/$slug': typeof PropostaSlugRoute
   '/servicos/funilaria': typeof ServicosFunilariaRoute
   '/servicos/martelinho-de-ouro': typeof ServicosMartelinhoDeOuroRoute
   '/servicos/pintura-automotiva': typeof ServicosPinturaAutomotivaRoute
   '/acompanhar': typeof AcompanharIndexRoute
+  '/briefing': typeof BriefingIndexRoute
   '/proposta': typeof PropostaIndexRoute
   '/servicos': typeof ServicosIndexRoute
+  '/admin/briefings/$briefingId': typeof AdminBriefingsBriefingIdRoute
+  '/admin/briefings': typeof AdminBriefingsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/404': typeof R404Route
   '/agendamentos': typeof AgendamentosRoute
-  '/briefing': typeof BriefingRoute
   '/contato': typeof ContatoRoute
   '/login': typeof LoginRoute
   '/para-corretores': typeof ParaCorretoresRoute
@@ -174,13 +198,17 @@ export interface FileRoutesById {
   '/sobre': typeof SobreRoute
   '/trabalhos': typeof TrabalhosRoute
   '/acompanhar/$token': typeof AcompanharTokenRoute
+  '/briefing/confirmacao': typeof BriefingConfirmacaoRoute
   '/proposta/$slug': typeof PropostaSlugRoute
   '/servicos/funilaria': typeof ServicosFunilariaRoute
   '/servicos/martelinho-de-ouro': typeof ServicosMartelinhoDeOuroRoute
   '/servicos/pintura-automotiva': typeof ServicosPinturaAutomotivaRoute
   '/acompanhar/': typeof AcompanharIndexRoute
+  '/briefing/': typeof BriefingIndexRoute
   '/proposta/': typeof PropostaIndexRoute
   '/servicos/': typeof ServicosIndexRoute
+  '/admin/briefings/$briefingId': typeof AdminBriefingsBriefingIdRoute
+  '/admin/briefings/': typeof AdminBriefingsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -188,7 +216,6 @@ export interface FileRouteTypes {
     | '/'
     | '/404'
     | '/agendamentos'
-    | '/briefing'
     | '/contato'
     | '/login'
     | '/para-corretores'
@@ -196,19 +223,22 @@ export interface FileRouteTypes {
     | '/sobre'
     | '/trabalhos'
     | '/acompanhar/$token'
+    | '/briefing/confirmacao'
     | '/proposta/$slug'
     | '/servicos/funilaria'
     | '/servicos/martelinho-de-ouro'
     | '/servicos/pintura-automotiva'
     | '/acompanhar/'
+    | '/briefing/'
     | '/proposta/'
     | '/servicos/'
+    | '/admin/briefings/$briefingId'
+    | '/admin/briefings/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/404'
     | '/agendamentos'
-    | '/briefing'
     | '/contato'
     | '/login'
     | '/para-corretores'
@@ -216,19 +246,22 @@ export interface FileRouteTypes {
     | '/sobre'
     | '/trabalhos'
     | '/acompanhar/$token'
+    | '/briefing/confirmacao'
     | '/proposta/$slug'
     | '/servicos/funilaria'
     | '/servicos/martelinho-de-ouro'
     | '/servicos/pintura-automotiva'
     | '/acompanhar'
+    | '/briefing'
     | '/proposta'
     | '/servicos'
+    | '/admin/briefings/$briefingId'
+    | '/admin/briefings'
   id:
     | '__root__'
     | '/'
     | '/404'
     | '/agendamentos'
-    | '/briefing'
     | '/contato'
     | '/login'
     | '/para-corretores'
@@ -236,20 +269,23 @@ export interface FileRouteTypes {
     | '/sobre'
     | '/trabalhos'
     | '/acompanhar/$token'
+    | '/briefing/confirmacao'
     | '/proposta/$slug'
     | '/servicos/funilaria'
     | '/servicos/martelinho-de-ouro'
     | '/servicos/pintura-automotiva'
     | '/acompanhar/'
+    | '/briefing/'
     | '/proposta/'
     | '/servicos/'
+    | '/admin/briefings/$briefingId'
+    | '/admin/briefings/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   R404Route: typeof R404Route
   AgendamentosRoute: typeof AgendamentosRoute
-  BriefingRoute: typeof BriefingRoute
   ContatoRoute: typeof ContatoRoute
   LoginRoute: typeof LoginRoute
   ParaCorretoresRoute: typeof ParaCorretoresRoute
@@ -257,13 +293,17 @@ export interface RootRouteChildren {
   SobreRoute: typeof SobreRoute
   TrabalhosRoute: typeof TrabalhosRoute
   AcompanharTokenRoute: typeof AcompanharTokenRoute
+  BriefingConfirmacaoRoute: typeof BriefingConfirmacaoRoute
   PropostaSlugRoute: typeof PropostaSlugRoute
   ServicosFunilariaRoute: typeof ServicosFunilariaRoute
   ServicosMartelinhoDeOuroRoute: typeof ServicosMartelinhoDeOuroRoute
   ServicosPinturaAutomotivaRoute: typeof ServicosPinturaAutomotivaRoute
   AcompanharIndexRoute: typeof AcompanharIndexRoute
+  BriefingIndexRoute: typeof BriefingIndexRoute
   PropostaIndexRoute: typeof PropostaIndexRoute
   ServicosIndexRoute: typeof ServicosIndexRoute
+  AdminBriefingsBriefingIdRoute: typeof AdminBriefingsBriefingIdRoute
+  AdminBriefingsIndexRoute: typeof AdminBriefingsIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -287,13 +327,6 @@ declare module '@tanstack/react-router' {
       path: '/agendamentos'
       fullPath: '/agendamentos'
       preLoaderRoute: typeof AgendamentosRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/briefing': {
-      id: '/briefing'
-      path: '/briefing'
-      fullPath: '/briefing'
-      preLoaderRoute: typeof BriefingRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contato': {
@@ -352,6 +385,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AcompanharTokenRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/briefing/': {
+      id: '/briefing/'
+      path: '/briefing'
+      fullPath: '/briefing/'
+      preLoaderRoute: typeof BriefingIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/briefing/confirmacao': {
+      id: '/briefing/confirmacao'
+      path: '/briefing/confirmacao'
+      fullPath: '/briefing/confirmacao'
+      preLoaderRoute: typeof BriefingConfirmacaoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/proposta/': {
       id: '/proposta/'
       path: '/proposta'
@@ -394,6 +441,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServicosPinturaAutomotivaRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/briefings/': {
+      id: '/admin/briefings/'
+      path: '/admin/briefings'
+      fullPath: '/admin/briefings/'
+      preLoaderRoute: typeof AdminBriefingsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/briefings/$briefingId': {
+      id: '/admin/briefings/$briefingId'
+      path: '/admin/briefings/$briefingId'
+      fullPath: '/admin/briefings/$briefingId'
+      preLoaderRoute: typeof AdminBriefingsBriefingIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -401,7 +462,6 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   R404Route: R404Route,
   AgendamentosRoute: AgendamentosRoute,
-  BriefingRoute: BriefingRoute,
   ContatoRoute: ContatoRoute,
   LoginRoute: LoginRoute,
   ParaCorretoresRoute: ParaCorretoresRoute,
@@ -409,13 +469,17 @@ const rootRouteChildren: RootRouteChildren = {
   SobreRoute: SobreRoute,
   TrabalhosRoute: TrabalhosRoute,
   AcompanharTokenRoute: AcompanharTokenRoute,
+  BriefingConfirmacaoRoute: BriefingConfirmacaoRoute,
   PropostaSlugRoute: PropostaSlugRoute,
   ServicosFunilariaRoute: ServicosFunilariaRoute,
   ServicosMartelinhoDeOuroRoute: ServicosMartelinhoDeOuroRoute,
   ServicosPinturaAutomotivaRoute: ServicosPinturaAutomotivaRoute,
   AcompanharIndexRoute: AcompanharIndexRoute,
+  BriefingIndexRoute: BriefingIndexRoute,
   PropostaIndexRoute: PropostaIndexRoute,
   ServicosIndexRoute: ServicosIndexRoute,
+  AdminBriefingsBriefingIdRoute: AdminBriefingsBriefingIdRoute,
+  AdminBriefingsIndexRoute: AdminBriefingsIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

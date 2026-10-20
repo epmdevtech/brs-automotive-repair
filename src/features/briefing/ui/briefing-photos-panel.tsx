@@ -8,9 +8,14 @@ import { MAX_BRIEFING_PHOTOS } from "./use-briefing-draft";
 
 interface BriefingPhotosPanelProps {
   photos: BriefingPhoto[];
-  onAddFiles: (files: File[], categoryId: string) => { added: number; skipped: number };
+  onAddFiles: (
+    files: File[],
+    categoryId: string,
+  ) => { added: number; skipped: number } | Promise<{ added: number; skipped: number }>;
   onUpdatePhoto: (photoId: string, updates: Partial<BriefingPhoto>) => void;
   onRemovePhoto: (photoId: string) => void;
+  uploading?: boolean;
+  message?: string | null;
 }
 
 export function BriefingPhotosPanel({
@@ -18,9 +23,10 @@ export function BriefingPhotosPanel({
   onAddFiles,
   onUpdatePhoto,
   onRemovePhoto,
+  uploading = false,
+  message = null,
 }: BriefingPhotosPanelProps) {
   const [categoryId, setCategoryId] = useState(PHOTO_CATEGORIES[0]?.id ?? "fachada");
-  const [message, setMessage] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   function handleFiles(event: ChangeEvent<HTMLInputElement>) {
@@ -30,15 +36,7 @@ export function BriefingPhotosPanel({
     const category = PHOTO_CATEGORIES.find((item) => item.id === categoryId);
     if (!category) return;
 
-    const result = onAddFiles(files, categoryId);
-    const parts = [
-      `${result.added} imagem(ns) registrada(s) apenas como metadados.`,
-      result.skipped > 0
-        ? `${result.skipped} arquivo(s) não foram registrados por limite de quantidade ou tamanho.`
-        : "",
-      "Nenhum arquivo foi enviado ou armazenado.",
-    ].filter(Boolean);
-    setMessage(parts.join(" "));
+    onAddFiles(files, categoryId);
 
     event.target.value = "";
   }
@@ -49,11 +47,11 @@ export function BriefingPhotosPanel({
         <div>
           <h3 className="font-display text-lg font-semibold text-white">Acervo de imagens</h3>
           <p className="mt-1 text-xs text-neutral-500">
-            {photos.length} de {MAX_BRIEFING_PHOTOS} registros. Arquivos não são enviados.
+            {photos.length} de {MAX_BRIEFING_PHOTOS} arquivos no armazenamento privado.
           </p>
         </div>
         <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 font-mono text-[0.65rem] uppercase tracking-wider text-neutral-400">
-          somente metadados
+          acesso restrito
         </span>
       </div>
 
@@ -91,17 +89,18 @@ export function BriefingPhotosPanel({
             type="button"
             variant="secondary"
             onClick={() => fileInputRef.current?.click()}
+            disabled={uploading}
             className="w-full justify-center"
           >
             <ImagePlus aria-hidden="true" />
-            Selecionar imagens
+            {uploading ? "Enviando…" : "Selecionar imagens"}
           </Button>
         </div>
       </div>
 
       <p className="mt-2 text-xs text-neutral-500">
-        A seleção apenas registra o nome do arquivo. Para enviar imagens, use um canal seguro
-        combinado com a EPM DevTech.
+        Os arquivos são enviados ao armazenamento privado da EPM DevTech. O envio não autoriza
+        publicação no site: a autorização de uso é marcada separadamente em cada imagem.
       </p>
 
       {message ? (

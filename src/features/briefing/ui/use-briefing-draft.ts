@@ -6,7 +6,12 @@ import {
   loadBriefingDraft,
   saveBriefingDraft,
 } from "../domain/storage";
-import type { BriefingDraft, BriefingPhoto, BriefingPhotoCategory } from "../domain/types";
+import type {
+  BriefingDraft,
+  BriefingPhoto,
+  BriefingPhotoCategory,
+  BriefingValue,
+} from "../domain/types";
 
 export const MAX_BRIEFING_PHOTOS = 60;
 export const MAX_PHOTO_SIZE_BYTES = 25 * 1024 * 1024;
@@ -117,6 +122,41 @@ export function useBriefingDraft() {
     setDraft((previous) => ({ ...previous, completed: true }));
   }, []);
 
+  const hydrateFromServer = useCallback(
+    (
+      values: Record<string, BriefingValue>,
+      pending: Record<string, boolean>,
+      photos: BriefingPhoto[],
+    ) => {
+      setDraft((previous) => {
+        const mergedValues = { ...previous.values, ...values };
+        const mergedPending = { ...previous.pending, ...pending };
+        const mergedPhotos = photos.length > 0 ? photos : previous.photos;
+
+        return {
+          ...previous,
+          values: mergedValues,
+          pending: mergedPending,
+          photos: mergedPhotos,
+          updatedAt: new Date().toISOString(),
+        };
+      });
+    },
+    [],
+  );
+
+  const addServerPhoto = useCallback((photo: BriefingPhoto) => {
+    setDraft((previous) => ({
+      ...previous,
+      photos: [...previous.photos, photo].slice(0, MAX_BRIEFING_PHOTOS),
+      completed: false,
+    }));
+  }, []);
+
+  const replacePhotos = useCallback((photos: BriefingPhoto[]) => {
+    setDraft((previous) => ({ ...previous, photos: photos.slice(0, MAX_BRIEFING_PHOTOS) }));
+  }, []);
+
   const resetDraft = useCallback(() => {
     clearBriefingDraft();
     setDraft(createEmptyDraft());
@@ -135,6 +175,9 @@ export function useBriefingDraft() {
     updatePhoto,
     removePhoto,
     markCompleted,
+    hydrateFromServer,
+    addServerPhoto,
+    replacePhotos,
     resetDraft,
   };
 }

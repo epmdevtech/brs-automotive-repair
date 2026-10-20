@@ -1,11 +1,5 @@
 import { describe, it, expect, beforeEach } from "vitest";
 import {
-  authorizeBriefing,
-  isBriefingAuthorized,
-  revokeBriefingAccess,
-  BRIEFING_SESSION_KEY,
-} from "@/features/briefing/domain/access";
-import {
   buildBriefingExport,
   buildExportFileName,
   generateBriefingReportText,
@@ -205,8 +199,8 @@ describe("Briefing operacional — domínio", () => {
         label: "CNPJ",
       },
     ]);
-    expect(exportData.disclaimers.join(" ")).toMatch(/não foi enviado/i);
     expect(exportData.disclaimers.join(" ")).toMatch(/não foram publicadas/i);
+    expect(exportData.disclaimers.join(" ")).toMatch(/armazenamento privado/i);
 
     const parsed = JSON.parse(serializeBriefingExport(draft)) as Record<string, unknown>;
     expect(parsed["status"]).toBe("rascunho");
@@ -215,7 +209,7 @@ describe("Briefing operacional — domínio", () => {
     const report = generateBriefingReportText(exportData);
     expect(report).toContain("PENDÊNCIAS");
     expect(report).toContain("Etapa 1 — CNPJ");
-    expect(report).toContain("não foram enviadas nem armazenadas");
+    expect(report).toContain("armazenamento privado");
     expect(buildExportFileName(draft)).toMatch(
       /^briefing-operacional-master-chapeacao-e-pinturas-\d{4}-\d{2}-\d{2}\.json$/,
     );
@@ -227,28 +221,7 @@ describe("Briefing operacional — domínio", () => {
 
     const exportData = buildBriefingExport(draft);
     expect(exportData.status).toBe("concluido_localmente");
-    expect(exportData.disclaimers.join(" ")).toContain("conclusão local não representa");
+    expect(exportData.disclaimers.join(" ")).toContain("não representa credenciamento");
     expect(LAST_STEP.number).toBe(15);
-  });
-
-  it("autoriza a sessão de demonstração por 8 horas e permite revogar", () => {
-    expect(authorizeBriefing("codigo-incorreto")).toBe(false);
-    expect(isBriefingAuthorized()).toBe(false);
-
-    expect(authorizeBriefing("master-2026")).toBe(true);
-    expect(isBriefingAuthorized()).toBe(true);
-
-    const session = JSON.parse(sessionStorage.getItem(BRIEFING_SESSION_KEY) ?? "{}") as {
-      expiresAt?: number;
-    };
-    expect(session.expiresAt ?? 0).toBeGreaterThan(Date.now() + 7 * 60 * 60 * 1000);
-
-    sessionStorage.setItem(BRIEFING_SESSION_KEY, JSON.stringify({ expiresAt: Date.now() - 1000 }));
-    expect(isBriefingAuthorized()).toBe(false);
-    expect(sessionStorage.getItem(BRIEFING_SESSION_KEY)).toBeNull();
-
-    authorizeBriefing("MASTER-2026");
-    revokeBriefingAccess();
-    expect(isBriefingAuthorized()).toBe(false);
   });
 });

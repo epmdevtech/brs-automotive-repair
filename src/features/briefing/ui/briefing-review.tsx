@@ -22,11 +22,22 @@ import { copyTextToClipboard, downloadTextFile } from "./download";
 interface BriefingReviewProps {
   draft: BriefingDraft;
   onEditStep: (stepNumber: number) => void;
-  onComplete: () => void;
+  onSubmit: () => void;
   onReset: () => void;
+  submitState: "idle" | "submitting" | "error";
+  submitError: string | null;
+  submitted: boolean;
 }
 
-export function BriefingReview({ draft, onEditStep, onComplete, onReset }: BriefingReviewProps) {
+export function BriefingReview({
+  draft,
+  onEditStep,
+  onSubmit,
+  onReset,
+  submitState,
+  submitError,
+  submitted,
+}: BriefingReviewProps) {
   const [copyStatus, setCopyStatus] = useState<string | null>(null);
 
   const exportData = useMemo(() => buildBriefingExport(draft), [draft]);
@@ -77,18 +88,19 @@ export function BriefingReview({ draft, onEditStep, onComplete, onReset }: Brief
               Confira antes de concluir
             </h2>
             <p className="mt-2 max-w-2xl text-sm leading-relaxed text-neutral-400">
-              Revise as respostas e as pendências. A conclusão é local: nada é enviado, publicado ou
-              encaminhado a seguradoras por este formulário.
+              Revise as respostas e as pendências. O envio registra o briefing no banco de dados da
+              EPM DevTech; nada é publicado no site e nenhuma seguradora é contatada por este
+              formulário.
             </p>
           </div>
           <span
             className={
-              draft.completed
+              submitted
                 ? "rounded-full border border-emerald-400/30 bg-emerald-400/10 px-3 py-1 text-xs text-emerald-200"
                 : "rounded-full border border-amber-300/30 bg-amber-300/10 px-3 py-1 text-xs text-amber-100"
             }
           >
-            {draft.completed ? "Concluído localmente" : "Rascunho local"}
+            {submitted ? "Enviado para análise" : "Rascunho em andamento"}
           </span>
         </div>
 
@@ -224,15 +236,18 @@ export function BriefingReview({ draft, onEditStep, onComplete, onReset }: Brief
           </ul>
         )}
         <p className="mt-2 text-xs text-neutral-500">
-          Apenas metadados. Nenhum arquivo foi enviado ou armazenado.
+          Arquivos enviados ficam em armazenamento privado e só podem ser acessados por você e pela
+          equipe da EPM DevTech, mediante autorização verificada no servidor. A autorização de
+          publicação no site é uma decisão separada.
         </p>
       </section>
 
       <section className="border border-white/10 bg-white/[0.02] p-4 sm:p-6">
         <h3 className="font-display text-lg font-semibold text-white">Pacote para revisão</h3>
         <p className="mt-2 text-sm leading-relaxed text-neutral-400">
-          O JSON e o relatório são gerados no navegador. A conclusão local não representa envio,
-          aprovação, regularidade documental, certificação ou credenciamento.
+          O JSON e o relatório são gerados no navegador a partir do que está preenchido. A fonte de
+          verdade é o banco de dados da EPM DevTech. O envio não representa aprovação, regularidade
+          documental, certificação ou credenciamento.
         </p>
 
         <div className="mt-4 flex flex-wrap gap-2">
@@ -266,15 +281,20 @@ export function BriefingReview({ draft, onEditStep, onComplete, onReset }: Brief
         </details>
 
         <div className="mt-5 flex flex-wrap items-center gap-2 border-t border-white/10 pt-4">
-          {draft.completed ? (
+          {submitted ? (
             <p className="flex items-center gap-2 text-sm text-emerald-200">
               <CheckCircle2 className="size-4" aria-hidden="true" />
-              Briefing concluído localmente. Baixe o pacote e entregue pelo canal combinado.
+              Briefing enviado e registrado no banco de dados da EPM DevTech.
             </p>
           ) : (
-            <Button type="button" variant="primary" onClick={onComplete}>
+            <Button
+              type="button"
+              variant="primary"
+              onClick={onSubmit}
+              disabled={submitState === "submitting"}
+            >
               <CheckCircle2 aria-hidden="true" />
-              Concluir localmente
+              {submitState === "submitting" ? "Enviando…" : "Enviar para análise"}
             </Button>
           )}
           <Button
@@ -284,9 +304,18 @@ export function BriefingReview({ draft, onEditStep, onComplete, onReset }: Brief
             className="text-neutral-400 hover:text-red-300"
           >
             <RotateCcw aria-hidden="true" />
-            Limpar rascunho
+            Limpar rascunho local
           </Button>
         </div>
+
+        {submitError ? (
+          <p
+            role="alert"
+            className="mt-3 border border-red-400/30 bg-red-400/5 p-3 text-xs text-red-100"
+          >
+            {submitError}
+          </p>
+        ) : null}
       </section>
     </div>
   );

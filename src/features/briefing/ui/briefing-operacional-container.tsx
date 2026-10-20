@@ -1,28 +1,32 @@
-import { useEffect, useMemo, useState } from "react";
-import { ArrowLeft, ArrowRight, CheckCircle2, LockKeyhole, ShieldCheck } from "lucide-react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useNavigate } from "@tanstack/react-router";
+import { ArrowLeft, ArrowRight, CheckCircle2, CloudOff, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { isBriefingAuthorized, revokeBriefingAccess } from "../domain/access";
-import {
-  canAdvanceStep,
-  getMissingRequiredFields,
-  getMissingRequiredFieldsAll,
-  getProgress,
-} from "../domain/progress";
+import { canAdvanceStep, getMissingRequiredFields, getProgress } from "../domain/progress";
 import { BRIEFING_STEPS, PHOTO_CATEGORIES } from "../domain/steps";
-import type { BriefingValue } from "../domain/types";
-import { BriefingAccessGate } from "./briefing-access-gate";
+import type { BriefingDraft, BriefingPhoto, BriefingValue } from "../domain/types";
 import { BriefingPhotosPanel } from "./briefing-photos-panel";
 import { BriefingReview } from "./briefing-review";
-import { BriefingStepPanel } from "./briefing-step-panel";
+import { BriefingStepForm, type BriefingStepFormHandle } from "./briefing-step-form";
 import { BriefingStepper } from "./briefing-stepper";
 import { useBriefingDraft } from "./use-briefing-draft";
+import { useBriefingServer } from "./use-briefing-server";
+
+const AUTOSAVE_DELAY_MS = 900;
 
 export function BriefingOperacionalContainer() {
-  const [authorized, setAuthorized] = useState<boolean | null>(null);
+  const navigate = useNavigate();
   const [activeStepNumber, setActiveStepNumber] = useState(1);
   const [showReview, setShowReview] = useState(false);
   const [showErrors, setShowErrors] = useState(false);
   const [showResetDialog, setShowResetDialog] = useState(false);
+  const [submitState, setSubmitState] = useState<"idle" | "submitting" | "error">("idle");
+  const [submitError, setSubmitError] = useState<string | null>(null);
+  const [submitted, setSubmitted] = useState(false);
+  const [photoMessage, setPhotoMessage] = useState<string | null>(null);
+  const [loadError, setLoadError] = useState<string | null>(null);
+  const [uploading, setUploading] = useState(false);
+  const formRef = useRef<BriefingStepFormHandle>(null);
 
   const {
     draft,
@@ -31,22 +35,125 @@ export function BriefingOperacionalContainer() {
     storageError,
     setValue,
     setPending,
-    addPhotos,
     updatePhoto,
     removePhoto,
-    markCompleted,
+    hydrateFromServer,
+    addServerPhoto,
     resetDraft,
   } = useBriefingDraft();
 
-  useEffect(() => {
-    setAuthorized(isBriefingAuthorized());
-  }, []);
+  const server = useBriefingServer();
 
   const progress = useMemo(() => getProgress(draft), [draft]);
   const currentStep =
     BRIEFING_STEPS.find((step) => step.number === activeStepNumber) ?? BRIEFING_STEPS[0]!;
   const missingForCurrentStep = getMissingRequiredFields(currentStep, draft);
-  const missingRequired = getMissingRequiredFieldsAll(draft);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    async function bootstrap() {
+      const data = await server.load();
+      if (cancelled) return;
+
+      if (!data) {
+        setLoadError(server.errorMessage ?? "Falha ao consultar o serviço de dados.");
+        return;
+      }
+
+      const values: Record<string, BriefingValue> = {};
+      const pending: Record<string, boolean> = {};
+
+      for (const section of Object.values(data.sections)) {
+        Object.assign(values, section.values);
+        Object.assign(pending, section.pending);
+      }
+
+      const photos: BriefingPhoto[] = data.files.map((file) => ({
+        id: file.id,
+        categoryId: file.category,
+        categoryLabel:
+          PHOTO_CATEGORIES.find((category) => category.id === file.category)?.label ??
+          file.category,
+        fileName: file.original_name,
+        fileSize: file.size_bytes,
+        fileType: file.mime_type,
+        description: "",
+        authorized: false,
+        identifiable: false,
+      }));
+
+      hydrateFromServer(values, pending, photos);
+      setSubmitted(data.briefing.status !== "draft");
+    }
+
+    void bootstrap();
+
+    return () => {
+      cancelled = true;
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const persistCurrentStep = useCallback(
+    async (stepNumber: number) => {
+      const step = BRIEFING_STEPS.find((item) => item.number === stepNumber);
+      if (!step) return;
+
+      const values: Record<string, string | boolean> = {};
+      const pending: Record<string, boolean> = {};
+
+      for (const field of step.fields) {
+        const value = draft.values[field.id];
+        if (value !== undefined) values[field.id] = value;
+        if (draft.pending[field.id]) pending[field.id] = true;
+      }
+
+      // Etapas com obrigatórios em aberto não são gravadas: o servidor exigiria
+      // a resposta ou a pendência declarada, e o salvamento só é retomado
+      // quando a etapa estiver completa.
+      const missingRequired = step.fields.some(
+        (field) =>
+          field.required &&
+          !pending[field.id] &&
+          !(typeof values[field.id] === "string"
+            ? values[field.id].trim().length > 0
+            : values[field.id] === true),
+      );
+
+      if (missingRequired) return;
+
+      await server.saveSection(step.id, values, pending);
+    },
+    [draft.pending, draft.values, server],
+  );
+
+  const lastStepRef = useRef(activeStepNumber);
+  useEffect(() => {
+    if (lastStepRef.current === activeStepNumber) return;
+    lastStepRef.current = activeStepNumber;
+    void persistCurrentStep(activeStepNumber - 1);
+  }, [activeStepNumber, persistCurrentStep]);
+
+  const autosaveTimerRef = useRef<number | null>(null);
+  useEffect(() => {
+    if (!hydrated) return;
+    if (server.status === "unavailable" || server.status === "error") return;
+
+    if (autosaveTimerRef.current !== null) {
+      window.clearTimeout(autosaveTimerRef.current);
+    }
+
+    autosaveTimerRef.current = window.setTimeout(() => {
+      void persistCurrentStep(activeStepNumber);
+    }, AUTOSAVE_DELAY_MS);
+
+    return () => {
+      if (autosaveTimerRef.current !== null) {
+        window.clearTimeout(autosaveTimerRef.current);
+      }
+    };
+  }, [activeStepNumber, draft.pending, draft.values, hydrated, persistCurrentStep, server.status]);
 
   function focusField(fieldId: string) {
     window.setTimeout(() => {
@@ -54,7 +161,14 @@ export function BriefingOperacionalContainer() {
     }, 0);
   }
 
-  function handleNext() {
+  async function handleNext() {
+    const valid = await formRef.current?.validate();
+    if (valid === false) {
+      setShowErrors(true);
+      if (missingForCurrentStep[0]) focusField(missingForCurrentStep[0].id);
+      return;
+    }
+
     if (!canAdvanceStep(currentStep, draft)) {
       setShowErrors(true);
       if (missingForCurrentStep[0]) focusField(missingForCurrentStep[0].id);
@@ -62,6 +176,8 @@ export function BriefingOperacionalContainer() {
     }
 
     setShowErrors(false);
+    await persistCurrentStep(currentStep.number);
+
     if (activeStepNumber >= BRIEFING_STEPS.length) {
       setShowReview(true);
       return;
@@ -84,21 +200,21 @@ export function BriefingOperacionalContainer() {
     setActiveStepNumber(stepNumber);
   }
 
-  function handleComplete() {
-    if (missingRequired.length > 0) {
-      const firstMissing = missingRequired[0]!;
-      const step = BRIEFING_STEPS.find((item) =>
-        item.fields.some((field) => field.id === firstMissing.id),
-      );
-      setShowReview(false);
-      if (step) setActiveStepNumber(step.number);
-      setShowErrors(true);
-      focusField(firstMissing.id);
+  async function handleSubmit() {
+    setSubmitState("submitting");
+    setSubmitError(null);
+
+    const result = await server.submit();
+
+    if (!result.ok) {
+      setSubmitState("error");
+      setSubmitError(result.message);
       return;
     }
 
-    markCompleted();
-    setShowReview(true);
+    setSubmitState("idle");
+    setSubmitted(true);
+    void navigate({ to: "/briefing/confirmacao" });
   }
 
   function handleConfirmReset() {
@@ -109,38 +225,98 @@ export function BriefingOperacionalContainer() {
     setShowResetDialog(false);
   }
 
-  function handleRevokeAccess() {
-    revokeBriefingAccess();
-    setAuthorized(false);
-    setShowReview(false);
-  }
-
-  function handleAddFiles(files: File[], categoryId: string) {
+  async function handleAddFiles(files: File[], categoryId: string) {
     const category = PHOTO_CATEGORIES.find((item) => item.id === categoryId);
     if (!category) return { added: 0, skipped: files.length };
-    return addPhotos(files, category);
+
+    if (!server.briefingId) {
+      setPhotoMessage(
+        "Não foi possível anexar agora: o armazenamento ainda não está disponível nesta sessão.",
+      );
+      return { added: 0, skipped: files.length };
+    }
+
+    setUploading(true);
+    let added = 0;
+    const failures: string[] = [];
+
+    for (const file of files) {
+      const result = await server.uploadFile(server.briefingId, categoryId, file);
+
+      if (!result.ok) {
+        failures.push(`${file.name}: ${result.message}`);
+        continue;
+      }
+
+      added += 1;
+      addServerPhoto({
+        id: result.data.id,
+        categoryId: result.data.category,
+        categoryLabel: category.label,
+        fileName: result.data.originalName,
+        fileSize: result.data.sizeBytes,
+        fileType: result.data.mimeType,
+        description: "",
+        authorized: false,
+        identifiable: false,
+      });
+    }
+
+    setUploading(false);
+    setPhotoMessage(
+      [
+        added > 0
+          ? `${added} arquivo(s) enviado(s) ao armazenamento privado.`
+          : "Nenhum arquivo foi enviado.",
+        failures.length > 0 ? `Recusados: ${failures.join("; ")}` : "",
+        "O envio de arquivos não autoriza publicação no site.",
+      ]
+        .filter(Boolean)
+        .join(" "),
+    );
+
+    return { added, skipped: files.length - added };
   }
 
-  if (authorized === null) {
+  if (server.status === "unavailable") {
     return (
-      <div className="mx-auto w-full max-w-6xl px-4 py-16 sm:px-6">
-        <p className="text-sm text-neutral-500">Verificando acesso…</p>
+      <div className="mx-auto w-full max-w-3xl px-4 py-16 sm:px-6">
+        <div className="border border-amber-300/30 bg-amber-300/5 p-5">
+          <h1 className="flex items-center gap-2 font-display text-xl font-semibold text-white">
+            <CloudOff className="size-5 text-amber-300" aria-hidden="true" />
+            Persistência indisponível
+          </h1>
+          <p className="mt-3 text-sm leading-relaxed text-neutral-300">
+            {server.errorMessage ??
+              "O serviço de dados do briefing ainda não foi configurado neste ambiente."}
+          </p>
+          <p className="mt-3 text-sm leading-relaxed text-neutral-400">
+            Nenhuma resposta será gravada enquanto a configuração não existir. Consulte a
+            documentação de provisionamento do Supabase e configure as variáveis de ambiente do
+            servidor antes de iniciar o preenchimento.
+          </p>
+        </div>
       </div>
     );
   }
 
-  if (!authorized) {
+  if (loadError) {
     return (
-      <div className="mx-auto w-full max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
-        <BriefingAccessGate onAuthorized={() => setAuthorized(true)} />
-      </div>
-    );
-  }
-
-  if (!hydrated) {
-    return (
-      <div className="mx-auto w-full max-w-6xl px-4 py-16 sm:px-6">
-        <p className="text-sm text-neutral-500">Carregando rascunho local…</p>
+      <div className="mx-auto w-full max-w-3xl px-4 py-16 sm:px-6">
+        <div role="alert" className="border border-red-400/30 bg-red-400/5 p-5">
+          <h1 className="font-display text-xl font-semibold text-white">
+            Não foi possível carregar o briefing
+          </h1>
+          <p className="mt-3 text-sm leading-relaxed text-neutral-300">{loadError}</p>
+          <Button
+            type="button"
+            variant="secondary"
+            className="mt-4"
+            onClick={() => void server.load()}
+          >
+            Tentar novamente
+          </Button>
+        </div>
       </div>
     );
   }
@@ -157,7 +333,8 @@ export function BriefingOperacionalContainer() {
           </h1>
           <p className="mt-2 max-w-2xl text-sm leading-relaxed text-neutral-400">
             Master Chapeação e Pinturas. Preencha o que souber e marque como pendente o que ainda
-            precisa confirmar. Nada é publicado automaticamente.
+            precisa confirmar. As respostas são gravadas no servidor e podem ser retomadas a partir
+            de qualquer dispositivo autenticado.
           </p>
         </div>
 
@@ -169,15 +346,6 @@ export function BriefingOperacionalContainer() {
           >
             {showReview ? "Voltar ao formulário" : "Revisar"}
           </Button>
-          <Button
-            type="button"
-            variant="ghost"
-            onClick={handleRevokeAccess}
-            className="text-neutral-400 hover:text-white"
-          >
-            <LockKeyhole aria-hidden="true" />
-            Bloquear acesso
-          </Button>
         </div>
       </header>
 
@@ -185,18 +353,29 @@ export function BriefingOperacionalContainer() {
         <div className="flex flex-wrap items-center justify-between gap-3">
           <p className="flex items-center gap-2 text-xs text-neutral-400">
             <ShieldCheck className="size-4 text-[var(--brand-text-accent)]" aria-hidden="true" />
-            Rascunho salvo apenas neste navegador. Nenhum dado é enviado automaticamente.
+            Respostas gravadas no servidor da EPM DevTech. O cache local do navegador é apenas
+            apoio.
           </p>
           <p
             role="status"
             aria-live="polite"
-            className={storageError ? "text-xs text-red-300" : "text-xs text-neutral-500"}
+            className={
+              server.status === "error" || storageError
+                ? "text-xs text-red-300"
+                : "text-xs text-neutral-500"
+            }
           >
-            {storageError
-              ? "Não foi possível salvar automaticamente. Verifique o armazenamento do navegador."
-              : lastSavedAt
-                ? `Salvo localmente às ${formatTime(lastSavedAt)}`
-                : "Salvamento automático ativo"}
+            {server.status === "error"
+              ? (server.errorMessage ?? "Falha ao sincronizar com o servidor.")
+              : server.status === "saving"
+                ? "Salvando no servidor…"
+                : server.status === "saved"
+                  ? `Sincronizado às ${formatTime(server.savedAt ?? new Date().toISOString())}`
+                  : storageError
+                    ? "Cache local indisponível no navegador."
+                    : lastSavedAt
+                      ? `Cache local às ${formatTime(lastSavedAt)}`
+                      : "Salvamento automático ativo"}
           </p>
         </div>
 
@@ -225,10 +404,10 @@ export function BriefingOperacionalContainer() {
           <span className={progress.pendingCount > 0 ? "text-amber-200" : undefined}>
             {progress.pendingCount} pendência(s)
           </span>
-          {draft.completed ? (
+          {submitted ? (
             <span className="flex items-center gap-1 text-emerald-200">
               <CheckCircle2 className="size-3.5" aria-hidden="true" />
-              concluído localmente
+              enviado para análise
             </span>
           ) : null}
         </div>
@@ -260,22 +439,63 @@ export function BriefingOperacionalContainer() {
           ) : null}
 
           <div className="mt-4">
-            <BriefingStepPanel
-              step={currentStep}
-              draft={draft}
-              showErrors={showErrors}
-              onValueChange={(fieldId: string, value: BriefingValue) => setValue(fieldId, value)}
-              onPendingChange={(fieldId: string, pending: boolean) => setPending(fieldId, pending)}
+            <section
+              aria-labelledby={`briefing-step-${currentStep.number}-title`}
+              className="border border-white/10 bg-white/[0.02] p-4 sm:p-6"
             >
+              <div className="border-b border-white/10 pb-4">
+                <p className="font-mono text-[0.65rem] uppercase tracking-[0.25em] text-[var(--brand-text-accent)]">
+                  Etapa {String(currentStep.number).padStart(2, "0")} de 15
+                </p>
+                <h2
+                  id={`briefing-step-${currentStep.number}-title`}
+                  className="mt-2 font-display text-xl font-semibold text-white sm:text-2xl"
+                >
+                  {currentStep.title}
+                </h2>
+                <p className="mt-2 max-w-3xl text-sm leading-relaxed text-neutral-400">
+                  {currentStep.description}
+                </p>
+              </div>
+
               {currentStep.kind === "photos" ? (
-                <BriefingPhotosPanel
-                  photos={draft.photos}
-                  onAddFiles={handleAddFiles}
-                  onUpdatePhoto={updatePhoto}
-                  onRemovePhoto={removePhoto}
-                />
+                <div className="mt-4 rounded-md border border-amber-300/20 bg-amber-300/5 p-3 text-xs leading-relaxed text-amber-100/90">
+                  Os arquivos são enviados para o armazenamento privado da EPM DevTech e só podem
+                  ser acessados por você e pela equipe autorizada. O envio não autoriza publicação
+                  no site.
+                </div>
               ) : null}
-            </BriefingStepPanel>
+
+              <BriefingStepForm
+                ref={formRef}
+                step={currentStep}
+                draft={draft}
+                showErrors={showErrors}
+                onValueChange={(fieldId: string, value: BriefingValue) => setValue(fieldId, value)}
+                onPendingChange={(fieldId: string, pending: boolean) =>
+                  setPending(fieldId, pending)
+                }
+              />
+
+              {currentStep.kind === "photos" ? (
+                <div className="mt-6">
+                  <BriefingPhotosPanel
+                    photos={draft.photos}
+                    onAddFiles={handleAddFiles}
+                    onUpdatePhoto={updatePhoto}
+                    onRemovePhoto={removePhoto}
+                    uploading={uploading}
+                    message={photoMessage}
+                  />
+                </div>
+              ) : null}
+
+              <p className="mt-6 border-t border-white/10 pt-3 text-xs leading-relaxed text-neutral-500">
+                Campos com <span className="text-[var(--brand-text-accent)]">*</span> são
+                obrigatórios, mas podem ser marcados como pendentes quando a informação não estiver
+                disponível. Declarações finais não podem ser marcadas como pendentes.
+              </p>
+            </section>
           </div>
 
           <div className="mt-5 flex flex-col-reverse gap-3 border-t border-white/10 pt-4 sm:flex-row sm:items-center sm:justify-between">
@@ -293,7 +513,7 @@ export function BriefingOperacionalContainer() {
               <span className="mr-1 font-mono text-xs text-neutral-500">
                 {String(activeStepNumber).padStart(2, "0")} / 15
               </span>
-              <Button type="button" variant="primary" onClick={handleNext}>
+              <Button type="button" variant="primary" onClick={() => void handleNext()}>
                 {activeStepNumber >= BRIEFING_STEPS.length ? "Revisar respostas" : "Próxima etapa"}
                 <ArrowRight aria-hidden="true" />
               </Button>
@@ -305,8 +525,11 @@ export function BriefingOperacionalContainer() {
           <BriefingReview
             draft={draft}
             onEditStep={handleSelectStep}
-            onComplete={handleComplete}
+            onSubmit={() => void handleSubmit()}
             onReset={() => setShowResetDialog(true)}
+            submitState={submitState}
+            submitError={submitError}
+            submitted={submitted}
           />
         </div>
       )}
@@ -324,14 +547,14 @@ export function BriefingOperacionalContainer() {
         >
           <div className="w-full max-w-sm border border-white/15 bg-neutral-950 p-5 shadow-2xl">
             <h2 id="briefing-reset-title" className="font-display text-lg font-semibold text-white">
-              Limpar rascunho?
+              Limpar cache local?
             </h2>
             <p
               id="briefing-reset-description"
               className="mt-2 text-sm leading-relaxed text-neutral-400"
             >
-              Todas as respostas, pendências e metadados de imagens salvos neste navegador serão
-              removidos. Esta ação não pode ser desfeita.
+              As respostas permanecem gravadas no servidor. Esta ação remove apenas a cópia mantido
+              neste navegador.
             </p>
             <div className="mt-5 flex justify-end gap-2">
               <Button
@@ -343,7 +566,7 @@ export function BriefingOperacionalContainer() {
                 Cancelar
               </Button>
               <Button type="button" variant="destructive" onClick={handleConfirmReset}>
-                Limpar rascunho
+                Limpar cache local
               </Button>
             </div>
           </div>

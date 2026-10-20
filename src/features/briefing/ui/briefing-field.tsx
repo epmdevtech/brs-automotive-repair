@@ -8,6 +8,7 @@ interface BriefingFieldProps {
   value: BriefingValue | undefined;
   pending: boolean;
   showError: boolean;
+  errorMessage?: string | undefined;
   onChange: (value: BriefingValue) => void;
   onPendingChange: (pending: boolean) => void;
 }
@@ -17,6 +18,7 @@ export function BriefingFieldInput({
   value,
   pending,
   showError,
+  errorMessage,
   onChange,
   onPendingChange,
 }: BriefingFieldProps) {
@@ -172,7 +174,7 @@ export function BriefingFieldInput({
 
       {hasError ? (
         <p id={errorId} role="alert" className="text-xs text-red-300">
-          Campo obrigatório: informe uma resposta ou marque como pendente.
+          {errorMessage ?? "Campo obrigatório: informe uma resposta ou marque como pendente."}
         </p>
       ) : null}
     </div>
