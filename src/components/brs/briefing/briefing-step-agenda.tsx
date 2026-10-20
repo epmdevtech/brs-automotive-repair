@@ -62,7 +62,7 @@ export function StepAgenda({ data, onChange }: StepAgendaProps) {
         {/* Antecedência Mínima */}
         <div className="space-y-1.5">
           <Label className="text-xs text-neutral-300 font-medium flex items-center gap-1.5">
-            <Clock className="size-3 text-primary" /> Antecedência Mínima (horas) *
+            <Clock className="size-3 text-brand-accent" /> Antecedência Mínima (horas) *
           </Label>
           <Input
             type="number"
@@ -145,7 +145,7 @@ export function StepAgenda({ data, onChange }: StepAgendaProps) {
 
       {/* BLOCO DE REGRAS EXCLUSIVAS DO NICHO AUTOMOTIVO */}
       <div className="p-5 rounded-xl border border-primary/20 bg-primary/5 space-y-4">
-        <div className="flex items-center gap-2 text-primary text-xs font-semibold uppercase tracking-wider">
+        <div className="flex items-center gap-2 text-brand-accent text-xs font-semibold uppercase tracking-wider">
           <Car className="size-4" />
           <span>Regras Específicas do Setor Automotivo (EPM Booking Auto)</span>
         </div>
@@ -177,7 +177,7 @@ export function StepAgenda({ data, onChange }: StepAgendaProps) {
             />
             <div>
               <span className="text-xs font-medium text-white block flex items-center gap-1.5">
-                <Truck className="size-3.5 text-primary" /> Serviço de Guincho
+                <Truck className="size-3.5 text-brand-accent" /> Serviço de Guincho
               </span>
               <span className="text-[11px] text-neutral-400 leading-tight block mt-0.5">
                 Habilita opção para retirada e entrega do veículo na residência/empresa em Toledo.
@@ -194,7 +194,7 @@ export function StepAgenda({ data, onChange }: StepAgendaProps) {
             />
             <div>
               <span className="text-xs font-medium text-white block flex items-center gap-1.5">
-                <ShieldCheck className="size-3.5 text-primary" /> Auto Socorro / Guincho
+                <ShieldCheck className="size-3.5 text-brand-accent" /> Auto Socorro / Guincho
               </span>
               <span className="text-[11px] text-neutral-400 leading-tight block mt-0.5">
                 Habilita botão de emergência rápida para panes ou socorro imediato na via.

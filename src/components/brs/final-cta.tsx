@@ -31,19 +31,19 @@ export function FinalCTA() {
         <div className="mt-10 pt-8 border-t border-border/60 grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs text-muted-foreground text-left sm:text-center">
           <a
             href={company.phoneHref}
-            className="flex sm:flex-col items-center justify-start sm:justify-center gap-2 hover:text-primary transition-colors py-1"
+            className="flex sm:flex-col items-center justify-start sm:justify-center gap-2 hover:text-brand-accent transition-colors py-1"
           >
-            <Phone size={15} className="text-primary shrink-0" aria-hidden="true" />
+            <Phone size={15} className="text-brand-accent shrink-0" aria-hidden="true" />
             <span className="font-medium text-foreground">{company.phone}</span>
           </a>
 
           <div className="flex sm:flex-col items-center justify-start sm:justify-center gap-2 py-1">
-            <MapPin size={15} className="text-primary shrink-0" aria-hidden="true" />
+            <MapPin size={15} className="text-brand-accent shrink-0" aria-hidden="true" />
             <span>{company.address.full}</span>
           </div>
 
           <div className="flex sm:flex-col items-center justify-start sm:justify-center gap-2 py-1">
-            <Clock size={15} className="text-primary shrink-0" aria-hidden="true" />
+            <Clock size={15} className="text-brand-accent shrink-0" aria-hidden="true" />
             <span>{company.openingHours}</span>
           </div>
         </div>

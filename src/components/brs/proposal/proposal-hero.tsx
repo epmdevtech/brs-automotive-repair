@@ -99,7 +99,7 @@ export function ProposalHero({ proposal }: ProposalHeroProps) {
           className="flex flex-wrap items-center justify-between gap-3 mb-6 pb-4 border-b border-white/8"
         >
           <div className="flex flex-wrap items-center gap-2.5">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/25 text-primary text-[11px] font-medium tracking-wide">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/25 text-brand-accent text-[11px] font-medium tracking-wide">
               <Sparkles className="size-3" aria-hidden="true" />
               <span>Proposta Comercial Exclusiva</span>
             </div>
@@ -109,7 +109,7 @@ export function ProposalHero({ proposal }: ProposalHeroProps) {
           </div>
 
           <div className="flex items-center gap-2 text-xs text-muted-foreground font-mono">
-            <Shield className="size-3 text-primary/70" aria-hidden="true" />
+            <Shield className="size-3 text-brand-accent/70" aria-hidden="true" />
             <span>Autoria: {proposal.author}</span>
             <span className="text-white/20">|</span>
             <span>Ref: {proposal.slug}</span>
@@ -154,7 +154,7 @@ export function ProposalHero({ proposal }: ProposalHeroProps) {
                 Emissão
               </span>
               <span className="text-neutral-200 flex items-center gap-1.5 font-mono text-sm">
-                <Calendar className="size-3.5 text-primary" aria-hidden="true" />
+                <Calendar className="size-3.5 text-brand-accent" aria-hidden="true" />
                 {proposal.issueDate}
               </span>
             </div>
@@ -166,7 +166,7 @@ export function ProposalHero({ proposal }: ProposalHeroProps) {
                 Validade da Proposta
               </span>
               <span className="text-neutral-200 flex items-center gap-1.5 font-mono text-sm">
-                <Calendar className="size-3.5 text-primary" aria-hidden="true" />
+                <Calendar className="size-3.5 text-brand-accent" aria-hidden="true" />
                 {proposal.validUntil}
               </span>
             </div>

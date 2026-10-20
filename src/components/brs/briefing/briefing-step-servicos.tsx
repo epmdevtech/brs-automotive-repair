@@ -75,7 +75,7 @@ export function StepServicos({ data, onChange }: StepServicosProps) {
           onClick={addServico}
           variant="outline"
           size="sm"
-          className="border-primary/40 text-primary hover:bg-primary/10 gap-1.5 text-xs"
+          className="border-primary/40 text-brand-accent hover:bg-primary/10 gap-1.5 text-xs"
         >
           <Plus className="size-3.5" /> Adicionar Serviço
         </Button>
@@ -89,7 +89,7 @@ export function StepServicos({ data, onChange }: StepServicosProps) {
           >
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <div className="size-7 rounded-lg bg-primary/10 text-primary flex items-center justify-center font-bold text-xs">
+                <div className="size-7 rounded-lg bg-primary/10 text-brand-accent flex items-center justify-center font-bold text-xs">
                   {idx + 1}
                 </div>
                 <h4 className="text-sm font-semibold text-white">
@@ -141,7 +141,7 @@ export function StepServicos({ data, onChange }: StepServicosProps) {
               {/* Duração em Minutos */}
               <div className="space-y-1.5">
                 <Label className="text-xs text-neutral-300 font-medium flex items-center gap-1.5">
-                  <Clock className="size-3 text-primary" /> Duração Estimada (min) *
+                  <Clock className="size-3 text-brand-accent" /> Duração Estimada (min) *
                 </Label>
                 <Input
                   type="number"
@@ -196,7 +196,7 @@ export function StepServicos({ data, onChange }: StepServicosProps) {
               {/* Exibição de Preço */}
               <div className="space-y-1.5">
                 <Label className="text-xs text-neutral-300 font-medium flex items-center gap-1.5">
-                  <DollarSign className="size-3 text-primary" /> Regra de Preço no Site
+                  <DollarSign className="size-3 text-brand-accent" /> Regra de Preço no Site
                 </Label>
                 <select
                   value={servico.exibirValorNoSite}

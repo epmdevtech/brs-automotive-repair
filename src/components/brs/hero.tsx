@@ -14,7 +14,7 @@ export function Hero({ config = defaultHeroConfig, debugMode = false }: HeroProp
       config={config}
       debugMode={debugMode}
       eyebrow={
-        <span className="eyebrow tracking-widest text-primary font-medium flex flex-wrap max-w-full">
+        <span className="eyebrow tracking-widest text-brand-accent font-medium flex flex-wrap max-w-full">
           Oficina Técnica Especializada • Toledo, PR
         </span>
       }

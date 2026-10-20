@@ -35,19 +35,19 @@ function AcompanharIndexPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0B0D10] text-neutral-200 flex flex-col justify-between antialiased">
+    <div className="min-h-screen bg-background text-neutral-200 flex flex-col justify-between antialiased">
       {/* CABEÇALHO ENXUTO DEDICADO */}
-      <header className="w-full h-14 sm:h-16 border-b border-neutral-800/80 px-4 sm:px-6 bg-[#0B0D10]/95 backdrop-blur-md">
+      <header className="w-full h-14 sm:h-16 border-b border-neutral-800/80 px-4 sm:px-6 bg-background/95 backdrop-blur-md">
         <div className="max-w-6xl mx-auto h-full flex items-center justify-between">
           <Link
             to="/"
-            className="flex items-center gap-2.5 group focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-[#D4AF37] rounded-lg p-1"
+            className="flex items-center gap-2.5 group focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-brand-accent rounded-lg p-1"
           >
-            <div className="size-8 rounded-lg bg-gradient-to-br from-[#D4AF37] to-[#A68322] flex items-center justify-center font-bold text-neutral-950 text-sm">
+            <div className="size-8 rounded-lg bg-gradient-to-br from-primary to-primary-active flex items-center justify-center font-bold text-white text-sm">
               B
             </div>
             <div className="flex flex-col">
-              <span className="font-display font-bold text-white text-sm group-hover:text-[#D4AF37] transition-colors">
+              <span className="font-display font-bold text-white text-sm group-hover:text-brand-accent transition-colors">
                 Master Chapeação
               </span>
               <span className="text-[10px] text-neutral-400 font-medium">Canal do cliente</span>
@@ -58,7 +58,7 @@ function AcompanharIndexPage() {
             href={CONTATO_OFICINA.telefoneHref}
             className="inline-flex items-center gap-1.5 text-xs text-neutral-400 hover:text-white transition-colors"
           >
-            <Phone size={13} className="text-[#D4AF37]" />
+            <Phone size={13} className="text-brand-accent" />
             <span>{CONTATO_OFICINA.telefoneFormatado}</span>
           </a>
         </div>
@@ -67,12 +67,12 @@ function AcompanharIndexPage() {
       {/* ÁREA CENTRAL DE BUSCA */}
       <main className="flex-1 flex items-center justify-center px-4 py-12">
         <div className="max-w-md w-full bg-[#13161B] border border-neutral-800 p-6 sm:p-8 rounded-2xl text-center space-y-6 shadow-2xl">
-          <div className="size-14 rounded-2xl bg-[#D4AF37]/10 text-[#D4AF37] flex items-center justify-center mx-auto border border-[#D4AF37]/20">
+          <div className="size-14 rounded-2xl bg-primary/10 text-brand-accent flex items-center justify-center mx-auto border border-primary/20">
             <Car size={28} />
           </div>
 
           <div className="space-y-1.5">
-            <span className="text-[10px] uppercase font-bold tracking-widest text-[#D4AF37] bg-[#D4AF37]/10 px-2.5 py-1 rounded-full border border-[#D4AF37]/20">
+            <span className="text-[10px] uppercase font-bold tracking-widest text-brand-accent bg-primary/10 px-2.5 py-1 rounded-full border border-primary/20">
               Área do cliente • Master
             </span>
             <h1 className="text-xl sm:text-2xl font-bold font-display text-white mt-3 tracking-tight">
@@ -93,14 +93,14 @@ function AcompanharIndexPage() {
                 value={protocol}
                 onChange={(e) => setProtocol(e.target.value)}
                 placeholder="Digite seu protocolo (ex: Master-7391)"
-                className="w-full text-xs bg-[#0B0D10] border border-neutral-800 rounded-xl pl-10 pr-4 py-3 text-white placeholder:text-neutral-500 focus:outline-hidden focus:border-[#D4AF37] shadow-inner"
+                className="w-full text-xs bg-background border border-neutral-800 rounded-xl pl-10 pr-4 py-3 text-white placeholder:text-neutral-500 focus:outline-hidden focus:border-primary shadow-inner"
                 required
               />
             </div>
 
             <button
               type="submit"
-              className="w-full py-3 px-4 rounded-xl bg-[#D4AF37] hover:bg-[#C29E2F] text-neutral-950 font-bold text-xs transition-colors flex items-center justify-center gap-1.5 shadow-md focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-[#D4AF37]"
+              className="w-full py-3 px-4 rounded-xl bg-primary hover:bg-primary-hover text-white font-bold text-xs transition-colors flex items-center justify-center gap-1.5 shadow-md focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-brand-accent"
             >
               <span>Consultar andamento</span>
               <ArrowRight size={14} />

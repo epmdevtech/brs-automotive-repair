@@ -127,7 +127,7 @@ export function ProjectGallery({ className }: { className?: string } = {}) {
               Arraste o divisor interativo para comparar a transição entre o dano e a recuperação
               técnica. Clique em qualquer caso para ampliar a inspeção em alta resolução.
             </p>
-            <p className="text-[10px] text-primary mt-3 flex items-center gap-1.5 font-medium">
+            <p className="text-[10px] text-brand-accent mt-3 flex items-center gap-1.5 font-medium">
               <ShieldCheck size={13} aria-hidden="true" />
               Demonstração técnica de reparo (acervo de fotos reais em preparação).
             </p>
@@ -159,7 +159,7 @@ export function ProjectGallery({ className }: { className?: string } = {}) {
                   <Button
                     variant="ghost"
                     size="icon"
-                    className="absolute top-3 right-3 z-30 size-8 rounded-sm bg-background/80 backdrop-blur-xs border border-border/60 text-foreground hover:text-primary hover:border-primary transition-colors cursor-pointer"
+                    className="absolute top-3 right-3 z-30 size-8 rounded-sm bg-background/80 backdrop-blur-xs border border-border/60 text-foreground hover:text-brand-accent hover:border-primary transition-colors cursor-pointer"
                     onClick={() => setActiveModalIndex(i)}
                     aria-label={`Ampliar inspeção em alta resolução de ${item.title}`}
                   >
@@ -168,7 +168,7 @@ export function ProjectGallery({ className }: { className?: string } = {}) {
                 </div>
 
                 {/* Informações Técnicas e Tipografia */}
-                <div className="flex items-center justify-between text-[10px] font-semibold text-primary tracking-wider uppercase mb-2">
+                <div className="flex items-center justify-between text-[10px] font-semibold text-brand-accent tracking-wider uppercase mb-2">
                   <span>{item.category}</span>
                   <span className="font-mono text-muted-foreground">
                     <NumericCounter target={parseInt(item.number, 10)} padZero /> / CASO
@@ -189,7 +189,7 @@ export function ProjectGallery({ className }: { className?: string } = {}) {
                 </span>
                 <Button
                   variant="link"
-                  className="p-0 h-auto text-xs text-primary hover:text-foreground font-medium inline-flex items-center gap-1 cursor-pointer"
+                  className="p-0 h-auto text-xs text-brand-accent hover:text-foreground font-medium inline-flex items-center gap-1 cursor-pointer"
                   onClick={() => setActiveModalIndex(i)}
                 >
                   Inspecionar ampliado <Expand size={12} aria-hidden="true" />
@@ -212,7 +212,7 @@ export function ProjectGallery({ className }: { className?: string } = {}) {
             <div className="flex flex-col gap-4">
               <div className="flex flex-col sm:flex-row justify-between sm:items-end gap-2 pr-8 border-b border-border/60 pb-3">
                 <div>
-                  <span className="text-[10px] font-semibold text-primary uppercase tracking-wider">
+                  <span className="text-[10px] font-semibold text-brand-accent uppercase tracking-wider">
                     {currentCase.category} · Caso {currentCase.number} de 03
                   </span>
                   <DialogTitle className="text-xl md:text-2xl font-semibold font-display tracking-tight mt-1 text-foreground text-balance">
@@ -247,7 +247,11 @@ export function ProjectGallery({ className }: { className?: string } = {}) {
                     key={idx}
                     className="flex items-center gap-2 p-2.5 rounded-sm bg-background/60 border border-border/40 text-muted-foreground"
                   >
-                    <CheckCircle2 size={14} className="text-primary shrink-0" aria-hidden="true" />
+                    <CheckCircle2
+                      size={14}
+                      className="text-brand-accent shrink-0"
+                      aria-hidden="true"
+                    />
                     <span>{highlight}</span>
                   </div>
                 ))}

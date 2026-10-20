@@ -25,7 +25,7 @@ export function ProposalModulesCatalog({
             Reparações Automotivas. Escolha os módulos que deseja avaliar para compor o investimento
             sob medida para o seu momento.
           </p>
-          <div className="mt-4 flex items-center gap-2 text-xs text-primary font-mono">
+          <div className="mt-4 flex items-center gap-2 text-xs text-brand-accent font-mono">
             <Layers className="size-3.5" aria-hidden="true" />
             <span>Selecione os módulos abaixo para simular o investimento em tempo real</span>
           </div>
@@ -57,7 +57,7 @@ export function ProposalModulesCatalog({
                       onClick={() => onToggleModule(mod.id)}
                       className={`text-xs font-semibold px-3 py-1 rounded-sm transition-colors cursor-pointer border ${
                         isSelected
-                          ? "bg-primary text-neutral-950 border-primary hover:bg-primary/90"
+                          ? "bg-primary text-white border-primary hover:bg-primary-hover"
                           : "bg-white/5 text-neutral-300 border-white/15 hover:border-primary/50 hover:text-white"
                       }`}
                       aria-pressed={isSelected}
@@ -76,7 +76,7 @@ export function ProposalModulesCatalog({
                     {mod.isStartingPrice && (
                       <span className="text-xs text-muted-foreground font-mono">a partir de</span>
                     )}
-                    <span className="text-2xl sm:text-3xl font-display font-bold text-primary">
+                    <span className="text-2xl sm:text-3xl font-display font-bold text-brand-accent">
                       {formatCurrencyBRL(mod.price)}
                     </span>
                     <span className="text-[11px] text-muted-foreground font-medium">
@@ -91,7 +91,7 @@ export function ProposalModulesCatalog({
                   {/* Problema que resolve */}
                   <div className="p-3 rounded-lg bg-white/[0.02] border border-white/5 mb-6 text-xs text-neutral-300 leading-relaxed">
                     <strong className="text-white block mb-1 flex items-center gap-1.5">
-                      <ShieldCheck className="size-3.5 text-primary" aria-hidden="true" />
+                      <ShieldCheck className="size-3.5 text-brand-accent" aria-hidden="true" />
                       Problema que resolve:
                     </strong>
                     {mod.problemSolved}
@@ -100,7 +100,7 @@ export function ProposalModulesCatalog({
                   {/* Entregáveis Incluídos */}
                   <div className="space-y-4 mb-6">
                     <div>
-                      <h4 className="text-xs font-semibold uppercase tracking-wider text-primary mb-2.5 flex items-center gap-1.5">
+                      <h4 className="text-xs font-semibold uppercase tracking-wider text-brand-accent mb-2.5 flex items-center gap-1.5">
                         <Check className="size-3.5" aria-hidden="true" />
                         <span>Escopo-base incluído</span>
                       </h4>
@@ -142,7 +142,7 @@ export function ProposalModulesCatalog({
                 <div className="pt-4 border-t border-white/10 space-y-2 text-[11px] text-neutral-400">
                   {mod.dependencies.length > 0 && (
                     <div className="flex items-start gap-1.5">
-                      <AlertCircle className="size-3 text-amber-400/80 shrink-0 mt-0.5" />
+                      <AlertCircle className="size-3 text-brand-accent shrink-0 mt-0.5" />
                       <span>
                         <strong className="text-neutral-300">Dependência:</strong>{" "}
                         {mod.dependencies.join("; ")}

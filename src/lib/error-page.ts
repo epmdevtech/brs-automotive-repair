@@ -8,7 +8,7 @@ export function renderErrorPage(): string {
     <style>
       body {
         font-family: 'Manrope', system-ui, -apple-system, sans-serif;
-        background: #17181c;
+        background: #0b0d10;
         color: #f8fafc;
         display: grid;
         place-items: center;
@@ -21,7 +21,7 @@ export function renderErrorPage(): string {
         width: 100%;
         text-align: center;
         padding: 2.5rem 2rem;
-        background: #1f2127;
+        background: #141821;
         border: 1px solid rgba(255, 255, 255, 0.12);
         border-radius: 4px;
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
@@ -34,7 +34,7 @@ export function renderErrorPage(): string {
         margin-bottom: 1.5rem;
       }
       .brand span {
-        color: #d89f41;
+        color: #E01B24;
       }
       h1 {
         font-family: 'Sora', 'Manrope', system-ui, -apple-system, sans-serif;
@@ -43,10 +43,14 @@ export function renderErrorPage(): string {
         font-weight: 600;
       }
       p {
-        color: #94a3b8;
+        color: #9ba3af;
         font-size: 0.875rem;
         line-height: 1.6;
         margin: 0 0 2rem;
+      }
+      a:focus-visible, button:focus-visible {
+        outline: 2px solid #ffffff;
+        outline-offset: 3px;
       }
       .actions {
         display: flex;
@@ -65,12 +69,12 @@ export function renderErrorPage(): string {
         transition: all 0.2s ease;
       }
       .primary {
-        background: #d89f41;
-        color: #17181c;
-        border: 1px solid #d89f41;
+        background: #E01B24;
+        color: #ffffff;
+        border: 1px solid #E01B24;
       }
       .primary:hover {
-        background: #c38c32;
+        background: #c4161e;
       }
       .secondary {
         background: transparent;

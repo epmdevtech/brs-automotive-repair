@@ -48,7 +48,7 @@ export function StatusTabs({ currentFilter, onFilterChange, stats }: StatusTabsP
       label: "Em Andamento",
       count: stats.inProgress,
       dotClass: getStatusDotClass("CONFIRMED"),
-      activeClass: "bg-amber-600 text-white shadow-xs font-semibold",
+      activeClass: "bg-violet-600 text-white shadow-xs font-semibold",
       tooltip: "Veículo na baia ou em execução técnica de reparo",
     },
     {

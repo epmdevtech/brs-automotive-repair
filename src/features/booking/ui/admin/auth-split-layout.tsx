@@ -62,7 +62,7 @@ export function AuthSplitLayout({ children, imageSrc }: AuthSplitLayoutProps) {
         aria-label="Apresentação Institucional Master"
         className="hidden lg:flex flex-1 relative bg-[#0b1329] text-white flex-col justify-between p-10 xl:p-14 2xl:p-16 h-full overflow-y-auto select-none"
       >
-        {/* Background com imagem opcional ou gradiente institucional dourado sutil (~8%) */}
+        {/* Background com imagem opcional ou gradiente institucional vermelho sutil (~8%) */}
         {imageSrc ? (
           <div className="absolute inset-0 z-0">
             <img
@@ -74,7 +74,7 @@ export function AuthSplitLayout({ children, imageSrc }: AuthSplitLayoutProps) {
           </div>
         ) : (
           <div className="absolute inset-0 z-0 pointer-events-none" aria-hidden="true">
-            {/* Gradiente radial de profundidade dourado sutil (~8%) e grid suave */}
+            {/* Gradiente radial de profundidade vermelho sutil (~8%) e grid suave */}
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_50%_20%,rgba(217,119,6,0.08),transparent)]" />
             <div
               className="absolute inset-0 opacity-[0.03]"
@@ -101,7 +101,7 @@ export function AuthSplitLayout({ children, imageSrc }: AuthSplitLayoutProps) {
         {/* Conteúdo central do painel direito: proposta de valor da plataforma */}
         <div className="relative z-10 max-w-[560px] mx-auto w-full space-y-6 my-auto">
           <div className="space-y-3">
-            <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-amber-400">
+            <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-brand-accent">
               <Sparkles size={14} />
               <span>Agenda e Atendimento</span>
             </div>
@@ -119,7 +119,7 @@ export function AuthSplitLayout({ children, imageSrc }: AuthSplitLayoutProps) {
           {/* Cards de pilares operacionais (sem jargões técnicos) */}
           <div className="grid grid-cols-2 gap-4 pt-1">
             <div className="p-4 rounded-xl bg-slate-800/60 border border-slate-700/70 backdrop-blur-xs space-y-2">
-              <div className="size-8 rounded-lg bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400">
+              <div className="size-8 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center text-brand-accent">
                 <Calendar size={16} />
               </div>
               <h3 className="text-sm font-semibold text-white">Agenda sempre atualizada</h3>
@@ -150,7 +150,7 @@ export function AuthSplitLayout({ children, imageSrc }: AuthSplitLayoutProps) {
                 <span className="size-2 rounded-full bg-emerald-400 animate-pulse" />
                 <span className="font-medium text-slate-200">Check-in de hoje · 08:30</span>
               </div>
-              <span className="px-2 py-0.5 rounded text-[11px] font-mono bg-amber-500/10 text-amber-300 border border-amber-500/20">
+              <span className="px-2 py-0.5 rounded text-[11px] font-mono bg-primary/10 text-brand-accent border border-primary/20">
                 Baia 1 · Toyota Corolla XEi
               </span>
             </div>
@@ -160,14 +160,14 @@ export function AuthSplitLayout({ children, imageSrc }: AuthSplitLayoutProps) {
               <div className="flex items-center justify-between text-[10px] text-slate-400 font-medium pb-1.5">
                 <span className="text-emerald-400">1. Check-in</span>
                 <span className="text-emerald-400">2. Desmontagem</span>
-                <span className="text-amber-300 font-semibold">3. Pintura</span>
+                <span className="text-brand-accent font-semibold">3. Pintura</span>
                 <span>4. Montagem</span>
                 <span>5. Entrega</span>
               </div>
               <div className="grid grid-cols-5 gap-1.5">
                 <div className="h-1.5 rounded-full bg-emerald-500" />
                 <div className="h-1.5 rounded-full bg-emerald-500" />
-                <div className="h-1.5 rounded-full bg-amber-400" />
+                <div className="h-1.5 rounded-full bg-primary" />
                 <div className="h-1.5 rounded-full bg-slate-700" />
                 <div className="h-1.5 rounded-full bg-slate-700" />
               </div>

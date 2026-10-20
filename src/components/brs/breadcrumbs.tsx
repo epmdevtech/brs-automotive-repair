@@ -23,7 +23,7 @@ export function Breadcrumbs({ items, className = "" }: BreadcrumbsProps) {
             to="/"
             className="flex items-center gap-1 hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary rounded-xs"
           >
-            <Home size={13} className="text-primary" aria-hidden="true" />
+            <Home size={13} className="text-brand-accent" aria-hidden="true" />
             <span>Início</span>
           </Link>
         </li>

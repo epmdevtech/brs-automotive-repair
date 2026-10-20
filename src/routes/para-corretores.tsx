@@ -117,7 +117,7 @@ function ParaCorretoresPage() {
             className="py-8 sm:py-10 sm:px-6 first:sm:pl-0 last:sm:pr-0 flex flex-col justify-between"
           >
             <div>
-              <span className="font-mono text-[11px] font-semibold text-primary uppercase tracking-wider block mb-3">
+              <span className="font-mono text-[11px] font-semibold text-brand-accent uppercase tracking-wider block mb-3">
                 <NumericCounter target={1} padZero /> / ACOMPANHAMENTO
               </span>
               <h3 className="text-base font-semibold font-display text-white mb-2">
@@ -137,7 +137,7 @@ function ParaCorretoresPage() {
             className="py-8 sm:py-10 sm:px-6 flex flex-col justify-between"
           >
             <div>
-              <span className="font-mono text-[11px] font-semibold text-primary uppercase tracking-wider block mb-3">
+              <span className="font-mono text-[11px] font-semibold text-brand-accent uppercase tracking-wider block mb-3">
                 <NumericCounter target={2} padZero /> / DOCUMENTAÇÃO
               </span>
               <h3 className="text-base font-semibold font-display text-white mb-2">
@@ -157,7 +157,7 @@ function ParaCorretoresPage() {
             className="py-8 sm:py-10 sm:px-6 flex flex-col justify-between"
           >
             <div>
-              <span className="font-mono text-[11px] font-semibold text-primary uppercase tracking-wider block mb-3">
+              <span className="font-mono text-[11px] font-semibold text-brand-accent uppercase tracking-wider block mb-3">
                 <NumericCounter target={3} padZero /> / INTERFACE B2B
               </span>
               <h3 className="text-base font-semibold font-display text-white mb-2">
@@ -177,7 +177,7 @@ function ParaCorretoresPage() {
             className="py-8 sm:py-10 sm:px-6 last:sm:pr-0 flex flex-col justify-between"
           >
             <div>
-              <span className="font-mono text-[11px] font-semibold text-primary uppercase tracking-wider block mb-3">
+              <span className="font-mono text-[11px] font-semibold text-brand-accent uppercase tracking-wider block mb-3">
                 <NumericCounter target={4} padZero /> / PREVISIBILIDADE
               </span>
               <h3 className="text-base font-semibold font-display text-white mb-2">
@@ -214,7 +214,7 @@ function ParaCorretoresPage() {
             className="py-8 md:py-10 md:px-8 first:md:pl-0 last:md:pr-0 flex flex-col justify-between"
           >
             <div>
-              <span className="font-mono text-[11px] font-semibold text-primary uppercase tracking-wider block mb-3">
+              <span className="font-mono text-[11px] font-semibold text-brand-accent uppercase tracking-wider block mb-3">
                 DIREITO DO CONSUMIDOR
               </span>
               <h3 className="text-lg font-semibold font-display text-white mb-3">
@@ -236,7 +236,7 @@ function ParaCorretoresPage() {
             className="py-8 md:py-10 md:px-8 first:md:pl-0 last:md:pr-0 flex flex-col justify-between"
           >
             <div>
-              <span className="font-mono text-[11px] font-semibold text-primary uppercase tracking-wider block mb-3">
+              <span className="font-mono text-[11px] font-semibold text-brand-accent uppercase tracking-wider block mb-3">
                 RIGOR TÉCNICO
               </span>
               <h3 className="text-lg font-semibold font-display text-white mb-3">
@@ -256,7 +256,7 @@ function ParaCorretoresPage() {
             className="py-8 md:py-10 md:px-8 first:md:pl-0 last:md:pr-0 flex flex-col justify-between"
           >
             <div>
-              <span className="font-mono text-[11px] font-semibold text-primary uppercase tracking-wider block mb-3">
+              <span className="font-mono text-[11px] font-semibold text-brand-accent uppercase tracking-wider block mb-3">
                 INTEGRIDADE INSTITUCIONAL
               </span>
               <h3 className="text-lg font-semibold font-display text-white mb-3">
@@ -318,7 +318,7 @@ function ParaCorretoresPage() {
                 <span>•</span>
                 <span>Toledo — PR</span>
                 <span>•</span>
-                <a href={company.phoneHref} className="text-primary hover:underline">
+                <a href={company.phoneHref} className="text-brand-accent hover:underline">
                   (45) 99954-5442
                 </a>
               </div>

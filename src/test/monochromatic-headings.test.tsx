@@ -25,7 +25,7 @@ describe("SPEC-044 / TASK-044-01: Padronização da Hierarquia Tipográfica e T�
         "Funilaria, pintura em estufa e martelinho de ouro em Toledo-PR.",
       );
 
-      // Não há span interno com classes de destaque dourado/âmbar
+      // Não há span interno com classes de destaque vermelho/âmbar
       const primarySpan = h1?.querySelector(".text-primary");
       expect(primarySpan).toBeNull();
       expect(h1?.innerHTML).not.toContain("text-amber-");

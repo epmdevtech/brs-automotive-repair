@@ -86,7 +86,7 @@ export function BookingDialog({ open, onOpenChange, defaultServiceId }: BookingD
       <DialogContent className="max-w-3xl max-h-[92vh] overflow-y-auto bg-card border-border p-6 md:p-8 text-foreground sm:rounded-xl">
         <DialogHeader className="space-y-1.5 pb-4 border-b border-border/60">
           <div className="flex items-center justify-between">
-            <span className="text-[11px] font-mono uppercase tracking-wider text-primary">
+            <span className="text-[11px] font-mono uppercase tracking-wider text-brand-accent">
               {booking.step === 6
                 ? "Agendamento & Pré-OS Confirmados"
                 : `Etapa ${booking.step} de 5 — Agendamento de Avaliação Técnica`}
@@ -282,7 +282,7 @@ export function BookingDialog({ open, onOpenChange, defaultServiceId }: BookingD
                       <div className="flex items-center gap-2">
                         <Wrench
                           size={16}
-                          className={isSelected ? "text-primary" : "text-muted-foreground"}
+                          className={isSelected ? "text-brand-accent" : "text-muted-foreground"}
                         />
                         <span className="text-sm font-semibold text-foreground">{svc.title}</span>
                       </div>
@@ -319,7 +319,7 @@ export function BookingDialog({ open, onOpenChange, defaultServiceId }: BookingD
                     size={18}
                     className={
                       booking.logisticsType === "presencial"
-                        ? "text-primary"
+                        ? "text-brand-accent"
                         : "text-muted-foreground"
                     }
                   />
@@ -346,7 +346,7 @@ export function BookingDialog({ open, onOpenChange, defaultServiceId }: BookingD
                     size={18}
                     className={
                       booking.logisticsType === "leva-e-traz"
-                        ? "text-primary"
+                        ? "text-brand-accent"
                         : "text-muted-foreground"
                     }
                   />
@@ -364,7 +364,7 @@ export function BookingDialog({ open, onOpenChange, defaultServiceId }: BookingD
             {booking.logisticsType === "leva-e-traz" && (
               <div className="p-4 rounded border border-border/80 bg-secondary/30 space-y-4">
                 <div className="flex items-center gap-2 text-xs font-semibold text-foreground">
-                  <Truck size={14} className="text-primary" />
+                  <Truck size={14} className="text-brand-accent" />
                   Dados para Coleta em Toledo-PR
                 </div>
 
@@ -422,7 +422,7 @@ export function BookingDialog({ open, onOpenChange, defaultServiceId }: BookingD
               </Button>
               <div className="text-center">
                 <div className="text-xs font-semibold text-foreground flex items-center justify-center gap-1.5">
-                  <Calendar size={14} className="text-primary" />
+                  <Calendar size={14} className="text-brand-accent" />
                   {formatDate(booking.selectedDate)}
                 </div>
                 <span className="text-[10px] text-muted-foreground">
@@ -512,7 +512,7 @@ export function BookingDialog({ open, onOpenChange, defaultServiceId }: BookingD
             {booking.selectedSlot && (
               <div className="p-3 rounded bg-primary/10 border border-primary/30 text-xs flex items-center justify-between text-foreground">
                 <span className="flex items-center gap-1.5 font-medium">
-                  <Check size={14} className="text-primary" />
+                  <Check size={14} className="text-brand-accent" />
                   Horário Escolhido: {formatDate(booking.selectedSlot.start)} às{" "}
                   {formatTime(booking.selectedSlot.start)}
                 </span>
@@ -641,7 +641,7 @@ export function BookingDialog({ open, onOpenChange, defaultServiceId }: BookingD
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center gap-2 h-10 px-4 rounded border border-border bg-secondary/30 hover:bg-secondary/60 text-xs font-medium text-foreground transition-colors"
                 >
-                  <Instagram size={14} className="text-primary" />
+                  <Instagram size={14} className="text-brand-accent" />
                   Instagram
                 </a>
 
@@ -651,7 +651,7 @@ export function BookingDialog({ open, onOpenChange, defaultServiceId }: BookingD
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center gap-2 h-10 px-4 rounded border border-border bg-secondary/30 hover:bg-secondary/60 text-xs font-medium text-foreground transition-colors"
                 >
-                  <Facebook size={14} className="text-primary" />
+                  <Facebook size={14} className="text-brand-accent" />
                   Facebook
                 </a>
 
@@ -659,7 +659,7 @@ export function BookingDialog({ open, onOpenChange, defaultServiceId }: BookingD
                   href={company.phoneHref}
                   className="inline-flex items-center justify-center gap-2 h-10 px-4 rounded border border-border bg-secondary/30 hover:bg-secondary/60 text-xs font-medium text-foreground transition-colors"
                 >
-                  <Phone size={14} className="text-primary" />
+                  <Phone size={14} className="text-brand-accent" />
                   Ligar: {company.phone}
                 </a>
               </div>

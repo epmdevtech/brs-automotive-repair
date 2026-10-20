@@ -29,10 +29,10 @@ export function ProposalInvestmentSection({ proposal }: ProposalInvestmentProps)
           {/* Bloco Principal de Valor: Destaque Nobre */}
           <div className="lg:col-span-7 rounded-xl border border-primary/40 bg-gradient-to-b from-card to-neutral-950 p-8 sm:p-10 shadow-2xl relative overflow-hidden">
             <div className="absolute top-0 right-0 p-6 opacity-10 pointer-events-none">
-              <Coins className="size-36 text-primary" aria-hidden="true" />
+              <Coins className="size-36 text-brand-accent" aria-hidden="true" />
             </div>
 
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-sm bg-primary/15 border border-primary/30 text-primary text-xs font-medium mb-6">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-sm bg-primary/15 border border-primary/30 text-brand-accent text-xs font-medium mb-6">
               <Sparkles className="size-3.5" aria-hidden="true" />
               <span>Valor Fechado de Implantação</span>
             </div>
@@ -56,7 +56,7 @@ export function ProposalInvestmentSection({ proposal }: ProposalInvestmentProps)
                     <span className="text-[11px] uppercase tracking-wider text-muted-foreground block mb-1">
                       Entrada no Aceite
                     </span>
-                    <span className="text-xl font-display font-semibold text-primary">
+                    <span className="text-xl font-display font-semibold text-brand-accent">
                       {formatCurrencyBRL(investment.entryValue)}
                     </span>
                     <span className="text-xs text-neutral-400 block mt-1">
@@ -84,7 +84,10 @@ export function ProposalInvestmentSection({ proposal }: ProposalInvestmentProps)
             {/* Informação de Parcelamento */}
             {investment.installmentsDescription && (
               <div className="mt-6 flex items-start gap-3 p-4 rounded-lg bg-primary/5 border border-primary/20 text-xs sm:text-sm text-neutral-300">
-                <CreditCard className="size-4 text-primary shrink-0 mt-0.5" aria-hidden="true" />
+                <CreditCard
+                  className="size-4 text-brand-accent shrink-0 mt-0.5"
+                  aria-hidden="true"
+                />
                 <span>{investment.installmentsDescription}</span>
               </div>
             )}
@@ -112,7 +115,7 @@ export function ProposalInvestmentSection({ proposal }: ProposalInvestmentProps)
             {/* Custos diretos de terceiros */}
             {investment.thirdPartyCosts && (
               <div className="rounded-xl border border-white/10 bg-white/[0.01] p-6 sm:p-7">
-                <div className="flex items-center gap-2 text-primary text-xs font-semibold uppercase tracking-wider mb-3">
+                <div className="flex items-center gap-2 text-brand-accent text-xs font-semibold uppercase tracking-wider mb-3">
                   <AlertCircle className="size-4" aria-hidden="true" />
                   <span>Custos Diretos de Terceiros</span>
                 </div>

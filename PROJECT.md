@@ -159,13 +159,14 @@ Master/
 
 ## 7. Experiência, Design e Acessibilidade
 
-- **Identidade Visual**: Paleta escura industrial automotiva:
-  - Fundo: Slate grafite profundo (`oklch(0.14 0.005 260)`)
-  - Acento Primário: Âmbar metálico aquecido (`oklch(0.73 0.1 82)`)
+- **Identidade Visual**: Paleta escura industrial automotiva alinhada à logo oficial (preto, vermelho e branco):
+  - Fundo: Preto automotivo (`#0b0d10`)
+  - Acento Primário: Vermelho da logo (`#e01b24`, `--brand-primary`)
+  - Acento de Texto: Vermelho claro para rótulos e ícones (`#f26b6f`, `--brand-text-accent`)
   - Tipografia: Display e Títulos em **Sora** (pesos 500 e 600, proporções técnicas e acabamento editorial de alta precisão) e corpo/controles em **Manrope** (pesos 400, 500 e 600, leitura técnica e confortável).
 - **Acessibilidade**:
   - Conformidade com critérios WCAG 2.1 nível AA.
-  - Navegação completa por teclado com anéis de foco visíveis (`outline: 2px solid var(--primary)`).
+  - Navegação completa por teclado com anéis de foco visíveis (`outline: 2px solid var(--brand-focus)`).
   - Diálogos e modais com captura de foco e descrição acessível via Radix UI.
   - Suporte a `prefers-reduced-motion`.
 

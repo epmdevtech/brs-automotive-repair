@@ -26,11 +26,11 @@ interface SignatureCanvasProps {
   interactive?: boolean;
 }
 
-const GOLD_PALETTE = [
-  "rgba(212, 175, 55, ", // Gold metallic
-  "rgba(230, 195, 85, ", // Light gold
-  "rgba(200, 169, 106, ", // Canonical Master Gold
-  "rgba(255, 255, 255, ", // High-light specular
+const BRAND_PALETTE = [
+  "rgba(224, 27, 36, ", // Vermelho Master
+  "rgba(242, 107, 111, ", // Vermelho claro
+  "rgba(196, 22, 30, ", // Vermelho profundo
+  "rgba(255, 255, 255, ", // Reflexo especular
 ];
 
 /**
@@ -94,7 +94,7 @@ export function SignatureCanvas({ className, interactive = true }: SignatureCanv
         vy: (Math.random() - 0.5) * 0.6,
         size: 1.2 + Math.random() * 2.2,
         baseSize: 1.2 + Math.random() * 2.2,
-        color: GOLD_PALETTE[Math.floor(Math.random() * GOLD_PALETTE.length)],
+        color: BRAND_PALETTE[Math.floor(Math.random() * BRAND_PALETTE.length)],
         alpha: baseAlpha,
         baseAlpha,
         pulseSpeed: 0.015 + Math.random() * 0.025,
@@ -203,7 +203,7 @@ export function SignatureCanvas({ className, interactive = true }: SignatureCanv
         ctx.save();
         ctx.beginPath();
         ctx.arc(rip.x, rip.y, rip.radius, 0, Math.PI * 2);
-        ctx.strokeStyle = `rgba(212, 175, 55, ${rip.alpha * 0.7})`;
+        ctx.strokeStyle = `rgba(224, 27, 36, ${rip.alpha * 0.7})`;
         ctx.lineWidth = 1.2;
         ctx.stroke();
         ctx.restore();
@@ -225,7 +225,7 @@ export function SignatureCanvas({ className, interactive = true }: SignatureCanv
               ctx.beginPath();
               ctx.moveTo(p1.x, p1.y);
               ctx.lineTo(p2.x, p2.y);
-              ctx.strokeStyle = `rgba(212, 175, 55, ${lineAlpha})`;
+              ctx.strokeStyle = `rgba(224, 27, 36, ${lineAlpha})`;
               ctx.stroke();
             }
           }
@@ -279,7 +279,7 @@ export function SignatureCanvas({ className, interactive = true }: SignatureCanv
         if (p.size > 2) {
           ctx.beginPath();
           ctx.arc(p.x, p.y, p.size * 2.2, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(212, 175, 55, ${p.alpha * 0.15})`;
+          ctx.fillStyle = `rgba(224, 27, 36, ${p.alpha * 0.15})`;
           ctx.fill();
         }
       }
@@ -289,11 +289,11 @@ export function SignatureCanvas({ className, interactive = true }: SignatureCanv
         ctx.save();
         ctx.beginPath();
         ctx.arc(mouse.x, mouse.y, 4, 0, Math.PI * 2);
-        ctx.fillStyle = "rgba(212, 175, 55, 0.85)";
+        ctx.fillStyle = "rgba(224, 27, 36, 0.85)";
         ctx.fill();
 
         // Linhas de mira óptica técnica (crosshair)
-        ctx.strokeStyle = "rgba(212, 175, 55, 0.28)";
+        ctx.strokeStyle = "rgba(224, 27, 36, 0.28)";
         ctx.lineWidth = 0.8;
         ctx.beginPath();
         ctx.moveTo(mouse.x - 14, mouse.y);
@@ -338,7 +338,7 @@ export function SignatureCanvas({ className, interactive = true }: SignatureCanv
       {hudVisible && (
         <div className="pointer-events-auto absolute bottom-20 right-3 sm:right-10 z-20 flex items-center gap-1.5 p-1 rounded-sm glass-panel-luxury text-[10px] font-mono tracking-wider border border-white/10 shadow-xl shadow-black/80 max-w-[calc(100vw-24px)]">
           <div className="flex items-center gap-1 px-2 py-0.5 text-neutral-400">
-            <Sparkles size={11} className="text-primary" />
+            <Sparkles size={11} className="text-brand-accent" />
             <span>OPTICAL HUD</span>
           </div>
 

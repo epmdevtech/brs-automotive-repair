@@ -177,7 +177,7 @@ export const IdentidadeVisualSchema = z.object({
   manual_marca_id: z.string().optional(),
   cor_primaria_hex: z
     .string()
-    .regex(/^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/, "Cor primária inválida (ex: #D4AF37)"),
+    .regex(/^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/, "Cor primária inválida (ex: #E01B24)"),
   cor_secundaria_hex: z
     .string()
     .regex(/^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/, "Cor secundária inválida (ex: #1C1F26)")
@@ -441,7 +441,7 @@ export const masterDefaultBriefing: BriefingDadosCompletos = {
   identidade_visual: {
     logo_arquivo_id: "logo-master.webp",
     manual_marca_id: "manual-identidade-master.pdf",
-    cor_primaria_hex: "#D4AF37",
+    cor_primaria_hex: "#E01B24",
     cor_secundaria_hex: "#1C1F26",
     cor_fundo_hex: "#0B0D10",
     sites_referencia_positivos: "Estética refinada, estilo Awwwards Dark Luxury automotivo.",
@@ -679,7 +679,7 @@ export function generateBriefingSummaryMessage(
     `• Equipe: ${numEquipe} profissional(is) cadastrado(s)`,
     `• Serviços: ${numServicos} especialidade(s) registrada(s)`,
     `• Unidades: ${numUnidades} endereço(s) configurado(s)`,
-    `• Cor Primária: ${dados.identidade_visual?.cor_primaria_hex || "#D4AF37"}`,
+    `• Cor Primária: ${dados.identidade_visual?.cor_primaria_hex || "#E01B24"}`,
     `• Cor Secundária: ${dados.identidade_visual?.cor_secundaria_hex || "#1C1F26"}`,
     ``,
     `*⚠️ Pendências Notificadas:* ${pendenciasCount === 0 ? "Nenhuma (100% preenchido)" : `${pendenciasCount} item(ns) pendente(s)`}`,

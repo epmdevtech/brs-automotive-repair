@@ -51,7 +51,7 @@ export function ProposalBundles({
                   active
                     ? "border-primary bg-gradient-to-b from-primary/[0.08] to-neutral-950 shadow-xl shadow-primary/10 ring-1 ring-primary/40"
                     : isHighlight
-                      ? "border-amber-500/40 bg-card/60 shadow-lg shadow-black/40"
+                      ? "border-primary/30 bg-card/60 shadow-lg shadow-black/40"
                       : "border-white/10 bg-card/30 hover:border-white/20"
                 }`}
               >
@@ -62,9 +62,9 @@ export function ProposalBundles({
                       <span
                         className={`text-[11px] font-mono px-2.5 py-1 rounded-sm border uppercase tracking-wider font-semibold ${
                           active
-                            ? "bg-primary text-neutral-950 border-primary"
+                            ? "bg-primary text-white border-primary"
                             : isHighlight
-                              ? "bg-primary/20 text-primary border-primary/40"
+                              ? "bg-primary/20 text-brand-accent border-primary/40"
                               : "bg-white/5 text-neutral-300 border-white/10"
                         }`}
                       >
@@ -73,14 +73,14 @@ export function ProposalBundles({
                     )}
 
                     {isHighlight && !active && (
-                      <span className="inline-flex items-center gap-1 text-[11px] font-mono text-amber-400">
+                      <span className="inline-flex items-center gap-1 text-[11px] font-mono text-brand-accent">
                         <Sparkles className="size-3" aria-hidden="true" />
                         Destaque
                       </span>
                     )}
 
                     {active && (
-                      <span className="inline-flex items-center gap-1 text-[11px] font-mono text-primary font-semibold">
+                      <span className="inline-flex items-center gap-1 text-[11px] font-mono text-brand-accent font-semibold">
                         <Check className="size-3.5" aria-hidden="true" />
                         Ativo no Simulador
                       </span>
@@ -98,7 +98,7 @@ export function ProposalBundles({
                   {/* Módulos inclusos no Pacote */}
                   <div className="mb-6 pt-4 border-t border-white/10">
                     <p className="text-[11px] font-mono uppercase tracking-wider text-neutral-400 mb-3 flex items-center gap-1.5">
-                      <Layers className="size-3 text-primary" aria-hidden="true" />
+                      <Layers className="size-3 text-brand-accent" aria-hidden="true" />
                       Módulos Inclusos ({bundle.moduleIds.length}):
                     </p>
                     <ul className="space-y-2">
@@ -109,7 +109,7 @@ export function ProposalBundles({
                             key={mId}
                             className="flex items-center gap-2 text-xs sm:text-sm text-neutral-200"
                           >
-                            <div className="size-4 rounded-full bg-primary/20 text-primary flex items-center justify-center shrink-0">
+                            <div className="size-4 rounded-full bg-primary/20 text-brand-accent flex items-center justify-center shrink-0">
                               <Check className="size-2.5" aria-hidden="true" />
                             </div>
                             <span>{mName}</span>

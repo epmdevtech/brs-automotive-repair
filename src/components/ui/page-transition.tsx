@@ -13,7 +13,7 @@ export interface PageTransitionProps {
  *
  * Características:
  * - Duração ágil e inercial de 280ms (curva de desaceleração de luxo [0.22, 1, 0.36, 1]).
- * - Barra laser superior dourada transitória que indica visualmente a troca de rota sem bloquear UI.
+ * - Barra laser superior vermelha transitória que indica visualmente a troca de rota sem bloquear UI.
  * - Suporte nativo à View Transitions API por Progressive Enhancement.
  * - Desativa animações automaticamente sob `prefers-reduced-motion` ou SSR.
  * - Não interfere na restauração de rolagem, nem no estado do TanStack Router ou Radix UI.
@@ -38,7 +38,7 @@ export function PageTransition({ children, pathname, className }: PageTransition
           animate={{ scaleX: 1, opacity: 0 }}
           transition={{ duration: 0.42, ease: [0.22, 1, 0.36, 1] }}
           style={{ originX: 0 }}
-          className="fixed top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-primary/30 via-primary to-amber-200 z-50 pointer-events-none shadow-[0_0_12px_rgba(212,175,55,0.8)] motion-reduce:hidden"
+          className="fixed top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-primary/30 via-primary to-brand-accent z-50 pointer-events-none shadow-[0_0_12px_var(--brand-primary-glow)] motion-reduce:hidden"
           aria-hidden="true"
         />
       )}

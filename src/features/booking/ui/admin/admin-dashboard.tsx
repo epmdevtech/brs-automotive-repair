@@ -124,7 +124,7 @@ export function AdminBookingDashboard() {
       {/* CABEÇALHO DA AGENDA */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-border/60 pb-5">
         <div>
-          <span className="text-[11px] font-mono uppercase tracking-wider text-primary">
+          <span className="text-[11px] font-mono uppercase tracking-wider text-brand-accent">
             Agenda Oficial & Pré-OS da Oficina
           </span>
           <h2 className="text-xl md:text-2xl font-display font-semibold text-foreground tracking-tight">
@@ -137,7 +137,7 @@ export function AdminBookingDashboard() {
         </div>
 
         <div className="flex items-center gap-2">
-          <span className="text-xs px-3 py-1.5 rounded bg-primary/10 text-primary border border-primary/20 font-mono font-medium">
+          <span className="text-xs px-3 py-1.5 rounded bg-primary/10 text-brand-accent border border-primary/20 font-mono font-medium">
             {metrics.confirmed} Agendamento{metrics.confirmed === 1 ? "" : "s"} Ativo
             {metrics.confirmed === 1 ? "" : "s"}
           </span>
@@ -169,7 +169,7 @@ export function AdminBookingDashboard() {
           }`}
         >
           <div className="text-[11px] font-mono uppercase text-muted-foreground mb-1 flex items-center gap-1">
-            <Clock size={12} className="text-primary" /> Atendimentos Hoje
+            <Clock size={12} className="text-brand-accent" /> Atendimentos Hoje
           </div>
           <div className="text-2xl font-display font-bold text-foreground">{metrics.forToday}</div>
         </div>
@@ -183,7 +183,7 @@ export function AdminBookingDashboard() {
           }`}
         >
           <div className="text-[11px] font-mono uppercase text-muted-foreground mb-1 flex items-center gap-1">
-            <Truck size={12} className="text-primary" /> Remoção com Guincho
+            <Truck size={12} className="text-brand-accent" /> Remoção com Guincho
           </div>
           <div className="text-2xl font-display font-bold text-foreground">{metrics.levaETraz}</div>
         </div>
@@ -286,7 +286,7 @@ export function AdminBookingDashboard() {
                 {/* TOPO DO CARD: PROTOCOLO, HORÁRIO E STATUS */}
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-border/60 pb-3">
                   <div className="flex flex-wrap items-center gap-2">
-                    <span className="font-mono font-bold text-sm text-primary px-2.5 py-0.5 rounded bg-primary/10 border border-primary/20">
+                    <span className="font-mono font-bold text-sm text-brand-accent px-2.5 py-0.5 rounded bg-primary/10 border border-primary/20">
                       {app.protocol}
                     </span>
                     <span
@@ -301,19 +301,19 @@ export function AdminBookingDashboard() {
                       {getStatusLabel(app.status)}
                     </span>
                     {isToday && (
-                      <span className="text-[10px] font-bold uppercase bg-amber-500/10 text-amber-400 px-2 py-0.5 rounded border border-amber-500/20">
+                      <span className="text-[10px] font-bold uppercase bg-primary/10 text-brand-accent px-2 py-0.5 rounded border border-primary/20">
                         Atendimento Hoje
                       </span>
                     )}
                     {isLeva && (
-                      <span className="text-[10px] flex items-center gap-1 text-primary bg-primary/5 px-2 py-0.5 rounded border border-primary/20">
+                      <span className="text-[10px] flex items-center gap-1 text-brand-accent bg-primary/5 px-2 py-0.5 rounded border border-primary/20">
                         <Truck size={12} /> Guincho em Toledo
                       </span>
                     )}
                   </div>
 
                   <div className="flex items-center gap-1.5 text-xs text-foreground font-semibold">
-                    <Clock size={14} className="text-primary" />
+                    <Clock size={14} className="text-brand-accent" />
                     <span>
                       {formatDate(scheduledDate)} às {formatTime(scheduledDate)}
                     </span>
@@ -332,16 +332,16 @@ export function AdminBookingDashboard() {
                     </div>
                     <div className="text-sm font-semibold text-foreground">{app.customer.name}</div>
                     <div className="text-muted-foreground flex items-center gap-2">
-                      <Phone size={13} className="text-primary" />
+                      <Phone size={13} className="text-brand-accent" />
                       <a
                         href={`tel:${app.customer.phone}`}
-                        className="hover:text-primary transition-colors font-mono"
+                        className="hover:text-brand-accent transition-colors font-mono"
                       >
                         {formatPhoneBR(app.customer.phone)}
                       </a>
                     </div>
                     {app.intake.isInsurance && (
-                      <div className="text-[11px] text-amber-400 font-medium">
+                      <div className="text-[11px] text-brand-accent font-medium">
                         • Atendimento vinculado a Sinistro / Seguradora
                       </div>
                     )}
@@ -351,7 +351,7 @@ export function AdminBookingDashboard() {
                   <div className="space-y-1.5 p-3 rounded-lg bg-card/60 border border-border/60">
                     <div className="text-[11px] font-mono uppercase text-muted-foreground flex items-center justify-between">
                       <span>Veículo & Pré-OS</span>
-                      <span className="text-primary font-medium">{svc?.short}</span>
+                      <span className="text-brand-accent font-medium">{svc?.short}</span>
                     </div>
                     <div className="text-sm font-semibold text-foreground">
                       {app.intake.vehicle.make} {app.intake.vehicle.model}{" "}
@@ -400,7 +400,7 @@ export function AdminBookingDashboard() {
                 {isLeva && (
                   <div className="p-3 rounded-lg bg-primary/5 border border-primary/20 text-xs space-y-1">
                     <div className="font-semibold text-foreground flex items-center gap-1.5">
-                      <MapPin size={13} className="text-primary" />
+                      <MapPin size={13} className="text-brand-accent" />
                       Endereço de Coleta em Toledo-PR:
                     </div>
                     <p className="text-muted-foreground">
@@ -410,7 +410,7 @@ export function AdminBookingDashboard() {
                       Condição:{" "}
                       <strong
                         className={
-                          app.logistics.vehicleDrivable ? "text-emerald-400" : "text-amber-400"
+                          app.logistics.vehicleDrivable ? "text-emerald-400" : "text-brand-accent"
                         }
                       >
                         {app.logistics.vehicleDrivable

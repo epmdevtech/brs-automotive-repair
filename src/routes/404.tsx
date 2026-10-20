@@ -23,7 +23,9 @@ function NotFoundPage() {
         </ScrollReveal>
 
         <ScrollReveal direction="up" delay={0.12}>
-          <h1 className="text-6xl sm:text-7xl font-bold font-display text-primary mb-4">404</h1>
+          <h1 className="text-6xl sm:text-7xl font-bold font-display text-brand-accent mb-4">
+            404
+          </h1>
           <h2 className="text-xl sm:text-2xl font-semibold text-white mb-3">
             Página não encontrada
           </h2>

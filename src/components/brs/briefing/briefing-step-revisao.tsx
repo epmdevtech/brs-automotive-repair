@@ -106,7 +106,7 @@ export function StepRevisao({ data, pendingFlags }: StepRevisaoProps) {
                 <CheckCircle2 className="size-3.5 mr-1" /> 100% Válido
               </Badge>
             ) : (
-              <Badge className="bg-amber-500/10 border-amber-500/40 text-amber-400 text-xs">
+              <Badge className="bg-primary/10 border-primary/30 text-brand-accent text-xs">
                 <AlertTriangle className="size-3.5 mr-1" /> Campos Incompletos
               </Badge>
             )}
@@ -144,7 +144,7 @@ export function StepRevisao({ data, pendingFlags }: StepRevisaoProps) {
       {/* RESUMO DOS DADOS INGESTADOS */}
       <div className="p-5 rounded-xl border border-white/10 bg-neutral-900/40 space-y-4">
         <h4 className="text-xs font-semibold text-white uppercase tracking-wider flex items-center gap-2">
-          <Sparkles className="size-4 text-primary" /> Resumo do Pacote de Briefing
+          <Sparkles className="size-4 text-brand-accent" /> Resumo do Pacote de Briefing
         </h4>
 
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
@@ -182,7 +182,8 @@ export function StepRevisao({ data, pendingFlags }: StepRevisaoProps) {
       <div className="p-5 rounded-xl border border-primary/30 bg-gradient-to-b from-primary/10 to-transparent space-y-4">
         <div>
           <h4 className="text-sm font-semibold text-white flex items-center gap-2">
-            <FileCode className="size-4 text-primary" /> Exportar Artefatos Canônicos EPM DEVTECH
+            <FileCode className="size-4 text-brand-accent" /> Exportar Artefatos Canônicos EPM
+            DEVTECH
           </h4>
           <p className="text-xs text-neutral-300 mt-1">
             Gere os arquivos estruturados em conformidade com o motor de briefings e agendamento da
@@ -240,7 +241,7 @@ export function StepRevisao({ data, pendingFlags }: StepRevisaoProps) {
             {copiedSummary ? (
               <Check className="size-3.5 text-emerald-400" />
             ) : (
-              <Send className="size-3.5 text-primary" />
+              <Send className="size-3.5 text-brand-accent" />
             )}
             {copiedSummary ? "Resumo Copiado!" : "Copiar Resumo para WhatsApp"}
           </Button>

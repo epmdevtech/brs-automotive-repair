@@ -352,7 +352,7 @@ export const AnimatedHero = ({
         >
           {resolvedProfile.flare.enabled && (
             <div
-              className="absolute border border-amber-400/70 bg-amber-400/10 text-[10px] text-amber-200 px-1 font-mono rounded"
+              className="absolute border border-primary/30 bg-primary/10 text-[10px] text-brand-accent px-1 font-mono rounded"
               style={{
                 top: `${resolvedProfile.flare.top}%`,
                 left: `${resolvedProfile.flare.left}%`,
@@ -370,7 +370,7 @@ export const AnimatedHero = ({
         </div>
       )}
 
-      {/* Halo de luz ambiente dourada interativo via GSAP */}
+      {/* Halo de luz ambiente vermelho interativo via GSAP */}
       <div
         ref={glowRef}
         aria-hidden="true"
@@ -438,7 +438,7 @@ export const AnimatedHero = ({
                     {secondaryCta.text}{" "}
                     <ArrowDown
                       size={14}
-                      className="ml-2 transition-transform duration-300 group-hover:translate-y-1 text-primary"
+                      className="ml-2 transition-transform duration-300 group-hover:translate-y-1 text-brand-accent"
                       aria-hidden="true"
                     />
                   </HeroLink>
@@ -452,7 +452,7 @@ export const AnimatedHero = ({
                   {secondaryCta.text}{" "}
                   <ArrowDown
                     size={14}
-                    className="ml-2 transition-transform duration-300 group-hover:translate-y-1 text-primary"
+                    className="ml-2 transition-transform duration-300 group-hover:translate-y-1 text-brand-accent"
                     aria-hidden="true"
                   />
                 </Button>
@@ -484,7 +484,7 @@ export const AnimatedHero = ({
                 key={i}
                 className="flex flex-col p-3 rounded-sm bg-white/[0.02] border border-white/10 backdrop-blur-sm transition-all duration-300 hover:border-primary/40 hover:bg-white/[0.04]"
               >
-                <div className="flex items-center gap-2 text-primary text-xs font-semibold">
+                <div className="flex items-center gap-2 text-brand-accent text-xs font-semibold">
                   <metric.icon size={14} aria-hidden="true" />
                   <span className="font-display tracking-tight text-[12px]">{metric.label}</span>
                 </div>
@@ -502,7 +502,7 @@ export const AnimatedHero = ({
         {bottomContent || (
           <div className="page-width flex items-center justify-between text-xs text-neutral-400 pt-3 border-t border-white/10 w-full">
             <span className="flex items-center gap-2 font-medium">
-              <MapPin size={14} className="text-primary" aria-hidden="true" /> Toledo, Paraná
+              <MapPin size={14} className="text-brand-accent" aria-hidden="true" /> Toledo, Paraná
             </span>
             <a
               href="#servicos"

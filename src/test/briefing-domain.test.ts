@@ -30,9 +30,9 @@ describe("Briefing Domain & Validation Engine", () => {
   });
 
   describe("Calculador de Contraste WCAG 2.2 AA", () => {
-    it("deve calcular razão de contraste adequada entre Dourado Master e Fundo Escuro", () => {
-      // Dourado #D4AF37 contra fundo preto #0B0D10
-      const ratio = getContrastRatio("#D4AF37", "#0B0D10");
+    it("deve calcular razão de contraste adequada entre o Vermelho de destaque Master e o Fundo Escuro", () => {
+      // Vermelho de destaque #F26B6F contra fundo preto #0B0D10
+      const ratio = getContrastRatio("#F26B6F", "#0B0D10");
       expect(ratio).toBeGreaterThanOrEqual(4.5);
 
       const evaluation = evaluateWCAGContrast(ratio);

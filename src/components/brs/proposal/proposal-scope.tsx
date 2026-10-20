@@ -26,14 +26,14 @@ export function ProposalScope({ proposal }: ProposalScopeProps) {
           {/* Coluna 1: Incluído no Projeto */}
           <div className="rounded-xl border border-primary/30 bg-primary/[0.02] p-6 sm:p-8">
             <div className="flex items-center gap-3 pb-6 mb-6 border-b border-primary/20">
-              <div className="size-8 rounded-full bg-primary/20 text-primary flex items-center justify-center shrink-0">
+              <div className="size-8 rounded-full bg-primary/20 text-brand-accent flex items-center justify-center shrink-0">
                 <CheckCircle2 className="size-5" aria-hidden="true" />
               </div>
               <div>
                 <h3 className="text-base sm:text-lg font-display font-semibold text-white">
                   Incluído no Projeto
                 </h3>
-                <p className="text-xs text-primary/80">
+                <p className="text-xs text-brand-accent/80">
                   Entregáveis cobertos integralmente pelo investimento
                 </p>
               </div>
@@ -43,7 +43,7 @@ export function ProposalScope({ proposal }: ProposalScopeProps) {
               {scopeIncluded.map((item) => (
                 <div key={item.id} className="flex items-start gap-3.5 group">
                   <CheckCircle2
-                    className="size-4 text-primary shrink-0 mt-1 transition-transform group-hover:scale-110"
+                    className="size-4 text-brand-accent shrink-0 mt-1 transition-transform group-hover:scale-110"
                     aria-hidden="true"
                   />
                   <div>

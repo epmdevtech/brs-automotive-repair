@@ -99,12 +99,12 @@ export function Services() {
               <div className="pt-6 mt-6 border-t border-border/40">
                 <Link
                   to={service.path}
-                  className="group/link inline-flex items-center gap-1.5 text-xs font-semibold text-primary hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary rounded-xs py-0.5"
+                  className="group/link inline-flex items-center gap-1.5 text-xs font-semibold text-brand-accent hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary rounded-xs py-0.5"
                 >
                   <span>Ver detalhes do serviço</span>
                   <ArrowUpRight
                     size={14}
-                    className="transition-transform duration-200 group-hover/link:translate-x-1 group-hover/link:-translate-y-1 text-primary"
+                    className="transition-transform duration-200 group-hover/link:translate-x-1 group-hover/link:-translate-y-1 text-brand-accent"
                     aria-hidden="true"
                   />
                 </Link>
@@ -127,12 +127,12 @@ export function Services() {
           <Link
             to="/servicos"
             hash="estetica-automotiva"
-            className="group/all inline-flex items-center gap-1.5 text-xs font-semibold text-primary hover:text-foreground transition-colors shrink-0"
+            className="group/all inline-flex items-center gap-1.5 text-xs font-semibold text-brand-accent hover:text-foreground transition-colors shrink-0"
           >
             <span>Ver estética e proteção</span>
             <ArrowUpRight
               size={14}
-              className="transition-transform duration-200 group-hover/all:translate-x-0.5 group-hover/all:-translate-y-0.5 text-primary"
+              className="transition-transform duration-200 group-hover/all:translate-x-0.5 group-hover/all:-translate-y-0.5 text-brand-accent"
               aria-hidden="true"
             />
           </Link>

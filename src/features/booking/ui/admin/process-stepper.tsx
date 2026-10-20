@@ -118,7 +118,7 @@ export function ProcessStepper({
                     isCompleted
                       ? "bg-emerald-600 ring-2 ring-emerald-100"
                       : isCurrent
-                        ? "bg-amber-500 ring-4 ring-amber-100 animate-pulse"
+                        ? "bg-violet-500 ring-4 ring-violet-100 animate-pulse"
                         : "bg-white border border-slate-300 ring-1 ring-slate-100"
                   }`}
                   aria-hidden="true"
@@ -162,7 +162,7 @@ export function ProcessStepper({
         <div className="w-full h-1 bg-slate-100 rounded-full overflow-hidden">
           <div
             className={`h-full rounded-full transition-all duration-300 ${
-              isAllCompleted ? "bg-emerald-500" : "bg-amber-500"
+              isAllCompleted ? "bg-emerald-500" : "bg-violet-500"
             }`}
             style={{ width: `${(activeStep / 6) * 100}%` }}
           />

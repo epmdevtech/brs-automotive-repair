@@ -71,7 +71,7 @@ export function StepEquipe({ data, onChange }: StepEquipeProps) {
           onClick={addMembro}
           variant="outline"
           size="sm"
-          className="border-primary/40 text-primary hover:bg-primary/10 gap-1.5 text-xs"
+          className="border-primary/40 text-brand-accent hover:bg-primary/10 gap-1.5 text-xs"
         >
           <Plus className="size-3.5" /> Adicionar Profissional
         </Button>
@@ -85,7 +85,7 @@ export function StepEquipe({ data, onChange }: StepEquipeProps) {
           >
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <div className="size-7 rounded-lg bg-primary/10 text-primary flex items-center justify-center font-bold text-xs">
+                <div className="size-7 rounded-lg bg-primary/10 text-brand-accent flex items-center justify-center font-bold text-xs">
                   {idx + 1}
                 </div>
                 <h4 className="text-sm font-semibold text-white">
@@ -121,7 +121,7 @@ export function StepEquipe({ data, onChange }: StepEquipeProps) {
               {/* Especialidade Automotiva */}
               <div className="space-y-1.5">
                 <Label className="text-xs text-neutral-300 font-medium flex items-center gap-1.5">
-                  <Wrench className="size-3 text-primary" /> Especialidade Técnica Automotiva
+                  <Wrench className="size-3 text-brand-accent" /> Especialidade Técnica Automotiva
                 </Label>
                 <Input
                   value={membro.camposNicho?.especialidade_tecnica || ""}
@@ -194,7 +194,8 @@ export function StepEquipe({ data, onChange }: StepEquipeProps) {
                   className="accent-primary size-4"
                 />
                 <span className="flex items-center gap-1">
-                  <UserCheck className="size-3.5 text-primary" /> Habilitado para agendamento online
+                  <UserCheck className="size-3.5 text-brand-accent" /> Habilitado para agendamento
+                  online
                 </span>
               </label>
 

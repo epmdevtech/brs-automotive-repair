@@ -287,7 +287,10 @@ export function ContactForm({ partner }: { partner: boolean }) {
           )}
           <p className="text-[11px] text-muted-foreground pt-3 border-t border-border/60">
             Prefere ligar diretamente?{" "}
-            <a className="underline hover:text-primary transition-colors" href={company.phoneHref}>
+            <a
+              className="underline hover:text-brand-accent transition-colors"
+              href={company.phoneHref}
+            >
               Ligue para {company.phone}
             </a>
             .

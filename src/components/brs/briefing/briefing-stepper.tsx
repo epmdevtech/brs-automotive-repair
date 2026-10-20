@@ -29,7 +29,7 @@ export function BriefingStepper({
       {/* Barra de Progresso Superior */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
         <div>
-          <span className="text-xs font-semibold uppercase tracking-wider text-primary">
+          <span className="text-xs font-semibold uppercase tracking-wider text-brand-accent">
             Fluxo Guiado de Briefing
           </span>
           <h2 className="text-sm sm:text-base font-semibold text-white">
@@ -71,13 +71,13 @@ export function BriefingStepper({
                 {isDone && !isActive ? (
                   <CheckCircle2 className="size-4 text-emerald-400" aria-hidden="true" />
                 ) : s.hasPending ? (
-                  <AlertCircle className="size-4 text-amber-400" aria-hidden="true" />
+                  <AlertCircle className="size-4 text-brand-accent" aria-hidden="true" />
                 ) : (
                   <span
                     className={cn(
                       "size-5 rounded-full flex items-center justify-center text-[11px]",
                       isActive
-                        ? "bg-primary text-neutral-950 font-bold"
+                        ? "bg-primary text-white font-bold"
                         : "bg-neutral-800 text-neutral-400 group-hover:text-white",
                     )}
                   >

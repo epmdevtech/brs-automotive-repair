@@ -174,7 +174,7 @@ export function PageHero({
 
           {codeIndex && (
             <div className="hidden sm:flex items-center gap-2 text-[10px] font-mono tracking-widest uppercase text-neutral-400">
-              <span className="text-primary font-medium">{codeIndex}</span>
+              <span className="text-brand-accent font-medium">{codeIndex}</span>
             </div>
           )}
         </div>
@@ -219,7 +219,7 @@ export function PageHero({
                       key={idx}
                       className="flex flex-col p-2.5 rounded-sm bg-white/[0.02] border border-white/8 backdrop-blur-xs transition-colors hover:border-primary/40 hover:bg-white/[0.04]"
                     >
-                      <div className="flex items-center gap-1.5 text-primary text-xs font-semibold">
+                      <div className="flex items-center gap-1.5 text-brand-accent text-xs font-semibold">
                         <Icon size={13} className="shrink-0" aria-hidden="true" />
                         <span className="font-display tracking-tight text-[11px] truncate">
                           {badge.label}

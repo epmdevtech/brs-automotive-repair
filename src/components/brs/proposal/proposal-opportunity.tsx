@@ -21,7 +21,7 @@ export function ProposalOpportunity({ proposal }: ProposalOpportunityProps) {
         </div>
 
         <div className="mt-10 pt-8 border-t border-white/10">
-          <h3 className="text-xs font-semibold uppercase tracking-wider text-primary mb-6 flex items-center gap-2">
+          <h3 className="text-xs font-semibold uppercase tracking-wider text-brand-accent mb-6 flex items-center gap-2">
             <Target className="size-4" aria-hidden="true" />
             <span>Objetivos Pretendidos com a Solução Digital</span>
           </h3>
@@ -32,7 +32,7 @@ export function ProposalOpportunity({ proposal }: ProposalOpportunityProps) {
                 key={idx}
                 className="flex items-start gap-3 p-4 rounded-lg bg-white/[0.02] border border-white/5 hover:border-white/15 transition-colors"
               >
-                <div className="size-5 rounded-full bg-primary/15 text-primary flex items-center justify-center shrink-0 mt-0.5">
+                <div className="size-5 rounded-full bg-primary/15 text-brand-accent flex items-center justify-center shrink-0 mt-0.5">
                   <Check className="size-3" aria-hidden="true" />
                 </div>
                 <span className="text-sm text-neutral-200 leading-normal">{objective}</span>

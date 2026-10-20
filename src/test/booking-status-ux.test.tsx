@@ -27,10 +27,10 @@ describe("Domain: Status Semantics & Styling (SPEC-051)", () => {
     expect(getStatusBorderClass("COMPLETED")).toContain("emerald");
     expect(getStatusDotClass("COMPLETED")).toContain("emerald");
 
-    // CONFIRMED (in-progress) must be amber
-    expect(getStatusBadgeClass("CONFIRMED")).toContain("amber");
+    // CONFIRMED (in-progress) must be violet
+    expect(getStatusBadgeClass("CONFIRMED")).toContain("violet");
     expect(getStatusBadgeClass("CONFIRMED")).not.toContain("emerald");
-    expect(getStatusBorderClass("CONFIRMED")).toContain("amber");
+    expect(getStatusBorderClass("CONFIRMED")).toContain("violet");
 
     // PENDING (open) must be sky/blue
     expect(getStatusBadgeClass("PENDING")).toContain("sky");

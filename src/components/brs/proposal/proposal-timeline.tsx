@@ -22,7 +22,7 @@ export function ProposalTimeline({ proposal }: ProposalTimelineProps) {
           </p>
 
           {estimatedTimeline && (
-            <div className="mt-4 inline-flex items-center gap-2 px-3 py-1.5 rounded-sm bg-white/5 border border-white/10 text-xs text-primary font-mono">
+            <div className="mt-4 inline-flex items-center gap-2 px-3 py-1.5 rounded-sm bg-white/5 border border-white/10 text-xs text-brand-accent font-mono">
               <Clock className="size-3.5" aria-hidden="true" />
               <span>Prazo Estimado Global: {estimatedTimeline}</span>
             </div>
@@ -33,7 +33,7 @@ export function ProposalTimeline({ proposal }: ProposalTimelineProps) {
           {developmentPhases.map((phase) => (
             <div key={phase.step} className="relative group">
               {/* Marcador Numérico na Linha */}
-              <div className="absolute -left-[35px] sm:-left-[43px] top-0 size-7 sm:size-8 rounded-full bg-neutral-900 border-2 border-primary text-primary flex items-center justify-center text-xs font-bold font-mono shadow-md">
+              <div className="absolute -left-[35px] sm:-left-[43px] top-0 size-7 sm:size-8 rounded-full bg-neutral-900 border-2 border-primary text-brand-accent flex items-center justify-center text-xs font-bold font-mono shadow-md">
                 {phase.step}
               </div>
 
@@ -44,7 +44,7 @@ export function ProposalTimeline({ proposal }: ProposalTimelineProps) {
                   </h3>
 
                   {phase.estimatedDuration && (
-                    <span className="text-[11px] font-mono px-2 py-0.5 rounded-sm bg-primary/10 border border-primary/20 text-primary">
+                    <span className="text-[11px] font-mono px-2 py-0.5 rounded-sm bg-primary/10 border border-primary/20 text-brand-accent">
                       {phase.estimatedDuration}
                     </span>
                   )}
@@ -59,7 +59,7 @@ export function ProposalTimeline({ proposal }: ProposalTimelineProps) {
         </div>
 
         <div className="mt-12 p-6 rounded-lg bg-white/[0.02] border border-white/10 flex items-start sm:items-center gap-4 text-xs sm:text-sm text-neutral-300">
-          <ArrowRight className="size-5 text-primary shrink-0" aria-hidden="true" />
+          <ArrowRight className="size-5 text-brand-accent shrink-0" aria-hidden="true" />
           <span>
             <strong>Garantia de Iteração:</strong> A fase de homologação inclui rodada de revisão e
             refinamentos pontuais antes do apontamento do domínio público.
