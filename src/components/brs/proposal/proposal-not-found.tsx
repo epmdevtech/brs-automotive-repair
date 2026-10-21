@@ -23,7 +23,7 @@ export function ProposalNotFound({ slug }: ProposalNotFoundProps) {
           {slug ? (
             <>
               Não localizamos nenhuma proposta ativa associada ao identificador{" "}
-              <code className="text-primary font-mono bg-white/5 px-1.5 py-0.5 rounded">
+              <code className="text-brand-accent font-mono bg-white/5 px-1.5 py-0.5 rounded">
                 {slug}
               </code>
               . O link pode ter expirado ou sido digitado incorretamente.

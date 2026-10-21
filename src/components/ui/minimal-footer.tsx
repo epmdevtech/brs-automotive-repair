@@ -21,6 +21,7 @@ export function MinimalFooter({ className }: MinimalFooterProps) {
         className,
       )}
     >
+      <div aria-hidden="true" className="brand-checker h-1 w-full" />
       <div className="page-width py-14 lg:py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-12">
           {/* Coluna 1: Marca, Endereço e Horário Oficial */}
@@ -32,11 +33,15 @@ export function MinimalFooter({ className }: MinimalFooterProps) {
             </p>
             <div className="mt-5 space-y-2 text-xs text-neutral-400">
               <div className="flex items-start gap-2">
-                <MapPin size={14} className="text-primary shrink-0 mt-0.5" aria-hidden="true" />
+                <MapPin
+                  size={14}
+                  className="text-brand-accent shrink-0 mt-0.5"
+                  aria-hidden="true"
+                />
                 <span>{company.address.full}</span>
               </div>
               <div className="flex items-center gap-2">
-                <Clock size={14} className="text-primary shrink-0" aria-hidden="true" />
+                <Clock size={14} className="text-brand-accent shrink-0" aria-hidden="true" />
                 <span>{company.openingHours}</span>
               </div>
             </div>
@@ -52,7 +57,7 @@ export function MinimalFooter({ className }: MinimalFooterProps) {
                 <li key={href}>
                   <Link
                     to={href}
-                    className="hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary rounded-xs"
+                    className="hover:text-brand-accent transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary rounded-xs"
                   >
                     {label}
                   </Link>
@@ -71,7 +76,7 @@ export function MinimalFooter({ className }: MinimalFooterProps) {
                 <li key={service.title}>
                   <Link
                     to={service.path}
-                    className="hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary rounded-xs"
+                    className="hover:text-brand-accent transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary rounded-xs"
                   >
                     {service.short}
                   </Link>
@@ -80,7 +85,7 @@ export function MinimalFooter({ className }: MinimalFooterProps) {
               <li>
                 <Link
                   to="/servicos"
-                  className="hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary rounded-xs"
+                  className="hover:text-brand-accent transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary rounded-xs"
                 >
                   Serviço de Guincho
                 </Link>
@@ -96,20 +101,20 @@ export function MinimalFooter({ className }: MinimalFooterProps) {
             <div className="space-y-3 text-xs text-neutral-400 w-full">
               <a
                 href={company.phoneHref}
-                className="flex items-center gap-2.5 hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary rounded-xs py-0.5"
+                className="flex items-center gap-2.5 hover:text-brand-accent transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary rounded-xs py-0.5"
                 aria-label={`Ligar para o telefone ${company.phone}`}
               >
-                <Phone size={14} className="text-primary shrink-0" aria-hidden="true" />
+                <Phone size={14} className="text-brand-accent shrink-0" aria-hidden="true" />
                 <span className="font-medium text-foreground">{company.phone}</span>
               </a>
 
               <a
                 href={company.instagram.url}
                 {...external}
-                className="flex items-center gap-2.5 hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary rounded-xs py-0.5"
+                className="flex items-center gap-2.5 hover:text-brand-accent transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary rounded-xs py-0.5"
                 aria-label="Abrir Instagram oficial da Master em nova aba"
               >
-                <Instagram size={14} className="text-primary shrink-0" aria-hidden="true" />
+                <Instagram size={14} className="text-brand-accent shrink-0" aria-hidden="true" />
                 <span>{company.instagram.handle}</span>
                 <ArrowUpRight size={12} className="text-neutral-500" aria-hidden="true" />
               </a>
@@ -117,10 +122,10 @@ export function MinimalFooter({ className }: MinimalFooterProps) {
               <a
                 href={company.social.url}
                 {...external}
-                className="flex items-center gap-2.5 hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary rounded-xs py-0.5"
+                className="flex items-center gap-2.5 hover:text-brand-accent transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary rounded-xs py-0.5"
                 aria-label="Abrir Facebook oficial da Master em nova aba"
               >
-                <Facebook size={14} className="text-primary shrink-0" aria-hidden="true" />
+                <Facebook size={14} className="text-brand-accent shrink-0" aria-hidden="true" />
                 <span>Master Chapeação e Pinturas</span>
                 <ArrowUpRight size={12} className="text-neutral-500" aria-hidden="true" />
               </a>
@@ -139,7 +144,7 @@ export function MinimalFooter({ className }: MinimalFooterProps) {
             </span>
             <Link
               to="/privacidade"
-              className="hover:text-primary transition-colors underline-offset-4 hover:underline"
+              className="hover:text-brand-accent transition-colors underline-offset-4 hover:underline"
             >
               Privacidade
             </Link>

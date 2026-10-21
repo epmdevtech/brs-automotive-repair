@@ -32,8 +32,8 @@ const COLUMNS: KanbanColumnConfig[] = [
   {
     status: "CONFIRMED",
     title: "Em Andamento",
-    dotColor: "bg-amber-500",
-    headerBorder: "border-amber-500",
+    dotColor: "bg-violet-500",
+    headerBorder: "border-violet-500",
     emptyText: "Nenhum atendimento em andamento",
   },
   {

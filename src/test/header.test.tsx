@@ -13,7 +13,7 @@ describe("Header component and floating capsule navbar", () => {
     expect(screen.getByRole("link", { name: "Serviços" })).toHaveAttribute("href", "/servicos");
   });
 
-  it("renders floating capsule design with dark glassmorphism and rounded gold CTA", () => {
+  it("renders floating capsule design with dark glassmorphism and rounded brand-red CTA", () => {
     const { container } = render(<Header />);
 
     const header = screen.getByRole("banner");
@@ -26,7 +26,7 @@ describe("Header component and floating capsule navbar", () => {
     expect(capsule).not.toHaveClass("rounded-full");
     expect(capsule).toHaveClass("backdrop-blur-md");
 
-    // Botão CTA dourado com classe canônica .btn--primary sem chanfro (SPEC-022)
+    // Botão CTA vermelho com classe canônica .btn--primary sem chanfro (SPEC-022)
     const ctaButton = screen.getByRole("link", { name: /solicitar avaliação/i });
     const btnElem = ctaButton.closest("button") || ctaButton;
     expect(btnElem).toHaveClass("btn--primary");

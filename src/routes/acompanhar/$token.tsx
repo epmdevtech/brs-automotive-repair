@@ -174,20 +174,20 @@ function CustomerTrackingPage() {
   const isCompleted = trackingData.statusGeral === "concluido";
 
   return (
-    <div className="min-h-screen bg-[#0B0D10] text-neutral-200 antialiased selection:bg-[#D4AF37]/30 selection:text-white">
+    <div className="min-h-screen bg-background text-neutral-200 antialiased selection:bg-primary/30 selection:text-white">
       {/* CABEÇALHO ENXUTO DEDICADO NO FLUXO (NÃO FLUTUANTE) */}
-      <header className="sticky top-0 z-30 w-full h-14 sm:h-16 bg-[#0B0D10]/95 backdrop-blur-md border-b border-neutral-800/80 px-4 sm:px-6">
+      <header className="sticky top-0 z-30 w-full h-14 sm:h-16 bg-background/95 backdrop-blur-md border-b border-neutral-800/80 px-4 sm:px-6">
         <div className="max-w-6xl mx-auto h-full flex items-center justify-between">
           <Link
             to="/"
-            className="flex items-center gap-2.5 group focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-[#D4AF37] rounded-lg p-1"
+            className="flex items-center gap-2.5 group focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-brand-accent rounded-lg p-1"
             title="Master Chapeação e Pinturas - Ir para início"
           >
-            <div className="size-8 sm:size-9 rounded-lg bg-gradient-to-br from-[#D4AF37] to-[#A68322] flex items-center justify-center font-bold font-display text-neutral-950 text-base shadow-sm">
+            <div className="size-8 sm:size-9 rounded-lg bg-gradient-to-br from-primary to-primary-active flex items-center justify-center font-bold font-display text-white text-base shadow-sm">
               B
             </div>
             <div className="flex flex-col">
-              <span className="font-display font-bold text-white text-sm sm:text-base tracking-tight leading-tight group-hover:text-[#D4AF37] transition-colors">
+              <span className="font-display font-bold text-white text-sm sm:text-base tracking-tight leading-tight group-hover:text-brand-accent transition-colors">
                 Master Chapeação
               </span>
               <span className="text-[10px] text-neutral-400 font-medium tracking-wide">
@@ -209,9 +209,9 @@ function CustomerTrackingPage() {
             </a>
             <a
               href={CONTATO_OFICINA.telefoneHref}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-neutral-900 border border-neutral-800 text-neutral-300 hover:text-white hover:bg-neutral-800 text-xs font-medium transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-[#D4AF37]"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-neutral-900 border border-neutral-800 text-neutral-300 hover:text-white hover:bg-neutral-800 text-xs font-medium transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-brand-accent"
             >
-              <Phone size={13} className="text-[#D4AF37]" />
+              <Phone size={13} className="text-brand-accent" />
               <span>{CONTATO_OFICINA.telefoneFormatado}</span>
             </a>
           </div>
@@ -223,14 +223,14 @@ function CustomerTrackingPage() {
         <aside
           role="status"
           aria-live="polite"
-          className="bg-amber-950/80 border-b border-amber-800/80 px-4 py-2.5 text-amber-200 text-xs flex items-center justify-center gap-2"
+          className="bg-primary/10 border-b border-primary/30 px-4 py-2.5 text-brand-accent text-xs flex items-center justify-center gap-2"
         >
-          <WifiOff size={15} className="shrink-0 text-amber-400" />
+          <WifiOff size={15} className="shrink-0 text-violet-300" />
           <span>Você está sem internet. Mostrando os últimos dados salvos.</span>
           <button
             type="button"
             onClick={() => loadData(true)}
-            className="underline hover:text-white font-semibold ml-2 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-amber-400 rounded px-1"
+            className="underline hover:text-white font-semibold ml-2 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-brand-accent rounded px-1"
           >
             Tentar reconectar
           </button>
@@ -257,7 +257,7 @@ function CustomerTrackingPage() {
                     type="button"
                     onClick={handleCopyProtocol}
                     aria-label={`Copiar protocolo ${trackingData.protocol}`}
-                    className="inline-flex items-center gap-1.5 font-mono font-bold text-xs bg-neutral-900 hover:bg-neutral-800 text-[#D4AF37] border border-[#D4AF37]/30 hover:border-[#D4AF37] px-2.5 py-1 rounded-md transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-[#D4AF37]"
+                    className="inline-flex items-center gap-1.5 font-mono font-bold text-xs bg-neutral-900 hover:bg-neutral-800 text-brand-accent border border-primary/30 hover:border-primary px-2.5 py-1 rounded-md transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-brand-accent"
                   >
                     <span>{trackingData.protocol}</span>
                     {copiedProtocol ? (
@@ -281,7 +281,7 @@ function CustomerTrackingPage() {
                     Concluído
                   </span>
                 ) : (
-                  <span className="text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-amber-950/70 border border-amber-800/70 text-amber-300">
+                  <span className="text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-violet-950/70 border border-violet-800/40 text-violet-300">
                     Em andamento
                   </span>
                 )}
@@ -345,7 +345,7 @@ function CustomerTrackingPage() {
                           isDone
                             ? "bg-emerald-500"
                             : isCurrent
-                              ? "bg-amber-400 animate-pulse shadow-[0_0_8px_rgba(251,191,36,0.6)]"
+                              ? "bg-violet-400 animate-pulse shadow-[0_0_8px_var(--brand-primary-glow)]"
                               : "bg-neutral-800"
                         }`}
                       />
@@ -365,11 +365,11 @@ function CustomerTrackingPage() {
                     disabled={isRefreshing}
                     title="Atualizar dados agora"
                     aria-label="Atualizar dados agora"
-                    className="p-1 rounded hover:bg-neutral-800 text-neutral-400 hover:text-white transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-[#D4AF37]"
+                    className="p-1 rounded hover:bg-neutral-800 text-neutral-400 hover:text-white transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-brand-accent"
                   >
                     <RefreshCw
                       size={12}
-                      className={isRefreshing ? "animate-spin text-[#D4AF37]" : ""}
+                      className={isRefreshing ? "animate-spin text-brand-accent" : ""}
                     />
                   </button>
                 </div>
@@ -378,7 +378,7 @@ function CustomerTrackingPage() {
                   <button
                     type="button"
                     onClick={scrollToCurrentStep}
-                    className="inline-flex items-center gap-1 text-[11px] text-[#D4AF37] hover:underline font-semibold focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-[#D4AF37] rounded"
+                    className="inline-flex items-center gap-1 text-[11px] text-brand-accent hover:underline font-semibold focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-brand-accent rounded"
                   >
                     <span>Ver etapa atual</span>
                     <ArrowRight size={11} />
@@ -393,13 +393,13 @@ function CustomerTrackingPage() {
               className="p-5 sm:p-6 rounded-2xl border border-neutral-800 bg-[#13161B] text-white space-y-4 shadow-xl"
             >
               <h3 className="text-xs uppercase tracking-wider font-semibold text-neutral-400 flex items-center gap-2">
-                <Car size={15} className="text-[#D4AF37]" />
+                <Car size={15} className="text-brand-accent" />
                 <span>Dados do veículo</span>
               </h3>
 
               <div className="space-y-3 text-xs">
                 {/* VEÍCULO */}
-                <div className="p-3 rounded-xl bg-[#0B0D10] border border-neutral-800/80 flex items-center justify-between">
+                <div className="p-3 rounded-xl bg-background border border-neutral-800/80 flex items-center justify-between">
                   <div>
                     <span className="text-[10px] text-neutral-400 uppercase tracking-wider block">
                       Modelo do veículo
@@ -412,12 +412,12 @@ function CustomerTrackingPage() {
                 </div>
 
                 {/* PLACA MASCARADA (CONFORMIDADE LGPD) */}
-                <div className="p-3 rounded-xl bg-[#0B0D10] border border-neutral-800/80 flex items-center justify-between">
+                <div className="p-3 rounded-xl bg-background border border-neutral-800/80 flex items-center justify-between">
                   <div>
                     <span className="text-[10px] text-neutral-400 uppercase tracking-wider block">
                       Placa identificada
                     </span>
-                    <strong className="text-sm font-mono font-bold text-[#D4AF37] mt-0.5 tracking-wider block">
+                    <strong className="text-sm font-mono font-bold text-brand-accent mt-0.5 tracking-wider block">
                       {trackingData.placaMascarada}
                     </strong>
                   </div>
@@ -425,7 +425,7 @@ function CustomerTrackingPage() {
                 </div>
 
                 {/* SERVIÇO */}
-                <div className="p-3 rounded-xl bg-[#0B0D10] border border-neutral-800/80 flex items-center justify-between">
+                <div className="p-3 rounded-xl bg-background border border-neutral-800/80 flex items-center justify-between">
                   <div>
                     <span className="text-[10px] text-neutral-400 uppercase tracking-wider block">
                       Serviço técnico
@@ -447,10 +447,10 @@ function CustomerTrackingPage() {
 
                 {/* PREVISÃO DE ENTREGA (SOMENTE SE INFORMADA FORMALMENTE) */}
                 {trackingData.previsaoEntrega && (
-                  <div className="p-3 rounded-xl bg-amber-950/30 border border-amber-800/40 text-amber-200 flex items-center gap-2.5">
-                    <Calendar size={16} className="text-amber-400 shrink-0" />
+                  <div className="p-3 rounded-xl bg-primary/10 border border-primary/30 text-brand-accent flex items-center gap-2.5">
+                    <Calendar size={16} className="text-brand-accent shrink-0" />
                     <div>
-                      <span className="text-[10px] text-amber-300 uppercase tracking-wider block font-semibold">
+                      <span className="text-[10px] text-brand-accent uppercase tracking-wider block font-semibold">
                         Previsão de entrega
                       </span>
                       <strong className="text-xs text-white">{trackingData.previsaoEntrega}</strong>
@@ -468,7 +468,7 @@ function CustomerTrackingPage() {
               <div className="font-semibold text-white text-sm">Master Chapeação e Pinturas</div>
               <div className="space-y-1 text-neutral-400 text-xs">
                 <p className="flex items-start gap-1.5">
-                  <MapPin size={13} className="text-[#D4AF37] shrink-0 mt-0.5" />
+                  <MapPin size={13} className="text-brand-accent shrink-0 mt-0.5" />
                   <span>{company.address.full}</span>
                 </p>
                 <p className="flex items-center gap-1.5 pl-4 text-[11px] text-neutral-400">
@@ -510,7 +510,7 @@ function CustomerTrackingPage() {
               <div className="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-neutral-800">
                 <div>
                   <h2 className="text-sm font-bold uppercase tracking-wider text-neutral-300 flex items-center gap-2">
-                    <Sparkles size={16} className="text-[#D4AF37]" />
+                    <Sparkles size={16} className="text-brand-accent" />
                     <span>Evolução da reparação</span>
                   </h2>
                   <p className="text-xs text-neutral-400 mt-0.5">
@@ -523,7 +523,7 @@ function CustomerTrackingPage() {
                   <button
                     type="button"
                     onClick={() => setExpandedCompleted(!expandedCompleted)}
-                    className="sm:hidden text-[11px] text-[#D4AF37] hover:underline font-medium"
+                    className="sm:hidden text-[11px] text-brand-accent hover:underline font-medium"
                   >
                     {expandedCompleted ? "Recolher etapas anteriores" : "Ver etapas anteriores"}
                   </button>
@@ -566,8 +566,8 @@ function CustomerTrackingPage() {
                           isDone
                             ? "bg-emerald-950 border-2 border-emerald-500 text-emerald-400 shadow-[0_0_10px_rgba(16,185,129,0.3)]"
                             : isCurrent
-                              ? "bg-amber-950 border-2 border-amber-400 text-amber-300 ring-4 ring-amber-400/20 shadow-[0_0_12px_rgba(251,191,36,0.5)]"
-                              : "bg-[#0B0D10] border-2 border-neutral-700 text-neutral-400"
+                              ? "bg-violet-950 border-2 border-violet-400 text-violet-300 ring-4 ring-violet-400/20 shadow-[0_0_12px_var(--brand-primary-glow)]"
+                              : "bg-background border-2 border-neutral-700 text-neutral-400"
                         }`}
                       >
                         {isDone ? (
@@ -581,10 +581,10 @@ function CustomerTrackingPage() {
                       <div
                         className={`flex-1 rounded-xl p-4 sm:p-5 border text-xs transition-all ${
                           isCurrent
-                            ? "bg-[#1A1F26] border-amber-500/50 ring-1 ring-amber-500/30 text-white"
+                            ? "bg-secondary border-violet-500/50 ring-1 ring-violet-500/30 text-white"
                             : isDone
-                              ? "bg-[#0B0D10]/80 border-emerald-900/40 text-neutral-300"
-                              : "bg-[#0B0D10]/40 border-neutral-800/70 text-neutral-400"
+                              ? "bg-background/80 border-emerald-900/40 text-neutral-300"
+                              : "bg-background/40 border-neutral-800/70 text-neutral-400"
                         }`}
                       >
                         {/* CABEÇALHO DO CARD (TÍTULO + BADGE SEM REPETIÇÃO) */}
@@ -592,7 +592,7 @@ function CustomerTrackingPage() {
                           <h3
                             className={`font-semibold text-sm sm:text-base leading-6 tracking-tight ${
                               isCurrent
-                                ? "text-amber-300 font-bold"
+                                ? "text-violet-300 font-bold"
                                 : isDone
                                   ? "text-neutral-200"
                                   : "text-neutral-400"
@@ -609,7 +609,7 @@ function CustomerTrackingPage() {
                                 : "Concluído"}
                             </span>
                           ) : isCurrent ? (
-                            <span className="text-[10px] font-semibold px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/40 animate-pulse">
+                            <span className="text-[10px] font-semibold px-2.5 py-0.5 rounded-full bg-violet-500/20 text-violet-300 border border-violet-500/50 animate-pulse">
                               Fase atual
                             </span>
                           ) : isNextStep ? (
@@ -657,7 +657,7 @@ function CustomerTrackingPage() {
                               )}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-4 py-2.5 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-neutral-950 font-bold text-xs shadow-md transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-emerald-400"
+                              className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-4 py-2.5 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-white font-bold text-xs shadow-md transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-emerald-400"
                             >
                               <MessageCircle size={15} />
                               <span>Aprovar orçamento pelo WhatsApp</span>
@@ -677,7 +677,7 @@ function CustomerTrackingPage() {
                   href={CONTATO_OFICINA.construirLinkWhatsApp(trackingData.protocol)}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-[#D4AF37] hover:underline font-semibold"
+                  className="text-brand-accent hover:underline font-semibold"
                 >
                   Falar com o consultor técnico
                 </a>
@@ -704,11 +704,11 @@ function CustomerTrackingPage() {
 
         <a
           href={CONTATO_OFICINA.telefoneHref}
-          className="min-h-[44px] px-4 flex items-center justify-center gap-1.5 rounded-xl bg-neutral-900 border border-neutral-700 active:bg-neutral-800 text-neutral-200 text-xs font-semibold transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-[#D4AF37]"
+          className="min-h-[44px] px-4 flex items-center justify-center gap-1.5 rounded-xl bg-neutral-900 border border-neutral-700 active:bg-neutral-800 text-neutral-200 text-xs font-semibold transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-brand-accent"
           title="Ligar para a Master"
           aria-label="Ligar para a oficina"
         >
-          <Phone size={15} className="text-[#D4AF37]" />
+          <Phone size={15} className="text-brand-accent" />
           <span>Ligar</span>
         </a>
       </nav>
@@ -722,7 +722,7 @@ function CustomerTrackingPage() {
 
 function TrackingSkeleton() {
   return (
-    <div className="min-h-screen bg-[#0B0D10] text-neutral-400 antialiased">
+    <div className="min-h-screen bg-background text-neutral-400 antialiased">
       {/* HEADER SKELETON */}
       <div className="w-full h-14 sm:h-16 border-b border-neutral-800/80 px-4 sm:px-6 flex items-center justify-between">
         <div className="flex items-center gap-3">
@@ -776,11 +776,11 @@ function TrackingNotFound({
   onSearchSubmit,
 }: TrackingNotFoundProps) {
   return (
-    <div className="min-h-screen bg-[#0B0D10] text-neutral-200 flex flex-col justify-between">
+    <div className="min-h-screen bg-background text-neutral-200 flex flex-col justify-between">
       {/* HEADER DISCRETO */}
       <header className="w-full h-14 sm:h-16 border-b border-neutral-800/80 px-4 sm:px-6 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-2">
-          <div className="size-8 rounded-lg bg-gradient-to-br from-[#D4AF37] to-[#A68322] flex items-center justify-center font-bold text-neutral-950 text-sm">
+          <div className="size-8 rounded-lg bg-gradient-to-br from-primary to-primary-active flex items-center justify-center font-bold text-white text-sm">
             B
           </div>
           <span className="font-display font-bold text-white text-sm">Master Chapeação</span>
@@ -796,7 +796,7 @@ function TrackingNotFound({
       {/* CARD CENTRAL */}
       <main className="flex-1 flex items-center justify-center px-4 py-12">
         <div className="max-w-md w-full bg-[#13161B] border border-neutral-800 p-6 sm:p-8 rounded-2xl text-center space-y-5 shadow-2xl">
-          <div className="size-12 rounded-xl bg-amber-500/10 text-amber-500 flex items-center justify-center mx-auto border border-amber-500/20">
+          <div className="size-12 rounded-xl bg-primary/10 text-brand-accent flex items-center justify-center mx-auto border border-primary/20">
             <AlertCircle size={24} />
           </div>
 
@@ -819,13 +819,13 @@ function TrackingNotFound({
                 value={searchProtocol}
                 onChange={(e) => onSearchChange(e.target.value)}
                 placeholder="Digite seu protocolo (ex: Master-7391)"
-                className="w-full text-xs bg-[#0B0D10] border border-neutral-800 rounded-xl pl-9 pr-3 py-2.5 text-white placeholder:text-neutral-500 focus:outline-hidden focus:border-[#D4AF37]"
+                className="w-full text-xs bg-background border border-neutral-800 rounded-xl pl-9 pr-3 py-2.5 text-white placeholder:text-neutral-500 focus:outline-hidden focus:border-primary"
                 required
               />
             </div>
             <button
               type="submit"
-              className="w-full py-2.5 px-4 rounded-xl bg-[#D4AF37] hover:bg-[#C29E2F] text-neutral-950 font-bold text-xs transition-colors flex items-center justify-center gap-1.5"
+              className="w-full py-2.5 px-4 rounded-xl bg-primary hover:bg-primary-hover text-white font-bold text-xs transition-colors flex items-center justify-center gap-1.5"
             >
               <span>Consultar outro protocolo</span>
               <ArrowRight size={13} />
@@ -837,7 +837,7 @@ function TrackingNotFound({
             <div className="flex items-center justify-center gap-3 pt-1">
               <a
                 href={CONTATO_OFICINA.telefoneHref}
-                className="text-[#D4AF37] hover:underline font-semibold"
+                className="text-brand-accent hover:underline font-semibold"
               >
                 {CONTATO_OFICINA.telefoneFormatado}
               </a>

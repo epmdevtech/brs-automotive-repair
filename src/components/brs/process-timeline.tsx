@@ -87,7 +87,7 @@ export function ProcessTimeline() {
                 delay={0.1 + i * 0.08}
                 className="flex flex-col border-t border-border/50 pt-4"
               >
-                <span className="text-primary text-xs font-semibold font-mono tracking-wider mb-2">
+                <span className="text-brand-accent text-xs font-semibold font-mono tracking-wider mb-2">
                   {step.number}
                 </span>
                 <h3 className="text-base md:text-lg font-semibold font-display tracking-tight text-foreground mb-2 text-balance">

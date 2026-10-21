@@ -26,7 +26,7 @@ export function StatusBadge({
       case "PENDING":
         return <Clock size={iconSize} className="shrink-0 text-sky-700" />;
       case "CONFIRMED":
-        return <PlayCircle size={iconSize} className="shrink-0 text-amber-700" />;
+        return <PlayCircle size={iconSize} className="shrink-0 text-violet-700" />;
       case "COMPLETED":
         return <CheckCircle2 size={iconSize} className="shrink-0 text-emerald-700" />;
       case "CANCELLED":

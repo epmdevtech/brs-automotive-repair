@@ -84,7 +84,7 @@ export function ProposalModularAcceptance({
     >
       <div className="page-width">
         <div className="max-w-3xl mx-auto text-center mb-10">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-sm bg-primary/10 border border-primary/25 text-primary text-xs font-medium mb-4">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-sm bg-primary/10 border border-primary/25 text-brand-accent text-xs font-medium mb-4">
             <Sparkles className="size-3.5" aria-hidden="true" />
             <span>Fechamento & Próximo Passo</span>
           </div>
@@ -107,7 +107,7 @@ export function ProposalModularAcceptance({
                 Composição Atual
               </span>
               <h3 className="text-lg sm:text-xl font-display font-semibold text-white flex items-center gap-2">
-                <Layers className="size-5 text-primary" aria-hidden="true" />
+                <Layers className="size-5 text-brand-accent" aria-hidden="true" />
                 {selectedModules.length} de {modules.length} Módulos Selecionados
               </h3>
             </div>
@@ -120,7 +120,7 @@ export function ProposalModularAcceptance({
                 {hasVariableStartingPrice && (
                   <span className="text-xs text-neutral-400 font-mono">A partir de</span>
                 )}
-                <span className="text-2xl sm:text-3xl font-display font-bold text-primary">
+                <span className="text-2xl sm:text-3xl font-display font-bold text-brand-accent">
                   {formatCurrencyBRL(totalValue)}
                 </span>
               </div>
@@ -134,7 +134,7 @@ export function ProposalModularAcceptance({
             </span>
 
             {selectedModules.length === 0 ? (
-              <div className="p-4 rounded-lg bg-neutral-900/60 border border-amber-500/30 text-amber-300 text-xs sm:text-sm flex items-start gap-2.5">
+              <div className="p-4 rounded-lg bg-neutral-900/60 border border-primary/30 text-brand-accent text-xs sm:text-sm flex items-start gap-2.5">
                 <AlertCircle className="size-4 shrink-0 mt-0.5" aria-hidden="true" />
                 <span>
                   Nenhum módulo selecionado no momento. Escolha os módulos desejados no{" "}
@@ -156,7 +156,7 @@ export function ProposalModularAcceptance({
                     className="flex items-center justify-between gap-3 p-3 rounded-lg bg-neutral-900/70 border border-white/5"
                   >
                     <div className="flex items-center gap-2.5 min-w-0">
-                      <div className="size-5 rounded-full bg-primary/20 text-primary flex items-center justify-center shrink-0">
+                      <div className="size-5 rounded-full bg-primary/20 text-brand-accent flex items-center justify-center shrink-0">
                         <Check className="size-3" aria-hidden="true" />
                       </div>
                       <div className="truncate">
@@ -213,7 +213,7 @@ export function ProposalModularAcceptance({
               <button
                 type="button"
                 onClick={() => onSelectBundle(["epm-web", "epm-booking", "epm-crm", "epm-oficina"])}
-                className="px-2.5 py-1 rounded-sm bg-primary/10 hover:bg-primary/20 text-primary border border-primary/20 text-[11px] font-mono font-semibold transition-colors"
+                className="px-2.5 py-1 rounded-sm bg-primary/10 hover:bg-primary/20 text-brand-accent border border-primary/20 text-[11px] font-mono font-semibold transition-colors"
               >
                 Operação Completa (Destaque)
               </button>
@@ -255,14 +255,14 @@ export function ProposalModularAcceptance({
               className="w-full sm:w-auto text-xs sm:text-sm"
             >
               <a href={mailtoUrl}>
-                <HelpCircle className="mr-2 size-4 text-primary" aria-hidden="true" />
+                <HelpCircle className="mr-2 size-4 text-brand-accent" aria-hidden="true" />
                 <span>Tirar dúvidas por e-mail</span>
               </a>
             </Button>
           </div>
 
           <p className="mt-6 text-xs text-neutral-400 text-center flex items-center justify-center gap-1.5">
-            <ShieldAlert className="size-3.5 text-primary/70 shrink-0" aria-hidden="true" />
+            <ShieldAlert className="size-3.5 text-brand-accent/70 shrink-0" aria-hidden="true" />
             <span>
               A manifestação não constitui obrigação contratual imediata. O escopo e valores serão
               ratificados em reunião técnica e formalizados em contrato antes do início.
@@ -328,7 +328,7 @@ export function ProposalModularAcceptance({
                 <button
                   type="button"
                   onClick={handleCopy}
-                  className="inline-flex items-center gap-1 text-[11px] font-mono text-primary hover:underline cursor-pointer"
+                  className="inline-flex items-center gap-1 text-[11px] font-mono text-brand-accent hover:underline cursor-pointer"
                 >
                   {copied ? (
                     <>

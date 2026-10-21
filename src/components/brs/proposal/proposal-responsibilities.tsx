@@ -26,7 +26,7 @@ export function ProposalResponsibilities({ proposal }: ProposalResponsibilitiesP
           {/* Responsabilidades da EPM DevTech */}
           <div className="p-7 rounded-xl border border-white/10 bg-card/40">
             <div className="flex items-center gap-3 pb-4 mb-6 border-b border-white/10">
-              <div className="size-8 rounded-full bg-primary/10 text-primary flex items-center justify-center shrink-0">
+              <div className="size-8 rounded-full bg-primary/10 text-brand-accent flex items-center justify-center shrink-0">
                 <Shield className="size-4" aria-hidden="true" />
               </div>
               <div>
@@ -45,7 +45,7 @@ export function ProposalResponsibilities({ proposal }: ProposalResponsibilitiesP
                   key={idx}
                   className="flex items-start gap-3 text-xs sm:text-sm text-neutral-300 leading-relaxed"
                 >
-                  <Check className="size-4 text-primary shrink-0 mt-0.5" aria-hidden="true" />
+                  <Check className="size-4 text-brand-accent shrink-0 mt-0.5" aria-hidden="true" />
                   <span>{resp}</span>
                 </li>
               ))}

@@ -40,12 +40,12 @@ export function HomePathways() {
           >
             <Link
               to="/para-corretores"
-              className="group/link inline-flex items-center gap-2 text-xs font-semibold text-primary hover:text-foreground transition-colors border border-primary/40 hover:border-primary px-5 py-3 rounded-xs min-h-[44px]"
+              className="group/link inline-flex items-center gap-2 text-xs font-semibold text-brand-accent hover:text-foreground transition-colors border border-primary/40 hover:border-primary px-5 py-3 rounded-xs min-h-[44px]"
             >
               <span>Atendimento para corretores</span>
               <ArrowUpRight
                 size={14}
-                className="transition-transform duration-200 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 text-primary"
+                className="transition-transform duration-200 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 text-brand-accent"
                 aria-hidden="true"
               />
             </Link>

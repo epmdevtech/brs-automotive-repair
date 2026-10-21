@@ -40,7 +40,7 @@ export function BackToTop() {
       tabIndex={visible ? 0 : -1}
       className={cn(
         "fixed bottom-6 right-6 z-40 size-11 flex items-center justify-center cursor-pointer",
-        "bg-neutral-900/85 hover:bg-neutral-800 text-neutral-300 hover:text-primary",
+        "bg-neutral-900/85 hover:bg-neutral-800 text-neutral-300 hover:text-brand-accent",
         "border border-white/10 hover:border-primary/50 shadow-lg shadow-black/50 backdrop-blur-md",
         "transition-all duration-300 ease-out focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2",
         "active:scale-95",

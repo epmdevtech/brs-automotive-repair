@@ -109,33 +109,37 @@ function SobrePage() {
         asideContent={
           <div className="relative rounded-2xl border border-white/10 bg-gradient-to-b from-white/[0.04] to-transparent p-6 sm:p-8 backdrop-blur-sm">
             <div className="border-b border-white/10 pb-4 mb-6">
-              <span className="font-mono text-[11px] uppercase tracking-[2px] text-primary font-semibold">
+              <span className="font-mono text-[11px] uppercase tracking-[2px] text-brand-accent font-semibold">
                 Oficina em Toledo, Paraná
               </span>
             </div>
             <p className="font-display text-5xl sm:text-6xl font-semibold tracking-tight text-white mb-2">
-              Master<span className="text-primary">.</span>
+              Master<span className="text-brand-accent">.</span>
             </p>
             <p className="font-mono text-xs uppercase tracking-[2px] text-muted-foreground mb-6">
               Reparações automotivas
             </p>
             <div className="space-y-4 border-t border-white/10 pt-5 text-xs text-neutral-300">
               <div className="flex items-start gap-3">
-                <MapPin size={16} className="text-primary shrink-0 mt-0.5" aria-hidden="true" />
+                <MapPin
+                  size={16}
+                  className="text-brand-accent shrink-0 mt-0.5"
+                  aria-hidden="true"
+                />
                 <span>{company.address.full}</span>
               </div>
               <div className="flex items-center gap-3">
-                <Clock size={16} className="text-primary shrink-0" aria-hidden="true" />
+                <Clock size={16} className="text-brand-accent shrink-0" aria-hidden="true" />
                 <span>{company.openingHours}</span>
               </div>
               <div className="flex items-center gap-3">
-                <Phone size={16} className="text-primary shrink-0" aria-hidden="true" />
-                <a href={company.phoneHref} className="hover:text-primary transition-colors">
+                <Phone size={16} className="text-brand-accent shrink-0" aria-hidden="true" />
+                <a href={company.phoneHref} className="hover:text-brand-accent transition-colors">
                   {company.phone}
                 </a>
               </div>
               <div className="flex items-center gap-3">
-                <Truck size={16} className="text-primary shrink-0" aria-hidden="true" />
+                <Truck size={16} className="text-brand-accent shrink-0" aria-hidden="true" />
                 <span>Serviço de Guincho sob consulta urbana</span>
               </div>
             </div>
@@ -159,7 +163,7 @@ function SobrePage() {
             className="py-8 sm:py-10 sm:px-8 first:sm:pl-0 last:sm:pr-0 flex flex-col justify-between"
           >
             <div>
-              <span className="font-mono text-[11px] font-semibold text-primary uppercase tracking-wider block mb-3">
+              <span className="font-mono text-[11px] font-semibold text-brand-accent uppercase tracking-wider block mb-3">
                 <NumericCounter target={1} padZero /> / ÉTICA PROFISSIONAL
               </span>
               <h3 className="text-base sm:text-lg font-semibold font-display text-white mb-2">
@@ -178,7 +182,7 @@ function SobrePage() {
             className="py-8 sm:py-10 sm:px-8 first:sm:pl-0 last:sm:pr-0 flex flex-col justify-between"
           >
             <div>
-              <span className="font-mono text-[11px] font-semibold text-primary uppercase tracking-wider block mb-3">
+              <span className="font-mono text-[11px] font-semibold text-brand-accent uppercase tracking-wider block mb-3">
                 <NumericCounter target={2} padZero /> / PADRÃO ORIGINAL
               </span>
               <h3 className="text-base sm:text-lg font-semibold font-display text-white mb-2">
@@ -197,7 +201,7 @@ function SobrePage() {
             className="py-8 sm:py-10 sm:px-8 first:sm:pl-0 last:sm:pr-0 flex flex-col justify-between"
           >
             <div>
-              <span className="font-mono text-[11px] font-semibold text-primary uppercase tracking-wider block mb-3">
+              <span className="font-mono text-[11px] font-semibold text-brand-accent uppercase tracking-wider block mb-3">
                 <NumericCounter target={3} padZero /> / ATENDIMENTO
               </span>
               <h3 className="text-base sm:text-lg font-semibold font-display text-white mb-2">
@@ -229,9 +233,9 @@ function SobrePage() {
               <p>
                 A sociedade empresária <strong className="text-white">{company.legalName}</strong>{" "}
                 foi formalmente constituída em{" "}
-                <span className="font-mono text-primary">{company.foundedFormatted}</span> (CNPJ{" "}
-                {company.cnpj}) e mantém a operação da Master na Av. Maripá, 4138, no Centro de
-                Toledo.
+                <span className="font-mono text-brand-accent">{company.foundedFormatted}</span>{" "}
+                (CNPJ {company.cnpj}) e mantém a operação da Master na Av. Maripá, 4138, no Centro
+                de Toledo.
               </p>
               <p className="text-xs text-neutral-400">
                 A estrutura formalizada e a prática diária na oficina permitem atender motoristas
@@ -246,7 +250,7 @@ function SobrePage() {
             delay={0.16}
             className="lg:col-span-5 p-6 sm:p-8 rounded-sm border border-border/80 bg-card/40"
           >
-            <span className="font-mono text-[11px] font-semibold text-primary uppercase tracking-wider block mb-4">
+            <span className="font-mono text-[11px] font-semibold text-brand-accent uppercase tracking-wider block mb-4">
               Dados Cadastrais & Transparência
             </span>
             <dl className="space-y-4 text-xs">

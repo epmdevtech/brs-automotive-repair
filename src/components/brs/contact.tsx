@@ -42,11 +42,11 @@ export function Contact({
               className="w-full p-4 rounded-lg border border-primary/40 bg-gradient-to-r from-primary/15 via-primary/10 to-transparent hover:border-primary text-left transition-all group flex items-center justify-between shadow-sm cursor-pointer"
             >
               <div>
-                <div className="flex items-center gap-1.5 text-xs font-mono text-primary uppercase tracking-wider mb-1">
+                <div className="flex items-center gap-1.5 text-xs font-mono text-brand-accent uppercase tracking-wider mb-1">
                   <Calendar size={13} />
                   <span>Agendamento Online</span>
                 </div>
-                <div className="text-sm font-semibold text-white group-hover:text-primary transition-colors">
+                <div className="text-sm font-semibold text-white group-hover:text-brand-accent transition-colors">
                   Agendar Vistoria ou Guincho (Pré-OS)
                 </div>
                 <p className="text-[11px] text-muted-foreground mt-0.5">
@@ -55,7 +55,7 @@ export function Contact({
               </div>
               <ArrowUpRight
                 size={18}
-                className="text-primary shrink-0 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1"
+                className="text-brand-accent shrink-0 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1"
               />
             </button>
           </div>
@@ -63,13 +63,13 @@ export function Contact({
           <div className="mt-8 pt-8 border-t border-border/60 space-y-6">
             <a
               href={company.phoneHref}
-              className="group block text-foreground hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary rounded-xs"
+              className="group block text-foreground hover:text-brand-accent transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary rounded-xs"
             >
               <div className="flex items-center gap-2 text-xs font-mono text-muted-foreground uppercase tracking-wider mb-1">
-                <Phone size={14} className="text-primary" aria-hidden="true" />
+                <Phone size={14} className="text-brand-accent" aria-hidden="true" />
                 <span>Central de Atendimento</span>
               </div>
-              <span className="font-display text-2xl sm:text-3xl font-semibold tracking-tight text-white group-hover:text-primary transition-colors">
+              <span className="font-display text-2xl sm:text-3xl font-semibold tracking-tight text-white group-hover:text-brand-accent transition-colors">
                 {company.phone}
               </span>
             </a>
@@ -77,17 +77,17 @@ export function Contact({
             <a
               href={company.instagram.url}
               {...external}
-              className="group block text-foreground hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary rounded-xs"
+              className="group block text-foreground hover:text-brand-accent transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary rounded-xs"
             >
               <div className="flex items-center gap-2 text-xs font-mono text-muted-foreground uppercase tracking-wider mb-1">
-                <Instagram size={14} className="text-primary" aria-hidden="true" />
+                <Instagram size={14} className="text-brand-accent" aria-hidden="true" />
                 <span>Instagram Oficial</span>
               </div>
-              <span className="text-base sm:text-lg font-medium text-white group-hover:text-primary transition-colors inline-flex items-center gap-1">
+              <span className="text-base sm:text-lg font-medium text-white group-hover:text-brand-accent transition-colors inline-flex items-center gap-1">
                 {company.instagram.handle}
                 <ArrowUpRight
                   size={14}
-                  className="text-primary transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                  className="text-brand-accent transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                   aria-hidden="true"
                 />
               </span>
@@ -96,17 +96,17 @@ export function Contact({
             <a
               href={company.social.url}
               {...external}
-              className="group block text-foreground hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary rounded-xs"
+              className="group block text-foreground hover:text-brand-accent transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary rounded-xs"
             >
               <div className="flex items-center gap-2 text-xs font-mono text-muted-foreground uppercase tracking-wider mb-1">
-                <Facebook size={14} className="text-primary" aria-hidden="true" />
+                <Facebook size={14} className="text-brand-accent" aria-hidden="true" />
                 <span>Facebook Oficial</span>
               </div>
-              <span className="text-base sm:text-lg font-medium text-white group-hover:text-primary transition-colors inline-flex items-center gap-1">
+              <span className="text-base sm:text-lg font-medium text-white group-hover:text-brand-accent transition-colors inline-flex items-center gap-1">
                 Master Chapeação e Pinturas
                 <ArrowUpRight
                   size={14}
-                  className="text-primary transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                  className="text-brand-accent transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                   aria-hidden="true"
                 />
               </span>
@@ -114,11 +114,15 @@ export function Contact({
 
             <div className="pt-2 space-y-2 text-xs text-neutral-300">
               <div className="flex items-start gap-2">
-                <MapPin size={14} className="text-primary shrink-0 mt-0.5" aria-hidden="true" />
+                <MapPin
+                  size={14}
+                  className="text-brand-accent shrink-0 mt-0.5"
+                  aria-hidden="true"
+                />
                 <span>{company.address.full}</span>
               </div>
               <div className="flex items-center gap-2">
-                <Clock size={14} className="text-primary shrink-0" aria-hidden="true" />
+                <Clock size={14} className="text-brand-accent shrink-0" aria-hidden="true" />
                 <span>{company.openingHours}</span>
               </div>
             </div>

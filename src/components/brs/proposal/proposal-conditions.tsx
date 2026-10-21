@@ -32,7 +32,7 @@ export function ProposalConditions({ proposal }: ProposalConditionsProps) {
                   : "border-white/10 bg-card/30"
               }`}
             >
-              <div className="flex items-center gap-2.5 text-xs font-semibold uppercase tracking-wider text-primary mb-3">
+              <div className="flex items-center gap-2.5 text-xs font-semibold uppercase tracking-wider text-brand-accent mb-3">
                 {cond.highlight ? (
                   <FileCheck2 className="size-4" aria-hidden="true" />
                 ) : (

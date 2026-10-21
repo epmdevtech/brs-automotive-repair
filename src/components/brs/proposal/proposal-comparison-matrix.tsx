@@ -50,7 +50,7 @@ export function ProposalComparisonMatrix({ modules }: ProposalComparisonMatrixPr
                   </td>
                   <td className="p-4 sm:px-6 text-neutral-300 max-w-xs">{mod.summary}</td>
                   <td className="p-4 sm:px-6 font-mono whitespace-nowrap">
-                    <span className="text-primary font-semibold text-sm sm:text-base">
+                    <span className="text-brand-accent font-semibold text-sm sm:text-base">
                       {mod.isStartingPrice ? "A partir de " : ""}
                       {formatCurrencyBRL(mod.price)}
                     </span>
@@ -75,12 +75,12 @@ export function ProposalComparisonMatrix({ modules }: ProposalComparisonMatrixPr
               <div className="flex items-start justify-between gap-2 border-b border-white/10 pb-3">
                 <div>
                   <h3 className="font-display font-semibold text-white text-base">{mod.name}</h3>
-                  <span className="text-[10px] text-primary uppercase font-mono">
+                  <span className="text-[10px] text-brand-accent uppercase font-mono">
                     {mod.category}
                   </span>
                 </div>
                 <div className="text-right">
-                  <span className="text-sm font-display font-bold text-primary block">
+                  <span className="text-sm font-display font-bold text-brand-accent block">
                     {mod.isStartingPrice ? "A partir de " : ""}
                     {formatCurrencyBRL(mod.price)}
                   </span>

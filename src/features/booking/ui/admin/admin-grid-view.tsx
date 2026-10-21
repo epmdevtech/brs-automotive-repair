@@ -231,7 +231,7 @@ export function AdminGridView({ onLogout }: AdminGridViewProps) {
             className="text-slate-600 hover:text-slate-900 font-medium flex items-center gap-1.5 transition-colors cursor-pointer"
             title="Recarrega a agenda com agendamentos fictícios de demonstração"
           >
-            <Sparkles size={12} className="text-amber-600" />
+            <Sparkles size={12} className="text-brand-accent" />
             <span>Restaurar Dados Fictícios</span>
           </button>
           <a

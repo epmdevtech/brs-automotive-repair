@@ -58,7 +58,7 @@ export function ProposalAcceptance({ proposal }: ProposalAcceptanceProps) {
     <section id="manifestar-interesse" className="section-space border-b border-border/80 relative">
       <div className="page-width">
         <div className="max-w-3xl mx-auto text-center">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-sm bg-primary/10 border border-primary/25 text-primary text-xs font-medium mb-4">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-sm bg-primary/10 border border-primary/25 text-brand-accent text-xs font-medium mb-4">
             <Sparkles className="size-3.5" aria-hidden="true" />
             <span>Próxima Etapa</span>
           </div>
@@ -90,14 +90,14 @@ export function ProposalAcceptance({ proposal }: ProposalAcceptanceProps) {
               className="w-full sm:w-auto text-xs sm:text-sm"
             >
               <a href={mailtoUrl}>
-                <HelpCircle className="mr-2 size-4 text-primary" aria-hidden="true" />
+                <HelpCircle className="mr-2 size-4 text-brand-accent" aria-hidden="true" />
                 <span>Quero esclarecer uma dúvida</span>
               </a>
             </Button>
           </div>
 
           <p className="mt-6 text-xs text-muted-foreground flex items-center justify-center gap-1.5">
-            <ShieldAlert className="size-3.5 text-primary/70 shrink-0" aria-hidden="true" />
+            <ShieldAlert className="size-3.5 text-brand-accent/70 shrink-0" aria-hidden="true" />
             <span>
               Esta manifestação representa interesse em avançar ao briefing e não constitui contrato
               jurídico irrevogável.
@@ -120,7 +120,7 @@ export function ProposalAcceptance({ proposal }: ProposalAcceptanceProps) {
 
           <div className="space-y-5 pt-2">
             <div className="p-4 rounded-lg bg-primary/5 border border-primary/20 text-xs sm:text-sm text-neutral-300">
-              <p className="font-semibold text-primary mb-1">Como funciona a transição:</p>
+              <p className="font-semibold text-brand-accent mb-1">Como funciona a transição:</p>
               <ol className="list-decimal list-inside space-y-1 text-neutral-300 text-xs leading-relaxed">
                 <li>Recebemos sua manifestação comercial e confirmamos os termos;</li>
                 <li>Emitimos o Contrato de Prestação de Serviços Digitais para formalização;</li>
@@ -172,7 +172,7 @@ export function ProposalAcceptance({ proposal }: ProposalAcceptanceProps) {
                 <button
                   type="button"
                   onClick={handleCopy}
-                  className="inline-flex items-center gap-1 text-[11px] text-primary hover:underline cursor-pointer border-0 bg-transparent p-0"
+                  className="inline-flex items-center gap-1 text-[11px] text-brand-accent hover:underline cursor-pointer border-0 bg-transparent p-0"
                 >
                   {copied ? (
                     <>

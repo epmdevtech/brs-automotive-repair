@@ -35,32 +35,44 @@ html.lenis body {
   --btn-h-sm: 34px;
   --btn-px: 20px;
   --btn-px-sm: 14px;
-  --gold: #c8a96a;
-  --gold-hover: #d8bc82;
-  --on-gold: #16130b;
+  /* Identidade Master — vermelho extraído da logo, preto e branco (SPEC-071) */
+  --brand-primary: #e01b24;
+  --brand-primary-hover: #c4161e;
+  --brand-primary-active: #a91219;
+  --brand-primary-soft: rgb(224 27 36 / 0.12);
+  --brand-primary-line: rgb(224 27 36 / 0.55);
+  --brand-primary-glow: rgb(224 27 36 / 0.22);
+  --brand-text-accent: #f26b6f;
+  --brand-bg: #0b0d10;
+  --brand-surface: #141821;
+  --brand-text: #f8fafc;
+  --brand-text-muted: #9ba3af;
+  --brand-border: rgb(255 255 255 / 0.14);
+  --brand-focus: #f8fafc;
+
   --line-light: rgb(255 255 255 / 0.28);
   --ease: 200ms ease;
 
   --radius: var(--radius-sm);
-  --background: oklch(0.14 0.005 260);
-  --foreground: oklch(0.98 0 0);
-  --card: oklch(0.2 0.008 260);
+  --background: var(--brand-bg);
+  --foreground: var(--brand-text);
+  --card: var(--brand-surface);
   --card-foreground: var(--foreground);
   --popover: var(--card);
   --popover-foreground: var(--foreground);
-  --primary: var(--gold);
-  --primary-foreground: var(--on-gold);
+  --primary: var(--brand-primary);
+  --primary-foreground: #ffffff;
   --secondary: oklch(0.21 0.008 260);
   --secondary-foreground: var(--foreground);
   --muted: var(--secondary);
-  --muted-foreground: oklch(0.73 0.01 260);
+  --muted-foreground: var(--brand-text-muted);
   --accent: oklch(0.26 0.008 260);
   --accent-foreground: var(--foreground);
   --destructive: oklch(0.73 0.15 25);
   --destructive-foreground: var(--foreground);
-  --border: oklch(0.98 0 0 / 0.14);
+  --border: var(--brand-border);
   --input: var(--border);
-  --ring: var(--gold);
+  --ring: var(--brand-focus);
   --hero-shade: linear-gradient(
     90deg,
     oklch(0.1 0.005 260 / 0.92) 0%,
@@ -125,8 +137,8 @@ html.lenis body {
   --stagger: 80ms;
   --hero-delay: 120ms;
   --zoom: 1.035;
-  --gold-glow: rgb(200 169 106 / 0.1);
-  --gold-line: rgb(200 169 106 / 0.55);
+  --brand-glow: var(--brand-primary-glow);
+  --brand-line: var(--brand-primary-line);
 
   /* Abertura Cinematográfica, Zoom Lento e Reflexo na Lataria (SPEC-067) */
   --hero-cinematic-header-delay: 0.8s;
@@ -149,8 +161,11 @@ html.lenis body {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-primary: var(--primary);
+  --color-primary-hover: var(--brand-primary-hover);
+  --color-primary-active: var(--brand-primary-active);
+  --color-primary-soft: var(--brand-primary-soft);
   --color-primary-foreground: var(--primary-foreground);
-  --color-gold: var(--gold);
+  --color-brand-accent: var(--brand-text-accent);
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
   --color-card: var(--card);
@@ -190,6 +205,8 @@ html.lenis body {
     margin: 0;
     background: var(--background);
     color: var(--foreground);
+    accent-color: var(--brand-primary);
+    caret-color: var(--brand-primary);
     font-family: var(--font-body);
     font-weight: var(--weight-regular);
     line-height: var(--leading-body);
@@ -226,7 +243,7 @@ html.lenis body {
     -webkit-tap-highlight-color: transparent;
   }
   a:focus-visible {
-    outline: 2px solid var(--primary);
+    outline: 2px solid var(--brand-focus);
     outline-offset: 5px;
   }
   input,
@@ -245,11 +262,11 @@ html.lenis body {
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.glass-panel-gold {
+.glass-panel-brand {
   background: rgba(18, 20, 26, 0.75);
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
-  border: 1px solid rgba(212, 175, 55, 0.22);
+  border: 1px solid var(--brand-primary-line);
 }
 
 @keyframes ledPulse {
@@ -257,12 +274,12 @@ html.lenis body {
   100% {
     opacity: 1;
     transform: scale(1);
-    box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.7);
+    box-shadow: 0 0 0 0 rgb(224 27 36 / 0.7);
   }
   50% {
     opacity: 0.85;
     transform: scale(1.08);
-    box-shadow: 0 0 0 6px rgba(212, 175, 55, 0);
+    box-shadow: 0 0 0 6px rgb(224 27 36 / 0);
   }
 }
 
@@ -323,13 +340,24 @@ html.lenis body {
   transition: border-color var(--dur-fast) var(--ease-out);
 }
 .tech-card:hover {
-  border-color: rgba(200, 169, 106, 0.35);
+  border-color: var(--brand-primary-line);
+}
+
+/* Motivo quadriculado de bandeira de corrida — detalhe sutil da logo Master. */
+.brand-checker {
+  background-image: repeating-conic-gradient(
+    from 0deg,
+    var(--foreground) 0% 25%,
+    var(--brand-bg) 0% 50%
+  );
+  background-size: 10px 10px;
+  opacity: 0.22;
 }
 .eyebrow {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  color: var(--primary);
+  color: var(--brand-text-accent);
   text-transform: uppercase;
   font-family: var(--font-body);
   font-size: 0.75rem;
@@ -516,7 +544,7 @@ html.lenis body {
   transition: border-color var(--dur-base) var(--ease-out);
 }
 .service-card::before {
-  /* Spotlight: iluminação dourada suave atrás do conteúdo, posicionada por --mx/--my. */
+  /* Spotlight: iluminação vermelha suave atrás do conteúdo, posicionada por --mx/--my. */
   content: "";
   position: absolute;
   inset: 0;
@@ -524,7 +552,7 @@ html.lenis body {
   opacity: 0;
   background: radial-gradient(
     340px circle at var(--mx, 50%) var(--my, 30%),
-    var(--gold-glow),
+    var(--brand-glow),
     transparent 70%
   );
   transition: opacity var(--dur-base) var(--ease-out);
@@ -533,14 +561,14 @@ html.lenis body {
   position: relative;
 }
 .service-card:focus-within {
-  border-color: var(--gold-line);
+  border-color: var(--brand-line);
 }
 .service-card:focus-within::before {
   opacity: 1;
 }
 @media (hover: hover) and (pointer: fine) {
   .service-card:hover {
-    border-color: var(--gold-line);
+    border-color: var(--brand-line);
   }
   .service-card:hover::before {
     opacity: 1;
@@ -635,9 +663,9 @@ textarea.field-input {
 }
 .field-input:focus,
 .field-input:focus-visible {
-  outline: 2px solid var(--gold);
+  outline: 2px solid var(--brand-focus);
   outline-offset: 2px;
-  border-color: var(--gold);
+  border-color: var(--brand-primary);
 }
 .field-input::placeholder {
   color: var(--muted-foreground);
@@ -849,7 +877,7 @@ textarea.field-input {
 }
 
 .btn:focus-visible {
-  outline: 2px solid var(--gold);
+  outline: 2px solid var(--brand-focus);
   outline-offset: 2px;
 }
 
@@ -867,18 +895,24 @@ textarea.field-input {
 
 /* Variante Primária */
 .btn--primary {
-  background: var(--gold);
-  color: var(--on-gold);
-  border-color: var(--gold);
+  background: var(--brand-primary);
+  color: var(--primary-foreground);
+  border-color: var(--brand-primary);
 }
 
 @media (hover: hover) and (pointer: fine) {
   .btn--primary:hover {
-    background: var(--gold-hover);
-    border-color: var(--gold-hover);
-    color: var(--on-gold);
-    box-shadow: 0 0 20px rgb(200 169 106 / 0.22);
+    background: var(--brand-primary-hover);
+    border-color: var(--brand-primary-hover);
+    color: var(--primary-foreground);
+    box-shadow: 0 0 20px var(--brand-primary-glow);
   }
+}
+
+.btn--primary:active {
+  background: var(--brand-primary-active);
+  border-color: var(--brand-primary-active);
+  color: var(--primary-foreground);
 }
 
 /* Variante Secundária */
@@ -890,17 +924,17 @@ textarea.field-input {
 
 @media (hover: hover) and (pointer: fine) {
   .btn--secondary:hover {
-    border-color: var(--gold);
-    background: rgb(200 169 106 / 0.1);
+    border-color: var(--brand-primary);
+    background: var(--brand-primary-soft);
     color: #ffffff;
-    box-shadow: 0 0 16px rgb(200 169 106 / 0.12);
+    box-shadow: 0 0 16px var(--brand-primary-soft);
   }
 }
 
 /* Variante Link */
 .btn--link {
   background: transparent;
-  color: var(--gold);
+  color: var(--foreground);
   border-color: transparent;
   padding: 0;
   height: auto;
@@ -915,7 +949,7 @@ textarea.field-input {
 
 @media (hover: hover) and (pointer: fine) {
   .btn--link:hover {
-    color: var(--gold-hover);
+    color: var(--brand-text-accent);
   }
   .btn--link:hover > svg,
   .btn--link:hover > .lucide-arrow-right {
@@ -1137,9 +1171,9 @@ textarea.field-input {
   background: linear-gradient(
     var(--hero-flare-angle, 90deg),
     transparent 0%,
-    rgba(255, 248, 225, 0.04) 25%,
-    rgba(255, 248, 225, var(--hero-flare-opacity, 0.35)) 50%,
-    rgba(255, 248, 225, 0.04) 75%,
+    rgb(255 255 255 / 0.04) 25%,
+    rgb(255 255 255 / var(--hero-flare-opacity, 0.35)) 50%,
+    rgb(255 255 255 / 0.04) 75%,
     transparent 100%
   );
   animation: heroFlareSweep var(--hero-cinematic-flare-dur, 2s) cubic-bezier(0.25, 1, 0.5, 1)

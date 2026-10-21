@@ -409,7 +409,7 @@ export const commercialProposals: Record<string, CommercialProposal> = {
     solutionOverview: {
       title: "Solução Proposta",
       description:
-        "Desenvolvimento de uma plataforma web institucional contemporânea, rápida e acessível, alinhada à identidade visual automotiva escura e dourada da Master, construída sobre arquitetura moderna em React 19 e TanStack Start.",
+        "Desenvolvimento de uma plataforma web institucional contemporânea, rápida e acessível, alinhada à identidade visual automotiva preta, vermelha e branca da Master, construída sobre arquitetura moderna em React 19 e TanStack Start.",
       highlights: [
         "Arquitetura moderna SPA multipágina com SSR híbrido e navegação client-side instantânea.",
         "Design editorial premium (Sora e Manrope) com estética Anti-Card Slop e acabamento de luxo.",
@@ -1101,7 +1101,7 @@ export const commercialProposals: Record<string, CommercialProposal> = {
         id: "mod-esc-2",
         title: "Arquitetura Editorial e Design System Exclusivo Master",
         description:
-          "Identidade visual automotiva escura e dourada, tipografia Sora/Manrope e conformidade Anti-Card Slop.",
+          "Identidade visual automotiva preta, vermelha e branca, tipografia Sora/Manrope e conformidade Anti-Card Slop.",
         included: true,
         category: "Frontend & Experiência",
       },

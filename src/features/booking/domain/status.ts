@@ -64,7 +64,7 @@ export function getStatusBadgeClass(status: AppointmentStatus): string {
     case "PENDING":
       return "bg-sky-50 text-sky-800 border border-sky-300";
     case "CONFIRMED":
-      return "bg-amber-50 text-amber-900 border border-amber-300";
+      return "bg-violet-50 text-violet-900 border border-violet-300";
     case "COMPLETED":
       return "bg-emerald-50 text-emerald-900 border border-emerald-300";
     case "CANCELLED":
@@ -82,7 +82,7 @@ export function getStatusBorderClass(status: AppointmentStatus): string {
     case "PENDING":
       return "border-l-sky-500";
     case "CONFIRMED":
-      return "border-l-amber-500";
+      return "border-l-violet-500";
     case "COMPLETED":
       return "border-l-emerald-500";
     case "CANCELLED":
@@ -100,7 +100,7 @@ export function getStatusDotClass(status: AppointmentStatus): string {
     case "PENDING":
       return "bg-sky-500";
     case "CONFIRMED":
-      return "bg-amber-500";
+      return "bg-violet-500";
     case "COMPLETED":
       return "bg-emerald-500";
     case "CANCELLED":
