@@ -288,6 +288,17 @@ async function fillField(page: Page, fieldId: string, value: string): Promise<vo
     return;
   }
 
+  if ((await locator.first().getAttribute("role")) === "combobox") {
+    await locator.first().click();
+    const option = page.getByRole("option", { name: value, exact: true });
+    if ((await option.count()) === 0) {
+      preenchimentosRecusados.push(`${fieldId} (opção "${value}" inexistente)`);
+      return;
+    }
+    await option.first().click();
+    return;
+  }
+
   const tagName = await locator.first().evaluate((node) => node.tagName.toLowerCase());
 
   if (tagName === "select") {

@@ -312,7 +312,8 @@ test.describe("SPEC-073 — percurso E2E do briefing da Master", () => {
     await page.getByRole("textbox", { name: "Nome fantasia" }).fill("Master Chapeação e Pinturas");
     await page.getByRole("textbox", { name: "CNPJ da empresa" }).fill("51.784.844/0001-01");
     await page.getByRole("textbox", { name: "Cidade" }).fill("Toledo");
-    await page.getByLabel("Estado", { exact: true }).selectOption("PR");
+    await page.getByRole("combobox", { name: "Estado", exact: true }).click();
+    await page.getByRole("option", { name: "PR", exact: true }).click();
 
     // A máscara de CEP é aplicada enquanto o usuário digita.
     const cepField = page.getByPlaceholder("00000-000");
@@ -323,7 +324,7 @@ test.describe("SPEC-073 — percurso E2E do briefing da Master", () => {
     await expect(page.getByText(/CEP não localizado|Preencha o endereço manualmente/i)).toBeVisible(
       { timeout: 15_000 },
     );
-    await page.getByRole("textbox", { name: "Endereço (logradouro)" }).fill("Av. das Indústrias");
+    await page.getByRole("textbox", { name: "Logradouro" }).fill("Av. das Indústrias");
     await page.getByRole("textbox", { name: "Bairro" }).fill("Centro");
 
     await waitForServerSync(page);

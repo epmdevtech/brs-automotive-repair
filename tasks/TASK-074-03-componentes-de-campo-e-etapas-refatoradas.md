@@ -40,7 +40,7 @@ Componentes reutilizáveis (entrada mascarada, data em segmentos, radio group, n
 - [x] src/features/briefing/ui/briefing-step-form.tsx
 - [x] src/features/briefing/ui/briefing-review.tsx
 - [x] src/features/briefing/ui/briefing-operacional-container.tsx
-- [ ] Execução de lint, testes e build.
+- [x] Execução de lint, testes e build.
 
 ## Validação
 
@@ -60,4 +60,12 @@ Componentes reutilizáveis (entrada mascarada, data em segmentos, radio group, n
 
 - Mudanças realizadas: ver diff da branch `feature/master-briefing-ux`.
 - Evidências: comandos de lint, teste, build e E2E executados.
+- Correção pós-revisão (branch `fix/briefing-ui-selects`): removidas as
+  definições duplicadas de `empresa.endereco`, `empresa.enderecoNumero` e
+  `empresa.enderecoComplemento` em `steps.ts` (chaves React duplicadas) e
+  substituído o uso indevido de exports inexistentes de `@radix-ui/react-select`
+  pelo wrapper `src/components/ui/select.tsx`; lint sem erros, build concluído,
+  `bun run test` com 531/531 testes aprovados e E2E
+  `briefing-15-etapas`/`briefing-preenchimento-completo` aprovados, sem erros de
+  console (chave duplicada ou elemento inválido).
 - Pendências ou bloqueios: validação em navegador real e preview dependem de decisão humana.

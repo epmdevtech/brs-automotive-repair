@@ -2,6 +2,13 @@ import { useEffect, useRef, useState, type ReactNode } from "react";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { lookupCep, type CepLookupResult } from "../domain/cep-service";
 import { isValidCep } from "../domain/masks";
 import type { BriefingField, BriefingValue } from "../domain/types";
@@ -233,6 +240,30 @@ export function BriefingFieldInput({
           aria-describedby={describedBy}
           className={cn(controlClass, "min-h-20")}
         />
+      ) : field.type === "select" && field.id === "empresa.estado" ? (
+        <Select
+          value={stringValue || undefined}
+          onValueChange={(nextValue) => onChange(nextValue)}
+          disabled={pending}
+        >
+          <SelectTrigger
+            id={field.id}
+            name={field.id}
+            aria-invalid={hasError ? true : undefined}
+            aria-required={field.required ? true : undefined}
+            aria-describedby={describedBy}
+            className={cn("h-10 text-base md:text-sm", controlClass)}
+          >
+            <SelectValue placeholder="Selecione o estado" />
+          </SelectTrigger>
+          <SelectContent className="max-h-[320px]">
+            {(field.options ?? []).map((option) => (
+              <SelectItem key={option.value} value={option.value}>
+                {option.label}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
       ) : field.type === "select" ? (
         <select
           id={field.id}

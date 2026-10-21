@@ -243,10 +243,19 @@ export const BRIEFING_STEPS: BriefingStep[] = [
         help: "Usado para contato sobre o briefing e sobre o projeto do site.",
         span: 2,
       }),
-      text("empresa.endereco", "Endereço (logradouro)", {
+      text("empresa.cep", "CEP", {
+        format: "cep",
+        inputMode: "numeric",
+        autoComplete: "postal-code",
+        placeholder: "00000-000",
+        help: "A consulta é apenas um auxílio: o endereço pode ser digitado manualmente.",
+        span: 1,
+      }),
+      text("empresa.endereco", "Logradouro", {
         autoComplete: "street-address",
         placeholder: "Ex.: Av. das Indústrias",
-        span: 2,
+        help: "Preencha com o endereço completo.",
+        span: 1,
       }),
       text("empresa.enderecoNumero", "Número", {
         inputMode: "numeric",
@@ -259,20 +268,12 @@ export const BRIEFING_STEPS: BriefingStep[] = [
         span: 1,
       }),
       text("empresa.bairro", "Bairro", { span: 1 }),
-      text("empresa.cep", "CEP", {
-        format: "cep",
-        inputMode: "numeric",
-        autoComplete: "postal-code",
-        placeholder: "00000-000",
-        help: "A consulta é apenas um auxílio: o endereço pode ser digitado manualmente.",
-        span: 1,
-      }),
       text("empresa.cidade", "Cidade", { autoComplete: "address-level2", span: 1 }),
       select("empresa.estado", "Estado", UFS, {
         autoComplete: "address-level1",
         span: 1,
       }),
-      text("empresa.horarioFuncionamento", "Horário de funcionamento", { span: 2 }),
+      text("empresa.horarioFuncionamento", "Horário de funcionamento", { span: 1 }),
       selectRadio("empresa.atendeSabado", "Atende aos sábados?", YES_NO_CONFIRM, { span: 1 }),
       selectRadio("empresa.outrasUnidades", "Possui outras unidades?", YES_NO_CONFIRM, { span: 1 }),
       textarea("empresa.unidadesAdicionais", "Quais outras unidades e em quais municípios?", {
