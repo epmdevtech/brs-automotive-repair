@@ -15,6 +15,11 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+# O token do repositório só precisa ler o código: nenhuma etapa do pipeline
+# escreve no repositório nem publica artefatos.
+permissions:
+  contents: read
+
 jobs:
   quality-gates:
     name: Quality Gates (Lint, Test, Build & SDD)
@@ -29,12 +34,12 @@ jobs:
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
         with:
-          bun-version: latest
+          bun-version: "1.4.2"
 
       - name: Setup Python (para gerador de rastreabilidade SDD)
         uses: actions/setup-python@v5
         with:
-          python-version: "3.x"
+          python-version: "3.13"
 
       - name: Install dependencies
         run: bun install --frozen-lockfile

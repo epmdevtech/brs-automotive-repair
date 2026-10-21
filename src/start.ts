@@ -1,6 +1,29 @@
 import { createStart, createCsrfMiddleware, createMiddleware } from "@tanstack/react-start";
+import { getRequestHeaders, setResponseHeader } from "@tanstack/react-start/server";
 
 import { renderErrorPage } from "./lib/error-page";
+import { buildSecurityHeaders } from "./lib/security-headers";
+
+/**
+ * Aplica os cabeçalhos de segurança a todas as respostas do servidor,
+ * inclusive às respostas das Server Functions (que não passam pelo HTML).
+ */
+const securityHeadersMiddleware = createMiddleware().server(async ({ next }) => {
+  const response = await next();
+
+  const requestHeaders = getRequestHeaders();
+  const forwardedProto = requestHeaders.get("x-forwarded-proto");
+  const isSecureRequest = forwardedProto === "https";
+  const isDevelopment = process.env.NODE_ENV !== "production";
+
+  const headers = buildSecurityHeaders({ isSecureRequest, isDevelopment });
+
+  for (const [name, value] of Object.entries(headers)) {
+    setResponseHeader(name, value);
+  }
+
+  return response;
+});
 
 const errorMiddleware = createMiddleware().server(async ({ next }) => {
   try {
@@ -25,5 +48,5 @@ const csrfMiddleware = createCsrfMiddleware({
 });
 
 export const startInstance = createStart(() => ({
-  requestMiddleware: [errorMiddleware, csrfMiddleware],
+  requestMiddleware: [securityHeadersMiddleware, errorMiddleware, csrfMiddleware],
 }));

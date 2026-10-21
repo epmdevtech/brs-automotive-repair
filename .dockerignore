@@ -16,3 +16,6 @@ bun.lockb
 .DS_Store
 *.local
 .env*.local
+.env
+.env.*
+!.env.example

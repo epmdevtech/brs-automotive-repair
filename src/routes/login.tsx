@@ -1,12 +1,11 @@
-import { useEffect } from "react";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { z } from "zod";
 import { buildRouteHead } from "@/lib/seo";
-import { isAdminAuthenticated } from "@/features/booking/domain/auth";
-import { AdminLogin } from "@/features/booking/ui/admin/admin-login";
+import { sanitizeRedirectTarget } from "@/lib/redirect";
+import { BriefingLoginForm } from "@/features/briefing/ui/briefing-login-form";
 
 const loginSearchSchema = z.object({
-  redirect: z.string().optional().catch("/agendamentos"),
+  redirect: z.string().optional().catch(undefined),
 });
 
 export const Route = createFileRoute("/login")({
@@ -14,9 +13,9 @@ export const Route = createFileRoute("/login")({
   component: LoginPage,
   head: () =>
     buildRouteHead({
-      title: "Painel da Oficina | Acesso Administrativo Master",
+      title: "Acesso restrito | EPM DevTech & Master Chapeação",
       description:
-        "Acesso administrativo seguro para gestão de agendamentos e equipe técnica da Master Chapeação e Pinturas.",
+        "Autenticação segura para o briefing operacional e o painel administrativo da EPM DevTech.",
       path: "/login",
       noindex: true,
     }),
@@ -25,19 +24,15 @@ export const Route = createFileRoute("/login")({
 function LoginPage() {
   const navigate = useNavigate();
   const search = Route.useSearch();
-  const targetRedirect = search.redirect || "/agendamentos";
-
-  useEffect(() => {
-    if (isAdminAuthenticated()) {
-      navigate({ to: targetRedirect });
-    }
-  }, [navigate, targetRedirect]);
+  const targetRedirect = sanitizeRedirectTarget(search.redirect);
 
   return (
-    <AdminLogin
-      onLoginSuccess={() => {
-        navigate({ to: targetRedirect });
-      }}
-    />
+    <main className="min-h-screen bg-neutral-950 text-neutral-200 antialiased">
+      <BriefingLoginForm
+        onAuthenticated={() => {
+          void navigate({ to: targetRedirect });
+        }}
+      />
+    </main>
   );
 }
