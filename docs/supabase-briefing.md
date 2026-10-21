@@ -1,10 +1,10 @@
 # Briefing da Master Chapeação — Supabase, RLS e operação
 
-| Campo      | Valor                                                                           |
-| ---------- | ------------------------------------------------------------------------------- |
-| Referência | `SPEC-073` / `TASK-073-01` a `TASK-073-04`                                      |
-| Status     | Implementado; **persistência real ainda não validada** (depende de credenciais) |
-| Atualizado | 2026-10-20                                                                      |
+| Campo      | Valor                                                                                                     |
+| ---------- | --------------------------------------------------------------------------------------------------------- |
+| Referência | `SPEC-073` / `TASK-073-01` a `TASK-073-04`                                                                |
+| Status     | Implementado; variáveis configuradas no Worker da Cloudflare; persistência real pendente de validação E2E |
+| Atualizado | 2026-10-21                                                                                                |
 
 Este documento descreve o que precisa ser feito manualmente para que o briefing
 funcione com persistência real. Nenhum passo abaixo pode ser automatizado sem
@@ -33,8 +33,8 @@ acesso ao projeto Supabase de destino.
 4. Configure a autenticação:
    - `Authentication → Providers → Email`: mantenha habilitado o e-mail e senha;
    - desabilite o cadastro público (`Sign up`) — o acesso é por convite;
-   - em `Authentication → URL Configuration`, defina a URL do site (preview e
-     produção) para evitar avisos de redirect em e-mails de confirmação.
+   - em `Authentication → URL Configuration`, defina a URL do site (produção e
+     desenvolvimento local) para evitar avisos de redirect em e-mails de confirmação.
 5. Crie os usuários em `Authentication → Users` (convite por e-mail) para:
    - o responsável da Master Chapeação (papel `client`);
    - os administradores da EPM DevTech (papel `admin`).
@@ -80,7 +80,13 @@ de parâmetro enviado pelo navegador.
 
 ## 5. Variáveis de ambiente
 
-Copie `.env.example` para `.env` (local) ou configure no painel da Vercel.
+Copie `.env.example` para `.env` (local) ou configure nas variáveis do Worker da
+Cloudflare (`brs-automotive-repair`), em **Settings → Variables and Secrets**.
+
+> O subdomínio `brs.epmdevtech.com.br` é servido por um proxy reverso na Vercel
+> (SPEC-116) que encaminha para o Worker `brs-automotive-repair.elessandrodev.workers.dev`.
+> Variáveis cadastradas no projeto da Vercel **não** chegam ao Worker: a
+> configuração de produção precisa existir na Cloudflare.
 
 | Variável                    | Ambiente | Exposição           | Descrição                                         |
 | --------------------------- | -------- | ------------------- | ------------------------------------------------- |
@@ -110,13 +116,17 @@ bun run dev            # http://localhost:5210/briefing (porta estrita 5210)
 Sem as variáveis preenchidas, a rota `/briefing` exibe o aviso de persistência
 indisponível — comportamento esperado e testado.
 
-## 7. Validação do preview na Vercel
+## 7. Validação em produção (Cloudflare Workers)
 
-1. Importe o repositório na Vercel e defina as variáveis de ambiente do preview.
-2. Confirme o runtime: o build do projeto gera `dist/server/server.js` (Nitro/Node).
-   Use **Node.js 20 LTS** e o comando de build `bun run build` (ou `npm run build`).
-3. Aplique a migração no mesmo projeto Supabase usado pelo preview.
-4. Verifique no preview:
+O aplicativo é publicado no Worker `brs-automotive-repair`
+(`https://brs-automotive-repair.elessandrodev.workers.dev`) e exposto em
+`https://brs.epmdevtech.com.br` pelo proxy reverso da Vercel (SPEC-116).
+
+1. Cadastre `SUPABASE_URL` e `SUPABASE_ANON_KEY` nas variáveis do Worker, no
+   ambiente de produção (a chave anônima pode ser um secret).
+2. Publique uma nova versão do Worker para que as variáveis entrem em vigor.
+3. Aplique a migração no mesmo projeto Supabase usado pelo Worker.
+4. Verifique, primeiro direto no Worker e depois no domínio público:
    - `/briefing` sem sessão redireciona para `/login`;
    - `/login` autentica com um usuário `client` e abre o formulário;
    - o preenchimento de uma etapa recarrega do banco em outro navegador;
@@ -200,10 +210,10 @@ o Chromium já instalado pelo Playwright — nenhuma dependência nova.
 
 ## 10. Pendências abertas
 
-| Pendência                                        | Responsável   | Dependência                 |
-| ------------------------------------------------ | ------------- | --------------------------- |
-| Criar o projeto Supabase e aplicar a migração    | Infra         | Acesso externo              |
-| Convidar usuários e promover o administrador     | Infra         | Projeto criado              |
-| Validar o preview com persistência real          | Engenharia    | Variáveis de ambiente       |
-| Definir prazo de retenção e processo de exclusão | Produto / DPO | Decisão de negócio          |
-| Avaliar publicação de fotos no site              | Produto       | Autorização do proprietário |
+| Pendência                                         | Responsável   | Dependência                 |
+| ------------------------------------------------- | ------------- | --------------------------- |
+| Criar o projeto Supabase e aplicar a migração     | Infra         | Acesso externo              |
+| Convidar usuários e promover o administrador      | Infra         | Projeto criado              |
+| Validar a produção (Worker) com persistência real | Engenharia    | Teste E2E                   |
+| Definir prazo de retenção e processo de exclusão  | Produto / DPO | Decisão de negócio          |
+| Avaliar publicação de fotos no site               | Produto       | Autorização do proprietário |
