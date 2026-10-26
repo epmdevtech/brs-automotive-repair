@@ -19,11 +19,12 @@ const MODULAR_SECTIONS = [
   { id: "diagnostico", label: "Cenário & Oportunidade" },
   { id: "modulos", label: "Módulos de Software" },
   { id: "comparativo", label: "Matriz Comparativa" },
-  { id: "pacotes", label: "Pacotes Sugeridos" },
+  { id: "pacotes", label: "Combinações Sugeridas" },
   { id: "custos-recorrentes", label: "Custos & Infra" },
+  { id: "condicoes", label: "Condições Comerciais" },
   { id: "cronograma", label: "Etapas do Projeto" },
   { id: "faq", label: "Dúvidas Frequentes" },
-  { id: "aceite", label: "Resumo & Briefing" },
+  { id: "aceite", label: "Resumo & CTA" },
 ];
 
 interface ProposalNavProps {

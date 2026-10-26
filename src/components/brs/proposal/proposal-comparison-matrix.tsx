@@ -29,13 +29,16 @@ export function ProposalComparisonMatrix({ modules }: ProposalComparisonMatrixPr
                   Solução
                 </th>
                 <th scope="col" className="p-4 sm:px-6">
-                  Finalidade Comercial
+                  Objetivo
                 </th>
                 <th scope="col" className="p-4 sm:px-6">
-                  Investimento
+                  Recursos Principais
                 </th>
                 <th scope="col" className="p-4 sm:px-6">
-                  Dependências Técnicas
+                  Dependências
+                </th>
+                <th scope="col" className="p-4 sm:px-6">
+                  Implantação
                 </th>
               </tr>
             </thead>
@@ -49,15 +52,24 @@ export function ProposalComparisonMatrix({ modules }: ProposalComparisonMatrixPr
                     </span>
                   </td>
                   <td className="p-4 sm:px-6 text-neutral-300 max-w-xs">{mod.summary}</td>
+                  <td className="p-4 sm:px-6 text-neutral-300 max-w-xs text-xs">
+                    <ul className="list-disc list-inside space-y-0.5">
+                      {mod.deliverables.slice(0, 3).map((item, idx) => (
+                        <li key={idx} className="truncate" title={item}>
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  </td>
+                  <td className="p-4 sm:px-6 text-neutral-400 text-xs">
+                    {mod.dependencies.length > 0 ? mod.dependencies.join("; ") : "Independente"}
+                  </td>
                   <td className="p-4 sm:px-6 font-mono whitespace-nowrap">
                     <span className="text-brand-accent font-semibold text-sm sm:text-base">
                       {mod.isStartingPrice ? "A partir de " : ""}
                       {formatCurrencyBRL(mod.price)}
                     </span>
                     <span className="block text-[10px] text-muted-foreground">implantação</span>
-                  </td>
-                  <td className="p-4 sm:px-6 text-neutral-400 text-xs">
-                    {mod.dependencies.length > 0 ? mod.dependencies.join("; ") : "Independente"}
                   </td>
                 </tr>
               ))}
@@ -90,9 +102,22 @@ export function ProposalComparisonMatrix({ modules }: ProposalComparisonMatrixPr
 
               <div>
                 <span className="text-[11px] uppercase tracking-wider text-muted-foreground block mb-1">
-                  Finalidade
+                  Objetivo
                 </span>
                 <p className="text-xs text-neutral-300 leading-relaxed">{mod.summary}</p>
+              </div>
+
+              <div>
+                <span className="text-[11px] uppercase tracking-wider text-muted-foreground block mb-1">
+                  Recursos Principais
+                </span>
+                <ul className="text-xs text-neutral-300 list-disc list-inside space-y-0.5">
+                  {mod.deliverables.slice(0, 3).map((item, idx) => (
+                    <li key={idx} className="truncate">
+                      {item}
+                    </li>
+                  ))}
+                </ul>
               </div>
 
               <div className="pt-2 border-t border-white/5 text-[11px] text-neutral-400">

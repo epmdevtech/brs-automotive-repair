@@ -8,7 +8,7 @@
 | Organização             | EPMDEVTECH Clientes                                             |
 | Responsável             | Engenharia & Produto EPMDEVTECH                                 |
 | Estado                  | Ativo / Website Institucional Multipágina Estruturado com Rotas |
-| Versão ou release       | `0.5.0` (Universal SDD Compliant)                               |
+| Versão ou release       | `0.6.0` (Universal SDD Compliant)                               |
 | Última revisão          | 2026-10-26                                                      |
 | Framework de Governança | Universal SDD (Spec-Driven Development)                         |
 | Revisores               | Equipe Técnica EPMDEVTECH                                       |
@@ -51,6 +51,7 @@
     - `/contato`: Rota dedicada de triagem de contato e avaliação técnica;
     - `/privacidade`: Políticas de privacidade e conformidade de dados;
     - `/proposta/$slug`: Rota de proposta comercial personalizada confidencial (`noindex, nofollow`);
+    - `/proposta/masterchapeacao`: Proposta comercial modular da Master, com marca e narrativa próprias, catálogo dos 6 produtos automotivos em centavos inteiros, 5 combinações sugeridas, matriz comparativa e `noindex, nofollow`;
     - `/briefing`: Rota confidencial de briefing operacional da Master com 15 etapas validadas por React Hook Form e Zod, persistência real em PostgreSQL (Supabase) com Row Level Security, retomada de preenchimento e envio idempotente (`noindex, nofollow`, fora dos menus públicos);
     - `/briefing/confirmacao`: Confirmação exibida somente após o servidor confirmar a persistência do envio (`noindex, nofollow`);
     - `/login`: Autenticação segura por Supabase Auth (e-mail e senha, sessão por cookie SSR) para o briefing e o painel administrativo (`noindex, nofollow`);
@@ -274,6 +275,7 @@ Todas as entregas obedecem ao protocolo **Universal SDD**:
 - `SPEC-074` / `TASK-074-01` a `TASK-074-04` / `REVIEW-074`: Auditoria e refatoração UX/UI das 15 etapas do briefing, com máscaras e validadores de domínio (CEP, CNPJ com dígitos verificadores, telefone com DDD, data civil com calendário, número pt-BR), consulta assistida de CEP com timeout e falha não bloqueante, perguntas condicionais com descarte explícito, agrupamento por assunto, radio groups acessíveis, resumo de erros focalizado, revisão final com pendências por etapa e confirmação explícita do envio.
 - `SPEC-077` / `TASK-077-01`: Aproveitamento das fotos reais da oficina com tratamento de placas, galeria acessível em `/trabalhos`, integração em home e páginas institucionais, remoção dos derivados não tratados e testes de privacidade.
 - `SPEC-078` / `TASK-078-01`: Substituição do acervo da oficina pelas seis imagens oficiais com placas da marca, novo hero/OG, galeria acessível em `/trabalhos`, rótulo "Imagem de divulgação" no hero e tratamento de placas reais remanescentes.
+- `SPEC-079` / `TASK-079-01`: Proposta comercial modular da Master em `/proposta/masterchapeacao`, com catálogo de 6 produtos automotivos em centavos inteiros, 5 combinações calculadas, matriz comparativa responsiva, custos externos segregados, contato EPM DevTech apenas por e-mail e isolamento integral da proposta original.
 
 ---
 

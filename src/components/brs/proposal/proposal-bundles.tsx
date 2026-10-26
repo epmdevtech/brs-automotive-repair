@@ -168,6 +168,15 @@ export function ProposalBundles({
             );
           })}
         </div>
+
+        <div className="mt-8 p-4 rounded-xl border border-white/10 bg-card/20 text-center text-xs text-neutral-400 max-w-3xl mx-auto leading-relaxed">
+          <p>
+            Valores de referência antes de eventual condição especial acordada. Nada exige a
+            contratação do portfólio completo: a Master tem total autonomia para iniciar pelo módulo
+            essencial e evoluir conforme a demanda de sua operação. Implantações conjuntas podem
+            exigir alinhamento técnico prévio.
+          </p>
+        </div>
       </div>
     </section>
   );

@@ -82,7 +82,8 @@ Gerado por `scripts/generate_traceability.py`. Não edite manualmente; execute n
 | [SPEC-076](../specs/SPEC-076-auditoria-de-seguranca-briefing.md) | Approved | [TASK-076-01](../tasks/TASK-076-01-auditoria-de-seguranca-e-plano-de-correcao.md) (Done)<br>[TASK-076-02](../tasks/TASK-076-02-correcoes-de-seguranca-em-codigo.md) (Done)<br>[TASK-076-03](../tasks/TASK-076-03-testes-de-regressao-e-documentacao.md) (Done) | `1c31cd57` test(security): cobre o controle de acesso e a regressão das correções<br>`eb20c459` fix(security): endurece sessão, cabeçalhos, papel e configuração<br>`a77965fd` docs(security): registra a auditoria OWASP do briefing da Master | [REVIEW-076-auditoria-de-seguranca-briefing.md](../reviews/REVIEW-076-auditoria-de-seguranca-briefing.md) (Approved) |
 | [SPEC-077](../specs/SPEC-077-aproveitamento-fotos-reais-oficina-e-privacidade.md) | Approved | [TASK-077-01](../tasks/TASK-077-01-fotos-reais-oficina-galeria-e-privacidade.md) (Done) | `f2fe9719` feat(oficina): publica imagens oficiais no hero, galeria e páginas | — |
 | [SPEC-078](../specs/SPEC-078-imagens-oficiais-oficina-hero-e-galeria.md) | Approved | [TASK-078-01](../tasks/TASK-078-01-imagens-oficiais-hero-e-galeria.md) (Done) | `f2fe9719` feat(oficina): publica imagens oficiais no hero, galeria e páginas | — |
+| [SPEC-079](../specs/SPEC-079-proposta-comercial-master-rota-dedicada.md) | Approved | [TASK-079-01](../tasks/TASK-079-01-proposta-comercial-master-rota-dedicada.md) (Completed) | — | — |
 
 ## Lacunas de rastreabilidade (Traceability gaps)
 
-- Nenhuma detectada nos artefatos verificados.
+- `TASK-079-01` não possui commit com `Task-Ref: TASK-079-01`.

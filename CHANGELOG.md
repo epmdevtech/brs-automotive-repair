@@ -4,6 +4,20 @@ Todas as alterações notáveis neste projeto serão documentadas neste arquivo.
 
 O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e este projeto adere ao [Universal SDD](UNIVERSAL_SDD_FRAMEWORK.md).
 
+## [0.6.0] - 2026-10-26
+
+### Adicionado
+
+- **Proposta comercial modular da Master em rota dedicada** (`SPEC-079` / `TASK-079-01`):
+  - Rota confidencial `/proposta/masterchapeacao` com metadados `noindex, nofollow`, fora dos menus públicos e do sitemap.
+  - Catálogo central tipado dos 6 módulos automotivos modelados em centavos inteiros (`implementationPriceCents`): EPM Web (R$ 2.490,00, produto de entrada), EPM Booking Auto (R$ 3.990,00, primeira evolução sugerida), EPM CRM Auto (R$ 4.990,00), EPM Oficina (R$ 7.490,00), EPM Connect (a partir de R$ 1.990,00) e EPM Insights (R$ 2.490,00).
+  - 5 combinações sugeridas calculadas a partir do catálogo: Presença Digital (R$ 2.490,00), Captação e Agendamento (R$ 6.480,00), Gestão Comercial (R$ 7.480,00), Operação Digital (R$ 18.960,00) e Ecossistema Expandido (R$ 23.440,00, rotulado como referência inicial).
+  - Segregação estrita de custos recorrentes e despesas externas (domínio, hospedagem, storage, mensageria, e-mail corporativo, suporte sob demanda e integrações), nunca somados à implantação.
+  - Matriz comparativa responsiva com recursos principais e layout empilhado legível em mobile, condições comerciais transparentes e 9 etapas do projeto.
+  - CTA interativo com resumo dinâmico, ação principal ("Tenho interesse nesta proposta"), ação secundária ("Quero esclarecer uma dúvida") e contato via canal confirmado (`contato@epmdevtech.com.br`), sem telefone ou WhatsApp fictício.
+  - Isolamento estrito da proposta original da BRS (`master-digital-presence`).
+  - Suíte de 18 testes automatizados em `src/test/proposta-masterchapeacao.test.tsx` com 100% de aprovação.
+
 ## [0.5.0] - 2026-10-26
 
 ### Adicionado

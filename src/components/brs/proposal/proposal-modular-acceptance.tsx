@@ -244,7 +244,7 @@ export function ProposalModularAcceptance({
               onClick={() => setModalOpen(true)}
               className="w-full sm:w-auto text-xs sm:text-sm font-semibold tracking-wide"
             >
-              <span>Manifestar interesse na seleção</span>
+              <span>Tenho interesse nesta proposta</span>
               <ArrowRight className="ml-2 size-4" aria-hidden="true" />
             </Button>
 
@@ -254,9 +254,13 @@ export function ProposalModularAcceptance({
               asChild
               className="w-full sm:w-auto text-xs sm:text-sm"
             >
-              <a href={mailtoUrl}>
+              <a
+                href={`mailto:${proposal.authorContact.email}?subject=${encodeURIComponent(
+                  `Dúvida Comercial - Proposta Master (${proposal.slug})`,
+                )}`}
+              >
                 <HelpCircle className="mr-2 size-4 text-brand-accent" aria-hidden="true" />
-                <span>Tirar dúvidas por e-mail</span>
+                <span>Quero esclarecer uma dúvida</span>
               </a>
             </Button>
           </div>

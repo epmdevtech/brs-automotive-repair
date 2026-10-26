@@ -154,6 +154,10 @@ export function ProposalView({ proposal }: ProposalViewProps) {
         {/* Seção F: Custos Recorrentes & Serviços de Terceiros */}
         <ProposalRecurringCosts recurringCosts={proposal.recurringCosts || []} />
 
+        {/* Seção G: Condições Comerciais & Responsabilidades */}
+        <ProposalConditions proposal={proposal} />
+        <ProposalResponsibilities proposal={proposal} />
+
         {/* Seção H: Ciclo de Execução em 9 Etapas */}
         <ProposalExecutionSteps steps={proposal.executionSteps || []} />
 

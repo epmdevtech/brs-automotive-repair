@@ -48,9 +48,22 @@ export function ProposalModulesCatalog({
                 <div>
                   {/* Cabeçalho do Card */}
                   <div className="flex items-start justify-between gap-3 mb-4">
-                    <span className="text-[11px] font-mono px-2.5 py-1 rounded-sm bg-white/5 border border-white/10 text-neutral-300 uppercase tracking-wider">
-                      {mod.category}
-                    </span>
+                    <div className="flex flex-wrap items-center gap-1.5">
+                      <span className="text-[11px] font-mono px-2.5 py-1 rounded-sm bg-white/5 border border-white/10 text-neutral-300 uppercase tracking-wider">
+                        {mod.category}
+                      </span>
+                      {mod.badge && (
+                        <span
+                          className={`text-[10px] font-mono px-2 py-0.5 rounded-sm border uppercase tracking-wider font-semibold ${
+                            mod.recommended
+                              ? "bg-amber-500/15 border-amber-500/30 text-amber-300"
+                              : "bg-primary/10 border-primary/20 text-brand-accent"
+                          }`}
+                        >
+                          {mod.badge}
+                        </span>
+                      )}
+                    </div>
 
                     <button
                       type="button"
