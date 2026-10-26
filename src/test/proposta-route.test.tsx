@@ -171,7 +171,7 @@ describe("SPEC-027 / TASK-027-01 — Componentes e Roteamento de Proposta Comerc
       expect(screen.getByRole("link", { name: /página inicial Master/i })).toBeInTheDocument();
       expect(screen.getByRole("link", { name: /falar com a epm devtech/i })).toHaveAttribute(
         "href",
-        "mailto:contato@epmdevtech.com.br",
+        "mailto:elessandro@epmdevtech.com.br",
       );
     });
 

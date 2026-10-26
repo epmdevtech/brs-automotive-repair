@@ -15,7 +15,7 @@ export const Route = createFileRoute("/servicos/martelinho-de-ouro")({
       description:
         "Martelinho de ouro artesanal (PDR) em Toledo-PR. Desamasse seu veículo sem repintar, preservando 100% da originalidade de fábrica e o valor de revenda.",
       path: "/servicos/martelinho-de-ouro",
-      image: "/assets/martelinho.jpg",
+      image: martelinhoServico,
       jsonLd: {
         "@context": "https://schema.org",
         "@graph": [

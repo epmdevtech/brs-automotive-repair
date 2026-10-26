@@ -6,7 +6,7 @@ import { PageHero } from "@/components/brs/page-hero";
 import { Button } from "@/components/ui/button";
 import { ScrollReveal } from "@/components/ui/scroll-reveal";
 import { NumericCounter } from "@/components/ui/numeric-counter";
-import corretoresVistoria from "@/assets/corretores-vistoria.jpg";
+import oficinaFachada02 from "@/assets/cliente/oficina-fachada-02.jpg";
 
 export const Route = createFileRoute("/para-corretores")({
   component: ParaCorretoresPage,
@@ -16,7 +16,7 @@ export const Route = createFileRoute("/para-corretores")({
       description:
         "Canal profissional de relacionamento técnico para corretores de seguros e peritos em Toledo-PR. Suporte em avarias, documentação e livre escolha de oficina.",
       path: "/para-corretores",
-      image: "/assets/funilaria.jpg",
+      image: oficinaFachada02,
       jsonLd: {
         "@context": "https://schema.org",
         "@graph": [
@@ -80,15 +80,15 @@ function ParaCorretoresPage() {
         asideContent={
           <div className="relative rounded-2xl border border-white/10 overflow-hidden bg-card/40 aspect-4/3">
             <img
-              src={corretoresVistoria}
-              alt="Avaliação técnica e documentação de avarias em ambiente de reparação automotiva (fotografia ilustrativa)"
-              width={1200}
-              height={800}
+              src={oficinaFachada02}
+              alt="Fachada da Master com caminhão-plataforma Volkswagen e placas com a marca"
+              width={1600}
+              height={900}
               className="w-full h-full object-cover"
               loading="lazy"
             />
             <span className="absolute bottom-3 right-3 text-[9px] uppercase tracking-wider px-2 py-1 bg-background/85 text-muted-foreground border border-border/50 backdrop-blur-xs rounded-xs pointer-events-none">
-              Fotografia ilustrativa
+              Registro oficial
             </span>
           </div>
         }

@@ -28,6 +28,8 @@ export interface ServicePageContent {
   heroCtaLabel: string;
   image: string;
   imageAlt: string;
+  /** `true` quando a imagem é ilustrativa; `false` para registro oficial da oficina. */
+  imageIllustrative?: boolean;
   applicationsIcon: ComponentType<{ size?: number; "aria-hidden"?: boolean | "true" | "false" }>;
   applicationsTitle: string;
   limitationsTitle: string;
@@ -51,6 +53,7 @@ export function ServicePageLayout({
   heroCtaLabel,
   image,
   imageAlt,
+  imageIllustrative = true,
   applicationsIcon: ApplicationsIcon,
   applicationsTitle,
   limitationsTitle,
@@ -142,7 +145,7 @@ export function ServicePageLayout({
                 loading="lazy"
               />
               <span className="absolute bottom-3 right-3 text-[9px] uppercase tracking-wider px-2 py-1 bg-background/85 text-muted-foreground border border-border/50 backdrop-blur-xs rounded-xs">
-                Fotografia ilustrativa
+                {imageIllustrative ? "Fotografia ilustrativa" : "Registro oficial"}
               </span>
             </ImageReveal>
           </div>

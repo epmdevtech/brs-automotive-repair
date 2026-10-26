@@ -116,6 +116,25 @@ export function ProposalHero({ proposal }: ProposalHeroProps) {
           </div>
         </div>
 
+        {proposal.branding?.logoUrl && (
+          <div className="mb-6 flex flex-wrap items-center gap-x-5 gap-y-3">
+            <img
+              src={proposal.branding.logoUrl}
+              alt={proposal.branding.logoAlt ?? proposal.companyName}
+              width={512}
+              height={172}
+              loading="eager"
+              decoding="async"
+              className="h-11 w-auto mix-blend-screen sm:h-12"
+            />
+            {proposal.branding.tagline && (
+              <span className="max-w-sm text-xs leading-relaxed text-neutral-400 sm:text-sm">
+                {proposal.branding.tagline}
+              </span>
+            )}
+          </div>
+        )}
+
         {/* Nome da empresa cliente e chamada editorial */}
         <p className="eyebrow mb-3">Preparada para {proposal.companyName}</p>
         <h1

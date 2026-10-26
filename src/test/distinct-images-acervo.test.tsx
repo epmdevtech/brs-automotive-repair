@@ -11,7 +11,7 @@ import martelinhoDepois from "@/assets/martelinho-depois.jpg";
 import funilariaServico from "@/assets/funilaria-servico.jpg";
 import pinturaServico from "@/assets/pintura-servico.jpg";
 import martelinhoServico from "@/assets/martelinho-servico.jpg";
-import corretoresVistoria from "@/assets/corretores-vistoria.jpg";
+import oficinaFachada02 from "@/assets/cliente/oficina-fachada-02.jpg";
 
 describe("SPEC-026 — Imagens Distintas para Antes e Depois e Eliminação de Repetição Visual", () => {
   it("garante que os pares de antes e depois são arquivos de imagem distintos", () => {
@@ -42,7 +42,7 @@ describe("SPEC-026 — Imagens Distintas para Antes e Depois e Eliminação de R
       funilariaServico,
       pinturaServico,
       martelinhoServico,
-      corretoresVistoria,
+      oficinaFachada02,
     ];
 
     const uniqueAssets = new Set(assets);

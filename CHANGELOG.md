@@ -4,6 +4,80 @@ Todas as alterações notáveis neste projeto serão documentadas neste arquivo.
 
 O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e este projeto adere ao [Universal SDD](UNIVERSAL_SDD_FRAMEWORK.md).
 
+## [0.6.1] - 2026-10-26
+
+### Corrigido (UX/UI mobile-first — SPEC-080 / TASK-080-01)
+
+- **`proposal-nav`**: removido `min-w-max` no wrapper externo que causava overflow horizontal no
+  mobile. Scroll interno com `scrollbar-none` e `scroll-smooth`, fades laterais com gradiente
+  indicando conteúdo rolável, e `scrollIntoView` para centralizar o item ativo automaticamente.
+  Labels encurtados para melhor legibilidade em viewports estreitos.
+- **`proposal-modules-catalog`**: texto introdutório passa a usar prop `companyName` dinamicamente
+  (sem hardcode). Ajuste de gap (`gap-5 sm:gap-7`) e `break-words` em todos os textos longos de
+  deliverables, exclusões, dependências e notas de custos. Ícones com `shrink-0`.
+- **`proposal-modular-acceptance`**: atalhos de pacotes reestruturados — label em linha própria,
+  botões com `whitespace-nowrap` e `flex-wrap gap-1.5` para não truncar em viewports < 400 px.
+- **`proposal-comparison-matrix`**: cards mobile sem `truncate` nos deliverables; substituído por
+  `line-clamp-2 break-words` com `title` acessível. Bullets com `shrink-0`.
+- **`proposal-bundles`**: preço do card usa `text-brand-accent` (consistente com demais seções);
+  card com `h-full` para equalização de alturas em Safari mobile; grid ajustado para `gap-5 sm:gap-7`.
+
+## [0.6.0] - 2026-10-26
+
+### Adicionado
+
+- **Proposta comercial modular da Master em rota dedicada** (`SPEC-079` / `TASK-079-01`):
+  - Rota confidencial `/proposta/masterchapeacao` com metadados `noindex, nofollow`, fora dos menus públicos e do sitemap.
+  - Catálogo central tipado dos 6 módulos automotivos modelados em centavos inteiros (`implementationPriceCents`): EPM Web (R$ 2.490,00, produto de entrada), EPM Booking Auto (R$ 3.990,00, primeira evolução sugerida), EPM CRM Auto (R$ 4.990,00), EPM Oficina (R$ 7.490,00), EPM Connect (a partir de R$ 1.990,00) e EPM Insights (R$ 2.490,00).
+  - 5 combinações sugeridas calculadas a partir do catálogo: Presença Digital (R$ 2.490,00), Captação e Agendamento (R$ 6.480,00), Gestão Comercial (R$ 7.480,00), Operação Digital (R$ 18.960,00) e Ecossistema Expandido (R$ 23.440,00, rotulado como referência inicial).
+  - Segregação estrita de custos recorrentes e despesas externas (domínio, hospedagem, storage, mensageria, e-mail corporativo, suporte sob demanda e integrações), nunca somados à implantação.
+  - Matriz comparativa responsiva com recursos principais e layout empilhado legível em mobile, condições comerciais transparentes e 9 etapas do projeto.
+  - CTA interativo com resumo dinâmico, ação principal ("Tenho interesse nesta proposta"), ação secundária ("Quero esclarecer uma dúvida") e contato via canal confirmado (`contato@epmdevtech.com.br`), sem telefone ou WhatsApp fictício.
+  - Isolamento estrito da proposta original da BRS (`master-digital-presence`).
+  - Suíte de 18 testes automatizados em `src/test/proposta-masterchapeacao.test.tsx` com 100% de aprovação.
+
+## [0.5.0] - 2026-10-26
+
+### Adicionado
+
+- **Imagens oficiais da oficina, hero e galeria** (`SPEC-078` / `TASK-078-01`):
+  - Seis imagens oficiais com placas da marca publicadas em `src/assets/cliente/`, com nomes neutros e JPG otimizado.
+  - Novo hero desktop/mobile e Open Graph derivados das imagens oficiais, com AVIF/WebP e preload preservados.
+  - Galeria acessível com seis registros oficiais em `/trabalhos`, com lightbox e navegação por teclado.
+  - Rótulo "Imagem de divulgação" no hero e nota de placas substituídas pela marca na galeria.
+  - Tratamento das placas reais remanescentes na imagem de céu nublado.
+  - `docs/image-treatment-report.json` com origem, dimensões, regiões tratadas e hashes.
+
+### Alterado
+
+- Fotos antigas com desfoque amplo foram substituídas pelas imagens oficiais da oficina em home, serviços, sobre, contato, corretores e trabalhos.
+- Hero da home deixou de usar o recorte com grande área de desfoque sobre a placa.
+- Texto de transparência de `/trabalhos` passou a distinguir registros oficiais, métodos ilustrativos e placas substituídas.
+
+## [0.4.0] - 2026-10-26
+
+### Adicionado
+
+- **Fotos reais da oficina e privacidade de placas** (`SPEC-077` / `TASK-077-01`):
+  - Pipeline reprodutível em `scripts/process-client-images.py` com pixelização, desfoque e véu escuro localizados sobre placas.
+  - Seis fotografias reais publicadas em `src/assets/cliente/`: fachadas, recepção, estufa de pintura e caminhão-plataforma.
+  - Galeria acessível com ampliação por diálogo, teclado e leitor de tela em `/trabalhos`.
+  - Registros reais integrados ao hero da home, `/sobre`, `/contato`, `/para-corretores`, `/servicos` e `/servicos/pintura-automotiva`.
+  - Variantes públicas do hero em AVIF/WebP e Open Graph regravados a partir das versões tratadas.
+  - Testes de privacidade de nomes/conteúdo e de renderização da galeria.
+  - Inventário e política de mídia em `docs/inventario-imagens-brs.md` e `docs/image-treatment-report.json`.
+
+### Alterado
+
+- Cards de serviço da home passaram a usar imagens semanticamente corretas, todas rotuladas como ilustrativas.
+- Página `/trabalhos` separa registros reais da oficina de sequências ilustrativas de método.
+- Metadados de serviço e de corretores usam os assets efetivamente importados, em vez de caminhos públicos inexistentes.
+
+### Removido
+
+- `src/assets/master/` com oito derivados não tratados das fotos do cliente.
+- Narrativa de "acervo em preparação" substituída pela distinção explícita entre registro real e demonstração de método.
+
 ## [0.3.0] - 2026-10-13
 
 ### Adicionado

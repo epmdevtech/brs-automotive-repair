@@ -38,7 +38,7 @@ export function Hero({ config = defaultHeroConfig, debugMode = false }: HeroProp
           </span>
           {config.isIllustrative && (
             <span className="image-note text-xs text-neutral-200 font-medium px-2 py-0.5 rounded bg-black/50 border border-white/15">
-              Fotografia ilustrativa
+              {config.mediaLabel ?? "Fotografia ilustrativa"}
             </span>
           )}
         </div>

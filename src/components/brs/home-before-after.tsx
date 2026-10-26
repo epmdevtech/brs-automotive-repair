@@ -168,8 +168,8 @@ export function HomeBeforeAfter() {
                   aria-hidden="true"
                 />
                 <span>
-                  O acervo fotográfico real está em documentação em Toledo-PR com autorização de
-                  clientes. Imagens ilustrativas demonstrativas dos métodos técnicos.
+                  Demonstração ilustrativa do método. Os registros oficiais da oficina estão na
+                  página Trabalhos, com as placas de terceiros substituídas pela marca.
                 </span>
               </p>
             </div>

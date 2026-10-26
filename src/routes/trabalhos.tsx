@@ -5,25 +5,28 @@ import { buildRouteHead, buildBreadcrumbSchema } from "@/lib/seo";
 import { PageHero } from "@/components/brs/page-hero";
 import { ProjectGallery } from "@/components/brs/project-gallery";
 import { ContactCTA } from "@/components/brs/contact-cta";
+import { WorkshopGallery } from "@/components/brs/workshop-gallery";
+import oficinaFachada01 from "@/assets/cliente/oficina-fachada-01.jpg";
 
 export const Route = createFileRoute("/trabalhos")({
   component: TrabalhosPage,
   head: () =>
     buildRouteHead({
-      title: "Trabalhos e Reparações Automotivas | Master",
+      title: "Trabalhos, Estrutura e Métodos | Master",
       description:
-        "Galeria interativa de métodos e processos de reparação da Master em Toledo-PR. Comparação antes/depois e ampliação técnica em alta resolução.",
+        "Imagens oficiais da estrutura da Master em Toledo-PR e demonstrações ilustrativas dos métodos de funilaria, pintura e martelinho de ouro.",
       path: "/trabalhos",
+      image: oficinaFachada01,
       jsonLd: {
         "@context": "https://schema.org",
         "@graph": [
           buildBreadcrumbSchema([{ name: "Trabalhos", path: "/trabalhos" }]),
           {
             "@type": "WebPage",
-            name: "Trabalhos e Reparações Automotivas — Master",
+            name: "Trabalhos, Estrutura e Métodos — Master",
             url: canonicalUrl("/trabalhos"),
             description:
-              "Galeria técnica demonstrando intervenções de funilaria, pintura e martelinho de ouro.",
+              "Registros fotográficos reais da oficina e demonstrações ilustrativas dos métodos de reparação.",
           },
         ],
       },
@@ -37,12 +40,11 @@ function TrabalhosPage() {
         breadcrumbs={[{ name: "Trabalhos" }]}
         codeIndex="GAL.03 // PORTFÓLIO"
         eyebrow="PORTFÓLIO & MÉTODOS DE REPARAÇÃO"
-        title="Casos de Reparação e Acabamento."
+        title="A oficina, os métodos e o acabamento."
         description={
           <p className="text-neutral-300 text-sm sm:text-base leading-relaxed">
-            Entenda como atuamos na recuperação de vincos, alinhamento de peças e fidelidade de cor.
-            As imagens abaixo são ilustrativas e demonstram as etapas técnicas de cada
-            especialidade.
+            Conheça a estrutura da Master em Toledo-PR e entenda as etapas técnicas que orientam a
+            recuperação de vincos, o alinhamento de peças e a fidelidade de cor.
           </p>
         }
         footerContent={
@@ -50,16 +52,19 @@ function TrabalhosPage() {
             <Info size={14} className="text-brand-accent shrink-0" aria-hidden="true" />
             <p>
               <span className="font-semibold text-white">Transparência Fotográfica: </span>
-              Acervo fotográfico real em fase de documentação em Toledo-PR. Imagens ilustrativas
-              demonstrativas dos métodos de reparação.
+              As imagens da estrutura são registros oficiais da oficina, com placas de terceiros
+              substituídas pela marca. As sequências de método são ilustrativas e não representam
+              casos de clientes.
             </p>
           </div>
         }
         className="mb-0 border-b-0 pb-6 sm:pb-8"
       />
 
+      <WorkshopGallery className="mt-10" />
+
       {/* Galeria com Filtros Interativos e Slider Antes/Depois com Respiro Otimizado */}
-      <ProjectGallery className="pt-6 sm:pt-8" />
+      <ProjectGallery className="mt-20" />
 
       {/* CTA de Fechamento */}
       <div className="mt-16">

@@ -115,7 +115,7 @@ export function ProposalView({ proposal }: ProposalViewProps) {
 
           <div className="mt-6">
             <Button variant="primary" asChild size="sm">
-              <a href="mailto:contato@epmdevtech.com.br">Solicitar Renovação da Proposta</a>
+              <a href="mailto:elessandro@epmdevtech.com.br">Solicitar Renovação da Proposta</a>
             </Button>
           </div>
         </div>
@@ -138,6 +138,7 @@ export function ProposalView({ proposal }: ProposalViewProps) {
           modules={proposal.modulesCatalog || []}
           selectedModuleIds={selectedModuleIds}
           onToggleModule={handleToggleModule}
+          companyName={proposal.companyName}
         />
 
         {/* Seção D: Matriz Comparativa de Módulos */}
@@ -153,6 +154,10 @@ export function ProposalView({ proposal }: ProposalViewProps) {
 
         {/* Seção F: Custos Recorrentes & Serviços de Terceiros */}
         <ProposalRecurringCosts recurringCosts={proposal.recurringCosts || []} />
+
+        {/* Seção G: Condições Comerciais & Responsabilidades */}
+        <ProposalConditions proposal={proposal} />
+        <ProposalResponsibilities proposal={proposal} />
 
         {/* Seção H: Ciclo de Execução em 9 Etapas */}
         <ProposalExecutionSteps steps={proposal.executionSteps || []} />

@@ -50,6 +50,8 @@ export interface ProposalModule {
   name: string;
   category: string;
   price: number;
+  implementationPriceCents?: number;
+  priceType?: "fixed" | "from";
   isStartingPrice?: boolean;
   summary: string;
   problemSolved: string;
@@ -57,8 +59,13 @@ export interface ProposalModule {
   exclusions: string[];
   dependencies: string[];
   recurringCostsNote: string;
+  relatedRecurringCosts?: string[];
   isAvailableForSelection: boolean;
+  selectable?: boolean;
+  publicationStatus?: "published" | "draft";
   commercialNotes?: string;
+  recommended?: boolean;
+  badge?: string;
 }
 
 export interface ModuleBundle {
@@ -68,10 +75,13 @@ export interface ModuleBundle {
   moduleIds: string[];
   description: string;
   referencePrice: number;
+  referencePriceCents?: number;
   isStartingPrice?: boolean;
+  priceType?: "fixed" | "from";
   discountAmount?: number;
   finalPrice?: number;
   highlight?: boolean;
+  commercialNote?: string;
 }
 
 export interface RecurringCostItem {
@@ -90,6 +100,12 @@ export interface ExecutionStep {
   duration?: string;
 }
 
+export interface ProposalBranding {
+  logoUrl?: string;
+  logoAlt?: string;
+  tagline?: string;
+}
+
 export interface CommercialProposal {
   id: string;
   slug: string;
@@ -98,6 +114,7 @@ export interface CommercialProposal {
   companyName: string;
   projectTitle: string;
   projectSubtitle?: string;
+  branding?: ProposalBranding;
   author: "EPM DevTech";
   authorRole: string;
   authorContact: {
@@ -298,24 +315,40 @@ export function generateAcceptanceMessage(
 
 /**
  * Calcula o total do investimento a partir dos módulos selecionados pelo cliente.
+ * Somas realizadas em centavos inteiros para prevenir imprecisão de ponto flutuante.
  */
 export function calculateSelectedModulesTotal(
   selectedIds: string[],
   modules: ProposalModule[],
 ): {
   totalValue: number;
+  totalValueCents: number;
   hasVariableStartingPrice: boolean;
   selectedModules: ProposalModule[];
 } {
   const selectedModules = modules.filter((mod) => selectedIds.includes(mod.id));
-  const totalValue = selectedModules.reduce((sum, mod) => sum + mod.price, 0);
-  const hasVariableStartingPrice = selectedModules.some((mod) => mod.isStartingPrice);
+  const totalValueCents = selectedModules.reduce(
+    (sum, mod) => sum + (mod.implementationPriceCents ?? Math.round(mod.price * 100)),
+    0,
+  );
+  const totalValue = totalValueCents / 100;
+  const hasVariableStartingPrice = selectedModules.some(
+    (mod) => mod.isStartingPrice || mod.priceType === "from",
+  );
 
   return {
     totalValue,
+    totalValueCents,
     hasVariableStartingPrice,
     selectedModules,
   };
+}
+
+/**
+ * Formata um valor numérico em centavos inteiros para o padrão monetário BRL (R$ X.XXX,XX).
+ */
+export function formatCurrencyCents(cents: number): string {
+  return formatCurrencyBRL(cents / 100);
 }
 
 /**
@@ -371,6 +404,485 @@ export function generateModularAcceptanceMessage(
 }
 
 /**
+ * Catálogo Oficial de Módulos Digitais EPM DevTech para a Master Chapeação e Pinturas.
+ * Modelado em centavos inteiros (implementationPriceCents) e formatação BRL padrão.
+ */
+export const masterModulesCatalog: ProposalModule[] = [
+  {
+    id: "epm-web",
+    name: "EPM Web",
+    category: "Presença digital automotiva",
+    price: 2490,
+    implementationPriceCents: 249000,
+    priceType: "fixed",
+    isStartingPrice: false,
+    summary:
+      "Website institucional multipágina de alta performance com arquitetura de rotas dedicadas (TanStack Router) para o setor automotivo em Toledo-PR.",
+    problemSolved:
+      "Estabelece autoridade digital sólida, elimina impressões amadoras e apresenta os serviços especializados de forma técnica e transparente em URLs próprias.",
+    deliverables: [
+      "Website multipágina completo em TanStack Router com rotas independentes e navegação client-side instantânea.",
+      "Rota principal (Início: /) com visão integrada, encaminhamento estratégico e componentes editoriais premium.",
+      "Catálogo geral de serviços (/servicos) com visão integrada das especialidades técnicas.",
+      "Rotas aprofundadas dedicadas para cada especialidade: Funilaria (/servicos/funilaria), Pintura em Estufa (/servicos/pintura-automotiva) e Martelinho de Ouro (/servicos/martelinho-de-ouro).",
+      "Rota exclusiva para corretores de seguros (/para-corretores) estruturada para credenciamento e sinistros.",
+      "Rota de galeria e portfólio de trabalhos concluídos (/trabalhos) com identificação correta das imagens oficiais.",
+      "Rota institucional Sobre (/sobre) com história, diferenciais e posicionamento técnico da oficina.",
+      "Rota dedicada de avaliação técnica e contato (/contato) com fluxo honesto de mensagem para canal oficial.",
+      "Rota de políticas de privacidade e termos (/privacidade).",
+      "SEO técnico avançado por rota: meta tags canônicas únicas, sitemap.xml estruturado e Schema.org AutoBodyShop.",
+      "Acessibilidade completa WCAG AA e otimização responsiva para celulares, tablets e computadores.",
+    ],
+    exclusions: [
+      "Agendamento com painel próprio interativo.",
+      "CRM e funil comercial de contatos.",
+      "Ordens de serviço e checklists operacionais.",
+      "Área administrativa de cadastro dinâmico.",
+      "Integração com ERP automotivo de oficina.",
+      "Produção profissional presencial de fotos ou filmagens com drone.",
+      "Gestão recorrente de redes sociais e publicações.",
+      "Campanhas de tráfego pago (Google Ads / Meta Ads).",
+    ],
+    dependencies: [
+      "Fornecimento de fotos reais das instalações ou uso autorizado de acervo oficial.",
+      "Definição dos canais oficiais confirmados de atendimento da oficina.",
+    ],
+    recurringCostsNote:
+      "Hospedagem básica e domínio (.com.br) contratados sob titularidade da Master.",
+    relatedRecurringCosts: ["rec-dominio", "rec-hospedagem"],
+    isAvailableForSelection: true,
+    selectable: true,
+    publicationStatus: "published",
+    badge: "Produto de entrada",
+    recommended: false,
+    commercialNotes: "Produto de entrada; não inclui módulos de gestão ou agendamento.",
+  },
+  {
+    id: "epm-booking",
+    name: "EPM Booking Auto",
+    category: "Solicitações de avaliação e agendamento",
+    price: 3990,
+    implementationPriceCents: 399000,
+    priceType: "fixed",
+    isStartingPrice: false,
+    summary:
+      "Formulário estruturado de pré-agendamento e painel administrativo de triagem de solicitações.",
+    problemSolved:
+      "Organiza pedidos de orçamento e avaliação de sinistros, evitando contatos dispersos e perda de horários na oficina.",
+    deliverables: [
+      "Formulário estruturado para solicitação de avaliação e agendamento de serviços.",
+      "Captura de dados de contato e informações essenciais do veículo (marca, modelo, placa/ano).",
+      "Seleção guiada da especialidade desejada (Funilaria, Pintura, Martelinho ou Avaliação Geral).",
+      "Seleção de data preferencial com base em regras e disponibilidade configuradas.",
+      "Painel administrativo para visualizar, filtrar e atualizar o status das solicitações.",
+      "Estados operacionais: Recebido, Em Análise, Confirmado, Concluído e Cancelado.",
+      "Registro cronológico com carimbo de data/hora e dados técnicos informados.",
+      "Interface responsiva para operação em computadores, tablets da oficina e celulares.",
+    ],
+    exclusions: [
+      "Sem confirmação automática nem agenda em tempo real.",
+      "Sem sincronização com Google Calendar ou agendas externas sem desenvolvimento sob medida.",
+      "Sem presumir elevadores, boxes ou oficinas.",
+      "Sem pagamentos online ou antecipação financeira de orçamentos.",
+      "Sem lembretes automáticos via SMS ou WhatsApp sem contratação explícita.",
+      "Sem API oficial do WhatsApp inclusa (salvo contratação explícita).",
+    ],
+    dependencies: [
+      "EPM Web ou aplicação web homologada para hospedagem do fluxo.",
+      "Definição das regras de horário e dias de atendimento pela equipe da Master.",
+    ],
+    recurringCostsNote: "Consumo padrão de infraestrutura de banco de dados e hospedagem.",
+    relatedRecurringCosts: ["rec-hospedagem"],
+    isAvailableForSelection: true,
+    selectable: true,
+    publicationStatus: "published",
+    badge: "Primeira evolução sugerida",
+    recommended: true,
+    commercialNotes:
+      "É uma solicitação sujeita à confirmação da Master, não confirmação automática. Sem agenda em tempo real. Pode ser contratado com o site ou avaliado separadamente.",
+  },
+  {
+    id: "epm-crm",
+    name: "EPM CRM Auto",
+    category: "Gestão comercial e relacionamento",
+    price: 4990,
+    implementationPriceCents: 499000,
+    priceType: "fixed",
+    isStartingPrice: false,
+    summary:
+      "Funil comercial especializado para oficina automotiva, gestão de leads, orçamentos e histórico.",
+    problemSolved:
+      "Elimina orçamentos esquecidos no WhatsApp e falta de acompanhamento de clientes que cotaram e não fecharam.",
+    deliverables: [
+      "Cadastro centralizado de clientes (particulares e corretores parceiros).",
+      "Cadastro e vinculação de histórico de veículos aos proprietários.",
+      "Registro da origem de captação do contato (indicação, balcão, site).",
+      "Funil comercial configurável em 7 etapas: Novo Contato, Qualificação, Avaliação, Orçamento, Negociação, Fechado e Perdido.",
+      "Registro de linha do tempo com histórico de notas, ligações e interações.",
+      "Gestão de tarefas internas e lembretes de retorno para follow-up de orçamentos.",
+      "Pesquisa rápida por nome, telefone, placa e filtros por etapa comercial.",
+    ],
+    exclusions: [
+      "ERP administrativo completo, compras ou fornecedores.",
+      "Emissão fiscal de NF-e / NFS-e.",
+      "Disparos automatizados em massa de mensagens de marketing.",
+      "Integrações nativas automáticas com sistemas de seguradoras (ex.: Cilia, Audatex).",
+      "Importação irrestrita ou saneamento de planilhas desorganizadas legadas.",
+      "Licenças pagas de softwares de terceiros.",
+    ],
+    dependencies: ["Definição do fluxo de atendimento e etapas comerciais padrão da Master."],
+    recurringCostsNote: "Infraestrutura de banco de dados seguro na nuvem.",
+    relatedRecurringCosts: ["rec-hospedagem"],
+    isAvailableForSelection: true,
+    selectable: true,
+    publicationStatus: "published",
+    badge: "Gestão de Leads",
+    recommended: false,
+    commercialNotes:
+      "Focado estritamente na conversão de novos orçamentos e relacionamento com corretores de seguros.",
+  },
+  {
+    id: "epm-oficina",
+    name: "EPM Oficina",
+    category: "Ordens de serviço e acompanhamento",
+    price: 7490,
+    implementationPriceCents: 749000,
+    priceType: "fixed",
+    isStartingPrice: false,
+    summary:
+      "Gestão operacional de ordens de serviço com checklist de entrada e registro de fotos do veículo.",
+    problemSolved:
+      "Previne contestações de avarias pré-existentes e padroniza as fases de funilaria, preparação, pintura e polimento.",
+    deliverables: [
+      "Abertura digital de Ordem de Serviço (OS) com numeração sequencial.",
+      "Vinculação direta do cliente, dados do veículo e corretor parceiro.",
+      "Discriminação técnica dos serviços contratados e peças a reparar.",
+      "Checklist digital de entrada veicular (combustível, avarias externas, pertences).",
+      "Upload e arquivamento de fotografias do estado de entrada do veículo (conforme limites de armazenamento).",
+      "Controle do status de execução (Recebido, Funilaria, Pintura, Martelinho, Montagem, Polimento, Pronto para Entrega).",
+      "Histórico cronológico de movimentações e observações internas da oficina.",
+      "Painel de consulta rápida de ordens em andamento e histórico de finalizadas.",
+    ],
+    exclusions: [
+      "Controle avançado de estoque, almoxarifado de tintas ou compras.",
+      "Folha de pagamento de mecânicos e comissões.",
+      "Contabilidade e fechamento fiscal.",
+      "Emissão de nota fiscal ou integração tributária.",
+      "ERP financeiro completo.",
+      "Aplicativo nativo compilado para Android/iOS (opera via Web App responsivo).",
+    ],
+    dependencies: [
+      "Infraestrutura de armazenamento de arquivos em nuvem (S3/R2 ou equivalente).",
+      "Aparelho smartphone ou tablet da oficina com câmera e navegador web.",
+    ],
+    recurringCostsNote: "Armazenamento de imagens e banco de dados conforme volume de ordens.",
+    relatedRecurringCosts: ["rec-storage", "rec-hospedagem"],
+    isAvailableForSelection: true,
+    selectable: true,
+    publicationStatus: "published",
+    badge: "Operação de Pátio",
+    recommended: false,
+    commercialNotes:
+      "Atende a um fluxo operacional delimitado e NÃO substitui automaticamente um ERP.",
+  },
+  {
+    id: "epm-connect",
+    name: "EPM Connect",
+    category: "Atendimento e notificações",
+    price: 1990,
+    implementationPriceCents: 199000,
+    priceType: "from",
+    isStartingPrice: true,
+    summary:
+      "Automação de notificações para clientes via WhatsApp ou e-mail sobre etapas de avaliação e reparo.",
+    problemSolved:
+      "Reduz ligações repetitivas de clientes perguntando se o carro está pronto, mantendo o proprietário informado.",
+    deliverables: [
+      "Configuração de 1 fluxo principal de notificação homologado.",
+      "Elaboração e validação de modelos de mensagem padronizados.",
+      "Notificações automáticas de recebimento de solicitação ou mudança de status da OS.",
+      "Mecanismo de tratamento básico de falhas e logs de envio quando suportado pelo provedor.",
+      "Documentação técnica da integração e parâmetros operacionais.",
+    ],
+    exclusions: [
+      "API oficial do WhatsApp NÃO está incluída.",
+      "Taxas e tarifas cobradas por mensagem pelos provedores oficiais (Meta/Twilio/Z-API).",
+      "Aprovação de templates, credenciais e permissões dependem do provedor.",
+      "Automação não é atendimento humano nem garantia de entrega em aparelhos sem conexão.",
+      "Sem disparos ilimitados de marketing.",
+      "Fluxos adicionais ou integrações extras exigem orçamento sob demanda.",
+    ],
+    dependencies: [
+      "Módulo EPM Booking Auto ou EPM Oficina contratado para fornecimento dos gatilhos.",
+      "Contratação e aprovação de conta em provedor de mensageria selecionado.",
+      "Número de WhatsApp oficial validado e aprovado pela Master.",
+    ],
+    recurringCostsNote:
+      "Tarifas de consumo de mensagens cobradas diretamente pelo provedor de API.",
+    relatedRecurringCosts: ["rec-whatsapp"],
+    isAvailableForSelection: true,
+    selectable: true,
+    publicationStatus: "published",
+    badge: "Mensageria",
+    recommended: false,
+    commercialNotes:
+      "Valor final depende de canal, número de fluxos e complexidade. Preço de referência inicial para 1 fluxo; integrações adicionais exigem dimensionamento prévio.",
+  },
+  {
+    id: "epm-insights",
+    name: "EPM Insights",
+    category: "Indicadores comerciais e operacionais",
+    price: 2490,
+    implementationPriceCents: 249000,
+    priceType: "fixed",
+    isStartingPrice: false,
+    summary:
+      "Painel executivo de indicadores de demanda, taxas de conversão e volume de serviços da oficina.",
+    problemSolved:
+      "Permite ao proprietário tomar decisões baseadas em números reais sobre quais serviços trazem mais retorno.",
+    deliverables: [
+      "Painel gerencial de indicadores alimentado pelos módulos contratados.",
+      "Métricas de volume de solicitações por período (dia, semana, mês).",
+      "Distribuição de demanda por etapa do funil comercial.",
+      "Taxa de conversão de avaliações em serviços fechados (quando CRM contratado).",
+      "Distribuição de ordens de serviço por status de execução (quando Oficina contratado).",
+      "Filtros por período e visualização gráfica de tendências.",
+    ],
+    exclusions: [
+      "Licenças pagas de softwares externos de BI (PowerBI, Tableau).",
+      "Algoritmos preditivos de IA generativa.",
+      "Métricas dependentes de fontes financeiras ou ERPs legados não integrados.",
+      "Migração e saneamento de históricos antigos em papel/planilhas.",
+    ],
+    dependencies: [
+      "Ao menos 1 módulo operacional contratado (EPM Booking Auto, EPM CRM Auto ou EPM Oficina).",
+      "Alimentação contínua dos dados pela equipe da Master.",
+    ],
+    recurringCostsNote:
+      "Sem custo adicional de terceiros (roda sobre a infraestrutura da plataforma).",
+    relatedRecurringCosts: [],
+    isAvailableForSelection: true,
+    selectable: true,
+    publicationStatus: "published",
+    badge: "Indicadores",
+    recommended: false,
+    commercialNotes:
+      "Não gera informação inexistente: o módulo depende da existência e qualidade dos dados gerados no dia a dia da oficina.",
+  },
+];
+
+/**
+ * Combinações estratégicas calculadas diretamente a partir do catálogo central.
+ */
+export const masterBundles: ModuleBundle[] = [
+  {
+    id: "presenca-digital",
+    name: "Alternativa 1 — Presença Digital Multipágina",
+    badge: "Produto de entrada",
+    moduleIds: ["epm-web"],
+    description:
+      "Website institucional multipágina completo com rotas dedicadas para posicionar a Master com autoridade na internet e atrair novos contatos qualificados.",
+    referencePrice: 2490,
+    referencePriceCents: 249000,
+    priceType: "fixed",
+    isStartingPrice: false,
+    highlight: false,
+  },
+  {
+    id: "captacao-agendamento",
+    name: "Alternativa 2 — Captação e Agendamento",
+    badge: "Primeira evolução sugerida",
+    moduleIds: ["epm-web", "epm-booking"],
+    description:
+      "Website multipágina completo integrado ao formulário estruturado de pré-agendamento e triagem de solicitações de avaliação.",
+    referencePrice: 6480,
+    referencePriceCents: 648000,
+    priceType: "fixed",
+    isStartingPrice: false,
+    highlight: false,
+  },
+  {
+    id: "gestao-comercial",
+    name: "Alternativa 3 — Gestão Comercial",
+    badge: "Foco em Conversão",
+    moduleIds: ["epm-web", "epm-crm"],
+    description:
+      "Website multipágina completo conectado ao funil comercial para acompanhamento rigoroso de orçamentos e corretores de seguros parceiros.",
+    referencePrice: 7480,
+    referencePriceCents: 748000,
+    priceType: "fixed",
+    isStartingPrice: false,
+    highlight: false,
+  },
+  {
+    id: "operacao-digital",
+    name: "Alternativa 4 — Operação Digital",
+    badge: "Operação Completa",
+    moduleIds: ["epm-web", "epm-booking", "epm-crm", "epm-oficina"],
+    description:
+      "Fluxo completo do website multipágina ao pátio da oficina, com checklist de fotos de entrada e ordens de serviço digitais.",
+    referencePrice: 18960,
+    referencePriceCents: 1896000,
+    priceType: "fixed",
+    isStartingPrice: false,
+    highlight: true,
+  },
+  {
+    id: "ecossistema-expandido",
+    name: "Alternativa 5 — Ecossistema Expandido",
+    badge: "Ecossistema Integrado",
+    moduleIds: ["epm-web", "epm-booking", "epm-crm", "epm-oficina", "epm-connect", "epm-insights"],
+    description:
+      "Ecossistema completo: website multipágina com rotas dedicadas, agendamento, CRM, gestão de pátio, notificações automáticas e painel gerencial.",
+    referencePrice: 23440,
+    referencePriceCents: 2344000,
+    priceType: "from",
+    isStartingPrice: true,
+    highlight: false,
+    commercialNote:
+      "Referência inicial, pois o módulo EPM Connect possui precificação a partir de.",
+  },
+];
+
+/**
+ * Custos recorrentes e despesas de terceiros segregados da implantação.
+ */
+export const masterRecurringCosts: RecurringCostItem[] = [
+  {
+    id: "rec-dominio",
+    category: "Identidade & Endereçamento",
+    title: "Registro de Domínio Oficial (.com.br)",
+    estimatedValueText: "~ R$ 40,00 / ano",
+    description:
+      "Contratado e registrado diretamente no Registro.br sob a titularidade e CNPJ da Master Chapeação e Pinturas.",
+    status: "third_party",
+  },
+  {
+    id: "rec-hospedagem",
+    category: "Infraestrutura Cloud",
+    title: "Hospedagem & Infraestrutura Cloud",
+    estimatedValueText: "R$ 0 a R$ 35,00 / mês (estimativa)",
+    description:
+      "Infraestrutura moderna em nuvem com certificado de segurança SSL automático e redundância global.",
+    status: "third_party",
+  },
+  {
+    id: "rec-storage",
+    category: "Armazenamento",
+    title: "Armazenamento de Fotos e Arquivos (se Oficina contratada)",
+    estimatedValueText: "A definir conforme volume",
+    description:
+      "Repositório seguro para guarda de fotos de entrada e vistorias dos veículos, tarifado por gigabyte utilizado.",
+    status: "third_party",
+  },
+  {
+    id: "rec-whatsapp",
+    category: "Mensageria Oficial",
+    title: "Provedor de WhatsApp / Mensagens (se Connect contratado)",
+    estimatedValueText: "Conforme consumo de mensagens",
+    description:
+      "Tarifas diretas do provedor homologado (Meta Business / BSP) para envio de notificações aos clientes.",
+    status: "third_party",
+  },
+  {
+    id: "rec-email",
+    category: "Comunicação",
+    title: "Serviços de E-mail Corporativo",
+    estimatedValueText: "A definir conforme provedor",
+    description:
+      "Contas de e-mail institucional (Google Workspace, Titan ou similar) sob gestão e titularidade do cliente.",
+    status: "third_party",
+  },
+  {
+    id: "rec-suporte",
+    category: "Sustentação",
+    title: "Manutenção Preventiva & Suporte Mensal",
+    estimatedValueText: "A definir conforme infraestrutura e escopo",
+    description:
+      "Sem mensalidade mandatória. Suporte e evoluções podem ser combinados sob demanda ou em pacote opcional aprovado. Plano mantido desativado até aprovação de horas e SLA.",
+    status: "on_demand",
+  },
+  {
+    id: "rec-integracoes",
+    category: "Evolução",
+    title: "Integrações de Terceiros e Evoluções Futuras",
+    estimatedValueText: "Orçamento separado",
+    description:
+      "Integrações com ERPs legados, seguradoras ou APIs de terceiros não previstas no escopo-base exigem estudo de viabilidade e orçamento próprio.",
+    status: "on_demand",
+  },
+];
+
+/**
+ * Ciclo de execução em 9 etapas do projeto de software sob medida.
+ */
+export const masterExecutionSteps: ExecutionStep[] = [
+  {
+    step: 1,
+    title: "Apresentação da Proposta",
+    description:
+      "Apresentação consultiva do portfólio modular pela EPM DevTech para avaliação da direção da Master.",
+    duration: "Etapa Concluída",
+  },
+  {
+    step: 2,
+    title: "Manifestação de Interesse",
+    description:
+      "A Master seleciona os módulos prioritários e compartilha sua intenção. A manifestação de interesse não é aceite jurídico, contratação nem início automático.",
+    duration: "Iniciativa do Cliente",
+  },
+  {
+    step: 3,
+    title: "Reunião de Alinhamento",
+    description:
+      "Alinhamento comercial e técnico entre as lideranças para definir prioridades e expectativas operacionais.",
+    duration: "1 dia útil",
+  },
+  {
+    step: 4,
+    title: "Briefing Funcional Orientado",
+    description:
+      "Coleta estruturada de regras da oficina, horários, fotos reais e definição das preferências visuais.",
+    duration: "2 a 3 dias úteis",
+  },
+  {
+    step: 5,
+    title: "Definição de Escopo & Contrato",
+    description:
+      "Formalização do escopo técnico exato dos módulos escolhidos e emissão do Contrato de Prestação de Serviços.",
+    duration: "2 dias úteis",
+  },
+  {
+    step: 6,
+    title: "Aprovação do Orçamento Definitivo",
+    description:
+      "Assinatura contratual e liberação da ordem de desenvolvimento com base nas condições acordadas.",
+    duration: "Marco Formal",
+  },
+  {
+    step: 7,
+    title: "Desenvolvimento & Engenharia",
+    description:
+      "Codificação com arquitetura moderna, design editorial automotivo, testes e acessibilidade.",
+    duration: "10 a 25 dias úteis",
+  },
+  {
+    step: 8,
+    title: "Validação & Homologação",
+    description:
+      "Apresentação da plataforma em ambiente de staging para testes práticos e aprovação pela equipe da Master.",
+    duration: "3 a 5 dias úteis",
+  },
+  {
+    step: 9,
+    title: "Publicação Oficial & Entrega",
+    description:
+      "Apontamento de domínio, emissão de SSL, entrega de credenciais e documentação operacional de uso.",
+    duration: "1 a 2 dias úteis",
+  },
+];
+
+/**
  * Repositório Canônico de Propostas Comerciais EPM DevTech
  */
 export const commercialProposals: Record<string, CommercialProposal> = {
@@ -387,9 +899,7 @@ export const commercialProposals: Record<string, CommercialProposal> = {
     authorRole: "Engenharia de Software & Estratégia Digital",
     authorContact: {
       name: "Engenharia & Comercial EPM DevTech",
-      email: "contato@epmdevtech.com.br",
-      phone: "(45) 99999-0000",
-      whatsappNumber: "5545999990000",
+      email: "elessandro@epmdevtech.com.br",
     },
     issueDate: "13/10/2026",
     validUntil: "28/10/2026",
@@ -662,9 +1172,7 @@ export const commercialProposals: Record<string, CommercialProposal> = {
     authorRole: "Engenharia de Software & Arquitetura de Sistemas",
     authorContact: {
       name: "Engenharia & Comercial EPM DevTech",
-      email: "contato@epmdevtech.com.br",
-      phone: "(45) 99999-0000",
-      whatsappNumber: "5545999990000",
+      email: "elessandro@epmdevtech.com.br",
     },
     issueDate: "13/10/2026",
     validUntil: "30/10/2026",
@@ -694,400 +1202,10 @@ export const commercialProposals: Record<string, CommercialProposal> = {
         "Identidade visual automotiva de alto padrão alinhada à estética da oficina em Toledo.",
       ],
     },
-    modulesCatalog: [
-      {
-        id: "epm-web",
-        name: "EPM Web",
-        category: "Presença digital automotiva",
-        price: 2490,
-        isStartingPrice: false,
-        summary:
-          "Website institucional multipágina de alta performance com arquitetura de rotas dedicadas (TanStack Router) para o setor automotivo em Toledo-PR.",
-        problemSolved:
-          "Estabelece autoridade digital sólida, elimina impressões amadoras e apresenta os serviços especializados de forma técnica e transparente em URLs próprias.",
-        deliverables: [
-          "Website multipágina completo em TanStack Router com rotas independentes e navegação client-side instantânea.",
-          "Rota principal (Início: /) com visão integrada, encaminhamento estratégico e componentes editoriais premium.",
-          "Catálogo geral de serviços (/servicos) com visão integrada das especialidades técnicas.",
-          "Rotas aprofundadas dedicadas para cada especialidade: Funilaria (/servicos/funilaria), Pintura em Estufa (/servicos/pintura-automotiva) e Martelinho de Ouro (/servicos/martelinho-de-ouro).",
-          "Rota exclusiva para corretores de seguros (/para-corretores) estruturada para credenciamento e sinistros.",
-          "Rota de galeria e portfólio de trabalhos concluídos (/trabalhos) com comparador interativo Antes/Depois.",
-          "Rota institucional Sobre (/sobre) com história, diferenciais e posicionamento técnico da oficina.",
-          "Rota dedicada de avaliação técnica e contato (/contato) com fluxo honesto de mensagem para canal oficial.",
-          "Rota de políticas de privacidade e termos (/privacidade).",
-          "SEO técnico avançado por rota: meta tags canônicas únicas, sitemap.xml estruturado e Schema.org AutoBodyShop.",
-          "Acessibilidade completa WCAG AA e otimização responsiva para celulares, tablets e computadores.",
-        ],
-        exclusions: [
-          "Agendamento com painel próprio interativo.",
-          "CRM e funil comercial de contatos.",
-          "Ordens de serviço e checklists operacionais.",
-          "Área administrativa de cadastro dinâmico.",
-          "Integração com ERP automotivo de oficina.",
-          "Produção profissional presencial de fotos ou filmagens com drone.",
-          "Gestão recorrente de redes sociais e publicações.",
-          "Campanhas de tráfego pago (Google Ads / Meta Ads).",
-        ],
-        dependencies: [
-          "Fornecimento de fotos reais das instalações ou uso autorizado de acervo ilustrativo.",
-          "Definição dos canais oficiais confirmados de atendimento da oficina.",
-        ],
-        recurringCostsNote:
-          "Hospedagem básica e domínio (.com.br) contratados sob titularidade da Master.",
-        isAvailableForSelection: true,
-        commercialNotes: "Produto de entrada; não inclui módulos de gestão ou agendamento.",
-      },
-      {
-        id: "epm-booking",
-        name: "EPM Booking Auto",
-        category: "Solicitações de avaliação e agendamento",
-        price: 3990,
-        isStartingPrice: false,
-        summary:
-          "Formulário estruturado de pré-agendamento e painel administrativo de triagem de solicitações.",
-        problemSolved:
-          "Organiza pedidos de orçamento e avaliação de sinistros, evitando contatos dispersos e perda de horários na oficina.",
-        deliverables: [
-          "Formulário estruturado para solicitação de avaliação e agendamento de serviços.",
-          "Captura de dados de contato e informações essenciais do veículo (marca, modelo, placa/ano).",
-          "Seleção guiada da especialidade desejada (Funilaria, Pintura, Martelinho ou Avaliação Geral).",
-          "Seleção de data preferencial com base em regras e disponibilidade configuradas.",
-          "Painel administrativo para visualizar, filtrar e atualizar o status das solicitações.",
-          "Máquina de estados operacional: Recebido, Em Análise, Confirmado, Concluído e Cancelado.",
-          "Registro cronológico com carimbo de data/hora e dados técnicos informados.",
-          "Interface responsiva para operação em computadores, tablets da oficina e celulares.",
-        ],
-        exclusions: [
-          "Confirmação em tempo real com agenda física sem integração homologada.",
-          "Sincronização com Google Calendar ou agendas externas sem desenvolvimento sob medida.",
-          "Pagamentos online ou antecipação financeira de orçamentos.",
-          "Lembretes automáticos via SMS ou WhatsApp sem o módulo EPM Connect.",
-        ],
-        dependencies: [
-          "EPM Web ou aplicação web homologada para hospedagem do fluxo.",
-          "Definição das regras de horário e dias de atendimento pela equipe da Master.",
-        ],
-        recurringCostsNote: "Consumo padrão de infraestrutura de banco de dados e hospedagem.",
-        isAvailableForSelection: true,
-        commercialNotes:
-          "Diferencia estritamente solicitação de agendamento de reserva confirmada, preservando a autonomia da oficina.",
-      },
-      {
-        id: "epm-crm",
-        name: "EPM CRM Auto",
-        category: "Gestão comercial e relacionamento",
-        price: 4990,
-        isStartingPrice: false,
-        summary:
-          "Funil comercial especializado para oficina automotiva, gestão de leads, orçamentos e histórico.",
-        problemSolved:
-          "Elimina orçamentos esquecidos no WhatsApp e falta de acompanhamento de clientes que cotaram e não fecharam.",
-        deliverables: [
-          "Cadastro centralizado de clientes (particulares e corretores parceiros).",
-          "Cadastro e vinculação de histórico de veículos aos proprietários.",
-          "Registro da origem de captação do contato (Facebook, indicação, balcão, site).",
-          "Funil comercial configurável em 7 etapas: Novo Contato, Qualificação, Avaliação, Orçamento, Negociação, Fechado e Perdido.",
-          "Registro de linha do tempo com histórico de notas, ligações e interações.",
-          "Gestão de tarefas internas e lembretes de retorno para follow-up de orçamentos.",
-          "Pesquisa rápida por nome, telefone, placa e filtros por etapa comercial.",
-        ],
-        exclusions: [
-          "ERP administrativo completo, compras ou fornecedores.",
-          "Emissão fiscal de NF-e / NFS-e.",
-          "Disparos automatizados em massa de mensagens de marketing.",
-          "Integrações nativas automáticas com sistemas de seguradoras (ex.: Cilia, Audatex).",
-          "Importação irrestrita ou saneamento de planilhas desorganizadas legadas.",
-          "Licenças pagas de softwares de terceiros.",
-        ],
-        dependencies: ["Definição do fluxo de atendimento e etapas comerciais padrão da Master."],
-        recurringCostsNote: "Infraestrutura de banco de dados seguro na nuvem.",
-        isAvailableForSelection: true,
-        commercialNotes:
-          "Focado estritamente na conversão de novos orçamentos e relacionamento com corretores de seguros.",
-      },
-      {
-        id: "epm-oficina",
-        name: "EPM Oficina",
-        category: "Gestão de ordens de serviço",
-        price: 7490,
-        isStartingPrice: false,
-        summary:
-          "Gestão operacional de ordens de serviço com checklist de entrada e registro de fotos do veículo.",
-        problemSolved:
-          "Previne contestações de avarias pré-existentes e padroniza as fases de funilaria, preparação, pintura e polimento.",
-        deliverables: [
-          "Abertura digital de Ordem de Serviço (OS) com numeração sequencial.",
-          "Vinculação direta do cliente, dados do veículo e corretor parceiro.",
-          "Discriminação técnica dos serviços contratados e peças a reparar.",
-          "Checklist digital de entrada veicular (combustível, avarias externas, pertences).",
-          "Upload e arquivamento de fotografias do estado de entrada do veículo (conforme limites de armazenamento).",
-          "Controle do status de execução (Recebido, Funilaria, Pintura, Martelinho, Montagem, Polimento, Pronto para Entrega).",
-          "Histórico cronológico de movimentações e observações internas da oficina.",
-          "Painel de consulta rápida de ordens em andamento e histórico de finalizadas.",
-        ],
-        exclusions: [
-          "Controle avançado de estoque, almoxarifado de tintas ou compras.",
-          "Folha de pagamento de mecânicos e comissões.",
-          "Contabilidade e fechamento fiscal.",
-          "Emissão de nota fiscal ou integração tributária.",
-          "ERP financeiro completo.",
-          "Aplicativo nativo compilado para Android/iOS (opera via Web App responsivo).",
-        ],
-        dependencies: [
-          "Infraestrutura de armazenamento de arquivos em nuvem (S3/R2 ou equivalente).",
-          "Aparelho smartphone ou tablet da oficina com câmera e navegador web.",
-        ],
-        recurringCostsNote: "Armazenamento de imagens e banco de dados conforme volume de ordens.",
-        isAvailableForSelection: true,
-        commercialNotes:
-          "Atende a um fluxo operacional bem delimitado e não deve ser confundido com ERP contábil/financeiro.",
-      },
-      {
-        id: "epm-connect",
-        name: "EPM Connect",
-        category: "Notificações e integrações",
-        price: 1990,
-        isStartingPrice: true,
-        summary:
-          "Automação de notificações para clientes via WhatsApp ou e-mail sobre etapas de avaliação e reparo.",
-        problemSolved:
-          "Reduz ligações repetitivas de clientes perguntando se o carro está pronto, mantendo o proprietário informado.",
-        deliverables: [
-          "Configuração de 1 fluxo principal de notificação homologado.",
-          "Elaboração e validação de modelos de mensagem padronizados.",
-          "Notificações automáticas de recebimento de solicitação ou mudança de status da OS.",
-          "Mecanismo de tratamento básico de falhas e logs de envio quando suportado pelo provedor.",
-          "Documentação técnica da integração e parâmetros operacionais.",
-        ],
-        exclusions: [
-          "Taxas e tarifas cobradas por mensagem pelos provedores oficiais (Meta/Twilio/Z-API).",
-          "Garantia de entrega em aparelhos sem conexão ou números incorretos.",
-          "Chatbot de inteligência artificial de conversação aberta complexa.",
-          "Atendimento humano terceirizado.",
-          "Fluxos adicionais ou integrações extras (orçadas sob demanda).",
-        ],
-        dependencies: [
-          "Módulo EPM Booking Auto ou EPM Oficina contratado para fornecimento dos gatilhos.",
-          "Contratação e aprovação de conta em provedor de mensageria selecionado.",
-          "Número de WhatsApp oficial validado e aprovado pela Master.",
-        ],
-        recurringCostsNote:
-          "Tarifas de consumo de mensagens cobradas diretamente pelo provedor de API.",
-        isAvailableForSelection: true,
-        commercialNotes:
-          "Preço de referência inicial para 1 fluxo; integrações adicionais exigem dimensionamento prévio.",
-      },
-      {
-        id: "epm-insights",
-        name: "EPM Insights",
-        category: "Indicadores comerciais e operacionais",
-        price: 2490,
-        isStartingPrice: false,
-        summary:
-          "Painel executivo de indicadores de demanda, taxas de conversão e volume de serviços da oficina.",
-        problemSolved:
-          "Permite ao proprietário tomar decisões baseadas em números reais sobre quais serviços trazem mais retorno.",
-        deliverables: [
-          "Painel gerencial de indicadores alimentado pelos módulos contratados.",
-          "Métricas de volume de solicitações por período (dia, semana, mês).",
-          "Distribuição de demanda por etapa do funil comercial.",
-          "Taxa de conversão de avaliações em serviços fechados (quando CRM contratado).",
-          "Distribuição de ordens de serviço por status de execução (quando Oficina contratado).",
-          "Filtros por período e visualização gráfica de tendências.",
-        ],
-        exclusions: [
-          "Licenças pagas de softwares externos de BI (PowerBI, Tableau).",
-          "Algoritmos preditivos de IA generativa.",
-          "Métricas dependentes de fontes financeiras ou ERPs legados não integrados.",
-          "Migração e saneamento de históricos antigos em papel/planilhas.",
-        ],
-        dependencies: [
-          "Ao menos 1 módulo operacional contratado (EPM Booking Auto, EPM CRM Auto ou EPM Oficina).",
-          "Alimentação contínua dos dados pela equipe da Master.",
-        ],
-        recurringCostsNote:
-          "Sem custo adicional de terceiros (roda sobre a infraestrutura da plataforma).",
-        isAvailableForSelection: true,
-        commercialNotes:
-          "O módulo depende da existência e qualidade dos dados gerados no dia a dia da oficina.",
-      },
-    ],
-    bundles: [
-      {
-        id: "presenca-digital",
-        name: "Alternativa 1 — Presença Digital Multipágina",
-        badge: "Entrada Essencial",
-        moduleIds: ["epm-web"],
-        description:
-          "Website institucional multipágina completo com rotas dedicadas para posicionar a Master com autoridade na internet e atrair novos contatos qualificados.",
-        referencePrice: 2490,
-        isStartingPrice: false,
-        highlight: false,
-      },
-      {
-        id: "captacao-agendamento",
-        name: "Alternativa 2 — Captação e Agendamento",
-        badge: "Recomendado para Captação",
-        moduleIds: ["epm-web", "epm-booking"],
-        description:
-          "Website multipágina completo integrado ao formulário estruturado de pré-agendamento e triagem de solicitações de avaliação.",
-        referencePrice: 6480,
-        isStartingPrice: false,
-        highlight: false,
-      },
-      {
-        id: "gestao-comercial",
-        name: "Alternativa 3 — Gestão Comercial",
-        badge: "Foco em Conversão",
-        moduleIds: ["epm-web", "epm-crm"],
-        description:
-          "Website multipágina completo conectado ao funil comercial para acompanhamento rigoroso de orçamentos e corretores de seguros parceiros.",
-        referencePrice: 7480,
-        isStartingPrice: false,
-        highlight: false,
-      },
-      {
-        id: "operacao-digital",
-        name: "Alternativa 4 — Operação Digital",
-        badge: "Operação Completa",
-        moduleIds: ["epm-web", "epm-booking", "epm-crm", "epm-oficina"],
-        description:
-          "Fluxo completo do website multipágina ao pátio da oficina, com checklist de fotos de entrada e ordens de serviço digitais.",
-        referencePrice: 18960,
-        isStartingPrice: false,
-        highlight: true,
-      },
-      {
-        id: "ecossistema-expandido",
-        name: "Alternativa 5 — Ecossistema Expandido",
-        badge: "Ecossistema Integrado",
-        moduleIds: [
-          "epm-web",
-          "epm-booking",
-          "epm-crm",
-          "epm-oficina",
-          "epm-connect",
-          "epm-insights",
-        ],
-        description:
-          "Ecossistema completo: website multipágina com rotas dedicadas, agendamento, CRM, gestão de pátio, notificações automáticas e painel gerencial.",
-        referencePrice: 23440,
-        isStartingPrice: true,
-        highlight: false,
-      },
-    ],
-    recurringCosts: [
-      {
-        id: "rec-dominio",
-        category: "Identidade & Endereçamento",
-        title: "Registro de Domínio Oficial (.com.br)",
-        estimatedValueText: "~ R$ 40,00 / ano",
-        description:
-          "Contratado e registrado diretamente no Registro.br sob a titularidade e CNPJ da Master Chapeação e Pinturas.",
-        status: "third_party",
-      },
-      {
-        id: "rec-hospedagem",
-        category: "Infraestrutura Cloud",
-        title: "Hospedagem & CDN de Alta Performance",
-        estimatedValueText: "R$ 0 a R$ 35,00 / mês",
-        description:
-          "Infraestrutura moderna em nuvem com certificado de segurança SSL automático e redundância global.",
-        status: "third_party",
-      },
-      {
-        id: "rec-storage",
-        category: "Armazenamento",
-        title: "Armazenamento de Fotos de OS (se Oficina contratada)",
-        estimatedValueText: "A definir conforme volume",
-        description:
-          "Repositório seguro para guarda de fotos de entrada e vistorias dos veículos, tarifado por gigabyte utilizado.",
-        status: "third_party",
-      },
-      {
-        id: "rec-whatsapp",
-        category: "Mensageria Oficial",
-        title: "Provedor de WhatsApp / Mensagens (se Connect contratado)",
-        estimatedValueText: "Conforme consumo de mensagens",
-        description:
-          "Tarifas diretas do provedor homologado (Meta Business / BSP) para envio de notificações aos clientes.",
-        status: "third_party",
-      },
-      {
-        id: "rec-suporte",
-        category: "Sustentação",
-        title: "Manutenção Preventiva & Suporte Contínuo",
-        estimatedValueText: "A definir conforme infraestrutura e escopo",
-        description:
-          "Sem mensalidade mandatória. Suporte e evoluções podem ser combinados sob demanda ou em pacote opcional aprovado.",
-        status: "on_demand",
-      },
-    ],
-    executionSteps: [
-      {
-        step: 1,
-        title: "Apresentação da Proposta",
-        description:
-          "Apresentação consultiva do portfólio modular pela EPM DevTech para avaliação da direção da Master.",
-        duration: "Etapa Concluída",
-      },
-      {
-        step: 2,
-        title: "Manifestação de Interesse",
-        description:
-          "A Master seleciona os módulos prioritários e compartilha sua intenção de avançar para a fase técnica.",
-        duration: "Iniciativa do Cliente",
-      },
-      {
-        step: 3,
-        title: "Reunião de Alinhamento",
-        description:
-          "Alinhamento comercial e técnico entre as lideranças para definir prioridades e expectativas operacionais.",
-        duration: "1 dia útil",
-      },
-      {
-        step: 4,
-        title: "Briefing Funcional Orientado",
-        description:
-          "Coleta estruturada de regras da oficina, horários, fotos reais e definição das preferências visuais.",
-        duration: "2 a 3 dias úteis",
-      },
-      {
-        step: 5,
-        title: "Definição de Escopo & Contrato",
-        description:
-          "Formalização do escopo técnico exato dos módulos escolhidos e emissão do Contrato de Prestação de Serviços.",
-        duration: "2 dias úteis",
-      },
-      {
-        step: 6,
-        title: "Aprovação do Orçamento Definitivo",
-        description:
-          "Assinatura contratual e liberação da ordem de desenvolvimento com base nas condições acordadas.",
-        duration: "Marco Formal",
-      },
-      {
-        step: 7,
-        title: "Desenvolvimento & Engenharia",
-        description:
-          "Codificação com arquitetura moderna, design editorial automotivo, testes e acessibilidade.",
-        duration: "10 a 25 dias úteis",
-      },
-      {
-        step: 8,
-        title: "Validação & Homologação",
-        description:
-          "Apresentação da plataforma em ambiente de staging para testes práticos e aprovação pela equipe da Master.",
-        duration: "3 a 5 dias úteis",
-      },
-      {
-        step: 9,
-        title: "Publicação Oficial & Entrega",
-        description:
-          "Apontamento de domínio, emissão de SSL, entrega de credenciais e documentação operacional de uso.",
-        duration: "1 a 2 dias úteis",
-      },
-    ],
+    modulesCatalog: masterModulesCatalog,
+    bundles: masterBundles,
+    recurringCosts: masterRecurringCosts,
+    executionSteps: masterExecutionSteps,
     scopeIncluded: [
       {
         id: "mod-esc-1",
@@ -1290,9 +1408,61 @@ export const commercialProposals: Record<string, CommercialProposal> = {
 };
 
 /**
+ * Proposta comercial modular dedicada da Master Chapeação e Pinturas.
+ *
+ * Rota confidencial (/proposta/masterchapeacao) com identidade visual oficial,
+ * catálogo de 6 produtos automotivos, combinações em centavos inteiros,
+ * matriz comparativa, custos externos segregados e canal de contato restrito ao e-mail confirmado.
+ */
+export const masterChapeacaoProposal: CommercialProposal = {
+  ...commercialProposals["master-chapeacao-pinturas"],
+  id: "prop-epm-master-modular-03",
+  slug: "masterchapeacao",
+  clientName: "Direção & Equipe Master",
+  companyName: "Master Chapeação e Pinturas",
+  projectTitle:
+    "Uma estrutura digital preparada para a próxima fase da Master Chapeação e Pinturas.",
+  projectSubtitle:
+    "Uma proposta de soluções digitais para fortalecer a presença online, organizar o atendimento e criar oportunidades de evolução para a operação da Master Chapeação e Pinturas.",
+  branding: {
+    logoUrl: "/master/logo.webp",
+    logoAlt: "Master Chapeação e Pinturas",
+    tagline: "Funilaria, pintura em estufa e martelinho de ouro em Toledo-PR.",
+  },
+  author: "EPM DevTech",
+  authorRole: "Software Architect & Engenharia de Sistemas",
+  authorContact: {
+    name: "Engenharia & Comercial EPM DevTech",
+    email: "elessandro@epmdevtech.com.br",
+  },
+  issueDate: "26/10/2026",
+  validUntil: "30/10/2026",
+  estimatedTimeline: "Definido após fechamento do escopo e do briefing comercial.",
+  isModularPortfolio: true,
+  modulesCatalog: masterModulesCatalog,
+  bundles: masterBundles,
+  recurringCosts: masterRecurringCosts,
+  executionSteps: masterExecutionSteps,
+  enabledSections: {
+    diagnosis: true,
+    solution: true,
+    modulesCatalog: true,
+    comparisonMatrix: true,
+    bundles: true,
+    recurringCosts: true,
+    conditions: true,
+    timeline: true,
+    responsibilities: true,
+    faq: true,
+    cta: true,
+  },
+};
+
+/**
  * Busca uma proposta pelo slug cadastrado.
  */
 export function getProposalBySlug(slug: string): CommercialProposal | undefined {
+  if (slug === masterChapeacaoProposal.slug) return masterChapeacaoProposal;
   return commercialProposals[slug];
 }
 
@@ -1300,5 +1470,5 @@ export function getProposalBySlug(slug: string): CommercialProposal | undefined 
  * Lista todas as propostas cadastradas (utilizado apenas para rotas administrativas internas).
  */
 export function listProposals(): CommercialProposal[] {
-  return Object.values(commercialProposals);
+  return [...Object.values(commercialProposals), masterChapeacaoProposal];
 }

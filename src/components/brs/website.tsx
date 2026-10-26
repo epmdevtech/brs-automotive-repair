@@ -27,7 +27,7 @@ import { FinalCTA } from "./final-cta";
  * 1. Hero (Proposta de valor + CTA Solicitar avaliação)
  * 2. Serviços (3 especialidades com link único + linha compacta de estética)
  * 3. Confiança e Processo consolidados (3 diferenciais verificáveis + 4 etapas em linha)
- * 4. [Trabalhos omitido da Home enquanto não há fotos reais autorizadas; mantido em /trabalhos]
+ * 4. [Trabalhos mantido em /trabalhos, com registros oficiais e métodos ilustrativos]
  * 5. Corretores (Faixa horizontal discreta com link para /para-corretores)
  * 6. CTA Final (Solicitar avaliação + canais confirmados) e Rodapé (em SiteLayout)
  */

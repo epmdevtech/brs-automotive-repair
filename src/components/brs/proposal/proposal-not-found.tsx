@@ -47,7 +47,7 @@ export function ProposalNotFound({ slug }: ProposalNotFoundProps) {
           </Button>
 
           <Button variant="secondary" asChild size="sm">
-            <a href="mailto:contato@epmdevtech.com.br">
+            <a href="mailto:elessandro@epmdevtech.com.br">
               <Mail className="size-3.5 mr-1.5" aria-hidden="true" />
               <span>Falar com a EPM DevTech</span>
             </a>

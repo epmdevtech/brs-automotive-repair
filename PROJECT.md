@@ -4,12 +4,12 @@
 
 | Campo                   | Valor                                                           |
 | ----------------------- | --------------------------------------------------------------- |
-| Nome do Projeto         | Master Chapeação e Pinturas (`brs`)                              |
+| Nome do Projeto         | Master Chapeação e Pinturas (`brs`)                             |
 | Organização             | EPMDEVTECH Clientes                                             |
 | Responsável             | Engenharia & Produto EPMDEVTECH                                 |
 | Estado                  | Ativo / Website Institucional Multipágina Estruturado com Rotas |
-| Versão ou release       | `0.2.0` (Universal SDD Compliant)                               |
-| Última revisão          | 2026-10-13                                                      |
+| Versão ou release       | `0.6.0` (Universal SDD Compliant)                               |
+| Última revisão          | 2026-10-26                                                      |
 | Framework de Governança | Universal SDD (Spec-Driven Development)                         |
 | Revisores               | Equipe Técnica EPMDEVTECH                                       |
 
@@ -29,6 +29,9 @@
   - `Serviço Leva e Traz`: Comodidade opcional para clientes da cidade de Toledo-PR.
   - `Canal Oficial Confirmado`: Instagram (`@masterchapeacao2022`) e telefone fixo `(45) 99954-5442`.
   - `WhatsApp Não Confirmado`: Diretriz estrita de não divulgar WhatsApp até confirmação formal do número pelo proprietário.
+  - `Mídia real da oficina`: fotografias do cliente publicadas apenas em `src/assets/cliente/`, com placas tratadas. Os originais ficam em `assets-originais/`, fora do Git. Inventário e política em [`docs/inventario-imagens-brs.md`](docs/inventario-imagens-brs.md).
+  - `Mídia oficial da oficina`: as seis imagens oficiais fornecidas pelo cliente, com placas substituídas pela marca, publicadas em `src/assets/cliente/`. São a base dos registros da oficina, do hero e do Open Graph. A imagem sob céu nublado tem placas reais de veículos ao fundo tratadas.
+  - `Mídia ilustrativa`: imagens de método, bancada e comparadores são identificadas como ilustrativas e nunca representam casos reais de clientes.
 
 ---
 
@@ -48,6 +51,7 @@
     - `/contato`: Rota dedicada de triagem de contato e avaliação técnica;
     - `/privacidade`: Políticas de privacidade e conformidade de dados;
     - `/proposta/$slug`: Rota de proposta comercial personalizada confidencial (`noindex, nofollow`);
+    - `/proposta/masterchapeacao`: Proposta comercial modular da Master, com marca e narrativa próprias, catálogo dos 6 produtos automotivos em centavos inteiros, 5 combinações sugeridas, matriz comparativa e `noindex, nofollow`;
     - `/briefing`: Rota confidencial de briefing operacional da Master com 15 etapas validadas por React Hook Form e Zod, persistência real em PostgreSQL (Supabase) com Row Level Security, retomada de preenchimento e envio idempotente (`noindex, nofollow`, fora dos menus públicos);
     - `/briefing/confirmacao`: Confirmação exibida somente após o servidor confirmar a persistência do envio (`noindex, nofollow`);
     - `/login`: Autenticação segura por Supabase Auth (e-mail e senha, sessão por cookie SSR) para o briefing e o painel administrativo (`noindex, nofollow`);
@@ -61,20 +65,20 @@
 
 ## 3. Stack Tecnológica Canônica
 
-| Camada / Dependência                 | Versão                                | Finalidade                                                   | Fonte Canônica   |
-| ------------------------------------ | ------------------------------------- | ------------------------------------------------------------ | ---------------- |
-| **Linguagem**                        | TypeScript `5.8+`                     | Tipagem estrita e segurança em tempo de compilação           | `tsconfig.json`  |
-| **Framework Fullstack**              | TanStack Start `1.168+`               | Framework SSR/híbrido com Vite nativo                        | `package.json`   |
-| **Biblioteca de UI**                 | React `19.2+`                         | Renderização reativa de componentes                          | `package.json`   |
-| **Bundler / Server**                 | Vite `8.1+`                           | Dev server ultrarrápido e bundling de produção               | `vite.config.ts` |
-| **Estilização**                      | Tailwind CSS `4.3+`                   | Design system com CSS variables e suporte a modo escuro      | `src/styles.css` |
-| **Primitivas UI**                    | Radix UI                              | Componentes acessíveis (Accordion, Dialog, Drawer, Dropdown) | `package.json`   |
-| **Ícones**                           | Lucide React `0.575+`                 | Iconografia vetorial responsiva e temática                   | `package.json`   |
-| **Motion Design**                    | Framer Motion `14.1+`                 | Animações de entrada escalonadas, gestos e AnimatedHero      | `package.json`   |
-| **Formulários e Validação**          | Zod `3.25+` / React Hook Form         | Validação declarativa e segura                               | `package.json`   |
-| **Testes Unitários & Integração**    | Vitest `4.1+` / React Testing Library | Testes automatizados das regras e rotas                      | `src/test/`      |
-| **Dados e Autenticação do Briefing**  | Supabase `2.118+` / `@supabase/ssr` `0.12+` | Auth por cookie SSR, PostgreSQL com RLS e Storage privado  | `package.json`   |
-| **Gerenciador de Pacotes / Runtime** | Bun `1.4+`                            | Execução de scripts, testes e resolução de dependências      | `bun.lock`       |
+| Camada / Dependência                 | Versão                                      | Finalidade                                                   | Fonte Canônica   |
+| ------------------------------------ | ------------------------------------------- | ------------------------------------------------------------ | ---------------- |
+| **Linguagem**                        | TypeScript `5.8+`                           | Tipagem estrita e segurança em tempo de compilação           | `tsconfig.json`  |
+| **Framework Fullstack**              | TanStack Start `1.168+`                     | Framework SSR/híbrido com Vite nativo                        | `package.json`   |
+| **Biblioteca de UI**                 | React `19.2+`                               | Renderização reativa de componentes                          | `package.json`   |
+| **Bundler / Server**                 | Vite `8.1+`                                 | Dev server ultrarrápido e bundling de produção               | `vite.config.ts` |
+| **Estilização**                      | Tailwind CSS `4.3+`                         | Design system com CSS variables e suporte a modo escuro      | `src/styles.css` |
+| **Primitivas UI**                    | Radix UI                                    | Componentes acessíveis (Accordion, Dialog, Drawer, Dropdown) | `package.json`   |
+| **Ícones**                           | Lucide React `0.575+`                       | Iconografia vetorial responsiva e temática                   | `package.json`   |
+| **Motion Design**                    | Framer Motion `14.1+`                       | Animações de entrada escalonadas, gestos e AnimatedHero      | `package.json`   |
+| **Formulários e Validação**          | Zod `3.25+` / React Hook Form               | Validação declarativa e segura                               | `package.json`   |
+| **Testes Unitários & Integração**    | Vitest `4.1+` / React Testing Library       | Testes automatizados das regras e rotas                      | `src/test/`      |
+| **Dados e Autenticação do Briefing** | Supabase `2.118+` / `@supabase/ssr` `0.12+` | Auth por cookie SSR, PostgreSQL com RLS e Storage privado    | `package.json`   |
+| **Gerenciador de Pacotes / Runtime** | Bun `1.4+`                                  | Execução de scripts, testes e resolução de dependências      | `bun.lock`       |
 
 ---
 
@@ -98,7 +102,7 @@ Master/
 ├── scripts/            # Scripts utilitários (matriz de rastreabilidade)
 ├── public/             # Arquivos públicos estáticos (favicon, robots.txt)
 ├── src/
-│   ├── assets/         # Imagens ilustrativas otimizadas (brs-hero, funilaria, martelinho, pintura)
+│   ├── assets/         # Imagens ilustrativas e registros reais tratados (cliente/)
 │   ├── components/
 │   │   ├── brs/        # Componente orquestrador Website e 15 submódulos especializados
 │   │   └── ui/         # Componentes Radix UI acessíveis (Accordion, Button, Dialog, etc.)
@@ -269,7 +273,9 @@ Todas as entregas obedecem ao protocolo **Universal SDD**:
 - `SPEC-072` / `TASK-072-01` / `REVIEW-072`: Briefing Operacional e Preparação para Credenciamento da Master (`/briefing`) em 15 etapas, com pendências explícitas, rascunho local versionado, metadados de fotos sem upload e exportação manual em JSON/relatório.
 - `SPEC-073` / `TASK-073-01` a `TASK-073-04` / `REVIEW-073`: Briefing da Master com persistência real em Supabase (Auth, PostgreSQL com RLS e Storage privado), schema Zod por etapa validado no cliente e no servidor, envio idempotente, arquivos privados com URL assinada, painel administrativo com isolamento de dados internos e degradação honesta sem backend configurado.
 - `SPEC-074` / `TASK-074-01` a `TASK-074-04` / `REVIEW-074`: Auditoria e refatoração UX/UI das 15 etapas do briefing, com máscaras e validadores de domínio (CEP, CNPJ com dígitos verificadores, telefone com DDD, data civil com calendário, número pt-BR), consulta assistida de CEP com timeout e falha não bloqueante, perguntas condicionais com descarte explícito, agrupamento por assunto, radio groups acessíveis, resumo de erros focalizado, revisão final com pendências por etapa e confirmação explícita do envio.
-
+- `SPEC-077` / `TASK-077-01`: Aproveitamento das fotos reais da oficina com tratamento de placas, galeria acessível em `/trabalhos`, integração em home e páginas institucionais, remoção dos derivados não tratados e testes de privacidade.
+- `SPEC-078` / `TASK-078-01`: Substituição do acervo da oficina pelas seis imagens oficiais com placas da marca, novo hero/OG, galeria acessível em `/trabalhos`, rótulo "Imagem de divulgação" no hero e tratamento de placas reais remanescentes.
+- `SPEC-079` / `TASK-079-01`: Proposta comercial modular da Master em `/proposta/masterchapeacao`, com catálogo de 6 produtos automotivos em centavos inteiros, 5 combinações calculadas, matriz comparativa responsiva, custos externos segregados, contato EPM DevTech apenas por e-mail e isolamento integral da proposta original.
 
 ---
 
@@ -277,8 +283,8 @@ Todas as entregas obedecem ao protocolo **Universal SDD**:
 
 Conforme estipulado no [`ROADMAP.md`](ROADMAP.md):
 
-1. **Fotografias e Logo Reais**: Substituir as imagens ilustrativas atuais por fotos autorizadas das instalações da oficina e logotipo fornecido pelo proprietário.
-2. **Comparativo Antes/Depois**: Incluir seção comparativa apenas mediante pares de fotos reais autorizadas.
+1. **Fotografias, Logo e Imagens Oficiais**: Concluído na `SPEC-077` para o inventário inicial, na `SPEC-071` para o logo e na `SPEC-078` para as imagens oficiais com placas da marca. As imagens publicadas têm placas de terceiros substituídas ou tratadas; os originais permanecem fora do versionamento.
+2. **Comparativo Antes/Depois**: Pendente de pares reais autorizados. Até lá, os comparadores permanecem explicitamente ilustrativos, sem atribuição a clientes.
 3. **Confirmação de WhatsApp**: Obter autorização e número oficial verificado antes de disponibilizar botão ou link de WhatsApp.
 4. **Alinhamento com Proprietário**: Validação formal de posicionamento e posterior geração de sitemap definitivo.
 

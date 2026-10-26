@@ -3,7 +3,7 @@ import { Paintbrush } from "lucide-react";
 import { services } from "@/lib/brs";
 import { buildRouteHead, buildBreadcrumbSchema, buildServiceSchema } from "@/lib/seo";
 import { ServicePageLayout } from "@/components/brs/service-page-layout";
-import pinturaServico from "@/assets/pintura-servico.jpg";
+import estufaAcabamento from "@/assets/cliente/estufa-acabamento-02.jpg";
 
 const service = services.find((s) => s.slug === "pintura-automotiva")!;
 
@@ -15,7 +15,7 @@ export const Route = createFileRoute("/servicos/pintura-automotiva")({
       description:
         "Pintura automotiva em estufa com controle de temperatura em Toledo-PR. Colorimetria precisa, primers anticorrosivos e cura térmica de alta resistência.",
       path: "/servicos/pintura-automotiva",
-      image: "/assets/pintura.jpg",
+      image: estufaAcabamento,
       jsonLd: {
         "@context": "https://schema.org",
         "@graph": [
@@ -41,8 +41,9 @@ function PinturaPage() {
       title="Pintura Automotiva em Estufa em Toledo."
       intro="O acabamento de pintura da Master alia rigor em preparação de superfície com aplicação em cabine com controle térmico e fluxo de ar filtrado. Cada reparo passa por análise colorimétrica minuciosa para garantir a correspondência de tonalidade e textura com as peças originais do veículo."
       heroCtaLabel="Solicitar avaliação de pintura"
-      image={pinturaServico}
-      imageAlt="Técnico aplicando pintura automotiva e verniz em estufa pressurizada na Master (fotografia ilustrativa)"
+      image={estufaAcabamento}
+      imageAlt="Veículo branco finalizado sob as luzes da estufa de pintura da Master em Toledo-PR"
+      imageIllustrative={false}
       applicationsIcon={Paintbrush}
       applicationsTitle="Aplicações da Pintura"
       limitationsTitle="Requisitos de Cura e Limitações"

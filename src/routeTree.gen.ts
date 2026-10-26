@@ -24,6 +24,7 @@ import { Route as BriefingIndexRouteImport } from './routes/briefing/index'
 import { Route as BriefingConfirmacaoRouteImport } from './routes/briefing/confirmacao'
 import { Route as PropostaIndexRouteImport } from './routes/proposta/index'
 import { Route as PropostaSlugRouteImport } from './routes/proposta/$slug'
+import { Route as PropostaMasterchapeacaoRouteImport } from './routes/proposta/masterchapeacao'
 import { Route as ServicosIndexRouteImport } from './routes/servicos/index'
 import { Route as ServicosFunilariaRouteImport } from './routes/servicos/funilaria'
 import { Route as ServicosMartelinhoDeOuroRouteImport } from './routes/servicos/martelinho-de-ouro'
@@ -106,6 +107,11 @@ const PropostaSlugRoute = PropostaSlugRouteImport.update({
   path: '/proposta/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PropostaMasterchapeacaoRoute = PropostaMasterchapeacaoRouteImport.update({
+  id: '/proposta/masterchapeacao',
+  path: '/proposta/masterchapeacao',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ServicosIndexRoute = ServicosIndexRouteImport.update({
   id: '/servicos/',
   path: '/servicos/',
@@ -153,6 +159,7 @@ export interface FileRoutesByFullPath {
   '/acompanhar/$token': typeof AcompanharTokenRoute
   '/briefing/confirmacao': typeof BriefingConfirmacaoRoute
   '/proposta/$slug': typeof PropostaSlugRoute
+  '/proposta/masterchapeacao': typeof PropostaMasterchapeacaoRoute
   '/servicos/funilaria': typeof ServicosFunilariaRoute
   '/servicos/martelinho-de-ouro': typeof ServicosMartelinhoDeOuroRoute
   '/servicos/pintura-automotiva': typeof ServicosPinturaAutomotivaRoute
@@ -176,6 +183,7 @@ export interface FileRoutesByTo {
   '/acompanhar/$token': typeof AcompanharTokenRoute
   '/briefing/confirmacao': typeof BriefingConfirmacaoRoute
   '/proposta/$slug': typeof PropostaSlugRoute
+  '/proposta/masterchapeacao': typeof PropostaMasterchapeacaoRoute
   '/servicos/funilaria': typeof ServicosFunilariaRoute
   '/servicos/martelinho-de-ouro': typeof ServicosMartelinhoDeOuroRoute
   '/servicos/pintura-automotiva': typeof ServicosPinturaAutomotivaRoute
@@ -200,6 +208,7 @@ export interface FileRoutesById {
   '/acompanhar/$token': typeof AcompanharTokenRoute
   '/briefing/confirmacao': typeof BriefingConfirmacaoRoute
   '/proposta/$slug': typeof PropostaSlugRoute
+  '/proposta/masterchapeacao': typeof PropostaMasterchapeacaoRoute
   '/servicos/funilaria': typeof ServicosFunilariaRoute
   '/servicos/martelinho-de-ouro': typeof ServicosMartelinhoDeOuroRoute
   '/servicos/pintura-automotiva': typeof ServicosPinturaAutomotivaRoute
@@ -225,6 +234,7 @@ export interface FileRouteTypes {
     | '/acompanhar/$token'
     | '/briefing/confirmacao'
     | '/proposta/$slug'
+    | '/proposta/masterchapeacao'
     | '/servicos/funilaria'
     | '/servicos/martelinho-de-ouro'
     | '/servicos/pintura-automotiva'
@@ -248,6 +258,7 @@ export interface FileRouteTypes {
     | '/acompanhar/$token'
     | '/briefing/confirmacao'
     | '/proposta/$slug'
+    | '/proposta/masterchapeacao'
     | '/servicos/funilaria'
     | '/servicos/martelinho-de-ouro'
     | '/servicos/pintura-automotiva'
@@ -271,6 +282,7 @@ export interface FileRouteTypes {
     | '/acompanhar/$token'
     | '/briefing/confirmacao'
     | '/proposta/$slug'
+    | '/proposta/masterchapeacao'
     | '/servicos/funilaria'
     | '/servicos/martelinho-de-ouro'
     | '/servicos/pintura-automotiva'
@@ -295,6 +307,7 @@ export interface RootRouteChildren {
   AcompanharTokenRoute: typeof AcompanharTokenRoute
   BriefingConfirmacaoRoute: typeof BriefingConfirmacaoRoute
   PropostaSlugRoute: typeof PropostaSlugRoute
+  PropostaMasterchapeacaoRoute: typeof PropostaMasterchapeacaoRoute
   ServicosFunilariaRoute: typeof ServicosFunilariaRoute
   ServicosMartelinhoDeOuroRoute: typeof ServicosMartelinhoDeOuroRoute
   ServicosPinturaAutomotivaRoute: typeof ServicosPinturaAutomotivaRoute
@@ -413,6 +426,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PropostaSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/proposta/masterchapeacao': {
+      id: '/proposta/masterchapeacao'
+      path: '/proposta/masterchapeacao'
+      fullPath: '/proposta/masterchapeacao'
+      preLoaderRoute: typeof PropostaMasterchapeacaoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/servicos/': {
       id: '/servicos/'
       path: '/servicos'
@@ -471,6 +491,7 @@ const rootRouteChildren: RootRouteChildren = {
   AcompanharTokenRoute: AcompanharTokenRoute,
   BriefingConfirmacaoRoute: BriefingConfirmacaoRoute,
   PropostaSlugRoute: PropostaSlugRoute,
+  PropostaMasterchapeacaoRoute: PropostaMasterchapeacaoRoute,
   ServicosFunilariaRoute: ServicosFunilariaRoute,
   ServicosMartelinhoDeOuroRoute: ServicosMartelinhoDeOuroRoute,
   ServicosPinturaAutomotivaRoute: ServicosPinturaAutomotivaRoute,

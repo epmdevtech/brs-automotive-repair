@@ -42,7 +42,7 @@ describe("HomeBeforeAfter component (SPEC-025)", () => {
     render(<HomeBeforeAfter />);
 
     expect(
-      screen.getByText(/O acervo fotográfico real está em documentação em Toledo-PR/i),
+      screen.getByText(/Os registros oficiais da oficina estão na página Trabalhos/i),
     ).toBeInTheDocument();
   });
 });

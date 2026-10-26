@@ -5,6 +5,7 @@ import { buildRouteHead, buildBreadcrumbSchema } from "@/lib/seo";
 import { PageHero } from "@/components/brs/page-hero";
 import { Contact } from "@/components/brs/contact";
 import { FAQAccordion } from "@/components/brs/faq-accordion";
+import oficinaFachada01 from "@/assets/cliente/oficina-fachada-01.jpg";
 
 export const Route = createFileRoute("/contato")({
   validateSearch: (search: Record<string, unknown>): { audience?: string } => {
@@ -18,6 +19,7 @@ export const Route = createFileRoute("/contato")({
       description:
         "Fale com a Master Chapeação e Pinturas em Toledo-PR. Solicite uma avaliação, agende seu atendimento e tire dúvidas sobre funilaria, pintura e martelinho.",
       path: "/contato",
+      image: oficinaFachada01,
       jsonLd: {
         "@context": "https://schema.org",
         "@graph": [
