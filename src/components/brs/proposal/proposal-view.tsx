@@ -138,6 +138,7 @@ export function ProposalView({ proposal }: ProposalViewProps) {
           modules={proposal.modulesCatalog || []}
           selectedModuleIds={selectedModuleIds}
           onToggleModule={handleToggleModule}
+          companyName={proposal.companyName}
         />
 
         {/* Seção D: Matriz Comparativa de Módulos */}

@@ -4,6 +4,24 @@ Todas as alterações notáveis neste projeto serão documentadas neste arquivo.
 
 O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e este projeto adere ao [Universal SDD](UNIVERSAL_SDD_FRAMEWORK.md).
 
+## [0.6.1] - 2026-10-26
+
+### Corrigido (UX/UI mobile-first — SPEC-080 / TASK-080-01)
+
+- **`proposal-nav`**: removido `min-w-max` no wrapper externo que causava overflow horizontal no
+  mobile. Scroll interno com `scrollbar-none` e `scroll-smooth`, fades laterais com gradiente
+  indicando conteúdo rolável, e `scrollIntoView` para centralizar o item ativo automaticamente.
+  Labels encurtados para melhor legibilidade em viewports estreitos.
+- **`proposal-modules-catalog`**: texto introdutório passa a usar prop `companyName` dinamicamente
+  (sem hardcode). Ajuste de gap (`gap-5 sm:gap-7`) e `break-words` em todos os textos longos de
+  deliverables, exclusões, dependências e notas de custos. Ícones com `shrink-0`.
+- **`proposal-modular-acceptance`**: atalhos de pacotes reestruturados — label em linha própria,
+  botões com `whitespace-nowrap` e `flex-wrap gap-1.5` para não truncar em viewports < 400 px.
+- **`proposal-comparison-matrix`**: cards mobile sem `truncate` nos deliverables; substituído por
+  `line-clamp-2 break-words` com `title` acessível. Bullets com `shrink-0`.
+- **`proposal-bundles`**: preço do card usa `text-brand-accent` (consistente com demais seções);
+  card com `h-full` para equalização de alturas em Safari mobile; grid ajustado para `gap-5 sm:gap-7`.
+
 ## [0.6.0] - 2026-10-26
 
 ### Adicionado

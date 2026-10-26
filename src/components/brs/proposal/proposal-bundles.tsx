@@ -38,8 +38,8 @@ export function ProposalBundles({
           </p>
         </div>
 
-        {/* Grid com 5 pacotes */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 items-stretch">
+        {/* Grid com 5 pacotes — h-full garante equalização de altura em todos os browsers */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-7 items-stretch">
           {bundles.map((bundle) => {
             const active = isBundleActive(bundle.moduleIds);
             const isHighlight = bundle.highlight;
@@ -47,7 +47,7 @@ export function ProposalBundles({
             return (
               <div
                 key={bundle.id}
-                className={`flex flex-col justify-between rounded-xl border transition-all duration-200 p-6 sm:p-7 relative ${
+                className={`flex flex-col justify-between rounded-xl border transition-all duration-200 p-5 sm:p-7 relative h-full ${
                   active
                     ? "border-primary bg-gradient-to-b from-primary/[0.08] to-neutral-950 shadow-xl shadow-primary/10 ring-1 ring-primary/40"
                     : isHighlight
@@ -130,7 +130,7 @@ export function ProposalBundles({
                       {bundle.isStartingPrice && (
                         <span className="text-xs text-neutral-400 font-mono">A partir de</span>
                       )}
-                      <span className="text-2xl sm:text-3xl font-display font-bold text-white tracking-tight">
+                      <span className="text-2xl sm:text-3xl font-display font-bold text-brand-accent tracking-tight">
                         {formatCurrencyBRL(bundle.referencePrice)}
                       </span>
                     </div>

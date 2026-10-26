@@ -111,10 +111,11 @@ export function ProposalComparisonMatrix({ modules }: ProposalComparisonMatrixPr
                 <span className="text-[11px] uppercase tracking-wider text-muted-foreground block mb-1">
                   Recursos Principais
                 </span>
-                <ul className="text-xs text-neutral-300 list-disc list-inside space-y-0.5">
+                <ul className="text-xs text-neutral-300 space-y-1">
                   {mod.deliverables.slice(0, 3).map((item, idx) => (
-                    <li key={idx} className="truncate">
-                      {item}
+                    <li key={idx} className="flex items-start gap-1.5 break-words" title={item}>
+                      <span className="size-1 rounded-full bg-primary/60 shrink-0 mt-1.5" />
+                      <span className="line-clamp-2 leading-relaxed">{item}</span>
                     </li>
                   ))}
                 </ul>

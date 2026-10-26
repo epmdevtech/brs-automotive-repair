@@ -193,29 +193,31 @@ export function ProposalModularAcceptance({
           </div>
 
           {/* Atalhos Rápidos para Pacotes */}
-          <div className="py-4 border-b border-white/10 flex flex-wrap items-center justify-between gap-2 text-xs">
-            <span className="text-neutral-400 font-mono text-[11px]">Atalhos de Pacotes:</span>
+          <div className="py-4 border-b border-white/10 space-y-2 text-xs">
+            <span className="text-neutral-400 font-mono text-[11px] block">
+              Atalhos de Pacotes:
+            </span>
             <div className="flex flex-wrap gap-1.5">
               <button
                 type="button"
                 onClick={() => onSelectBundle(["epm-web"])}
-                className="px-2.5 py-1 rounded-sm bg-white/5 hover:bg-white/10 text-neutral-300 text-[11px] font-mono transition-colors"
+                className="px-2.5 py-1 rounded-sm bg-white/5 hover:bg-white/10 text-neutral-300 text-[11px] font-mono transition-colors whitespace-nowrap"
               >
                 Presença Digital
               </button>
               <button
                 type="button"
                 onClick={() => onSelectBundle(["epm-web", "epm-booking"])}
-                className="px-2.5 py-1 rounded-sm bg-white/5 hover:bg-white/10 text-neutral-300 text-[11px] font-mono transition-colors"
+                className="px-2.5 py-1 rounded-sm bg-white/5 hover:bg-white/10 text-neutral-300 text-[11px] font-mono transition-colors whitespace-nowrap"
               >
                 Captação + Agendamento
               </button>
               <button
                 type="button"
                 onClick={() => onSelectBundle(["epm-web", "epm-booking", "epm-crm", "epm-oficina"])}
-                className="px-2.5 py-1 rounded-sm bg-primary/10 hover:bg-primary/20 text-brand-accent border border-primary/20 text-[11px] font-mono font-semibold transition-colors"
+                className="px-2.5 py-1 rounded-sm bg-primary/10 hover:bg-primary/20 text-brand-accent border border-primary/20 text-[11px] font-mono font-semibold transition-colors whitespace-nowrap"
               >
-                Operação Completa (Destaque)
+                Operação Completa
               </button>
               <button
                 type="button"
@@ -229,7 +231,7 @@ export function ProposalModularAcceptance({
                     "epm-insights",
                   ])
                 }
-                className="px-2.5 py-1 rounded-sm bg-white/5 hover:bg-white/10 text-neutral-300 text-[11px] font-mono transition-colors"
+                className="px-2.5 py-1 rounded-sm bg-white/5 hover:bg-white/10 text-neutral-300 text-[11px] font-mono transition-colors whitespace-nowrap"
               >
                 Todos os 6 Módulos
               </button>
