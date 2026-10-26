@@ -22,7 +22,7 @@ export function ProposalModulesCatalog({
           </h2>
           <p className="mt-4 text-neutral-300 text-sm sm:text-base leading-relaxed">
             Cada solução atende a uma demanda operacional ou comercial bem delimitada da Master
-            Reparações Automotivas. Escolha os módulos que deseja avaliar para compor o investimento
+            Chapeação e Pinturas. Escolha os módulos que deseja avaliar para compor o investimento
             sob medida para o seu momento.
           </p>
           <div className="mt-4 flex items-center gap-2 text-xs text-brand-accent font-mono">

@@ -215,7 +215,7 @@ describe("SPEC-079 / TASK-079-01 — Proposta Comercial Modular Master em Rota D
       const questionLink = screen.getByRole("link", { name: /quero esclarecer uma dúvida/i });
       expect(questionLink).toHaveAttribute(
         "href",
-        expect.stringContaining("mailto:contato@epmdevtech.com.br"),
+        expect.stringContaining("mailto:elessandro@epmdevtech.com.br"),
       );
     });
 
@@ -231,12 +231,12 @@ describe("SPEC-079 / TASK-079-01 — Proposta Comercial Modular Master em Rota D
       const emailAction = screen.getByRole("link", { name: /enviar por e-mail/i });
       expect(emailAction).toHaveAttribute(
         "href",
-        expect.stringContaining("mailto:contato@epmdevtech.com.br"),
+        expect.stringContaining("mailto:elessandro@epmdevtech.com.br"),
       );
     });
 
     it("não propaga dados pessoais na URL ou números de telefone inventados", () => {
-      expect(masterChapeacaoProposal.authorContact.email).toBe("contato@epmdevtech.com.br");
+      expect(masterChapeacaoProposal.authorContact.email).toBe("elessandro@epmdevtech.com.br");
       expect(masterChapeacaoProposal.authorContact.phone).toBeUndefined();
       expect(masterChapeacaoProposal.authorContact.whatsappNumber).toBeUndefined();
 

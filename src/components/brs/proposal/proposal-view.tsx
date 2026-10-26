@@ -115,7 +115,7 @@ export function ProposalView({ proposal }: ProposalViewProps) {
 
           <div className="mt-6">
             <Button variant="primary" asChild size="sm">
-              <a href="mailto:contato@epmdevtech.com.br">Solicitar Renovação da Proposta</a>
+              <a href="mailto:elessandro@epmdevtech.com.br">Solicitar Renovação da Proposta</a>
             </Button>
           </div>
         </div>

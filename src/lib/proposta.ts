@@ -899,7 +899,7 @@ export const commercialProposals: Record<string, CommercialProposal> = {
     authorRole: "Engenharia de Software & Estratégia Digital",
     authorContact: {
       name: "Engenharia & Comercial EPM DevTech",
-      email: "contato@epmdevtech.com.br",
+      email: "elessandro@epmdevtech.com.br",
     },
     issueDate: "13/10/2026",
     validUntil: "28/10/2026",
@@ -1172,7 +1172,7 @@ export const commercialProposals: Record<string, CommercialProposal> = {
     authorRole: "Engenharia de Software & Arquitetura de Sistemas",
     authorContact: {
       name: "Engenharia & Comercial EPM DevTech",
-      email: "contato@epmdevtech.com.br",
+      email: "elessandro@epmdevtech.com.br",
     },
     issueDate: "13/10/2026",
     validUntil: "30/10/2026",
@@ -1433,7 +1433,7 @@ export const masterChapeacaoProposal: CommercialProposal = {
   authorRole: "Software Architect & Engenharia de Sistemas",
   authorContact: {
     name: "Engenharia & Comercial EPM DevTech",
-    email: "contato@epmdevtech.com.br",
+    email: "elessandro@epmdevtech.com.br",
   },
   issueDate: "26/10/2026",
   validUntil: "30/10/2026",
