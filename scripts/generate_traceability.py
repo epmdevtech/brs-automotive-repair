@@ -16,11 +16,12 @@ SPEC_PATTERN = re.compile(r"\bSPEC-\d{3}(?:-v\d+)?\b")
 TASK_PATTERN = re.compile(r"\bTASK-\d{3}-\d{2}\b")
 METADATA_ROW = re.compile(r"^\|\s*([^|]+?)\s*\|\s*([^|]+?)\s*\|\s*$", re.MULTILINE)
 
-# Commits de manutenção SDD (atualização da matriz de rastreabilidade) não
-# representam entrega funcional e são excluídos da coluna "Commits" para evitar
-# o ciclo vicioso em que cada sincronização gera um novo diff.
+# Commits de manutenção SDD (qualquer commit com escopo `(sdd)` — sincronização
+# da matriz de rastreabilidade, correção de ciclo vicioso, etc.) não representam
+# entrega funcional e são excluídos da coluna "Commits" para evitar o ciclo
+# vicioso em que cada sincronização gera um novo diff.
 SDD_MAINTENANCE_PATTERN = re.compile(
-    r"^docs\(sdd\):\s*(sincroniza|regenera|atualiza|sincronizar)\s+matriz",
+    r"^\w+\(sdd\):",
     re.IGNORECASE,
 )
 
