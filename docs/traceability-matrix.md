@@ -83,7 +83,7 @@ Gerado por `scripts/generate_traceability.py`. Não edite manualmente; execute n
 | [SPEC-077](../specs/SPEC-077-aproveitamento-fotos-reais-oficina-e-privacidade.md) | Approved | [TASK-077-01](../tasks/TASK-077-01-fotos-reais-oficina-galeria-e-privacidade.md) (Done) | `f2fe9719` feat(oficina): publica imagens oficiais no hero, galeria e páginas | — |
 | [SPEC-078](../specs/SPEC-078-imagens-oficiais-oficina-hero-e-galeria.md) | Approved | [TASK-078-01](../tasks/TASK-078-01-imagens-oficiais-hero-e-galeria.md) (Done) | `f2fe9719` feat(oficina): publica imagens oficiais no hero, galeria e páginas | — |
 | [SPEC-079](../specs/SPEC-079-proposta-comercial-master-rota-dedicada.md) | Approved | [TASK-079-01](../tasks/TASK-079-01-proposta-comercial-master-rota-dedicada.md) (Completed) | `00b15232` fix(proposta): corrige e-mail e identidade em /proposta/masterchapeacao<br>`0403a6df` feat(proposta): entrega modular Master em /proposta/masterchapeacao (SPEC-079) | — |
-| [SPEC-080](../specs/SPEC-080-auditoria-ux-ui-responsivo-proposta-masterchapeacao.md) | Approved | [TASK-080-01](../tasks/TASK-080-01-auditoria-ux-ui-responsivo-proposta-masterchapeacao.md) (Completed) | `08d21989` fix(ux): refinamento responsivo mobile-first da proposta modular (SPEC-080) | — |
+| [SPEC-080](../specs/SPEC-080-auditoria-ux-ui-responsivo-proposta-masterchapeacao.md) | Approved | [TASK-080-01](../tasks/TASK-080-01-auditoria-ux-ui-responsivo-proposta-masterchapeacao.md) (Completed) | `c443177c` docs(sdd): sincroniza matriz de rastreabilidade<br>`08d21989` fix(ux): refinamento responsivo mobile-first da proposta modular (SPEC-080) | — |
 
 ## Lacunas de rastreabilidade (Traceability gaps)
 
