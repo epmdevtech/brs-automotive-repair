@@ -16,6 +16,14 @@ SPEC_PATTERN = re.compile(r"\bSPEC-\d{3}(?:-v\d+)?\b")
 TASK_PATTERN = re.compile(r"\bTASK-\d{3}-\d{2}\b")
 METADATA_ROW = re.compile(r"^\|\s*([^|]+?)\s*\|\s*([^|]+?)\s*\|\s*$", re.MULTILINE)
 
+# Commits de manutenção SDD (atualização da matriz de rastreabilidade) não
+# representam entrega funcional e são excluídos da coluna "Commits" para evitar
+# o ciclo vicioso em que cada sincronização gera um novo diff.
+SDD_MAINTENANCE_PATTERN = re.compile(
+    r"^docs\(sdd\):\s*(sincroniza|regenera|atualiza|sincronizar)\s+matriz",
+    re.IGNORECASE,
+)
+
 
 @dataclass(frozen=True)
 class Artifact:
@@ -180,7 +188,10 @@ def render_matrix(root: Path, data: TraceabilityData) -> str:
         linked_commits = [
             commit
             for commit in data.commits
-            if spec.identifier in commit.references or bool(task_ids.intersection(commit.references))
+            if (
+                spec.identifier in commit.references or bool(task_ids.intersection(commit.references))
+            )
+            and not SDD_MAINTENANCE_PATTERN.match(commit.subject)
         ]
         linked_reviews = [
             review
