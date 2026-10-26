@@ -4,6 +4,7 @@ import { company } from "@/lib/brs";
 import { ScrollReveal } from "@/components/ui/scroll-reveal";
 import { ContactForm } from "./contact-form";
 import { BookingDialog } from "@/features/booking/ui/booking-dialog";
+import oficinaFachada01 from "@/assets/cliente/oficina-fachada-01.jpg";
 
 const external = { target: "_blank", rel: "noopener noreferrer" };
 
@@ -126,6 +127,24 @@ export function Contact({
                 <span>{company.openingHours}</span>
               </div>
             </div>
+
+            <figure className="mt-8 overflow-hidden rounded-sm border border-white/10 bg-card">
+              <div className="aspect-16/10 overflow-hidden">
+                <img
+                  src={oficinaFachada01}
+                  alt="Fachada da Master com caminhão-plataforma branco e placas com a marca"
+                  width={1600}
+                  height={935}
+                  loading="lazy"
+                  decoding="async"
+                  className="h-full w-full object-cover"
+                />
+              </div>
+              <figcaption className="px-4 py-3 text-[11px] text-neutral-400">
+                Fachada e caminhão-plataforma da Master em Toledo-PR. Imagem oficial com placas
+                substituídas pela marca.
+              </figcaption>
+            </figure>
           </div>
         </ScrollReveal>
 

@@ -17,14 +17,39 @@ import { Button } from "@/components/ui/button";
 import { ScrollReveal } from "@/components/ui/scroll-reveal";
 import { ImageReveal } from "@/components/ui/image-reveal";
 import { useSmoothScroll } from "@/hooks/use-smooth-scroll";
+import estufaAcabamento from "@/assets/cliente/estufa-acabamento-02.jpg";
 import funilariaServico from "@/assets/funilaria-servico.jpg";
-import pinturaServico from "@/assets/pintura-servico.jpg";
 import martelinhoServico from "@/assets/martelinho-servico.jpg";
+import oficinaFachada01 from "@/assets/cliente/oficina-fachada-01.jpg";
 
 const serviceImages: Record<string, string> = {
   funilaria: funilariaServico,
-  "pintura-automotiva": pinturaServico,
+  "pintura-automotiva": estufaAcabamento,
   "martelinho-de-ouro": martelinhoServico,
+};
+
+const serviceImageMeta: Record<
+  string,
+  { alt: string; badge: string; width: number; height: number }
+> = {
+  funilaria: {
+    alt: "Técnico trabalhando a chapa metálica com martelo de funilaria (fotografia ilustrativa)",
+    badge: "Fotografia ilustrativa",
+    width: 1376,
+    height: 768,
+  },
+  "pintura-automotiva": {
+    alt: "Veículo branco finalizado sob as luzes da estufa de pintura da Master em Toledo-PR",
+    badge: "Registro oficial",
+    width: 1280,
+    height: 964,
+  },
+  "martelinho-de-ouro": {
+    alt: "Técnico inspecionando painel automotivo com luminária de contraste (fotografia ilustrativa)",
+    badge: "Fotografia ilustrativa",
+    width: 1376,
+    height: 768,
+  },
 };
 
 const serviceAnchorIds: Record<string, string> = {
@@ -102,6 +127,7 @@ function ServicesPage() {
       <section id="lista-servicos" className="page-width border-t border-border/70 py-16 lg:py-20">
         {services.map((service, index) => {
           const image = serviceImages[service.slug] || funilariaServico;
+          const meta = serviceImageMeta[service.slug] || serviceImageMeta.funilaria;
           const isReverse = index % 2 === 1;
           const sectionId = serviceAnchorIds[service.slug] || service.slug;
 
@@ -123,14 +149,14 @@ function ServicesPage() {
                 >
                   <img
                     src={image}
-                    alt={`${service.title} em Toledo-PR (fotografia ilustrativa)`}
-                    width={1200}
-                    height={800}
+                    alt={meta.alt}
+                    width={meta.width}
+                    height={meta.height}
                     className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
                     loading="lazy"
                   />
                   <span className="absolute bottom-3 right-3 text-[9px] uppercase tracking-wider px-2 py-1 bg-background/85 text-muted-foreground border border-border/50 backdrop-blur-xs rounded-xs pointer-events-none">
-                    Fotografia ilustrativa
+                    {meta.badge}
                   </span>
                 </ImageReveal>
               </div>
@@ -403,8 +429,8 @@ function ServicesPage() {
             className="pointer-events-none absolute -right-20 -bottom-20 size-72 rounded-full bg-primary/10 blur-3xl -z-10"
           />
 
-          <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
-            <div className="max-w-2xl">
+          <div className="grid gap-8 lg:grid-cols-12 lg:items-center">
+            <div className="lg:col-span-7">
               <div className="flex items-center gap-2 text-xs font-mono tracking-widest uppercase text-brand-accent mb-3">
                 <Truck size={16} className="text-brand-accent shrink-0" aria-hidden="true" />
                 <span>Comodidade Urbana em Toledo-PR</span>
@@ -417,18 +443,36 @@ function ServicesPage() {
                 endereço. Realizamos triagem técnica honesta indicando apenas a intervenção
                 necessária.
               </p>
+              <div className="mt-6">
+                <Button
+                  variant="primary"
+                  asChild
+                  className="h-12 min-h-[44px] px-8 text-xs font-semibold cursor-pointer shadow-lg shadow-primary/15"
+                >
+                  <Link to="/contato">
+                    <span>Solicitar avaliação</span>
+                    <ArrowUpRight className="ml-2 size-4" aria-hidden="true" />
+                  </Link>
+                </Button>
+              </div>
             </div>
 
-            <Button
-              variant="primary"
-              asChild
-              className="h-12 min-h-[44px] px-8 text-xs font-semibold shrink-0 cursor-pointer shadow-lg shadow-primary/15"
-            >
-              <Link to="/contato">
-                <span>Solicitar avaliação</span>
-                <ArrowUpRight className="ml-2 size-4" aria-hidden="true" />
-              </Link>
-            </Button>
+            <div className="lg:col-span-5">
+              <div className="relative overflow-hidden rounded-lg border border-white/10 aspect-16/10">
+                <img
+                  src={oficinaFachada01}
+                  alt="Fachada da Master com caminhão-plataforma branco e placas com a marca"
+                  width={1600}
+                  height={935}
+                  loading="lazy"
+                  decoding="async"
+                  className="h-full w-full object-cover"
+                />
+                <span className="absolute bottom-3 right-3 text-[9px] uppercase tracking-wider px-2 py-1 bg-background/85 text-muted-foreground border border-border/50 backdrop-blur-xs rounded-xs">
+                  Registro oficial
+                </span>
+              </div>
+            </div>
           </div>
         </ScrollReveal>
       </section>

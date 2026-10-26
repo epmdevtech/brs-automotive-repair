@@ -114,8 +114,8 @@ describe("SPEC-043: Refatoração Global de UX/UI (/servicos, /trabalhos e /para
 
       // Eyebrow e microcopy técnica corretos
       expect(pageHero?.textContent).toContain("PORTFÓLIO & MÉTODOS DE REPARAÇÃO");
-      expect(pageHero?.textContent).toContain("Casos de Reparação e Acabamento.");
-      expect(pageHero?.textContent).toContain("Entenda como atuamos na recuperação de vincos");
+      expect(pageHero?.textContent).toContain("A oficina, os métodos e o acabamento.");
+      expect(pageHero?.textContent).toContain("Conheça a estrutura da Master");
     });
 
     it("possui disclaimer de transparência fotográfica compacto", () => {

@@ -518,7 +518,7 @@ export const AnimatedHero = ({
             </a>
             {resolvedConfig.isIllustrative && (
               <span className="image-note text-[11px] text-neutral-400">
-                Fotografia ilustrativa
+                {resolvedConfig.mediaLabel ?? "Fotografia ilustrativa"}
               </span>
             )}
           </div>

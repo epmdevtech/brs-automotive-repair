@@ -1,0 +1,139 @@
+{
+  "generated_by": "scripts/process-client-images.py",
+  "policy": "Imagens oficiais com placas substituídas pela marca; originais fora de src/ e public/.",
+  "assets": [
+    {
+      "original": "original-oficial-fachada-branco.png",
+      "published": "src/assets/cliente/oficina-fachada-01.jpg",
+      "dimensions": [
+        1600,
+        935
+      ],
+      "description": "Fachada da oficina com caminhão-plataforma branco e placas com a marca.",
+      "redacted_regions": [],
+      "sha256": "e6f7c18473e1e1f081ef16c1c7c60738a0878852c9ff991abe0a053059abf3e0"
+    },
+    {
+      "original": "original-oficial-fachada-vw.png",
+      "published": "src/assets/cliente/oficina-fachada-02.jpg",
+      "dimensions": [
+        1600,
+        900
+      ],
+      "description": "Fachada da oficina com caminhão-plataforma Volkswagen e placas com a marca.",
+      "redacted_regions": [],
+      "sha256": "6cc405bc13f83cebed7b8a73ecd7ea104936789baf49a3a38cf2aac1ffaa556b"
+    },
+    {
+      "original": "original-oficial-fachada-ceu-nublado.png",
+      "published": "src/assets/cliente/oficina-fachada-03.jpg",
+      "dimensions": [
+        1600,
+        900
+      ],
+      "description": "Fachada da oficina sob céu nublado, com veículos ao fundo.",
+      "redacted_regions": [
+        [
+          1356,
+          762,
+          60,
+          24
+        ],
+        [
+          1582,
+          776,
+          62,
+          20
+        ]
+      ],
+      "sha256": "df42482f8914f668fc7a8e4a7fa3f117936f9bb7c9d5568d3d67307e6b10211e"
+    },
+    {
+      "original": "original-oficial-fachada-02.jpg",
+      "published": "src/assets/cliente/oficina-fachada-04.jpg",
+      "dimensions": [
+        1280,
+        720
+      ],
+      "description": "Fachada da oficina em plano aberto, com veículo na recepção.",
+      "redacted_regions": [],
+      "sha256": "da570481d4c36c1386eab6a51c686026201e9bb3d1044c75ad8ce094b40f136f"
+    },
+    {
+      "original": "original-oficial-estufa-01.jpg",
+      "published": "src/assets/cliente/estufa-acabamento-01.jpg",
+      "dimensions": [
+        1280,
+        964
+      ],
+      "description": "Veículo branco na estufa de pintura, com placa da marca.",
+      "redacted_regions": [],
+      "sha256": "054a040c63f37572ba5060854d1e5747c2c407c102867c03bfb88a1180715782"
+    },
+    {
+      "original": "original-oficial-estufa-02.jpg",
+      "published": "src/assets/cliente/estufa-acabamento-02.jpg",
+      "dimensions": [
+        1280,
+        964
+      ],
+      "description": "Veículo branco finalizado na estufa de pintura, com placa da marca.",
+      "redacted_regions": [],
+      "sha256": "bc2b0461688a75b13fa1a79d653b2bb3f6a09284c2191f74a02dc4b2b40d290f"
+    },
+    {
+      "published": "src/assets/cliente/estufa-acabamento-01-desktop.jpg",
+      "dimensions": [
+        1280,
+        720
+      ],
+      "description": "Recorte desktop do hero derivado da estufa oficial.",
+      "redacted_regions": "derivado de estufa-acabamento-01.jpg"
+    },
+    {
+      "published": "src/assets/cliente/estufa-acabamento-01-mobile.jpg",
+      "dimensions": [
+        900,
+        964
+      ],
+      "description": "Recorte mobile do hero derivado da estufa oficial.",
+      "redacted_regions": "derivado de estufa-acabamento-01.jpg"
+    },
+    {
+      "published": "public/hero/master-hero-*.avif|webp",
+      "dimensions": [
+        [
+          640,
+          360
+        ],
+        [
+          960,
+          540
+        ],
+        [
+          1280,
+          720
+        ],
+        [
+          600,
+          643
+        ],
+        [
+          900,
+          964
+        ]
+      ],
+      "description": "Variantes responsivas do hero derivadas da estufa oficial.",
+      "redacted_regions": "derivado de estufa-acabamento-01.jpg"
+    },
+    {
+      "published": "public/master/og-master.jpg",
+      "dimensions": [
+        1200,
+        630
+      ],
+      "description": "Cartão social derivado da fachada oficial com guincho branco.",
+      "redacted_regions": "derivado de oficina-fachada-01.jpg"
+    }
+  ]
+}

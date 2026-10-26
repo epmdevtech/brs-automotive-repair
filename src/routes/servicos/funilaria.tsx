@@ -15,7 +15,7 @@ export const Route = createFileRoute("/servicos/funilaria")({
       description:
         "Funilaria técnica especializada em Toledo-PR. Recuperação de lataria, alinhamento de painéis e preservação de gaps originais com diagnóstico honesto.",
       path: "/servicos/funilaria",
-      image: "/assets/funilaria.jpg",
+      image: funilariaServico,
       jsonLd: {
         "@context": "https://schema.org",
         "@graph": [

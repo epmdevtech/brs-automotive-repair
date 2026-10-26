@@ -16,6 +16,8 @@ import { PageHero } from "@/components/brs/page-hero";
 import { ContactCTA } from "@/components/brs/contact-cta";
 import { ScrollReveal } from "@/components/ui/scroll-reveal";
 import { NumericCounter } from "@/components/ui/numeric-counter";
+import oficinaFachada03 from "@/assets/cliente/oficina-fachada-03.jpg";
+import oficinaFachada01 from "@/assets/cliente/oficina-fachada-01.jpg";
 
 const external = { target: "_blank", rel: "noopener noreferrer" };
 
@@ -27,6 +29,7 @@ export const Route = createFileRoute("/sobre")({
       description:
         "História, princípios e estrutura técnica da Master Chapeação e Pinturas em Toledo, Paraná. Especialistas em funilaria, pintura em estufa e martelinho de ouro.",
       path: "/sobre",
+      image: oficinaFachada03,
       jsonLd: {
         "@context": "https://schema.org",
         "@graph": [
@@ -212,6 +215,60 @@ function SobrePage() {
                 entrega (Guincho) em Toledo para facilitar o andamento do reparo.
               </p>
             </div>
+          </ScrollReveal>
+        </div>
+      </section>
+
+      {/* Registro real da estrutura — fotos tratadas do cliente */}
+      <section className="page-width mt-16 pt-12 border-t border-border">
+        <ScrollReveal direction="up" delay={0.08} className="max-w-2xl mb-8">
+          <p className="eyebrow mb-2">Registros da Oficina</p>
+          <h2 className="text-2xl sm:text-3xl font-semibold font-display text-white">
+            A estrutura onde o trabalho acontece.
+          </h2>
+          <p className="text-xs sm:text-sm text-neutral-400 mt-3 leading-relaxed">
+            Fachada, área de manobra e caminhão-plataforma de atendimento em Toledo-PR. Imagens
+            oficiais da operação, com as placas de terceiros substituídas pela marca.
+          </p>
+        </ScrollReveal>
+
+        <div className="grid gap-3 sm:gap-4 md:grid-cols-2">
+          <ScrollReveal direction="up" delay={0.04}>
+            <figure className="group overflow-hidden rounded-sm border border-white/10 bg-card">
+              <div className="aspect-16/10 overflow-hidden">
+                <img
+                  src={oficinaFachada03}
+                  alt="Vista da fachada da Master sob céu nublado, com caminhão-plataforma e veículos ao fundo"
+                  width={1600}
+                  height={900}
+                  loading="lazy"
+                  decoding="async"
+                  className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+              </div>
+              <figcaption className="px-4 py-3 text-[11px] text-neutral-400">
+                Frente da oficina e área de manobra na Av. Maripá, em Toledo-PR.
+              </figcaption>
+            </figure>
+          </ScrollReveal>
+
+          <ScrollReveal direction="up" delay={0.12}>
+            <figure className="group overflow-hidden rounded-sm border border-white/10 bg-card">
+              <div className="aspect-16/10 overflow-hidden">
+                <img
+                  src={oficinaFachada01}
+                  alt="Fachada da Master com caminhão-plataforma branco e placas com a marca"
+                  width={1600}
+                  height={935}
+                  loading="lazy"
+                  decoding="async"
+                  className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+              </div>
+              <figcaption className="px-4 py-3 text-[11px] text-neutral-400">
+                Fachada e caminhão-plataforma do atendimento em Toledo-PR.
+              </figcaption>
+            </figure>
           </ScrollReveal>
         </div>
       </section>

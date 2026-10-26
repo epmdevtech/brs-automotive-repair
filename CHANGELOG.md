@@ -4,6 +4,48 @@ Todas as alterações notáveis neste projeto serão documentadas neste arquivo.
 
 O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e este projeto adere ao [Universal SDD](UNIVERSAL_SDD_FRAMEWORK.md).
 
+## [0.5.0] - 2026-10-26
+
+### Adicionado
+
+- **Imagens oficiais da oficina, hero e galeria** (`SPEC-078` / `TASK-078-01`):
+  - Seis imagens oficiais com placas da marca publicadas em `src/assets/cliente/`, com nomes neutros e JPG otimizado.
+  - Novo hero desktop/mobile e Open Graph derivados das imagens oficiais, com AVIF/WebP e preload preservados.
+  - Galeria acessível com seis registros oficiais em `/trabalhos`, com lightbox e navegação por teclado.
+  - Rótulo "Imagem de divulgação" no hero e nota de placas substituídas pela marca na galeria.
+  - Tratamento das placas reais remanescentes na imagem de céu nublado.
+  - `docs/image-treatment-report.json` com origem, dimensões, regiões tratadas e hashes.
+
+### Alterado
+
+- Fotos antigas com desfoque amplo foram substituídas pelas imagens oficiais da oficina em home, serviços, sobre, contato, corretores e trabalhos.
+- Hero da home deixou de usar o recorte com grande área de desfoque sobre a placa.
+- Texto de transparência de `/trabalhos` passou a distinguir registros oficiais, métodos ilustrativos e placas substituídas.
+
+## [0.4.0] - 2026-10-26
+
+### Adicionado
+
+- **Fotos reais da oficina e privacidade de placas** (`SPEC-077` / `TASK-077-01`):
+  - Pipeline reprodutível em `scripts/process-client-images.py` com pixelização, desfoque e véu escuro localizados sobre placas.
+  - Seis fotografias reais publicadas em `src/assets/cliente/`: fachadas, recepção, estufa de pintura e caminhão-plataforma.
+  - Galeria acessível com ampliação por diálogo, teclado e leitor de tela em `/trabalhos`.
+  - Registros reais integrados ao hero da home, `/sobre`, `/contato`, `/para-corretores`, `/servicos` e `/servicos/pintura-automotiva`.
+  - Variantes públicas do hero em AVIF/WebP e Open Graph regravados a partir das versões tratadas.
+  - Testes de privacidade de nomes/conteúdo e de renderização da galeria.
+  - Inventário e política de mídia em `docs/inventario-imagens-brs.md` e `docs/image-treatment-report.json`.
+
+### Alterado
+
+- Cards de serviço da home passaram a usar imagens semanticamente corretas, todas rotuladas como ilustrativas.
+- Página `/trabalhos` separa registros reais da oficina de sequências ilustrativas de método.
+- Metadados de serviço e de corretores usam os assets efetivamente importados, em vez de caminhos públicos inexistentes.
+
+### Removido
+
+- `src/assets/master/` com oito derivados não tratados das fotos do cliente.
+- Narrativa de "acervo em preparação" substituída pela distinção explícita entre registro real e demonstração de método.
+
 ## [0.3.0] - 2026-10-13
 
 ### Adicionado

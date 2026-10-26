@@ -4,24 +4,23 @@ import { services } from "@/lib/brs";
 import { ScrollReveal } from "@/components/ui/scroll-reveal";
 import { ParallaxImage } from "@/components/ui/parallax-image";
 import funilariaImg from "@/assets/funilaria.jpg";
-import pinturaImg from "@/assets/master/pintura.jpg";
+import pinturaImg from "@/assets/pintura-servico.jpg";
 import martelinhoImg from "@/assets/martelinho.jpg";
-import estruturaImg from "@/assets/master/estrutura.jpg";
 
 const serviceImages = [
   {
-    src: estruturaImg,
-    alt: "Fachada da Master Chapeação e Pinturas com veículo em atendimento na oficina",
-    illustrative: false,
+    src: funilariaImg,
+    alt: "Técnico trabalhando a chapa metálica com martelo de funilaria (fotografia ilustrativa)",
+    illustrative: true,
   },
   {
     src: pinturaImg,
-    alt: "Veículo branco finalizado sob as luzes da estufa de pintura da Master",
-    illustrative: false,
+    alt: "Técnico aplicando pintura automotiva em cabine com controle de partículas (fotografia ilustrativa)",
+    illustrative: true,
   },
   {
     src: martelinhoImg,
-    alt: "Técnica de martelinho de ouro em painel automotivo (fotografia ilustrativa)",
+    alt: "Técnico inspecionando painel automotivo com luminária de contraste (fotografia ilustrativa)",
     illustrative: true,
   },
 ];

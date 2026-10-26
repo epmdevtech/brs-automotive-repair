@@ -116,7 +116,7 @@ export function ProjectGallery({ className }: { className?: string } = {}) {
           className="flex flex-col md:flex-row gap-5 justify-between md:items-end mb-10"
         >
           <div>
-            <p className="eyebrow mb-4">Galeria Antes & Depois</p>
+            <p className="eyebrow mb-4">Demonstração de Método</p>
             <h2 className="section-title">
               Foco na forma
               <br />e na textura original.
@@ -129,7 +129,7 @@ export function ProjectGallery({ className }: { className?: string } = {}) {
             </p>
             <p className="text-[10px] text-brand-accent mt-3 flex items-center gap-1.5 font-medium">
               <ShieldCheck size={13} aria-hidden="true" />
-              Demonstração técnica de reparo (acervo de fotos reais em preparação).
+              Sequências ilustrativas de método — não são casos reais de clientes.
             </p>
           </div>
         </ScrollReveal>

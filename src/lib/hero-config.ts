@@ -1,5 +1,5 @@
-import heroDesktopImage from "@/assets/master/hero-fallback.jpg";
-import heroMobileImage from "@/assets/master/hero-mobile.jpg";
+import heroDesktopImage from "@/assets/cliente/estufa-acabamento-01-desktop.jpg";
+import heroMobileImage from "@/assets/cliente/estufa-acabamento-01-mobile.jpg";
 
 /**
  * Perfis disponíveis para caracterização visual da fotografia do Hero.
@@ -114,9 +114,11 @@ export interface HeroConfig {
   /**
    * Flag de controle estrito:
    * - `true`: renderiza o microdado "Fotografia ilustrativa" no rodapé do Hero.
-   * - `false`: suprime o selo para fotos reais de instalações e serviços da oficina.
+   * - `false`: suprime o selo; use `mediaLabel` para identificar imagens oficiais de divulgação.
    */
   isIllustrative: boolean;
+  /** Rótulo exibido quando a imagem é uma arte de divulgação ou fotografia ilustrativa. */
+  mediaLabel?: string;
   /** Configuração das fontes de imagem desktop e mobile */
   image: HeroImageConfig;
   /** Sobrescritas pontuais por perfil (opcional) */
@@ -257,7 +259,8 @@ export const HERO_PROFILE_PRESETS: Record<HeroProfileType, HeroProfilePreset> = 
  */
 export const defaultHeroConfig: HeroConfig = {
   profile: "veiculo-inteiro",
-  isIllustrative: false,
+  isIllustrative: true,
+  mediaLabel: "Imagem de divulgação",
   image: {
     desktop: {
       src: heroDesktopImage,

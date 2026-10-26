@@ -40,3 +40,10 @@ e2e-screenshots/
 .env
 .env.*
 !.env.example
+
+# Originais fotográficos do cliente (não versionar; contêm placas legíveis)
+assets-originais/
+
+# Python cache do pipeline de imagens
+scripts/__pycache__/
+*.pyc

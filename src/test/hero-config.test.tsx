@@ -73,11 +73,21 @@ describe("SPEC-068: Desacoplamento da Animação do Hero e Configuração Centra
     });
   });
 
+  it("usa o rótulo de divulgação no hero canônico", () => {
+    render(<Hero />);
+
+    expect(defaultHeroConfig.isIllustrative).toBe(true);
+    expect(defaultHeroConfig.mediaLabel).toBe("Imagem de divulgação");
+    expect(screen.getByText("Imagem de divulgação")).toBeInTheDocument();
+    expect(screen.queryByText("Fotografia ilustrativa")).toBeNull();
+  });
+
   describe("2. Renderização Condicional do Aviso 'Fotografia ilustrativa'", () => {
     it("renderiza o aviso quando isIllustrative === true", () => {
       const config: HeroConfig = {
         ...defaultHeroConfig,
         isIllustrative: true,
+        mediaLabel: undefined,
       };
 
       render(<Hero config={config} />);
